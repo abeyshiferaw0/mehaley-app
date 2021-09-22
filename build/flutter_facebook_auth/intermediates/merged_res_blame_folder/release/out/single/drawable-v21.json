@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/abc_list_divider_material.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/7a381ab645c1828f35cd39a445a33042/appcompat-1.1.0/res/drawable-v21/abc_list_divider_material.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/7a381ab645c1828f35cd39a445a33042/appcompat-1.1.0/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/7a381ab645c1828f35cd39a445a33042/appcompat-1.1.0/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/7a381ab645c1828f35cd39a445a33042/appcompat-1.1.0/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/notification_action_background.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/fc852b262edf340f0e2f90b932786776/core-1.3.2/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_facebook_auth/intermediates/res/merged/release/drawable-v21/abc_dialog_material_background.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/7a381ab645c1828f35cd39a445a33042/appcompat-1.1.0/res/drawable-v21/abc_dialog_material_background.xml"
+    }
+]

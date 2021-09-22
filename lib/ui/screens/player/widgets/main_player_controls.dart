@@ -1,0 +1,431 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/Muted_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/player_video_mode_remove_controls_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/custom_track_shape.dart';
+import 'package:elf_play/ui/common/like_follow/song_favorite_button.dart';
+import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
+import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:marquee/marquee.dart';
+import 'package:sizer/sizer.dart';
+
+import '../queue_list_page.dart';
+
+class MainPlayerControls extends StatefulWidget {
+  const MainPlayerControls({Key? key}) : super(key: key);
+
+  @override
+  _MainPlayerControlsState createState() => _MainPlayerControlsState();
+}
+
+class _MainPlayerControlsState extends State<MainPlayerControls> {
+  //AUDIO PLAYER PLAYBACK STATE CHANGES
+  double progress = 0.0;
+  double bufferedPosition = 0.0;
+  double totalDuration = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<SongPositionCubit, Duration>(
+          listener: (context, state) {
+            progress = state.inSeconds.toDouble();
+          },
+        ),
+        BlocListener<SongBufferedCubit, Duration>(
+          listener: (context, state) {
+            bufferedPosition = state.inSeconds.toDouble();
+          },
+        ),
+        BlocListener<SongDurationCubit, Duration>(
+          listener: (context, state) {
+            totalDuration = state.inSeconds.toDouble();
+          },
+        ),
+      ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppMargin.margin_16),
+        child: Column(
+          children: [
+            BlocBuilder<CurrentPlayingCubit, Song?>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 30,
+                            child: AutoSizeText(
+                              state != null ? state.songName.textAm : '',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: AppFontSizes.font_size_18,
+                                color: AppColors.white,
+                              ),
+                              maxLines: 1,
+                              minFontSize: AppFontSizes.font_size_18,
+                              maxFontSize: AppFontSizes.font_size_18,
+                              overflowReplacement: Marquee(
+                                text: state != null
+                                    ? state.songName.textAm
+                                    : '',
+                                style: TextStyle(
+                                  fontSize: AppFontSizes.font_size_18,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.white,
+                                ),
+                                scrollAxis: Axis.horizontal,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                blankSpace: AppPadding.padding_32,
+                                velocity: 50.0,
+                                pauseAfterRound: Duration(seconds: 2),
+                                startPadding: AppPadding.padding_16,
+                                accelerationDuration:
+                                Duration(seconds: 1),
+                                accelerationCurve: Curves.easeIn,
+                                decelerationDuration:
+                                Duration(milliseconds: 500),
+                                decelerationCurve: Curves.easeOut,
+                                showFadingOnlyWhenScrolling: false,
+                                fadingEdgeEndFraction: 0.2,
+                                fadingEdgeStartFraction: 0.2,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: AppMargin.margin_2,
+                          ),
+                          Text(
+                            state != null
+                                ? PagesUtilFunctions.getArtistsNames(
+                                state.artistsName)
+                                : '',
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: AppFontSizes.font_size_10.sp,
+                              color: AppColors.lightGrey,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    ///DOWNLOAD STATES IF BOUGHT
+                    SongDownloadIndicator(
+                      song: state!,
+                      isForPlayerPage: true,
+                    ),
+
+                    ///ADD TO CART BUTTON
+                    AppBouncingButton(
+                      onTap: () {},
+                      child: Container(
+                        width: AppIconSizes.icon_size_48,
+                        height: AppIconSizes.icon_size_48,
+                        padding: const EdgeInsets.all(
+                          AppPadding.padding_8,
+                        ),
+                        child: Icon(
+                          PhosphorIcons.shopping_cart_simple_light,
+                          color: AppColors.lightGrey,
+                          size: AppIconSizes.icon_size_24,
+                        ),
+                      ),
+                    ),
+
+                    ///FAV BUTTON
+                    SongFavoriteButton(
+                      songId: state.songId,
+                      isLiked: state.isLiked,
+                    ),
+                  ],
+                );
+              },
+            ),
+            SizedBox(
+              height: AppMargin.margin_4,
+            ),
+            //SLIDER
+            SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: AppColors.lightGrey,
+                inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+                trackShape: CustomTrackShape(),
+                trackHeight: 3.0,
+                thumbColor: AppColors.white,
+                thumbShape:
+                RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                overlayColor: AppColors.white.withOpacity(0.24),
+                overlayShape:
+                RoundSliderOverlayShape(overlayRadius: 16.0),
+              ),
+              child: BlocBuilder<SongPositionCubit, Duration>(
+                builder: (context, state) {
+                  return Slider(
+                    value: AudioPlayerUtil.getCorrectProgress(
+                      state.inSeconds.toDouble(),
+                      totalDuration,
+                    ),
+                    min: 0.0,
+                    max: totalDuration,
+                    onChanged: (value) {
+                      BlocProvider.of<AudioPlayerBloc>(context).add(
+                        SeekAudioPlayerEvent(
+                          duration: Duration(seconds: value.toInt()),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BlocBuilder<SongPositionCubit, Duration>(
+                  builder: (context, state) {
+                    return Text(
+                      PagesUtilFunctions.formatDurationTimeTo(
+                        Duration(seconds: state.inSeconds.toInt()),
+                      ),
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        color: AppColors.lightGrey.withOpacity(0.7),
+                      ),
+                    );
+                  },
+                ),
+                Text(
+                  PagesUtilFunctions.formatDurationTimeTo(
+                    Duration(seconds: totalDuration.toInt()),
+                  ),
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    color: AppColors.lightGrey.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
+            //PLAYER PLAY PAUSE AND OTHER BUTTONS
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BlocBuilder<ShuffleCubit, bool>(
+                  builder: (context, state) {
+                    return BouncingWidget(
+                      onPressed: () {
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(ShufflePlayerQueueEvent());
+                      },
+                      duration: Duration(
+                        milliseconds:
+                        AppValues.buttonBouncingDurationInMili,
+                      ),
+                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                      child: Padding(
+                        padding:
+                        const EdgeInsets.all(AppPadding.padding_16),
+                        child: Column(
+                          children: [
+                            Icon(
+                              PhosphorIcons.shuffle_light,
+                              color: state
+                                  ? AppColors.green
+                                  : AppColors.white,
+                              size: AppIconSizes.icon_size_20,
+                            ),
+                            state
+                                ? Icon(
+                              Icons.circle,
+                              color: AppColors.darkGreen,
+                              size: AppIconSizes.icon_size_4,
+                            )
+                                : SizedBox(),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                BouncingWidget(
+                  duration: Duration(
+                    milliseconds: AppValues.buttonBouncingDurationInMili,
+                  ),
+                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                  onPressed: () {
+                    BlocProvider.of<AudioPlayerBloc>(context)
+                        .add(PlayPreviousSongEvent());
+                  },
+                  child: Icon(
+                    Icons.skip_previous_sharp,
+                    color: AppColors.white,
+                    size: AppIconSizes.icon_size_48,
+                  ),
+                ),
+                BlocBuilder<PlayPauseCubit, bool>(
+                  builder: (context, state) {
+                    return BouncingWidget(
+                      duration: Duration(
+                        milliseconds:
+                        AppValues.buttonBouncingDurationInMili,
+                      ),
+                      scaleFactor: AppValues.buttonBouncingScaleFactor,
+                      onPressed: () {
+                        BlocProvider.of<AudioPlayerBloc>(context).add(
+                          PlayPauseEvent(),
+                        );
+                      },
+                      child: Icon(
+                        state
+                            ? Icons.pause_circle_filled_sharp
+                            : FlutterRemix.play_circle_fill,
+                        size: AppIconSizes.icon_size_72,
+                        color: AppColors.white,
+                      ),
+                    );
+                  },
+                ),
+                BouncingWidget(
+                  duration: Duration(
+                    milliseconds: AppValues.buttonBouncingDurationInMili,
+                  ),
+                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                  onPressed: () {
+                    BlocProvider.of<AudioPlayerBloc>(context)
+                        .add(PlayNextSongEvent());
+                  },
+                  child: Icon(
+                    Icons.skip_next_sharp,
+                    color: AppColors.white,
+                    size: AppIconSizes.icon_size_48,
+                  ),
+                ),
+                BlocBuilder<LoopCubit, LoopMode>(
+                  builder: (context, state) {
+                    return BouncingWidget(
+                      onPressed: () {
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(LoopPlayerQueueEvent());
+                      },
+                      duration: Duration(
+                        milliseconds:
+                        AppValues.buttonBouncingDurationInMili,
+                      ),
+                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                      child: Padding(
+                        padding:
+                        const EdgeInsets.all(AppPadding.padding_16),
+                        child: Column(
+                          children: [
+                            Icon(
+                              PagesUtilFunctions.getLoopIcon(state),
+                              color:
+                              PagesUtilFunctions.getLoopButtonColor(
+                                  state),
+                              size: AppIconSizes.icon_size_20,
+                            ),
+                            state != LoopMode.off
+                                ? Icon(
+                              Icons.circle,
+                              size: AppIconSizes.icon_size_4,
+                              color: AppColors.darkGreen,
+                            )
+                                : SizedBox()
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            // SizedBox(
+            //   height: AppMargin.margin_8,
+            // ),
+            //player cast and playlist buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BlocBuilder<IsMutedCubit, bool>(
+                  builder: (context, state) {
+                    return BouncingWidget(
+                      onPressed: () {
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(SetMutedEvent());
+                      },
+                      duration: Duration(
+                        milliseconds:
+                        AppValues.buttonBouncingDurationInMili,
+                      ),
+                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                      child: Padding(
+                        padding: EdgeInsets.all(AppPadding.padding_16),
+                        child: Icon(
+                          state
+                              ? PhosphorIcons.speaker_slash_light
+                              : PhosphorIcons.speaker_high_thin,
+                          color: AppColors.lightGrey,
+                          size: AppIconSizes.icon_size_20,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                BouncingWidget(
+                  onPressed: () {
+                    //NAVIGATE TO PLAYER QUEUE PAGE
+                    Navigator.of(context, rootNavigator: true).push(
+                      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+                        page: QueueListPage(),
+                      ),
+                    );
+                  },
+                  duration: Duration(
+                    milliseconds: AppValues.buttonBouncingDurationInMili,
+                  ),
+                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppPadding.padding_16),
+                    child: Icon(
+                      PhosphorIcons.playlist_thin,
+                      color: AppColors.lightGrey,
+                      size: AppIconSizes.icon_size_20,
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

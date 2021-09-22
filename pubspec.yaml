@@ -1,0 +1,113 @@
+name: elf_play
+description: a music player engine
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #BLOC
+  flutter_bloc: ^7.1.0
+  equatable: ^2.0.3
+  #FOR UI
+  hexcolor: ^2.0.4
+  flutter_svg: ^0.22.0
+  flutter_remix: ^0.0.1
+  cupertino_icons: ^1.0.2
+  flutter_phosphor_icons: ^0.0.1+5
+  palette_generator: ^0.3.0
+  lyrics_parser: ^1.0.0-nullsafety.0
+  page_view_indicators: ^2.0.0
+  auto_size_text: ^3.0.0-nullsafety.0
+  flutter_masked_text2: ^0.9.1
+  #PIN PUT
+  pinput: ^1.2.0
+  #COUNTRY CODE
+  country_code_picker: ^2.0.2
+  #SCROLLABLE POSITIONED LIST
+  scrollable_positioned_list: ^0.2.0-nullsafety.0
+  #TAB STYLER
+  tab_indicator_styler: ^2.0.0
+  #NATIVE SPLASH
+  flutter_native_splash: ^1.2.1
+  #LOTTIE
+  lottie: ^1.1.0
+  #SHIMMER
+  shimmer: ^2.0.0
+  #tab_indicator_styler: ^1.0.0
+  bouncing_widget: ^2.0.0
+  #RESPONSIVE FONT SIZE
+  sizer: ^2.0.13
+  #CATCH
+  cached_network_image: ^3.0.0
+  dio_cache_interceptor: ^3.0.1
+  dio_cache_interceptor_hive_store: ^3.0.1
+  #AUDIO PLAYER
+  just_audio: ^0.9.10
+  just_audio_background: ^0.0.1-beta.1
+  audio_session: ^0.1.6
+  #NETWORK API
+  dio: ^4.0.0
+  #UTILL
+  enum_to_string: ^2.0.1
+  intl: ^0.17.0
+  marquee: ^2.2.0
+  easy_debounce: ^2.0.1
+  #INFINITE SCROLL
+  infinite_scroll_pagination: ^3.1.0
+  flutter_staggered_grid_view: ^0.4.0
+  #DB
+  hive: ^2.0.4
+  path_provider: ^2.0.2
+  #VIDEO PLAYERS
+  video_player: ^2.1.12
+  #CONNECTIVITY
+  connectivity_plus: ^1.0.6
+  #IMAGE PICKER
+  image_picker: ^0.8.4+1
+  #FIREBASE AUTH
+  firebase_core: ^1.6.0
+  firebase_auth: ^3.1.0
+  google_sign_in: ^5.0.7
+  flutter_facebook_auth: ^3.5.1
+  #LOCAL NOTIFICATIONS
+  awesome_notifications: ^0.0.6+10
+  #DOWNLOADER
+  flutter_downloader: ^1.7.0
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  logger: ^1.0.0
+  hive_generator: ^1.1.0
+  build_runner: ^2.1.1
+
+flutter:
+  assets:
+    - assets/icons/
+    - assets/lottie/
+    - assets/images/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/poppins_light.ttf
+          weight: 300
+        - asset: assets/fonts/poppins/poppins_regular.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/poppins_medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/poppins_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/poppins_bold.ttf
+          weight: 700
+
+
+  uses-material-design: true

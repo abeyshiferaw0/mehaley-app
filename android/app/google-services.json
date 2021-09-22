@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1057243143883",
+    "project_id": "elfplay-cc918",
+    "storage_bucket": "elfplay-cc918.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057243143883:android:6eb9e8708ddf05d16f054e",
+        "android_client_info": {
+          "package_name": "com.example.elf_play"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057243143883-08pf4viljfr9p052av43f2sg458mh0um.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.elf_play",
+            "certificate_hash": "3f2de122c6f15c1a4e34bc1c0334b0f6d8fe5489"
+          }
+        },
+        {
+          "client_id": "1057243143883-430b4rj17qp1njmj6anu34ggduekmiq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABOi77u-nHkKbOVrdeW9ZPMeYNNynOmgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057243143883-430b4rj17qp1njmj6anu34ggduekmiq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

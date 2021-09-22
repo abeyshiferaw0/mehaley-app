@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_downloader/intermediates/res/merged/release/drawable/notification_bg_low.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/5600aad99d3e6b3c713a2bae332fa275/core-1.5.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_downloader/intermediates/res/merged/release/drawable/notification_bg.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/5600aad99d3e6b3c713a2bae332fa275/core-1.5.0/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_downloader/intermediates/res/merged/release/drawable/notification_icon_background.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/5600aad99d3e6b3c713a2bae332fa275/core-1.5.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/flutter_downloader/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/5600aad99d3e6b3c713a2bae332fa275/core-1.5.0/res/drawable/notification_tile_bg.xml"
+    }
+]

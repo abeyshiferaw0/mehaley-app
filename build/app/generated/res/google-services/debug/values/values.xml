@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1057243143883-430b4rj17qp1njmj6anu34ggduekmiq5.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1057243143883</string>
+    <string name="google_api_key" translatable="false">AIzaSyABOi77u-nHkKbOVrdeW9ZPMeYNNynOmgw</string>
+    <string name="google_app_id" translatable="false">1:1057243143883:android:6eb9e8708ddf05d16f054e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyABOi77u-nHkKbOVrdeW9ZPMeYNNynOmgw</string>
+    <string name="google_storage_bucket" translatable="false">elfplay-cc918.appspot.com</string>
+    <string name="project_id" translatable="false">elfplay-cc918</string>
+</resources>

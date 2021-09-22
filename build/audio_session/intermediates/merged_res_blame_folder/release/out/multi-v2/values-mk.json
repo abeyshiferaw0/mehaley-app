@@ -1,0 +1,68 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/user/Desktop/elf_play/build/audio_session/intermediates/incremental/mergeReleaseResources/merged.dir/values-mk/values-mk.xml",
+            "map": [
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/867f8a7c549d204c6756c2106690f2fc/core-1.3.0/res/values-mk/values-mk.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "626",
+                        "endColumns": "100",
+                        "endOffsets": "722"
+                    }
+                },
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/values-mk/values-mk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,167,267,363,490",
+                        "endColumns": "111,99,95,126,135",
+                        "endOffsets": "162,262,358,485,621"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/user/Desktop/elf_play/build/audio_session/intermediates/res/merged/release/values-mk/values-mk.xml",
+            "map": [
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/867f8a7c549d204c6756c2106690f2fc/core-1.3.0/res/values-mk/values-mk.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "626",
+                        "endColumns": "100",
+                        "endOffsets": "722"
+                    }
+                },
+                {
+                    "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/values-mk/values-mk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,167,267,363,490",
+                        "endColumns": "111,99,95,126,135",
+                        "endOffsets": "162,262,358,485,621"
+                    }
+                }
+            ]
+        }
+    ]
+}

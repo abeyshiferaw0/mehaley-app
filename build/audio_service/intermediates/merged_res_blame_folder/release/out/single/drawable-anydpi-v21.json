@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/audio_service/intermediates/res/merged/release/drawable-anydpi-v21/media_session_service_notification_ic_pause.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/drawable-anydpi-v21/media_session_service_notification_ic_pause.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/audio_service/intermediates/res/merged/release/drawable-anydpi-v21/media_session_service_notification_ic_skip_to_previous.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/drawable-anydpi-v21/media_session_service_notification_ic_skip_to_previous.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/audio_service/intermediates/res/merged/release/drawable-anydpi-v21/media_session_service_notification_ic_play.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/drawable-anydpi-v21/media_session_service_notification_ic_play.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/audio_service/intermediates/res/merged/release/drawable-anydpi-v21/media_session_service_notification_ic_music_note.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/drawable-anydpi-v21/media_session_service_notification_ic_music_note.xml"
+    },
+    {
+        "merged": "/Users/user/Desktop/elf_play/build/audio_service/intermediates/res/merged/release/drawable-anydpi-v21/media_session_service_notification_ic_skip_to_next.xml",
+        "source": "/Users/user/.gradle/caches/transforms-2/files-2.1/17abb6ecabb77fbb68e8128b6f2b8528/jetified-media2-session-1.1.3/res/drawable-anydpi-v21/media_session_service_notification_ic_skip_to_next.xml"
+    }
+]

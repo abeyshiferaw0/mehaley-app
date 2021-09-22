@@ -1,0 +1,105 @@
+import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_playlist_bloc/purchased_playlist_bloc.dart';
+import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
+import 'package:elf_play/ui/common/app_loading.dart';
+import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
+import 'package:elf_play/util/screen_util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+
+class PurchasedPlaylistsPage extends StatefulWidget {
+  const PurchasedPlaylistsPage({Key? key}) : super(key: key);
+
+  @override
+  _PurchasedPlaylistsPageState createState() => _PurchasedPlaylistsPageState();
+}
+
+class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
+  @override
+  void initState() {
+    ///INITIALLY LOAD ALL PURCHASED PlaylistS
+    BlocProvider.of<PurchasedPlaylistBloc>(context).add(
+      LoadPurchasedPlaylistsEvent(),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = ScreenUtil(context: context).getScreenHeight();
+    return BlocBuilder<PurchasedPlaylistBloc, PurchasedPlaylistState>(
+      builder: (context, state) {
+        if (state is PurchasedPlaylistsLoadingState) {
+          return buildAppLoading(context, screenHeight);
+        } else if (state is PurchasedPlaylistsLoadedState) {
+          if (state.purchasedPlaylists.length > 0) {
+            return buildPageLoaded(state.purchasedPlaylists);
+          } else {
+            return Container(
+              height: screenHeight * 0.5,
+              child: LibraryEmptyPage(
+                icon: PhosphorIcons.folder_fill,
+                msg: "You don't have any purchased\nplaylists",
+              ),
+            );
+          }
+        } else if (state is PurchasedPlaylistsLoadingErrorState) {
+          return Container(
+            height: screenHeight * 0.5,
+            child: Text(
+              state.error,
+              style: TextStyle(
+                color: AppColors.errorRed,
+              ),
+            ),
+          );
+        }
+        return buildAppLoading(context, screenHeight);
+      },
+    );
+  }
+
+  Container buildAppLoading(BuildContext context, double screenHeight) {
+    return Container(
+      height: screenHeight * 0.5,
+      child: AppLoading(size: AppValues.loadingWidgetSize),
+    );
+  }
+
+  Widget buildPageLoaded(List<PurchasedPlaylist> purchasedPlaylists) {
+    return Column(
+      children: [
+        AutoDownloadRadio(downloadAllSelected: true),
+        SizedBox(height: AppMargin.margin_8),
+        buildPlaylistList(purchasedPlaylists)
+      ],
+    );
+  }
+
+  Padding buildPlaylistList(List<PurchasedPlaylist> purchasedPlaylist) {
+    return Padding(
+      padding: EdgeInsets.only(right: AppPadding.padding_16),
+      child: GridView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: purchasedPlaylist.length,
+        itemBuilder: (BuildContext context, int index) {
+          return LibraryPlaylistItem(
+            playlist: purchasedPlaylist[index].playlist,
+          );
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: (1 / 1.3),
+          crossAxisSpacing: AppMargin.margin_12,
+          mainAxisSpacing: AppMargin.margin_16,
+          crossAxisCount: 2,
+        ),
+      ),
+    );
+  }
+}
