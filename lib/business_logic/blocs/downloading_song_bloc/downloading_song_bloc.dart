@@ -8,6 +8,7 @@ import 'package:elf_play/data/models/api_response/settings_page_data.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/repositories/setting_data_repository.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/network_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
@@ -51,24 +52,50 @@ class DownloadingSongBloc
     DownloadingSongEvent event,
   ) async* {
     if (event is DownloadSongEvent) {
+      ///GET SONG QUALITY FROM SETTING
       SettingsPageData settingsPageData =
           await settingDataRepository.getSettingsPageData();
+
+      ///CHEK IF DOWNLOAD ALREADY QUEUED
       bool isAlreadyInQueue = await downloadUtil.isAlreadyInQueue(event.song);
-      if (!isAlreadyInQueue) {
-        String saveDir = await downloadUtil.getSaveDir(event.song);
-        await FlutterDownloader.enqueue(
-          url: downloadUtil.getDownloadUrl(
-            event.song,
-            settingsPageData.downloadSongQuality,
-          ),
-          savedDir: saveDir,
-          fileName: downloadUtil.getSongFileName(
-            event.song,
-            settingsPageData.downloadSongQuality,
-          ),
-          showNotification: true,
-          openFileFromNotification: false,
-        );
+
+      ///CHECK IF INTERNET CONNECTION AVAILABLE
+      bool isNetAvailable = await NetworkUtil.isInternetAvailable();
+      if (isNetAvailable) {
+        if (!isAlreadyInQueue) {
+          String saveDir = await downloadUtil.getSaveDir(event.song);
+          await FlutterDownloader.enqueue(
+            url: downloadUtil.getDownloadUrl(
+              event.song,
+              settingsPageData.downloadSongQuality,
+            ),
+            savedDir: saveDir,
+            fileName: downloadUtil.getSongFileName(
+              event.song,
+              settingsPageData.downloadSongQuality,
+            ),
+            showNotification: true,
+            openFileFromNotification: false,
+          );
+        }
+      } else {
+        yield DownloadingSongInitial();
+        yield SongDownloadedNetworkNotAvailableState();
+      }
+    } else if (event is RetryDownloadSongEvent) {
+      ///GET FAILED TASK ID
+      String? failedTaskId = await downloadUtil.getFailedTaskId(event.song);
+      if (failedTaskId != null) {
+        ///CHECK IF INTERNET CONNECTION AVAILABLE
+        bool isNetAvailable = await NetworkUtil.isInternetAvailable();
+        if (isNetAvailable) {
+          await FlutterDownloader.retry(taskId: failedTaskId);
+        } else {
+          yield DownloadingSongInitial();
+          yield SongDownloadedNetworkNotAvailableState();
+        }
+      } else {
+        this.add(DownloadSongEvent(song: event.song));
       }
     } else if (event is DownloadIngSongProgressEvent) {
       ///GET LIST OF DOWNLOADING SONGS

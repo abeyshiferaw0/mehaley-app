@@ -122,6 +122,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 ArtistFollowButton(
                   isFollowing: artistPageData.artist.isFollowed!,
                   artistId: artistPageData.artist.artistId,
+                  askDialog: false,
                 ),
                 SizedBox(
                   width: AppMargin.margin_16,

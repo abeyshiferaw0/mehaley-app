@@ -3,9 +3,11 @@ import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/library_data/favorite_song.dart';
+import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FavoriteSongsPage extends StatefulWidget {
-  const FavoriteSongsPage({Key? key}) : super(key: key);
+  const FavoriteSongsPage({Key? key, required this.onSongsLoaded})
+      : super(key: key);
+
+  final Function(List<Song>) onSongsLoaded;
 
   @override
   _FavoriteSongsPageState createState() => _FavoriteSongsPageState();
@@ -37,25 +42,30 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
         if (state is FavoriteSongsLoadingState) {
           return buildAppLoading(context, screenHeight);
         } else if (state is FavoriteSongsLoadedState) {
+          ///PASS ALL LOADED SONGS TO PREVIOUS PAGE
+          widget.onSongsLoaded(
+            state.favoriteSongs.map((e) => e.song).toList(),
+          );
           if (state.favoriteSongs.length > 0) {
             return buildPageLoaded(state.favoriteSongs);
           } else {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.folder_fill,
-                msg: "You don't have any favorite\nmezmurs",
+                icon: PhosphorIcons.heart_straight_fill,
+                msg: "You don't have any favorite\nMezmurs",
               ),
             );
           }
         } else if (state is FavoriteSongsLoadingErrorState) {
           return Container(
-            height: screenHeight * 0.5,
-            child: Text(
-              state.error,
-              style: TextStyle(
-                color: AppColors.errorRed,
-              ),
+            height: ScreenUtil(context: context).getScreenHeight() * 0.5,
+            child: LibraryErrorWidget(
+              onRetry: () {
+                BlocProvider.of<FavoriteSongsBloc>(context).add(
+                  LoadFavoriteSongsEvent(),
+                );
+              },
             ),
           );
         }
@@ -67,7 +77,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
   Container buildAppLoading(BuildContext context, double screenHeight) {
     return Container(
       height: screenHeight * 0.5,
-      child: AppLoading(size: AppValues.loadingWidgetSize),
+      child: AppLoading(size: AppValues.loadingWidgetSize / 2),
     );
   }
 

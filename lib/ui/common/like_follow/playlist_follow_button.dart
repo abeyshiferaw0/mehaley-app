@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -67,13 +68,19 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
 
   void onTap() {
     ///FOLLOW UNFOLLOW PLAYLIST
-    BlocProvider.of<LibraryBloc>(context).add(
-      FollowUnFollowPlaylistEvent(
-        id: widget.playlistId,
-        appLikeFollowEvents: preButtonOnTap()
-            ? AppLikeFollowEvents.UNFOLLOW
-            : AppLikeFollowEvents.FOLLOW,
-      ),
+    EasyDebounce.debounce(
+      "PLAYLIST_FOLLOW",
+      Duration(milliseconds: 800),
+      () {
+        BlocProvider.of<LibraryBloc>(context).add(
+          FollowUnFollowPlaylistEvent(
+            id: widget.playlistId,
+            appLikeFollowEvents: preButtonOnTap()
+                ? AppLikeFollowEvents.UNFOLLOW
+                : AppLikeFollowEvents.FOLLOW,
+          ),
+        );
+      },
     );
   }
 

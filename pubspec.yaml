@@ -41,7 +41,7 @@ dependencies:
   #SHIMMER
   shimmer: ^2.0.0
   #tab_indicator_styler: ^1.0.0
-  bouncing_widget: ^2.0.0
+  #bouncing_widget: ^2.0.0
   #RESPONSIVE FONT SIZE
   sizer: ^2.0.13
   #CATCH
@@ -71,6 +71,7 @@ dependencies:
   connectivity_plus: ^1.0.6
   #IMAGE PICKER
   image_picker: ^0.8.4+1
+  exif: ^3.0.0
   #FIREBASE AUTH
   firebase_core: ^1.6.0
   firebase_auth: ^3.1.0

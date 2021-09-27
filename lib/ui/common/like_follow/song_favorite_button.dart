@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
@@ -78,13 +79,19 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton>
 
   void onTap() {
     ///LIKE UNLIKE SONG
-    BlocProvider.of<LibraryBloc>(context).add(
-      LikeUnlikeSongEvent(
-        id: widget.songId,
-        appLikeFollowEvents: preButtonOnTap()
-            ? AppLikeFollowEvents.UNLIKE
-            : AppLikeFollowEvents.LIKE,
-      ),
+    EasyDebounce.debounce(
+      "SONG_LIKE",
+      Duration(milliseconds: 800),
+      () {
+        BlocProvider.of<LibraryBloc>(context).add(
+          LikeUnlikeSongEvent(
+            id: widget.songId,
+            appLikeFollowEvents: preButtonOnTap()
+                ? AppLikeFollowEvents.UNLIKE
+                : AppLikeFollowEvents.LIKE,
+          ),
+        );
+      },
     );
   }
 

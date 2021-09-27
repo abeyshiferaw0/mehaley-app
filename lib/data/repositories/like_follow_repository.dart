@@ -1,12 +1,12 @@
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/library_data_provider.dart';
+import 'package:elf_play/data/data_providers/like_follow_provider.dart';
 
-class LibraryDataRepository {
+class LikeFollowRepository {
   ///INIT PROVIDER FOR API CALL
-  final LibraryDataProvider libraryDataProvider;
+  final LikeFollowProvider libraryDataProvider;
 
-  const LibraryDataRepository({required this.libraryDataProvider});
+  const LikeFollowRepository({required this.libraryDataProvider});
 
   ///FOR SONG
   Future<void> likeUnlikeSong(

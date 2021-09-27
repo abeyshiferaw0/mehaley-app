@@ -94,3 +94,8 @@ class SongIsDownloadedState extends DownloadingSongState {
   @override
   List<Object?> get props => [downloadTaskStatus, song];
 }
+
+class SongDownloadedNetworkNotAvailableState extends DownloadingSongState {
+  @override
+  List<Object?> get props => [];
+}

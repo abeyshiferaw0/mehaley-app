@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.45.202:8181/music";
-  static const String userBaseUrl = "http://192.168.45.202:8181/user";
-  static const String baseFileUrl = "http://192.168.45.202:8181";
+  static const String musicBaseUrl = "http://192.168.248.202:8181/music";
+  static const String userBaseUrl = "http://192.168.248.202:8181/user";
+  static const String baseFileUrl = "http://192.168.248.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {

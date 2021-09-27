@@ -11,6 +11,7 @@ import 'package:elf_play/data/models/library_data/purchased_album.dart';
 import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
 import 'package:elf_play/data/models/library_data/purchased_song.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/util/api_util.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 class LibraryPageDataRepository {
@@ -128,7 +129,8 @@ class LibraryPageDataRepository {
     );
   }
 
-  Future<List<Song>> getOfflineSongs() async {
+  Future<List<Song>> getOfflineSongs(
+      AppLibrarySortTypes appLibrarySortTypes) async {
     ///GET FAILED DOWNLOADS
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
@@ -137,12 +139,15 @@ class LibraryPageDataRepository {
     );
 
     List<Song> songs = [];
+    List<int> timeDownloaded = [];
     if (tasks != null) {
       if (tasks.length > 0) {
         tasks.forEach((element) {
           songs.add(Song.fromBase64(element.url.split("?song=")[1]));
+          timeDownloaded.add(element.timeCreated);
         });
-        return songs;
+        return ApiUtil.sortDownloadedSongs(
+            songs, appLibrarySortTypes, timeDownloaded);
       }
     }
     return [];

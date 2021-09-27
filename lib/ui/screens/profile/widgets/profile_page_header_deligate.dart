@@ -1,14 +1,18 @@
 import 'dart:math';
 
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:sizer/sizer.dart';
 
 class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final VoidCallback onBackPress;
+
+  ProfilePageHeaderDelegate({required this.onBackPress});
+
   @override
   Widget build(_, double shrinkOffset, bool overlapsContent) {
     var shrinkPercentage =
@@ -41,7 +45,9 @@ class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              onBackPress();
+                            },
                             icon: Icon(
                               PhosphorIcons.caret_left_light,
                               color: AppColors.white,

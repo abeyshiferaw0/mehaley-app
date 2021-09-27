@@ -62,6 +62,9 @@ class FollowedPlaylistsBloc
       } catch (error) {
         yield FollowedPlaylistsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshFollowedPlaylistsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadFollowedPlaylistsEvent());
     }
   }
 

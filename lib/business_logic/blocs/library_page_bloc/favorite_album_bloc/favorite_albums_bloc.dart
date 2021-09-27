@@ -62,6 +62,9 @@ class FavoriteAlbumsBloc
       } catch (error) {
         yield FavoriteAlbumsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshFavoriteAlbumsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadFavoriteAlbumsEvent());
     }
   }
 

@@ -51,3 +51,13 @@ enum AppPurchasedPageItemTypes { ALL_SONGS, SONGS, ALBUMS, PLAYLISTS }
 enum AppFavoritePageItemTypes { SONGS, ALBUMS }
 
 enum AppFollowedPageItemTypes { ARTIST, PLAYLISTS }
+
+enum AppUserImageType { SOCIAL_IMAGE, PROFILE_IMAGE, NONE }
+
+enum AppLibrarySortTypes {
+  TITLE_A_Z,
+  ARTIST_A_Z,
+  NEWEST,
+  OLDEST,
+  LATEST_DOWNLOAD,
+}

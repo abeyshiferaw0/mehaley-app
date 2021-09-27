@@ -52,7 +52,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
       child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
         builder: (context, state) {
           if (state is PlayerPageDominantColorChangedState) {
-            dominantColor = ColorUtil.changeColorSaturation(state.color, 0.7);
+            dominantColor = ColorUtil.changeColorSaturation(state.color, 0.9);
           }
           return BlocBuilder<LyricParserCubit, List<LyricItem>>(
             builder: (context, lyricList) {

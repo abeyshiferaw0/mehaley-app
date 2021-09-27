@@ -8,8 +8,8 @@ import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_b
 import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
+import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_cancel_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.dart';
 import 'package:elf_play/config/app_repositories.dart';
@@ -18,7 +18,6 @@ import 'package:elf_play/ui/screens/artist/artist_page.dart';
 import 'package:elf_play/ui/screens/cart/cart_page.dart';
 import 'package:elf_play/ui/screens/category/category_page.dart';
 import 'package:elf_play/ui/screens/home/home_page.dart';
-import 'package:elf_play/ui/screens/library/create_playlist_page.dart';
 import 'package:elf_play/ui/screens/library/library_page.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
 import 'package:elf_play/ui/screens/playlist/playlist_page.dart';
@@ -30,7 +29,6 @@ import 'package:elf_play/ui/screens/setting/settings_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'constants.dart';
 
@@ -60,6 +58,7 @@ class AppRouterPaths {
   static const String searchResultRoute = '/search_result';
   static const String searchResultDedicatedRoute = '/search_result_dedicated';
   static const String cartRoute = '/cart';
+  static const String songAddToPlaylist = '/song_add_to_playlist';
 
   //ROUTE OBSERVER
   static final RouteObserver<ModalRoute<void>> routeObserver =
@@ -114,18 +113,18 @@ class AppRouter {
               child: PlaylistPage(playlistId: args.args['playlistId']),
             );
         break;
-      case AppRouterPaths.createPlaylistRoute:
-        builder = (_) => MultiBlocProvider(
-              providers: [
-                BlocProvider<ImagePickerCubit>(
-                  create: (context) => ImagePickerCubit(
-                    picker: ImagePicker(),
-                  ),
-                ),
-              ],
-              child: CreatePlaylistPage(),
-            );
-        break;
+      // case AppRouterPaths.createPlaylistRoute:
+      //   builder = (_) => MultiBlocProvider(
+      //         providers: [
+      //           BlocProvider<ImagePickerCubit>(
+      //             create: (context) => ImagePickerCubit(
+      //               picker: ImagePicker(),
+      //             ),
+      //           ),
+      //         ],
+      //         child: CreatePlaylistPage(),
+      //       );
+      //   break;
       case AppRouterPaths.artistRoute:
         final args = settings.arguments as ScreenArguments;
         builder = (_) => BlocProvider(
@@ -136,8 +135,15 @@ class AppRouter {
         break;
       case AppRouterPaths.libraryRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => BlocProvider(
-              create: (context) => FollowingTabPagesCubit(),
+        builder = (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => FollowingTabPagesCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => LibraryTabPagesCubit(),
+                ),
+              ],
               child: LibraryPage(
                 isFromOffline: args.args[AppValues.isLibraryForOffline],
               ),

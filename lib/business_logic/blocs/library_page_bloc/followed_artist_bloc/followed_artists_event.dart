@@ -8,3 +8,8 @@ class LoadFollowedArtistsEvent extends FollowedArtistsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class RefreshFollowedArtistsEvent extends FollowedArtistsEvent {
+  @override
+  List<Object?> get props => [];
+}

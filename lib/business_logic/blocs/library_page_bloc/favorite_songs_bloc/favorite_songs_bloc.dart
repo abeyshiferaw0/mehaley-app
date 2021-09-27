@@ -61,6 +61,9 @@ class FavoriteSongsBloc extends Bloc<FavoriteSongsEvent, FavoriteSongsState> {
       } catch (error) {
         yield FavoriteSongsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshFavoriteSongsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadFavoriteSongsEvent());
     }
   }
 

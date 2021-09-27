@@ -61,6 +61,9 @@ class PurchasedPlaylistBloc
       } catch (error) {
         yield PurchasedPlaylistsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshPurchasedPlaylistsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadPurchasedPlaylistsEvent());
     }
   }
 

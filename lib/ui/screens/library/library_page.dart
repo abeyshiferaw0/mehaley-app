@@ -1,14 +1,17 @@
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/favorite_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/following_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/my_playlist_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/offline_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/purchased_tab_view.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_header_persistant_header.dart';
+import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -47,6 +50,11 @@ class _LibraryPageState extends State<LibraryPage>
   void initState() {
     ///INIT TAB CONTROLLER
     _tabController = new TabController(length: 5, vsync: this);
+    _tabController.addListener(() {
+      BlocProvider.of<LibraryTabPagesCubit>(context).tabChanged(
+        _tabController.index,
+      );
+    });
     super.initState();
   }
 
@@ -117,34 +125,39 @@ class _LibraryPageState extends State<LibraryPage>
       pinned: false,
       leadingWidth: 80,
       leading: Center(
-        child: Stack(
-          children: [
-            CircleAvatar(
-              backgroundColor: AppColors.blue,
-              radius: 18,
-              child: Text(
-                "a",
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_16,
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w400,
+        child: AppBouncingButton(
+          onTap: () {
+            Navigator.pushNamed(context, AppRouterPaths.profileRoute);
+          },
+          child: Stack(
+            children: [
+              CircleAvatar(
+                backgroundColor: AppColors.blue,
+                radius: 18,
+                child: Text(
+                  "a",
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_16,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Icon(
-                PhosphorIcons.gear_six_bold,
-                size: AppIconSizes.icon_size_12,
-                color: AppColors.white,
-              ),
-            )
-          ],
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Icon(
+                  PhosphorIcons.gear_six_bold,
+                  size: AppIconSizes.icon_size_12,
+                  color: AppColors.white,
+                ),
+              )
+            ],
+          ),
         ),
       ),
       title: Text(
-        "abey shiferaw",
+        AuthUtil.getUserName(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_16,
           fontWeight: FontWeight.w600,

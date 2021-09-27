@@ -92,7 +92,7 @@ class LibraryArtistsItem extends StatelessWidget {
           ),
           ArtistFollowButton(
             isFollowing: artist.isFollowed!,
-            artistId: artist.artistId,
+            artistId: artist.artistId, askDialog: true,
           ),
           SizedBox(
             width: AppMargin.margin_16,

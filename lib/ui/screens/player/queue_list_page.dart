@@ -1,4 +1,3 @@
-import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
@@ -12,6 +11,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/custom_track_shape.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
@@ -23,7 +23,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
@@ -152,15 +151,11 @@ class _QueueListPageState extends State<QueueListPage> {
         children: [
           BlocBuilder<ShuffleCubit, bool>(
             builder: (context, state) {
-              return BouncingWidget(
-                onPressed: () {
+              return AppBouncingButton(
+                onTap: () {
                   BlocProvider.of<AudioPlayerBloc>(context)
                       .add(ShufflePlayerQueueEvent());
                 },
-                duration: Duration(
-                  milliseconds: AppValues.buttonBouncingDurationInMili,
-                ),
-                scaleFactor: AppValues.buttonBouncingScaleFactor2,
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
                   child: Column(
@@ -183,12 +178,8 @@ class _QueueListPageState extends State<QueueListPage> {
               );
             },
           ),
-          BouncingWidget(
-            duration: Duration(
-              milliseconds: AppValues.buttonBouncingDurationInMili,
-            ),
-            scaleFactor: AppValues.buttonBouncingScaleFactor2,
-            onPressed: () {
+          AppBouncingButton(
+            onTap: () {
               BlocProvider.of<AudioPlayerBloc>(context)
                   .add(PlayPreviousSongEvent());
             },
@@ -200,12 +191,8 @@ class _QueueListPageState extends State<QueueListPage> {
           ),
           BlocBuilder<PlayPauseCubit, bool>(
             builder: (context, state) {
-              return BouncingWidget(
-                duration: Duration(
-                  milliseconds: AppValues.buttonBouncingDurationInMili,
-                ),
-                scaleFactor: AppValues.buttonBouncingScaleFactor,
-                onPressed: () {
+              return AppBouncingButton(
+                onTap: () {
                   BlocProvider.of<AudioPlayerBloc>(context).add(
                     PlayPauseEvent(),
                   );
@@ -220,12 +207,8 @@ class _QueueListPageState extends State<QueueListPage> {
               );
             },
           ),
-          BouncingWidget(
-            duration: Duration(
-              milliseconds: AppValues.buttonBouncingDurationInMili,
-            ),
-            scaleFactor: AppValues.buttonBouncingScaleFactor2,
-            onPressed: () {
+          AppBouncingButton(
+            onTap: () {
               BlocProvider.of<AudioPlayerBloc>(context)
                   .add(PlayNextSongEvent());
             },
@@ -237,15 +220,11 @@ class _QueueListPageState extends State<QueueListPage> {
           ),
           BlocBuilder<LoopCubit, LoopMode>(
             builder: (context, state) {
-              return BouncingWidget(
-                onPressed: () {
+              return AppBouncingButton(
+                onTap: () {
                   BlocProvider.of<AudioPlayerBloc>(context)
                       .add(LoopPlayerQueueEvent());
                 },
-                duration: Duration(
-                  milliseconds: AppValues.buttonBouncingDurationInMili,
-                ),
-                scaleFactor: AppValues.buttonBouncingScaleFactor2,
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
                   child: Column(

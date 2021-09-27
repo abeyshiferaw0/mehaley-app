@@ -13,6 +13,7 @@ import 'package:elf_play/ui/common/mini_player.dart';
 import 'package:elf_play/ui/common/no_internet_indicator_small.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:just_audio/just_audio.dart';
 
 //INIT ROUTERS
@@ -124,11 +125,24 @@ class _MainScreenState extends State<MainScreen> {
           listener: (context, state) {
             if (state is DownloadingSongsCompletedState) {
               ScaffoldMessenger.of(context).showSnackBar(
-                buildDownloadSuccessSnackBar(
+                buildDownloadMsgSnackBar(
+                    bgColor: AppColors.white,
+                    isFloating: true,
+                    msg: "${state.song!.songName.textAm} Download complete",
+                    txtColor: AppColors.black,
+                    icon: PhosphorIcons.check_circle_fill,
+                    iconColor: AppColors.darkGreen),
+              );
+            }
+            if (state is SongDownloadedNetworkNotAvailableState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
-                  isFloating: true,
-                  msg: "${state.song!.songName.textAm} Download complete",
+                  isFloating: false,
+                  msg: "You're not connected to the internet",
                   txtColor: AppColors.black,
+                  icon: PhosphorIcons.wifi_x_light,
+                  iconColor: AppColors.errorRed,
                 ),
               );
             }

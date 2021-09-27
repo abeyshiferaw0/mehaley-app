@@ -1,7 +1,9 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -11,8 +13,12 @@ import '../app_bouncing_button.dart';
 class ArtistFollowButton extends StatelessWidget {
   final bool isFollowing;
   final int artistId;
+  final bool askDialog;
 
-  const ArtistFollowButton({required this.isFollowing, required this.artistId});
+  const ArtistFollowButton(
+      {required this.isFollowing,
+      required this.artistId,
+      required this.askDialog});
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +45,47 @@ class ArtistFollowButton extends StatelessWidget {
   }
 
   void onTap(context) {
+    if (askDialog && preButtonOnTap()) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Center(
+            child: DialogUlLikeUnFollow(
+              mainButtonText: 'UNFOLLOW'.toUpperCase(),
+              cancelButtonText: 'CANCEL',
+              titleText: 'Remove From Followed Artists?',
+              onUnLikeUnFollow: () {
+                ///FOLLOW UNFOLLOW ARTIST
+                BlocProvider.of<LibraryBloc>(context).add(
+                  FollowUnFollowArtistEvent(
+                    id: artistId,
+                    appLikeFollowEvents: preButtonOnTap()
+                        ? AppLikeFollowEvents.UNFOLLOW
+                        : AppLikeFollowEvents.FOLLOW,
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      );
+    }
+
     ///FOLLOW UNFOLLOW ARTIST
-    BlocProvider.of<LibraryBloc>(context).add(
-      FollowUnFollowArtistEvent(
-        id: artistId,
-        appLikeFollowEvents: preButtonOnTap()
-            ? AppLikeFollowEvents.UNFOLLOW
-            : AppLikeFollowEvents.FOLLOW,
-      ),
+
+    EasyDebounce.debounce(
+      "ARTIST_FOLLOW",
+      Duration(milliseconds: 800),
+      () {
+        BlocProvider.of<LibraryBloc>(context).add(
+          FollowUnFollowArtistEvent(
+            id: artistId,
+            appLikeFollowEvents: preButtonOnTap()
+                ? AppLikeFollowEvents.UNFOLLOW
+                : AppLikeFollowEvents.FOLLOW,
+          ),
+        );
+      },
     );
   }
 

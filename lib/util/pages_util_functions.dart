@@ -1,7 +1,11 @@
 import 'dart:math';
 
+import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -14,6 +18,7 @@ import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
+import 'package:elf_play/ui/screens/library/create_playlist_page.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/download_util.dart';
@@ -23,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:sizer/sizer.dart';
@@ -132,7 +138,6 @@ class PagesUtilFunctions {
 
   static Widget getGroupItemPrice(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
-      var item2 = (item as Song);
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
@@ -140,7 +145,6 @@ class PagesUtilFunctions {
         isFree: item.isFree,
       );
     } else if (groupType == GroupType.PLAYLIST) {
-      var item2 = (item as Playlist);
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
@@ -148,7 +152,6 @@ class PagesUtilFunctions {
         isFree: item.isFree,
       );
     } else if (groupType == GroupType.ALBUM) {
-      var item2 = (item as Album);
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
@@ -436,9 +439,11 @@ class PagesUtilFunctions {
     required bool startPlaying,
     required PlayingFrom playingFrom,
     required int index,
-  }) {
+  }) async {
+    DownloadUtil downloadUtil = DownloadUtil();
+    //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems =
-        songs.map((song) => Song.toAudioSourceStreamUri(song)).toList();
+        await Song.toListAudioSourceStreamUri(downloadUtil, songs);
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
       SetPlayerQueueEvent(
@@ -458,9 +463,11 @@ class PagesUtilFunctions {
     );
   }
 
-  static Route createBottomToUpAnimatedRoute({required Widget page}) {
+  static Route createBottomToUpAnimatedRoute(
+      {required Widget page, String? setting}) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
+      settings: setting != null ? RouteSettings(name: setting) : null,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
@@ -526,7 +533,7 @@ class PagesUtilFunctions {
   }
 
   static int getRandomIndex({required int min, required int max}) {
-    return Random().nextInt(max);
+    return min + Random().nextInt(max - min);
   }
 
   static String getSearchFrontPageItemTitle(
@@ -655,6 +662,40 @@ class PagesUtilFunctions {
       return "artist_${item.artistId}";
     } else {
       throw "Unknown Recent type";
+    }
+  }
+
+  static void openCreatePlaylistPage(context) async {
+    final refresh = await Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+        page: MultiBlocProvider(
+          providers: [
+            BlocProvider<ImagePickerCubit>(
+              create: (context) => ImagePickerCubit(
+                picker: ImagePicker(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => UserPlaylistBloc(
+                userPLayListRepository: AppRepositories.userPLayListRepository,
+              ),
+            ),
+          ],
+          child: CreatePlaylistPage(
+            createWithSong: false,
+            song: null,
+          ),
+        ),
+      ),
+    );
+    if (refresh != null) {
+      if (refresh is bool) {
+        if (refresh) {
+          BlocProvider.of<MyPlaylistBloc>(context).add(
+            LoadAllMyPlaylistsEvent(isForAddSongPage: false),
+          );
+        }
+      }
     }
   }
 }

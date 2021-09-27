@@ -1,11 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/Muted_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/player_video_mode_remove_controls_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
@@ -90,26 +88,23 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               minFontSize: AppFontSizes.font_size_18,
                               maxFontSize: AppFontSizes.font_size_18,
                               overflowReplacement: Marquee(
-                                text: state != null
-                                    ? state.songName.textAm
-                                    : '',
+                                text:
+                                    state != null ? state.songName.textAm : '',
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_18,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.white,
                                 ),
                                 scrollAxis: Axis.horizontal,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 blankSpace: AppPadding.padding_32,
                                 velocity: 50.0,
                                 pauseAfterRound: Duration(seconds: 2),
                                 startPadding: AppPadding.padding_16,
-                                accelerationDuration:
-                                Duration(seconds: 1),
+                                accelerationDuration: Duration(seconds: 1),
                                 accelerationCurve: Curves.easeIn,
                                 decelerationDuration:
-                                Duration(milliseconds: 500),
+                                    Duration(milliseconds: 500),
                                 decelerationCurve: Curves.easeOut,
                                 showFadingOnlyWhenScrolling: false,
                                 fadingEdgeEndFraction: 0.2,
@@ -123,7 +118,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           Text(
                             state != null
                                 ? PagesUtilFunctions.getArtistsNames(
-                                state.artistsName)
+                                    state.artistsName)
                                 : '',
                             maxLines: 1,
                             style: TextStyle(
@@ -138,7 +133,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
 
                     ///DOWNLOAD STATES IF BOUGHT
                     SongDownloadIndicator(
-                      song: state!,
+                      key: Key(state!.songId.toString()),
+                      song: state,
                       isForPlayerPage: true,
                     ),
 
@@ -177,13 +173,11 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 activeTrackColor: AppColors.lightGrey,
                 inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
                 trackShape: CustomTrackShape(),
-                trackHeight: 3.0,
+                trackHeight: 2.0,
                 thumbColor: AppColors.white,
-                thumbShape:
-                RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.0),
                 overlayColor: AppColors.white.withOpacity(0.24),
-                overlayShape:
-                RoundSliderOverlayShape(overlayRadius: 16.0),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
               ),
               child: BlocBuilder<SongPositionCubit, Duration>(
                 builder: (context, state) {
@@ -215,7 +209,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         Duration(seconds: state.inSeconds.toInt()),
                       ),
                       style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontSize: AppFontSizes.font_size_8.sp,
                         color: AppColors.lightGrey.withOpacity(0.7),
                       ),
                     );
@@ -226,7 +220,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     Duration(seconds: totalDuration.toInt()),
                   ),
                   style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontSize: AppFontSizes.font_size_8.sp,
                     color: AppColors.lightGrey.withOpacity(0.7),
                   ),
                 ),
@@ -239,34 +233,26 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
               children: [
                 BlocBuilder<ShuffleCubit, bool>(
                   builder: (context, state) {
-                    return BouncingWidget(
-                      onPressed: () {
+                    return AppBouncingButton(
+                      onTap: () {
                         BlocProvider.of<AudioPlayerBloc>(context)
                             .add(ShufflePlayerQueueEvent());
                       },
-                      duration: Duration(
-                        milliseconds:
-                        AppValues.buttonBouncingDurationInMili,
-                      ),
-                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
                       child: Padding(
-                        padding:
-                        const EdgeInsets.all(AppPadding.padding_16),
+                        padding: const EdgeInsets.all(AppPadding.padding_16),
                         child: Column(
                           children: [
                             Icon(
                               PhosphorIcons.shuffle_light,
-                              color: state
-                                  ? AppColors.green
-                                  : AppColors.white,
+                              color: state ? AppColors.green : AppColors.white,
                               size: AppIconSizes.icon_size_20,
                             ),
                             state
                                 ? Icon(
-                              Icons.circle,
-                              color: AppColors.darkGreen,
-                              size: AppIconSizes.icon_size_4,
-                            )
+                                    Icons.circle,
+                                    color: AppColors.darkGreen,
+                                    size: AppIconSizes.icon_size_4,
+                                  )
                                 : SizedBox(),
                           ],
                         ),
@@ -274,12 +260,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
-                BouncingWidget(
-                  duration: Duration(
-                    milliseconds: AppValues.buttonBouncingDurationInMili,
-                  ),
-                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
-                  onPressed: () {
+                AppBouncingButton(
+                  onTap: () {
                     BlocProvider.of<AudioPlayerBloc>(context)
                         .add(PlayPreviousSongEvent());
                   },
@@ -291,13 +273,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
                 BlocBuilder<PlayPauseCubit, bool>(
                   builder: (context, state) {
-                    return BouncingWidget(
-                      duration: Duration(
-                        milliseconds:
-                        AppValues.buttonBouncingDurationInMili,
-                      ),
-                      scaleFactor: AppValues.buttonBouncingScaleFactor,
-                      onPressed: () {
+                    return AppBouncingButton(
+                      onTap: () {
                         BlocProvider.of<AudioPlayerBloc>(context).add(
                           PlayPauseEvent(),
                         );
@@ -312,12 +289,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
-                BouncingWidget(
-                  duration: Duration(
-                    milliseconds: AppValues.buttonBouncingDurationInMili,
-                  ),
-                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
-                  onPressed: () {
+                AppBouncingButton(
+                  onTap: () {
                     BlocProvider.of<AudioPlayerBloc>(context)
                         .add(PlayNextSongEvent());
                   },
@@ -329,34 +302,27 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
                 BlocBuilder<LoopCubit, LoopMode>(
                   builder: (context, state) {
-                    return BouncingWidget(
-                      onPressed: () {
+                    return AppBouncingButton(
+                      onTap: () {
                         BlocProvider.of<AudioPlayerBloc>(context)
                             .add(LoopPlayerQueueEvent());
                       },
-                      duration: Duration(
-                        milliseconds:
-                        AppValues.buttonBouncingDurationInMili,
-                      ),
-                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
                       child: Padding(
-                        padding:
-                        const EdgeInsets.all(AppPadding.padding_16),
+                        padding: const EdgeInsets.all(AppPadding.padding_16),
                         child: Column(
                           children: [
                             Icon(
                               PagesUtilFunctions.getLoopIcon(state),
                               color:
-                              PagesUtilFunctions.getLoopButtonColor(
-                                  state),
+                                  PagesUtilFunctions.getLoopButtonColor(state),
                               size: AppIconSizes.icon_size_20,
                             ),
                             state != LoopMode.off
                                 ? Icon(
-                              Icons.circle,
-                              size: AppIconSizes.icon_size_4,
-                              color: AppColors.darkGreen,
-                            )
+                                    Icons.circle,
+                                    size: AppIconSizes.icon_size_4,
+                                    color: AppColors.darkGreen,
+                                  )
                                 : SizedBox()
                           ],
                         ),
@@ -376,16 +342,11 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
               children: [
                 BlocBuilder<IsMutedCubit, bool>(
                   builder: (context, state) {
-                    return BouncingWidget(
-                      onPressed: () {
+                    return AppBouncingButton(
+                      onTap: () {
                         BlocProvider.of<AudioPlayerBloc>(context)
                             .add(SetMutedEvent());
                       },
-                      duration: Duration(
-                        milliseconds:
-                        AppValues.buttonBouncingDurationInMili,
-                      ),
-                      scaleFactor: AppValues.buttonBouncingScaleFactor2,
                       child: Padding(
                         padding: EdgeInsets.all(AppPadding.padding_16),
                         child: Icon(
@@ -399,8 +360,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
-                BouncingWidget(
-                  onPressed: () {
+                AppBouncingButton(
+                  onTap: () {
                     //NAVIGATE TO PLAYER QUEUE PAGE
                     Navigator.of(context, rootNavigator: true).push(
                       PagesUtilFunctions.createBottomToUpAnimatedRoute(
@@ -408,10 +369,6 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                       ),
                     );
                   },
-                  duration: Duration(
-                    milliseconds: AppValues.buttonBouncingDurationInMili,
-                  ),
-                  scaleFactor: AppValues.buttonBouncingScaleFactor2,
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.padding_16),
                     child: Icon(

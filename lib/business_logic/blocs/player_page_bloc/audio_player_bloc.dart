@@ -289,7 +289,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         loadLyricsIfAvalvable(song);
 
         ///ADD SONG TO RECENTLY PLAYED LIST
-        playerDataRepository.addToRecentlyPlayer(song);
+        playerDataRepository.addToRecentlyPlayed(song);
       },
     );
   }
@@ -396,12 +396,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   void loadLyricsIfAvalvable(Song song) {
     if (song.lyricIncluded) {
-      print("RemoveLyricWidgetStateeee truuuu");
       this.add(
         LoadSongLyricEvent(songId: song.songId),
       );
     } else {
-      print("RemoveLyricWidgetStateeee 555");
       this.add(
         RemoveLyricWidgetEvent(),
       );

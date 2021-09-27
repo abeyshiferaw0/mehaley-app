@@ -1,6 +1,6 @@
-import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -11,12 +11,8 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BouncingWidget(
-      onPressed: onTap,
-      duration: Duration(
-        milliseconds: AppValues.buttonBouncingDurationInMili,
-      ),
-      scaleFactor: AppValues.buttonBouncingScaleFactor2,
+    return AppBouncingButton(
+      onTap: onTap,
       child: Stack(
         children: [
           CircleAvatar(

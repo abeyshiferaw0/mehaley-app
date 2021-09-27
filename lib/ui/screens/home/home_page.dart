@@ -51,19 +51,6 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-    //DEBUG
-    // Future.delayed(
-    //   Duration(microseconds: 500),
-    //   () {
-    //     showDialog(
-    //       context: context,
-    //       builder: (context) {
-    //         return SongMenuWidget();
-    //       },
-    //     );
-    //   },
-    // );
-    //DEBUG
     super.initState();
   }
 
@@ -175,9 +162,9 @@ class _HomePageState extends State<HomePage>
       itemBuilder: (context, index) {
         if (groups[index].groupItems.length > 0) {
           return HomeGroups(
-            groupTitle: groups[index].groupTitleTextId.textAm,
-            groupSubTitle: groups[index].groupSubTitleTextId != null
-                ? groups[index].groupSubTitleTextId!.textAm
+            groupTitle: groups[index].groupTitleText.textAm,
+            groupSubTitle: groups[index].groupSubTitleText != null
+                ? groups[index].groupSubTitleText!.textAm
                 : null,
             groupHeaderImageUrl: groups[index].headerImageId != null
                 ? AppApi.baseFileUrl +

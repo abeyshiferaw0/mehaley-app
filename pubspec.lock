@@ -92,13 +92,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  bouncing_widget:
-    dependency: "direct main"
-    description:
-      name: bouncing_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   build:
     dependency: transitive
     description:
@@ -358,6 +351,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  exif:
+    dependency: "direct main"
+    description:
+      name: exif
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   fading_edge_scrollview:
     dependency: transitive
     description:
@@ -1036,6 +1036,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.0"
   sqflite:
     dependency: transitive
     description:

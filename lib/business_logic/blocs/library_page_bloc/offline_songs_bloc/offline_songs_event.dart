@@ -5,6 +5,19 @@ abstract class OfflineSongsEvent extends Equatable {
 }
 
 class LoadOfflineSongsEvent extends OfflineSongsEvent {
+  final AppLibrarySortTypes appLibrarySortTypes;
+
+  LoadOfflineSongsEvent({required this.appLibrarySortTypes});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appLibrarySortTypes];
+}
+
+class RefreshOfflineSongsEvent extends OfflineSongsEvent {
+  final AppLibrarySortTypes appLibrarySortTypes;
+
+  RefreshOfflineSongsEvent({required this.appLibrarySortTypes});
+
+  @override
+  List<Object?> get props => [appLibrarySortTypes];
 }

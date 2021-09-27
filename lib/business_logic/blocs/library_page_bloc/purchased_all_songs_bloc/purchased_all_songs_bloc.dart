@@ -63,6 +63,9 @@ class PurchasedAllSongsBloc
       } catch (error) {
         yield PurchasedAllSongsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshAllPurchasedSongsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadAllPurchasedSongsEvent());
     }
   }
 

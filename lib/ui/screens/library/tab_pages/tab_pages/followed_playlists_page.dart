@@ -4,6 +4,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/library_data/followed_playlist.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -41,19 +42,20 @@ class _FollowedPlaylistsPageState extends State<FollowedPlaylistsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.folder_fill,
-                msg: "You don't have any followed\nmezmurs",
+                icon: PhosphorIcons.hand_pointing_fill,
+                msg: "You are not following any\nPlaylist",
               ),
             );
           }
         } else if (state is FollowedPlaylistsLoadingErrorState) {
           return Container(
-            height: screenHeight * 0.5,
-            child: Text(
-              state.error,
-              style: TextStyle(
-                color: AppColors.errorRed,
-              ),
+            height: ScreenUtil(context: context).getScreenHeight() * 0.5,
+            child: LibraryErrorWidget(
+              onRetry: () {
+                BlocProvider.of<FollowedPlaylistsBloc>(context).add(
+                  LoadFollowedPlaylistsEvent(),
+                );
+              },
             ),
           );
         }
@@ -65,7 +67,7 @@ class _FollowedPlaylistsPageState extends State<FollowedPlaylistsPage> {
   Container buildAppLoading(BuildContext context, double screenHeight) {
     return Container(
       height: screenHeight * 0.5,
-      child: AppLoading(size: AppValues.loadingWidgetSize),
+      child: AppLoading(size: AppValues.loadingWidgetSize / 2),
     );
   }
 

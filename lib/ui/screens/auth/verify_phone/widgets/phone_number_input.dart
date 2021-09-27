@@ -15,7 +15,7 @@ class PhoneNumberInput extends StatelessWidget {
   final MaskedTextController controller;
   final bool hasError;
 
-  ////////
+  ///
   bool readOnly = false;
 
   @override

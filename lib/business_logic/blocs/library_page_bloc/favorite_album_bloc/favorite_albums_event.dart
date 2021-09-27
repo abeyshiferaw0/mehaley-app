@@ -8,3 +8,8 @@ class LoadFavoriteAlbumsEvent extends FavoriteAlbumsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class RefreshFavoriteAlbumsEvent extends FavoriteAlbumsEvent {
+  @override
+  List<Object?> get props => [];
+}

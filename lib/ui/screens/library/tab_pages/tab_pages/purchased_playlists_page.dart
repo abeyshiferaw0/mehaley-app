@@ -2,9 +2,11 @@ import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_playli
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
+import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedPlaylistsPage extends StatefulWidget {
-  const PurchasedPlaylistsPage({Key? key}) : super(key: key);
+  const PurchasedPlaylistsPage({Key? key, required this.onPlaylistsLoaded})
+      : super(key: key);
+
+  final Function(List<Playlist>) onPlaylistsLoaded;
 
   @override
   _PurchasedPlaylistsPageState createState() => _PurchasedPlaylistsPageState();
@@ -22,9 +27,8 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
   @override
   void initState() {
     ///INITIALLY LOAD ALL PURCHASED PlaylistS
-    BlocProvider.of<PurchasedPlaylistBloc>(context).add(
-      LoadPurchasedPlaylistsEvent(),
-    );
+    BlocProvider.of<PurchasedPlaylistBloc>(context)
+        .add(LoadPurchasedPlaylistsEvent());
     super.initState();
   }
 
@@ -36,25 +40,29 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
         if (state is PurchasedPlaylistsLoadingState) {
           return buildAppLoading(context, screenHeight);
         } else if (state is PurchasedPlaylistsLoadedState) {
+          ///PASS ALL LOADED PLAYLISTS TO PREVIOUS PAGE
+          widget.onPlaylistsLoaded(
+            state.purchasedPlaylists.map((e) => e.playlist).toList(),
+          );
           if (state.purchasedPlaylists.length > 0) {
             return buildPageLoaded(state.purchasedPlaylists);
           } else {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.folder_fill,
-                msg: "You don't have any purchased\nplaylists",
+                icon: PhosphorIcons.playlist_fill,
+                msg: "You don't have any purchased\nPlaylists",
               ),
             );
           }
         } else if (state is PurchasedPlaylistsLoadingErrorState) {
           return Container(
-            height: screenHeight * 0.5,
-            child: Text(
-              state.error,
-              style: TextStyle(
-                color: AppColors.errorRed,
-              ),
+            height: ScreenUtil(context: context).getScreenHeight() * 0.5,
+            child: LibraryErrorWidget(
+              onRetry: () {
+                BlocProvider.of<PurchasedPlaylistBloc>(context)
+                    .add(LoadPurchasedPlaylistsEvent());
+              },
             ),
           );
         }
@@ -66,7 +74,7 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
   Container buildAppLoading(BuildContext context, double screenHeight) {
     return Container(
       height: screenHeight * 0.5,
-      child: AppLoading(size: AppValues.loadingWidgetSize),
+      child: AppLoading(size: AppValues.loadingWidgetSize / 2),
     );
   }
 

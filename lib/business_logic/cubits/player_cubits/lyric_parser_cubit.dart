@@ -14,7 +14,6 @@ class LyricParserCubit extends Cubit<List<LyricItem>> {
       if (state is LyricDataLoaded) {
         parseLyric(state.lyric);
       } else if (state is RemoveLyricWidgetState) {
-        print("RemoveLyricWidgetStateeee");
         emit([]);
       }
     });

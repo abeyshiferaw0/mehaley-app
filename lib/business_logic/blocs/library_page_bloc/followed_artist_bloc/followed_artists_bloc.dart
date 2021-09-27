@@ -62,6 +62,9 @@ class FollowedArtistsBloc
       } catch (error) {
         yield FollowedArtistsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshFollowedArtistsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadFollowedArtistsEvent());
     }
   }
 

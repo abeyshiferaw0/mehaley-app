@@ -4,7 +4,7 @@ import 'package:elf_play/data/models/song.dart';
 class PlayerDataRepository {
   const PlayerDataRepository();
 
-  void addToRecentlyPlayer(Song song) {
+  void addToRecentlyPlayed(Song song) {
     ///REMOVE LAST IF MORE THAN 15
     if (AppHiveBoxes.instance.recentlyPlayedBox.values.length > 15) {
       AppHiveBoxes.instance.recentlyPlayedBox.deleteAt(0);

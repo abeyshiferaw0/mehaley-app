@@ -213,4 +213,23 @@ class DownloadUtil {
     }
     return false;
   }
+
+  Future<String?> getFailedTaskId(Song song) async {
+    ///GET LIST OF COMPLETED DOWNLOADS
+    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
+    final String url =
+        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query: "SELECT * FROM task WHERE url='$url'",
+    );
+
+    if (tasks == null) return null;
+    if (tasks.length < 1) return null;
+
+    if (Song.fromBase64(tasks.first.url.split("?song=")[1]) == song) {
+      return tasks.first.taskId;
+    }
+    return null;
+  }
 }

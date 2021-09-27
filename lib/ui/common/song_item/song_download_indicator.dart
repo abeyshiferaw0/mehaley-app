@@ -165,18 +165,20 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
             BlocProvider.of<DownloadingSongBloc>(context).add(
-              DownloadSongEvent(song: widget.song),
+              RetryDownloadSongEvent(song: widget.song),
             );
           });
         },
         child: Padding(
-          padding: EdgeInsets.all(AppPadding.padding_8),
+          padding: EdgeInsets.all(
+            AppPadding.padding_8,
+          ),
           child: Icon(
-            PhosphorIcons.warning_circle_light,
-            color: AppColors.errorRed,
+            PhosphorIcons.warning_fill,
+            color: AppColors.yellow,
             size: widget.isForPlayerPage
-                ? AppIconSizes.icon_size_28
-                : AppIconSizes.icon_size_24,
+                ? AppIconSizes.icon_size_24
+                : AppIconSizes.icon_size_20,
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -71,7 +72,9 @@ class _SongItemState extends State<SongItem> {
   Widget build(BuildContext context) {
     return AppBouncingButton(
       onTap: onPressed,
-      onLongTap: showSongMenu,
+      onLongTap: () {
+        showSongMenu(context, song);
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -154,20 +157,9 @@ class _SongItemState extends State<SongItem> {
             song: song,
             isForPlayerPage: false,
           ),
-          AppBouncingButton(
-            onTap: () {
-              //SHOW MENU DIALOG
-              showSongMenu();
-            },
-            child: Padding(
-              padding: EdgeInsets.all(AppPadding.padding_8),
-              child: Icon(
-                PhosphorIcons.dots_three_vertical_bold,
-                color: AppColors.lightGrey,
-                size: AppIconSizes.icon_size_24,
-              ),
-            ),
-          ),
+          SongMenuDotsWidget(
+            song: song,
+          )
         ],
       ),
     );
@@ -254,13 +246,6 @@ class _SongItemState extends State<SongItem> {
       ),
     );
   }
-
-  void showSongMenu() {
-    PagesUtilFunctions.showMenuDialog(
-      context: context,
-      child: SongMenuWidget(song: song),
-    );
-  }
 }
 
 AppItemsImagePlaceHolder buildImagePlaceHolder() {
@@ -294,4 +279,104 @@ class SongIsPlayingText extends StatelessWidget {
       },
     );
   }
+}
+
+class SongMenuDotsWidget extends StatefulWidget {
+  SongMenuDotsWidget({Key? key, required this.song}) : super(key: key);
+
+  final Song song;
+
+  @override
+  _SongMenuDotsWidgetState createState() => _SongMenuDotsWidgetState();
+}
+
+class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
+  ///
+  bool showMenu = true;
+
+  @override
+  void initState() {
+    BlocProvider.of<DownloadingSongBloc>(context).add(
+      IsSongDownloadedEvent(song: widget.song),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<DownloadingSongBloc, DownloadingSongState>(
+      listener: (context, state) {
+        if (state is DownloadingSongsRunningState) {
+          if (state.song != null) {
+            if (state.song!.songId == widget.song.songId) {
+              setState(() {
+                showMenu = true;
+              });
+            }
+          }
+        }
+        if (state is DownloadingSongsCompletedState) {
+          if (state.song != null) {
+            if (state.song!.songId == widget.song.songId) {
+              setState(() {
+                showMenu = true;
+              });
+            }
+          }
+        }
+        if (state is DownloadingSongsFailedState) {
+          if (state.song != null) {
+            if (state.song!.songId == widget.song.songId) {
+              setState(() {
+                showMenu = false;
+              });
+            }
+          }
+        }
+        if (state is DownloadingSongDeletedState) {
+          if (state.song.songId == widget.song.songId) {
+            setState(() {
+              showMenu = true;
+            });
+          }
+        }
+      },
+      child: AppBouncingButton(
+        onTap: () {
+          //SHOW MENU DIALOG
+          showSongMenu(context, widget.song);
+        },
+        child: Row(
+          children: [
+            Visibility(
+              visible: showMenu,
+              child: Padding(
+                padding: EdgeInsets.all(AppPadding.padding_8),
+                child: Icon(
+                  PhosphorIcons.dots_three_vertical_bold,
+                  color: AppColors.lightGrey,
+                  size: AppIconSizes.icon_size_24,
+                ),
+              ),
+            ),
+            Visibility(
+              visible: !showMenu,
+              child: SizedBox(
+                width: AppMargin.margin_4,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void showSongMenu(context, song) {
+  PagesUtilFunctions.showMenuDialog(
+    context: context,
+    child: SongMenuWidget(
+      song: song,
+    ),
+  );
 }

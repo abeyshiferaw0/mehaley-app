@@ -26,7 +26,6 @@ class PurchasedSongsBloc
     if (event is LoadPurchasedSongsEvent) {
       // REFRESH AFTER CACHE YIELD
       // LOAD CACHE AND REFRESH
-
       yield PurchasedSongsLoadingState();
       try {
         //YIELD CACHE DATA
@@ -63,6 +62,9 @@ class PurchasedSongsBloc
       } catch (error) {
         yield PurchasedSongsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshPurchasedSongsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadPurchasedSongsEvent());
     }
   }
 

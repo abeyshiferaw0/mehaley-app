@@ -28,6 +28,7 @@ class AppColors {
   static Color transparent = Colors.transparent;
   static Color blue = HexColor("#1E96ED");
   static Color errorRed = Colors.redAccent;
+  static Color yellow = HexColor("#f7c631");
 }
 
 class AppFontSizes {

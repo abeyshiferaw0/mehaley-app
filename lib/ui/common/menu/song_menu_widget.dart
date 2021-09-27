@@ -1,5 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
+import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:elf_play/config/app_repositories.dart';
+import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
@@ -8,6 +12,7 @@ import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_download_menu_item.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_favorite_menu_item.dart';
+import 'package:elf_play/ui/screens/library/song_add_to_playlist_page.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -192,7 +197,33 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.playlist_light,
                     title: "Add to playlist",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.of(context, rootNavigator: true).push(
+                        PagesUtilFunctions.createBottomToUpAnimatedRoute(
+                          setting: AppRouterPaths.songAddToPlaylist,
+                          page: MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) => UserPlaylistBloc(
+                                  userPLayListRepository:
+                                      AppRepositories.userPLayListRepository,
+                                ),
+                              ),
+                              BlocProvider(
+                                create: (context) => MyPlaylistBloc(
+                                  myPlaylistRepository:
+                                      AppRepositories.myPLayListRepository,
+                                ),
+                              ),
+                            ],
+                            child: SongAddToPlaylistPage(
+                              song: song,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   MenuItem(
                     isDisabled: false,

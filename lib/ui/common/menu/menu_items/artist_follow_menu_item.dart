@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -48,13 +49,19 @@ class _ArtistFollowMenuItemState extends State<ArtistFollowMenuItem> {
 
   void onTap() {
     ///FOLLOW UNFOLLOW ARTIST
-    BlocProvider.of<LibraryBloc>(context).add(
-      FollowUnFollowArtistEvent(
-        id: widget.artistId,
-        appLikeFollowEvents: preButtonOnTap()
-            ? AppLikeFollowEvents.UNFOLLOW
-            : AppLikeFollowEvents.FOLLOW,
-      ),
+    EasyDebounce.debounce(
+      "ARTIST_FOLLOW",
+      Duration(milliseconds: 800),
+      () {
+        BlocProvider.of<LibraryBloc>(context).add(
+          FollowUnFollowArtistEvent(
+            id: widget.artistId,
+            appLikeFollowEvents: preButtonOnTap()
+                ? AppLikeFollowEvents.UNFOLLOW
+                : AppLikeFollowEvents.FOLLOW,
+          ),
+        );
+      },
     );
   }
 

@@ -63,6 +63,9 @@ class PurchasedAlbumsBloc
       } catch (error) {
         yield PurchasedAlbumsLoadingErrorState(error: error.toString());
       }
+    } else if (event is RefreshPurchasedAlbumsEvent) {
+      libraryPageDataRepository.cancelDio();
+      this.add(LoadPurchasedAlbumsEvent());
     }
   }
 

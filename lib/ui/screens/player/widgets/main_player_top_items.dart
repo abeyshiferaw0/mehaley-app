@@ -82,7 +82,9 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                   //SHOW MENU DIALOG
                   PagesUtilFunctions.showMenuDialog(
                     context: context,
-                    child: SongMenuWidget(song: state!),
+                    child: SongMenuWidget(
+                      song: state!,
+                    ),
                   );
                 },
               );

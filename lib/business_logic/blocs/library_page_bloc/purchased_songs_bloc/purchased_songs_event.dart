@@ -7,3 +7,8 @@ class LoadPurchasedSongsEvent extends PurchasedSongsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class RefreshPurchasedSongsEvent extends PurchasedSongsEvent {
+  @override
+  List<Object?> get props => [];
+}

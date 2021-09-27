@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
@@ -119,13 +120,20 @@ class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem>
 
   void onTap() {
     ///LIKE UNLIKE ALBUM
-    BlocProvider.of<LibraryBloc>(context).add(
-      LikeUnLikeAlbumEvent(
-        id: widget.albumId,
-        appLikeFollowEvents: preButtonOnTap()
-            ? AppLikeFollowEvents.UNLIKE
-            : AppLikeFollowEvents.LIKE,
-      ),
+
+    EasyDebounce.debounce(
+      "ALBUM_LIKE",
+      Duration(milliseconds: 800),
+      () {
+        BlocProvider.of<LibraryBloc>(context).add(
+          LikeUnLikeAlbumEvent(
+            id: widget.albumId,
+            appLikeFollowEvents: preButtonOnTap()
+                ? AppLikeFollowEvents.UNLIKE
+                : AppLikeFollowEvents.LIKE,
+          ),
+        );
+      },
     );
   }
 

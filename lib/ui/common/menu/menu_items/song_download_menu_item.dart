@@ -151,14 +151,14 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       child: MenuItem(
         isDisabled: false,
         hasTopMargin: false,
-        iconColor: AppColors.errorRed,
+        iconColor: AppColors.yellow,
         icon: PhosphorIcons.warning_fill,
         title: "Retry download",
         onTap: () {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
             BlocProvider.of<DownloadingSongBloc>(context).add(
-              DownloadSongEvent(song: widget.song),
+              RetryDownloadSongEvent(song: widget.song),
             );
           });
         },

@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 SnackBar buildAppSnackBar({
   required Color bgColor,
@@ -43,10 +42,12 @@ SnackBar buildAppSnackBar({
   );
 }
 
-SnackBar buildDownloadSuccessSnackBar({
+SnackBar buildDownloadMsgSnackBar({
   required Color bgColor,
   required String msg,
   required Color txtColor,
+  required Color iconColor,
+  required IconData icon,
   bool isFloating = true,
 }) {
   return SnackBar(
@@ -54,21 +55,23 @@ SnackBar buildDownloadSuccessSnackBar({
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          PhosphorIcons.check_circle_fill,
-          color: AppColors.green,
+          icon,
+          color: iconColor,
           size: AppIconSizes.icon_size_24,
         ),
         SizedBox(
           width: AppMargin.margin_16,
         ),
-        AutoSizeText(
-          msg,
-          maxFontSize: AppFontSizes.font_size_14,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: txtColor,
-            letterSpacing: 0.5,
-            fontWeight: FontWeight.w400,
+        Expanded(
+          child: AutoSizeText(
+            msg,
+            maxFontSize: AppFontSizes.font_size_12,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: txtColor,
+              letterSpacing: 0.5,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ],
@@ -84,7 +87,7 @@ SnackBar buildDownloadSuccessSnackBar({
     elevation: 12,
     behavior: isFloating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(isFloating ? 8 : 0),
+      borderRadius: BorderRadius.circular(isFloating ? 4 : 0),
     ),
     backgroundColor: bgColor,
   );

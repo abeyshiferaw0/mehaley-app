@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            delegate: ProfilePageHeaderDelegate(),
+            delegate: ProfilePageHeaderDelegate(onBackPress: () { Navigator.pop(context); }),
             floating: false,
             pinned: true,
           ),
