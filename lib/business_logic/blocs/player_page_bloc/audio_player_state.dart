@@ -110,31 +110,6 @@ class AudioPlayerQueueChangedState extends AudioPlayerState {
   List<Object?> get props => [queue, currentIndex];
 }
 
-////FOR LYRICS DATA
-
-class LyricDataLoading extends AudioPlayerState {
-  @override
-  List<Object?> get props => [];
-}
-
-class LyricDataLoaded extends AudioPlayerState {
-  final Lyric lyric;
-
-  LyricDataLoaded({required this.lyric});
-
-  @override
-  List<Object?> get props => [lyric];
-}
-
-class LyricDataLoadingError extends AudioPlayerState {
-  final String error;
-
-  LyricDataLoadingError({required this.error});
-
-  @override
-  List<Object?> get props => [error];
-}
-
 class AudioPlayerVolumeChangedState extends AudioPlayerState {
   final double volume;
 
@@ -142,9 +117,4 @@ class AudioPlayerVolumeChangedState extends AudioPlayerState {
 
   @override
   List<Object?> get props => [volume];
-}
-
-class RemoveLyricWidgetState extends AudioPlayerState {
-  @override
-  List<Object?> get props => [];
 }

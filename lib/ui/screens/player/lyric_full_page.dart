@@ -30,7 +30,9 @@ import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
 
 class LyricFullPage extends StatefulWidget {
-  const LyricFullPage({Key? key}) : super(key: key);
+  const LyricFullPage({Key? key, required this.song}) : super(key: key);
+
+  final Song song;
 
   @override
   _LyricFullPageState createState() => _LyricFullPageState();
@@ -50,60 +52,72 @@ class _LyricFullPageState extends State<LyricFullPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
-      builder: (context, state) {
-        if (state is PlayerPageDominantColorChangedState) {
-          dominantColor = ColorUtil.changeColorSaturation(state.color, 0.7);
+    return BlocListener<CurrentPlayingCubit, Song?>(
+      listener: (context, state) {
+        if (state == null) {
+          Navigator.pop(context);
+        } else {
+          if (state!.songId != widget.song.songId) {
+            Navigator.pop(context);
+          }
         }
-        return Scaffold(
-          backgroundColor: dominantColor,
-          body: SafeArea(
-            child: MultiBlocListener(
-              listeners: [
-                BlocListener<SongPositionCubit, Duration>(
-                  listener: (context, state) {
-                    setState(() {
-                      progress = state.inSeconds.toDouble();
-                    });
-                  },
-                ),
-                BlocListener<SongBufferedCubit, Duration>(
-                  listener: (context, state) {
-                    bufferedPosition = state.inSeconds.toDouble();
-                  },
-                ),
-                BlocListener<SongDurationCubit, Duration>(
-                  listener: (context, state) {
-                    totalDuration = state.inSeconds.toDouble();
-                  },
-                ),
-              ],
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: AppPadding.padding_20,
-                  right: AppPadding.padding_20,
-                  top: AppPadding.padding_20,
-                  bottom: AppPadding.padding_32,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    buildPageHeader(context),
-                    SizedBox(height: AppMargin.margin_32),
-                    Expanded(
-                      child: LyricPlayerFullPageWidget(
-                        dominantColor: dominantColor,
+      },
+      child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
+        builder: (context, state) {
+          if (state is PlayerPageDominantColorChangedState) {
+            dominantColor = ColorUtil.changeColorSaturation(state.color, 0.9);
+          }
+          return Scaffold(
+            backgroundColor: dominantColor,
+            body: SafeArea(
+              child: MultiBlocListener(
+                listeners: [
+                  BlocListener<SongPositionCubit, Duration>(
+                    listener: (context, state) {
+                      setState(() {
+                        progress = state.inSeconds.toDouble();
+                      });
+                    },
+                  ),
+                  BlocListener<SongBufferedCubit, Duration>(
+                    listener: (context, state) {
+                      bufferedPosition = state.inSeconds.toDouble();
+                    },
+                  ),
+                  BlocListener<SongDurationCubit, Duration>(
+                    listener: (context, state) {
+                      totalDuration = state.inSeconds.toDouble();
+                    },
+                  ),
+                ],
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.padding_20,
+                    right: AppPadding.padding_20,
+                    top: AppPadding.padding_20,
+                    bottom: AppPadding.padding_32,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildPageHeader(context),
+                      SizedBox(height: AppMargin.margin_32),
+                      Expanded(
+                        child: LyricPlayerFullPageWidget(
+                          dominantColor: dominantColor,
+                          song: widget.song,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: AppMargin.margin_8),
-                    buildQueuePageControls(context),
-                  ],
+                      SizedBox(height: AppMargin.margin_8),
+                      buildQueuePageControls(context),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

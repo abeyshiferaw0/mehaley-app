@@ -11,6 +11,7 @@ class ApiUtil {
     required Dio dio,
     required String url,
     Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
   }) async {
     ///GET USER TOKE
     String token =
@@ -23,6 +24,7 @@ class ApiUtil {
       url,
       queryParameters: queryParameters,
       options: options,
+        cancelToken:cancelToken,
     );
 
     return response;

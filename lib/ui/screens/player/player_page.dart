@@ -1,3 +1,4 @@
+import 'package:elf_play/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/config/fake_data.dart';
 import 'package:elf_play/config/themes.dart';

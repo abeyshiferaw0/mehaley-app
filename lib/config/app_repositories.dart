@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:elf_play/data/data_providers/album_data_provider.dart';
 import 'package:elf_play/data/data_providers/artist_data_provider.dart';
 import 'package:elf_play/data/data_providers/auth_provider.dart';
@@ -51,7 +52,7 @@ class AppRepositories {
     playlistDataProvider: PlaylistDataProvider(),
   );
   static LyricDataRepository lyricDataRepository = LyricDataRepository(
-    lyricDataProvider: LyricDataProvider(),
+    lyricDataProvider: LyricDataProvider(cancelToken: CancelToken()),
   );
 
   static SongMenuRepository songMenuRepository = SongMenuRepository(

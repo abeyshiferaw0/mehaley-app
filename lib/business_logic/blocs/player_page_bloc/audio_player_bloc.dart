@@ -2,10 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/lyric_data_repository.dart';
 import 'package:elf_play/data/repositories/player_data_repository.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:equatable/equatable.dart';
@@ -20,12 +17,10 @@ part 'audio_player_state.dart';
 
 class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioPlayer audioPlayer;
-  final LyricDataRepository lyricDataRepository;
   final PlayerDataRepository playerDataRepository;
 
   AudioPlayerBloc({
     required this.playerDataRepository,
-    required this.lyricDataRepository,
     required this.audioPlayer,
   }) : super(AudioPlayerInitialState()) {
     audioPlayer.setCanUseNetworkResourcesForLiveStreamingWhilePaused(true);
@@ -69,33 +64,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   Stream<AudioPlayerState> mapEventToState(
     AudioPlayerEvent event,
   ) async* {
-    if (event is LoadSongLyricEvent) {
-      //LOAD CACHE AND REFRESH
-      yield LyricDataLoading();
-      try {
-        //YIELD CACHE DATA
-        final Lyric lyric = await lyricDataRepository.getLyricData(
-          event.songId,
-          AppCacheStrategy.LOAD_CACHE_FIRST,
-        );
-        yield LyricDataLoaded(lyric: lyric);
-        try {
-          //REFRESH AFTER CACHE YIELD
-          final Lyric lyric = await lyricDataRepository.getLyricData(
-            event.songId,
-            AppCacheStrategy.CACHE_LATER,
-          );
-          yield LyricDataLoading();
-          yield LyricDataLoaded(lyric: lyric);
-        } catch (error) {
-          //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
-        }
-      } catch (error) {
-        yield LyricDataLoadingError(error: error.toString());
-      }
-    } else if (event is RemoveLyricWidgetEvent) {
-      yield RemoveLyricWidgetState();
-    } else if (event is SetPlayerQueueEvent) {
+    if (event is SetPlayerQueueEvent) {
       //SETTING AUDIO PLAYER QUEUE
       setAudioPlayerQueue(event);
     } else if (event is SetMutedEvent) {
@@ -285,8 +254,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
         ///DEBUG ALSO CHECK FOR DATA SAVER
         //checkForVideoBg(mediaItem);
-        ///LOAD LYRICS AFTER SONG CHANGED
-        loadLyricsIfAvalvable(song);
 
         ///ADD SONG TO RECENTLY PLAYED LIST
         playerDataRepository.addToRecentlyPlayed(song);
@@ -392,18 +359,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         PlayerQueueChangedEvent(queue: queue, currentIndex: currentIndex),
       );
     });
-  }
-
-  void loadLyricsIfAvalvable(Song song) {
-    if (song.lyricIncluded) {
-      this.add(
-        LoadSongLyricEvent(songId: song.songId),
-      );
-    } else {
-      this.add(
-        RemoveLyricWidgetEvent(),
-      );
-    }
   }
 
   void updateQueueItemsMoved(Song newSong, Song oldSong) {

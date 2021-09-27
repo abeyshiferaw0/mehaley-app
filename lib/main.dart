@@ -44,7 +44,6 @@ import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/cubits/player_cubits/Muted_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
-import 'business_logic/cubits/player_cubits/lyric_parser_cubit.dart';
 import 'business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'business_logic/cubits/player_cubits/player_queue_cubit.dart';
 import 'business_logic/cubits/player_cubits/player_state_cubit.dart';
@@ -157,7 +156,6 @@ class _MyAppState extends State<MyApp> {
               create: (context) => AudioPlayerBloc(
                 audioPlayer: AudioPlayer(),
                 playerDataRepository: AppRepositories.playerDataRepository,
-                lyricDataRepository: AppRepositories.lyricDataRepository,
               ),
             ),
             BlocProvider<PlayerPagePlayingFromCubit>(
@@ -218,11 +216,6 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider<CurrentPlayingCubit>(
               create: (context) => CurrentPlayingCubit(
-                audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
-              ),
-            ),
-            BlocProvider<LyricParserCubit>(
-              create: (context) => LyricParserCubit(
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),

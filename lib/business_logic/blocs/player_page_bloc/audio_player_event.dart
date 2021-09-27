@@ -168,15 +168,6 @@ class PlayerQueueChangedEvent extends AudioPlayerEvent {
   List<Object?> get props => [queue, currentIndex];
 }
 
-class LoadSongLyricEvent extends AudioPlayerEvent {
-  final int songId;
-
-  LoadSongLyricEvent({required this.songId});
-
-  @override
-  List<Object?> get props => [songId];
-}
-
 class UpdateQueueItemsMovedEvent extends AudioPlayerEvent {
   final Song oldMedia;
   final Song newMedia;
@@ -211,9 +202,4 @@ class PlayerVolumeChangedEvent extends AudioPlayerEvent {
 
   @override
   List<Object?> get props => [volume];
-}
-
-class RemoveLyricWidgetEvent extends AudioPlayerEvent {
-  @override
-  List<Object?> get props => [];
 }
