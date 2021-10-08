@@ -88,6 +88,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
             discountPercentage: recentlyPlayed.elementAt(i).discountPercentage,
             isFree: recentlyPlayed.elementAt(i).isFree,
             price: recentlyPlayed.elementAt(i).priceEtb,
+            isBought: recentlyPlayed.elementAt(i).isBought,
           ),
         );
         items.add(

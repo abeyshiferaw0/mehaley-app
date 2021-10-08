@@ -108,6 +108,7 @@ class LibraryAlbumItem extends StatelessWidget {
                   price: album.priceEtb,
                   discountPercentage: album.discountPercentage,
                   isDiscountAvailable: album.isDiscountAvailable,
+                  isPurchased: album.isBought,
                 ),
               ],
             ),
@@ -126,6 +127,7 @@ class LibraryAlbumItem extends StatelessWidget {
                     isFree: album.isFree,
                     isDiscountAvailable: album.isDiscountAvailable,
                     discountPercentage: album.discountPercentage,
+                    isBought: album.isBought,
                   ),
                 );
               },

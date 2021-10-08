@@ -54,6 +54,18 @@ class PagesDominantColorBloc
         0.15,
       );
       yield PlayerPageDominantColorChangedState(color: dominantColor);
+    } else if (event is UserPlaylistPageDominantColorChanged) {
+      Color dominantColor = ColorUtil.darken(
+        event.dominantColor,
+        0.15,
+      );
+      yield UserPlaylistPageDominantColorChangedState(color: dominantColor);
+    } else if (event is UserProfilePageDominantColorChanged) {
+      Color dominantColor = ColorUtil.darken(
+        event.dominantColor,
+        0.0,
+      );
+      yield ProfilePageDominantColorChangedState(color: dominantColor);
     }
   }
 

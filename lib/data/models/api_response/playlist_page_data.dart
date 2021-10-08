@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:equatable/equatable.dart';
 
-import '../group.dart';
 import '../playlist.dart';
 
 class PlaylistPageData extends Equatable {
@@ -22,5 +19,6 @@ class PlaylistPageData extends Equatable {
   List<Object?> get props => [
         songs,
         playlist,
+        response,
       ];
 }

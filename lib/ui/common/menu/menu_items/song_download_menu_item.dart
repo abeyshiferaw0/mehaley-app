@@ -38,7 +38,9 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
   @override
   void initState() {
     BlocProvider.of<DownloadingSongBloc>(context).add(
-      IsSongDownloadedEvent(song: widget.song),
+      IsSongDownloadedEvent(
+        song: widget.song,
+      ),
     );
     super.initState();
   }

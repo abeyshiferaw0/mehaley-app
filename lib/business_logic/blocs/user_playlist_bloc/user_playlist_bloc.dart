@@ -34,6 +34,22 @@ class UserPlaylistBloc extends Bloc<UserPlaylistEvent, UserPlaylistState> {
       } catch (e) {
         yield UserPlaylistLoadingErrorState(error: e.toString());
       }
+    } else if (event is UpdateUserPlaylistEvent) {
+      yield UserPlaylistLoadingState();
+      try {
+        MyPlaylist myPlaylist = await userPLayListRepository.updateUserPlaylist(
+          event.playlistId,
+          event.playlistName,
+          event.playlistDescription,
+          event.playlistImage,
+          event.imageRemoved,
+        );
+        yield UserPlaylistUpdatedState(
+          myPlaylist: myPlaylist,
+        );
+      } catch (e) {
+        yield UserPlaylistLoadingErrorState(error: e.toString());
+      }
     } else if (event is AddSongUserPlaylistEvent) {
       yield UserPlaylistLoadingState();
       try {
@@ -42,6 +58,18 @@ class UserPlaylistBloc extends Bloc<UserPlaylistEvent, UserPlaylistState> {
           event.song,
         );
         yield SongAddedToPlaylistState(
+            myPlaylist: event.myPlaylist, song: event.song);
+      } catch (e) {
+        yield UserPlaylistLoadingErrorState(error: e.toString());
+      }
+    } else if (event is RemoveSongUserPlaylistEvent) {
+      yield UserPlaylistLoadingState();
+      try {
+        await userPLayListRepository.removeSongUserPlaylist(
+          event.myPlaylist,
+          event.song,
+        );
+        yield SongRemovedFromPlaylistState(
             myPlaylist: event.myPlaylist, song: event.song);
       } catch (e) {
         yield UserPlaylistLoadingErrorState(error: e.toString());

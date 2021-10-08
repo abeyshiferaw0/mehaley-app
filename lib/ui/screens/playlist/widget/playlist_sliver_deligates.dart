@@ -1,4 +1,6 @@
 import 'dart:math';
+
+import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/screens/playlist/widget/playlist_page_header.dart';
@@ -6,6 +8,10 @@ import 'package:elf_play/ui/screens/playlist/widget/playlist_play_shuffle.dart';
 import 'package:flutter/material.dart';
 
 class PlaylistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final PlaylistPageData playlistPageData;
+
+  PlaylistPageSliverHeaderDelegate({required this.playlistPageData});
+
   @override
   Widget build(_, double shrinkOffset, bool overlapsContent) {
     var shrinkPercentage =
@@ -13,6 +19,7 @@ class PlaylistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
     return PlaylistPageHeader(
       shrinkPercentage: shrinkPercentage,
+      playlistPageData: playlistPageData,
     );
   }
 

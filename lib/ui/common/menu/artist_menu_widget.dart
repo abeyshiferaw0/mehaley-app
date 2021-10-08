@@ -125,8 +125,8 @@ class ArtistMenuWidget extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.lightGrey,
-              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.white,
+              fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
           ),

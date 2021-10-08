@@ -143,7 +143,18 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        ColorUtil.darken(color, 0.1),
+        color,
+        AppColors.black,
+      ],
+    );
+  }
+
+  getUserPlaylistHeaderGradient(Color dominantColor) {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        dominantColor,
         AppColors.black,
       ],
     );

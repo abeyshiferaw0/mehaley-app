@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
@@ -27,10 +29,14 @@ class SongItem extends StatefulWidget {
     this.thumbRadius = 0.0,
     required this.onPressed,
     this.badges,
+    required this.isForMyPlaylist,
+    this.onRemoveSongFromPlaylist,
   });
 
   final Song song;
   final int? position;
+  final bool isForMyPlaylist;
+  final Function(Song song)? onRemoveSongFromPlaylist;
   final String? thumbUrl;
   final double? thumbSize;
   final double thumbRadius;
@@ -46,6 +52,7 @@ class SongItem extends StatefulWidget {
         thumbRadius: thumbRadius,
         onPressed: onPressed,
         badges: badges,
+        isForMyPlaylist: isForMyPlaylist,
       );
 }
 
@@ -54,11 +61,13 @@ class _SongItemState extends State<SongItem> {
   final int? position;
   final double? thumbSize;
   final String? thumbUrl;
+  final bool isForMyPlaylist;
   final double thumbRadius;
   final VoidCallback onPressed;
   final List<SongItemBadge>? badges;
 
   _SongItemState({
+    required this.isForMyPlaylist,
     required this.song,
     this.position,
     this.thumbSize,
@@ -73,7 +82,12 @@ class _SongItemState extends State<SongItem> {
     return AppBouncingButton(
       onTap: onPressed,
       onLongTap: () {
-        showSongMenu(context, song);
+        showSongMenu(
+          context,
+          song,
+          isForMyPlaylist,
+          widget.onRemoveSongFromPlaylist,
+        );
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,6 +129,7 @@ class _SongItemState extends State<SongItem> {
                             song.isFree,
                             song.isDiscountAvailable,
                             song.discountPercentage,
+                            song.isBought,
                           ),
                           //////////
                           //SONG OTHER BADGES
@@ -159,6 +174,8 @@ class _SongItemState extends State<SongItem> {
           ),
           SongMenuDotsWidget(
             song: song,
+            isForMyPlaylist: isForMyPlaylist,
+            onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
           )
         ],
       ),
@@ -222,7 +239,7 @@ class _SongItemState extends State<SongItem> {
   }
 
   getPriceBadge(double price, bool isFree, bool isDiscountAvailable,
-      double discountPercentage) {
+      double discountPercentage, bool isBought) {
     // if (isSongFree) {
     //   return SongItemBadge(
     //     tag: 'FREE',
@@ -243,6 +260,7 @@ class _SongItemState extends State<SongItem> {
         isFree: isFree,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
+        isPurchased: isBought,
       ),
     );
   }
@@ -282,9 +300,16 @@ class SongIsPlayingText extends StatelessWidget {
 }
 
 class SongMenuDotsWidget extends StatefulWidget {
-  SongMenuDotsWidget({Key? key, required this.song}) : super(key: key);
+  SongMenuDotsWidget({
+    Key? key,
+    required this.song,
+    required this.isForMyPlaylist,
+    this.onRemoveSongFromPlaylist,
+  }) : super(key: key);
 
   final Song song;
+  final bool isForMyPlaylist;
+  final Function(Song song)? onRemoveSongFromPlaylist;
 
   @override
   _SongMenuDotsWidgetState createState() => _SongMenuDotsWidgetState();
@@ -296,9 +321,6 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
 
   @override
   void initState() {
-    BlocProvider.of<DownloadingSongBloc>(context).add(
-      IsSongDownloadedEvent(song: widget.song),
-    );
     super.initState();
   }
 
@@ -344,7 +366,12 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
       child: AppBouncingButton(
         onTap: () {
           //SHOW MENU DIALOG
-          showSongMenu(context, widget.song);
+          showSongMenu(
+            context,
+            widget.song,
+            widget.isForMyPlaylist,
+            widget.onRemoveSongFromPlaylist,
+          );
         },
         child: Row(
           children: [
@@ -372,11 +399,23 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
   }
 }
 
-void showSongMenu(context, song) {
+void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
   PagesUtilFunctions.showMenuDialog(
     context: context,
     child: SongMenuWidget(
       song: song,
+      onRemoveSongFromPlaylist: onRemoveSongFromPlaylist,
+      onCreateWithSongSuccess: (MyPlaylist myPlaylist) {
+        ///GO TO USER PLAYLIST PAGE
+        Navigator.pushNamed(
+          context,
+          AppRouterPaths.userPlaylistRoute,
+          arguments: ScreenArguments(
+            args: {'playlistId': myPlaylist.playlistId},
+          ),
+        );
+      },
+      isForMyPlaylist: isForMyPlaylist,
     ),
   );
 }

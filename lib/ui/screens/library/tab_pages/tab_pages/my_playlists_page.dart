@@ -1,14 +1,11 @@
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
+import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/library/create_playlist_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_my_playlist_item.dart';
@@ -17,7 +14,6 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
 class MyPlaylistsPage extends StatefulWidget {
@@ -96,7 +92,17 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
           },
           itemBuilder: (context, index) {
             return LibraryMyPlaylistItem(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.userPlaylistRoute,
+                  arguments: ScreenArguments(
+                    args: {
+                      'playlistId': myPlaylists.elementAt(index).playlistId
+                    },
+                  ),
+                );
+              },
               myPlaylist: myPlaylists.elementAt(index),
               isForSongAddToPlaylistPage: false,
             );
@@ -109,7 +115,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
   AppBouncingButton buildCreatePlaylistButton(context) {
     return AppBouncingButton(
       onTap: () {
-        openCreatePlaylistPage();
+        PagesUtilFunctions.openCreatePlaylistPage(context);
       },
       child: Container(
         child: Row(
@@ -142,39 +148,5 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
         ),
       ),
     );
-  }
-
-  void openCreatePlaylistPage() async {
-    final refresh = await Navigator.of(context, rootNavigator: true).push(
-      PagesUtilFunctions.createBottomToUpAnimatedRoute(
-        page: MultiBlocProvider(
-          providers: [
-            BlocProvider<ImagePickerCubit>(
-              create: (context) => ImagePickerCubit(
-                picker: ImagePicker(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => UserPlaylistBloc(
-                userPLayListRepository: AppRepositories.userPLayListRepository,
-              ),
-            ),
-          ],
-          child: CreatePlaylistPage(
-            song: null,
-            createWithSong: false,
-          ),
-        ),
-      ),
-    );
-    if (refresh != null) {
-      if (refresh is bool) {
-        if (refresh) {
-          BlocProvider.of<MyPlaylistBloc>(context).add(
-            LoadAllMyPlaylistsEvent(isForAddSongPage: false),
-          );
-        }
-      }
-    }
   }
 }

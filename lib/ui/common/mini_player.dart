@@ -75,7 +75,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             //OPEN PLAYER PAGE
             Navigator.of(context, rootNavigator: true).push(
               PagesUtilFunctions.createBottomToUpAnimatedRoute(
-                page: PlayerPage(),
+                page: PlayerPage(
+
+                ),
               ),
             );
           },
@@ -272,32 +274,38 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
     );
   }
 
-  SliderTheme buildMiniPlayerSlider(BuildContext context) {
-    return SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-        activeTrackColor: AppColors.white,
-        inactiveTrackColor: AppColors.lightGrey.withOpacity(0.5),
-        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-        overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
-        trackHeight: AppValues.miniPlayerTrackHeight,
-      ),
-      child: BlocBuilder<SongPositionCubit, Duration>(
-        builder: (context, state) {
-          return Slider(
-            value: AudioPlayerUtil.getCorrectProgress(
-                state.inSeconds.toDouble(), totalDuration),
-            min: 0.0,
-            max: totalDuration,
-            onChanged: (value) {
-              BlocProvider.of<AudioPlayerBloc>(context).add(
-                SeekAudioPlayerEvent(
-                  duration: Duration(seconds: value.toInt()),
+  BlocBuilder buildMiniPlayerSlider(BuildContext context) {
+    return BlocBuilder<CurrentPlayingCubit, Song?>(
+      builder: (context, currentPlayingState) {
+        return SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: AppColors.white,
+            inactiveTrackColor: AppColors.lightGrey.withOpacity(0.5),
+            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
+            trackHeight: AppValues.miniPlayerTrackHeight,
+          ),
+          child: BlocBuilder<SongPositionCubit, Duration>(
+            builder: (context, state) {
+              return Slider(
+                value: AudioPlayerUtil.getCorrectProgress(
+                  state.inSeconds.toDouble(),
+                  currentPlayingState!.audioFile.audioDurationSeconds,
                 ),
+                min: 0.0,
+                max: currentPlayingState.audioFile.audioDurationSeconds,
+                onChanged: (value) {
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    SeekAudioPlayerEvent(
+                      duration: Duration(seconds: value.toInt()),
+                    ),
+                  );
+                },
               );
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

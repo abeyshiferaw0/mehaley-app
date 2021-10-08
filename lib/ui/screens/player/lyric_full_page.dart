@@ -57,7 +57,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
         if (state == null) {
           Navigator.pop(context);
         } else {
-          if (state!.songId != widget.song.songId) {
+          if (state.songId != widget.song.songId) {
             Navigator.pop(context);
           }
         }
@@ -65,7 +65,10 @@ class _LyricFullPageState extends State<LyricFullPage> {
       child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
         builder: (context, state) {
           if (state is PlayerPageDominantColorChangedState) {
-            dominantColor = ColorUtil.changeColorSaturation(state.color, 0.9);
+            dominantColor = ColorUtil.changeColorSaturation(
+              state.color,
+              1.0,
+            );
           }
           return Scaffold(
             backgroundColor: dominantColor,
@@ -220,105 +223,115 @@ class _LyricFullPageState extends State<LyricFullPage> {
     );
   }
 
-  Column buildQueuePageControls(BuildContext context) {
-    return Column(
-      children: [
-        SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            activeTrackColor: AppColors.lightGrey,
-            inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
-            trackShape: CustomTrackShapeThin(),
-            thumbColor: AppColors.white,
-            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4.0),
-            overlayColor: AppColors.white.withOpacity(0.24),
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
-          ),
-          child: BlocBuilder<SongPositionCubit, Duration>(
-            builder: (context, state) {
-              return Slider(
-                value: AudioPlayerUtil.getCorrectProgress(
-                    state.inSeconds.toDouble(), totalDuration),
-                min: 0.0,
-                max: totalDuration,
-                onChanged: (value) {
-                  BlocProvider.of<AudioPlayerBloc>(context).add(
-                    SeekAudioPlayerEvent(
-                      duration: Duration(seconds: value.toInt()),
+  BlocBuilder buildQueuePageControls(BuildContext context) {
+    return BlocBuilder<CurrentPlayingCubit, Song?>(
+      builder: (context, currentPlayingState) {
+        return Column(
+          children: [
+            SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: AppColors.lightGrey,
+                inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+                trackShape: CustomTrackShapeThin(),
+                thumbColor: AppColors.white,
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4.0),
+                overlayColor: AppColors.white.withOpacity(0.24),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
+              ),
+              child: BlocBuilder<SongPositionCubit, Duration>(
+                builder: (context, state) {
+                  return Slider(
+                    value: AudioPlayerUtil.getCorrectProgress(
+                      state.inSeconds.toDouble(),
+                      currentPlayingState!.audioFile.audioDurationSeconds,
                     ),
+                    min: 0.0,
+                    max: currentPlayingState.audioFile.audioDurationSeconds,
+                    onChanged: (value) {
+                      BlocProvider.of<AudioPlayerBloc>(context).add(
+                        SeekAudioPlayerEvent(
+                          duration: Duration(seconds: value.toInt()),
+                        ),
+                      );
+                    },
                   );
                 },
-              );
-            },
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BlocBuilder<SongPositionCubit, Duration>(
-              builder: (context, state) {
-                return Text(
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BlocBuilder<SongPositionCubit, Duration>(
+                  builder: (context, state) {
+                    return Text(
+                      PagesUtilFunctions.formatDurationTimeTo(
+                        Duration(seconds: state.inSeconds.toInt()),
+                      ),
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_8.sp,
+                        color: AppColors.lightGrey.withOpacity(0.6),
+                      ),
+                    );
+                  },
+                ),
+                Text(
                   PagesUtilFunctions.formatDurationTimeTo(
-                    Duration(seconds: state.inSeconds.toInt()),
+                    Duration(
+                      seconds: currentPlayingState!
+                          .audioFile.audioDurationSeconds
+                          .toInt(),
+                    ),
                   ),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,
                     color: AppColors.lightGrey.withOpacity(0.6),
                   ),
-                );
-              },
+                ),
+              ],
             ),
-            Text(
-              PagesUtilFunctions.formatDurationTimeTo(
-                Duration(seconds: totalDuration.toInt()),
-              ),
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_8.sp,
-                color: AppColors.lightGrey.withOpacity(0.6),
+            Container(
+              height: ScreenUtil(context: context).getScreenHeight() * 0.07,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: BlocBuilder<PlayPauseCubit, bool>(
+                      builder: (context, state) {
+                        return AppBouncingButton(
+                          onTap: () {
+                            BlocProvider.of<AudioPlayerBloc>(context).add(
+                              PlayPauseEvent(),
+                            );
+                          },
+                          child: Icon(
+                            state
+                                ? Icons.pause_circle_filled_sharp
+                                : FlutterRemix.play_circle_fill,
+                            size: AppIconSizes.icon_size_72,
+                            color: AppColors.white,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    child: Center(
+                      child: ShareBtnWidget(),
+                    ),
+                  )
+                ],
               ),
             ),
           ],
-        ),
-        Container(
-          height: ScreenUtil(context: context).getScreenHeight() * 0.07,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: BlocBuilder<PlayPauseCubit, bool>(
-                  builder: (context, state) {
-                    return AppBouncingButton(
-                      onTap: () {
-                        BlocProvider.of<AudioPlayerBloc>(context).add(
-                          PlayPauseEvent(),
-                        );
-                      },
-                      child: Icon(
-                        state
-                            ? Icons.pause_circle_filled_sharp
-                            : FlutterRemix.play_circle_fill,
-                        size: AppIconSizes.icon_size_72,
-                        color: AppColors.white,
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Positioned(
-                top: 0,
-                bottom: 0,
-                right: 0,
-                child: Center(
-                  child: ShareBtnWidget(),
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 

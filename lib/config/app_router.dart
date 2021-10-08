@@ -1,15 +1,20 @@
 import 'package:elf_play/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:elf_play/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:elf_play/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_cancel_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.dart';
 import 'package:elf_play/config/app_repositories.dart';
@@ -26,6 +31,7 @@ import 'package:elf_play/ui/screens/search/search_page.dart';
 import 'package:elf_play/ui/screens/search/search_result_dedicated.dart';
 import 'package:elf_play/ui/screens/search/search_result_page.dart';
 import 'package:elf_play/ui/screens/setting/settings_page.dart';
+import 'package:elf_play/ui/screens/user_playlist/user_playlist_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,8 +53,10 @@ class AppRouterPaths {
   static const String homeRoute = 'home';
   static const String settingRoute = '/setting';
   static const String profileRoute = '/profile';
+  static const String editProfileRoute = '/edit_rofile';
   static const String albumRoute = '/album';
   static const String playlistRoute = '/playlist';
+  static const String userPlaylistRoute = '/user_playlist';
   static const String playerRoute = '/player';
   static const String artistRoute = '/artist';
   static const String libraryRoute = '/library';
@@ -90,7 +98,12 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.profileRoute:
-        builder = (_) => ProfilePage();
+        builder = (_) => BlocProvider(
+              create: (context) => ProfilePageBloc(
+                profileDataRepository: AppRepositories.profileDataRepository,
+              ),
+              child: ProfilePage(),
+            );
         break;
       case AppRouterPaths.playerRoute:
         builder = (_) => PlayerPage();
@@ -113,7 +126,27 @@ class AppRouter {
               child: PlaylistPage(playlistId: args.args['playlistId']),
             );
         break;
-      // case AppRouterPaths.createPlaylistRoute:
+      case AppRouterPaths.userPlaylistRoute:
+        final args = settings.arguments as ScreenArguments;
+        builder = (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider<UserPlaylistPageBloc>(
+                  create: (context) => UserPlaylistPageBloc(
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => UserPlaylistBloc(
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
+                  ),
+                ),
+              ],
+              child: UserPlaylistPage(playlistId: args.args['playlistId']),
+            );
+        break;
+      // case AppRouterPaths.editProfileRoute:
       //   builder = (_) => MultiBlocProvider(
       //         providers: [
       //           BlocProvider<ImagePickerCubit>(
@@ -121,8 +154,14 @@ class AppRouter {
       //               picker: ImagePicker(),
       //             ),
       //           ),
+      //           BlocProvider<AuthBloc>(
+      //             create: (context) => AuthBloc(
+      //               firebaseAuth: FirebaseAuth.instance,
+      //               authRepository: AppRepositories.authRepository,
+      //             ),
+      //           ),
       //         ],
-      //         child: CreatePlaylistPage(),
+      //         child: EditUserProfilePage(),
       //       );
       //   break;
       case AppRouterPaths.artistRoute:
@@ -141,11 +180,22 @@ class AppRouter {
                   create: (context) => FollowingTabPagesCubit(),
                 ),
                 BlocProvider(
+                  create: (context) => PurchasedTabPagesCubit(),
+                ),
+                BlocProvider(
                   create: (context) => LibraryTabPagesCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => UserPlaylistBloc(
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
+                  ),
                 ),
               ],
               child: LibraryPage(
                 isFromOffline: args.args[AppValues.isLibraryForOffline],
+                isLibraryForProfile: args.args[AppValues.isLibraryForProfile],
+                profileListTypes: args.args[AppValues.profileListTypes],
               ),
             );
         break;
@@ -223,7 +273,12 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.cartRoute:
-        builder = (_) => CartPage();
+        builder = (_) => BlocProvider(
+              create: (context) => CartPageBloc(
+                cartRepository: AppRepositories.cartRepository,
+              ),
+              child: CartPage(),
+            );
         break;
       default:
         throw Exception('Invalid route: ${settings.name}');

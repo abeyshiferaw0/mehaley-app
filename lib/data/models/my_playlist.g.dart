@@ -17,9 +17,9 @@ class MyPlaylistAdapter extends TypeAdapter<MyPlaylist> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MyPlaylist(
-      numberOfSongs: fields[19] as int,
-      playlistPlaceHolderImage: fields[4] as RemoteImage?,
-      songs: (fields[18] as List?)?.cast<Song>(),
+      numberOfSongs: fields[16] as int,
+      gridSongImages: (fields[4] as List).cast<RemoteImage>(),
+      songs: (fields[15] as List?)?.cast<Song>(),
       playlistId: fields[0] as int,
       playlistNameText: fields[1] as TextLan,
       playlistDescriptionText: fields[2] as TextLan,
@@ -28,22 +28,19 @@ class MyPlaylistAdapter extends TypeAdapter<MyPlaylist> {
       isFeatured: fields[6] as bool,
       priceEtb: fields[7] as double,
       priceDollar: fields[8] as double,
-      isForSale: fields[10] as bool,
       isFree: fields[9] as bool,
-      isDiscountAvailable: fields[11] as bool,
-      discountPercentage: fields[12] as double,
-      createdBy: fields[13] as PlaylistCreatedBy,
-      createdById: fields[14] as String,
-      isFollowed: fields[15] as bool?,
-      playlistDateCreated: fields[16] as DateTime,
-      playlistDateUpdated: fields[17] as DateTime,
+      isDiscountAvailable: fields[10] as bool,
+      discountPercentage: fields[11] as double,
+      isFollowed: fields[12] as bool?,
+      playlistDateCreated: fields[13] as DateTime,
+      playlistDateUpdated: fields[14] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, MyPlaylist obj) {
     writer
-      ..writeByte(20)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.playlistId)
       ..writeByte(1)
@@ -53,7 +50,7 @@ class MyPlaylistAdapter extends TypeAdapter<MyPlaylist> {
       ..writeByte(3)
       ..write(obj.playlistImage)
       ..writeByte(4)
-      ..write(obj.playlistPlaceHolderImage)
+      ..write(obj.gridSongImages)
       ..writeByte(5)
       ..write(obj.isVerified)
       ..writeByte(6)
@@ -65,24 +62,18 @@ class MyPlaylistAdapter extends TypeAdapter<MyPlaylist> {
       ..writeByte(9)
       ..write(obj.isFree)
       ..writeByte(10)
-      ..write(obj.isForSale)
-      ..writeByte(11)
       ..write(obj.isDiscountAvailable)
-      ..writeByte(12)
+      ..writeByte(11)
       ..write(obj.discountPercentage)
-      ..writeByte(13)
-      ..write(obj.createdBy)
-      ..writeByte(14)
-      ..write(obj.createdById)
-      ..writeByte(15)
+      ..writeByte(12)
       ..write(obj.isFollowed)
-      ..writeByte(16)
+      ..writeByte(13)
       ..write(obj.playlistDateCreated)
-      ..writeByte(17)
+      ..writeByte(14)
       ..write(obj.playlistDateUpdated)
-      ..writeByte(18)
+      ..writeByte(15)
       ..write(obj.songs)
-      ..writeByte(19)
+      ..writeByte(16)
       ..write(obj.numberOfSongs);
   }
 

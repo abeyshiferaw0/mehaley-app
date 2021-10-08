@@ -2,7 +2,6 @@ import 'package:elf_play/data/models/enums/playlist_created_by.dart';
 import 'package:elf_play/data/models/remote_image.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/text_lan.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
@@ -19,7 +18,7 @@ class MyPlaylist extends Equatable {
   @HiveField(3)
   final RemoteImage? playlistImage;
   @HiveField(4)
-  final RemoteImage? playlistPlaceHolderImage;
+  final List<RemoteImage> gridSongImages;
   @HiveField(5)
   final bool isVerified;
   @HiveField(6)
@@ -31,29 +30,23 @@ class MyPlaylist extends Equatable {
   @HiveField(9)
   final bool isFree;
   @HiveField(10)
-  final bool isForSale;
-  @HiveField(11)
   final bool isDiscountAvailable;
-  @HiveField(12)
+  @HiveField(11)
   final double discountPercentage;
-  @HiveField(13)
-  final PlaylistCreatedBy createdBy;
-  @HiveField(14)
-  final String createdById;
-  @HiveField(15)
+  @HiveField(12)
   final bool? isFollowed;
-  @HiveField(16)
+  @HiveField(13)
   final DateTime playlistDateCreated;
-  @HiveField(17)
+  @HiveField(14)
   final DateTime playlistDateUpdated;
-  @HiveField(18)
+  @HiveField(15)
   final List<Song>? songs;
-  @HiveField(19)
+  @HiveField(16)
   final int numberOfSongs;
 
   const MyPlaylist({
     required this.numberOfSongs,
-    required this.playlistPlaceHolderImage,
+    required this.gridSongImages,
     required this.songs,
     required this.playlistId,
     required this.playlistNameText,
@@ -63,12 +56,9 @@ class MyPlaylist extends Equatable {
     required this.isFeatured,
     required this.priceEtb,
     required this.priceDollar,
-    required this.isForSale,
     required this.isFree,
     required this.isDiscountAvailable,
     required this.discountPercentage,
-    required this.createdBy,
-    required this.createdById,
     required this.isFollowed,
     required this.playlistDateCreated,
     required this.playlistDateUpdated,
@@ -80,17 +70,14 @@ class MyPlaylist extends Equatable {
         playlistNameText,
         playlistDescriptionText,
         playlistImage,
-        playlistPlaceHolderImage,
+        gridSongImages,
         isVerified,
         priceEtb,
         priceDollar,
         isFree,
-        isForSale,
         isDiscountAvailable,
         discountPercentage,
         isFeatured,
-        createdBy,
-        createdById,
         isFollowed,
         playlistDateCreated,
         playlistDateUpdated,
@@ -112,18 +99,16 @@ class MyPlaylist extends Equatable {
               map['playlist_image_id'],
             )
           : null,
-      playlistPlaceHolderImage: map['playlist_placeholder_image_id'] != null
-          ? RemoteImage.fromMap(
-              map['playlist_placeholder_image_id'],
-            )
-          : null,
+      gridSongImages: (map['grid_song_images'] as List)
+          .map((remoteImage) =>
+              RemoteImage.fromMap(remoteImage['song']['album_art_id']))
+          .toList(),
       songs: map['songs'] != null
           ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
           : null,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,
-      isForSale: map['is_for_sale'] == 1 ? true : false,
       isDiscountAvailable: map['is_discount_available'] == 1 ? true : false,
       discountPercentage: map['discount_percentage'] as double,
       isVerified: map['is_verified'] == 1 ? true : false,
@@ -131,11 +116,6 @@ class MyPlaylist extends Equatable {
       isFollowed: map['is_followed'] != null
           ? (map['is_followed'] == 1 ? true : false)
           : null,
-      createdBy: EnumToString.fromString(
-        PlaylistCreatedBy.values,
-        map['created_by'],
-      ) as PlaylistCreatedBy,
-      createdById: map['created_by_id'] as String,
       playlistDateCreated: DateTime.parse(
         map['playlist_date_created'],
       ),
@@ -153,17 +133,14 @@ class MyPlaylist extends Equatable {
       'playlist_name_text': this.playlistNameText,
       'playlist_description_text': this.playlistDescriptionText,
       'playlist_image': this.playlistImage,
-      'playlist_placeholder_image_id': this.playlistPlaceHolderImage,
+      'playlist_placeholder_image_id': this.gridSongImages,
       'is_verified': this.isVerified,
       'is_featured': this.isFeatured,
-      'created_by': this.createdBy,
       'price_etb': this.priceEtb,
       'price_dollar': this.priceDollar,
-      'is_for_sale': this.isForSale,
       'is_free': this.isFree,
       'is_discount_available': this.isDiscountAvailable,
       'discount_percentage': this.discountPercentage,
-      'created_by_id': this.createdById,
       'is_followed': this.isFollowed,
       'playlist_date_created': this.playlistDateCreated,
       'playlist_date_updated': this.playlistDateUpdated,

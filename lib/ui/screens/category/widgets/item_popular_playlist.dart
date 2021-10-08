@@ -62,12 +62,15 @@ class ItemPopularPlaylist extends StatelessWidget {
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
             ),
-            PagesUtilFunctions.getItemPrice(
-              isDiscountAvailable: playlist.isDiscountAvailable,
-              discountPercentage: playlist.discountPercentage,
-              isFree: playlist.isFree,
-              price: playlist.priceEtb,
-            )
+            playlist.isFree
+                ? SizedBox()
+                : PagesUtilFunctions.getItemPrice(
+                    isDiscountAvailable: playlist.isDiscountAvailable,
+                    discountPercentage: playlist.discountPercentage,
+                    isFree: playlist.isFree,
+                    price: playlist.priceEtb,
+                    isPurchased: playlist.isBought,
+                  )
           ],
         ),
       ),

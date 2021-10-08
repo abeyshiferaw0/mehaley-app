@@ -1,9 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/data/models/app_firebase_user.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/util/api_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
@@ -14,8 +14,11 @@ class AuthProvider {
   Future<Response> saveUser(AppFireBaseUser appFireBaseUser) async {
     //GET CACHE OPTIONS
     CacheOptions cacheOptions = await AppApi.getDioCacheOptions();
-
-    dio = Dio();
+    BaseOptions options = new BaseOptions(
+      connectTimeout: 15000,
+      receiveTimeout: 9000,
+    );
+    dio = Dio(options);
     //SEND REQUEST
 
     Response response = await ApiUtil.post(
@@ -39,5 +42,36 @@ class AuthProvider {
     if (dio != null) {
       dio.close(force: true);
     }
+  }
+
+  updateUser(String userName, File image, bool imageChanged) async {
+    dio = Dio();
+
+    ///SEND REQUEST
+
+    ///CHECK IF IMAGE EXISTS
+    bool imageExists = image.existsSync();
+
+    Map<String, dynamic> map = {
+      'user_name': userName,
+      'is_profile_image_removed': imageChanged,
+    };
+
+    ///CHECK IF IMAGE IS PICKED
+    if (imageExists) {
+      map['profile_image'] = await MultipartFile.fromFile(image.path,
+          filename: image.path.split('/').last);
+    }
+
+    ///FORM DATA
+    FormData formData = FormData.fromMap(map);
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/update_profile/",
+      useToken: true,
+      data: formData,
+    );
+    return response;
   }
 }

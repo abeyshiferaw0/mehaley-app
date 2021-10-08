@@ -60,12 +60,15 @@ class LibraryPlaylistItem extends StatelessWidget {
               fontSize: AppFontSizes.font_size_10.sp,
             ),
           ),
-          PagesUtilFunctions.getItemPrice(
-            discountPercentage: playlist.discountPercentage,
-            isFree: playlist.isFree,
-            price: playlist.priceEtb,
-            isDiscountAvailable: playlist.isDiscountAvailable,
-          )
+          playlist.isFree
+              ? SizedBox()
+              : PagesUtilFunctions.getItemPrice(
+                  discountPercentage: playlist.discountPercentage,
+                  isFree: playlist.isFree,
+                  price: playlist.priceEtb,
+                  isDiscountAvailable: playlist.isDiscountAvailable,
+                  isPurchased: playlist.isBought,
+                )
         ],
       ),
     );

@@ -1,15 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/app_user.dart';
+import 'package:elf_play/ui/common/user_image_sm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
 
 class BottomBar extends StatefulWidget {
   final GlobalKey<NavigatorState> navigatorKey;
@@ -214,115 +213,51 @@ class BottomBarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget userImage;
+    return BlocBuilder<AppUserWidgetsCubit, AppUser>(
+      builder: (context, state) {
+        return Container(child: getProfilePic(state));
+      },
+    );
+  }
+
+  Widget getProfilePic(AppUser appUser) {
     if (isForLibrary) {
-      AppUser appUser =
-          AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
       if (appUser.profileImageId != null) {
-        userImage = UserImage(
+        return UserImageSm(
           size: size,
           appUser: appUser,
           appUserImageType: AppUserImageType.PROFILE_IMAGE,
-          color: color,
+          borderColor: color,
+          hasBorder: true,
+          fontSize: AppFontSizes.font_size_8,
+          letter: "Li",
         );
       } else if (appUser.socialProfileImgUrl != null) {
-        userImage = UserImage(
+        return UserImageSm(
           size: size,
           appUser: appUser,
           appUserImageType: AppUserImageType.SOCIAL_IMAGE,
-          color: color,
+          borderColor: color,
+          hasBorder: true,
+          fontSize: AppFontSizes.font_size_8,
+          letter: "Li",
         );
       } else {
-        userImage = UserImage(
+        return UserImageSm(
           size: size,
           appUser: appUser,
           appUserImageType: AppUserImageType.NONE,
-          color: color,
+          borderColor: color,
+          hasBorder: true,
+          fontSize: AppFontSizes.font_size_8,
+          letter: "Li",
         );
       }
-
-      return Padding(
-        padding: EdgeInsets.all(0.0),
-        child: userImage,
-      );
     } else {
       return Padding(
         padding: EdgeInsets.all(0.0),
         child: Icon(icon, color: color, size: size),
       );
     }
-  }
-}
-
-class UserImage extends StatelessWidget {
-  const UserImage({
-    Key? key,
-    required this.size,
-    required this.appUserImageType,
-    required this.appUser,
-    required this.color,
-  }) : super(key: key);
-
-  final double size;
-  final AppUser appUser;
-  final Color color;
-  final AppUserImageType appUserImageType;
-
-  @override
-  Widget build(BuildContext context) {
-    if (appUserImageType == AppUserImageType.SOCIAL_IMAGE) {
-      return buildNetWorkImage(color);
-    } else if (appUserImageType == AppUserImageType.PROFILE_IMAGE) {
-      return buildNetWorkImage(color);
-    } else {
-      return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size / 2),
-          border: Border.all(color: color, width: 1.5),
-          color: AppColors.darkGrey,
-        ),
-        width: size,
-        height: size,
-        child: Center(
-          child: Text(
-            appUser.userName != null
-                ? appUser.userName!.isNotEmpty
-                    ? appUser.userName!.substring(0, 1)
-                    : "Li"
-                : "Li",
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_8.sp,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-        ),
-      );
-    }
-  }
-
-  Container buildNetWorkImage(Color color) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size / 2),
-          border: Border.all(color: color, width: 1.5)),
-      width: size,
-      height: size,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(size / 2),
-        child: CachedNetworkImage(
-          height: size,
-          width: size,
-          imageUrl: appUser.socialProfileImgUrl!,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => Container(
-            color: AppColors.lightGrey,
-          ),
-          errorWidget: (context, url, error) => Container(
-            color: AppColors.lightGrey,
-          ),
-        ),
-      ),
-    );
   }
 }

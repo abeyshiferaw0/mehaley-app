@@ -84,6 +84,7 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
               showDiscount: false,
               discountPercentage: playlist.discountPercentage,
               isDiscountAvailable: playlist.isDiscountAvailable,
+              isBought: playlist.isBought,
             ),
             SizedBox(width: AppMargin.margin_16),
           ],

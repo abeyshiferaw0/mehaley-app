@@ -7,7 +7,6 @@ import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/util/download_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -195,30 +194,53 @@ class Song extends Equatable {
       DownloadUtil downloadUtil, List<Song> songs) async {
     List<AudioSource> audioSources = [];
 
+    ///GET ALL DOWNLOADS SONGS AND TASKS
+    List<DownloadedTaskWithSong> allDownloads =
+        await downloadUtil.getAllDownloadedSongs();
+
     for (var song in songs) {
-      DownloadTask? downloadTask =
-          await downloadUtil.isSongDownloadedForPlayback(song);
-      if (downloadTask == null) {
+      ///CHECK IF DOWNLOADED
+      DownloadedTaskWithSong? downloadedTaskWithSong =
+          downloadUtil.isSongDownloaded(song, allDownloads);
+
+      ///CHECK IF SONG BOUGHT
+      bool isBought = song.isBought;
+
+      if (downloadedTaskWithSong == null) {
+        ClippingAudioSource clippingAudioSource;
+        MediaItem tag = MediaItem(
+          id: song.songId.toString(),
+          title: song.songName.textAm,
+          artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
+          duration: Duration(
+            seconds: song.audioFile.audioDurationSeconds.toInt(),
+          ),
+          artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+          extras: {AppValues.songExtraStr: song.toMap()},
+        );
+
         ///SONG IS NOT DOWNLOADED
         HlsAudioSource hlsAudioSource = HlsAudioSource(
           Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
-          tag: MediaItem(
-            id: song.songId.toString(),
-            title: song.songName.textAm,
-            artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
-            duration: Duration(
-              seconds: song.audioFile.audioDurationSeconds.toInt(),
-            ),
-            artUri:
-                Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
-            extras: {AppValues.songExtraStr: song.toMap()},
-          ),
+          tag: tag,
         );
-        audioSources.add(hlsAudioSource);
+        if (!isBought) {
+          ///CLIP IF NOT BOUGHT
+          clippingAudioSource = ClippingAudioSource(
+            child: hlsAudioSource,
+            tag: tag,
+            start: Duration(seconds: 5),
+            end: Duration(seconds: 20),
+          );
+          audioSources.add(clippingAudioSource);
+        } else {
+          audioSources.add(hlsAudioSource);
+        }
       } else {
         ///SONG IS DOWNLOADED
         AudioSource audioSource = AudioSource.uri(
-          Uri.file("${downloadTask.savedDir}${downloadTask.filename}"),
+          Uri.file(
+              "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
           tag: MediaItem(
             id: song.songId.toString(),
             title: song.songName.textAm,
@@ -234,7 +256,6 @@ class Song extends Equatable {
         audioSources.add(audioSource);
       }
     }
-
     return audioSources;
   }
 

@@ -1,9 +1,8 @@
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_error.dart';
@@ -16,21 +15,24 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
-import 'create_playlist_page.dart';
-
-class SongAddToPlaylistPage extends StatefulWidget {
-  const SongAddToPlaylistPage({Key? key, required this.song}) : super(key: key);
+class SongAddToUserPlaylistPage extends StatefulWidget {
+  const SongAddToUserPlaylistPage({
+    Key? key,
+    required this.song,
+    required this.onCreateWithSongSuccess,
+  }) : super(key: key);
 
   final Song song;
+  final Function(MyPlaylist) onCreateWithSongSuccess;
 
   @override
-  _SongAddToPlaylistPageState createState() => _SongAddToPlaylistPageState();
+  _SongAddToUserPlaylistPageState createState() =>
+      _SongAddToUserPlaylistPageState();
 }
 
-class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
+class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
   @override
   void initState() {
     BlocProvider.of<MyPlaylistBloc>(context).add(
@@ -47,13 +49,21 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
         if (state is SongAddedToPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.white,
-                isFloating: true,
-                msg:
-                    "${state.song.songName.textAm} added to ${state.myPlaylist.playlistNameText.textAm}",
-                txtColor: AppColors.black,
-                icon: PhosphorIcons.check_circle_fill,
-                iconColor: AppColors.darkGreen),
+              bgColor: AppColors.white,
+              isFloating: true,
+              msg:
+                  "${state.song.songName.textAm} added to ${state.myPlaylist.playlistNameText.textAm}",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.check_circle_fill,
+              iconColor: AppColors.darkGreen,
+            ),
+          );
+
+          ///CALL TO LOAD ALL MY PLAYLISTS
+          BlocProvider.of<MyPlaylistBloc>(context).add(
+            LoadAllMyPlaylistsEvent(
+              isForAddSongPage: false,
+            ),
           );
           Navigator.pop(context);
         }
@@ -78,7 +88,7 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
         appBar: buildAppBar(context),
         body: Stack(
           children: [
-            buildHeaderAndList(),
+            buildHeaderAndList(context),
             buildPageLoading(),
             buildPlaylistsRefreshing(),
           ],
@@ -87,7 +97,7 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
     );
   }
 
-  Container buildHeaderAndList() {
+  Container buildHeaderAndList(mContext) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppPadding.padding_16,
@@ -95,7 +105,7 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          buildTopItems(),
+          buildTopItems(mContext),
           buildPlaylistsList(),
         ],
       ),
@@ -202,6 +212,7 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       brightness: Brightness.dark,
+      backgroundColor: AppColors.black,
       shadowColor: AppColors.transparent,
       leading: IconButton(
         onPressed: () {
@@ -239,7 +250,7 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
     );
   }
 
-  buildTopItems() {
+  buildTopItems(mContext) {
     return Column(
       children: [
         SizedBox(
@@ -250,7 +261,11 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
           children: [
             AppBouncingButton(
               onTap: () {
-                openCreatePlaylistPage();
+                PagesUtilFunctions.openCreatePlaylistPageForAdding(
+                  mContext,
+                  widget.song,
+                  widget.onCreateWithSongSuccess,
+                );
               },
               child: Container(
                 padding: EdgeInsets.symmetric(
@@ -297,31 +312,6 @@ class _SongAddToPlaylistPageState extends State<SongAddToPlaylistPage> {
           height: AppMargin.margin_16,
         ),
       ],
-    );
-  }
-
-  void openCreatePlaylistPage() {
-    Navigator.of(context, rootNavigator: true).push(
-      PagesUtilFunctions.createBottomToUpAnimatedRoute(
-        page: MultiBlocProvider(
-          providers: [
-            BlocProvider<ImagePickerCubit>(
-              create: (context) => ImagePickerCubit(
-                picker: ImagePicker(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => UserPlaylistBloc(
-                userPLayListRepository: AppRepositories.userPLayListRepository,
-              ),
-            ),
-          ],
-          child: CreatePlaylistPage(
-            createWithSong: true,
-            song: widget.song,
-          ),
-        ),
-      ),
     );
   }
 }

@@ -66,3 +66,22 @@ class ResendCodeState extends AuthState {
   @override
   List<Object?> get props => [];
 }
+
+class AuthDumState extends AuthState {
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthUpdateSuccessState extends AuthState {
+  final AppUser appUser;
+
+  AuthUpdateSuccessState({required this.appUser});
+
+  @override
+  List<Object?> get props => [appUser];
+}
+
+class AuthProfileUpdatingState extends AuthState {
+  @override
+  List<Object?> get props => [];
+}

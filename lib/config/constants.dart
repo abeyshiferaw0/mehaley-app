@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.248.202:8181/music";
-  static const String userBaseUrl = "http://192.168.248.202:8181/user";
-  static const String baseFileUrl = "http://192.168.248.202:8181";
+  static const String musicBaseUrl = "http://192.168.43.176:8181/music";
+  static const String userBaseUrl = "http://192.168.43.176:8181/user";
+  static const String baseFileUrl = "http://192.168.43.176:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -68,6 +68,7 @@ class AppValues {
   static const double playlistPageOneImageSize = 200;
   static const double playlistPageTwoImageSize = 40;
   static const double playlistSongItemSize = 50;
+  static const double userPlaylistImageSize = 70;
 
   //ARTIST PAGE
   static const double artistSongItemSize = 50;
@@ -81,6 +82,8 @@ class AppValues {
   static const double followedArtistImageSize = 80;
   static const double offlineSongsSize = 65;
   static const String isLibraryForOffline = "IS_LIBRARY_FOR_OFFLINE";
+  static const String isLibraryForProfile = "IS_LIBRARY_FOR_PROFILE";
+  static const String profileListTypes = "PROFILE_LIST_TYPES";
 
   //CATEGORY PAGE
   static const double categoryHeaderHeight = 250;
@@ -94,6 +97,10 @@ class AppValues {
   static const double searchBarHeight = 58.0;
   static const double searchTopArtistSongsWidth = 110;
 
+  //PROFILE PAGE
+  static const double profilePagePicSize = 90;
+  static const double editProfileImageSize = 160;
+
   //HIVE BOXES
   static const String recentSearchesBox = "RECENT_SEARCHES";
   static const String userBox = "USER_BOX_KEY";
@@ -103,6 +110,9 @@ class AppValues {
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";
   static const String recentlyUnLikedAlbumBox = "RECENTLY_UNLIKED_ALBUM_BOX";
+  static const String cartAlbumsBox = "CART_ALBUMS_BOX";
+  static const String cartPlaylistsBox = "CART_PLAYLISTS_BOX";
+  static const String cartSongsBox = "CART_SONGS_BOX";
   static const String recentlyFollowedPlaylistBox =
       "RECENTLY_FOLLOWED_PLAYLIST_BOX";
   static const String recentlyUnFollowedPlaylistBox =
@@ -118,6 +128,8 @@ class AppValues {
   static const String lastPhoneVerificationSentTimeKey = "LAST_PHONE_AUTH_TIME";
   static const String loggedInUserKey = "LOGGED_IN_USER";
   static const String userAccessTokenKey = "USER_ACCESS_TOKEN";
+  static const String userTemporaryNameKey = "USER_TEMP_NAME";
+  static const String userTemporaryColorKey = "USER_TEMP_COLOR";
   static const String downloadSongQualityKey = "DOWNLOAD_SONG_QUALITY";
 
   //system folders

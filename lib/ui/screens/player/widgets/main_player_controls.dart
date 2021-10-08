@@ -168,36 +168,40 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
               height: AppMargin.margin_4,
             ),
             //SLIDER
-            SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                activeTrackColor: AppColors.lightGrey,
-                inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
-                trackShape: CustomTrackShape(),
-                trackHeight: 2.0,
-                thumbColor: AppColors.white,
-                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.0),
-                overlayColor: AppColors.white.withOpacity(0.24),
-                overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
-              ),
-              child: BlocBuilder<SongPositionCubit, Duration>(
-                builder: (context, state) {
-                  return Slider(
-                    value: AudioPlayerUtil.getCorrectProgress(
-                      state.inSeconds.toDouble(),
-                      totalDuration,
-                    ),
-                    min: 0.0,
-                    max: totalDuration,
-                    onChanged: (value) {
-                      BlocProvider.of<AudioPlayerBloc>(context).add(
-                        SeekAudioPlayerEvent(
-                          duration: Duration(seconds: value.toInt()),
+            BlocBuilder<CurrentPlayingCubit, Song?>(
+              builder: (context, currentPlayingState) {
+                return SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    activeTrackColor: AppColors.lightGrey,
+                    inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+                    trackShape: CustomTrackShape(),
+                    trackHeight: 2.0,
+                    thumbColor: AppColors.white,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.0),
+                    overlayColor: AppColors.white.withOpacity(0.24),
+                    overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
+                  ),
+                  child: BlocBuilder<SongPositionCubit, Duration>(
+                    builder: (context, state) {
+                      return Slider(
+                        value: AudioPlayerUtil.getCorrectProgress(
+                          state.inSeconds.toDouble(),
+                          currentPlayingState!.audioFile.audioDurationSeconds,
                         ),
+                        min: 0.0,
+                        max: currentPlayingState.audioFile.audioDurationSeconds,
+                        onChanged: (value) {
+                          BlocProvider.of<AudioPlayerBloc>(context).add(
+                            SeekAudioPlayerEvent(
+                              duration: Duration(seconds: value.toInt()),
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,14 +219,22 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
-                Text(
-                  PagesUtilFunctions.formatDurationTimeTo(
-                    Duration(seconds: totalDuration.toInt()),
-                  ),
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_8.sp,
-                    color: AppColors.lightGrey.withOpacity(0.7),
-                  ),
+                BlocBuilder<CurrentPlayingCubit, Song?>(
+                  builder: (context, currentPlayingState) {
+                    return Text(
+                      PagesUtilFunctions.formatDurationTimeTo(
+                        Duration(
+                          seconds: currentPlayingState!
+                              .audioFile.audioDurationSeconds
+                              .toInt(),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_8.sp,
+                        color: AppColors.lightGrey.withOpacity(0.7),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

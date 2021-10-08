@@ -2,10 +2,12 @@ import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_b
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
+import 'package:elf_play/ui/common/download_all_purchased.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/playlist/widget/playlist_sliver_deligates.dart';
 import 'package:elf_play/ui/screens/playlist/widget/shimmer_playlist.dart';
@@ -45,10 +47,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
             return ShimmerPlaylist();
           }
           if (state is PlaylistPageLoadedState) {
-            return buildPlaylistPageLoaded(
-              state.playlistPageData.songs,
-              state.playlistPageData.playlist,
-            );
+            return buildPlaylistPageLoaded(state.playlistPageData);
           }
           if (state is PlaylistPageLoadingErrorState) {
             return AppError(
@@ -66,26 +65,28 @@ class _PlaylistPageState extends State<PlaylistPage> {
     );
   }
 
-  NestedScrollView buildPlaylistPageLoaded(
-      List<Song> songs, Playlist playlist) {
+  NestedScrollView buildPlaylistPageLoaded(PlaylistPageData playlistPageData) {
     return NestedScrollView(
       headerSliverBuilder: (context, value) {
         return [
-          buildSliverHeader(),
-          buildSliverPlayShuffleButton(songs, playlist),
-          // buildDownloadAllSection(),
+          buildSliverHeader(playlistPageData),
+          buildSliverPlayShuffleButton(
+            playlistPageData.songs,
+            playlistPageData.playlist,
+          ),
         ];
       },
       body: buildPlaylistSongList(
-        songs,
-        playlist,
+        playlistPageData.songs,
+        playlistPageData.playlist,
       ),
     );
   }
 
-  SliverPersistentHeader buildSliverHeader() {
+  SliverPersistentHeader buildSliverHeader(playlistPageData) {
     return SliverPersistentHeader(
-      delegate: PlaylistPageSliverHeaderDelegate(),
+      delegate:
+          PlaylistPageSliverHeaderDelegate(playlistPageData: playlistPageData),
       floating: true,
       pinned: true,
     );
@@ -102,36 +103,50 @@ class _PlaylistPageState extends State<PlaylistPage> {
   Padding buildPlaylistSongList(List<Song> songs, Playlist playlist) {
     return Padding(
       padding: const EdgeInsets.only(left: AppPadding.padding_16),
-      child: ListView.builder(
-        itemCount: songs.length,
+      child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            children: [
-              SizedBox(height: AppMargin.margin_8),
-              SongItem(
-                song: songs[position],
-                thumbUrl: AppApi.baseFileUrl +
-                    songs[position].albumArt.imageSmallPath,
-                thumbSize: AppValues.playlistSongItemSize,
-                onPressed: () {
-                  //OPEN SONG
-                  PagesUtilFunctions.openSong(
-                    context: context,
-                    songs: songs,
-                    startPlaying: true,
-                    playingFrom: PlayingFrom(
-                      from: "playing from playlist",
-                      title: playlist.playlistNameText.textAm,
+        child: Column(
+          children: [
+            SizedBox(height: AppMargin.margin_16),
+            DownloadAllPurchased(downloadAllSelected: downloadAllSelected),
+            SizedBox(height: AppMargin.margin_16),
+            ListView.builder(
+              itemCount: songs.length,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              itemBuilder: (BuildContext context, int position) {
+                return Column(
+                  children: [
+                    SizedBox(height: AppMargin.margin_8),
+                    SongItem(
+                      song: songs[position],
+                      isForMyPlaylist: false,
+                      thumbUrl: AppApi.baseFileUrl +
+                          songs[position].albumArt.imageSmallPath,
+                      thumbSize: AppValues.playlistSongItemSize,
+                      onPressed: () {
+                        //OPEN SONG
+                        PagesUtilFunctions.openSong(
+                          context: context,
+                          songs: songs,
+                          startPlaying: true,
+                          playingFrom: PlayingFrom(
+                            from: "playing from playlist",
+                            title: playlist.playlistNameText.textAm,
+                          ),
+                          index: position,
+
+                        );
+                      },
                     ),
-                    index: position,
-                  );
-                },
-              ),
-              SizedBox(height: AppMargin.margin_8),
-            ],
-          );
-        },
+                    SizedBox(height: AppMargin.margin_8),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

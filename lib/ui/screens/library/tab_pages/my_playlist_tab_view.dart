@@ -1,7 +1,6 @@
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/my_playlists_page.dart';
@@ -33,46 +32,41 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocProvider(
-      create: (context) => MyPlaylistBloc(
-        myPlaylistRepository: AppRepositories.myPLayListRepository,
-      ),
-      child: Builder(
-        builder: (context) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              if (BlocProvider.of<LibraryTabPagesCubit>(context).state == 2) {
-                BlocProvider.of<MyPlaylistBloc>(context).add(
-                  RefreshMyPlaylistEvent(
-                    isForAddSongPage: false,
-                    now: DateTime.now(),
-                  ),
-                );
-                await BlocProvider.of<MyPlaylistBloc>(context).stream.first;
-                return;
-              }
-            },
-            color: AppColors.darkGreen,
-            edgeOffset: AppMargin.margin_16,
-            child: Container(
-              color: AppColors.black,
-              height: ScreenUtil(context: context).getScreenHeight(),
-              padding: EdgeInsets.only(left: AppPadding.padding_16),
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    SizedBox(height: AppMargin.margin_8),
-                    buildSubTabs(),
-                    SizedBox(height: AppMargin.margin_8),
-                    MyPlaylistsPage(),
-                  ],
+    return Builder(
+      builder: (context) {
+        return RefreshIndicator(
+          onRefresh: () async {
+            if (BlocProvider.of<LibraryTabPagesCubit>(context).state == 2) {
+              BlocProvider.of<MyPlaylistBloc>(context).add(
+                RefreshMyPlaylistEvent(
+                  isForAddSongPage: false,
+                  now: DateTime.now(),
                 ),
+              );
+              await BlocProvider.of<MyPlaylistBloc>(context).stream.first;
+              return;
+            }
+          },
+          color: AppColors.darkGreen,
+          edgeOffset: AppMargin.margin_16,
+          child: Container(
+            color: AppColors.black,
+            height: ScreenUtil(context: context).getScreenHeight(),
+            padding: EdgeInsets.only(left: AppPadding.padding_16),
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(height: AppMargin.margin_8),
+                  buildSubTabs(),
+                  SizedBox(height: AppMargin.margin_8),
+                  MyPlaylistsPage(),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

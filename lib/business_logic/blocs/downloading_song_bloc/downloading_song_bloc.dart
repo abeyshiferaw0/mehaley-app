@@ -17,11 +17,11 @@ part 'downloading_song_state.dart';
 
 class DownloadingSongBloc
     extends Bloc<DownloadingSongEvent, DownloadingSongState> {
-  DownloadingSongBloc(
-      {required this.settingDataRepository,
-      required this.receivePort,
-      required this.downloadUtil})
-      : super(DownloadingSongInitial()) {
+  DownloadingSongBloc({
+    required this.settingDataRepository,
+    required this.receivePort,
+    required this.downloadUtil,
+  }) : super(DownloadingSongInitial()) {
     ///INIT DOWNLOADER ISOLATE COMMUNICATION
     IsolateNameServer.registerPortWithName(
       receivePort.sendPort,
@@ -30,7 +30,6 @@ class DownloadingSongBloc
 
     ///LISTEN TO DOWNLOADER ISOLATE
     receivePort.listen((dynamic data) {
-      print("datadatadata=> ${data}");
       this.add(
         DownloadIngSongProgressEvent(
           taskId: data[0],
@@ -139,9 +138,10 @@ class DownloadingSongBloc
 
       yield DownloadingSongDeletedState(song: event.song);
     } else if (event is IsSongDownloadedEvent) {
-      DownloadTaskStatus downloadTaskStatus =
-          await downloadUtil.isSongDownloaded(event.song);
       yield DownloadingSongInitial();
+
+      DownloadTaskStatus downloadTaskStatus =
+          await downloadUtil.isSongDownloadedCheckWithDb(event.song);
       yield SongIsDownloadedState(
         downloadTaskStatus: downloadTaskStatus,
         song: event.song,

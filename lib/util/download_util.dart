@@ -40,12 +40,12 @@ class DownloadUtil {
   Future<String> getSaveDir(Song song) async {
     Directory directory = await getApplicationSupportDirectory();
     Directory saveDir = Directory(
-        "${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}");
+      "${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}",
+    );
     bool exists = await saveDir.exists();
     if (!exists) {
       await saveDir.create(recursive: true);
     }
-    exists = await saveDir.exists();
     return saveDir.path;
   }
 
@@ -115,7 +115,17 @@ class DownloadUtil {
     return null;
   }
 
-  Future<DownloadTaskStatus> isSongDownloaded(Song song) async {
+  DownloadedTaskWithSong? isSongDownloaded(
+      Song song, List<DownloadedTaskWithSong> allDownloads) {
+    for (var i = 0; i < allDownloads.length; i++) {
+      if (allDownloads[i].song.songId == song.songId) {
+        return allDownloads[i];
+      }
+    }
+    return null;
+  }
+
+  Future<DownloadTaskStatus> isSongDownloadedCheckWithDb(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
     //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
     final String url =
@@ -153,20 +163,29 @@ class DownloadUtil {
     return null;
   }
 
-  Future<List<Song>> getAllDownloadedSongs() async {
+  Future<List<DownloadedTaskWithSong>> getAllDownloadedSongs() async {
     ///GET LIST OF COMPLETED DOWNLOADS
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
       query:
           "SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}",
     );
+
+    List<DownloadedTaskWithSong> downloadedTaskWithSongs = [];
+
     if (tasks == null) return [];
     if (tasks.length < 1) return [];
 
-    List<Song> completedSongs = tasks.map<Song>((e) {
-      return Song.fromBase64(e.url.split("?song=")[1]);
-    }).toList();
-    return completedSongs;
+    tasks.forEach((e) {
+      downloadedTaskWithSongs.add(
+        DownloadedTaskWithSong(
+          task: e,
+          song: Song.fromBase64(e.url.split("?song=")[1]),
+        ),
+      );
+    });
+
+    return downloadedTaskWithSongs;
   }
 
   Future<DownloadTask?> getDownloadTask(Song song) async {
@@ -232,4 +251,11 @@ class DownloadUtil {
     }
     return null;
   }
+}
+
+class DownloadedTaskWithSong {
+  final DownloadTask task;
+  final Song song;
+
+  DownloadedTaskWithSong({required this.task, required this.song});
 }

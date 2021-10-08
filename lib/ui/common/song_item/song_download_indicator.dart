@@ -40,7 +40,9 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
   @override
   void initState() {
     BlocProvider.of<DownloadingSongBloc>(context).add(
-      IsSongDownloadedEvent(song: widget.song),
+      IsSongDownloadedEvent(
+        song: widget.song,
+      ),
     );
     super.initState();
   }

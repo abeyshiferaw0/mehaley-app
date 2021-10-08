@@ -104,7 +104,7 @@ class _SongFavoriteMenuItemState extends State<SongFavoriteMenuItem>
                         color: !widget.isDisabled
                             ? AppColors.white
                             : AppColors.white.withOpacity(0.4),
-                        fontSize: 11.sp,
+                        fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

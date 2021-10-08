@@ -25,6 +25,7 @@ class AlbumMenuWidget extends StatelessWidget {
     required this.discountPercentage,
     required this.albumId,
     required this.isLiked,
+    required this.isBought,
   }) : super(key: key);
 
   final int albumId;
@@ -35,6 +36,7 @@ class AlbumMenuWidget extends StatelessWidget {
   final double discountPercentage;
   final bool isFree;
   final bool isLiked;
+  final bool isBought;
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +157,8 @@ class AlbumMenuWidget extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.lightGrey,
-              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.white,
+              fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -166,6 +168,7 @@ class AlbumMenuWidget extends StatelessWidget {
             isFree: isFree,
             discountPercentage: discountPercentage,
             isDiscountAvailable: isDiscountAvailable,
+            isPurchased: isBought,
           )
         ],
       ),

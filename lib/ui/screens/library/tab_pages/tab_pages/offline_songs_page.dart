@@ -106,6 +106,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SizedBox(height: AppMargin.margin_8),
             SongItem(
               song: offlineSong[position],
+              isForMyPlaylist: false,
               thumbUrl: AppApi.baseFileUrl +
                   offlineSong[position].albumArt.imageSmallPath,
               thumbSize: AppValues.offlineSongsSize,

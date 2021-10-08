@@ -1,11 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
@@ -29,15 +26,10 @@ class LibraryMyPlaylistItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppCard(
-              child: CachedNetworkImage(
-                width: AppValues.libraryMusicItemSize,
-                height: AppValues.libraryMusicItemSize,
-                fit: BoxFit.cover,
-                imageUrl: getPlaylistImageUrl(myPlaylist),
-                placeholder: (context, url) => buildImagePlaceHolder(),
-                errorWidget: (context, url, e) => buildImagePlaceHolder(),
-              ),
+            Container(
+              width: AppValues.libraryMusicItemSize,
+              height: AppValues.libraryMusicItemSize,
+              child: PagesUtilFunctions.getSongGridImage(myPlaylist),
             ),
             SizedBox(width: AppMargin.margin_16),
             Expanded(
@@ -76,19 +68,4 @@ class LibraryMyPlaylistItem extends StatelessWidget {
       ),
     );
   }
-
-  String getPlaylistImageUrl(MyPlaylist myPlaylist) {
-    if (myPlaylist.playlistImage != null) {
-      return AppApi.baseFileUrl + myPlaylist.playlistImage!.imageMediumPath;
-    }
-    if (myPlaylist.playlistPlaceHolderImage != null) {
-      return AppApi.baseFileUrl +
-          myPlaylist.playlistPlaceHolderImage!.imageMediumPath;
-    }
-    return AppApi.baseFileUrl;
-  }
-}
-
-AppItemsImagePlaceHolder buildImagePlaceHolder() {
-  return AppItemsImagePlaceHolder(appItemsType: AppItemsType.PLAYLIST);
 }

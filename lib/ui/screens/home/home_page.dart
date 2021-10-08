@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage>
         return SizedBox(height: AppMargin.margin_32);
       },
       itemBuilder: (context, index) {
-        if (groups[index].groupItems.length > 0) {
+        if (groups[index].groupItems.length > 0 && groups[index].isVisible) {
           return HomeGroups(
             groupTitle: groups[index].groupTitleText.textAm,
             groupSubTitle: groups[index].groupSubTitleText != null

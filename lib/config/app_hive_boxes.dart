@@ -19,6 +19,11 @@ class AppHiveBoxes {
   late Box recentSearchesBox;
   late Box recentlyPlayedBox;
 
+  ///FOR CART PAGE
+  late Box cartAlbumsBox;
+  late Box cartPlaylistsBox;
+  late Box cartSongsBox;
+
   AppHiveBoxes._privateConstructor();
 
   static final AppHiveBoxes _instance = AppHiveBoxes._privateConstructor();
@@ -85,6 +90,21 @@ class AppHiveBoxes {
     ///RECENT SEARCH BOX
     recentSearchesBox = await Hive.openBox<dynamic>(
       AppValues.recentSearchesBox,
+    );
+
+    ///CART ALBUMS BOX
+    cartAlbumsBox = await Hive.openBox<dynamic>(
+      AppValues.cartAlbumsBox,
+    );
+
+    ///CART PLAYLISTS BOX
+    cartPlaylistsBox = await Hive.openBox<dynamic>(
+      AppValues.cartPlaylistsBox,
+    );
+
+    ///CART SONGS BOX
+    cartSongsBox = await Hive.openBox<dynamic>(
+      AppValues.cartSongsBox,
     );
 
     ///CLEAR RECENTLY LIKED AND UNLIKED SONGS

@@ -34,7 +34,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
   final List<Song> songs;
 
   //DOMINANT COLOR INIT
-  Color dominantColor = AppColors.completelyBlack;
+  Color dominantColor = AppColors.appGradientDefaultColorBlack;
 
   _AlbumPageHeaderState({required this.songs, required this.album});
 
@@ -78,6 +78,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                   isFree: album.isFree,
                   discountPercentage: album.discountPercentage,
                   isDiscountAvailable: album.isDiscountAvailable,
+                  isBought: album.isBought,
                 ),
                 SizedBox(height: AppMargin.margin_16),
                 PlayShuffleLgBtnWidget(

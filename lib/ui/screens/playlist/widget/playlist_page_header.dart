@@ -1,5 +1,4 @@
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
@@ -16,9 +15,11 @@ import 'package:page_view_indicators/circle_page_indicator.dart';
 class PlaylistPageHeader extends StatefulWidget {
   const PlaylistPageHeader({
     required this.shrinkPercentage,
+    required this.playlistPageData,
   });
 
   final double shrinkPercentage;
+  final PlaylistPageData playlistPageData;
 
   @override
   _PlaylistPageHeaderState createState() => _PlaylistPageHeaderState();
@@ -43,45 +44,41 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
         if (state is PlaylistPageDominantColorChangedState) {
           dominantColor = state.color;
         }
-        return BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
-          builder: (context, state) {
-            return Stack(
-              children: [
-                AnimatedSwitcher(
-                  switchInCurve: Curves.easeIn,
-                  switchOutCurve: Curves.easeOut,
-                  duration: Duration(
-                    milliseconds: AppValues.colorChangeAnimationDuration,
-                  ),
-                  child: Container(
-                    height: 500,
-                    decoration: BoxDecoration(
-                      gradient: AppGradients()
-                          .getPlaylistHeaderGradient(dominantColor),
-                    ),
-                    child: SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      child: Column(
-                        children: [
-                          buildAppBar(
-                            widget.shrinkPercentage,
-                            (state as PlaylistPageLoadedState).playlistPageData,
-                          ),
-                          Opacity(
-                            opacity: 1 - widget.shrinkPercentage,
-                            child: buildPlaylistInfo(
-                              state.playlistPageData,
-                            ),
-                          )
-                        ],
+        return Stack(
+          children: [
+            AnimatedSwitcher(
+              switchInCurve: Curves.easeIn,
+              switchOutCurve: Curves.easeOut,
+              duration: Duration(
+                milliseconds: AppValues.colorChangeAnimationDuration,
+              ),
+              child: Container(
+                height: 500,
+                decoration: BoxDecoration(
+                  gradient:
+                      AppGradients().getPlaylistHeaderGradient(dominantColor),
+                ),
+                child: SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      buildAppBar(
+                        widget.shrinkPercentage,
+                        widget.playlistPageData,
                       ),
-                    ),
+                      Opacity(
+                        opacity: 1 - widget.shrinkPercentage,
+                        child: buildPlaylistInfo(
+                          widget.playlistPageData,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                //buildPlayShuffleButton()
-              ],
-            );
-          },
+              ),
+            ),
+            //buildPlayShuffleButton()
+          ],
         );
       },
     );
@@ -143,6 +140,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                       playlistPageData.playlist.discountPercentage,
                   playlistId: playlistPageData.playlist.playlistId,
                   isFollowed: playlistPageData.playlist.isFollowed!,
+                  isPurchased: playlistPageData.playlist.isBought,
                 ),
               );
             },
@@ -171,8 +169,13 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                   });
                 },
                 children: [
-                  PlaylistInfoPageOne(playlistPageData: playlistPageData),
-                  PlaylistInfoPageTwo(playlistPageData: playlistPageData),
+                  PlaylistInfoPageOne(
+                    playlist: widget.playlistPageData.playlist,
+                  ),
+                  PlaylistInfoPageTwo(
+                    songs: widget.playlistPageData.songs,
+                    playlist: widget.playlistPageData.playlist,
+                  ),
                 ],
               ),
             ),

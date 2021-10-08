@@ -29,3 +29,21 @@ class PlayerPageDominantColorChanged extends PagesDominantColorEvent {
   @override
   List<Object?> get props => [dominantColor];
 }
+
+class UserPlaylistPageDominantColorChanged extends PagesDominantColorEvent {
+  final HexColor dominantColor;
+
+  UserPlaylistPageDominantColorChanged({required this.dominantColor});
+
+  @override
+  List<Object?> get props => [dominantColor];
+}
+
+class UserProfilePageDominantColorChanged extends PagesDominantColorEvent {
+  final HexColor dominantColor;
+
+  UserProfilePageDominantColorChanged({required this.dominantColor});
+
+  @override
+  List<Object?> get props => [dominantColor];
+}

@@ -13,6 +13,7 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/category/widgets/category_sliver_header_delegate.dart';
 import 'package:elf_play/ui/screens/category/widgets/item_popular_album.dart';
 import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart';
+import 'package:elf_play/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category_top.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
@@ -149,6 +150,7 @@ class _CategoryPageState extends State<CategoryPage>
                 SizedBox(height: AppMargin.margin_8),
                 SongItem(
                   song: item,
+                  isForMyPlaylist: false,
                   thumbUrl: AppApi.baseFileUrl + item.albumArt.imageSmallPath,
                   thumbSize: AppValues.categorySongItemSize,
                   onPressed: () {
@@ -190,23 +192,17 @@ class _CategoryPageState extends State<CategoryPage>
             );
           },
           newPageErrorIndicatorBuilder: (context) {
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
-              child: Text(
-                "Network Error",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppColors.txtGrey),
-              ),
+            return PaginationErrorWidget(
+              onRetry: () {
+                _pagingController.retryLastFailedRequest();
+              },
             );
           },
           firstPageErrorIndicatorBuilder: (context) {
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
-              child: Text(
-                "Network Error",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppColors.txtGrey),
-              ),
+            return PaginationErrorWidget(
+              onRetry: () {
+                _pagingController.refresh();
+              },
             );
           },
         ),

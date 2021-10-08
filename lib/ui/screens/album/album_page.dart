@@ -89,6 +89,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                     SizedBox(height: AppMargin.margin_4),
                     SongItem(
                       position: position + 1,
+                      isForMyPlaylist: false,
                       song: albumPageData.songs[position],
                       onPressed: () {
                         //OPEN SONG
@@ -180,6 +181,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                 isFree: album.isFree,
                 isDiscountAvailable: album.isDiscountAvailable,
                 discountPercentage: album.discountPercentage,
+                isBought: album.isBought,
               ),
             );
           },

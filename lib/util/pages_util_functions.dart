@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
+import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/app_repositories.dart';
@@ -11,18 +15,26 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
+import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/enums/playlist_created_by.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/text_lan.dart';
+import 'package:elf_play/ui/common/app_card.dart';
+import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/ui/screens/library/create_playlist_page.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
+import 'package:elf_play/ui/screens/profile/edit_profile_page.dart';
+import 'package:elf_play/ui/screens/user_playlist/create_user_playlist_page.dart';
+import 'package:elf_play/ui/screens/user_playlist/edit_user_playlist_page.dart';
+import 'package:elf_play/util/auth_util.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/download_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,25 +150,31 @@ class PagesUtilFunctions {
 
   static Widget getGroupItemPrice(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
+      item as Song;
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
+        isPurchased: item.isBought,
       );
     } else if (groupType == GroupType.PLAYLIST) {
+      item as Playlist;
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
+        isPurchased: item.isBought,
       );
     } else if (groupType == GroupType.ALBUM) {
+      item as Album;
       return SmallTextPriceWidget(
         price: item.priceEtb,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
+        isPurchased: item.isBought,
       );
     } else if (groupType == GroupType.ARTIST) {
       return SizedBox();
@@ -170,12 +188,14 @@ class PagesUtilFunctions {
     required bool isDiscountAvailable,
     required double discountPercentage,
     required bool isFree,
+    required bool isPurchased,
   }) {
     return SmallTextPriceWidget(
       price: price,
       isDiscountAvailable: isDiscountAvailable,
       discountPercentage: discountPercentage,
       isFree: isFree,
+      isPurchased: isPurchased,
     );
   }
 
@@ -681,7 +701,7 @@ class PagesUtilFunctions {
               ),
             ),
           ],
-          child: CreatePlaylistPage(
+          child: CreateUserPlaylistPage(
             createWithSong: false,
             song: null,
           ),
@@ -695,6 +715,257 @@ class PagesUtilFunctions {
             LoadAllMyPlaylistsEvent(isForAddSongPage: false),
           );
         }
+      }
+    }
+  }
+
+  static void openEditPlaylistPage(context, MyPlaylist myPlaylist,
+      Function(MyPlaylist myPlaylist) onUpdateSuccess) async {
+    final updatedMyPlaylist =
+        await Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+        page: MultiBlocProvider(
+          providers: [
+            BlocProvider<ImagePickerCubit>(
+              create: (context) => ImagePickerCubit(
+                picker: ImagePicker(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => UserPlaylistBloc(
+                userPLayListRepository: AppRepositories.userPLayListRepository,
+              ),
+            ),
+          ],
+          child: EditUserPlaylistPage(
+            myPlaylist: myPlaylist,
+          ),
+        ),
+      ),
+    );
+    if (updatedMyPlaylist != null) {
+      if (updatedMyPlaylist is MyPlaylist) {
+        ///UPDATE PLAYLIST PAGE WITH NEW DATA
+        print("onUpdateSuccess 1 ${myPlaylist.playlistNameText.textAm}");
+        onUpdateSuccess(updatedMyPlaylist);
+        Navigator.pop(context);
+      }
+    }
+  }
+
+  static void openCreatePlaylistPageForAdding(
+      context, Song song, Function(MyPlaylist) onCreateWithSongSuccess) async {
+    final shouldPop = await Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+        page: MultiBlocProvider(
+          providers: [
+            BlocProvider<ImagePickerCubit>(
+              create: (context) => ImagePickerCubit(
+                picker: ImagePicker(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => UserPlaylistBloc(
+                userPLayListRepository: AppRepositories.userPLayListRepository,
+              ),
+            ),
+          ],
+          child: CreateUserPlaylistPage(
+            createWithSong: true,
+            song: song,
+            onCreateWithSongSuccess: onCreateWithSongSuccess,
+          ),
+        ),
+      ),
+    );
+    if (shouldPop != null) {
+      if (shouldPop) {
+        Navigator.pop(context);
+      }
+    }
+  }
+
+  static Widget getSongGridImage(MyPlaylist myPlaylist) {
+    if (myPlaylist.playlistImage != null) {
+      return AppCard(
+        child: CachedNetworkImage(
+          width: AppValues.libraryMusicItemSize,
+          height: AppValues.libraryMusicItemSize,
+          fit: BoxFit.cover,
+          imageUrl:
+              AppApi.baseFileUrl + myPlaylist.playlistImage!.imageMediumPath,
+          placeholder: (context, url) =>
+              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          errorWidget: (context, url, e) =>
+              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        ),
+      );
+    }
+    if (myPlaylist.gridSongImages.length > 0) {
+      if (myPlaylist.gridSongImages.length <= 3) {
+        return AppCard(
+          child: CachedNetworkImage(
+            width: AppValues.libraryMusicItemSize,
+            height: AppValues.libraryMusicItemSize,
+            fit: BoxFit.cover,
+            imageUrl: AppApi.baseFileUrl +
+                myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
+            placeholder: (context, url) =>
+                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+            errorWidget: (context, url, e) =>
+                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          ),
+        );
+      }
+      if (myPlaylist.gridSongImages.length >= 4) {
+        return GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          children: List.generate(
+            4,
+            (index) {
+              return CachedNetworkImage(
+                width: AppValues.libraryMusicItemSize,
+                height: AppValues.libraryMusicItemSize,
+                fit: BoxFit.cover,
+                imageUrl: AppApi.baseFileUrl +
+                    myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
+                placeholder: (context, url) =>
+                    buildImagePlaceHolder(AppItemsType.OTHER),
+                errorWidget: (context, url, e) =>
+                    buildImagePlaceHolder(AppItemsType.OTHER),
+              );
+            },
+          ),
+        );
+      }
+    }
+    return AppCard(
+      child: CachedNetworkImage(
+        width: AppValues.libraryMusicItemSize,
+        height: AppValues.libraryMusicItemSize,
+        fit: BoxFit.cover,
+        imageUrl: AppApi.baseFileUrl,
+        placeholder: (context, url) =>
+            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        errorWidget: (context, url, e) =>
+            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+      ),
+    );
+  }
+
+  static Widget buildImagePlaceHolder(appItemsType) {
+    if (appItemsType == AppItemsType.OTHER) {
+      return Container(
+        color: AppColors.darkGrey,
+      );
+    }
+    return AppItemsImagePlaceHolder(appItemsType: appItemsType);
+  }
+
+  static String getUserPlaylistByText(MyPlaylist myPlaylist, context) {
+    return "BY ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}";
+  }
+
+  static String getUserPlaylistDescription(MyPlaylist myPlaylist) {
+    if (myPlaylist.playlistDescriptionText.textAm.isNotEmpty) {
+      return myPlaylist.playlistDescriptionText.textAm;
+    } else {
+      return myPlaylist.playlistNameText.textAm;
+    }
+  }
+
+  static String getUserPlaylistOwner(MyPlaylist myPlaylist, context) {
+    return AuthUtil.getUserName(
+        BlocProvider.of<AppUserWidgetsCubit>(context).state);
+  }
+
+  static getUserPlaylistDateCreated(MyPlaylist myPlaylist) {
+    return DateFormat.yMMMd().format(myPlaylist.playlistDateCreated).toString();
+  }
+
+  static void changeUserPlaylistDominantColor(
+      MyPlaylist myPlaylist, BuildContext context) {
+    if (myPlaylist.playlistImage != null) {
+      BlocProvider.of<PagesDominantColorBloc>(context).add(
+        UserPlaylistPageDominantColorChanged(
+          dominantColor: HexColor(myPlaylist.playlistImage!.primaryColorHex),
+        ),
+      );
+      return;
+    }
+    if (myPlaylist.gridSongImages.length > 0) {
+      if (myPlaylist.gridSongImages.length >= 4) {
+        Color color1 = HexColor(myPlaylist.gridSongImages[0].primaryColorHex);
+        Color color2 = HexColor(myPlaylist.gridSongImages[1].primaryColorHex);
+        Color color3 = HexColor(myPlaylist.gridSongImages[2].primaryColorHex);
+        Color color4 = HexColor(myPlaylist.gridSongImages[3].primaryColorHex);
+
+        Color newColor1 = Color.alphaBlend(color1, color2);
+        Color newColor2 = Color.alphaBlend(color3, color4);
+
+        Color dominantColor = Color.alphaBlend(newColor1, newColor2);
+        BlocProvider.of<PagesDominantColorBloc>(context).add(
+          UserPlaylistPageDominantColorChanged(
+            dominantColor: HexColor(
+              "#${dominantColor.value.toRadixString(16)}",
+            ),
+          ),
+        );
+        return;
+      }
+      if (myPlaylist.gridSongImages.length <= 3) {
+        BlocProvider.of<PagesDominantColorBloc>(context).add(
+          UserPlaylistPageDominantColorChanged(
+            dominantColor:
+                HexColor(myPlaylist.gridSongImages[0].primaryColorHex),
+          ),
+        );
+        return;
+      }
+    }
+    BlocProvider.of<PagesDominantColorBloc>(context).add(
+      UserPlaylistPageDominantColorChanged(
+        dominantColor: HexColor(
+          ColorUtil.darken(
+            AppColors.appGradientDefaultColorBlack,
+            0.1,
+          ).value.toRadixString(16),
+        ),
+      ),
+    );
+    return;
+  }
+
+  static void openEditProfilePage(
+    context,
+    Function(AppUser appUser) onUpdateSuccess,
+  ) async {
+    final appUser = await Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createScaleAnimatedRoute(
+        page: MultiBlocProvider(
+          providers: [
+            BlocProvider<ImagePickerCubit>(
+              create: (context) => ImagePickerCubit(
+                picker: ImagePicker(),
+              ),
+            ),
+            BlocProvider<AuthBloc>(
+              create: (context) => AuthBloc(
+                firebaseAuth: FirebaseAuth.instance,
+                authRepository: AppRepositories.authRepository,
+              ),
+            ),
+          ],
+          child: EditUserProfilePage(),
+        ),
+      ),
+    );
+    if (appUser != null) {
+      if (appUser is AppUser) {
+        onUpdateSuccess(appUser);
       }
     }
   }

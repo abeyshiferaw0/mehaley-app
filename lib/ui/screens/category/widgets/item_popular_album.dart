@@ -69,6 +69,7 @@ class ItemPopularAlbum extends StatelessWidget {
               discountPercentage: album.discountPercentage,
               isFree: album.isFree,
               price: album.priceEtb,
+              isPurchased: album.isBought,
             )
           ],
         ),

@@ -17,7 +17,9 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Playlist(
-      songs: (fields[17] as List?)?.cast<Song>(),
+      isBought: fields[10] as bool,
+      numberOfFollowers: fields[15] as int?,
+      songs: (fields[18] as List?)?.cast<Song>(),
       playlistId: fields[0] as int,
       playlistNameText: fields[1] as TextLan,
       playlistDescriptionText: fields[2] as TextLan,
@@ -26,22 +28,21 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       isFeatured: fields[5] as bool,
       priceEtb: fields[6] as double,
       priceDollar: fields[7] as double,
-      isForSale: fields[9] as bool,
       isFree: fields[8] as bool,
-      isDiscountAvailable: fields[10] as bool,
+      isDiscountAvailable: fields[9] as bool,
       discountPercentage: fields[11] as double,
       createdBy: fields[12] as PlaylistCreatedBy,
       createdById: fields[13] as String,
       isFollowed: fields[14] as bool?,
-      playlistDateCreated: fields[15] as DateTime,
-      playlistDateUpdated: fields[16] as DateTime,
+      playlistDateCreated: fields[16] as DateTime,
+      playlistDateUpdated: fields[17] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Playlist obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.playlistId)
       ..writeByte(1)
@@ -61,9 +62,9 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       ..writeByte(8)
       ..write(obj.isFree)
       ..writeByte(9)
-      ..write(obj.isForSale)
-      ..writeByte(10)
       ..write(obj.isDiscountAvailable)
+      ..writeByte(10)
+      ..write(obj.isBought)
       ..writeByte(11)
       ..write(obj.discountPercentage)
       ..writeByte(12)
@@ -73,10 +74,12 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       ..writeByte(14)
       ..write(obj.isFollowed)
       ..writeByte(15)
-      ..write(obj.playlistDateCreated)
+      ..write(obj.numberOfFollowers)
       ..writeByte(16)
-      ..write(obj.playlistDateUpdated)
+      ..write(obj.playlistDateCreated)
       ..writeByte(17)
+      ..write(obj.playlistDateUpdated)
+      ..writeByte(18)
       ..write(obj.songs);
   }
 

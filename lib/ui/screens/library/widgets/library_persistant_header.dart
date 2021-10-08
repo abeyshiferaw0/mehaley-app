@@ -82,7 +82,7 @@ class LibraryHeader extends StatelessWidget {
       tabs: [
         buildTabItem("PURCHASED"),
         buildTabItem("OFFLINE"),
-        buildTabItem("PLAYLIST"),
+        buildTabItem("MY PLAYLIST"),
         buildTabItem("FAVORITES"),
         buildTabItem("FOLLOWING"),
       ],

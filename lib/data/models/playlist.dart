@@ -29,9 +29,9 @@ class Playlist extends Equatable {
   @HiveField(8)
   final bool isFree;
   @HiveField(9)
-  final bool isForSale;
-  @HiveField(10)
   final bool isDiscountAvailable;
+  @HiveField(10)
+  final bool isBought;
   @HiveField(11)
   final double discountPercentage;
   @HiveField(12)
@@ -41,13 +41,17 @@ class Playlist extends Equatable {
   @HiveField(14)
   final bool? isFollowed;
   @HiveField(15)
-  final DateTime playlistDateCreated;
+  final int? numberOfFollowers;
   @HiveField(16)
-  final DateTime playlistDateUpdated;
+  final DateTime playlistDateCreated;
   @HiveField(17)
+  final DateTime playlistDateUpdated;
+  @HiveField(18)
   final List<Song>? songs;
 
   const Playlist({
+    required this.isBought,
+    this.numberOfFollowers,
     required this.songs,
     required this.playlistId,
     required this.playlistNameText,
@@ -57,7 +61,6 @@ class Playlist extends Equatable {
     required this.isFeatured,
     required this.priceEtb,
     required this.priceDollar,
-    required this.isForSale,
     required this.isFree,
     required this.isDiscountAvailable,
     required this.discountPercentage,
@@ -78,7 +81,7 @@ class Playlist extends Equatable {
         priceEtb,
         priceDollar,
         isFree,
-        isForSale,
+        isBought,
         isDiscountAvailable,
         discountPercentage,
         isFeatured,
@@ -88,6 +91,7 @@ class Playlist extends Equatable {
         playlistDateCreated,
         playlistDateUpdated,
         songs,
+        numberOfFollowers,
       ];
 
   factory Playlist.fromMap(Map<String, dynamic> map) {
@@ -108,13 +112,16 @@ class Playlist extends Equatable {
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,
-      isForSale: map['is_for_sale'] == 1 ? true : false,
+      isBought: map['is_bought'] == 1 ? true : false,
       isDiscountAvailable: map['is_discount_available'] == 1 ? true : false,
       discountPercentage: map['discount_percentage'] as double,
       isVerified: map['is_verified'] == 1 ? true : false,
       isFeatured: map['is_featured'] == 1 ? true : false,
       isFollowed: map['is_followed'] != null
           ? (map['is_followed'] == 1 ? true : false)
+          : null,
+      numberOfFollowers: map['number_of_followers'] != null
+          ? map['number_of_followers']
           : null,
       createdBy: EnumToString.fromString(
         PlaylistCreatedBy.values,
@@ -142,12 +149,13 @@ class Playlist extends Equatable {
       'created_by': this.createdBy,
       'price_etb': this.priceEtb,
       'price_dollar': this.priceDollar,
-      'is_for_sale': this.isForSale,
       'is_free': this.isFree,
+      'is_bought': this.isBought,
       'is_discount_available': this.isDiscountAvailable,
       'discount_percentage': this.discountPercentage,
       'created_by_id': this.createdById,
       'is_followed': this.isFollowed,
+      'number_of_followers': this.numberOfFollowers,
       'playlist_date_created': this.playlistDateCreated,
       'playlist_date_updated': this.playlistDateUpdated,
     } as Map<String, dynamic>;

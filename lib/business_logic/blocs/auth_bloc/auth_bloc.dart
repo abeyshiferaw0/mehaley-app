@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/api_response/save_user_data.dart';
 import 'package:elf_play/data/models/app_firebase_user.dart';
+import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/enums/user_login_type.dart';
 import 'package:elf_play/data/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -111,15 +113,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final SaveUserData saveUserData = await authRepository.saveUser(
           event.appFireBaseUser,
         );
-
-        ///SAVE USER AND TOKEN
-        AppHiveBoxes.instance.userBox
-            .put(AppValues.loggedInUserKey, saveUserData.appUser);
-        AppHiveBoxes.instance.userBox
-            .put(AppValues.userAccessTokenKey, saveUserData.accessToken);
         yield AuthSuccessState();
       } catch (error) {
-        AuthErrorState(error: error.toString());
+        yield AuthErrorState(error: error.toString());
+      }
+    } else if (event is EditUserEvent) {
+      yield AuthProfileUpdatingState();
+      try {
+        final AppUser appUser = await authRepository.updateUser(
+          event.userName,
+          event.image,
+          event.imageChanged,
+        );
+        yield AuthUpdateSuccessState(appUser: appUser);
+      } catch (error) {
+        yield AuthErrorState(error: error.toString());
       }
     }
   }

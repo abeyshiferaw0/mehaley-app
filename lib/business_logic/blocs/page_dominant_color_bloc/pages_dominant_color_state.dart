@@ -41,11 +41,21 @@ class PlayerPageDominantColorChangedState extends PagesDominantColorState {
   List<Object?> get props => [color];
 }
 
-// class PlayerPageLightDominantColorChangedState extends PagesDominantColorState {
-//   final Color color;
-//
-//   PlayerPageLightDominantColorChangedState({required this.color});
-//
-//   @override
-//   List<Object?> get props => [color];
-// }
+class UserPlaylistPageDominantColorChangedState
+    extends PagesDominantColorState {
+  final Color color;
+
+  UserPlaylistPageDominantColorChangedState({required this.color});
+
+  @override
+  List<Object?> get props => [color];
+}
+
+class ProfilePageDominantColorChangedState extends PagesDominantColorState {
+  final Color color;
+
+  ProfilePageDominantColorChangedState({required this.color});
+
+  @override
+  List<Object?> get props => [color];
+}

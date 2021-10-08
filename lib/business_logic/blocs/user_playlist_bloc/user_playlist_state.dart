@@ -32,11 +32,30 @@ class UserPlaylistPostedState extends UserPlaylistState {
   List<Object?> get props => [myPlaylist];
 }
 
+class UserPlaylistUpdatedState extends UserPlaylistState {
+  UserPlaylistUpdatedState({required this.myPlaylist});
+
+  final MyPlaylist myPlaylist;
+
+  @override
+  List<Object?> get props => [myPlaylist];
+}
+
 class SongAddedToPlaylistState extends UserPlaylistState {
   final MyPlaylist myPlaylist;
   final Song song;
 
   SongAddedToPlaylistState({required this.myPlaylist, required this.song});
+
+  @override
+  List<Object?> get props => [myPlaylist, song];
+}
+
+class SongRemovedFromPlaylistState extends UserPlaylistState {
+  final MyPlaylist myPlaylist;
+  final Song song;
+
+  SongRemovedFromPlaylistState({required this.myPlaylist, required this.song});
 
   @override
   List<Object?> get props => [myPlaylist, song];

@@ -25,6 +25,7 @@ class PlaylistMenuWidget extends StatelessWidget {
     required this.discountPercentage,
     required this.playlistId,
     required this.isFollowed,
+    required this.isPurchased,
   }) : super(key: key);
 
   final int playlistId;
@@ -35,6 +36,7 @@ class PlaylistMenuWidget extends StatelessWidget {
   final bool isFree;
   final bool isDiscountAvailable;
   final double discountPercentage;
+  final bool isPurchased;
 
   @override
   Widget build(BuildContext context) {
@@ -75,22 +77,26 @@ class PlaylistMenuWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: false,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.currency_circle_dollar_thin,
-                    title: "Buy Playlist",
-                    onTap: () {},
-                  ),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.shopping_cart_simple_light,
-                    title: "Add to cart",
-                    onTap: () {},
-                  ),
+                  isFree
+                      ? SizedBox()
+                      : MenuItem(
+                          isDisabled: false,
+                          hasTopMargin: false,
+                          iconColor: AppColors.grey.withOpacity(0.6),
+                          icon: PhosphorIcons.currency_circle_dollar_thin,
+                          title: "Buy Playlist",
+                          onTap: () {},
+                        ),
+                  isFree
+                      ? SizedBox()
+                      : MenuItem(
+                          isDisabled: false,
+                          hasTopMargin: true,
+                          iconColor: AppColors.grey.withOpacity(0.6),
+                          icon: PhosphorIcons.shopping_cart_simple_light,
+                          title: "Add to cart",
+                          onTap: () {},
+                        ),
                   PlaylistFollowMenuItem(
                     playlistId: playlistId,
                     isFollowing: isFollowed,
@@ -157,17 +163,30 @@ class PlaylistMenuWidget extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.lightGrey,
-              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.white,
+              fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: AppMargin.margin_2),
-          SmallTextPriceWidget(
-            price: price,
-            isDiscountAvailable: isDiscountAvailable,
-            isFree: isFree,
-            discountPercentage: discountPercentage,
+          isFree
+              ? SizedBox()
+              : SmallTextPriceWidget(
+                  price: price,
+                  isDiscountAvailable: isDiscountAvailable,
+                  isFree: isFree,
+                  discountPercentage: discountPercentage,
+                  isPurchased: isPurchased,
+                ),
+          SizedBox(height: AppMargin.margin_2),
+          Text(
+            "BY ELF PLAY".toUpperCase(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.txtGrey,
+              fontSize: AppFontSizes.font_size_8.sp,
+              fontWeight: FontWeight.w400,
+            ),
           )
         ],
       ),

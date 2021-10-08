@@ -218,6 +218,7 @@ class _ArtistPageState extends State<ArtistPage> {
               SizedBox(height: AppMargin.margin_8),
               SongItem(
                 position: position + 1,
+                isForMyPlaylist: false,
                 song: popularSongs[position],
                 onPressed: () {
                   //OPEN SONG

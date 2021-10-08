@@ -117,6 +117,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
                   index: position,
                 );
               },
+              isForMyPlaylist: false,
             ),
             SizedBox(height: AppMargin.margin_8),
           ],

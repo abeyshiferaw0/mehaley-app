@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/util/api_util.dart';
 
 class PlaylistDataProvider {
@@ -19,18 +18,13 @@ class PlaylistDataProvider {
       dio = Dio()
         ..interceptors.add(
           DioCacheInterceptor(
-            options: cacheOptions.copyWith(
-              policy: CachePolicy.forceCache,
-              keyBuilder: (request) {
-                return AppApi.musicBaseUrl + "/get-playlist?id=$playlistId";
-              },
-            ),
+            options: cacheOptions.copyWith(policy: CachePolicy.forceCache),
           ),
         );
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url:AppApi.musicBaseUrl + "/get-playlist",
+        url: AppApi.musicBaseUrl + "/get-playlist",
         queryParameters: {'id': playlistId},
       );
       return response;
@@ -38,18 +32,14 @@ class PlaylistDataProvider {
       dio = Dio()
         ..interceptors.add(
           DioCacheInterceptor(
-            options: cacheOptions.copyWith(
-              policy: CachePolicy.refreshForceCache,
-              keyBuilder: (request) {
-                return AppApi.musicBaseUrl + "/get-playlist?id=$playlistId";
-              },
-            ),
+            options:
+                cacheOptions.copyWith(policy: CachePolicy.refreshForceCache),
           ),
         );
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url:AppApi.musicBaseUrl + "/get-playlist",
+        url: AppApi.musicBaseUrl + "/get-playlist",
         queryParameters: {'id': playlistId},
       );
       return response;

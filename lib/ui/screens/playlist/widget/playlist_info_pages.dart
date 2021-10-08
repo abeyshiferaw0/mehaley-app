@@ -3,7 +3,8 @@ import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dom
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
+import 'package:elf_play/data/models/playlist.dart';
+import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/add_to_cart_btn.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
@@ -16,18 +17,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
-class PlaylistInfoPageOne extends StatefulWidget {
-  const PlaylistInfoPageOne({Key? key, required this.playlistPageData})
-      : super(key: key);
+class PlaylistInfoPageOne extends StatelessWidget {
+  PlaylistInfoPageOne({Key? key, required this.playlist}) : super(key: key);
 
-  final PlaylistPageData playlistPageData;
+  final Playlist playlist;
 
-  @override
-  _PlaylistInfoPageOneState createState() =>
-      _PlaylistInfoPageOneState(playlistPageData: playlistPageData);
-}
-
-class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
     color: AppColors.lightGrey,
@@ -35,10 +29,7 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
     letterSpacing: 0.5,
   );
 
-  final PlaylistPageData playlistPageData;
   ImageProvider? currentImageProvider;
-
-  _PlaylistInfoPageOneState({required this.playlistPageData});
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +48,16 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl +
-                    playlistPageData.playlist.playlistImage.imageMediumPath,
+                imageUrl:
+                    AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   //CHANGE DOMINANT COLOR
                   if (currentImageProvider != imageProvider) {
                     currentImageProvider = imageProvider;
                     BlocProvider.of<PagesDominantColorBloc>(context).add(
                       PlaylistPageDominantColorChanged(
-                          dominantColor: playlistPageData
-                              .playlist.playlistImage.primaryColorHex),
+                        dominantColor: playlist.playlistImage.primaryColorHex,
+                      ),
                     );
                   }
 
@@ -86,7 +77,7 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
             SizedBox(height: AppMargin.margin_20),
             //PLAYLIST TITLE
             Text(
-              playlistPageData.playlist.playlistNameText.textAm,
+              playlist.playlistNameText.textAm,
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -100,15 +91,15 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
 
             ///FOLLOW UNFOLLOW PLAYLIST BTN
             PlaylistFollowButton(
-              playlistId: playlistPageData.playlist.playlistId,
-              isFollowing: playlistPageData.playlist.isFollowed!,
+              playlistId: playlist.playlistId,
+              isFollowing: playlist.isFollowed!,
             ),
             SizedBox(height: AppMargin.margin_16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  PagesUtilFunctions.getPlaylistBy(playlistPageData.playlist),
+                  PagesUtilFunctions.getPlaylistBy(playlist),
                   style: followersTextStyle,
                 ),
                 Padding(
@@ -119,7 +110,8 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
                     color: AppColors.white,
                   ),
                 ),
-                Text("123,00 FOLLOWERS", style: followersTextStyle),
+                Text("${playlist.numberOfFollowers} FOLLOWERS",
+                    style: followersTextStyle),
               ],
             )
           ],
@@ -130,9 +122,10 @@ class _PlaylistInfoPageOneState extends State<PlaylistInfoPageOne> {
 }
 
 class PlaylistInfoPageTwo extends StatelessWidget {
-  final PlaylistPageData playlistPageData;
+  final Playlist playlist;
+  final List<Song> songs;
 
-  PlaylistInfoPageTwo({Key? key, required this.playlistPageData})
+  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs})
       : super(key: key);
 
   @override
@@ -167,20 +160,21 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                 SizedBox(
                   width: AppMargin.margin_16,
                 ),
-                Expanded(
-                  child: BuyItemBtnWidget(
-                    price: playlistPageData.playlist.priceEtb,
-                    title: 'BUY ALL',
-                    hasLeftMargin: false,
-                    showDiscount: false,
-                    isCentred: true,
-                    isFree: playlistPageData.playlist.isFree,
-                    discountPercentage:
-                        playlistPageData.playlist.discountPercentage,
-                    isDiscountAvailable:
-                        playlistPageData.playlist.isDiscountAvailable,
-                  ),
-                )
+                playlist.isFree
+                    ? SizedBox()
+                    : Expanded(
+                        child: BuyItemBtnWidget(
+                          price: playlist.priceEtb,
+                          title: 'BUY ALL',
+                          hasLeftMargin: false,
+                          showDiscount: false,
+                          isCentred: true,
+                          isFree: playlist.isFree,
+                          discountPercentage: playlist.discountPercentage,
+                          isDiscountAvailable: playlist.isDiscountAvailable,
+                          isBought: playlist.isBought,
+                        ),
+                      )
               ],
             ),
           ),
@@ -193,7 +187,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
 
   Text buildPlaylistDescription() {
     return Text(
-      PagesUtilFunctions.getPlaylistDescription(playlistPageData.playlist),
+      PagesUtilFunctions.getPlaylistDescription(playlist),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_16,
@@ -207,7 +201,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.playlistPageTwoImageSize / 2),
+          Radius.circular(AppValues.userPlaylistImageSize / 2),
         ),
         boxShadow: [
           BoxShadow(
@@ -220,14 +214,13 @@ class PlaylistInfoPageTwo extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.playlistPageTwoImageSize / 2),
+          Radius.circular(AppValues.userPlaylistImageSize / 2),
         ),
         child: CachedNetworkImage(
-          width: AppValues.playlistPageTwoImageSize,
-          height: AppValues.playlistPageTwoImageSize,
+          width: AppValues.userPlaylistImageSize,
+          height: AppValues.userPlaylistImageSize,
           fit: BoxFit.cover,
-          imageUrl: PagesUtilFunctions.getPlaylistOwnerProfilePic(
-              playlistPageData.playlist),
+          imageUrl: PagesUtilFunctions.getPlaylistOwnerProfilePic(playlist),
           placeholder: (context, url) => buildItemsImagePlaceHolder(),
           errorWidget: (context, url, e) => buildItemsImagePlaceHolder(),
         ),
@@ -256,7 +249,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
         ],
       ),
       child: Text(
-        PagesUtilFunctions.getPlaylistOwner(playlistPageData.playlist),
+        PagesUtilFunctions.getPlaylistOwner(playlist),
         style: TextStyle(
           color: AppColors.white,
           fontSize: AppFontSizes.font_size_12,
@@ -273,13 +266,13 @@ class PlaylistInfoPageTwo extends StatelessWidget {
         IconText(
           icon: PhosphorIcons.calendar_blank_light,
           text: PagesUtilFunctions.getPlaylistDateCreated(
-            playlistPageData.playlist,
+            playlist,
           ),
         ),
         IconText(
           icon: PhosphorIcons.clock_light,
           text: PagesUtilFunctions.getPlaylistTotalDuration(
-            playlistPageData.songs,
+            songs,
           ),
         ),
       ],

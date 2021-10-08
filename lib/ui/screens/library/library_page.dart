@@ -1,28 +1,38 @@
+import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:elf_play/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/user_profile_pic.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/favorite_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/following_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/my_playlist_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/offline_tab_view.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/purchased_tab_view.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_header_persistant_header.dart';
+import 'package:elf_play/ui/screens/library/widgets/library_persistant_header.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:sizer/sizer.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({
     Key? key,
     required this.isFromOffline,
+    this.isLibraryForProfile,
+    this.profileListTypes,
   }) : super(key: key);
 
   final bool isFromOffline;
+  final bool? isLibraryForProfile;
+  final ProfileListTypes? profileListTypes;
 
   @override
   _LibraryPageState createState() => _LibraryPageState();
@@ -55,6 +65,10 @@ class _LibraryPageState extends State<LibraryPage>
         _tabController.index,
       );
     });
+
+    ///CHECK IF FROM PROFILE PAGE AND NAVIGATE
+    checkFromProfilePage();
+
     super.initState();
   }
 
@@ -64,6 +78,24 @@ class _LibraryPageState extends State<LibraryPage>
     ///NAVIGATE TO OFFLINE TAB IF TRUE
     if (widget.isFromOffline) {
       _tabController.animateTo(1, duration: Duration(milliseconds: 300));
+    }
+
+    ///NAVIGATE TO APPROPRIATE TABS IF COMING FROM PROFILE PAGE
+    if (widget.isLibraryForProfile != null && widget.profileListTypes != null) {
+      if (widget.isLibraryForProfile!) {
+        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_SONGS ||
+            widget.profileListTypes! == ProfileListTypes.PURCHASED_PLAYLISTS ||
+            widget.profileListTypes! == ProfileListTypes.PURCHASED_ALBUMS) {
+          _tabController.animateTo(0, duration: Duration(milliseconds: 300));
+        }
+        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_PLAYLISTS ||
+            widget.profileListTypes! == ProfileListTypes.FOLLOWED_ARTISTS) {
+          _tabController.animateTo(4, duration: Duration(milliseconds: 300));
+        }
+        if (widget.profileListTypes! == ProfileListTypes.OTHER) {
+          _tabController.animateTo(2, duration: Duration(milliseconds: 300));
+        }
+      }
     }
 
     ///SUBSCRIBE TO ROUTH OBSERVER
@@ -131,24 +163,16 @@ class _LibraryPageState extends State<LibraryPage>
           },
           child: Stack(
             children: [
-              CircleAvatar(
-                backgroundColor: AppColors.blue,
-                radius: 18,
-                child: Text(
-                  "a",
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_16,
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+              UserProfilePic(
+                size: AppIconSizes.icon_size_20 * 2,
+                fontSize: AppFontSizes.font_size_12.sp,
               ),
               Positioned(
                 right: 0,
                 bottom: 0,
                 child: Icon(
                   PhosphorIcons.gear_six_bold,
-                  size: AppIconSizes.icon_size_12,
+                  size: AppIconSizes.icon_size_16,
                   color: AppColors.white,
                 ),
               )
@@ -156,12 +180,16 @@ class _LibraryPageState extends State<LibraryPage>
           ),
         ),
       ),
-      title: Text(
-        AuthUtil.getUserName(),
-        style: TextStyle(
-          fontSize: AppFontSizes.font_size_16,
-          fontWeight: FontWeight.w600,
-        ),
+      title: BlocBuilder<AppUserWidgetsCubit, AppUser>(
+        builder: (context, state) {
+          return Text(
+            AuthUtil.getUserName(state),
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_16,
+              fontWeight: FontWeight.w600,
+            ),
+          );
+        },
       ),
       actions: [
         IconButton(
@@ -182,6 +210,43 @@ class _LibraryPageState extends State<LibraryPage>
       pinned: true,
       delegate: LibraryHeaderDelegate(tabController: _tabController),
     );
+  }
+
+  void checkFromProfilePage() {
+    if (widget.isLibraryForProfile != null && widget.profileListTypes != null) {
+      if (widget.isLibraryForProfile!) {
+        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_SONGS) {
+          ///OPEN PURCHASED SONGS PAGE
+          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
+            AppPurchasedPageItemTypes.SONGS,
+          );
+        }
+        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_PLAYLISTS) {
+          ///OPEN PURCHASED PLAYLISTS PAGE
+          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
+            AppPurchasedPageItemTypes.PLAYLISTS,
+          );
+        }
+        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_ALBUMS) {
+          ///OPEN PURCHASED ALBUMS PAGE
+          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
+            AppPurchasedPageItemTypes.ALBUMS,
+          );
+        }
+        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_PLAYLISTS) {
+          ///OPEN PURCHASED PLAYLISTS PAGE
+          BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
+            AppFollowedPageItemTypes.PLAYLISTS,
+          );
+        }
+        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_ARTISTS) {
+          ///OPEN PURCHASED ALBUMS PAGE
+          BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
+            AppFollowedPageItemTypes.ARTIST,
+          );
+        }
+      }
+    }
   }
 }
 

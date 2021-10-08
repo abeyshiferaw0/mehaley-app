@@ -88,3 +88,22 @@ class SaveUserEvent extends AuthEvent {
   @override
   List<Object?> get props => [appFireBaseUser];
 }
+
+class EditUserEvent extends AuthEvent {
+  final String userName;
+  final File image;
+  final bool imageChanged;
+
+  EditUserEvent({
+    required this.userName,
+    required this.image,
+    required this.imageChanged,
+  });
+
+  @override
+  List<Object?> get props => [
+        userName,
+        image,
+        imageChanged,
+      ];
+}

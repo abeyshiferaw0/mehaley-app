@@ -1,158 +1,39 @@
 import 'dart:math';
 
+import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
+import 'package:elf_play/ui/common/menu/profile_menu_widget.dart';
+import 'package:elf_play/ui/common/user_profile_pic.dart';
+import 'package:elf_play/util/auth_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
   final VoidCallback onBackPress;
+  final Color dominantColor;
 
-  ProfilePageHeaderDelegate({required this.onBackPress});
+  ProfilePageHeaderDelegate({
+    required this.dominantColor,
+    required this.onBackPress,
+  });
 
   @override
   Widget build(_, double shrinkOffset, bool overlapsContent) {
     var shrinkPercentage =
         min(1, shrinkOffset / (maxExtent - minExtent)).toDouble();
 
-    return Container(
-      height: 380,
-      decoration: BoxDecoration(
-        gradient: AppGradients().getProfilePageGradient(AppColors.blue),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(
-              children: [
-                Opacity(
-                  opacity: shrinkPercentage,
-                  child: Container(
-                    height: 80,
-                    color: AppColors.blue,
-                  ),
-                ),
-                Container(
-                  height: 80,
-                  child: SafeArea(
-                    child: Stack(
-                      //  crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            onPressed: () {
-                              onBackPress();
-                            },
-                            icon: Icon(
-                              PhosphorIcons.caret_left_light,
-                              color: AppColors.white,
-                              size: AppIconSizes.icon_size_24,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Opacity(
-                            opacity: shrinkPercentage,
-                            child: Text(
-                              "abey",
-                              style: TextStyle(
-                                fontSize: AppFontSizes.font_size_12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(AppPadding.padding_4),
-                            child: AppBouncingButton(
-                              onTap: () {},
-                              child: Icon(
-                                PhosphorIcons.dots_three_vertical,
-                                color: AppColors.white,
-                                size: AppIconSizes.icon_size_24,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Transform.translate(
-              offset: Offset(0, 1 - (shrinkPercentage * 150)),
-              child: Transform.scale(
-                scale: 1 - shrinkPercentage,
-                child: Opacity(
-                  opacity: 1 - shrinkPercentage,
-                  child: Container(
-                    height: 320,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: AppColors.blue,
-                          radius: 50,
-                          child: Text(
-                            "A",
-                            style: TextStyle(
-                              fontSize: AppFontSizes.font_size_24.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: AppPadding.padding_16,
-                          ),
-                          child: Text(
-                            "abey",
-                            style: TextStyle(
-                              fontSize: AppFontSizes.font_size_20.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            border:
-                                Border.all(color: AppColors.white, width: 1),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: AppPadding.padding_4,
-                            horizontal: AppPadding.padding_16,
-                          ),
-                          child: Text(
-                            "EDIT PROFILE",
-                            style: TextStyle(
-                              fontSize: AppFontSizes.font_size_8.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+    return ProfilePageHeader(
+      shrinkPercentage: shrinkPercentage,
+      dominantColor: dominantColor,
+      onBackPress: onBackPress,
     );
   }
 
@@ -164,4 +45,228 @@ class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+}
+
+class ProfilePageHeader extends StatefulWidget {
+  const ProfilePageHeader({
+    Key? key,
+    required this.dominantColor,
+    required this.onBackPress,
+    required this.shrinkPercentage,
+  }) : super(key: key);
+
+  final VoidCallback onBackPress;
+  final Color dominantColor;
+  final double shrinkPercentage;
+
+  @override
+  State<ProfilePageHeader> createState() => _ProfilePageHeaderState();
+}
+
+class _ProfilePageHeaderState extends State<ProfilePageHeader> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 380,
+      decoration: BoxDecoration(
+        gradient: AppGradients().getProfilePageGradient(widget.dominantColor),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            buildAppBar(widget.shrinkPercentage, context),
+            buildProfileInfo(widget.shrinkPercentage, context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Transform buildProfileInfo(double shrinkPercentage, context) {
+    return Transform.translate(
+      offset: Offset(0, 1 - (shrinkPercentage * 150)),
+      child: Transform.scale(
+        scale: 1 - shrinkPercentage,
+        child: Opacity(
+          opacity: 1 - shrinkPercentage,
+          child: Container(
+            height: 320,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: AppValues.profilePagePicSize,
+                  width: AppValues.profilePagePicSize,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(AppValues.profilePagePicSize),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.1),
+                        spreadRadius: 6,
+                        blurRadius: 12,
+                        offset: Offset(0, 0),
+                      )
+                    ],
+                  ),
+                  child: UserProfilePic(
+                    fontSize: AppFontSizes.font_size_16.sp,
+                    size: AppValues.profilePagePicSize,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppPadding.padding_16,
+                  ),
+                  child: BlocBuilder<AppUserWidgetsCubit, AppUser>(
+                    builder: (context, state) {
+                      return Text(
+                        AuthUtil.getUserName(state),
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_18.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.white,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                AppBouncingButton(
+                  onTap: () {
+                    PagesUtilFunctions.openEditProfilePage(
+                      context,
+                      (AppUser appUser) {
+                        ///UPDATE USER LOCALLY
+                        BlocProvider.of<AppUserWidgetsCubit>(context)
+                            .updateAppUser(appUser);
+
+                        ///CHANGE DOMINANT COLOR
+                        BlocProvider.of<PagesDominantColorBloc>(context).add(
+                          UserProfilePageDominantColorChanged(
+                            dominantColor: AuthUtil.getDominantColor(
+                                BlocProvider.of<AppUserWidgetsCubit>(context)
+                                    .state),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(color: AppColors.white, width: 1),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppPadding.padding_4,
+                      horizontal: AppPadding.padding_16,
+                    ),
+                    child: Text(
+                      "EDIT PROFILE",
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_8.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Stack buildAppBar(double shrinkPercentage, mContext) {
+    return Stack(
+      children: [
+        Opacity(
+          opacity: shrinkPercentage,
+          child: Container(
+            height: 80,
+            color: widget.dominantColor,
+          ),
+        ),
+        Container(
+          height: 80,
+          child: SafeArea(
+            child: Stack(
+              //  crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () {
+                      widget.onBackPress();
+                    },
+                    icon: Icon(
+                      PhosphorIcons.caret_left_light,
+                      color: AppColors.white,
+                      size: AppIconSizes.icon_size_24,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Opacity(
+                    opacity: shrinkPercentage,
+                    child: BlocBuilder<AppUserWidgetsCubit, AppUser>(
+                      builder: (context, state) {
+                        return Text(
+                          AuthUtil.getUserName(state),
+                          style: TextStyle(
+                            fontSize: AppFontSizes.font_size_12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppPadding.padding_4),
+                    child: AppBouncingButton(
+                      onTap: () {
+                        PagesUtilFunctions.showMenuDialog(
+                          context: mContext,
+                          child: ProfileMenuWidget(
+                            onUpdateSuccess: (AppUser appUser) {
+                              ///UPDATE USER LOCALLY
+                              BlocProvider.of<AppUserWidgetsCubit>(context)
+                                  .updateAppUser(appUser);
+
+                              ///CHANGE DOMINANT COLOR
+                              BlocProvider.of<PagesDominantColorBloc>(context)
+                                  .add(
+                                UserProfilePageDominantColorChanged(
+                                  dominantColor: AuthUtil.getDominantColor(
+                                      BlocProvider.of<AppUserWidgetsCubit>(
+                                              context)
+                                          .state),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        PhosphorIcons.dots_three_vertical,
+                        color: AppColors.white,
+                        size: AppIconSizes.icon_size_24,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
 }

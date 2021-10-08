@@ -9,6 +9,7 @@ class SmallTextPriceWidget extends StatelessWidget {
   final bool isDiscountAvailable;
   final double discountPercentage;
   final bool showDiscount;
+  final bool isPurchased;
 
   const SmallTextPriceWidget({
     Key? key,
@@ -18,19 +19,40 @@ class SmallTextPriceWidget extends StatelessWidget {
     required this.discountPercentage,
     this.useLargerText = false,
     this.showDiscount = true,
+    required this.isPurchased,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (!isFree) {
-      if (isDiscountAvailable && showDiscount) {
-        return buildDiscountAvailablePrice();
+    if(isPurchased){
+      return buildPurchased();
+    }else{
+      if (!isFree) {
+        if (isDiscountAvailable && showDiscount) {
+          return buildDiscountAvailablePrice();
+        } else {
+          return buildPrice();
+        }
       } else {
-        return buildPrice();
+        return buildFreeText();
       }
-    } else {
-      return buildFreeText();
     }
+
+  }
+
+  Text buildPurchased() {
+    return Text(
+      "PURCHASED",
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        color: AppColors.darkGreen,
+        fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
+        fontSize: useLargerText
+            ? AppFontSizes.font_size_12.sp
+            : AppFontSizes.font_size_10.sp,
+      ),
+    );
   }
 
   Text buildFreeText() {

@@ -86,6 +86,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
               showDiscount: false,
               discountPercentage: album.discountPercentage,
               isDiscountAvailable: album.isDiscountAvailable,
+              isBought: album.isBought,
             ),
             SizedBox(width: AppMargin.margin_16),
           ],

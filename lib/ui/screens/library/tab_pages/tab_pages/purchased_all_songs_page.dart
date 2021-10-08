@@ -103,6 +103,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
             SizedBox(height: AppMargin.margin_8),
             SongItem(
               song: allPurchasedSong[position].song,
+              isForMyPlaylist: false,
               thumbUrl: AppApi.baseFileUrl +
                   allPurchasedSong[position].song.albumArt.imageSmallPath,
               thumbSize: AppValues.playlistSongItemSize,

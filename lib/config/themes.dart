@@ -14,7 +14,7 @@ class App {
 }
 
 class AppColors {
-  static Color appGradientDefaultColorBlack = HexColor("#333333");
+  static Color appGradientDefaultColorBlack = HexColor("#95999d");
   static Color appGradientDefaultColor = HexColor("#1E96ED");
   static Color green = HexColor("#27D660");
   static Color darkGreen = HexColor("#1db954");

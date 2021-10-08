@@ -13,6 +13,7 @@ class BuyItemBtnWidget extends StatelessWidget {
   final bool isDiscountAvailable;
   final double discountPercentage;
   final bool isCentred;
+  final bool isBought;
 
   const BuyItemBtnWidget({
     Key? key,
@@ -24,6 +25,7 @@ class BuyItemBtnWidget extends StatelessWidget {
     required this.isFree,
     this.isCentred = false,
     this.showDiscount = true,
+    required this.isBought,
   }) : super(key: key);
 
   @override
@@ -62,6 +64,7 @@ class BuyItemBtnWidget extends StatelessWidget {
               showDiscount: showDiscount,
               isDiscountAvailable: isDiscountAvailable,
               discountPercentage: discountPercentage,
+              isPurchased: isBought,
             )
           ],
         ),

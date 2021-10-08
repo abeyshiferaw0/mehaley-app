@@ -55,7 +55,9 @@ class DeleteDownloadedSongEvent extends DownloadingSongEvent {
 class IsSongDownloadedEvent extends DownloadingSongEvent {
   final Song song;
 
-  IsSongDownloadedEvent({required this.song});
+  IsSongDownloadedEvent({
+    required this.song,
+  });
 
   @override
   List<Object?> get props => [song];

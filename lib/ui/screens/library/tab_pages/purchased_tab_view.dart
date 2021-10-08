@@ -50,9 +50,6 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => PurchasedTabPagesCubit(),
-        ),
-        BlocProvider(
           create: (context) => PurchasedAllSongsBloc(
             libraryPageDataRepository:
                 AppRepositories.libraryPageDataRepository,

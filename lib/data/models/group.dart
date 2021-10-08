@@ -14,7 +14,7 @@ class Group extends Equatable {
   final TextLan groupTitleText;
   final TextLan? groupSubTitleText;
   final RemoteImage? headerImageId;
-  final bool? is_visible;
+  final bool isVisible;
   final List<dynamic> groupItems;
   final GroupType groupType;
   final GroupUiType groupUiType;
@@ -31,7 +31,7 @@ class Group extends Equatable {
     required this.groupUiType,
     required this.groupDateCreated,
     required this.groupDateUpdated,
-    required this.is_visible,
+    required this.isVisible,
   });
 
   @override
@@ -45,20 +45,30 @@ class Group extends Equatable {
         groupUiType,
         groupDateCreated,
         groupDateUpdated,
-        is_visible,
+        isVisible,
       ];
 
-  factory Group.fromMap(Map<String, dynamic> map) {
+  factory Group.fromMap(Map<String, dynamic> map, bool isAdminGroup) {
     //PARSE GROUP ITEMS BASED ON GROUP ITEM
     List<dynamic> parseGroupItems(GroupType mGroupType, List<dynamic> items) {
       if (mGroupType == GroupType.SONG) {
-        return items.map((song) => Song.fromMap(song)).toList();
+        return items
+            .map((song) => Song.fromMap(isAdminGroup ? song['item'] : song))
+            .toList();
       } else if (mGroupType == GroupType.PLAYLIST) {
-        return items.map((playlist) => Playlist.fromMap(playlist)).toList();
+        return items
+            .map((playlist) =>
+                Playlist.fromMap(isAdminGroup ? playlist['item'] : playlist))
+            .toList();
       } else if (mGroupType == GroupType.ARTIST) {
-        return items.map((artist) => Artist.fromMap(artist)).toList();
+        return items
+            .map((artist) =>
+                Artist.fromMap(isAdminGroup ? artist['item'] : artist))
+            .toList();
       } else if (mGroupType == GroupType.ALBUM) {
-        return items.map((album) => Album.fromMap(album)).toList();
+        return items
+            .map((album) => Album.fromMap(isAdminGroup ? album['item'] : album))
+            .toList();
       } else {
         throw Exception("parsing group items error");
       }
@@ -87,12 +97,8 @@ class Group extends Equatable {
       groupItems: parseGroupItems(
           EnumToString.fromString(GroupType.values, map['group_type'])
               as GroupType,
-          map['group_items']),
-      is_visible: map['is_visible'] != null
-          ? map['is_visible'] == 1
-              ? true
-              : false
-          : null,
+          map['items']),
+      isVisible: map['is_visible'] == 1 ? true : false,
     );
   }
 
@@ -103,7 +109,7 @@ class Group extends Equatable {
       'group_title_text_id': this.groupTitleText,
       'group_sub_title_text_id': this.groupSubTitleText,
       'header_image_id': this.headerImageId,
-      'group_items': this.groupItems,
+      'items': this.groupItems,
       'group_type': this.groupType,
       'group_ui_type': this.groupUiType,
       'group_date_created': this.groupDateCreated,

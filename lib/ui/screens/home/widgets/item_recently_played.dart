@@ -15,6 +15,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
   final String title;
   final double price;
   final bool isDiscountAvailable;
+  final bool isBought;
   final double discountPercentage;
   final bool isFree;
   final VoidCallback onTap;
@@ -29,6 +30,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
     required this.discountPercentage,
     required this.isFree,
     required this.onTap,
+    required this.isBought,
   });
 
   @override
@@ -79,6 +81,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
               isDiscountAvailable: isDiscountAvailable,
               discountPercentage: discountPercentage,
               isFree: isFree,
+              isPurchased: isBought,
             )
           ],
         ),

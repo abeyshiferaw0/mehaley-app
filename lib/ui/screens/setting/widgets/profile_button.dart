@@ -1,8 +1,13 @@
+import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/user_profile_pic.dart';
+import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,16 +25,26 @@ class ProfileButton extends StatelessWidget {
       shrinkRatio: 6,
       child: Row(
         children: [
-          CircleAvatar(
-            backgroundColor: AppColors.green,
-            radius: AppIconSizes.icon_size_36,
-            child: Text(
-              "A",
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_24.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
+          Container(
+            height: AppIconSizes.icon_size_64,
+            width: AppIconSizes.icon_size_64,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                AppIconSizes.icon_size_64 / 2,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black.withOpacity(0.3),
+                  spreadRadius: 6,
+                  blurRadius: 6,
+                  offset: Offset(0, 0),
+                )
+              ],
+            ),
+            child:
+            UserProfilePic(
+              fontSize: AppFontSizes.font_size_12.sp,
+              size: AppValues.userPlaylistImageSize,
             ),
           ),
           SizedBox(
@@ -38,17 +53,21 @@ class ProfileButton extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Abey shi",
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.white,
-                ),
+              BlocBuilder<AppUserWidgetsCubit, AppUser>(
+                builder: (context, state) {
+                  return Text(
+                    AuthUtil.getUserName(state),
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
+                    ),
+                  );
+                },
               ),
-              SizedBox(
-                height: AppMargin.margin_4,
-              ),
+              // SizedBox(
+              //   height: AppMargin.margin_2,
+              // ),
               Text(
                 "View profile",
                 style: TextStyle(

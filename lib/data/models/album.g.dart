@@ -17,6 +17,7 @@ class AlbumAdapter extends TypeAdapter<Album> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Album(
+      isBought: fields[10] as bool,
       albumId: fields[0] as int,
       albumTitle: fields[1] as TextLan,
       albumDescription: fields[2] as TextLan,
@@ -27,20 +28,20 @@ class AlbumAdapter extends TypeAdapter<Album> {
       priceDollar: fields[7] as double,
       isFree: fields[8] as bool,
       isDiscountAvailable: fields[9] as bool,
-      discountPercentage: fields[10] as double,
-      isOnlyOnElf: fields[11] as bool,
-      isFeatured: fields[12] as bool,
-      isLiked: fields[13] as bool,
-      albumReleaseDate: fields[14] as DateTime,
-      albumDateCreated: fields[15] as DateTime,
-      albumDateUpdated: fields[16] as DateTime,
+      discountPercentage: fields[11] as double,
+      isOnlyOnElf: fields[12] as bool,
+      isFeatured: fields[13] as bool,
+      isLiked: fields[14] as bool,
+      albumReleaseDate: fields[15] as DateTime,
+      albumDateCreated: fields[16] as DateTime,
+      albumDateUpdated: fields[17] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Album obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.albumId)
       ..writeByte(1)
@@ -62,18 +63,20 @@ class AlbumAdapter extends TypeAdapter<Album> {
       ..writeByte(9)
       ..write(obj.isDiscountAvailable)
       ..writeByte(10)
-      ..write(obj.discountPercentage)
+      ..write(obj.isBought)
       ..writeByte(11)
-      ..write(obj.isOnlyOnElf)
+      ..write(obj.discountPercentage)
       ..writeByte(12)
-      ..write(obj.isFeatured)
+      ..write(obj.isOnlyOnElf)
       ..writeByte(13)
-      ..write(obj.isLiked)
+      ..write(obj.isFeatured)
       ..writeByte(14)
-      ..write(obj.albumReleaseDate)
+      ..write(obj.isLiked)
       ..writeByte(15)
-      ..write(obj.albumDateCreated)
+      ..write(obj.albumReleaseDate)
       ..writeByte(16)
+      ..write(obj.albumDateCreated)
+      ..writeByte(17)
       ..write(obj.albumDateUpdated);
   }
 

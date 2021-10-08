@@ -4,8 +4,8 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
+import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,6 +48,9 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         if (state is AuthSuccessState) {
           Navigator.pushNamedAndRemoveUntil(context, AppRouterPaths.mainScreen,
               ModalRoute.withName(AppRouterPaths.splashRoute));
+        }
+        if (state is AuthErrorState) {
+          Navigator.pop(context);
         }
       },
       child: Scaffold(
@@ -138,7 +141,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Can't receive SMS? ",
+          "Didn't receive SMS? ",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12,

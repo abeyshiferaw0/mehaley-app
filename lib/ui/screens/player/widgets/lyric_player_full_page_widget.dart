@@ -68,11 +68,13 @@ class _LyricPlayerFullPageWidgetState extends State<LyricPlayerFullPageWidget> {
                         currentLyricItem = lyricItem;
                       });
                     }
-                    lyricScrollController.scrollTo(
-                      index: lyricItem.index,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
+                    if (state.lyricList.length > lyricItem.index) {
+                      lyricScrollController.scrollTo(
+                        index: lyricItem.index,
+                        duration: Duration(milliseconds: 0),
+                        curve: Curves.easeIn,
+                      );
+                    }
                   }
                 } catch (e) {}
                 //LISTEN TO LYRIC AND DURATION CHANGES

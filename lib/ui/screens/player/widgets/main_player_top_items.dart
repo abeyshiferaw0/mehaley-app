@@ -84,6 +84,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                     context: context,
                     child: SongMenuWidget(
                       song: state!,
+                      isForMyPlaylist: false,
                     ),
                   );
                 },

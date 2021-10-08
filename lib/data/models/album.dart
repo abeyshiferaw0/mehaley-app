@@ -30,21 +30,24 @@ class Album extends Equatable {
   @HiveField(9)
   final bool isDiscountAvailable;
   @HiveField(10)
-  final double discountPercentage;
+  final bool isBought;
   @HiveField(11)
-  final bool isOnlyOnElf;
+  final double discountPercentage;
   @HiveField(12)
-  final bool isFeatured;
+  final bool isOnlyOnElf;
   @HiveField(13)
-  final bool isLiked;
+  final bool isFeatured;
   @HiveField(14)
-  final DateTime albumReleaseDate;
+  final bool isLiked;
   @HiveField(15)
-  final DateTime albumDateCreated;
+  final DateTime albumReleaseDate;
   @HiveField(16)
+  final DateTime albumDateCreated;
+  @HiveField(17)
   final DateTime albumDateUpdated;
 
   const Album({
+    required this.isBought,
     required this.albumId,
     required this.albumTitle,
     required this.albumDescription,
@@ -75,6 +78,7 @@ class Album extends Equatable {
         priceEtb,
         priceDollar,
         isFree,
+        isBought,
         isDiscountAvailable,
         discountPercentage,
         isOnlyOnElf,
@@ -100,6 +104,7 @@ class Album extends Equatable {
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,
+      isBought: map['is_bought'] == 1 ? true : false,
       isDiscountAvailable: map['is_discount_available'] == 1 ? true : false,
       discountPercentage: map['discount_percentage'] as double,
       isOnlyOnElf: map['is_only_on_elf'] == 1 ? true : false,
@@ -123,6 +128,7 @@ class Album extends Equatable {
       'price_etb': this.priceEtb,
       'price_dollar': this.priceDollar,
       'is_free': this.isFree,
+      'is_bought': this.isBought,
       'is_discount_available': this.isDiscountAvailable,
       'discount_percentage': this.discountPercentage,
       'is_only_on_elf': this.isOnlyOnElf,
