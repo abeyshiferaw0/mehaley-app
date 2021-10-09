@@ -69,26 +69,30 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
           ),
           BlocBuilder<CurrentPlayingCubit, Song?>(
             builder: (context, state) {
-              return AppBouncingButton(
-                child: Padding(
-                  padding: EdgeInsets.all(AppPadding.padding_8),
-                  child: Icon(
-                    PhosphorIcons.dots_three_vertical_bold,
-                    color: AppColors.white,
-                    size: AppIconSizes.icon_size_24,
-                  ),
-                ),
-                onTap: () {
-                  //SHOW MENU DIALOG
-                  PagesUtilFunctions.showMenuDialog(
-                    context: context,
-                    child: SongMenuWidget(
-                      song: state!,
-                      isForMyPlaylist: false,
+              if (state != null) {
+                return AppBouncingButton(
+                  child: Padding(
+                    padding: EdgeInsets.all(AppPadding.padding_8),
+                    child: Icon(
+                      PhosphorIcons.dots_three_vertical_bold,
+                      color: AppColors.white,
+                      size: AppIconSizes.icon_size_24,
                     ),
-                  );
-                },
-              );
+                  ),
+                  onTap: () {
+                    //SHOW MENU DIALOG
+                    PagesUtilFunctions.showMenuDialog(
+                      context: context,
+                      child: SongMenuWidget(
+                        song: state,
+                        isForMyPlaylist: false,
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return SizedBox();
+              }
             },
           )
         ],

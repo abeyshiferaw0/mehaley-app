@@ -30,45 +30,57 @@ class BuyItemBtnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_8,
-        ),
-        margin:
-            EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-          color: AppColors.lightGrey,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment:
-              isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
-          children: [
-            Text(
-              title.toUpperCase(),
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_10.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.darkGrey,
+    if (isBought) {
+      return SmallTextPriceWidget(
+        price: price,
+        isFree: isFree,
+        useLargerText: true,
+        showDiscount: showDiscount,
+        isDiscountAvailable: isDiscountAvailable,
+        discountPercentage: discountPercentage,
+        isPurchased: isBought,
+      );
+    } else {
+      return AppBouncingButton(
+        onTap: () {},
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_16,
+            vertical: AppPadding.padding_8,
+          ),
+          margin:
+              EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+            color: AppColors.lightGrey,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment:
+                isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
+            children: [
+              Text(
+                title.toUpperCase(),
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_10.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkGrey,
+                ),
               ),
-            ),
-            SizedBox(width: AppMargin.margin_4),
-            SmallTextPriceWidget(
-              price: price,
-              isFree: isFree,
-              useLargerText: true,
-              showDiscount: showDiscount,
-              isDiscountAvailable: isDiscountAvailable,
-              discountPercentage: discountPercentage,
-              isPurchased: isBought,
-            )
-          ],
+              SizedBox(width: AppMargin.margin_4),
+              SmallTextPriceWidget(
+                price: price,
+                isFree: isFree,
+                useLargerText: true,
+                showDiscount: showDiscount,
+                isDiscountAvailable: isDiscountAvailable,
+                discountPercentage: discountPercentage,
+                isPurchased: isBought,
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

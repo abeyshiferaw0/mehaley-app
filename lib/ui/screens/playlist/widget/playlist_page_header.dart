@@ -5,6 +5,7 @@ import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
+import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/screens/playlist/widget/playlist_info_pages.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
@@ -104,19 +105,45 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             ),
           ),
           Expanded(
-            child: Opacity(
-              opacity: shrinkPercentage,
-              child: Text(
-                playlistPageData.playlist.playlistNameText.textAm,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+            child: Stack(
+              children: [
+                Opacity(
+                  opacity: shrinkPercentage,
+                  child: Center(
+                    child: Text(
+                      playlistPageData.playlist.playlistNameText.textAm,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                playlistPageData.playlist.isBought?  Opacity(
+                  opacity: 1 - shrinkPercentage,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: AppPadding.padding_4,
+                      ),
+                      child: SmallTextPriceWidget(
+                        price: playlistPageData.playlist.priceEtb,
+                        isFree: playlistPageData.playlist.isFree,
+                        useLargerText: true,
+                        isDiscountAvailable:
+                            playlistPageData.playlist.isDiscountAvailable,
+                        discountPercentage:
+                            playlistPageData.playlist.discountPercentage,
+                        isPurchased: playlistPageData.playlist.isBought,
+                      ),
+                    ),
+                  ),
+                ):SizedBox(),
+              ],
             ),
           ),
           AppBouncingButton(

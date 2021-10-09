@@ -29,6 +29,7 @@ class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
   ) async* {
     if (event is LoadArtistPageEvent) {
       //LOAD CACHE AND REFRESH
+      yield ArtistPageLoadingState();
       try {
         //YIELD CACHE DATA
         final ArtistPageData artistPageData =
@@ -38,7 +39,6 @@ class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
         );
         yield ArtistPageLoadedState(artistPageData: artistPageData);
         if (isFromCatch(artistPageData.response)) {
-          yield ArtistPageLoadingState();
           try {
             //REFRESH AFTER CACHE YIELD
             final ArtistPageData artistPageData =

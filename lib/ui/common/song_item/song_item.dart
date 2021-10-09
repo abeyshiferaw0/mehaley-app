@@ -284,16 +284,18 @@ class SongIsPlayingText extends StatelessWidget {
           if (state.songId == song.songId) {
             isPlaying = true;
           }
+          return Text(
+            song.songName.textAm,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_16,
+              color: isPlaying ? AppColors.green : AppColors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          );
+        } else {
+          return SizedBox();
         }
-        return Text(
-          song.songName.textAm,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: AppFontSizes.font_size_16,
-            color: isPlaying ? AppColors.green : AppColors.white,
-            fontWeight: FontWeight.w500,
-          ),
-        );
       },
     );
   }

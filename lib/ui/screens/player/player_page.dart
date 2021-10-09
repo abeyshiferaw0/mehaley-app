@@ -1,4 +1,3 @@
-import 'package:elf_play/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/config/fake_data.dart';
 import 'package:elf_play/config/themes.dart';
@@ -18,10 +17,12 @@ class PlayerPage extends StatefulWidget {
 class _PlayerPageState extends State<PlayerPage> {
   //SCROLL CONTROLLER
   late ScrollController _singleChildScrollViewController;
+  late bool isPagePopped;
 
   @override
   void initState() {
     _singleChildScrollViewController = ScrollController();
+    isPagePopped = false;
     //_singleChildScrollViewController.addListener(showControls);
     //DEBUG
     // Future.delayed(
@@ -113,14 +114,14 @@ class _PlayerPageState extends State<PlayerPage> {
         ),
       );
     }
-    if (state is LyricDataLoadingError) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   buildAppSnackBar(
-      //     bgColor: AppColors.errorRed,
-      //     txtColor: AppColors.white,
-      //     msg: "Unable to load lyric",
-      //   ),
-      // );
+    if (state is AudioPlayerCurrentSongChangeState) {
+      ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
+      if (!state.song.isFree && !state.song.isBought && !isPagePopped) {
+        print(
+            "AudioPlayerCurrentSongChangeStatePOPPED ${state.song.isFree}  //  ${state.song.isBought}");
+        isPagePopped = true;
+        Navigator.pop(context);
+      }
     }
   }
 }

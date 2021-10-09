@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/player_queue_cubit.dart';
@@ -38,6 +39,7 @@ class _QueueListPageState extends State<QueueListPage> {
   double progress = 0.0;
   double bufferedPosition = 0.0;
   double totalDuration = 0.0;
+
   //QUEUE;
   final List<Song> queue = [];
 
@@ -126,16 +128,27 @@ class _QueueListPageState extends State<QueueListPage> {
         overlayColor: AppColors.white.withOpacity(0.24),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
       ),
-      child: Slider(
-        value: AudioPlayerUtil.getCorrectProgress(progress, totalDuration),
-        min: 0.0,
-        max: totalDuration,
-        onChanged: (value) {
-          BlocProvider.of<AudioPlayerBloc>(context).add(
-            SeekAudioPlayerEvent(
-              duration: Duration(seconds: value.toInt()),
-            ),
-          );
+      child: BlocBuilder<CurrentPlayingCubit, Song?>(
+        builder: (context, currentPlayingState) {
+          if (currentPlayingState != null) {
+            return Slider(
+              value:
+                  AudioPlayerUtil.getCorrectProgress(progress, totalDuration),
+              min: 0.0,
+              max: PagesUtilFunctions.getSongLength(
+                currentPlayingState,
+              ),
+              onChanged: (value) {
+                BlocProvider.of<AudioPlayerBloc>(context).add(
+                  SeekAudioPlayerEvent(
+                    duration: Duration(seconds: value.toInt()),
+                  ),
+                );
+              },
+            );
+          } else {
+            return SizedBox();
+          }
         },
       ),
     );

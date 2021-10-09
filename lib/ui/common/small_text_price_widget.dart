@@ -24,9 +24,9 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(isPurchased){
+    if (isPurchased) {
       return buildPurchased();
-    }else{
+    } else {
       if (!isFree) {
         if (isDiscountAvailable && showDiscount) {
           return buildDiscountAvailablePrice();
@@ -37,7 +37,6 @@ class SmallTextPriceWidget extends StatelessWidget {
         return buildFreeText();
       }
     }
-
   }
 
   Text buildPurchased() {

@@ -4,8 +4,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
-import 'package:elf_play/util/color_util.dart';
+import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -73,10 +72,6 @@ class ArtistAlbumItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SongItemBadge(
-                      tag: '\$${album.priceEtb.toStringAsFixed(2)}',
-                      color: ColorUtil.darken(AppColors.darkGreen, 0.5),
-                    ),
                     Text(
                       PagesUtilFunctions.getAlbumYear(album),
                       style: TextStyle(
@@ -104,7 +99,17 @@ class ArtistAlbumItem extends StatelessWidget {
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w400,
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      width: AppMargin.margin_4,
+                    ),
+                    SmallTextPriceWidget(
+                      price: album.priceEtb,
+                      isFree: album.isFree,
+                      isDiscountAvailable: album.isDiscountAvailable,
+                      discountPercentage: album.discountPercentage,
+                      isPurchased: album.isBought,
+                    ),
                   ],
                 ),
                 SizedBox(height: AppMargin.margin_6),

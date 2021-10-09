@@ -28,7 +28,7 @@ class AudioFileAdapter extends TypeAdapter<AudioFile> {
       audio96KpsStreamPath: fields[8] as String,
       audio128KpsStreamPath: fields[9] as String,
       audio160KpsStreamPath: fields[10] as String,
-      audioPreviewStreamPath: fields[11] as String,
+      audioPreviewDurationSeconds: fields[11] as double,
     );
   }
 
@@ -59,7 +59,7 @@ class AudioFileAdapter extends TypeAdapter<AudioFile> {
       ..writeByte(10)
       ..write(obj.audio160KpsStreamPath)
       ..writeByte(11)
-      ..write(obj.audioPreviewStreamPath);
+      ..write(obj.audioPreviewDurationSeconds);
   }
 
   @override

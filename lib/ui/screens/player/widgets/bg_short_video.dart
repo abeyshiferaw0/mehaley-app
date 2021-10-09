@@ -70,16 +70,20 @@ class _BgShortVideoState extends State<BgShortVideo> {
           visible: showThumbnail,
           child: BlocBuilder<CurrentPlayingCubit, Song?>(
             builder: (context, state) {
-              return CachedNetworkImage(
-                width: ScreenUtil(context: context).getScreenWidth(),
-                height: ScreenUtil(context: context).getScreenHeight(),
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) => buildImagePlaceHolder(),
-                placeholder: (context, url) => buildImagePlaceHolder(),
-                imageUrl: state != null
-                    ? AppApi.baseFileUrl + state.albumArt.imageMediumPath
-                    : '',
-              );
+              if (state != null) {
+                return CachedNetworkImage(
+                  width: ScreenUtil(context: context).getScreenWidth(),
+                  height: ScreenUtil(context: context).getScreenHeight(),
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => buildImagePlaceHolder(),
+                  placeholder: (context, url) => buildImagePlaceHolder(),
+                  imageUrl: state != null
+                      ? AppApi.baseFileUrl + state.albumArt.imageMediumPath
+                      : '',
+                );
+              } else {
+                return SizedBox();
+              }
             },
           ),
         ),

@@ -413,11 +413,16 @@ class PagesUtilFunctions {
     required List<dynamic> items,
     required bool startPlaying,
     required int index,
-  }) {
+  }) async {
+    DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems =
-        items.map((song) => Song.toAudioSourceStreamUri(song)).toList();
-    //SET PLAYER QUEUE
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
+      downloadUtil,
+      items as List<Song>,
+    );
+    // List<AudioSource> audioSourceItems =
+    //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
+    // //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
       SetPlayerQueueEvent(
           queue: audioSourceItems, startPlaying: startPlaying, index: index),
@@ -545,7 +550,7 @@ class PagesUtilFunctions {
     }
   }
 
-  static String formatDurationTimeTo(Duration duration) {
+  static String formatSongDurationTimeTo(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
@@ -968,5 +973,27 @@ class PagesUtilFunctions {
         onUpdateSuccess(appUser);
       }
     }
+  }
+
+  static double getSongLength(Song song) {
+    if (!song.isBought && !song.isFree) {
+      return song.audioFile.audioPreviewDurationSeconds;
+    }
+    return song.audioFile.audioDurationSeconds;
+  }
+
+  static String getFormatdMaxSongDuration(Song song) {
+    if (!song.isBought && !song.isFree) {
+      return formatSongDurationTimeTo(
+        Duration(
+          seconds: song.audioFile.audioPreviewDurationSeconds.toInt(),
+        ),
+      );
+    }
+    return formatSongDurationTimeTo(
+      Duration(
+        seconds: song.audioFile.audioDurationSeconds.toInt(),
+      ),
+    );
   }
 }

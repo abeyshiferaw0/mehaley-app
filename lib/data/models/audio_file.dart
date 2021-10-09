@@ -28,7 +28,7 @@ class AudioFile extends Equatable {
   @HiveField(10)
   final String audio160KpsStreamPath;
   @HiveField(11)
-  final String audioPreviewStreamPath;
+  final double audioPreviewDurationSeconds;
 
   AudioFile({
     required this.audioId,
@@ -42,7 +42,7 @@ class AudioFile extends Equatable {
     required this.audio96KpsStreamPath,
     required this.audio128KpsStreamPath,
     required this.audio160KpsStreamPath,
-    required this.audioPreviewStreamPath,
+    required this.audioPreviewDurationSeconds,
   });
 
   @override
@@ -58,7 +58,7 @@ class AudioFile extends Equatable {
         audio96KpsStreamPath,
         audio128KpsStreamPath,
         audio160KpsStreamPath,
-        audioPreviewStreamPath,
+        audioPreviewDurationSeconds,
       ];
 
   factory AudioFile.fromMap(Map<String, dynamic> map) {
@@ -74,7 +74,8 @@ class AudioFile extends Equatable {
       audio96KpsStreamPath: map['audio_96kps_stream_path'],
       audio128KpsStreamPath: map['audio_128kps_stream_path'],
       audio160KpsStreamPath: map['audio_160kps_stream_path'] as String,
-      audioPreviewStreamPath: map['audio_preview_stream_path'] as String,
+      audioPreviewDurationSeconds:
+          map['audio_preview_duration_seconds'] as double,
     );
   }
 
@@ -92,7 +93,7 @@ class AudioFile extends Equatable {
       'audio_96kps_stream_path': this.audio96KpsStreamPath,
       'audio_128kps_stream_path': this.audio128KpsStreamPath,
       'audio_160kps_stream_path': this.audio160KpsStreamPath,
-      'audio_preview_stream_path': this.audioPreviewStreamPath,
+      'audio_preview_duration_seconds': this.audioPreviewDurationSeconds,
     } as Map<String, dynamic>;
   }
 }

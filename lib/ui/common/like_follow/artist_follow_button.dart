@@ -56,37 +56,42 @@ class ArtistFollowButton extends StatelessWidget {
               titleText: 'Remove From Followed Artists?',
               onUnLikeUnFollow: () {
                 ///FOLLOW UNFOLLOW ARTIST
-                BlocProvider.of<LibraryBloc>(context).add(
-                  FollowUnFollowArtistEvent(
-                    id: artistId,
-                    appLikeFollowEvents: preButtonOnTap()
-                        ? AppLikeFollowEvents.UNFOLLOW
-                        : AppLikeFollowEvents.FOLLOW,
-                  ),
+                EasyDebounce.debounce(
+                  "ARTIST_FOLLOW",
+                  Duration(milliseconds: 800),
+                  () {
+                    BlocProvider.of<LibraryBloc>(context).add(
+                      FollowUnFollowArtistEvent(
+                        id: artistId,
+                        appLikeFollowEvents: preButtonOnTap()
+                            ? AppLikeFollowEvents.UNFOLLOW
+                            : AppLikeFollowEvents.FOLLOW,
+                      ),
+                    );
+                  },
                 );
               },
             ),
           );
         },
       );
+    } else {
+      ///FOLLOW UNFOLLOW ARTIST
+      EasyDebounce.debounce(
+        "ARTIST_FOLLOW",
+        Duration(milliseconds: 800),
+        () {
+          BlocProvider.of<LibraryBloc>(context).add(
+            FollowUnFollowArtistEvent(
+              id: artistId,
+              appLikeFollowEvents: preButtonOnTap()
+                  ? AppLikeFollowEvents.UNFOLLOW
+                  : AppLikeFollowEvents.FOLLOW,
+            ),
+          );
+        },
+      );
     }
-
-    ///FOLLOW UNFOLLOW ARTIST
-
-    EasyDebounce.debounce(
-      "ARTIST_FOLLOW",
-      Duration(milliseconds: 800),
-      () {
-        BlocProvider.of<LibraryBloc>(context).add(
-          FollowUnFollowArtistEvent(
-            id: artistId,
-            appLikeFollowEvents: preButtonOnTap()
-                ? AppLikeFollowEvents.UNFOLLOW
-                : AppLikeFollowEvents.FOLLOW,
-          ),
-        );
-      },
-    );
   }
 
   bool preButtonOnTap() {

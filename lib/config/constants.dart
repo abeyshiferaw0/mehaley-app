@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.43.176:8181/music";
-  static const String userBaseUrl = "http://192.168.43.176:8181/user";
-  static const String baseFileUrl = "http://192.168.43.176:8181";
+  static const String musicBaseUrl = "http://192.168.135.202:8181/music";
+  static const String userBaseUrl = "http://192.168.135.202:8181/user";
+  static const String baseFileUrl = "http://192.168.135.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -60,6 +60,7 @@ class AppValues {
   //PLAYER PAGE
   static const double lyricPlayerHeight = 380;
   static const double queueSongItemSize = 50;
+  static const int playerPreviewStartSecond = 5;
 
   //ALBUM PAGE
   static const double albumPageImageSize = 170;
@@ -155,6 +156,7 @@ class AppValues {
   static const double createPlaylistImageSize = 180;
   static const String downloaderSendPort = "downloader_send_port";
   static const String songExtraStr = "SONG_EXTRA";
+  static const double previewDialogSongItemSize = 60;
 
   //static const String languageRadioGroupValue = "LANGUAGE_RADIO";
 }

@@ -173,22 +173,22 @@ class Song extends Equatable {
     return mapItems;
   }
 
-  static HlsAudioSource toAudioSourceStreamUri(Song song) {
-    HlsAudioSource hlsAudioSource = HlsAudioSource(
-      Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
-      tag: MediaItem(
-        id: song.songId.toString(),
-        title: song.songName.textAm,
-        artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
-        duration: Duration(
-          seconds: song.audioFile.audioDurationSeconds.toInt(),
-        ),
-        artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
-        extras: {AppValues.songExtraStr: song.toMap()},
-      ),
-    );
-    return hlsAudioSource;
-  }
+  // static HlsAudioSource toAudioSourceStreamUri(Song song) {
+  //   HlsAudioSource hlsAudioSource = HlsAudioSource(
+  //     Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
+  //     tag: MediaItem(
+  //       id: song.songId.toString(),
+  //       title: song.songName.textAm,
+  //       artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
+  //       duration: Duration(
+  //         seconds: song.audioFile.audioDurationSeconds.toInt(),
+  //       ),
+  //       artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+  //       extras: {AppValues.songExtraStr: song.toMap()},
+  //     ),
+  //   );
+  //   return hlsAudioSource;
+  // }
 
   static Future<List<AudioSource>> toListAudioSourceStreamUri(
       DownloadUtil downloadUtil, List<Song> songs) async {
@@ -203,11 +203,11 @@ class Song extends Equatable {
       DownloadedTaskWithSong? downloadedTaskWithSong =
           downloadUtil.isSongDownloaded(song, allDownloads);
 
-      ///CHECK IF SONG BOUGHT
-      bool isBought = song.isBought;
-
       if (downloadedTaskWithSong == null) {
+        ///SONG IS NOT DOWNLOADED
         ClippingAudioSource clippingAudioSource;
+
+        ///TAG MEDIA
         MediaItem tag = MediaItem(
           id: song.songId.toString(),
           title: song.songName.textAm,
@@ -219,18 +219,22 @@ class Song extends Equatable {
           extras: {AppValues.songExtraStr: song.toMap()},
         );
 
-        ///SONG IS NOT DOWNLOADED
+        ///CHECK IF SONG BOUGHT
         HlsAudioSource hlsAudioSource = HlsAudioSource(
           Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
           tag: tag,
         );
-        if (!isBought) {
+        print("song.isBought => ${song.isBought} ${song.isFree}");
+        if (!song.isBought && !song.isFree) {
           ///CLIP IF NOT BOUGHT
           clippingAudioSource = ClippingAudioSource(
             child: hlsAudioSource,
             tag: tag,
-            start: Duration(seconds: 5),
-            end: Duration(seconds: 20),
+            start: Duration(seconds: AppValues.playerPreviewStartSecond),
+            end: Duration(
+              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
+                  AppValues.playerPreviewStartSecond,
+            ),
           );
           audioSources.add(clippingAudioSource);
         } else {

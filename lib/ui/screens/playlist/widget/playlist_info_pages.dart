@@ -10,6 +10,7 @@ import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/ui/common/like_follow/playlist_follow_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
@@ -152,31 +153,43 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           SizedBox(height: AppMargin.margin_8),
           buildProfileOwnerNameTag(),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: AddToCartBtn(),
-                ),
-                SizedBox(
-                  width: AppMargin.margin_16,
-                ),
-                playlist.isFree
-                    ? SizedBox()
-                    : Expanded(
-                        child: BuyItemBtnWidget(
-                          price: playlist.priceEtb,
-                          title: 'BUY ALL',
-                          hasLeftMargin: false,
-                          showDiscount: false,
-                          isCentred: true,
-                          isFree: playlist.isFree,
-                          discountPercentage: playlist.discountPercentage,
-                          isDiscountAvailable: playlist.isDiscountAvailable,
-                          isBought: playlist.isBought,
-                        ),
-                      )
-              ],
-            ),
+            child: playlist.isBought
+                ? Center(
+                    child: SmallTextPriceWidget(
+                      price: playlist.priceEtb,
+                      isFree: playlist.isFree,
+                      useLargerText: true,
+                      isDiscountAvailable: playlist.isDiscountAvailable,
+                      discountPercentage: playlist.discountPercentage,
+                      isPurchased: playlist.isBought,
+                    ),
+                  )
+                : Row(
+                    children: [
+                      Expanded(
+                        child: AddToCartBtn(),
+                      ),
+                      SizedBox(
+                        width: AppMargin.margin_16,
+                      ),
+                      playlist.isFree
+                          ? SizedBox()
+                          : Expanded(
+                              child: BuyItemBtnWidget(
+                                price: playlist.priceEtb,
+                                title: 'BUY ALL',
+                                hasLeftMargin: false,
+                                showDiscount: false,
+                                isCentred: true,
+                                isFree: playlist.isFree,
+                                discountPercentage: playlist.discountPercentage,
+                                isDiscountAvailable:
+                                    playlist.isDiscountAvailable,
+                                isBought: playlist.isBought,
+                              ),
+                            )
+                    ],
+                  ),
           ),
           buildPlaylistDateAndTime(),
           SizedBox(height: AppMargin.margin_20),

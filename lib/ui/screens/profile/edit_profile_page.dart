@@ -432,7 +432,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
   }
 
   AppItemsImagePlaceHolder buildImagePlaceHolder() {
-    return AppItemsImagePlaceHolder(appItemsType: AppItemsType.SINGLE_TRACK);
+    return AppItemsImagePlaceHolder(appItemsType: AppItemsType.ARTIST);
   }
 
   void initPreviousValues() {

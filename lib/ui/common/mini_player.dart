@@ -12,6 +12,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/dialog/dialog_song_preview_mode.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
 import 'package:elf_play/util/audio_player_util.dart';
@@ -19,7 +20,9 @@ import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
+import 'package:sizer/sizer.dart';
 
 import 'app_card.dart';
 import 'like_follow/song_favorite_button.dart';
@@ -65,93 +68,170 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.black,
-      child: SlideTransition(
-        position: offset,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () {
-            //OPEN PLAYER PAGE
-            Navigator.of(context, rootNavigator: true).push(
-              PagesUtilFunctions.createBottomToUpAnimatedRoute(
-                page: PlayerPage(
-
-                ),
-              ),
-            );
-          },
-          child: MultiBlocListener(
-            listeners: [
-              BlocListener<SongPositionCubit, Duration>(
-                listener: (context, state) {
-                  progress = state.inSeconds.toDouble();
-                },
-              ),
-              BlocListener<SongBufferedCubit, Duration>(
-                listener: (context, state) {
-                  bufferedPosition = state.inSeconds.toDouble();
-                },
-              ),
-              BlocListener<SongDurationCubit, Duration>(
-                listener: (context, state) {
-                  totalDuration = state.inSeconds.toDouble();
-                },
-              ),
-            ],
-            child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
-              builder: (context, state) {
-                if (state is PlayerPageDominantColorChangedState) {
-                  dominantColor = ColorUtil.darken(
-                    state.color,
-                    0.05,
-                  );
-                }
-                return BlocBuilder<CurrentPlayingCubit, Song?>(
-                  builder: (context, state) {
-                    //ANIMATE WHEN SONG CHANGE
-                    animateWhenSongChange(state);
-                    return AnimatedSwitcher(
-                      switchInCurve: Curves.easeIn,
-                      switchOutCurve: Curves.easeOut,
-                      duration: Duration(
-                          milliseconds: AppValues.colorChangeAnimationDuration),
-                      child: Container(
-                        key: ValueKey<int>(state.hashCode),
-                        color: dominantColor,
-                        child: Wrap(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.all(AppMargin.margin_8),
-                                  child: Row(
-                                    children: [
-                                      buildMiniAlbumArt(state),
-                                      SizedBox(width: AppMargin.margin_8),
-                                      buildTrackTitle(state),
-                                      SizedBox(width: AppMargin.margin_4),
-                                      buildMiniPlayerIcons(
-                                        state!.songId,
-                                        state.isLiked,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                buildMiniPlayerSlider(context),
-                              ],
-                            ),
-                          ],
-                        ),
+    return BlocBuilder<CurrentPlayingCubit, Song?>(
+      builder: (context, currentPlayingSong) {
+        if (currentPlayingSong != null) {
+          return Container(
+            color: AppColors.black,
+            child: SlideTransition(
+              position: offset,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  ///OPEN PLAYER PAGE IF PURCHASED OR FREE
+                  if (currentPlayingSong.isBought ||
+                      currentPlayingSong.isFree) {
+                    Navigator.of(context, rootNavigator: true).push(
+                      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+                        page: PlayerPage(),
                       ),
                     );
-                  },
-                );
-              },
+                  } else {
+                    ///SHOW BUY OR PURCHASE DIALOG
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: DialogSongPreviewMode(
+                            dominantColor: dominantColor,
+                            song: currentPlayingSong,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: MultiBlocListener(
+                  listeners: [
+                    BlocListener<SongPositionCubit, Duration>(
+                      listener: (context, state) {
+                        progress = state.inSeconds.toDouble();
+                      },
+                    ),
+                    BlocListener<SongBufferedCubit, Duration>(
+                      listener: (context, state) {
+                        bufferedPosition = state.inSeconds.toDouble();
+                      },
+                    ),
+                    BlocListener<SongDurationCubit, Duration>(
+                      listener: (context, state) {
+                        totalDuration = state.inSeconds.toDouble();
+                      },
+                    ),
+                  ],
+                  child: BlocBuilder<PagesDominantColorBloc,
+                      PagesDominantColorState>(
+                    builder: (context, state) {
+                      if (state is PlayerPageDominantColorChangedState) {
+                        dominantColor = ColorUtil.darken(
+                          state.color,
+                          0.05,
+                        );
+                      }
+                      animateWhenSongChange(currentPlayingSong);
+                      return AnimatedSwitcher(
+                        switchInCurve: Curves.easeIn,
+                        switchOutCurve: Curves.easeOut,
+                        duration: Duration(
+                            milliseconds:
+                                AppValues.colorChangeAnimationDuration),
+                        child: Container(
+                          key: ValueKey<int>(state.hashCode),
+                          color: dominantColor,
+                          child: Wrap(
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  !currentPlayingSong.isBought &&
+                                          !currentPlayingSong.isFree
+                                      ? buildBuyContainer(currentPlayingSong)
+                                      : SizedBox(),
+                                  buildPlayerControls(currentPlayingSong),
+                                  buildMiniPlayerSlider(context),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+    );
+  }
+
+  Container buildBuyContainer(Song song) => Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(AppPadding.padding_8),
+        //color: AppColors.darkGrey,
+        color: ColorUtil.darken(dominantColor, 0.05),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: AppMargin.margin_4,
+            ),
+            Text(
+              "PREVIEW MODE".toUpperCase(),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: AppFontSizes.font_size_10.sp,
+                color: AppColors.white,
+              ),
+            ),
+            SizedBox(
+              height: AppMargin.margin_4,
+            ),
+            Text(
+              "You are listing a preview, buy the mezmur to listen to the full version",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: AppFontSizes.font_size_8.sp,
+                color: AppColors.txtGrey,
+              ),
+            ),
+            SizedBox(
+              height: AppMargin.margin_12,
+            ),
+            Row(
+              children: [
+                buildBuyButton(),
+                Expanded(
+                  child: SizedBox(),
+                ),
+                buildAddToCartButton(),
+              ],
+            ),
+            SizedBox(
+              height: AppMargin.margin_8,
+            ),
+          ],
         ),
+      );
+
+  Container buildPlayerControls(Song currentPlayingSong) {
+    return Container(
+      margin: EdgeInsets.all(AppMargin.margin_8),
+      child: Row(
+        children: [
+          buildMiniAlbumArt(currentPlayingSong),
+          SizedBox(width: AppMargin.margin_8),
+          buildTrackTitle(currentPlayingSong),
+          SizedBox(width: AppMargin.margin_4),
+          buildMiniPlayerIcons(
+            currentPlayingSong.songId,
+            currentPlayingSong.isLiked,
+          )
+        ],
       ),
     );
   }
@@ -277,34 +357,40 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   BlocBuilder buildMiniPlayerSlider(BuildContext context) {
     return BlocBuilder<CurrentPlayingCubit, Song?>(
       builder: (context, currentPlayingState) {
-        return SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            activeTrackColor: AppColors.white,
-            inactiveTrackColor: AppColors.lightGrey.withOpacity(0.5),
-            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
-            trackHeight: AppValues.miniPlayerTrackHeight,
-          ),
-          child: BlocBuilder<SongPositionCubit, Duration>(
-            builder: (context, state) {
-              return Slider(
-                value: AudioPlayerUtil.getCorrectProgress(
-                  state.inSeconds.toDouble(),
-                  currentPlayingState!.audioFile.audioDurationSeconds,
-                ),
-                min: 0.0,
-                max: currentPlayingState.audioFile.audioDurationSeconds,
-                onChanged: (value) {
-                  BlocProvider.of<AudioPlayerBloc>(context).add(
-                    SeekAudioPlayerEvent(
-                      duration: Duration(seconds: value.toInt()),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        );
+        if (currentPlayingState != null) {
+          return SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: AppColors.white,
+              inactiveTrackColor: AppColors.lightGrey.withOpacity(0.5),
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
+              trackHeight: AppValues.miniPlayerTrackHeight,
+            ),
+            child: BlocBuilder<SongPositionCubit, Duration>(
+              builder: (context, state) {
+                return Slider(
+                  value: AudioPlayerUtil.getCorrectProgress(
+                    state.inSeconds.toDouble(),
+                    currentPlayingState.audioFile.audioDurationSeconds,
+                  ),
+                  min: 0.0,
+                  max: PagesUtilFunctions.getSongLength(
+                    currentPlayingState,
+                  ),
+                  onChanged: (value) {
+                    BlocProvider.of<AudioPlayerBloc>(context).add(
+                      SeekAudioPlayerEvent(
+                        duration: Duration(seconds: value.toInt()),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          );
+        } else {
+          return SizedBox();
+        }
       },
     );
   }
@@ -321,6 +407,70 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         }
       }
     }
+  }
+
+  buildBuyButton() {
+    return AppBouncingButton(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.padding_16,
+          vertical: AppPadding.padding_4,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: AppColors.darkGreen,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "BUY MEZMUR".toUpperCase(),
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_10.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildAddToCartButton() {
+    return AppBouncingButton(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.padding_16,
+          vertical: AppPadding.padding_4,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              PhosphorIcons.shopping_cart_simple_light,
+              size: AppIconSizes.icon_size_16,
+              color: AppColors.white,
+            ),
+            SizedBox(
+              width: AppMargin.margin_4,
+            ),
+            Text(
+              "ADD TO CART".toUpperCase(),
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_8.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

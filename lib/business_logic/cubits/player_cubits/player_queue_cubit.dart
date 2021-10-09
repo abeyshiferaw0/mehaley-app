@@ -31,6 +31,11 @@ class PlayerQueueCubit extends Cubit<QueueAndIndex> {
 
   static QueueAndIndex getEffectiveSequence(AudioPlayerBloc audioPlayerBloc) {
     List<Song> queue = [];
+    if (audioPlayerBloc.audioPlayer.sequenceState == null)
+      return QueueAndIndex(
+        queue: [],
+        currentIndex: 0,
+      );
     audioPlayerBloc.audioPlayer.sequenceState!.effectiveSequence.forEach(
       (mediaItem) {
         queue.add(
