@@ -40,11 +40,12 @@ class PlaylistMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: AppGradients().getMenuGradient(),
-        ),
+    return Container(
+      height: ScreenUtil(context: context).getScreenHeight(),
+      decoration: BoxDecoration(
+        gradient: AppGradients().getMenuGradient(),
+      ),
+      child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,

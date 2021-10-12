@@ -79,3 +79,14 @@ class RemoveSongUserPlaylistEvent extends UserPlaylistEvent {
   @override
   List<Object?> get props => [myPlaylist, song];
 }
+
+class DeletePlaylistEvent extends UserPlaylistEvent {
+  final MyPlaylist myPlaylist;
+
+  DeletePlaylistEvent({
+    required this.myPlaylist,
+  });
+
+  @override
+  List<Object?> get props => [myPlaylist];
+}

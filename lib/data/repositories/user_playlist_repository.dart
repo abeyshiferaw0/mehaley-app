@@ -119,6 +119,17 @@ class UserPLayListRepository {
     }
   }
 
+  deletePlaylist(MyPlaylist myPlaylist) async {
+    Response response =
+        await userPlaylistDataProvider.deletePlaylist(myPlaylist);
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw "DELETE_FAILED";
+    }
+  }
+
   cancelDio() {
     userPlaylistDataProvider.cancel();
   }

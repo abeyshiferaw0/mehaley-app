@@ -74,6 +74,18 @@ class UserPlaylistBloc extends Bloc<UserPlaylistEvent, UserPlaylistState> {
       } catch (e) {
         yield UserPlaylistLoadingErrorState(error: e.toString());
       }
+    } else if (event is DeletePlaylistEvent) {
+      yield UserPlaylistLoadingState();
+      try {
+        await userPLayListRepository.deletePlaylist(
+          event.myPlaylist,
+        );
+        yield UserPlaylistDeletedState(
+          myPlaylist: event.myPlaylist,
+        );
+      } catch (e) {
+        yield UserPlaylistDeletingErrorState(error: e.toString());
+      }
     }
   }
 }

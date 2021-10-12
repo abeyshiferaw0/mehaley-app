@@ -1,20 +1,16 @@
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
+import 'package:dio/dio.dart';
+import 'package:elf_play/data/models/cart/cart.dart';
 import 'package:equatable/equatable.dart';
 
 class CartPageData extends Equatable {
-  final List<Album> albums;
-  final List<Playlist> playlists;
-  final List<Song> songs;
+  final Cart cart;
+  final Response response;
 
-  CartPageData(
-      {required this.albums, required this.playlists, required this.songs});
+  CartPageData({required this.cart, required this.response});
 
   @override
   List<Object?> get props => [
-        songs,
-        albums,
-        playlists,
+        cart,
+        response,
       ];
 }

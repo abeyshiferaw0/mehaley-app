@@ -102,6 +102,9 @@ class AppValues {
   static const double profilePagePicSize = 90;
   static const double editProfileImageSize = 160;
 
+  //CART PAGE
+  static const double cartItemsSize = 120;
+
   //HIVE BOXES
   static const String recentSearchesBox = "RECENT_SEARCHES";
   static const String userBox = "USER_BOX_KEY";
@@ -111,9 +114,6 @@ class AppValues {
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";
   static const String recentlyUnLikedAlbumBox = "RECENTLY_UNLIKED_ALBUM_BOX";
-  static const String cartAlbumsBox = "CART_ALBUMS_BOX";
-  static const String cartPlaylistsBox = "CART_PLAYLISTS_BOX";
-  static const String cartSongsBox = "CART_SONGS_BOX";
   static const String recentlyFollowedPlaylistBox =
       "RECENTLY_FOLLOWED_PLAYLIST_BOX";
   static const String recentlyUnFollowedPlaylistBox =

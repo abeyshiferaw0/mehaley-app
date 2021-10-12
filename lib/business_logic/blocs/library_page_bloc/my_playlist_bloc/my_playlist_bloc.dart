@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/data/models/api_response/my_playlist_page_data.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/repositories/my_playlist_repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -28,6 +29,17 @@ class MyPlaylistBloc extends Bloc<MyPlaylistEvent, MyPlaylistState> {
         final MyPlaylistPageData cachedMyPlaylistPageData =
             await myPlaylistRepository
                 .getMyPlaylistData(AppCacheStrategy.LOAD_CACHE_FIRST);
+
+        ///CHECK IF IS FOR DELETED PLAYLIST AND REMOVE DELETED PLAYLIST
+        if (event.isForUserPlaylistDeleted != null) {
+          if (event.isForUserPlaylistDeleted!) {
+            if (event.deletedPlaylist != null) {
+              cachedMyPlaylistPageData.myPlaylists
+                  .remove(event.deletedPlaylist);
+            }
+          }
+        }
+
         yield MyPlaylistPageDataLoaded(
             myPlaylistPageData: cachedMyPlaylistPageData);
 
@@ -54,7 +66,6 @@ class MyPlaylistBloc extends Bloc<MyPlaylistEvent, MyPlaylistState> {
         yield MyPlaylistLoadingErrorState(error: error.toString());
       }
     } else if (event is RefreshMyPlaylistEvent) {
-      print("myPlaylistRepositoryyyy called");
       myPlaylistRepository.cancelDio();
       this.add(
         LoadAllMyPlaylistsEvent(isForAddSongPage: event.isForAddSongPage),

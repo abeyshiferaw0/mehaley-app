@@ -1,6 +1,8 @@
+import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
@@ -15,15 +17,13 @@ class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
         horizontal: AppPadding.padding_16,
       ),
       decoration: BoxDecoration(
-        color: AppColors.darkGreen.withOpacity(
-          opacityPercentage,
-        ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            ColorUtil.darken(AppColors.darkGreen, 0.3)
-                .withOpacity(opacityPercentage),
+            ColorUtil.darken(AppColors.darkGreen, 0.3).withOpacity(
+              opacityPercentage < 0.2 ? 0.2 : opacityPercentage,
+            ),
             AppColors.black,
           ],
         ),
@@ -73,18 +73,32 @@ class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(40),
                   ),
-                  child: Center(
-                    child: Text(
-                      "CHECK OUT",
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_12.sp,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "CHECK OUT",
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_12.sp,
+                          color: ColorUtil.darken(
+                            AppColors.darkGreen,
+                            1 - opacityPercentage,
+                          ),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        width: AppMargin.margin_2,
+                      ),
+                      Icon(
+                        PhosphorIcons.caret_right_light,
                         color: ColorUtil.darken(
                           AppColors.darkGreen,
-                          opacityPercentage,
+                          1 - opacityPercentage,
                         ),
-                        fontWeight: FontWeight.w600,
+                        size: AppIconSizes.icon_size_16,
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

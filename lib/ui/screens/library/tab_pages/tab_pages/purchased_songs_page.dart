@@ -51,7 +51,7 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.folder_fill,
+                icon: PhosphorIcons.music_note_simple_light,
                 msg: "You don't have any purchased\nMezmurs",
               ),
             );

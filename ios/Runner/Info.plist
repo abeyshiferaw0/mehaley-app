@@ -34,7 +34,6 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FDAllFilesDownloadedMessage</key>
 	<string>All Downloads Completed</string>
-
 	<key>FacebookAppID</key>
 	<string>366488778401927</string>
 	<key>FacebookClientToken</key>
@@ -59,7 +58,6 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

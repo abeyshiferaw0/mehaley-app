@@ -13,6 +13,7 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
+import 'package:elf_play/ui/screens/cart/widgets/remove_from_cart_button.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,12 +31,16 @@ class SongItem extends StatefulWidget {
     required this.onPressed,
     this.badges,
     required this.isForMyPlaylist,
+    this.isForCart,
+    this.onRemoveFromCart,
     this.onRemoveSongFromPlaylist,
   });
 
   final Song song;
   final int? position;
   final bool isForMyPlaylist;
+  final bool? isForCart;
+  final VoidCallback? onRemoveFromCart;
   final Function(Song song)? onRemoveSongFromPlaylist;
   final String? thumbUrl;
   final double? thumbSize;
@@ -53,6 +58,8 @@ class SongItem extends StatefulWidget {
         onPressed: onPressed,
         badges: badges,
         isForMyPlaylist: isForMyPlaylist,
+        isForCart: isForCart,
+        onRemoveFromCart: onRemoveFromCart,
       );
 }
 
@@ -62,12 +69,16 @@ class _SongItemState extends State<SongItem> {
   final double? thumbSize;
   final String? thumbUrl;
   final bool isForMyPlaylist;
+  final bool? isForCart;
+  final VoidCallback? onRemoveFromCart;
   final double thumbRadius;
   final VoidCallback onPressed;
   final List<SongItemBadge>? badges;
 
   _SongItemState({
     required this.isForMyPlaylist,
+    this.isForCart,
+    this.onRemoveFromCart,
     required this.song,
     this.position,
     this.thumbSize,
@@ -172,11 +183,7 @@ class _SongItemState extends State<SongItem> {
             song: song,
             isForPlayerPage: false,
           ),
-          SongMenuDotsWidget(
-            song: song,
-            isForMyPlaylist: isForMyPlaylist,
-            onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
-          )
+          showDotsMenuOrRemoveFromCart(isForCart),
         ],
       ),
     );
@@ -264,6 +271,29 @@ class _SongItemState extends State<SongItem> {
       ),
     );
   }
+
+  Widget showDotsMenuOrRemoveFromCart(bool? isForCart) {
+    if (isForCart == null) {
+      return SongMenuDotsWidget(
+        song: song,
+        isForMyPlaylist: isForMyPlaylist,
+        onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
+      );
+    } else {
+      if (isForCart) {
+        return RemoveFromCartButton(
+          onRemoveFromCart: onRemoveFromCart!,
+          isWithText: false,
+        );
+      } else {
+        return SongMenuDotsWidget(
+          song: song,
+          isForMyPlaylist: isForMyPlaylist,
+          onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
+        );
+      }
+    }
+  }
 }
 
 AppItemsImagePlaceHolder buildImagePlaceHolder() {
@@ -284,18 +314,16 @@ class SongIsPlayingText extends StatelessWidget {
           if (state.songId == song.songId) {
             isPlaying = true;
           }
-          return Text(
-            song.songName.textAm,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_16,
-              color: isPlaying ? AppColors.green : AppColors.white,
-              fontWeight: FontWeight.w500,
-            ),
-          );
-        } else {
-          return SizedBox();
         }
+        return Text(
+          song.songName.textAm,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_16,
+            color: isPlaying ? AppColors.green : AppColors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        );
       },
     );
   }

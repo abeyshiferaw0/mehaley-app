@@ -185,6 +185,37 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
               ),
               child: Column(
                 children: [
+                  widget.isForMyPlaylist
+                      ? MenuItem(
+                          isDisabled: false,
+                          hasTopMargin: true,
+                          iconColor: AppColors.grey.withOpacity(0.6),
+                          icon: PhosphorIcons.minus_circle_light,
+                          title: "Remove from playlist",
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Center(
+                                  child: DialogDeleteSong(
+                                    mainButtonText: 'REMOVE'.toUpperCase(),
+                                    cancelButtonText: 'CANCEL',
+                                    titleText:
+                                        'Remove ${song.songName.textAm} From this playlist?',
+                                    onDelete: () {
+                                      if (widget.onRemoveSongFromPlaylist !=
+                                          null) {
+                                        widget.onRemoveSongFromPlaylist!(song);
+                                      }
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        )
+                      : SizedBox(),
                   song.isBought ? SongDownloadMenuItem(song: song) : SizedBox(),
                   MenuItem(
                     isDisabled: false,
@@ -233,37 +264,6 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                       );
                     },
                   ),
-                  widget.isForMyPlaylist
-                      ? MenuItem(
-                          isDisabled: false,
-                          hasTopMargin: true,
-                          iconColor: AppColors.grey.withOpacity(0.6),
-                          icon: PhosphorIcons.minus_circle_light,
-                          title: "Remove from playlist",
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Center(
-                                  child: DialogDeleteSong(
-                                    mainButtonText: 'REMOVE'.toUpperCase(),
-                                    cancelButtonText: 'CANCEL',
-                                    titleText:
-                                        'Remove ${song.songName.textAm} From this playlist?',
-                                    onDelete: () {
-                                      if (widget.onRemoveSongFromPlaylist !=
-                                          null) {
-                                        widget.onRemoveSongFromPlaylist!(song);
-                                      }
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        )
-                      : SizedBox(),
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,

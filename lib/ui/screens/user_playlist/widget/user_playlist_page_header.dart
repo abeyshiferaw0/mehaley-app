@@ -1,4 +1,5 @@
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -149,6 +150,13 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                       RefreshUserPlaylistPageEvent(
                         myPlaylist: myPlaylist,
                         songs: widget.songs,
+                      ),
+                    );
+                  },
+                  onPlaylistDelete: (MyPlaylist myPlaylist) {
+                    BlocProvider.of<UserPlaylistBloc>(context).add(
+                      DeletePlaylistEvent(
+                        myPlaylist: myPlaylist,
                       ),
                     );
                   },

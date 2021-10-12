@@ -5,7 +5,12 @@ abstract class CartPageEvent extends Equatable {
 }
 
 class LoadCartPageEvent extends CartPageEvent {
-  LoadCartPageEvent();
+  LoadCartPageEvent({this.song, this.album, this.playlist, this.isForRemoved});
+
+  final bool? isForRemoved;
+  final Song? song;
+  final Album? album;
+  final Playlist? playlist;
 
   @override
   List<Object?> get props => [];

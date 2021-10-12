@@ -173,6 +173,26 @@ class UserPlaylistDataProvider {
     return response;
   }
 
+  Future<Response> deletePlaylist(MyPlaylist myPlaylist) async {
+    dio = Dio();
+
+    ///SEND REQUEST
+    Map<String, dynamic> map = {
+      'playlist_id': myPlaylist.playlistId,
+    };
+
+    ///FORM DATA
+    FormData formData = FormData.fromMap(map);
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/delete_playlist/",
+      useToken: true,
+      data: formData,
+    );
+    return response;
+  }
+
   cancel() {
     if (dio != null) {
       dio.close(force: true);

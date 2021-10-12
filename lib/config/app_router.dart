@@ -1,6 +1,7 @@
 import 'package:elf_play/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
@@ -273,10 +274,19 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.cartRoute:
-        builder = (_) => BlocProvider(
-              create: (context) => CartPageBloc(
-                cartRepository: AppRepositories.cartRepository,
-              ),
+        builder = (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => CartPageBloc(
+                    cartRepository: AppRepositories.cartRepository,
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => CartUtilBloc(
+                    cartRepository: AppRepositories.cartRepository,
+                  ),
+                ),
+              ],
               child: CartPage(),
             );
         break;

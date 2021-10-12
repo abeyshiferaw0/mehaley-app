@@ -1,14 +1,27 @@
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
+import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/api_response/cart_page_data.dart';
+import 'package:elf_play/data/models/cart/cart.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/app_error.dart';
+import 'package:elf_play/ui/common/app_loading.dart';
+import 'package:elf_play/ui/common/app_snack_bar.dart';
+import 'package:elf_play/ui/screens/cart/widgets/cart_app_bar.dart';
+import 'package:elf_play/ui/screens/cart/widgets/cart_appbar_delegate.dart';
 import 'package:elf_play/ui/screens/cart/widgets/cart_clear_and_check_delegate.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_header_delegate.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_horizontal_item.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_item.dart';
+import 'package:elf_play/ui/screens/cart/widgets/cart_summery.dart';
+import 'package:elf_play/ui/screens/cart/widgets/list_cart_albums.dart';
+import 'package:elf_play/ui/screens/cart/widgets/list_cart_playlist.dart';
+import 'package:elf_play/ui/screens/cart/widgets/list_cart_songs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class CartPage extends StatefulWidget {
@@ -41,7 +54,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   @override
   void initState() {
-    //CHANGE BOTTOM BAR TO CART PAGE
+    ///CHANGE BOTTOM BAR TO CART PAGE
     BlocProvider.of<BottomBarCubit>(context).changeScreen(
       BottomBarPages.CART,
     );
@@ -55,257 +68,370 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<CartUtilBloc, CartUtilState>(
+      listener: (context, state) {
+        ///ERROR MESSAGES WHEN REMOVING FROM CART
+        if (state is CartUtilSongRemoveErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              bgColor: AppColors.white,
+              isFloating: false,
+              msg:
+                  "Unable to remove ${state.song.songName.textAm} from cart\ncheck your internet connection",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.wifi_x_light,
+              iconColor: AppColors.errorRed,
+            ),
+          );
+        }
+        if (state is CartUtilAlbumRemoveErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              bgColor: AppColors.white,
+              isFloating: false,
+              msg:
+                  "Unable to remove ${state.album.albumTitle.textAm} from cart\ncheck your internet connection",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.wifi_x_light,
+              iconColor: AppColors.errorRed,
+            ),
+          );
+        }
+        if (state is CartUtilPlaylistRemoveErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              bgColor: AppColors.white,
+              isFloating: false,
+              msg:
+                  "Unable to remove ${state.playlist.playlistNameText.textAm} from cart\ncheck your internet connection",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.wifi_x_light,
+              iconColor: AppColors.errorRed,
+            ),
+          );
+        }
+
+        ///SUCCESS MESSAGES WHEN REMOVING
+        if (state is CartUtilSongRemovedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+                bgColor: AppColors.white,
+                isFloating: true,
+                msg: "${state.song.songName.textAm} removed from cart",
+                txtColor: AppColors.black,
+                icon: PhosphorIcons.check_circle_fill,
+                iconColor: AppColors.darkGreen),
+          );
+
+          ///LOAD CART WITHOUT REMOVED SONG
+          BlocProvider.of<CartPageBloc>(context).add(
+            LoadCartPageEvent(
+              isForRemoved: true,
+              song: state.song,
+            ),
+          );
+        }
+
+        if (state is CartUtilAlbumRemovedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+                bgColor: AppColors.white,
+                isFloating: true,
+                msg: "${state.album.albumTitle.textAm} removed from cart",
+                txtColor: AppColors.black,
+                icon: PhosphorIcons.check_circle_fill,
+                iconColor: AppColors.darkGreen),
+          );
+
+          ///LOAD CART WITHOUT REMOVED ALBUM
+          BlocProvider.of<CartPageBloc>(context).add(
+            LoadCartPageEvent(
+              isForRemoved: true,
+              album: state.album,
+            ),
+          );
+        }
+
+        if (state is CartUtilPlaylistRemovedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+                bgColor: AppColors.white,
+                isFloating: true,
+                msg:
+                    "${state.playlist.playlistNameText.textAm} removed from cart",
+                txtColor: AppColors.black,
+                icon: PhosphorIcons.check_circle_fill,
+                iconColor: AppColors.darkGreen),
+          );
+
+          ///LOAD CART WITHOUT REMOVED PLAYLIST
+          BlocProvider.of<CartPageBloc>(context).add(
+            LoadCartPageEvent(
+              isForRemoved: true,
+              playlist: state.playlist,
+            ),
+          );
+        }
+      },
+      child: BlocBuilder<CartPageBloc, CartPageState>(
+        builder: (context, state) {
+          if (state is CartPageLoadingState) {
+            return buildPageLoading();
+          }
+          if (state is CartPageLoadedState) {
+            if (cartIsEmpty(state.cartPageData)) {
+              return buildPageEmpty();
+            }
+            return buildPageLoaded(state.cartPageData.cart);
+          }
+          if (state is CartPageLoadingErrorState) {
+            return buildPageLoadingError();
+          }
+          return buildPageLoading();
+        },
+      ),
+    );
+  }
+
+  Scaffold buildPageLoaded(Cart cart) {
     return Scaffold(
       backgroundColor: AppColors.black,
-      body: CustomScrollView(
-        slivers: [
-          //SEARCH PAGE HEADER
-          SliverPersistentHeader(
-            floating: true,
-            pinned: false,
-            delegate: CartHeaderDelegate(height: 90),
-          ),
-          SliverPersistentHeader(
-            floating: false,
-            pinned: true,
-            delegate: ClearAndCheckDelegate(),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_16)),
-          SliverToBoxAdapter(
-            child: Text(
-              "Cart Summery",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_12.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.white,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_16)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: AppPadding.padding_16,
-                right: AppPadding.padding_16,
-              ),
-              child: Divider(
-                height: 1,
-                color: AppColors.darkGrey,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_16)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: AppMargin.margin_16,
-                bottom: AppMargin.margin_16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Albums",
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.lightGrey,
-                    ),
-                  ),
-                  SizedBox(height: AppMargin.margin_16),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    child: Row(
-                      children: [
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: 'subTitle',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: 'subTitle',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: 'subTitle',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: 'subTitle',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: 'subTitle',
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: AppMargin.margin_16,
-                top: AppMargin.margin_16,
-                bottom: AppMargin.margin_16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Playlists",
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.lightGrey,
-                    ),
-                  ),
-                  SizedBox(height: AppMargin.margin_16),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    child: Row(
-                      children: [
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: '34 tracks',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: '34 tracks',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: '34 tracks',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: '34 tracks',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                        CartHorizontalItem(
-                          price: 4.05,
-                          width: 100,
-                          imageUrl: '',
-                          title: 'title',
-                          subTitle: '34 tracks',
-                        ),
-                        SizedBox(
-                          width: AppMargin.margin_16,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: AppMargin.margin_16,
-                top: AppMargin.margin_16,
-              ),
-              child: Text(
-                "Mezmurs",
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.lightGrey,
+      body: RefreshIndicator(
+        color: AppColors.darkGreen,
+        onRefresh: () async {
+          ///LOAD CART PAGE
+          BlocProvider.of<CartPageBloc>(context).add(
+            LoadCartPageEvent(),
+          );
+          await BlocProvider.of<CartPageBloc>(context).stream.first;
+        },
+        child: Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                ///CART PAGE APPBAR
+                SliverPersistentHeader(
+                  floating: true,
+                  pinned: false,
+                  delegate: CartAppBarDelegate(height: 80),
                 ),
-              ),
+
+                ///CART PAGE CHECK OUT HEADER
+                SliverPersistentHeader(
+                  floating: false,
+                  pinned: true,
+                  delegate: ClearAndCheckDelegate(),
+                ),
+
+                ///CART PAGE SUMMERY HEADER
+                SliverToBoxAdapter(
+                  child: CartSummery(),
+                ),
+
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: AppMargin.margin_12,
+                  ),
+                ),
+
+                ///CART ALBUMS LIST
+                SliverToBoxAdapter(
+                  child: CartAlbumsList(
+                    albumCart: cart.albumCart,
+                  ),
+                ),
+
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: AppMargin.margin_12,
+                  ),
+                ),
+
+                ///CART PLAYLISTS LIST
+                SliverToBoxAdapter(
+                  child: CartPlaylistsList(
+                    playlistCart: cart.playlistCart,
+                  ),
+                ),
+
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: AppMargin.margin_16,
+                  ),
+                ),
+
+                ///CART SONGS LIST
+                SliverToBoxAdapter(
+                  child: CartSongsList(
+                    songCart: cart.songCart,
+                  ),
+                )
+              ],
             ),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppPadding.padding_16,
-              vertical: AppPadding.padding_8,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      CartItem(
-                        itemKey: Key("asd"),
-                        item: "item",
-                        title: "title",
-                        subTitle: "subTitle",
-                        imagePath: "imagePath",
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 0,
-                        ),
-                        child: Divider(
-                          height: 1,
-                          color: AppColors.darkGreen.withOpacity(0.3),
-                        ),
-                      )
-                    ],
-                  );
-                },
-                childCount: 20,
+            buildCartUtilLoading(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Scaffold buildPageLoading() {
+    return Scaffold(
+      backgroundColor: AppColors.black,
+      body: Column(
+        children: [
+          CartAppBar(),
+          Expanded(
+            child: Center(
+              child: AppLoading(
+                size: AppValues.loadingWidgetSize,
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  BlocBuilder buildCartUtilLoading() {
+    return BlocBuilder<CartUtilBloc, CartUtilState>(
+      builder: (context, state) {
+        if (state is CartUtilLoadingState) {
+          return Container(
+            color: AppColors.black.withOpacity(
+              0.5,
+            ),
+            child: Center(
+              child: AppLoading(
+                size: AppValues.loadingWidgetSize,
+              ),
+            ),
+          );
+        }
+        return SizedBox();
+      },
+    );
+  }
+
+  Scaffold buildPageEmpty() {
+    return Scaffold(
+      backgroundColor: AppColors.black,
+      body: Column(
+        children: [
+          CartAppBar(),
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_20),
+            child: Expanded(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: AppMargin.margin_58,
+                  ),
+                  Container(
+                    height: AppIconSizes.icon_size_64 * 3,
+                    width: AppIconSizes.icon_size_64 * 3,
+                    color: AppColors.white,
+                    child: Center(
+                      child: LottieBuilder.asset(
+                        "assets/lottie/cart_loading.json",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppMargin.margin_32,
+                  ),
+                  Text(
+                    "Your cart is currently empty",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppMargin.margin_4,
+                  ),
+                  Text(
+                    "Before proceeding to check out you, must add some items to yor cart",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_10.sp,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.txtGrey,
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppMargin.margin_16,
+                  ),
+                  AppBouncingButton(
+                    onTap: () {
+                      Navigator.popUntil(
+                        context,
+                        ModalRoute.withName(
+                          AppRouterPaths.homeRoute,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.padding_20,
+                        vertical: AppPadding.padding_8,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: AppColors.darkGreen,
+                      ),
+                      child: Text(
+                        "Go to home screen",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Scaffold buildPageLoadingError() {
+    return Scaffold(
+      backgroundColor: AppColors.black,
+      body: Column(
+        children: [
+          CartAppBar(),
+          Expanded(
+            child: AppError(
+              bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
+              onRetry: () {
+                BlocProvider.of<CartPageBloc>(context).add(
+                  LoadCartPageEvent(),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool cartIsEmpty(CartPageData cartPageData) {
+    int total = cartPageData.cart.albumCart.items.length;
+    total = total + cartPageData.cart.playlistCart.items.length;
+    total = total + cartPageData.cart.songCart.items.length;
+
+    if (total > 0) {
+      return false;
+    }
+    return true;
   }
 }

@@ -68,6 +68,20 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           );
         }
 
+        if (state is UserPlaylistDeletedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              bgColor: AppColors.white,
+              isFloating: true,
+              msg: "${state.myPlaylist.playlistNameText.textAm} deleted",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.check_circle_fill,
+              iconColor: AppColors.darkGreen,
+            ),
+          );
+          Navigator.pop(context, state.myPlaylist);
+        }
+
         ///REQUEST FAILURE MESSAGE
         if (state is UserPlaylistLoadingErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -75,6 +89,19 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               txtColor: AppColors.errorRed,
               msg:
                   "Unable remove mezmur from playlist\ncheck your internet connection",
+              bgColor: AppColors.white,
+              isFloating: false,
+              iconColor: AppColors.errorRed,
+              icon: PhosphorIcons.wifi_x_light,
+            ),
+          );
+        }
+
+        if (state is UserPlaylistDeletingErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              txtColor: AppColors.errorRed,
+              msg: "Unable to delete playlist\ncheck your internet connection",
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -118,21 +145,45 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
     );
   }
 
-  NestedScrollView buildUserPlaylistPageLoaded(
-      List<Song> songs, MyPlaylist myPlaylist) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, value) {
-        return [
-          buildSliverHeader(songs, myPlaylist),
-          songs.length > 0
-              ? buildSliverPlayShuffleButton(songs, myPlaylist)
-              : buildSliverAddSongsButton(),
-        ];
+  Stack buildUserPlaylistPageLoaded(List<Song> songs, MyPlaylist myPlaylist) {
+    return Stack(
+      children: [
+        NestedScrollView(
+          headerSliverBuilder: (context, value) {
+            return [
+              buildSliverHeader(songs, myPlaylist),
+              songs.length > 0
+                  ? buildSliverPlayShuffleButton(songs, myPlaylist)
+                  : buildSliverAddSongsButton(),
+            ];
+          },
+          body: buildUserPlaylistSongList(
+            songs,
+            myPlaylist,
+          ),
+        ),
+        buildDeletePlaylistLoading(),
+      ],
+    );
+  }
+
+  BlocBuilder buildDeletePlaylistLoading() {
+    return BlocBuilder<UserPlaylistBloc, UserPlaylistState>(
+      builder: (context, state) {
+        if (state is UserPlaylistLoadingState) {
+          return Container(
+            color: AppColors.black.withOpacity(
+              0.5,
+            ),
+            child: Center(
+              child: AppLoading(
+                size: AppValues.loadingWidgetSize,
+              ),
+            ),
+          );
+        }
+        return SizedBox();
       },
-      body: buildUserPlaylistSongList(
-        songs,
-        myPlaylist,
-      ),
     );
   }
 
@@ -221,7 +272,6 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                             title: playlist.playlistNameText.textAm,
                           ),
                           index: position,
-
                         );
                       },
                     ),

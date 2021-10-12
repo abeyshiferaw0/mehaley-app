@@ -6,11 +6,18 @@ abstract class MyPlaylistEvent extends Equatable {
 
 class LoadAllMyPlaylistsEvent extends MyPlaylistEvent {
   final bool isForAddSongPage;
+  final bool? isForUserPlaylistDeleted;
+  final MyPlaylist? deletedPlaylist;
 
-  LoadAllMyPlaylistsEvent({required this.isForAddSongPage});
+  LoadAllMyPlaylistsEvent({
+    this.deletedPlaylist,
+    this.isForUserPlaylistDeleted,
+    required this.isForAddSongPage,
+  });
 
   @override
-  List<Object?> get props => [isForAddSongPage];
+  List<Object?> get props =>
+      [isForAddSongPage, isForUserPlaylistDeleted, deletedPlaylist];
 }
 
 class RefreshMyPlaylistEvent extends MyPlaylistEvent {

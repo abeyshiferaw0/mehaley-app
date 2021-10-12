@@ -29,7 +29,9 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
   @override
   void initState() {
     BlocProvider.of<MyPlaylistBloc>(context).add(
-      LoadAllMyPlaylistsEvent(isForAddSongPage: false),
+      LoadAllMyPlaylistsEvent(
+        isForAddSongPage: false,
+      ),
     );
     super.initState();
   }
@@ -92,8 +94,8 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
           },
           itemBuilder: (context, index) {
             return LibraryMyPlaylistItem(
-              onTap: () {
-                Navigator.pushNamed(
+              onTap: () async {
+                final myPlaylist = await Navigator.pushNamed(
                   context,
                   AppRouterPaths.userPlaylistRoute,
                   arguments: ScreenArguments(
@@ -101,7 +103,20 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
                       'playlistId': myPlaylists.elementAt(index).playlistId
                     },
                   ),
-                );
+                ) ;
+
+                ///POPPED BECAUSE USER PLAYLIST WAS DELETED
+                if (myPlaylist != null) {
+                  if (myPlaylist is MyPlaylist) {
+                    BlocProvider.of<MyPlaylistBloc>(context).add(
+                      LoadAllMyPlaylistsEvent(
+                        isForAddSongPage: false,
+                        isForUserPlaylistDeleted: true,
+                        deletedPlaylist: myPlaylist,
+                      ),
+                    );
+                  }
+                }
               },
               myPlaylist: myPlaylists.elementAt(index),
               isForSongAddToPlaylistPage: false,

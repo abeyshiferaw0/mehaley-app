@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
+import 'package:elf_play/ui/common/dialog/dialog_delete_user_playlist.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
@@ -30,6 +31,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
     required this.isFollowed,
     required this.myPlaylist,
     required this.onUpdateSuccess,
+    required this.onPlaylistDelete,
   }) : super(key: key);
 
   final int playlistId;
@@ -42,15 +44,17 @@ class UserPlaylistMenuWidget extends StatelessWidget {
   final bool isDiscountAvailable;
   final double discountPercentage;
   final Function(MyPlaylist myPlaylist) onUpdateSuccess;
+  final Function(MyPlaylist myPlaylist) onPlaylistDelete;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      reverse: true,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: AppGradients().getMenuGradient(),
-        ),
+    return Container(
+      height: ScreenUtil(context: context).getScreenHeight(),
+      decoration: BoxDecoration(
+        gradient: AppGradients().getMenuGradient(),
+      ),
+      child: SingleChildScrollView(
+        reverse: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -111,7 +115,24 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.x_light,
                     title: "Delete playlist",
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Center(
+                            child: DialogDeleteUserPlaylist(
+                              mainButtonText: 'DELETE'.toUpperCase(),
+                              cancelButtonText: 'CANCEL',
+                              titleText: 'Delete playlist permanently?',
+                              onDelete: () {
+                                onPlaylistDelete(myPlaylist);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                   MenuItem(
                     isDisabled: false,

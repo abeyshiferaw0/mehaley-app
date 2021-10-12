@@ -1,17 +1,17 @@
+import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class CartHeaderDelegate extends SliverPersistentHeaderDelegate {
-  CartHeaderDelegate({required this.height});
-
-  final double height;
+class CartAppBar extends StatelessWidget {
+  const CartAppBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  Widget build(context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context) {
     return Container(
-      height: height,
+      height: 80,
       color: AppColors.black,
       child: SafeArea(
         child: Container(
@@ -27,7 +27,7 @@ class CartHeaderDelegate extends SliverPersistentHeaderDelegate {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_16.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                       color: AppColors.white,
                     ),
                   ),
@@ -44,7 +44,13 @@ class CartHeaderDelegate extends SliverPersistentHeaderDelegate {
                           color: AppColors.white,
                         ),
                       ),
-                      SizedBox(width: AppMargin.margin_8),
+                      SizedBox(width: AppMargin.margin_4),
+                      Icon(
+                        Icons.circle,
+                        color: AppColors.white,
+                        size: AppIconSizes.icon_size_4,
+                      ),
+                      SizedBox(width: AppMargin.margin_4),
                       Text(
                         "300 ETB",
                         style: TextStyle(
@@ -63,13 +69,4 @@ class CartHeaderDelegate extends SliverPersistentHeaderDelegate {
       ),
     );
   }
-
-  @override
-  double get maxExtent => height;
-
-  @override
-  double get minExtent => height;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

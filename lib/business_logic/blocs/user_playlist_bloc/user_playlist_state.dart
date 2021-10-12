@@ -60,3 +60,21 @@ class SongRemovedFromPlaylistState extends UserPlaylistState {
   @override
   List<Object?> get props => [myPlaylist, song];
 }
+
+class UserPlaylistDeletedState extends UserPlaylistState {
+  final MyPlaylist myPlaylist;
+
+  UserPlaylistDeletedState({required this.myPlaylist});
+
+  @override
+  List<Object?> get props => [myPlaylist];
+}
+
+class UserPlaylistDeletingErrorState extends UserPlaylistState {
+  final String error;
+
+  UserPlaylistDeletingErrorState({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
