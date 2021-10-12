@@ -18,8 +18,8 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
     };
     return Playlist(
       isBought: fields[10] as bool,
-      numberOfFollowers: fields[15] as int?,
-      songs: (fields[18] as List?)?.cast<Song>(),
+      numberOfFollowers: fields[16] as int?,
+      songs: (fields[19] as List?)?.cast<Song>(),
       playlistId: fields[0] as int,
       playlistNameText: fields[1] as TextLan,
       playlistDescriptionText: fields[2] as TextLan,
@@ -34,15 +34,16 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       createdBy: fields[12] as PlaylistCreatedBy,
       createdById: fields[13] as String,
       isFollowed: fields[14] as bool?,
-      playlistDateCreated: fields[16] as DateTime,
-      playlistDateUpdated: fields[17] as DateTime,
+      isInCart: fields[15] as bool?,
+      playlistDateCreated: fields[17] as DateTime,
+      playlistDateUpdated: fields[18] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Playlist obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(20)
       ..writeByte(0)
       ..write(obj.playlistId)
       ..writeByte(1)
@@ -74,12 +75,14 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       ..writeByte(14)
       ..write(obj.isFollowed)
       ..writeByte(15)
-      ..write(obj.numberOfFollowers)
+      ..write(obj.isInCart)
       ..writeByte(16)
-      ..write(obj.playlistDateCreated)
+      ..write(obj.numberOfFollowers)
       ..writeByte(17)
-      ..write(obj.playlistDateUpdated)
+      ..write(obj.playlistDateCreated)
       ..writeByte(18)
+      ..write(obj.playlistDateUpdated)
+      ..writeByte(19)
       ..write(obj.songs);
   }
 

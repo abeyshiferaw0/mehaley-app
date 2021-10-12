@@ -41,12 +41,14 @@ class Playlist extends Equatable {
   @HiveField(14)
   final bool? isFollowed;
   @HiveField(15)
-  final int? numberOfFollowers;
+  final bool? isInCart;
   @HiveField(16)
-  final DateTime playlistDateCreated;
+  final int? numberOfFollowers;
   @HiveField(17)
-  final DateTime playlistDateUpdated;
+  final DateTime playlistDateCreated;
   @HiveField(18)
+  final DateTime playlistDateUpdated;
+  @HiveField(19)
   final List<Song>? songs;
 
   const Playlist({
@@ -67,6 +69,7 @@ class Playlist extends Equatable {
     required this.createdBy,
     required this.createdById,
     required this.isFollowed,
+    required this.isInCart,
     required this.playlistDateCreated,
     required this.playlistDateUpdated,
   });
@@ -88,6 +91,7 @@ class Playlist extends Equatable {
         createdBy,
         createdById,
         isFollowed,
+        isInCart,
         playlistDateCreated,
         playlistDateUpdated,
         songs,
@@ -106,9 +110,7 @@ class Playlist extends Equatable {
       playlistImage: RemoteImage.fromMap(
         map['playlist_image_id'],
       ),
-      songs: map['songs'] != null
-          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
-          : null,
+      songs: map['songs'] != null ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList() : null,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,
@@ -117,12 +119,9 @@ class Playlist extends Equatable {
       discountPercentage: map['discount_percentage'] as double,
       isVerified: map['is_verified'] == 1 ? true : false,
       isFeatured: map['is_featured'] == 1 ? true : false,
-      isFollowed: map['is_followed'] != null
-          ? (map['is_followed'] == 1 ? true : false)
-          : null,
-      numberOfFollowers: map['number_of_followers'] != null
-          ? map['number_of_followers']
-          : null,
+      isFollowed: map['is_followed'] != null ? (map['is_followed'] == 1 ? true : false) : null,
+      isInCart: map['is_in_cart'] == 1 ? true : false,
+      numberOfFollowers: map['number_of_followers'] != null ? map['number_of_followers'] : null,
       createdBy: EnumToString.fromString(
         PlaylistCreatedBy.values,
         map['created_by'],
@@ -155,6 +154,7 @@ class Playlist extends Equatable {
       'discount_percentage': this.discountPercentage,
       'created_by_id': this.createdById,
       'is_followed': this.isFollowed,
+      'is_in_cart': this.isInCart,
       'number_of_followers': this.numberOfFollowers,
       'playlist_date_created': this.playlistDateCreated,
       'playlist_date_updated': this.playlistDateUpdated,

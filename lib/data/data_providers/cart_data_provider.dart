@@ -33,8 +33,7 @@ class CartDataProvider {
       dio = Dio()
         ..interceptors.add(
           DioCacheInterceptor(
-            options:
-                cacheOptions.copyWith(policy: CachePolicy.refreshForceCache),
+            options: cacheOptions.copyWith(policy: CachePolicy.refreshForceCache),
           ),
         );
 
@@ -103,6 +102,23 @@ class CartDataProvider {
       useToken: true,
       data: formData,
     );
+    return response;
+  }
+
+  clearAllCart() async {
+    dio = Dio();
+
+    ///SEND REQUEST
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/cart_clear/",
+      useToken: true,
+    );
+
+    if (response.statusCode == 200) {
+      await ApiUtil.deleteFromCache(AppApi.userBaseUrl + "/cart/");
+    }
+
     return response;
   }
 

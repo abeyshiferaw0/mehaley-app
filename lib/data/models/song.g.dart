@@ -35,16 +35,17 @@ class SongAdapter extends TypeAdapter<Song> {
       producedBy: fields[16] as String,
       source: fields[17] as String,
       isLiked: fields[18] as bool,
-      releasedDate: fields[19] as DateTime,
-      songCreatedDate: fields[20] as DateTime,
-      songUpdatedDated: fields[21] as DateTime,
+      isInCart: fields[19] as bool,
+      releasedDate: fields[20] as DateTime,
+      songCreatedDate: fields[21] as DateTime,
+      songUpdatedDated: fields[22] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Song obj) {
     writer
-      ..writeByte(21)
+      ..writeByte(22)
       ..writeByte(0)
       ..write(obj.songId)
       ..writeByte(1)
@@ -82,10 +83,12 @@ class SongAdapter extends TypeAdapter<Song> {
       ..writeByte(18)
       ..write(obj.isLiked)
       ..writeByte(19)
-      ..write(obj.releasedDate)
+      ..write(obj.isInCart)
       ..writeByte(20)
-      ..write(obj.songCreatedDate)
+      ..write(obj.releasedDate)
       ..writeByte(21)
+      ..write(obj.songCreatedDate)
+      ..writeByte(22)
       ..write(obj.songUpdatedDated);
   }
 

@@ -38,7 +38,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
       children: [
         ExpansionPanel(
           canTapOnHeader: true,
-          hasIcon: false,
+          //hasIcon: false,
           backgroundColor: AppColors.black,
           headerBuilder: (context, isExpanded) {
             return Container(
@@ -82,7 +82,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ),
         ExpansionPanel(
           canTapOnHeader: true,
-          hasIcon: false,
+          //hasIcon: false,
           backgroundColor: AppColors.black,
           headerBuilder: (context, isExpanded) {
             return Container(

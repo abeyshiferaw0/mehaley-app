@@ -41,6 +41,20 @@ class CartUtilPlaylistRemovedState extends CartUtilState {
   List<Object?> get props => [playlist];
 }
 
+class CartAllRemovedState extends CartUtilState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CartAllRemovingErrorState extends CartUtilState {
+  final String error;
+
+  CartAllRemovingErrorState({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
 class CartUtilSongRemoveErrorState extends CartUtilState {
   final String error;
   final Song song;
@@ -65,8 +79,7 @@ class CartUtilPlaylistRemoveErrorState extends CartUtilState {
   final String error;
   final Playlist playlist;
 
-  CartUtilPlaylistRemoveErrorState(
-      {required this.error, required this.playlist});
+  CartUtilPlaylistRemoveErrorState({required this.error, required this.playlist});
 
   @override
   List<Object?> get props => [error, playlist];

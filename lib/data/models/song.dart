@@ -52,10 +52,12 @@ class Song extends Equatable {
   @HiveField(18)
   final bool isLiked;
   @HiveField(19)
-  final DateTime releasedDate;
+  final bool isInCart;
   @HiveField(20)
-  final DateTime songCreatedDate;
+  final DateTime releasedDate;
   @HiveField(21)
+  final DateTime songCreatedDate;
+  @HiveField(22)
   final DateTime songUpdatedDated;
 
   const Song({
@@ -78,6 +80,7 @@ class Song extends Equatable {
     required this.producedBy,
     required this.source,
     required this.isLiked,
+    required this.isInCart,
     required this.releasedDate,
     required this.songCreatedDate,
     required this.songUpdatedDated,
@@ -103,7 +106,7 @@ class Song extends Equatable {
         writtenByText,
         producedBy,
         source,
-        isLiked,
+        isLiked, isInCart,
         releasedDate,
         songCreatedDate,
         songUpdatedDated,
@@ -116,9 +119,7 @@ class Song extends Equatable {
       //songBgVideo: BgVideo.fromMap(map['song_bg_video_id']),
       albumArt: RemoteImage.fromMap(map['album_art_id']),
       audioFile: AudioFile.fromMap(map['audio_file_id']),
-      artistsName: (map['artists'] as List)
-          .map((name) => TextLan.fromMap(name['artist_name_text_id']))
-          .toList(),
+      artistsName: (map['artists'] as List).map((name) => TextLan.fromMap(name['artist_name_text_id'])).toList(),
       lyricIncluded: map['lyric_included'] == 1 ? true : false,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
@@ -130,6 +131,7 @@ class Song extends Equatable {
       producedBy: map['produced_by'] as String,
       source: map['source'] as String,
       isLiked: map['is_liked'] == 1 ? true : false,
+      isInCart: map['is_in_cart'] == 1 ? true : false,
       releasedDate: DateTime.parse(map['released_date']),
       songCreatedDate: DateTime.parse(map['song_created_date']),
       songUpdatedDated: DateTime.parse(map['song_updated_dated']),
@@ -157,6 +159,7 @@ class Song extends Equatable {
       'produced_by': this.producedBy,
       'source': this.source,
       'is_liked': this.isLiked ? 1 : 0,
+      'is_in_cart': this.isInCart ? 1 : 0,
       'released_date': this.releasedDate.toString(),
       'song_created_date': this.songCreatedDate.toString(),
       'song_updated_dated': this.songUpdatedDated.toString(),
@@ -190,18 +193,15 @@ class Song extends Equatable {
   //   return hlsAudioSource;
   // }
 
-  static Future<List<AudioSource>> toListAudioSourceStreamUri(
-      DownloadUtil downloadUtil, List<Song> songs) async {
+  static Future<List<AudioSource>> toListAudioSourceStreamUri(DownloadUtil downloadUtil, List<Song> songs) async {
     List<AudioSource> audioSources = [];
 
     ///GET ALL DOWNLOADS SONGS AND TASKS
-    List<DownloadedTaskWithSong> allDownloads =
-        await downloadUtil.getAllDownloadedSongs();
+    List<DownloadedTaskWithSong> allDownloads = await downloadUtil.getAllDownloadedSongs();
 
     for (var song in songs) {
       ///CHECK IF DOWNLOADED
-      DownloadedTaskWithSong? downloadedTaskWithSong =
-          downloadUtil.isSongDownloaded(song, allDownloads);
+      DownloadedTaskWithSong? downloadedTaskWithSong = downloadUtil.isSongDownloaded(song, allDownloads);
 
       if (downloadedTaskWithSong == null) {
         ///SONG IS NOT DOWNLOADED
@@ -232,8 +232,7 @@ class Song extends Equatable {
             tag: tag,
             start: Duration(seconds: AppValues.playerPreviewStartSecond),
             end: Duration(
-              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
-                  AppValues.playerPreviewStartSecond,
+              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() + AppValues.playerPreviewStartSecond,
             ),
           );
           audioSources.add(clippingAudioSource);
@@ -243,8 +242,7 @@ class Song extends Equatable {
       } else {
         ///SONG IS DOWNLOADED
         AudioSource audioSource = AudioSource.uri(
-          Uri.file(
-              "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
+          Uri.file("${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
           tag: MediaItem(
             id: song.songId.toString(),
             title: song.songName.textAm,
@@ -252,8 +250,7 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri:
-                Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+            artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
             extras: {AppValues.songExtraStr: song.toMap()},
           ),
         );

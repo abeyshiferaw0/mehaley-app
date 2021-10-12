@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
 import 'package:elf_play/data/models/library_data/purchased_song.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ApiUtil {
   static Future<Response> get({
@@ -14,8 +18,7 @@ class ApiUtil {
     CancelToken? cancelToken,
   }) async {
     ///GET USER TOKE
-    String token =
-        AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
+    String token = AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
     ///CONFIG HEADER
     Options options = Options(headers: {"Authorization": "Token $token"});
@@ -24,7 +27,7 @@ class ApiUtil {
       url,
       queryParameters: queryParameters,
       options: options,
-        cancelToken:cancelToken,
+      cancelToken: cancelToken,
     );
 
     return response;
@@ -42,15 +45,11 @@ class ApiUtil {
 
     if (useToken) {
       ///GET USER TOKEN AND CSRF TOKEN
-      String token =
-          AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
+      String token = AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
       ///CONFIG HEADER TOKEN
       options = Options(
-        headers: {
-          "Authorization": "Token $token",
-          "content-type": "application/x-www-form-urlencoded"
-        },
+        headers: {"Authorization": "Token $token", "content-type": "application/x-www-form-urlencoded"},
       );
     }
     var response = await dio.post(
@@ -63,8 +62,15 @@ class ApiUtil {
     return response;
   }
 
-  static List<PurchasedSong> sortPurchasedSongs(
-      List<PurchasedSong> items, appLibrarySortTypes) {
+  static Future<void> deleteFromCache(String key) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    HiveCacheStore hiveCacheStore = HiveCacheStore(appDocPath);
+    await hiveCacheStore.delete(key);
+    return;
+  }
+
+  static List<PurchasedSong> sortPurchasedSongs(List<PurchasedSong> items, appLibrarySortTypes) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((a, b) => a.paymentDate.compareTo(b.paymentDate));
       return items;
@@ -78,8 +84,7 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => a.song.artistsName[0].textAm
-            .compareTo(b.song.artistsName[0].textAm),
+        (a, b) => a.song.artistsName[0].textAm.compareTo(b.song.artistsName[0].textAm),
       );
       return items;
     } else {
@@ -87,8 +92,7 @@ class ApiUtil {
     }
   }
 
-  static List<Song> sortDownloadedSongs(
-      List<Song> items, appLibrarySortTypes, List<int> timeDownloaded) {
+  static List<Song> sortDownloadedSongs(List<Song> items, appLibrarySortTypes, List<int> timeDownloaded) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((b, a) => a.releasedDate.compareTo(b.releasedDate));
       return items;
@@ -129,8 +133,7 @@ class ApiUtil {
     }
   }
 
-  static List<PurchasedPlaylist> sortPurchasedPlaylists(
-      List<PurchasedPlaylist> items, appLibrarySortTypes) {
+  static List<PurchasedPlaylist> sortPurchasedPlaylists(List<PurchasedPlaylist> items, appLibrarySortTypes) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((a, b) => a.paymentDate.compareTo(b.paymentDate));
       return items;
@@ -139,14 +142,12 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z) {
       items.sort(
-        (a, b) => a.playlist.playlistNameText.textAm
-            .compareTo(b.playlist.playlistNameText.textAm),
+        (a, b) => a.playlist.playlistNameText.textAm.compareTo(b.playlist.playlistNameText.textAm),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => a.playlist.playlistNameText.textAm
-            .compareTo(b.playlist.playlistNameText.textAm),
+        (a, b) => a.playlist.playlistNameText.textAm.compareTo(b.playlist.playlistNameText.textAm),
       );
       return items;
     } else {

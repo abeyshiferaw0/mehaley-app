@@ -52,6 +52,16 @@ class CartUtilBloc extends Bloc<CartUtilEvent, CartUtilState> {
           playlist: event.playlist,
         );
       }
+    } else if (event is ClearAllCartEvent) {
+      yield CartUtilLoadingState();
+      try {
+        await cartRepository.clearAllCart();
+        yield CartAllRemovedState();
+      } catch (error) {
+        yield CartAllRemovingErrorState(
+          error: error.toString(),
+        );
+      }
     }
   }
 }

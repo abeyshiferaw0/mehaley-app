@@ -32,16 +32,17 @@ class AlbumAdapter extends TypeAdapter<Album> {
       isOnlyOnElf: fields[12] as bool,
       isFeatured: fields[13] as bool,
       isLiked: fields[14] as bool,
-      albumReleaseDate: fields[15] as DateTime,
-      albumDateCreated: fields[16] as DateTime,
-      albumDateUpdated: fields[17] as DateTime,
+      isInCart: fields[15] as bool,
+      albumReleaseDate: fields[16] as DateTime,
+      albumDateCreated: fields[17] as DateTime,
+      albumDateUpdated: fields[18] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Album obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.albumId)
       ..writeByte(1)
@@ -73,10 +74,12 @@ class AlbumAdapter extends TypeAdapter<Album> {
       ..writeByte(14)
       ..write(obj.isLiked)
       ..writeByte(15)
-      ..write(obj.albumReleaseDate)
+      ..write(obj.isInCart)
       ..writeByte(16)
-      ..write(obj.albumDateCreated)
+      ..write(obj.albumReleaseDate)
       ..writeByte(17)
+      ..write(obj.albumDateCreated)
+      ..writeByte(18)
       ..write(obj.albumDateUpdated);
   }
 

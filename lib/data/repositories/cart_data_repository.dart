@@ -58,4 +58,14 @@ class CartRepository {
 
     throw "PLAYLIST REMOVE FROM CART NOT SUCCESSFUL";
   }
+
+  clearAllCart() async {
+    Response response = await cartDataProvider.clearAllCart();
+
+    if (response.statusCode == 200) {
+      return response;
+    }
+
+    throw "ALL CART NOT REMOVED SUCCESSFUL";
+  }
 }

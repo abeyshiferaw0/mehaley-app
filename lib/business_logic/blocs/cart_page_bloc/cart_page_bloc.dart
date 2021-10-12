@@ -27,8 +27,7 @@ class CartPageBloc extends Bloc<CartPageEvent, CartPageState> {
       yield CartPageLoadingState();
       try {
         //YIELD CACHE DATA
-        final CartPageData cartPageData =
-            await cartRepository.getCartData(AppCacheStrategy.LOAD_CACHE_FIRST);
+        final CartPageData cartPageData = await cartRepository.getCartData(AppCacheStrategy.LOAD_CACHE_FIRST);
 
         ///CHECK IS FOR REMOVED AND REMOVE FROM CACHE
         if (event.isForRemoved != null) {
@@ -50,8 +49,7 @@ class CartPageBloc extends Bloc<CartPageEvent, CartPageState> {
         if (isFromCatch(cartPageData.response)) {
           try {
             //REFRESH AFTER CACHE YIELD
-            final CartPageData cartPageData =
-                await cartRepository.getCartData(AppCacheStrategy.CACHE_LATER);
+            final CartPageData cartPageData = await cartRepository.getCartData(AppCacheStrategy.CACHE_LATER);
             yield CartPageLoadingState();
             yield CartPageLoadedState(cartPageData: cartPageData);
           } catch (error) {

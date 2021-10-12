@@ -63,6 +63,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
     BlocProvider.of<CartPageBloc>(context).add(
       LoadCartPageEvent(),
     );
+
     super.initState();
   }
 
@@ -76,8 +77,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  "Unable to remove ${state.song.songName.textAm} from cart\ncheck your internet connection",
+              msg: "Unable to remove ${state.song.songName.textAm} from cart\ncheck your internet connection",
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -89,8 +89,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  "Unable to remove ${state.album.albumTitle.textAm} from cart\ncheck your internet connection",
+              msg: "Unable to remove ${state.album.albumTitle.textAm} from cart\ncheck your internet connection",
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -102,8 +101,19 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  "Unable to remove ${state.playlist.playlistNameText.textAm} from cart\ncheck your internet connection",
+              msg: "Unable to remove ${state.playlist.playlistNameText.textAm} from cart\ncheck your internet connection",
+              txtColor: AppColors.black,
+              icon: PhosphorIcons.wifi_x_light,
+              iconColor: AppColors.errorRed,
+            ),
+          );
+        }
+        if (state is CartAllRemovingErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+              bgColor: AppColors.white,
+              isFloating: false,
+              msg: "Unable to clear cart\ncheck your internet connection",
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -157,8 +167,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg:
-                    "${state.playlist.playlistNameText.textAm} removed from cart",
+                msg: "${state.playlist.playlistNameText.textAm} removed from cart",
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -169,6 +178,25 @@ class _CartPageState extends State<CartPage> with RouteAware {
             LoadCartPageEvent(
               isForRemoved: true,
               playlist: state.playlist,
+            ),
+          );
+        }
+
+        if (state is CartAllRemovedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            buildDownloadMsgSnackBar(
+                bgColor: AppColors.white,
+                isFloating: true,
+                msg: "Cart cleared",
+                txtColor: AppColors.black,
+                icon: PhosphorIcons.check_circle_fill,
+                iconColor: AppColors.darkGreen),
+          );
+
+          ///LOAD CART WITHOUT REMOVED PLAYLIST
+          BlocProvider.of<CartPageBloc>(context).add(
+            LoadCartPageEvent(
+              isForRemoved: false,
             ),
           );
         }
@@ -213,7 +241,10 @@ class _CartPageState extends State<CartPage> with RouteAware {
                 SliverPersistentHeader(
                   floating: true,
                   pinned: false,
-                  delegate: CartAppBarDelegate(height: 80),
+                  delegate: CartAppBarDelegate(
+                    height: 80,
+                    cart: cart,
+                  ),
                 ),
 
                 ///CART PAGE CHECK OUT HEADER
@@ -280,7 +311,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
       backgroundColor: AppColors.black,
       body: Column(
         children: [
-          CartAppBar(),
+          CartAppBar(
+            hasPrice: false,
+          ),
           Expanded(
             child: Center(
               child: AppLoading(
@@ -318,10 +351,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
       backgroundColor: AppColors.black,
       body: Column(
         children: [
-          CartAppBar(),
-          Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_20),
-            child: Expanded(
+          CartAppBar(
+            hasPrice: false,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppPadding.padding_20),
               child: Column(
                 children: [
                   SizedBox(
@@ -408,7 +443,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
       backgroundColor: AppColors.black,
       body: Column(
         children: [
-          CartAppBar(),
+          CartAppBar(
+            hasPrice: false,
+          ),
           Expanded(
             child: AppError(
               bgWidget: AppLoading(size: AppValues.loadingWidgetSize),

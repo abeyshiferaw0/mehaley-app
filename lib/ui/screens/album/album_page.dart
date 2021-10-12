@@ -30,8 +30,7 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
   @override
   void initState() {
-    BlocProvider.of<AlbumPageBloc>(context)
-        .add(LoadAlbumPageEvent(albumId: widget.albumId));
+    BlocProvider.of<AlbumPageBloc>(context).add(LoadAlbumPageEvent(albumId: widget.albumId));
     super.initState();
   }
 
@@ -74,8 +73,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AlbumPageHeader(
-              album: albumPageData.album, songs: albumPageData.songs),
+          AlbumPageHeader(album: albumPageData.album, songs: albumPageData.songs),
           Padding(
             padding: const EdgeInsets.only(left: AppPadding.padding_16),
             child: ListView.builder(
@@ -149,11 +147,6 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
           icon: Icon(PhosphorIcons.shopping_cart_simple_light),
           iconSize: AppIconSizes.icon_size_24,
         ),
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(PhosphorIcons.heart_straight_light),
-        //   iconSize: AppIconSizes.icon_size_24,
-        // ),
         AlbumFavoriteButton(
           padding: EdgeInsets.all(AppPadding.padding_8),
           isLiked: album.isLiked,
@@ -175,8 +168,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                 albumId: album.albumId,
                 isLiked: album.isLiked,
                 title: album.albumTitle.textAm,
-                imageUrl:
-                    AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+                imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
                 price: album.priceEtb,
                 isFree: album.isFree,
                 isDiscountAvailable: album.isDiscountAvailable,

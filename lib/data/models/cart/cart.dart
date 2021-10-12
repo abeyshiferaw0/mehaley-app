@@ -36,6 +36,9 @@ class Cart extends Equatable {
         playlistCart,
         albumCart,
         songCart,
+        duplicatedSongs,
+        deductibleAmountEtb,
+        deductibleAmountDollar,
       ];
 
   factory Cart.fromMap(Map<String, dynamic> map) {
@@ -43,8 +46,7 @@ class Cart extends Equatable {
       playlistCart: PlaylistCart.fromMap(map['playlist_cart']),
       albumCart: AlbumCart.fromMap(map['album_cart']),
       songCart: SongCart.fromMap(map['song_cart']),
-      duplicatedSongs:
-          (map['existing'] as List).map((song) => Song.fromMap(song)).toList(),
+      duplicatedSongs: (map['existing'] as List).map((song) => Song.fromMap(song)).toList(),
       deductibleAmountEtb: map['deductible_amount_etb'] as double,
       deductibleAmountDollar: map['deductible_amount_dollar'] as double,
     );

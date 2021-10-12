@@ -40,10 +40,12 @@ class Album extends Equatable {
   @HiveField(14)
   final bool isLiked;
   @HiveField(15)
-  final DateTime albumReleaseDate;
+  final bool isInCart;
   @HiveField(16)
-  final DateTime albumDateCreated;
+  final DateTime albumReleaseDate;
   @HiveField(17)
+  final DateTime albumDateCreated;
+  @HiveField(18)
   final DateTime albumDateUpdated;
 
   const Album({
@@ -62,6 +64,7 @@ class Album extends Equatable {
     required this.isOnlyOnElf,
     required this.isFeatured,
     required this.isLiked,
+    required this.isInCart,
     required this.albumReleaseDate,
     required this.albumDateCreated,
     required this.albumDateUpdated,
@@ -84,6 +87,7 @@ class Album extends Equatable {
         isOnlyOnElf,
         isFeatured,
         isLiked,
+        isInCart,
         albumReleaseDate,
         albumDateCreated,
         albumDateUpdated,
@@ -94,12 +98,8 @@ class Album extends Equatable {
       albumId: map['album_id'] as int,
       albumTitle: TextLan.fromMap(map['album_title_text_id']),
       albumDescription: TextLan.fromMap(map['album_description_text_id']),
-      albumImages: (map['album_images'] as List)
-          .map((remoteImage) => RemoteImage.fromMap(remoteImage))
-          .toList(),
-      songs: map['songs'] != null
-          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
-          : null,
+      albumImages: (map['album_images'] as List).map((remoteImage) => RemoteImage.fromMap(remoteImage)).toList(),
+      songs: map['songs'] != null ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList() : null,
       artist: Artist.fromMap(map['artist_id']),
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
@@ -110,6 +110,7 @@ class Album extends Equatable {
       isOnlyOnElf: map['is_only_on_elf'] == 1 ? true : false,
       isFeatured: map['is_featured'] == 1 ? true : false,
       isLiked: map['is_liked'] == 1 ? true : false,
+      isInCart: map['is_in_cart'] == 1 ? true : false,
       albumReleaseDate: DateTime.parse(map['album_release_date']),
       albumDateCreated: DateTime.parse(map['album_date_created']),
       albumDateUpdated: DateTime.parse(map['album_date_updated']),
@@ -134,6 +135,7 @@ class Album extends Equatable {
       'is_only_on_elf': this.isOnlyOnElf,
       'is_featured': this.isFeatured,
       'is_liked': this.isLiked,
+      'is_in_cart': this.isInCart,
       'album_release_date': this.albumReleaseDate,
       'album_date_created': this.albumDateCreated,
       'album_date_updated': this.albumDateUpdated,

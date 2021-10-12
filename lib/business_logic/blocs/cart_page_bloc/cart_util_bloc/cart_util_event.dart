@@ -30,3 +30,10 @@ class RemovePlaylistFromCartEvent extends CartUtilEvent {
   @override
   List<Object?> get props => [playlist];
 }
+
+class ClearAllCartEvent extends CartUtilEvent {
+  ClearAllCartEvent();
+
+  @override
+  List<Object?> get props => [];
+}
