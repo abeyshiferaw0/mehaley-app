@@ -18,6 +18,12 @@ class AppHiveBoxes {
   late Box recentlyUnFollowedArtistBox;
   late Box recentSearchesBox;
   late Box recentlyPlayedBox;
+  late Box recentlyCartAddedAlbumBox;
+  late Box recentlyCartRemovedAlbumBox;
+  late Box recentlyCartAddedSongBox;
+  late Box recentlyCartRemovedSongBox;
+  late Box recentlyCartAddedPlaylistBox;
+  late Box recentlyCartRemovedPlaylistBox;
 
   AppHiveBoxes._privateConstructor();
 
@@ -30,6 +36,36 @@ class AppHiveBoxes {
     ///RECENTLY PLAYED
     recentlyPlayedBox = await Hive.openBox<Song>(
       AppValues.recentlyPlayedBox,
+    );
+
+    ///RECENTLY CART ADDED ALBUM
+    recentlyCartAddedAlbumBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartAddedAlbumBox,
+    );
+
+    ///RECENTLY CART REMOVED ALBUM
+    recentlyCartRemovedAlbumBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartRemovedAlbumBox,
+    );
+
+    ///RECENTLY CART ADDED SONG
+    recentlyCartAddedSongBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartAddedSongBox,
+    );
+
+    ///RECENTLY CART REMOVED SONG
+    recentlyCartRemovedSongBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartRemovedSongBox,
+    );
+
+    ///RECENTLY CART ADDED PLAYLIST
+    recentlyCartAddedPlaylistBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartAddedPlaylistBox,
+    );
+
+    ///RECENTLY CART REMOVED PLAYLIST
+    recentlyCartRemovedPlaylistBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyCartRemovedPlaylistBox,
     );
 
     ///RECENTLY LIKED SONG
@@ -102,6 +138,18 @@ class AppHiveBoxes {
     ///CLEAR RECENTLY FOLLOWED AND UNFOLLOWED ARTIST
     recentlyFollowedArtistBox.clear();
     recentlyUnFollowedArtistBox.clear();
+
+    ///CLEAR RECENTLY CART ADDED AND REMOVED ALBUMS
+    recentlyCartAddedAlbumBox.clear();
+    recentlyCartRemovedAlbumBox.clear();
+
+    ///CLEAR RECENTLY CART ADDED AND REMOVED SONGS
+    recentlyCartAddedSongBox.clear();
+    recentlyCartRemovedSongBox.clear();
+
+    ///CLEAR RECENTLY CART ADDED AND REMOVED PLAYLISTS
+    recentlyCartAddedPlaylistBox.clear();
+    recentlyCartRemovedPlaylistBox.clear();
 
     ///INIT SETTINGS BOX
     initSettingsBox();

@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
+import 'package:elf_play/ui/common/menu/menu_items/playlist_cart_menu_item.dart';
 import 'package:elf_play/ui/common/menu/menu_items/playlist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,7 @@ class PlaylistMenuWidget extends StatelessWidget {
     required this.playlistId,
     required this.isFollowed,
     required this.isPurchased,
+    required this.playlist,
   }) : super(key: key);
 
   final int playlistId;
@@ -37,6 +40,7 @@ class PlaylistMenuWidget extends StatelessWidget {
   final bool isDiscountAvailable;
   final double discountPercentage;
   final bool isPurchased;
+  final Playlist playlist;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,7 @@ class PlaylistMenuWidget extends StatelessWidget {
         gradient: AppGradients().getMenuGradient(),
       ),
       child: SingleChildScrollView(
+        reverse: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -88,16 +93,9 @@ class PlaylistMenuWidget extends StatelessWidget {
                           title: "Buy Playlist",
                           onTap: () {},
                         ),
-                  isFree
-                      ? SizedBox()
-                      : MenuItem(
-                          isDisabled: false,
-                          hasTopMargin: true,
-                          iconColor: AppColors.grey.withOpacity(0.6),
-                          icon: PhosphorIcons.shopping_cart_simple_light,
-                          title: "Add to cart",
-                          onTap: () {},
-                        ),
+                  PlaylistCartMenuItem(
+                    playlist: playlist,
+                  ),
                   PlaylistFollowMenuItem(
                     playlistId: playlistId,
                     isFollowing: isFollowed,

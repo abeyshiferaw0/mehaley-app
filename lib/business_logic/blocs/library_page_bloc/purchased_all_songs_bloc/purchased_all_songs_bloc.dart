@@ -12,10 +12,8 @@ import 'package:meta/meta.dart';
 part 'purchased_all_songs_event.dart';
 part 'purchased_all_songs_state.dart';
 
-class PurchasedAllSongsBloc
-    extends Bloc<PurchasedAllSongsEvent, PurchasedAllSongsState> {
-  PurchasedAllSongsBloc({required this.libraryPageDataRepository})
-      : super(PurchasedAllSongsInitial());
+class PurchasedAllSongsBloc extends Bloc<PurchasedAllSongsEvent, PurchasedAllSongsState> {
+  PurchasedAllSongsBloc({required this.libraryPageDataRepository}) : super(PurchasedAllSongsInitial());
 
   final LibraryPageDataRepository libraryPageDataRepository;
 
@@ -29,8 +27,7 @@ class PurchasedAllSongsBloc
       yield PurchasedAllSongsLoadingState();
       try {
         //YIELD CACHE DATA
-        final PurchasedItemsData purchasedItemsData =
-            await libraryPageDataRepository.getPurchasedItems(
+        final PurchasedItemsData purchasedItemsData = await libraryPageDataRepository.getPurchasedItems(
           AppCacheStrategy.LOAD_CACHE_FIRST,
           AppPurchasedPageItemTypes.ALL_SONGS,
         );
@@ -43,14 +40,12 @@ class PurchasedAllSongsBloc
         ///IF FROM CACHE TRY FRESH AGAIN
         if (isFromCatch(purchasedItemsData.response)) {
           try {
+            yield PurchasedAllSongsLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final PurchasedItemsData allPurchasedSongsData =
-                await libraryPageDataRepository.getPurchasedItems(
+            final PurchasedItemsData allPurchasedSongsData = await libraryPageDataRepository.getPurchasedItems(
               AppCacheStrategy.CACHE_LATER,
               AppPurchasedPageItemTypes.ALL_SONGS,
             );
-
-            yield PurchasedAllSongsLoadingState();
 
             ///YIELD BASED ON PAGE
             yield AllPurchasedSongsLoadedState(

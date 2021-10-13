@@ -1,6 +1,7 @@
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/cart/song_cart.dart';
 import 'package:elf_play/ui/common/dialog/dialog_remove_from_cart.dart';
@@ -67,8 +68,9 @@ class _CartSongsListState extends State<CartSongsList> {
                                 titleText: 'Remove From Cart?',
                                 onRemove: () {
                                   BlocProvider.of<CartUtilBloc>(context).add(
-                                    RemoveSongFromCartEvent(
+                                    AddRemovedSongCartEvent(
                                       song: songCart.items.elementAt(index),
+                                      appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
                                     ),
                                   );
                                 },
@@ -78,11 +80,7 @@ class _CartSongsListState extends State<CartSongsList> {
                         );
                       },
                       position: (index + 1),
-                      thumbUrl: AppApi.baseFileUrl +
-                          songCart.items
-                              .elementAt(index)
-                              .albumArt
-                              .imageSmallPath,
+                      thumbUrl: AppApi.baseFileUrl + songCart.items.elementAt(index).albumArt.imageSmallPath,
                       thumbSize: AppValues.categorySongItemSize,
                       onPressed: () {
                         //OPEN SONG

@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
@@ -35,6 +36,7 @@ class _MainScreenState extends State<MainScreen> {
       listeners: [
         BlocListener<LibraryBloc, LibraryState>(
           listener: (context, state) {
+            ///SONG LIKE UNLIKE SUCCESS
             if (state is SongLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -46,6 +48,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///SONG LIKE UNLIKE ERROR
             if (state is SongLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -56,6 +60,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///ALBUM LIKE UNLIKE SUCCESS
             if (state is AlbumLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -67,6 +73,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///ALBUM LIKE UNLIKE ERROR
             if (state is AlbumLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -77,6 +85,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///PLAYLIST FOLLOW UNFOLLOW SUCCESS
             if (state is PlaylistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -88,6 +98,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///PLAYLIST FOLLOW UNFOLLOW ERROR
             if (state is PlaylistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -98,6 +110,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///ARTISTS FOLLOW UNFOLLOW SUCCESS
             if (state is ArtistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
@@ -109,7 +123,87 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+
+            ///ARTISTS FOLLOW UNFOLLOW ERROR
             if (state is ArtistFollowUnFollowErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: false,
+                  msg: "Couldn't connect to the internet",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<CartUtilBloc, CartUtilState>(
+          listener: (context, state) {
+            ///ALBUM CART ADD REMOVE SUCCESS
+            if (state is CartUtilAlbumAddedSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg:
+                      "Album ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+
+            ///ALBUM CART ADD REMOVE ERROR
+            if (state is CartUtilAlbumAddingErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: false,
+                  msg: "Couldn't connect to the internet",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+
+            ///SONG CART ADD REMOVE SUCCESS
+            if (state is CartUtilSongAddedSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg:
+                      "Mezmur ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+
+            ///SONG CART ADD REMOVE ERROR
+            if (state is CartUtilSongAddingErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: false,
+                  msg: "Couldn't connect to the internet",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+
+            ///PLAYLIST CART ADD REMOVE SUCCESS
+            if (state is CartUtilPlaylistAddedSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg:
+                      "Playlist ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+
+            ///PLAYLIST CART ADD REMOVE ERROR
+            if (state is CartUtilPlaylistAddingErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
@@ -218,8 +312,7 @@ class _MainScreenState extends State<MainScreen> {
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context)
-                  .changeIsSearching(false);
+              BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(false);
               return Future<bool>.value(false);
             }
             //DEFAULT BEHAVIOUR
@@ -236,9 +329,7 @@ class _MainScreenState extends State<MainScreen> {
             key: _navigatorKey,
             initialRoute: AppRouterPaths.homeRoute,
             onGenerateRoute: _appRouter.generateRoute,
-            observers: <RouteObserver<ModalRoute<void>>>[
-              AppRouterPaths.routeObserver
-            ],
+            observers: <RouteObserver<ModalRoute<void>>>[AppRouterPaths.routeObserver],
           ),
         );
       },

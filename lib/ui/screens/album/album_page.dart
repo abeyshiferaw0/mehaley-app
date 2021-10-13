@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/api_response/album_page_data.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
+import 'package:elf_play/ui/common/cart_buttons/album_cart_button.dart';
 import 'package:elf_play/ui/common/like_follow/album_favorite_button.dart';
 import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
@@ -140,12 +141,10 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
           }
         },
       ),
-      centerTitle: true,
+      centerTitle: false,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(PhosphorIcons.shopping_cart_simple_light),
-          iconSize: AppIconSizes.icon_size_24,
+        AlbumCartButton(
+          album: album,
         ),
         AlbumFavoriteButton(
           padding: EdgeInsets.all(AppPadding.padding_8),
@@ -166,6 +165,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
               context: context,
               child: AlbumMenuWidget(
                 albumId: album.albumId,
+                album: album,
                 isLiked: album.isLiked,
                 title: album.albumTitle.textAm,
                 imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,

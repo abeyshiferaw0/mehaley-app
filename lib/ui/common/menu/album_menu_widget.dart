@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/menu_items/album_favorite_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
@@ -12,6 +13,7 @@ import 'package:sizer/sizer.dart';
 import '../app_gradients.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
+import 'menu_items/album_cart_menu_item.dart';
 import 'menu_items/menu_item.dart';
 
 class AlbumMenuWidget extends StatelessWidget {
@@ -26,6 +28,7 @@ class AlbumMenuWidget extends StatelessWidget {
     required this.albumId,
     required this.isLiked,
     required this.isBought,
+    required this.album,
   }) : super(key: key);
 
   final int albumId;
@@ -37,6 +40,7 @@ class AlbumMenuWidget extends StatelessWidget {
   final bool isFree;
   final bool isLiked;
   final bool isBought;
+  final Album album;
 
   @override
   Widget build(BuildContext context) {
@@ -88,14 +92,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       title: "Buy album",
                       onTap: () {},
                     ),
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: true,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.shopping_cart_simple_light,
-                      title: "Add to cart",
-                      onTap: () {},
-                    ),
+                    AlbumCartMenuItem(album: album),
                     AlbumFavoriteMenuItem(
                       hasTopMargin: true,
                       isDisabled: false,

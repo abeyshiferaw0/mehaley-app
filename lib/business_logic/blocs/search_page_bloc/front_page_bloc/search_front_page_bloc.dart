@@ -11,10 +11,8 @@ import 'package:meta/meta.dart';
 part 'search_front_page_event.dart';
 part 'search_front_page_state.dart';
 
-class SearchFrontPageBloc
-    extends Bloc<SearchFrontPageEvent, SearchFrontPageState> {
-  SearchFrontPageBloc({required this.searchDataRepository})
-      : super(SearchFrontPageInitial());
+class SearchFrontPageBloc extends Bloc<SearchFrontPageEvent, SearchFrontPageState> {
+  SearchFrontPageBloc({required this.searchDataRepository}) : super(SearchFrontPageInitial());
 
   final SearchDataRepository searchDataRepository;
 
@@ -33,22 +31,18 @@ class SearchFrontPageBloc
       yield SearchFrontPageLoadingState();
       try {
         //YIELD CACHE DATA
-        final SearchPageFrontData searchPageFrontData =
-            await searchDataRepository.getSearchFrontPageData(
+        final SearchPageFrontData searchPageFrontData = await searchDataRepository.getSearchFrontPageData(
           AppCacheStrategy.LOAD_CACHE_FIRST,
         );
-        yield SearchFrontPageLoadedState(
-            searchPageFrontData: searchPageFrontData);
+        yield SearchFrontPageLoadedState(searchPageFrontData: searchPageFrontData);
         if (isFromCatch(searchPageFrontData.response)) {
           try {
+            yield SearchFrontPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final SearchPageFrontData searchPageFrontData =
-                await searchDataRepository.getSearchFrontPageData(
+            final SearchPageFrontData searchPageFrontData = await searchDataRepository.getSearchFrontPageData(
               AppCacheStrategy.CACHE_LATER,
             );
-            yield SearchFrontPageLoadingState();
-            yield SearchFrontPageLoadedState(
-                searchPageFrontData: searchPageFrontData);
+            yield SearchFrontPageLoadedState(searchPageFrontData: searchPageFrontData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
           }

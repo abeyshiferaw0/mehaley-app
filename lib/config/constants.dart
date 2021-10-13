@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.135.202:8181/music";
-  static const String userBaseUrl = "http://192.168.135.202:8181/user";
-  static const String baseFileUrl = "http://192.168.135.202:8181";
+  static const String musicBaseUrl = "http://192.168.65.202:8181/music";
+  static const String userBaseUrl = "http://192.168.65.202:8181/user";
+  static const String baseFileUrl = "http://192.168.65.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -114,14 +114,17 @@ class AppValues {
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";
   static const String recentlyUnLikedAlbumBox = "RECENTLY_UNLIKED_ALBUM_BOX";
-  static const String recentlyFollowedPlaylistBox =
-      "RECENTLY_FOLLOWED_PLAYLIST_BOX";
-  static const String recentlyUnFollowedPlaylistBox =
-      "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
-  static const String recentlyFollowedArtistBox =
-      "RECENTLY_FOLLOWED_ARTIST_BOX";
-  static const String recentlyUnFollowedArtistBox =
-      "RECENTLY_UNFOLLOWED_ARTIST_BOX";
+  static const String recentlyFollowedPlaylistBox = "RECENTLY_FOLLOWED_PLAYLIST_BOX";
+  static const String recentlyUnFollowedPlaylistBox = "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
+  static const String recentlyFollowedArtistBox = "RECENTLY_FOLLOWED_ARTIST_BOX";
+  static const String recentlyUnFollowedArtistBox = "RECENTLY_UNFOLLOWED_ARTIST_BOX";
+  static const String recentlyCartAddedAlbumBox = "RECENTLY_CART_ADDED_ALBUM_BOX";
+  static const String recentlyCartRemovedAlbumBox = "RECENTLY_CART_REMOVED_ALBUM_BOX";
+  static const String recentlyCartAddedSongBox = "RECENTLY_CART_ADDED_SONG_BOX";
+  static const String recentlyCartRemovedSongBox = "RECENTLY_CART_REMOVED_SONG_BOX";
+  static const String recentlyCartAddedPlaylistBox = "RECENTLY_CART_ADDED_PLAYLIST_BOX";
+  static const String recentlyCartRemovedPlaylistBox = "RECENTLY_CART_REMOVED_PLAYLIST_BOX";
+
   static const String settingsBox = "SETTINGS_BOX";
 
   //HIVE BOX KEYS

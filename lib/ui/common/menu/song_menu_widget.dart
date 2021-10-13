@@ -25,6 +25,7 @@ import '../app_bouncing_button.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
 import 'menu_items/menu_item.dart';
+import 'menu_items/song_cart_menu_item.dart';
 
 class SongMenuWidget extends StatefulWidget {
   const SongMenuWidget({
@@ -146,8 +147,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
     );
   }
 
-  SingleChildScrollView buildMenuList(
-      context, isLeftOverLoaded, onCreateWithSongSuccess) {
+  SingleChildScrollView buildMenuList(context, isLeftOverLoaded, onCreateWithSongSuccess) {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
@@ -200,11 +200,9 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                                   child: DialogDeleteSong(
                                     mainButtonText: 'REMOVE'.toUpperCase(),
                                     cancelButtonText: 'CANCEL',
-                                    titleText:
-                                        'Remove ${song.songName.textAm} From this playlist?',
+                                    titleText: 'Remove ${song.songName.textAm} From this playlist?',
                                     onDelete: () {
-                                      if (widget.onRemoveSongFromPlaylist !=
-                                          null) {
+                                      if (widget.onRemoveSongFromPlaylist != null) {
                                         widget.onRemoveSongFromPlaylist!(song);
                                       }
                                       Navigator.pop(context);
@@ -225,13 +223,8 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     title: "Buy mezmur",
                     onTap: () {},
                   ),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.shopping_cart_simple_light,
-                    title: "Add to cart",
-                    onTap: () {},
+                  SongCartMenuItem(
+                    song: song,
                   ),
                   SongFavoriteMenuItem(
                     hasTopMargin: true,
@@ -252,8 +245,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           setting: AppRouterPaths.songAddToPlaylist,
                           page: BlocProvider(
                             create: (context) => UserPlaylistBloc(
-                              userPLayListRepository:
-                                  AppRepositories.userPLayListRepository,
+                              userPLayListRepository: AppRepositories.userPLayListRepository,
                             ),
                             child: SongAddToUserPlaylistPage(
                               song: song,

@@ -48,9 +48,9 @@ class CartPageBloc extends Bloc<CartPageEvent, CartPageState> {
 
         if (isFromCatch(cartPageData.response)) {
           try {
+            yield CartPageLoadingState();
             //REFRESH AFTER CACHE YIELD
             final CartPageData cartPageData = await cartRepository.getCartData(AppCacheStrategy.CACHE_LATER);
-            yield CartPageLoadingState();
             yield CartPageLoadedState(cartPageData: cartPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED

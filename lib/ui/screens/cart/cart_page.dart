@@ -72,7 +72,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
     return BlocListener<CartUtilBloc, CartUtilState>(
       listener: (context, state) {
         ///ERROR MESSAGES WHEN REMOVING FROM CART
-        if (state is CartUtilSongRemoveErrorState) {
+        if (state is CartUtilSongAddingErrorState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -84,7 +85,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             ),
           );
         }
-        if (state is CartUtilAlbumRemoveErrorState) {
+        if (state is CartUtilAlbumAddingErrorState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -96,7 +98,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             ),
           );
         }
-        if (state is CartUtilPlaylistRemoveErrorState) {
+        if (state is CartUtilPlaylistAddingErrorState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -122,27 +125,37 @@ class _CartPageState extends State<CartPage> with RouteAware {
         }
 
         ///SUCCESS MESSAGES WHEN REMOVING
-        if (state is CartUtilSongRemovedState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            buildDownloadMsgSnackBar(
-                bgColor: AppColors.white,
-                isFloating: true,
-                msg: "${state.song.songName.textAm} removed from cart",
-                txtColor: AppColors.black,
-                icon: PhosphorIcons.check_circle_fill,
-                iconColor: AppColors.darkGreen),
-          );
+        if (state is CartUtilSongAddedSuccessState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
+            ///LOAD CART WITHOUT REMOVED SONG
+            BlocProvider.of<CartPageBloc>(context).add(
+              LoadCartPageEvent(
+                isForRemoved: false,
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              buildDownloadMsgSnackBar(
+                  bgColor: AppColors.white,
+                  isFloating: true,
+                  msg: "${state.song.songName.textAm} removed from cart",
+                  txtColor: AppColors.black,
+                  icon: PhosphorIcons.check_circle_fill,
+                  iconColor: AppColors.darkGreen),
+            );
 
-          ///LOAD CART WITHOUT REMOVED SONG
-          BlocProvider.of<CartPageBloc>(context).add(
-            LoadCartPageEvent(
-              isForRemoved: true,
-              song: state.song,
-            ),
-          );
+            ///LOAD CART WITHOUT REMOVED SONG
+            BlocProvider.of<CartPageBloc>(context).add(
+              LoadCartPageEvent(
+                isForRemoved: true,
+                song: state.song,
+              ),
+            );
+          }
         }
 
-        if (state is CartUtilAlbumRemovedState) {
+        if (state is CartUtilAlbumAddedSuccessState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
@@ -162,7 +175,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
 
-        if (state is CartUtilPlaylistRemovedState) {
+        if (state is CartUtilPlaylistAddedSuccessState) {
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
@@ -365,10 +379,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   Container(
                     height: AppIconSizes.icon_size_64 * 3,
                     width: AppIconSizes.icon_size_64 * 3,
-                    color: AppColors.white,
                     child: Center(
                       child: LottieBuilder.asset(
-                        "assets/lottie/cart_loading.json",
+                        "assets/lottie/cart_empty.json",
                         fit: BoxFit.cover,
                       ),
                     ),
