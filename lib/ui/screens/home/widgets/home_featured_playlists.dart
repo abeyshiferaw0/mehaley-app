@@ -4,6 +4,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/playlist.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
@@ -122,6 +123,8 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 playingFrom: PlayingFrom(
                   from: "playing from featured playlist",
                   title: playlist.playlistNameText.textAm,
+                  songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_GROUP,
+                  songSyncPlayedFromId: playlist.playlistId,
                 ),
                 context: context,
                 index: i,

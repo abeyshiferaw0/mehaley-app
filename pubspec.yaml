@@ -81,6 +81,8 @@ dependencies:
   awesome_notifications: ^0.0.6+10
   #DOWNLOADER
   flutter_downloader: ^1.7.0
+  #UUID
+  uuid: 3.0.5
 
 
 

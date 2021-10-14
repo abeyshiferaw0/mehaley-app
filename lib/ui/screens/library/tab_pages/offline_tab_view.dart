@@ -5,6 +5,7 @@ import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/offline_songs_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_icon_button.dart';
@@ -137,6 +138,8 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 playingFrom: PlayingFrom(
                   from: "playing from",
                   title: "purchased mezmurs",
+                  songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE,
+                  songSyncPlayedFromId: -1,
                 ),
                 index: PagesUtilFunctions.getRandomIndex(
                   min: 0,

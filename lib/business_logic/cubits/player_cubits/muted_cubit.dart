@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 class IsMutedCubit extends Cubit<bool> {
   late StreamSubscription subscription;

@@ -5,11 +5,12 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:sizer/sizer.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
+import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchTopArtistSongItem extends StatelessWidget {
   final Song song;
@@ -42,8 +43,11 @@ class SearchTopArtistSongItem extends StatelessWidget {
             appSearchItemTypes: AppSearchItemTypes.SONG,
             item: song,
             playingFrom: PlayingFrom(
-                from: "Playing From ${artist.artistName.textAm}",
-                title: song.songName.textAm),
+              from: "Playing From ${artist.artistName.textAm}",
+              title: song.songName.textAm,
+              songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
+              songSyncPlayedFromId: -1,
+            ),
             items: queue,
             context: context,
             index: 0);

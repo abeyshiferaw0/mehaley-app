@@ -3,6 +3,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_recently_played.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 playingFrom: PlayingFrom(
                   from: "playing from recently played",
                   title: recentlyPlayed.elementAt(i).songName.textAm,
+                  songSyncPlayedFrom:SongSyncPlayedFrom.RECENTLY_PLAYED,
+                  songSyncPlayedFromId: -1,
                 ),
                 context: context,
                 index: i,

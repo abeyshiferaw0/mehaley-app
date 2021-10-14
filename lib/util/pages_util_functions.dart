@@ -22,6 +22,7 @@ import 'package:elf_play/data/models/enums/playlist_created_by.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
@@ -289,6 +290,7 @@ class PagesUtilFunctions {
         context: context,
         items: items,
         startPlaying: true,
+        playingFrom: playingFrom,
         index: index,
       );
 
@@ -340,6 +342,7 @@ class PagesUtilFunctions {
         context: context,
         items: items,
         startPlaying: true,
+        playingFrom: playingFrom,
         index: index,
       );
 
@@ -412,6 +415,7 @@ class PagesUtilFunctions {
     required BuildContext context,
     required List<dynamic> items,
     required bool startPlaying,
+    required PlayingFrom playingFrom,
     required int index,
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
@@ -419,6 +423,7 @@ class PagesUtilFunctions {
     List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
       downloadUtil,
       items as List<Song>,
+      playingFrom,
     );
     // List<AudioSource> audioSourceItems =
     //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
@@ -439,7 +444,7 @@ class PagesUtilFunctions {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems =
-        await Song.toListAudioSourceStreamUri(downloadUtil, songs);
+        await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom);
     //List<AudioSource> audioSourceItems = [Song.toAudioSourceStreamUri(song)];
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
@@ -468,7 +473,7 @@ class PagesUtilFunctions {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems =
-        await Song.toListAudioSourceStreamUri(downloadUtil, songs);
+        await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom);
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
       SetPlayerQueueEvent(
@@ -995,5 +1000,15 @@ class PagesUtilFunctions {
         seconds: song.audioFile.audioDurationSeconds.toInt(),
       ),
     );
+  }
+
+  static SongSyncPlayedFrom getSongSyncPlayedFromGroupType(
+      GroupType groupType) {
+    if (groupType == GroupType.ARTIST) return SongSyncPlayedFrom.ARTIST_GROUP;
+    if (groupType == GroupType.PLAYLIST)
+      return SongSyncPlayedFrom.PLAYLIST_GROUP;
+    if (groupType == GroupType.ALBUM) return SongSyncPlayedFrom.ALBUM_GROUP;
+    if (groupType == GroupType.SONG) return SongSyncPlayedFrom.SONG_GROUP;
+    return SongSyncPlayedFrom.UNK;
   }
 }

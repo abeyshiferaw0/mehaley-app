@@ -5,6 +5,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
@@ -270,6 +271,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           playingFrom: PlayingFrom(
                             from: "playing from playlist",
                             title: playlist.playlistNameText.textAm,
+                            songSyncPlayedFrom:
+                                SongSyncPlayedFrom.USER_PLAYLIST,
+                            songSyncPlayedFromId: playlist.playlistId,
                           ),
                           index: position,
                         );

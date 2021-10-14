@@ -4,6 +4,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
@@ -119,6 +120,8 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                   playingFrom: PlayingFrom(
                     from: "playing from",
                     title: "offline mezmurs",
+                    songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE,
+                    songSyncPlayedFromId: -1,
                   ),
                   index: position,
                 );

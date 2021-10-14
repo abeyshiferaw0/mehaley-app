@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/Muted_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/muted_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';

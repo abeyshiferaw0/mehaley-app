@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/audio_file.dart';
 import 'package:elf_play/data/models/remote_image.dart';
+import 'package:elf_play/data/models/sync/song_sync.dart';
 import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/util/download_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
@@ -10,6 +12,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:uuid/uuid.dart';
 
 part 'song.g.dart';
 
@@ -119,7 +122,9 @@ class Song extends Equatable {
       //songBgVideo: BgVideo.fromMap(map['song_bg_video_id']),
       albumArt: RemoteImage.fromMap(map['album_art_id']),
       audioFile: AudioFile.fromMap(map['audio_file_id']),
-      artistsName: (map['artists'] as List).map((name) => TextLan.fromMap(name['artist_name_text_id'])).toList(),
+      artistsName: (map['artists'] as List)
+          .map((name) => TextLan.fromMap(name['artist_name_text_id']))
+          .toList(),
       lyricIncluded: map['lyric_included'] == 1 ? true : false,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
@@ -176,32 +181,33 @@ class Song extends Equatable {
     return mapItems;
   }
 
-  // static HlsAudioSource toAudioSourceStreamUri(Song song) {
-  //   HlsAudioSource hlsAudioSource = HlsAudioSource(
-  //     Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
-  //     tag: MediaItem(
-  //       id: song.songId.toString(),
-  //       title: song.songName.textAm,
-  //       artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
-  //       duration: Duration(
-  //         seconds: song.audioFile.audioDurationSeconds.toInt(),
-  //       ),
-  //       artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
-  //       extras: {AppValues.songExtraStr: song.toMap()},
-  //     ),
-  //   );
-  //   return hlsAudioSource;
-  // }
-
-  static Future<List<AudioSource>> toListAudioSourceStreamUri(DownloadUtil downloadUtil, List<Song> songs) async {
+  static Future<List<AudioSource>> toListAudioSourceStreamUri(
+    DownloadUtil downloadUtil,
+    List<Song> songs,
+    PlayingFrom playingFrom,
+  ) async {
     List<AudioSource> audioSources = [];
 
     ///GET ALL DOWNLOADS SONGS AND TASKS
-    List<DownloadedTaskWithSong> allDownloads = await downloadUtil.getAllDownloadedSongs();
+    List<DownloadedTaskWithSong> allDownloads =
+        await downloadUtil.getAllDownloadedSongs();
 
     for (var song in songs) {
       ///CHECK IF DOWNLOADED
-      DownloadedTaskWithSong? downloadedTaskWithSong = downloadUtil.isSongDownloaded(song, allDownloads);
+      DownloadedTaskWithSong? downloadedTaskWithSong =
+          downloadUtil.isSongDownloaded(song, allDownloads);
+
+      ///GENERATE SONG SYNC OBJECT
+      var uuid = Uuid();
+      SongSync songSync = SongSync(
+        uuid: uuid.v5(
+            Uuid.NAMESPACE_NIL, "${DateTime.now().toString()}_${song.songId}"),
+        playedFrom: playingFrom.songSyncPlayedFrom,
+        playedFromId: playingFrom.songSyncPlayedFromId,
+        isPreview: song.isFree || song.isBought,
+        listenDate: DateTime.now(),
+        secondsPlayed: null,
+      );
 
       if (downloadedTaskWithSong == null) {
         ///SONG IS NOT DOWNLOADED
@@ -216,7 +222,10 @@ class Song extends Equatable {
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
           artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
-          extras: {AppValues.songExtraStr: song.toMap()},
+          extras: {
+            AppValues.songExtraStr: song.toMap(),
+            AppValues.songSyncExtraStr: songSync.toMap(),
+          },
         );
 
         ///CHECK IF SONG BOUGHT
@@ -232,7 +241,8 @@ class Song extends Equatable {
             tag: tag,
             start: Duration(seconds: AppValues.playerPreviewStartSecond),
             end: Duration(
-              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() + AppValues.playerPreviewStartSecond,
+              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
+                  AppValues.playerPreviewStartSecond,
             ),
           );
           audioSources.add(clippingAudioSource);
@@ -242,7 +252,8 @@ class Song extends Equatable {
       } else {
         ///SONG IS DOWNLOADED
         AudioSource audioSource = AudioSource.uri(
-          Uri.file("${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
+          Uri.file(
+              "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
           tag: MediaItem(
             id: song.songId.toString(),
             title: song.songName.textAm,
@@ -250,8 +261,12 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
-            extras: {AppValues.songExtraStr: song.toMap()},
+            artUri:
+                Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+            extras: {
+              AppValues.songExtraStr: song.toMap(),
+              AppValues.songSyncExtraStr: songSync.toMap(),
+            },
           ),
         );
         audioSources.add(audioSource);

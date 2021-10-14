@@ -5,17 +5,18 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
+import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:flutter/material.dart';
 
 class SearchResultItem extends StatefulWidget {
   const SearchResultItem({
@@ -95,8 +96,11 @@ class _SearchResultItemState extends State<SearchResultItem> {
             appSearchItemTypes: appSearchItemTypes,
             item: item,
             playingFrom: PlayingFrom(
-                from: "Playing From Search Result \"$searchKey\"",
-                title: title),
+              from: "Playing From Search Result \"$searchKey\"",
+              title: title,
+              songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
+              songSyncPlayedFromId: -1,
+            ),
             items: items,
             context: context,
             index: 0);

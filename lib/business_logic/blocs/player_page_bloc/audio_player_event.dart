@@ -106,11 +106,12 @@ class PlayerLoopChangedEvent extends AudioPlayerEvent {
 
 class PositionChangedEvent extends AudioPlayerEvent {
   final Duration duration;
+  final SongSync? songSync;
 
-  PositionChangedEvent({required this.duration});
+  PositionChangedEvent({required this.songSync, required this.duration});
 
   @override
-  List<Object?> get props => [duration];
+  List<Object?> get props => [duration, songSync];
 }
 
 class BufferedPositionChangedEvent extends AudioPlayerEvent {

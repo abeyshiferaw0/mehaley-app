@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync.dart';
 import 'package:elf_play/data/repositories/player_data_repository.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:equatable/equatable.dart';
@@ -25,7 +26,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   }) : super(AudioPlayerInitialState()) {
     audioPlayer.setCanUseNetworkResourcesForLiveStreamingWhilePaused(true);
     //audioPlayer.setSkipSilenceEnabled(true);
-
     //INITIALIZE AUDIO SESSION
     AudioPlayerUtil.initAudioSession();
 
@@ -111,7 +111,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       yield AudioPlayerLoopChangedState(loopMode: event.loopMode);
     } else if (event is PositionChangedEvent) {
       //PLAYER SONG POSITION LISTENER
-      yield AudioPlayerPositionChangedState(duration: event.duration);
+      yield AudioPlayerPositionChangedState(
+        duration: event.duration,
+        songSync: event.songSync,
+      );
     } else if (event is BufferedPositionChangedEvent) {
       //PLAYER SONG (TOTAL) DURATION LISTENER
       yield AudioPlayerBufferedPositionChangedState(duration: event.duration);
@@ -279,7 +282,12 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   void audioPlayerPositionListen() {
     audioPlayer.positionStream.listen((duration) {
-      this.add(PositionChangedEvent(duration: duration));
+      this.add(
+        PositionChangedEvent(
+          duration: duration,
+          songSync: getCurrentPlayingSongSyncData(),
+        ),
+      );
     });
   }
 
@@ -291,10 +299,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   void audioPlayerDurationListen() {
     audioPlayer.durationStream.listen((duration) {
-      print("audioPlayer.durationStream ${duration.toString()}");
       this.add(
         DurationChangedEvent(
-            duration: duration != null ? duration : Duration.zero),
+          duration: duration != null ? duration : Duration.zero,
+        ),
       );
     });
   }
@@ -442,5 +450,15 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     audioPlayer.volumeStream.listen((event) {
       this.add(PlayerVolumeChangedEvent(volume: event));
     });
+  }
+
+  SongSync? getCurrentPlayingSongSyncData() {
+    if (audioPlayer.sequenceState == null) return null;
+    final currentItem = audioPlayer.sequenceState!.currentSource;
+    MediaItem mediaItem = (currentItem!.tag as MediaItem);
+    SongSync songSync = SongSync.fromMap(
+      mediaItem.extras![AppValues.songSyncExtraStr],
+    );
+    return songSync;
   }
 }

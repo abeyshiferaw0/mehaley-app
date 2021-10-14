@@ -7,6 +7,7 @@ import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
+import 'package:elf_play/business_logic/blocs/sync_song/sync_song_bloc.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
@@ -43,9 +44,9 @@ import 'package:sizer/sizer.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'business_logic/cubits/player_cubits/Muted_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'business_logic/cubits/player_cubits/muted_cubit.dart';
 import 'business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'business_logic/cubits/player_cubits/player_queue_cubit.dart';
 import 'business_logic/cubits/player_cubits/player_state_cubit.dart';
@@ -226,6 +227,11 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider<PagesDominantColorBloc>(
               create: (context) => PagesDominantColorBloc(
+                audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
+              ),
+            ),
+            BlocProvider<SyncSongBloc>(
+              create: (context) => SyncSongBloc(
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),

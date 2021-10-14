@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
@@ -161,6 +162,8 @@ class _CategoryPageState extends State<CategoryPage>
                       playingFrom: PlayingFrom(
                         from: "playing from category",
                         title: widget.category.categoryNameText.textAm,
+                        songSyncPlayedFrom: SongSyncPlayedFrom.CATEGORY_DETAIL,
+                        songSyncPlayedFromId: widget.category.categoryId,
                       ),
                       startPlaying: true,
                       index: 0,

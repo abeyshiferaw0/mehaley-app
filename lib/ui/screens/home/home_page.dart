@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
     super.initState();
@@ -162,6 +161,7 @@ class _HomePageState extends State<HomePage>
       itemBuilder: (context, index) {
         if (groups[index].groupItems.length > 0 && groups[index].isVisible) {
           return HomeGroups(
+            groupId: groups[index].groupId,
             groupTitle: groups[index].groupTitleText.textAm,
             groupSubTitle: groups[index].groupSubTitleText != null
                 ? groups[index].groupSubTitleText!.textAm

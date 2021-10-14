@@ -9,6 +9,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/favorite_albums_page.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/favorite_songs_page.dart';
@@ -173,6 +174,8 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
               playingFrom: PlayingFrom(
                 from: "playing from",
                 title: "favorite mezmurs",
+                songSyncPlayedFrom: SongSyncPlayedFrom.FAVORITE_SONG,
+                songSyncPlayedFromId: -1,
               ),
               index: PagesUtilFunctions.getRandomIndex(
                 min: 0,

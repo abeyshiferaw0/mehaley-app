@@ -6,6 +6,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
@@ -91,9 +92,13 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                       playingFrom: PlayingFrom(
                         from: "playing from album",
                         title: album.albumTitle.textAm,
+                        songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
+                        songSyncPlayedFromId: album.albumId,
                       ),
                       index: PagesUtilFunctions.getRandomIndex(
-                          min: 0, max: songs.length),
+                        min: 0,
+                        max: songs.length,
+                      ),
                     );
                   },
                 ),

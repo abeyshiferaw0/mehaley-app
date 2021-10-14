@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/api_response/artist_page_data.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
@@ -113,43 +114,6 @@ class _ArtistPageState extends State<ArtistPage> {
         ),
       ),
     );
-    // return CustomScrollView(
-    //   slivers: [
-    //     buildSliverHeader(artistPageData),
-    //     buildSliverPlayShuffleButton(
-    //         artistPageData.popularSongs, artistPageData.artist),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(
-    //         height: AppMargin.margin_12,
-    //       ),
-    //     ),
-    //     buildPopularSongsHeader(),
-    //     buildArtistSongList(artistPageData.popularSongs, artistPageData.artist),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(
-    //         height: AppMargin.margin_12,
-    //       ),
-    //     ),
-    //     buildAlbumsHeader(),
-    //     buildArtistAlbumsList(artistPageData.topAlbums),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_32),
-    //     ),
-    //     buildFeaturingArtistPlaylistHeader(artistPageData.artist),
-    //     SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_4)),
-    //     buildArtistFeaturingPlaylistList(
-    //         artistPageData.playlistsFeaturingArtists),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_32),
-    //     ),
-    //     buildOtherArtistsHeader(),
-    //     SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_4)),
-    //     buildSimilarArtistList(artistPageData.similarArtists),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_16),
-    //     ),
-    //   ],
-    // );
   }
 
   SliverPersistentHeader buildSliverHeader(ArtistPageData artistPageData) {
@@ -228,6 +192,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     playingFrom: PlayingFrom(
                       from: "playing from artist",
                       title: artist.artistName.textAm,
+                      songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
+                      songSyncPlayedFromId: artist.artistId,
                     ),
                     startPlaying: true,
                     index: position,
