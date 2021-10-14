@@ -1,3 +1,4 @@
+import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -33,8 +34,8 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   @override
   void initState() {
-    BlocProvider.of<PlaylistPageBloc>(context)
-        .add(LoadPlaylistPageEvent(playlistId: widget.playlistId));
+    BlocProvider.of<PlaylistPageBloc>(context).add(LoadPlaylistPageEvent(playlistId: widget.playlistId));
+
     super.initState();
   }
 
@@ -48,6 +49,12 @@ class _PlaylistPageState extends State<PlaylistPage> {
             return ShimmerPlaylist();
           }
           if (state is PlaylistPageLoadedState) {
+            ///CHANGE PLAYLIST DOMINANT COLOR
+            BlocProvider.of<PagesDominantColorBloc>(context).add(
+              PlaylistPageDominantColorChanged(
+                dominantColor: state.playlistPageData.playlist.playlistImage.primaryColorHex,
+              ),
+            );
             return buildPlaylistPageLoaded(state.playlistPageData);
           }
           if (state is PlaylistPageLoadingErrorState) {
@@ -86,15 +93,13 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   SliverPersistentHeader buildSliverHeader(playlistPageData) {
     return SliverPersistentHeader(
-      delegate:
-          PlaylistPageSliverHeaderDelegate(playlistPageData: playlistPageData),
+      delegate: PlaylistPageSliverHeaderDelegate(playlistPageData: playlistPageData),
       floating: true,
       pinned: true,
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(
-      List<Song> songs, Playlist playlist) {
+  SliverPersistentHeader buildSliverPlayShuffleButton(List<Song> songs, Playlist playlist) {
     return SliverPersistentHeader(
       pinned: true,
       delegate: PlaylistPlayShuffleDelegate(songs: songs, playlist: playlist),
@@ -123,8 +128,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     SongItem(
                       song: songs[position],
                       isForMyPlaylist: false,
-                      thumbUrl: AppApi.baseFileUrl +
-                          songs[position].albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseFileUrl + songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG

@@ -34,7 +34,7 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       createdBy: fields[12] as PlaylistCreatedBy,
       createdById: fields[13] as String,
       isFollowed: fields[14] as bool?,
-      isInCart: fields[15] as bool?,
+      isInCart: fields[15] as bool,
       playlistDateCreated: fields[17] as DateTime,
       playlistDateUpdated: fields[18] as DateTime,
     );
@@ -91,8 +91,5 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlaylistAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      identical(this, other) || other is PlaylistAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

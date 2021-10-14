@@ -11,10 +11,8 @@ import 'package:equatable/equatable.dart';
 part 'favorite_albums_event.dart';
 part 'favorite_albums_state.dart';
 
-class FavoriteAlbumsBloc
-    extends Bloc<FavoriteAlbumsEvent, FavoriteAlbumsState> {
-  FavoriteAlbumsBloc({required this.libraryPageDataRepository})
-      : super(FavoriteAlbumsInitial());
+class FavoriteAlbumsBloc extends Bloc<FavoriteAlbumsEvent, FavoriteAlbumsState> {
+  FavoriteAlbumsBloc({required this.libraryPageDataRepository}) : super(FavoriteAlbumsInitial());
 
   final LibraryPageDataRepository libraryPageDataRepository;
 
@@ -28,8 +26,7 @@ class FavoriteAlbumsBloc
       yield FavoriteAlbumsLoadingState();
       try {
         //YIELD CACHE DATA
-        final FavoriteItemsData favoriteItemsData =
-            await libraryPageDataRepository.getFavoriteItems(
+        final FavoriteItemsData favoriteItemsData = await libraryPageDataRepository.getFavoriteItems(
           AppCacheStrategy.LOAD_CACHE_FIRST,
           AppFavoritePageItemTypes.ALBUMS,
         );
@@ -42,14 +39,12 @@ class FavoriteAlbumsBloc
         ///IF FROM CACHE TRY FRESH AGAIN
         if (isFromCatch(favoriteItemsData.response)) {
           try {
+            yield FavoriteAlbumsLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final FavoriteItemsData favoriteAlbumsData =
-                await libraryPageDataRepository.getFavoriteItems(
+            final FavoriteItemsData favoriteAlbumsData = await libraryPageDataRepository.getFavoriteItems(
               AppCacheStrategy.CACHE_LATER,
               AppFavoritePageItemTypes.ALBUMS,
             );
-
-            yield FavoriteAlbumsLoadingState();
 
             ///YIELD BASED ON PAGE
             yield FavoriteAlbumsLoadedState(

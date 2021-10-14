@@ -2,9 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/util/api_util.dart';
 
 class CartDataProvider {
@@ -45,12 +42,12 @@ class CartDataProvider {
     }
   }
 
-  removeSongFromCart(Song song) async {
+  removeSongFromCart(int songId) async {
     dio = Dio();
 
     ///SEND REQUEST
     Map<String, dynamic> map = {
-      'song_id_list[]': song.songId,
+      'song_id_list[]': songId,
     };
 
     ///FORM DATA
@@ -65,12 +62,12 @@ class CartDataProvider {
     return response;
   }
 
-  removeAlbumFromCart(Album album) async {
+  removeAlbumFromCart(int albumId) async {
     dio = Dio();
 
     ///SEND REQUEST
     Map<String, dynamic> map = {
-      'album_id_list[]': album.albumId,
+      'album_id_list[]': albumId,
     };
 
     ///FORM DATA
@@ -85,12 +82,12 @@ class CartDataProvider {
     return response;
   }
 
-  removePlaylistFromCart(Playlist playlist) async {
+  removePlaylistFromCart(int playlistId) async {
     dio = Dio();
 
     ///SEND REQUEST
     Map<String, dynamic> map = {
-      'playlist_id_list[]': playlist.playlistId,
+      'playlist_id_list[]': playlistId,
     };
 
     ///FORM DATA
@@ -99,6 +96,66 @@ class CartDataProvider {
     Response response = await ApiUtil.post(
       dio: dio,
       url: AppApi.userBaseUrl + "/remove_playlist_cart/",
+      useToken: true,
+      data: formData,
+    );
+    return response;
+  }
+
+  addAlbumToCart(int id) async {
+    dio = Dio();
+
+    ///SEND REQUEST
+    Map<String, dynamic> map = {
+      'album_id_list[]': id,
+    };
+
+    ///FORM DATA
+    FormData formData = FormData.fromMap(map);
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/add_album_cart/",
+      useToken: true,
+      data: formData,
+    );
+    return response;
+  }
+
+  addSongToCart(int id) async {
+    dio = Dio();
+
+    ///SEND REQUEST
+    Map<String, dynamic> map = {
+      'song_id_list[]': id,
+    };
+
+    ///FORM DATA
+    FormData formData = FormData.fromMap(map);
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/add_song_cart/",
+      useToken: true,
+      data: formData,
+    );
+    return response;
+  }
+
+  addPlaylistToCart(int id) async {
+    dio = Dio();
+
+    ///SEND REQUEST
+    Map<String, dynamic> map = {
+      'playlist_id_list[]': id,
+    };
+
+    ///FORM DATA
+    FormData formData = FormData.fromMap(map);
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/add_playlist_cart/",
       useToken: true,
       data: formData,
     );

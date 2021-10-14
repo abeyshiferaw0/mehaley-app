@@ -50,8 +50,7 @@ class LibraryAlbumItem extends StatelessWidget {
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl:
-                    AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
+                imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),
@@ -119,10 +118,10 @@ class LibraryAlbumItem extends StatelessWidget {
                   context: context,
                   child: AlbumMenuWidget(
                     albumId: album.albumId,
+                    album: album,
                     isLiked: album.isLiked,
                     title: album.albumTitle.textAm,
-                    imageUrl: AppApi.baseFileUrl +
-                        album.albumImages[0].imageMediumPath,
+                    imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
                     price: album.priceEtb,
                     isFree: album.isFree,
                     isDiscountAvailable: album.isDiscountAvailable,

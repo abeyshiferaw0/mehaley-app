@@ -1,20 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/add_to_cart_btn.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
+import 'package:elf_play/ui/common/cart_buttons/playlist_info_cart_button.dart';
 import 'package:elf_play/ui/common/like_follow/playlist_follow_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,8 +27,6 @@ class PlaylistInfoPageOne extends StatelessWidget {
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
-
-  ImageProvider? currentImageProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +45,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl:
-                    AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
+                imageUrl: AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
-                  //CHANGE DOMINANT COLOR
-                  if (currentImageProvider != imageProvider) {
-                    currentImageProvider = imageProvider;
-                    BlocProvider.of<PagesDominantColorBloc>(context).add(
-                      PlaylistPageDominantColorChanged(
-                        dominantColor: playlist.playlistImage.primaryColorHex,
-                      ),
-                    );
-                  }
-
                   return Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -111,8 +96,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-                Text("${playlist.numberOfFollowers} FOLLOWERS",
-                    style: followersTextStyle),
+                Text("${playlist.numberOfFollowers} FOLLOWERS", style: followersTextStyle),
               ],
             )
           ],
@@ -126,8 +110,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
   final Playlist playlist;
   final List<Song> songs;
 
-  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs})
-      : super(key: key);
+  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -167,24 +150,27 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                 : Row(
                     children: [
                       Expanded(
-                        child: AddToCartBtn(),
+                        child: playlist.isFree || playlist.isBought
+                            ? SizedBox()
+                            : PlaylistInfoCartButton(
+                                playlist: playlist,
+                              ),
                       ),
                       SizedBox(
                         width: AppMargin.margin_16,
                       ),
-                      playlist.isFree
+                      playlist.isFree || playlist.isBought
                           ? SizedBox()
                           : Expanded(
                               child: BuyItemBtnWidget(
                                 price: playlist.priceEtb,
-                                title: 'BUY ALL',
+                                title: 'BUY',
                                 hasLeftMargin: false,
                                 showDiscount: false,
                                 isCentred: true,
                                 isFree: playlist.isFree,
                                 discountPercentage: playlist.discountPercentage,
-                                isDiscountAvailable:
-                                    playlist.isDiscountAvailable,
+                                isDiscountAvailable: playlist.isDiscountAvailable,
                                 isBought: playlist.isBought,
                               ),
                             )

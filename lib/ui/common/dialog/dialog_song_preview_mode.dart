@@ -5,6 +5,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
@@ -194,31 +195,8 @@ class DialogSongPreviewMode extends StatelessWidget {
           ),
           AppBouncingButton(
             onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(AppPadding.padding_8),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    PhosphorIcons.shopping_cart_simple_light,
-                    color: AppColors.black,
-                    size: AppIconSizes.icon_size_20,
-                  ),
-                  SizedBox(
-                    width: AppMargin.margin_8,
-                  ),
-                  Text(
-                    "ADD TO CART".toUpperCase(),
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.black,
-                    ),
-                  ),
-                ],
-              ),
+            child: DialogSongPreviewCartButton(
+              song: song,
             ),
           ),
           SizedBox(

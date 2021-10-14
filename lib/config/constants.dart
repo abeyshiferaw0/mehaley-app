@@ -114,14 +114,17 @@ class AppValues {
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";
   static const String recentlyUnLikedAlbumBox = "RECENTLY_UNLIKED_ALBUM_BOX";
-  static const String recentlyFollowedPlaylistBox =
-      "RECENTLY_FOLLOWED_PLAYLIST_BOX";
-  static const String recentlyUnFollowedPlaylistBox =
-      "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
-  static const String recentlyFollowedArtistBox =
-      "RECENTLY_FOLLOWED_ARTIST_BOX";
-  static const String recentlyUnFollowedArtistBox =
-      "RECENTLY_UNFOLLOWED_ARTIST_BOX";
+  static const String recentlyFollowedPlaylistBox = "RECENTLY_FOLLOWED_PLAYLIST_BOX";
+  static const String recentlyUnFollowedPlaylistBox = "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
+  static const String recentlyFollowedArtistBox = "RECENTLY_FOLLOWED_ARTIST_BOX";
+  static const String recentlyUnFollowedArtistBox = "RECENTLY_UNFOLLOWED_ARTIST_BOX";
+  static const String recentlyCartAddedAlbumBox = "RECENTLY_CART_ADDED_ALBUM_BOX";
+  static const String recentlyCartRemovedAlbumBox = "RECENTLY_CART_REMOVED_ALBUM_BOX";
+  static const String recentlyCartAddedSongBox = "RECENTLY_CART_ADDED_SONG_BOX";
+  static const String recentlyCartRemovedSongBox = "RECENTLY_CART_REMOVED_SONG_BOX";
+  static const String recentlyCartAddedPlaylistBox = "RECENTLY_CART_ADDED_PLAYLIST_BOX";
+  static const String recentlyCartRemovedPlaylistBox = "RECENTLY_CART_REMOVED_PLAYLIST_BOX";
+
   static const String settingsBox = "SETTINGS_BOX";
 
   //HIVE BOX KEYS

@@ -41,7 +41,7 @@ class Playlist extends Equatable {
   @HiveField(14)
   final bool? isFollowed;
   @HiveField(15)
-  final bool? isInCart;
+  final bool isInCart;
   @HiveField(16)
   final int? numberOfFollowers;
   @HiveField(17)

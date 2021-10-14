@@ -11,10 +11,8 @@ import 'package:equatable/equatable.dart';
 part 'purchased_playlist_event.dart';
 part 'purchased_playlist_state.dart';
 
-class PurchasedPlaylistBloc
-    extends Bloc<PurchasedPlaylistEvent, PurchasedPlaylistState> {
-  PurchasedPlaylistBloc({required this.libraryPageDataRepository})
-      : super(PurchasedPlaylistInitial());
+class PurchasedPlaylistBloc extends Bloc<PurchasedPlaylistEvent, PurchasedPlaylistState> {
+  PurchasedPlaylistBloc({required this.libraryPageDataRepository}) : super(PurchasedPlaylistInitial());
 
   final LibraryPageDataRepository libraryPageDataRepository;
 
@@ -28,8 +26,7 @@ class PurchasedPlaylistBloc
       yield PurchasedPlaylistsLoadingState();
       try {
         //YIELD CACHE DATA
-        final PurchasedItemsData purchasedItemsData =
-            await libraryPageDataRepository.getPurchasedItems(
+        final PurchasedItemsData purchasedItemsData = await libraryPageDataRepository.getPurchasedItems(
           AppCacheStrategy.LOAD_CACHE_FIRST,
           AppPurchasedPageItemTypes.PLAYLISTS,
         );
@@ -43,12 +40,12 @@ class PurchasedPlaylistBloc
         if (isFromCatch(purchasedItemsData.response)) {
           try {
             //REFRESH AFTER CACHE YIELD
-            final PurchasedItemsData purchasedPlaylistsData =
-                await libraryPageDataRepository.getPurchasedItems(
+            yield PurchasedPlaylistsLoadingState();
+
+            final PurchasedItemsData purchasedPlaylistsData = await libraryPageDataRepository.getPurchasedItems(
               AppCacheStrategy.CACHE_LATER,
               AppPurchasedPageItemTypes.PLAYLISTS,
             );
-            yield PurchasedPlaylistsLoadingState();
 
             ///YIELD BASED ON PAGE
             yield PurchasedPlaylistsLoadedState(

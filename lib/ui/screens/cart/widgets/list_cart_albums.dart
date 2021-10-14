@@ -1,4 +1,5 @@
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/cart/album_cart.dart';
@@ -81,7 +82,10 @@ class _CartAlbumsListState extends State<CartAlbumsList> {
                       titleText: 'Remove From Cart?',
                       onRemove: () {
                         BlocProvider.of<CartUtilBloc>(context).add(
-                          RemoveAlbumFromCartEvent(album: albums[i]),
+                          AddRemoveAlbumCartEvent(
+                            album: albums[i],
+                            appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
+                          ),
                         );
                       },
                     ),

@@ -1,4 +1,5 @@
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/cart/playlist_cart.dart';
 import 'package:elf_play/data/models/playlist.dart';
@@ -10,8 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'card_header_title.dart';
 
 class CartPlaylistsList extends StatefulWidget {
-  const CartPlaylistsList({Key? key, required this.playlistCart})
-      : super(key: key);
+  const CartPlaylistsList({Key? key, required this.playlistCart}) : super(key: key);
 
   final PlaylistCart playlistCart;
 
@@ -82,7 +82,10 @@ class _CartPlaylistsListState extends State<CartPlaylistsList> {
                       titleText: 'Remove From Cart?',
                       onRemove: () {
                         BlocProvider.of<CartUtilBloc>(context).add(
-                          RemovePlaylistFromCartEvent(playlist: playlists[i]),
+                          AddRemovePlaylistCartEvent(
+                            playlist: playlists[i],
+                            appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
+                          ),
                         );
                       },
                     ),

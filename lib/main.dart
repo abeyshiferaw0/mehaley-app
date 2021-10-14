@@ -41,6 +41,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:sizer/sizer.dart';
 
+import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
@@ -99,8 +100,7 @@ void main() async {
 
   ///INITIALIZE DOWNLOADER
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(
-      debug: true // optional: set false to disable printing logs to console
+  await FlutterDownloader.initialize(debug: true // optional: set false to disable printing logs to console
       );
 
   ///INIT LOCAL NOTIFICATIONS
@@ -207,6 +207,11 @@ class _MyAppState extends State<MyApp> {
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),
+            BlocProvider(
+              create: (context) => CartUtilBloc(
+                cartRepository: AppRepositories.cartRepository,
+              ),
+            ),
             // BlocProvider<PlayerVideoModeCubit>(
             //   create: (context) => PlayerVideoModeCubit(
             //     audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
@@ -280,10 +285,8 @@ class _MyAppState extends State<MyApp> {
               AppRouterPaths.splashRoute: (context) => const SplashPage(),
               AppRouterPaths.signUp: (context) => const SignUpPage(),
               AppRouterPaths.mainScreen: (context) => const MainScreen(),
-              AppRouterPaths.verifyPhonePageOne: (context) =>
-                  const VerifyPhonePageOne(),
-              AppRouterPaths.verifyPhonePageTwo: (context) =>
-                  const VerifyPhonePageTwo(),
+              AppRouterPaths.verifyPhonePageOne: (context) => const VerifyPhonePageOne(),
+              AppRouterPaths.verifyPhonePageTwo: (context) => const VerifyPhonePageTwo(),
             },
           ),
         );

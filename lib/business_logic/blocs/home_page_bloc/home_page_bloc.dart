@@ -33,16 +33,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       yield HomePageLoading();
       try {
         //YIELD CACHE DATA
-        final HomePageData cachedHomePageData = await homeDataRepository
-            .getHomeData(AppCacheStrategy.LOAD_CACHE_FIRST);
+        final HomePageData cachedHomePageData = await homeDataRepository.getHomeData(AppCacheStrategy.LOAD_CACHE_FIRST);
         yield HomePageLoaded(homePageData: cachedHomePageData);
 
         if (isFromCatch(cachedHomePageData.response)) {
           try {
-            //REFRESH AFTER CACHE YIELD
-            final HomePageData refreshedHomePageData = await homeDataRepository
-                .getHomeData(AppCacheStrategy.CACHE_LATER);
             yield HomePageLoading();
+            //REFRESH AFTER CACHE YIELD
+            final HomePageData refreshedHomePageData = await homeDataRepository.getHomeData(AppCacheStrategy.CACHE_LATER);
             yield HomePageLoaded(homePageData: refreshedHomePageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
