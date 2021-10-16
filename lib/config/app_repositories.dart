@@ -14,6 +14,7 @@ import 'package:elf_play/data/data_providers/profile_data_provider.dart';
 import 'package:elf_play/data/data_providers/search_data_provider.dart';
 import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/data_providers/song_menu_data_provider.dart';
+import 'package:elf_play/data/data_providers/sync_provider.dart';
 import 'package:elf_play/data/data_providers/user_playlist_data_provider.dart';
 import 'package:elf_play/data/repositories/album_data_repository.dart';
 import 'package:elf_play/data/repositories/artist_data_repository.dart';
@@ -31,6 +32,7 @@ import 'package:elf_play/data/repositories/profile_data_repository.dart';
 import 'package:elf_play/data/repositories/search_data_repository.dart';
 import 'package:elf_play/data/repositories/setting_data_repository.dart';
 import 'package:elf_play/data/repositories/song_menu_repository.dart';
+import 'package:elf_play/data/repositories/sync_repository.dart';
 import 'package:elf_play/data/repositories/user_playlist_repository.dart';
 
 class AppRepositories {
@@ -96,5 +98,9 @@ class AppRepositories {
 
   static ProfileDataRepository profileDataRepository = ProfileDataRepository(
     profileDataProvider: ProfileDataProvider(),
+  );
+
+  static SyncRepository syncSongRepository = SyncRepository(
+    syncProvider: SyncProvider(),
   );
 }

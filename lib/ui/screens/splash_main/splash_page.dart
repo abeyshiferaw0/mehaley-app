@@ -1,10 +1,8 @@
-import 'package:elf_play/business_logic/blocs/sync_song/sync_song_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:elf_play/util/debouncer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -21,7 +19,6 @@ class _SplashPageState extends State<SplashPage> {
       ///CHECK AUTH HERE
       checkIfUserLoggedIn();
     });
-    //BlocProvider.of<SyncSongBloc>(context).add(DumSongEvent());
     super.initState();
   }
 
@@ -29,12 +26,8 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.darkGreen,
-      body: BlocBuilder<SyncSongBloc, SyncSongState>(
-        builder: (context, state) {
-          return Container(
-            color: AppColors.darkGreen,
-          );
-        },
+      body: Container(
+        color: AppColors.darkGreen,
       ),
     );
   }

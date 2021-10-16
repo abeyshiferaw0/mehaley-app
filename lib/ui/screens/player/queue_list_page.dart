@@ -52,9 +52,7 @@ class _QueueListPageState extends State<QueueListPage> {
           listeners: [
             BlocListener<SongPositionCubit, Duration>(
               listener: (context, state) {
-                setState(() {
-                  progress = state.inSeconds.toDouble();
-                });
+                progress = state.inSeconds.toDouble();
               },
             ),
             BlocListener<SongBufferedCubit, Duration>(
@@ -131,18 +129,25 @@ class _QueueListPageState extends State<QueueListPage> {
       child: BlocBuilder<CurrentPlayingCubit, Song?>(
         builder: (context, currentPlayingState) {
           if (currentPlayingState != null) {
-            return Slider(
-              value:
-                  AudioPlayerUtil.getCorrectProgress(progress, totalDuration),
-              min: 0.0,
-              max: PagesUtilFunctions.getSongLength(
-                currentPlayingState,
-              ),
-              onChanged: (value) {
-                BlocProvider.of<AudioPlayerBloc>(context).add(
-                  SeekAudioPlayerEvent(
-                    duration: Duration(seconds: value.toInt()),
+            return BlocBuilder<SongPositionCubit, Duration>(
+              builder: (context, state) {
+                return Slider(
+                  value: AudioPlayerUtil.getCorrectProgress(
+                    state.inSeconds.toDouble(),
+                    currentPlayingState.audioFile.audioDurationSeconds,
                   ),
+                  min: 0.0,
+                  max: PagesUtilFunctions.getSongLength(
+                    currentPlayingState,
+                  ),
+                  onChanged: (value) {
+                    BlocProvider.of<AudioPlayerBloc>(context).add(
+                      SeekAudioPlayerEvent(
+                        skipToDuration: Duration(seconds: value.toInt()),
+                        previousDuration: state,
+                      ),
+                    );
+                  },
                 );
               },
             );

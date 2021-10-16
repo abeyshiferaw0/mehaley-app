@@ -8,7 +8,7 @@ part of 'playlist_cart.dart';
 
 class PlaylistCartAdapter extends TypeAdapter<PlaylistCart> {
   @override
-  final int typeId = 16;
+  final int typeId = 19;
 
   @override
   PlaylistCart read(BinaryReader reader) {

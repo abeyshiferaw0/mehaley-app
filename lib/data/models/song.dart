@@ -200,11 +200,19 @@ class Song extends Equatable {
       ///GENERATE SONG SYNC OBJECT
       var uuid = Uuid();
       SongSync songSync = SongSync(
+        songId: song.songId,
         uuid: uuid.v5(
-            Uuid.NAMESPACE_NIL, "${DateTime.now().toString()}_${song.songId}"),
+          Uuid.NAMESPACE_NIL,
+          "${DateTime.now().toString()}_${song.songId}",
+        ),
         playedFrom: playingFrom.songSyncPlayedFrom,
         playedFromId: playingFrom.songSyncPlayedFromId,
-        isPreview: song.isFree || song.isBought,
+        isPreview: song.isFree
+            ? false
+            : song.isBought
+                ? false
+                : true,
+        isOffline: downloadedTaskWithSong != null ? true : false,
         listenDate: DateTime.now(),
         secondsPlayed: null,
       );

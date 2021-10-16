@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 part 'playlist_cart.g.dart';
 
-@HiveType(typeId: 16)
+@HiveType(typeId: 19)
 class PlaylistCart extends Equatable {
   @HiveField(0)
   final int cartId;

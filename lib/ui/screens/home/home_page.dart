@@ -1,11 +1,13 @@
 import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/api_response/home_page_data.dart';
 import 'package:elf_play/data/models/group.dart';
+import 'package:elf_play/data/models/sync/song_sync.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_subscribe_card.dart';
@@ -50,6 +52,14 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+
+    ///DEBUG
+    AppHiveBoxes.instance.songSyncBox.values.forEach((element) {
+      if (element is SongSync) {
+        print("SYNCEDDD DATEE= > ${element.toMap()}");
+      }
+    });
+
     super.initState();
   }
 

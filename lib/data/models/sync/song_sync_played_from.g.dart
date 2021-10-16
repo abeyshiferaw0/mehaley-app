@@ -36,17 +36,17 @@ class SongSyncPlayedFromAdapter extends TypeAdapter<SongSyncPlayedFrom> {
       case 10:
         return SongSyncPlayedFrom.RECENTLY_PLAYED;
       case 11:
-        return SongSyncPlayedFrom.OFFLINE;
-      case 12:
         return SongSyncPlayedFrom.USER_PLAYLIST;
-      case 13:
+      case 12:
         return SongSyncPlayedFrom.FAVORITE_SONG;
-      case 14:
+      case 13:
         return SongSyncPlayedFrom.PURCHASED_SONG;
-      case 15:
+      case 14:
         return SongSyncPlayedFrom.CART_PAGE;
-      case 16:
+      case 15:
         return SongSyncPlayedFrom.PROFILE_PAGE;
+      case 16:
+        return SongSyncPlayedFrom.OFFLINE_PAGE;
       case 17:
         return SongSyncPlayedFrom.UNK;
       default:
@@ -90,22 +90,22 @@ class SongSyncPlayedFromAdapter extends TypeAdapter<SongSyncPlayedFrom> {
       case SongSyncPlayedFrom.RECENTLY_PLAYED:
         writer.writeByte(10);
         break;
-      case SongSyncPlayedFrom.OFFLINE:
+      case SongSyncPlayedFrom.USER_PLAYLIST:
         writer.writeByte(11);
         break;
-      case SongSyncPlayedFrom.USER_PLAYLIST:
+      case SongSyncPlayedFrom.FAVORITE_SONG:
         writer.writeByte(12);
         break;
-      case SongSyncPlayedFrom.FAVORITE_SONG:
+      case SongSyncPlayedFrom.PURCHASED_SONG:
         writer.writeByte(13);
         break;
-      case SongSyncPlayedFrom.PURCHASED_SONG:
+      case SongSyncPlayedFrom.CART_PAGE:
         writer.writeByte(14);
         break;
-      case SongSyncPlayedFrom.CART_PAGE:
+      case SongSyncPlayedFrom.PROFILE_PAGE:
         writer.writeByte(15);
         break;
-      case SongSyncPlayedFrom.PROFILE_PAGE:
+      case SongSyncPlayedFrom.OFFLINE_PAGE:
         writer.writeByte(16);
         break;
       case SongSyncPlayedFrom.UNK:

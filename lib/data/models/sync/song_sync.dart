@@ -15,40 +15,96 @@ class SongSync {
   @HiveField(3)
   final bool isPreview;
   @HiveField(4)
-  final DateTime listenDate;
+  final bool isOffline;
   @HiveField(5)
-  final double? secondsPlayed;
+  final DateTime listenDate;
+  @HiveField(6)
+  final int? secondsPlayed;
+  @HiveField(7)
+  final int songId;
   SongSync({
+    required this.songId,
     required this.uuid,
     required this.playedFrom,
     required this.playedFromId,
     required this.isPreview,
+    required this.isOffline,
     required this.listenDate,
     required this.secondsPlayed,
   });
 
   factory SongSync.fromMap(Map<String, dynamic> json) {
     return SongSync(
-      uuid: json["uuid"],
+      songId: json["song_id"],
+      uuid: json["listen_sync_id"],
       playedFrom: EnumToString.fromString(
-          SongSyncPlayedFrom.values, json["playedFrom"])!,
-      playedFromId: json["playedFromId"],
-      isPreview: json["isPreview"],
-      listenDate: DateTime.parse(json["listenDate"]),
-      secondsPlayed: json["secondsPlayed"] != null
-          ? double.parse(json["secondsPlayed"])
-          : null,
+          SongSyncPlayedFrom.values, json["played_from"])!,
+      playedFromId: json["played_from_id"],
+      isPreview: json["is_preview"],
+      isOffline: json["is_offline"],
+      listenDate: DateTime.parse(json["listen_date"]),
+      secondsPlayed:
+          json["s_played"] != null ? int.parse(json["s_played"]) : null,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "uuid": this.uuid,
-      "playedFrom": EnumToString.convertToString(this.playedFrom),
-      "playedFromId": this.playedFromId,
-      "isPreview": this.isPreview,
-      "listenDate": this.listenDate.toIso8601String(),
-      "secondsPlayed": this.secondsPlayed,
+      "song_id": this.songId,
+      "listen_sync_id": this.uuid,
+      "played_from": EnumToString.convertToString(this.playedFrom),
+      "played_from_id": this.playedFromId,
+      "is_preview": this.isPreview,
+      "is_offline": this.isOffline,
+      "listen_date": this.listenDate.toIso8601String(),
+      "s_played": this.secondsPlayed,
     };
+  }
+
+  Map<String, dynamic> toMapWithQuation() {
+    if (this.playedFromId == -1) {
+      return {
+        "\"song_id\"": this.songId,
+        "\"listen_sync_id\"": "\"${this.uuid}\"",
+        "\"played_from\"":
+            "\"${EnumToString.convertToString(this.playedFrom)}\"",
+        "\"is_preview\"": this.isPreview ? 1 : 0,
+        "\"is_offline\"": this.isOffline ? 1 : 0,
+        "\"listen_date\"": "\"${this.listenDate.toIso8601String()}\"",
+        "\"s_played\"": this.secondsPlayed,
+      };
+    }
+    return {
+      "\"song_id\"": this.songId,
+      "\"listen_sync_id\"": "\"${this.uuid}\"",
+      "\"played_from\"": "\"${EnumToString.convertToString(this.playedFrom)}\"",
+      "\"played_from_id\"": "\"${this.playedFromId}\"",
+      "\"is_preview\"": this.isPreview ? 1 : 0,
+      "\"is_offline\"": this.isOffline ? 1 : 0,
+      "\"listen_date\"": "\"${this.listenDate.toIso8601String()}\"",
+      "\"s_played\"": this.secondsPlayed,
+    };
+  }
+
+  SongSync copyWith({
+    String? uuid,
+    SongSyncPlayedFrom? playedFrom,
+    int? playedFromId,
+    bool? isPreview,
+    bool? isOffline,
+    DateTime? listenDate,
+    int? secondsPlayed,
+    int? songId,
+  }) {
+    return SongSync(
+      songId: songId ?? this.songId,
+      uuid: uuid ?? this.uuid,
+      playedFrom: playedFrom ?? this.playedFrom,
+      playedFromId: playedFromId ?? this.playedFromId,
+      isPreview: isPreview ?? this.isPreview,
+      isOffline: isOffline ?? this.isOffline,
+      listenDate: listenDate ?? this.listenDate,
+      secondsPlayed: secondsPlayed ?? this.secondsPlayed,
+    );
   }
 }

@@ -27,17 +27,17 @@ enum SongSyncPlayedFrom {
   @HiveField(10)
   RECENTLY_PLAYED,
   @HiveField(11)
-  OFFLINE,
-  @HiveField(12)
   USER_PLAYLIST,
-  @HiveField(13)
+  @HiveField(12)
   FAVORITE_SONG,
-  @HiveField(14)
+  @HiveField(13)
   PURCHASED_SONG,
-  @HiveField(15)
+  @HiveField(14)
   CART_PAGE,
-  @HiveField(16)
+  @HiveField(15)
   PROFILE_PAGE,
+  @HiveField(16)
+  OFFLINE_PAGE,
   @HiveField(17)
   UNK,
 }

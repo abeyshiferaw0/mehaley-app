@@ -91,5 +91,8 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is PlaylistAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is PlaylistAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

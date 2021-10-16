@@ -253,7 +253,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                       onChanged: (value) {
                         BlocProvider.of<AudioPlayerBloc>(context).add(
                           SeekAudioPlayerEvent(
-                            duration: Duration(seconds: value.toInt()),
+                            skipToDuration: Duration(seconds: value.toInt()),
+                            previousDuration: state,
                           ),
                         );
                       },

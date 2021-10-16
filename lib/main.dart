@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:isolate';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -7,22 +6,12 @@ import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
-import 'package:elf_play/business_logic/blocs/sync_song/sync_song_bloc.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/audio_file.dart';
-import 'package:elf_play/data/models/bg_video.dart';
-import 'package:elf_play/data/models/enums/playlist_created_by.dart';
-import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
-import 'package:elf_play/data/models/enums/user_login_type.dart';
-import 'package:elf_play/data/models/lyric.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/ui/screens/auth/sign_up_page.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
@@ -35,16 +24,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:sizer/sizer.dart';
 
 import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
+import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'business_logic/cubits/player_cubits/muted_cubit.dart';
@@ -58,12 +47,6 @@ import 'business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'business_logic/cubits/player_playing_from_cubit.dart';
 import 'business_logic/cubits/search_input_is_searching_cubit.dart';
 import 'config/app_hive_boxes.dart';
-import 'data/models/app_user.dart';
-import 'data/models/artist.dart';
-import 'data/models/audio_file.dart';
-import 'data/models/lyric.dart';
-import 'data/models/playlist.dart';
-import 'data/models/remote_image.dart';
 
 void main() async {
   //BLOC TRANSITION OBSERVER AND LOGGER
@@ -75,22 +58,6 @@ void main() async {
     androidNotificationOngoing: true,
     //notificationColor: AppColors.appGradientDefaultColor,
   );
-  //INIT HIVE
-  Directory directory = await pathProvider.getApplicationDocumentsDirectory();
-  Hive.init(directory.path);
-  Hive.registerAdapter(SongAdapter());
-  Hive.registerAdapter(PlaylistAdapter());
-  Hive.registerAdapter(AlbumAdapter());
-  Hive.registerAdapter(ArtistAdapter());
-  Hive.registerAdapter(AudioFileAdapter());
-  Hive.registerAdapter(BgVideoAdapter());
-  Hive.registerAdapter(LyricAdapter());
-  Hive.registerAdapter(RemoteImageAdapter());
-  Hive.registerAdapter(TextLanAdapter());
-  Hive.registerAdapter(PlaylistCreatedByAdapter());
-  Hive.registerAdapter(AppUserAdapter());
-  Hive.registerAdapter(UserLoginTypeAdapter());
-  Hive.registerAdapter(DownloadSongQualityAdapter());
 
   ///INIT HIVE BOXES
   await AppHiveBoxes.instance.initHiveBoxes();
@@ -100,7 +67,8 @@ void main() async {
 
   ///INITIALIZE DOWNLOADER
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(debug: true // optional: set false to disable printing logs to console
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
       );
 
   ///INIT LOCAL NOTIFICATIONS
@@ -235,9 +203,15 @@ class _MyAppState extends State<MyApp> {
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),
-            BlocProvider<SyncSongBloc>(
-              create: (context) => SyncSongBloc(
+            BlocProvider<SongListenRecorderBloc>(
+              create: (context) => SongListenRecorderBloc(
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
+                syncRepository: AppRepositories.syncSongRepository,
+              ),
+            ),
+            BlocProvider<SongSyncBloc>(
+              create: (context) => SongSyncBloc(
+                syncRepository: AppRepositories.syncSongRepository,
               ),
             ),
             BlocProvider<BottomBarCubit>(
@@ -285,8 +259,10 @@ class _MyAppState extends State<MyApp> {
               AppRouterPaths.splashRoute: (context) => const SplashPage(),
               AppRouterPaths.signUp: (context) => const SignUpPage(),
               AppRouterPaths.mainScreen: (context) => const MainScreen(),
-              AppRouterPaths.verifyPhonePageOne: (context) => const VerifyPhonePageOne(),
-              AppRouterPaths.verifyPhonePageTwo: (context) => const VerifyPhonePageTwo(),
+              AppRouterPaths.verifyPhonePageOne: (context) =>
+                  const VerifyPhonePageOne(),
+              AppRouterPaths.verifyPhonePageTwo: (context) =>
+                  const VerifyPhonePageTwo(),
             },
           ),
         );

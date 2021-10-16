@@ -138,7 +138,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 playingFrom: PlayingFrom(
                   from: "playing from",
                   title: "purchased mezmurs",
-                  songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE,
+                  songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                   songSyncPlayedFromId: -1,
                 ),
                 index: PagesUtilFunctions.getRandomIndex(

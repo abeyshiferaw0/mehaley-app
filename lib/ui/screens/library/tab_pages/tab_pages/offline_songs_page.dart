@@ -120,7 +120,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                   playingFrom: PlayingFrom(
                     from: "playing from",
                     title: "offline mezmurs",
-                    songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE,
+                    songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                     songSyncPlayedFromId: -1,
                   ),
                   index: position,

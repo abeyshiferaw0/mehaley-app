@@ -133,12 +133,13 @@ class DurationChangedEvent extends AudioPlayerEvent {
 }
 
 class SeekAudioPlayerEvent extends AudioPlayerEvent {
-  final Duration duration;
+  final Duration previousDuration;
+  final Duration skipToDuration;
 
-  SeekAudioPlayerEvent({required this.duration});
+  SeekAudioPlayerEvent({required this.previousDuration, required this.skipToDuration});
 
   @override
-  List<Object?> get props => [duration];
+  List<Object?> get props => [skipToDuration,previousDuration];
 }
 
 class SeekAudioPlayerToEvent extends AudioPlayerEvent {

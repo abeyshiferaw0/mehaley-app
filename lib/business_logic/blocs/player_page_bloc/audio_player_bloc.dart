@@ -113,7 +113,9 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       //PLAYER SONG POSITION LISTENER
       yield AudioPlayerPositionChangedState(
         duration: event.duration,
-        songSync: event.songSync,
+        songSync: event.songSync == null
+            ? null
+            : event.songSync!.copyWith(secondsPlayed: event.duration.inSeconds),
       );
     } else if (event is BufferedPositionChangedEvent) {
       //PLAYER SONG (TOTAL) DURATION LISTENER
@@ -123,7 +125,12 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       yield AudioPlayerDurationChangedState(duration: event.duration);
     } else if (event is SeekAudioPlayerEvent) {
       //SEEK PLAYER DURATION POSITION
-      seekPlayerPosition(event.duration);
+      seekPlayerPosition(event.skipToDuration);
+      yield AudioPlayerSkipChangedState(
+        skipToDuration: event.skipToDuration,
+        previousDuration: event.previousDuration,
+        songSync: getCurrentPlayingSongSyncData(),
+      );
     } else if (event is SeekAudioPlayerToEvent) {
       //SEEK PLAYER DURATION POSITION
       seekPlayerToPosition(event.song);

@@ -2,6 +2,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:elf_play/business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
+import 'package:elf_play/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_input_is_searching_cubit.dart';
@@ -30,6 +32,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    ///START LISTING SYNC RECORDING
+    BlocProvider.of<SongListenRecorderBloc>(context).add(StartRecordEvent());
+    BlocProvider.of<SongSyncBloc>(context).add(StartSongSyncEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
@@ -312,7 +322,8 @@ class _MainScreenState extends State<MainScreen> {
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(false);
+              BlocProvider.of<SearchInputIsSearchingCubit>(context)
+                  .changeIsSearching(false);
               return Future<bool>.value(false);
             }
             //DEFAULT BEHAVIOUR
@@ -329,7 +340,9 @@ class _MainScreenState extends State<MainScreen> {
             key: _navigatorKey,
             initialRoute: AppRouterPaths.homeRoute,
             onGenerateRoute: _appRouter.generateRoute,
-            observers: <RouteObserver<ModalRoute<void>>>[AppRouterPaths.routeObserver],
+            observers: <RouteObserver<ModalRoute<void>>>[
+              AppRouterPaths.routeObserver
+            ],
           ),
         );
       },

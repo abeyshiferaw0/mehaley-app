@@ -55,7 +55,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0)).animate(controller);
+    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+        .animate(controller);
     // controller.forward();
     super.initState();
   }
@@ -79,7 +80,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   ///OPEN PLAYER PAGE IF PURCHASED OR FREE
-                  if (currentPlayingSong.isBought || currentPlayingSong.isFree) {
+                  if (currentPlayingSong.isBought ||
+                      currentPlayingSong.isFree) {
                     Navigator.of(context, rootNavigator: true).push(
                       PagesUtilFunctions.createBottomToUpAnimatedRoute(
                         page: PlayerPage(),
@@ -118,7 +120,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       },
                     ),
                   ],
-                  child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
+                  child: BlocBuilder<PagesDominantColorBloc,
+                      PagesDominantColorState>(
                     builder: (context, state) {
                       if (state is PlayerPageDominantColorChangedState) {
                         dominantColor = ColorUtil.darken(
@@ -130,16 +133,20 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       return AnimatedSwitcher(
                         switchInCurve: Curves.easeIn,
                         switchOutCurve: Curves.easeOut,
-                        duration: Duration(milliseconds: AppValues.colorChangeAnimationDuration),
+                        duration: Duration(
+                            milliseconds:
+                                AppValues.colorChangeAnimationDuration),
                         child: Container(
                           key: ValueKey<int>(state.hashCode),
                           color: dominantColor,
                           child: Wrap(
                             children: [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  !currentPlayingSong.isBought && !currentPlayingSong.isFree
+                                  !currentPlayingSong.isBought &&
+                                          !currentPlayingSong.isFree
                                       ? buildBuyContainer(currentPlayingSong)
                                       : SizedBox(),
                                   buildPlayerControls(currentPlayingSong),
@@ -303,8 +310,12 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             ),
           ),
           Text(
-            song != null ? PagesUtilFunctions.getArtistsNames(song.artistsName) : '',
-            style: TextStyle(color: AppColors.lightGrey, fontSize: AppFontSizes.font_size_12),
+            song != null
+                ? PagesUtilFunctions.getArtistsNames(song.artistsName)
+                : '',
+            style: TextStyle(
+                color: AppColors.lightGrey,
+                fontSize: AppFontSizes.font_size_12),
           )
         ],
       ),
@@ -317,7 +328,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(
-          imageUrl: song != null ? AppApi.baseFileUrl + song.albumArt.imageSmallPath : '',
+          imageUrl: song != null
+              ? AppApi.baseFileUrl + song.albumArt.imageSmallPath
+              : '',
           fit: BoxFit.cover,
           height: AppValues.miniPlayerAlbumArtSize,
           width: AppValues.miniPlayerAlbumArtSize,
@@ -370,7 +383,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   onChanged: (value) {
                     BlocProvider.of<AudioPlayerBloc>(context).add(
                       SeekAudioPlayerEvent(
-                        duration: Duration(seconds: value.toInt()),
+                        skipToDuration: Duration(seconds: value.toInt()),
+                        previousDuration: state,
                       ),
                     );
                   },

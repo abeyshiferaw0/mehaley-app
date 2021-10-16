@@ -17,19 +17,21 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SongSync(
+      songId: fields[7] as int,
       uuid: fields[0] as String?,
       playedFrom: fields[1] as SongSyncPlayedFrom,
-      playedFromId: fields[2] as int,
+      playedFromId: fields[2] as int?,
       isPreview: fields[3] as bool,
-      listenDate: fields[4] as DateTime,
-      secondsPlayed: fields[5] as double?,
+      isOffline: fields[4] as bool,
+      listenDate: fields[5] as DateTime,
+      secondsPlayed: fields[6] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, SongSync obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -39,9 +41,13 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       ..writeByte(3)
       ..write(obj.isPreview)
       ..writeByte(4)
-      ..write(obj.listenDate)
+      ..write(obj.isOffline)
       ..writeByte(5)
-      ..write(obj.secondsPlayed);
+      ..write(obj.listenDate)
+      ..writeByte(6)
+      ..write(obj.secondsPlayed)
+      ..writeByte(7)
+      ..write(obj.songId);
   }
 
   @override

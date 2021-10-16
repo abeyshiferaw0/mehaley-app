@@ -122,3 +122,14 @@ class AudioPlayerVolumeChangedState extends AudioPlayerState {
   @override
   List<Object?> get props => [volume];
 }
+
+class AudioPlayerSkipChangedState extends AudioPlayerState {
+  final Duration previousDuration;
+  final Duration skipToDuration;
+  final SongSync? songSync;
+
+  AudioPlayerSkipChangedState({required this.songSync, required this.previousDuration,required this.skipToDuration});
+
+  @override
+  List<Object?> get props => [previousDuration,skipToDuration,songSync];
+}
