@@ -12,7 +12,8 @@ part 'playlist_page_event.dart';
 part 'playlist_page_state.dart';
 
 class PlaylistPageBloc extends Bloc<PlaylistPageEvent, PlaylistPageState> {
-  PlaylistPageBloc({required this.playlistDataRepository}) : super(PlaylistPageInitial());
+  PlaylistPageBloc({required this.playlistDataRepository})
+      : super(PlaylistPageInitial());
 
   final PlaylistDataRepository playlistDataRepository;
 
@@ -26,17 +27,19 @@ class PlaylistPageBloc extends Bloc<PlaylistPageEvent, PlaylistPageState> {
       try {
         //YIELD CACHE DATA
         final PlaylistPageData playlistPageData =
-            await playlistDataRepository.getPlaylistData(event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
+            await playlistDataRepository.getPlaylistData(
+                event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
         yield PlaylistPageLoadedState(playlistPageData: playlistPageData);
 
         if (isFromCatch(playlistPageData.response)) {
           try {
-            yield PlaylistPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final PlaylistPageData playlistPageData = await playlistDataRepository.getPlaylistData(
+            final PlaylistPageData playlistPageData =
+                await playlistDataRepository.getPlaylistData(
               event.playlistId,
               AppCacheStrategy.CACHE_LATER,
             );
+            yield PlaylistPageLoadingState();
             yield PlaylistPageLoadedState(playlistPageData: playlistPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED

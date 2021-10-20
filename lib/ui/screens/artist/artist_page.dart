@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_artist_album.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_artist_featured_playlist.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_similar_artists.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -191,7 +192,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     songs: popularSongs,
                     playingFrom: PlayingFrom(
                       from: "playing from artist",
-                      title: artist.artistName.textAm,
+                      title:
+                          L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
                       songSyncPlayedFromId: artist.artistId,
                     ),
@@ -267,7 +269,7 @@ class _ArtistPageState extends State<ArtistPage> {
   Center buildFeaturingArtistPlaylistHeader(Artist artist) {
     return Center(
       child: Text(
-        "Featuring ${artist.artistName.textAm}",
+        "Featuring ${L10nUtil.translateLocale(artist.artistName, context)}",
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
           color: AppColors.white,

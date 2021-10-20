@@ -113,9 +113,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       //PLAYER SONG POSITION LISTENER
       yield AudioPlayerPositionChangedState(
         duration: event.duration,
-        songSync: event.songSync == null
-            ? null
-            : event.songSync!.copyWith(secondsPlayed: event.duration.inSeconds),
       );
     } else if (event is BufferedPositionChangedEvent) {
       //PLAYER SONG (TOTAL) DURATION LISTENER
@@ -128,8 +125,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       seekPlayerPosition(event.skipToDuration);
       yield AudioPlayerSkipChangedState(
         skipToDuration: event.skipToDuration,
-        previousDuration: event.previousDuration,
-        songSync: getCurrentPlayingSongSyncData(),
       );
     } else if (event is SeekAudioPlayerToEvent) {
       //SEEK PLAYER DURATION POSITION
@@ -292,7 +287,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       this.add(
         PositionChangedEvent(
           duration: duration,
-          songSync: getCurrentPlayingSongSyncData(),
         ),
       );
     });
@@ -459,13 +453,5 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     });
   }
 
-  SongSync? getCurrentPlayingSongSyncData() {
-    if (audioPlayer.sequenceState == null) return null;
-    final currentItem = audioPlayer.sequenceState!.currentSource;
-    MediaItem mediaItem = (currentItem!.tag as MediaItem);
-    SongSync songSync = SongSync.fromMap(
-      mediaItem.extras![AppValues.songSyncExtraStr],
-    );
-    return songSync;
-  }
+
 }

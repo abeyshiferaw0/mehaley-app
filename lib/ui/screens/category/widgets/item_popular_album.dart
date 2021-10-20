@@ -54,7 +54,7 @@ class ItemPopularAlbum extends StatelessWidget {
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(
-              PagesUtilFunctions.albumTitle(album),
+              PagesUtilFunctions.albumTitle(album, context),
               maxLines: 2,
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,

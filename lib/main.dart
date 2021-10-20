@@ -19,11 +19,14 @@ import 'package:elf_play/ui/screens/splash_main/main_screen.dart';
 import 'package:elf_play/ui/screens/splash_main/splash_page.dart';
 import 'package:elf_play/util/app_bloc_deligate.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:sizer/sizer.dart';
@@ -34,6 +37,7 @@ import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
+import 'business_logic/cubits/localization_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'business_logic/cubits/player_cubits/muted_cubit.dart';
@@ -205,7 +209,7 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider<SongListenRecorderBloc>(
               create: (context) => SongListenRecorderBloc(
-                audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
+                songPositionCubit: BlocProvider.of<SongPositionCubit>(context),
                 syncRepository: AppRepositories.syncSongRepository,
               ),
             ),
@@ -243,26 +247,47 @@ class _MyAppState extends State<MyApp> {
                 myPlaylistRepository: AppRepositories.myPlayListRepository,
               ),
             ),
+            BlocProvider(
+              create: (context) => LocalizationCubit(),
+            ),
           ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            builder: (BuildContext context, Widget? child) {
-              final MediaQueryData data = MediaQuery.of(context);
-              return MediaQuery(
-                data: data.copyWith(textScaleFactor: 1),
-                child: child!,
+          child: Builder(
+            builder: (context) {
+              return BlocBuilder<LocalizationCubit, Locale?>(
+                builder: (context, state) {
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    builder: (BuildContext context, Widget? child) {
+                      final MediaQueryData data = MediaQuery.of(context);
+                      return MediaQuery(
+                        data: data.copyWith(textScaleFactor: 1),
+                        child: child!,
+                      );
+                    },
+                    locale: state ,
+                    supportedLocales: L10nUtil.supportedLocales,
+                    theme: App.theme,
+                    initialRoute: AppRouterPaths.splashRoute,
+                    localizationsDelegates: [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    routes: {
+                      AppRouterPaths.splashRoute: (context) =>
+                          const SplashPage(),
+                      AppRouterPaths.signUp: (context) => const SignUpPage(),
+                      AppRouterPaths.mainScreen: (context) =>
+                          const MainScreen(),
+                      AppRouterPaths.verifyPhonePageOne: (context) =>
+                          const VerifyPhonePageOne(),
+                      AppRouterPaths.verifyPhonePageTwo: (context) =>
+                          const VerifyPhonePageTwo(),
+                    },
+                  );
+                },
               );
-            },
-            theme: App.theme,
-            initialRoute: AppRouterPaths.splashRoute,
-            routes: {
-              AppRouterPaths.splashRoute: (context) => const SplashPage(),
-              AppRouterPaths.signUp: (context) => const SignUpPage(),
-              AppRouterPaths.mainScreen: (context) => const MainScreen(),
-              AppRouterPaths.verifyPhonePageOne: (context) =>
-                  const VerifyPhonePageOne(),
-              AppRouterPaths.verifyPhonePageTwo: (context) =>
-                  const VerifyPhonePageTwo(),
             },
           ),
         );

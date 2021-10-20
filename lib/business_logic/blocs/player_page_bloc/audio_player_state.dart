@@ -65,15 +65,13 @@ class AudioPlayerLoopChangedState extends AudioPlayerState {
 
 class AudioPlayerPositionChangedState extends AudioPlayerState {
   final Duration duration;
-  final SongSync? songSync;
 
   AudioPlayerPositionChangedState({
     required this.duration,
-    required this.songSync,
   });
 
   @override
-  List<Object?> get props => [duration, songSync];
+  List<Object?> get props => [duration];
 }
 
 class AudioPlayerBufferedPositionChangedState extends AudioPlayerState {
@@ -124,12 +122,10 @@ class AudioPlayerVolumeChangedState extends AudioPlayerState {
 }
 
 class AudioPlayerSkipChangedState extends AudioPlayerState {
-  final Duration previousDuration;
   final Duration skipToDuration;
-  final SongSync? songSync;
 
-  AudioPlayerSkipChangedState({required this.songSync, required this.previousDuration,required this.skipToDuration});
+  AudioPlayerSkipChangedState({required  this.skipToDuration});
 
   @override
-  List<Object?> get props => [previousDuration,skipToDuration,songSync];
+  List<Object?> get props => [skipToDuration];
 }

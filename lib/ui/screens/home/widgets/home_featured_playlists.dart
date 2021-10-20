@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,8 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                   groupHeaderImageUrl: AppApi.baseFileUrl +
                       playlist.playlistImage.imageSmallPath,
                   groupSubTitle: "${playlist.songs!.length} Mezmurs",
-                  groupTitle: playlist.playlistNameText.textAm,
+                  groupTitle: L10nUtil.translateLocale(
+                      playlist.playlistNameText, context),
                 ),
               ),
             ),
@@ -122,7 +124,8 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 item: playlist.songs![i],
                 playingFrom: PlayingFrom(
                   from: "playing from featured playlist",
-                  title: playlist.playlistNameText.textAm,
+                  title: L10nUtil.translateLocale(
+                      playlist.playlistNameText, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_GROUP,
                   songSyncPlayedFromId: playlist.playlistId,
                 ),

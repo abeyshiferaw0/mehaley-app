@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/bottom_bar.dart';
 import 'package:elf_play/ui/common/mini_player.dart';
 import 'package:elf_play/ui/common/no_internet_indicator_small.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -232,7 +233,8 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                     bgColor: AppColors.white,
                     isFloating: true,
-                    msg: "${state.song!.songName.textAm} Download complete",
+                    msg:
+                        "${L10nUtil.translateLocale(state.song!.songName, context)} Download complete",
                     txtColor: AppColors.black,
                     icon: PhosphorIcons.check_circle_fill,
                     iconColor: AppColors.darkGreen),

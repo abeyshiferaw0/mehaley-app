@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
+import 'package:elf_play/config/enums.dart';import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
@@ -81,7 +81,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
               msg:
-                  "Playlist ${state.myPlaylist.playlistNameText.textAm} updated",
+                  "Playlist ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText,context) } updated",
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -530,10 +530,9 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   }
 
   void initPreviousValues() {
-    nameInputController.text = widget.myPlaylist.playlistNameText.textAm;
-    descriptionInputController.text =
-        widget.myPlaylist.playlistDescriptionText.textAm;
-    if (widget.myPlaylist.playlistDescriptionText.textAm.isNotEmpty) {
+    nameInputController.text =L10nUtil.translateLocale(widget.myPlaylist.playlistNameText,context)  ;
+    descriptionInputController.text = L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText,context);
+    if (L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText,context)  .isNotEmpty) {
       showDescription = true;
     }
   }

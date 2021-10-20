@@ -4,7 +4,7 @@ import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/category.dart';
+import 'package:elf_play/data/models/category.dart';import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
@@ -161,7 +161,8 @@ class _CategoryPageState extends State<CategoryPage>
                       songs: [item],
                       playingFrom: PlayingFrom(
                         from: "playing from category",
-                        title: widget.category.categoryNameText.textAm,
+                        title: L10nUtil.translateLocale(
+                            widget.category.categoryNameText, context),
                         songSyncPlayedFrom: SongSyncPlayedFrom.CATEGORY_DETAIL,
                         songSyncPlayedFromId: widget.category.categoryId,
                       ),

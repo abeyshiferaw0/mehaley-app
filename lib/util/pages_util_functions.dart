@@ -34,6 +34,7 @@ import 'package:elf_play/ui/screens/user_playlist/edit_user_playlist_page.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,11 +48,13 @@ import 'package:just_audio/just_audio.dart';
 import 'package:sizer/sizer.dart';
 
 class PagesUtilFunctions {
-  static String getPlaylistDescription(Playlist playlist) {
-    if (playlist.playlistDescriptionText.textAm.isNotEmpty) {
-      return playlist.playlistDescriptionText.textAm;
+  static String getPlaylistDescription(Playlist playlist, context) {
+    if (L10nUtil.translateLocale(playlist.playlistDescriptionText, context)
+        .isNotEmpty) {
+      return L10nUtil.translateLocale(
+          playlist.playlistDescriptionText, context);
     } else {
-      return playlist.playlistNameText.textAm;
+      return L10nUtil.translateLocale(playlist.playlistNameText, context);
     }
   }
 
@@ -116,13 +119,13 @@ class PagesUtilFunctions {
     //return "${totalDurationInSeconds}";
   }
 
-  static String getArtistsNames(List<TextLan> artistsName) {
+  static String getArtistsNames(List<TextLan> artistsName, context) {
     String names = "";
     for (TextLan name in artistsName) {
       if (names.isEmpty) {
-        names = names + name.textAm;
+        names = names + L10nUtil.translateLocale(name, context);
       } else {
-        names = names + " , " + name.textAm;
+        names = names + " , " + L10nUtil.translateLocale(name, context);
       }
     }
     return names;
@@ -200,23 +203,25 @@ class PagesUtilFunctions {
     );
   }
 
-  static String getGroupItemTitle(GroupType groupType, dynamic item) {
+  static String getGroupItemTitle(GroupType groupType, dynamic item, context) {
     if (groupType == GroupType.SONG) {
-      String title = (item as Song).songName.textAm;
+      String title = L10nUtil.translateLocale((item as Song).songName, context);
 
       if (item.artistsName.length > 0) {
-        title = "$title - ${item.artistsName[0].textAm}";
+        title =
+            "$title - ${L10nUtil.translateLocale(item.artistsName[0], context)}";
       }
 
       return title;
     } else if (groupType == GroupType.PLAYLIST) {
-      return (item as Playlist).playlistNameText.textAm;
+      return L10nUtil.translateLocale(
+          (item as Playlist).playlistNameText, context);
     } else if (groupType == GroupType.ALBUM) {
       String title =
-          "${(item as Album).albumTitle.textAm} - ${item.artist.artistName.textAm}";
+          "${L10nUtil.translateLocale((item as Album).albumTitle, context)} - ${L10nUtil.translateLocale(item.artist.artistName, context)}";
       return title;
     } else if (groupType == GroupType.ARTIST) {
-      return (item as Artist).artistName.textAm;
+      return L10nUtil.translateLocale((item as Artist).artistName, context);
     } else {
       return "";
     }
@@ -270,9 +275,9 @@ class PagesUtilFunctions {
     }
   }
 
-  static String albumTitle(Album album) {
+  static String albumTitle(Album album, context) {
     String title =
-        "${album.albumTitle.textAm} - ${album.artist.artistName.textAm}";
+        "${L10nUtil.translateLocale(album.albumTitle, context)} - ${L10nUtil.translateLocale(album.artist.artistName, context)}";
     return title;
   }
 
@@ -424,6 +429,7 @@ class PagesUtilFunctions {
       downloadUtil,
       items as List<Song>,
       playingFrom,
+      context,
     );
     // List<AudioSource> audioSourceItems =
     //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
@@ -443,8 +449,8 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems =
-        await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
+        downloadUtil, songs, playingFrom, context);
     //List<AudioSource> audioSourceItems = [Song.toAudioSourceStreamUri(song)];
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
@@ -472,8 +478,8 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems =
-        await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
+        downloadUtil, songs, playingFrom, context);
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
       SetPlayerQueueEvent(
@@ -567,13 +573,14 @@ class PagesUtilFunctions {
   }
 
   static String getSearchFrontPageItemTitle(
-      AppItemsType appItemsType, dynamic item) {
+      AppItemsType appItemsType, dynamic item, context) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return (item as Category).categoryNameText.textAm;
+      return L10nUtil.translateLocale(
+          (item as Category).categoryNameText, context);
     } else if (appItemsType == AppItemsType.ARTIST) {
-      return (item as Artist).artistName.textAm;
+      return L10nUtil.translateLocale((item as Artist).artistName, context);
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
-      return (item as Song).songName.textAm;
+      return L10nUtil.translateLocale((item as Song).songName, context);
     }
     return "";
   }
@@ -756,7 +763,8 @@ class PagesUtilFunctions {
     if (updatedMyPlaylist != null) {
       if (updatedMyPlaylist is MyPlaylist) {
         ///UPDATE PLAYLIST PAGE WITH NEW DATA
-        print("onUpdateSuccess 1 ${myPlaylist.playlistNameText.textAm}");
+        print(
+            "onUpdateSuccess 1 ${L10nUtil.translateLocale(myPlaylist.playlistNameText, context)}");
         onUpdateSuccess(updatedMyPlaylist);
         Navigator.pop(context);
       }
@@ -879,11 +887,13 @@ class PagesUtilFunctions {
     return "BY ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}";
   }
 
-  static String getUserPlaylistDescription(MyPlaylist myPlaylist) {
-    if (myPlaylist.playlistDescriptionText.textAm.isNotEmpty) {
-      return myPlaylist.playlistDescriptionText.textAm;
+  static String getUserPlaylistDescription(MyPlaylist myPlaylist, context) {
+    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context)
+        .isNotEmpty) {
+      return L10nUtil.translateLocale(
+          myPlaylist.playlistDescriptionText, context);
     } else {
-      return myPlaylist.playlistNameText.textAm;
+      return L10nUtil.translateLocale(myPlaylist.playlistNameText, context);
     }
   }
 

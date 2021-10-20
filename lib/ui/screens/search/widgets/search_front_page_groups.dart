@@ -48,6 +48,7 @@ class SearchFrontPageGroups extends StatelessWidget {
               title: PagesUtilFunctions.getSearchFrontPageItemTitle(
                 appItemsType,
                 items.elementAt(index),
+                context,
               ),
               imageUrl: PagesUtilFunctions.getSearchFrontPageItemImageUrl(
                 appItemsType,

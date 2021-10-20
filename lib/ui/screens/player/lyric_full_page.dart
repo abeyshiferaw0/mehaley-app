@@ -19,6 +19,7 @@ import 'package:elf_play/ui/screens/player/widgets/lyric_player_full_page_widget
 import 'package:elf_play/ui/screens/player/widgets/share_btn_widget.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:elf_play/util/color_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -75,10 +76,10 @@ class _LyricFullPageState extends State<LyricFullPage> {
             body: SafeArea(
               child: MultiBlocListener(
                 listeners: [
-                  BlocListener<SongPositionCubit, Duration>(
+                  BlocListener<SongPositionCubit, CurrentPlayingPosition>(
                     listener: (context, state) {
                       setState(() {
-                        progress = state.inSeconds.toDouble();
+                        progress = state.currentDuration.inSeconds.toDouble();
                       });
                     },
                   ),
@@ -153,7 +154,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                     SizedBox(
                       height: 30,
                       child: AutoSizeText(
-                        state.songName.textAm,
+                        L10nUtil.translateLocale(state.songName, context),
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: AppFontSizes.font_size_16,
@@ -163,7 +164,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         minFontSize: AppFontSizes.font_size_16,
                         maxFontSize: AppFontSizes.font_size_16,
                         overflowReplacement: Marquee(
-                          text: state.songName.textAm,
+                          text:
+                              L10nUtil.translateLocale(state.songName, context),
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_16,
                             fontWeight: FontWeight.w500,
@@ -186,7 +188,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                       ),
                     ),
                     Text(
-                      PagesUtilFunctions.getArtistsNames(state.artistsName),
+                      PagesUtilFunctions.getArtistsNames(
+                          state.artistsName, context),
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
@@ -239,11 +242,11 @@ class _LyricFullPageState extends State<LyricFullPage> {
                   overlayColor: AppColors.white.withOpacity(0.24),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
                 ),
-                child: BlocBuilder<SongPositionCubit, Duration>(
+                child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
                   builder: (context, state) {
                     return Slider(
                       value: AudioPlayerUtil.getCorrectProgress(
-                        state.inSeconds.toDouble(),
+                        state.currentDuration.inSeconds.toDouble(),
                         currentPlayingState.audioFile.audioDurationSeconds,
                       ),
                       min: 0.0,
@@ -254,7 +257,6 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         BlocProvider.of<AudioPlayerBloc>(context).add(
                           SeekAudioPlayerEvent(
                             skipToDuration: Duration(seconds: value.toInt()),
-                            previousDuration: state,
                           ),
                         );
                       },
@@ -266,11 +268,12 @@ class _LyricFullPageState extends State<LyricFullPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BlocBuilder<SongPositionCubit, Duration>(
+                  BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
                     builder: (context, state) {
                       return Text(
                         PagesUtilFunctions.formatSongDurationTimeTo(
-                          Duration(seconds: state.inSeconds.toInt()),
+                          Duration(
+                              seconds: state.currentDuration.inSeconds.toInt()),
                         ),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,

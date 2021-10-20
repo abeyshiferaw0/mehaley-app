@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -60,7 +61,7 @@ class ArtistAlbumItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  album.albumTitle.textAm,
+                  L10nUtil.translateLocale(album.albumTitle, context),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
                     color: AppColors.white,

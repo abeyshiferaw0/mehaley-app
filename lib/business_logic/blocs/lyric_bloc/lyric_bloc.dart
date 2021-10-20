@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -31,6 +32,7 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
             await lyricDataRepository.getLyricData(
           event.songId,
           AppCacheStrategy.LOAD_CACHE_FIRST,
+          event.currentLocale,
         );
         yield LyricDataLoaded(lyricList: lyricList, songId: event.songId);
         try {
@@ -39,6 +41,7 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
               await lyricDataRepository.getLyricData(
             event.songId,
             AppCacheStrategy.CACHE_LATER,
+            event.currentLocale,
           );
           yield LyricDataLoading();
           yield LyricDataLoaded(lyricList: lyricList, songId: event.songId);

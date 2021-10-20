@@ -9,11 +9,14 @@ class StartRecordEvent extends SongListenRecorderEvent {
 
 class SaveRecordedSongEvent extends SongListenRecorderEvent {
   final SongSync songSync;
-  final Duration? previousDuration;
-  final Duration? skipToDuration;
+  final Duration previousDuration;
+  final Duration currentDuration;
 
-  SaveRecordedSongEvent({this.previousDuration, this.skipToDuration, required this.songSync});
+  SaveRecordedSongEvent(
+      {required this.previousDuration,
+      required this.currentDuration,
+      required this.songSync});
 
   @override
-  List<Object?> get props => [songSync,previousDuration,skipToDuration];
+  List<Object?> get props => [songSync, previousDuration, currentDuration];
 }

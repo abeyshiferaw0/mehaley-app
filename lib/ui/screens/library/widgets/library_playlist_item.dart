@@ -6,6 +6,7 @@ import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -50,7 +51,7 @@ class LibraryPlaylistItem extends StatelessWidget {
           ),
           SizedBox(height: AppMargin.margin_8),
           Text(
-            playlist.playlistNameText.textAm,
+            L10nUtil.translateLocale(playlist.playlistNameText, context),
             maxLines: 1,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,

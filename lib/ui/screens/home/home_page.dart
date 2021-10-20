@@ -20,6 +20,7 @@ import 'package:elf_play/ui/screens/home/widgets/home_groups.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_header_gradient.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_recently_played.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_user_library.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -172,9 +173,11 @@ class _HomePageState extends State<HomePage>
         if (groups[index].groupItems.length > 0 && groups[index].isVisible) {
           return HomeGroups(
             groupId: groups[index].groupId,
-            groupTitle: groups[index].groupTitleText.textAm,
+            groupTitle:
+                L10nUtil.translateLocale(groups[index].groupTitleText, context),
             groupSubTitle: groups[index].groupSubTitleText != null
-                ? groups[index].groupSubTitleText!.textAm
+                ? L10nUtil.translateLocale(
+                    groups[index].groupSubTitleText!, context)
                 : null,
             groupHeaderImageUrl: groups[index].headerImageId != null
                 ? AppApi.baseFileUrl +

@@ -11,6 +11,7 @@ import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_empty_message.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
 import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -163,8 +164,8 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       resultItem as Song;
       return SearchResultItem(
         itemKey: Key("song_${resultItem.songId}"),
-        title: resultItem.songName.textAm,
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName),
+        title: L10nUtil.translateLocale(resultItem.songName, context),
+        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName,context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -177,7 +178,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       resultItem as Playlist;
       return SearchResultItem(
         itemKey: Key("playlist_${resultItem.playlistId}"),
-        title: resultItem.playlistNameText.textAm,
+        title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
         subTitle: "",
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
@@ -191,8 +192,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       resultItem as Album;
       return SearchResultItem(
         itemKey: Key("album_${resultItem.albumId}"),
-        title: resultItem.albumTitle.textAm,
-        subTitle: resultItem.artist.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: widget.searchKey,
@@ -205,7 +207,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       resultItem as Artist;
       return SearchResultItem(
         itemKey: Key("artist_${resultItem.artistId}"),
-        title: resultItem.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.artistName, context),
         subTitle: "",
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,

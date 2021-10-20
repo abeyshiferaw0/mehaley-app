@@ -1,6 +1,7 @@
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
@@ -70,10 +71,26 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
               data: ThemeData(unselectedWidgetColor: AppColors.txtGrey),
               child: Column(
                 children: [
-                  LanguageSettingItem(text: "ኣማርኟ", isSelected: true),
-                  LanguageSettingItem(text: "English", isSelected: false),
-                  LanguageSettingItem(text: "Oromiffa", isSelected: false),
-                  LanguageSettingItem(text: "Tigrinya", isSelected: false),
+                  LanguageSettingItem(
+                    text: "ኣማርኟ",
+                    isSelected: isLocaleSelected(L10nUtil.amharic),
+                    locale: L10nUtil.amharic,
+                  ),
+                  LanguageSettingItem(
+                    text: "English",
+                    isSelected: isLocaleSelected(L10nUtil.english),
+                    locale: L10nUtil.english,
+                  ),
+                  LanguageSettingItem(
+                    text: "Oromiffa",
+                    isSelected: false,
+                    locale: L10nUtil.amharic,
+                  ),
+                  LanguageSettingItem(
+                    text: "Tigrinya",
+                    isSelected: false,
+                    locale: L10nUtil.amharic,
+                  ),
                 ],
               ),
             ),
@@ -142,5 +159,10 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         )
       ],
     );
+  }
+
+  isLocaleSelected(Locale locale) {
+    Locale cLocale = Localizations.localeOf(context);
+    return cLocale.languageCode == locale.languageCode;
   }
 }

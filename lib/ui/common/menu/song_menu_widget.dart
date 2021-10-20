@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_download_menu_item.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_favorite_menu_item.dart';
 import 'package:elf_play/ui/screens/user_playlist/song_add_to_user_playlist_page.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +119,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           ),
           SizedBox(height: AppMargin.margin_16),
           Text(
-            song.songName.textAm,
+            L10nUtil.translateLocale(song.songName, context),
             style: TextStyle(
               color: AppColors.white,
               fontSize: AppFontSizes.font_size_12.sp,
@@ -127,7 +128,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           ),
           SizedBox(height: AppMargin.margin_2),
           Text(
-            PagesUtilFunctions.getArtistsNames(song.artistsName),
+            PagesUtilFunctions.getArtistsNames(song.artistsName, context),
             style: TextStyle(
               color: AppColors.txtGrey,
               fontSize: AppFontSizes.font_size_8.sp,
@@ -147,7 +148,8 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
     );
   }
 
-  SingleChildScrollView buildMenuList(context, isLeftOverLoaded, onCreateWithSongSuccess) {
+  SingleChildScrollView buildMenuList(
+      context, isLeftOverLoaded, onCreateWithSongSuccess) {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
@@ -200,9 +202,11 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                                   child: DialogDeleteSong(
                                     mainButtonText: 'REMOVE'.toUpperCase(),
                                     cancelButtonText: 'CANCEL',
-                                    titleText: 'Remove ${song.songName.textAm} From this playlist?',
+                                    titleText:
+                                        'Remove ${L10nUtil.translateLocale(song.songName, context)} From this playlist?',
                                     onDelete: () {
-                                      if (widget.onRemoveSongFromPlaylist != null) {
+                                      if (widget.onRemoveSongFromPlaylist !=
+                                          null) {
                                         widget.onRemoveSongFromPlaylist!(song);
                                       }
                                       Navigator.pop(context);
@@ -245,7 +249,8 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           setting: AppRouterPaths.songAddToPlaylist,
                           page: BlocProvider(
                             create: (context) => UserPlaylistBloc(
-                              userPLayListRepository: AppRepositories.userPLayListRepository,
+                              userPLayListRepository:
+                                  AppRepositories.userPLayListRepository,
                             ),
                             child: SongAddToUserPlaylistPage(
                               song: song,

@@ -130,7 +130,9 @@ class LibraryPageDataRepository {
   }
 
   Future<List<Song>> getOfflineSongs(
-      AppLibrarySortTypes appLibrarySortTypes) async {
+    AppLibrarySortTypes appLibrarySortTypes,
+    currentLocale,
+  ) async {
     ///GET FAILED DOWNLOADS
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
@@ -147,7 +149,11 @@ class LibraryPageDataRepository {
           timeDownloaded.add(element.timeCreated);
         });
         return ApiUtil.sortDownloadedSongs(
-            songs, appLibrarySortTypes, timeDownloaded);
+          songs,
+          appLibrarySortTypes,
+          timeDownloaded,
+          currentLocale,
+        );
       }
     }
     return [];

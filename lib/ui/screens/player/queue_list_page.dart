@@ -18,6 +18,7 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
 import 'package:elf_play/ui/common/song_item/song_queue_item.dart';
 import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,9 +51,9 @@ class _QueueListPageState extends State<QueueListPage> {
       body: SafeArea(
         child: MultiBlocListener(
           listeners: [
-            BlocListener<SongPositionCubit, Duration>(
+            BlocListener<SongPositionCubit, CurrentPlayingPosition>(
               listener: (context, state) {
-                progress = state.inSeconds.toDouble();
+                progress = state.currentDuration.inSeconds.toDouble();
               },
             ),
             BlocListener<SongBufferedCubit, Duration>(
@@ -129,11 +130,11 @@ class _QueueListPageState extends State<QueueListPage> {
       child: BlocBuilder<CurrentPlayingCubit, Song?>(
         builder: (context, currentPlayingState) {
           if (currentPlayingState != null) {
-            return BlocBuilder<SongPositionCubit, Duration>(
+            return BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
               builder: (context, state) {
                 return Slider(
                   value: AudioPlayerUtil.getCorrectProgress(
-                    state.inSeconds.toDouble(),
+                    state.currentDuration.inSeconds.toDouble(),
                     currentPlayingState.audioFile.audioDurationSeconds,
                   ),
                   min: 0.0,
@@ -144,7 +145,6 @@ class _QueueListPageState extends State<QueueListPage> {
                     BlocProvider.of<AudioPlayerBloc>(context).add(
                       SeekAudioPlayerEvent(
                         skipToDuration: Duration(seconds: value.toInt()),
-                        previousDuration: state,
                       ),
                     );
                   },
@@ -354,7 +354,7 @@ class _QueueListPageState extends State<QueueListPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                song.songName.textAm,
+                L10nUtil.translateLocale(song.songName, context),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   color: AppColors.white,
@@ -369,7 +369,8 @@ class _QueueListPageState extends State<QueueListPage> {
                 children: [
                   song.lyricIncluded ? SongItemBadge(tag: 'LYRIC') : SizedBox(),
                   Text(
-                    PagesUtilFunctions.getArtistsNames(song.artistsName),
+                    PagesUtilFunctions.getArtistsNames(
+                        song.artistsName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.txtGrey,

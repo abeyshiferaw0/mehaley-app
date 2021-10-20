@@ -1,5 +1,4 @@
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
@@ -10,6 +9,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
 import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -167,8 +167,9 @@ class SearchRecentOrMessage extends StatelessWidget {
       return SearchResultItem(
         key: Key("song_${resultItem.songId}"),
         itemKey: Key("song_${resultItem.songId}"),
-        title: resultItem.songName.textAm,
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName),
+        title: L10nUtil.translateLocale(resultItem.songName, context),
+        subTitle:
+            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -181,7 +182,7 @@ class SearchRecentOrMessage extends StatelessWidget {
       return SearchResultItem(
         key: Key("playlist_${resultItem.playlistId}"),
         itemKey: Key("playlist_${resultItem.playlistId}"),
-        title: resultItem.playlistNameText.textAm,
+        title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
         subTitle: "",
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
@@ -195,8 +196,9 @@ class SearchRecentOrMessage extends StatelessWidget {
       return SearchResultItem(
         key: Key("album_${resultItem.albumId}"),
         itemKey: Key("album_${resultItem.albumId}"),
-        title: resultItem.albumTitle.textAm,
-        subTitle: resultItem.artist.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,
@@ -209,7 +211,7 @@ class SearchRecentOrMessage extends StatelessWidget {
       return SearchResultItem(
         key: Key("artist_${resultItem.artistId}"),
         itemKey: Key("artist_${resultItem.artistId}"),
-        title: resultItem.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.artistName, context),
         subTitle: "",
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,

@@ -11,6 +11,7 @@ import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_my_playlist_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/playlists_refreshing_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +53,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
               bgColor: AppColors.white,
               isFloating: true,
               msg:
-                  "${state.song.songName.textAm} added to ${state.myPlaylist.playlistNameText.textAm}",
+                  "${L10nUtil.translateLocale(state.song.songName, context)} added to ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)}",
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,

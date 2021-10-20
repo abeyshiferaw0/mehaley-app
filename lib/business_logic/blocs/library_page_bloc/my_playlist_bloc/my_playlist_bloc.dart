@@ -12,7 +12,8 @@ part 'my_playlist_event.dart';
 part 'my_playlist_state.dart';
 
 class MyPlaylistBloc extends Bloc<MyPlaylistEvent, MyPlaylistState> {
-  MyPlaylistBloc({required this.myPlaylistRepository}) : super(MyPlaylistInitial());
+  MyPlaylistBloc({required this.myPlaylistRepository})
+      : super(MyPlaylistInitial());
 
   final MyPLayListRepository myPlaylistRepository;
 
@@ -26,29 +27,34 @@ class MyPlaylistBloc extends Bloc<MyPlaylistEvent, MyPlaylistState> {
       try {
         //YIELD CACHE DATA
         final MyPlaylistPageData cachedMyPlaylistPageData =
-            await myPlaylistRepository.getMyPlaylistData(AppCacheStrategy.LOAD_CACHE_FIRST);
+            await myPlaylistRepository
+                .getMyPlaylistData(AppCacheStrategy.LOAD_CACHE_FIRST);
 
         ///CHECK IF IS FOR DELETED PLAYLIST AND REMOVE DELETED PLAYLIST
         if (event.isForUserPlaylistDeleted != null) {
           if (event.isForUserPlaylistDeleted!) {
             if (event.deletedPlaylist != null) {
-              cachedMyPlaylistPageData.myPlaylists.remove(event.deletedPlaylist);
+              cachedMyPlaylistPageData.myPlaylists
+                  .remove(event.deletedPlaylist);
             }
           }
         }
 
-        yield MyPlaylistPageDataLoaded(myPlaylistPageData: cachedMyPlaylistPageData);
+        yield MyPlaylistPageDataLoaded(
+            myPlaylistPageData: cachedMyPlaylistPageData);
 
         if (isFromCatch(cachedMyPlaylistPageData.response)) {
           try {
-            yield MyPlaylistLoadingState();
             //REFRESH AFTER CACHE YIELD
             if (event.isForAddSongPage) {
               yield MyPlaylistRefreshLoadingState();
             }
             final MyPlaylistPageData refreshedMyPlaylistPageData =
-                await myPlaylistRepository.getMyPlaylistData(AppCacheStrategy.CACHE_LATER);
-            yield MyPlaylistPageDataLoaded(myPlaylistPageData: refreshedMyPlaylistPageData);
+                await myPlaylistRepository
+                    .getMyPlaylistData(AppCacheStrategy.CACHE_LATER);
+            yield MyPlaylistLoadingState();
+            yield MyPlaylistPageDataLoaded(
+                myPlaylistPageData: refreshedMyPlaylistPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
           }

@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -63,7 +64,7 @@ class SongQueueItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    song.songName.textAm,
+                    L10nUtil.translateLocale(song.songName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       color: AppColors.white.withOpacity(0.9),
@@ -74,7 +75,8 @@ class SongQueueItem extends StatelessWidget {
                     height: AppMargin.margin_2,
                   ),
                   Text(
-                    PagesUtilFunctions.getArtistsNames(song.artistsName),
+                    PagesUtilFunctions.getArtistsNames(
+                        song.artistsName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.txtGrey,

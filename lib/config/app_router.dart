@@ -69,7 +69,8 @@ class AppRouterPaths {
   static const String songAddToPlaylist = '/song_add_to_playlist';
 
   //ROUTE OBSERVER
-  static final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
+  static final RouteObserver<ModalRoute<void>> routeObserver =
+      RouteObserver<ModalRoute<void>>();
 }
 
 class AppRouter {
@@ -131,12 +132,14 @@ class AppRouter {
               providers: [
                 BlocProvider<UserPlaylistPageBloc>(
                   create: (context) => UserPlaylistPageBloc(
-                    userPLayListRepository: AppRepositories.userPLayListRepository,
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
                   ),
                 ),
                 BlocProvider(
                   create: (context) => UserPlaylistBloc(
-                    userPLayListRepository: AppRepositories.userPLayListRepository,
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
                   ),
                 ),
               ],
@@ -184,7 +187,8 @@ class AppRouter {
                 ),
                 BlocProvider(
                   create: (context) => UserPlaylistBloc(
-                    userPLayListRepository: AppRepositories.userPLayListRepository,
+                    userPLayListRepository:
+                        AppRepositories.userPLayListRepository,
                   ),
                 ),
               ],
@@ -201,12 +205,14 @@ class AppRouter {
               providers: [
                 BlocProvider<CategoryPageBloc>(
                   create: (context) => CategoryPageBloc(
-                    categoryDataRepository: AppRepositories.categoryDataRepository,
+                    categoryDataRepository:
+                        AppRepositories.categoryDataRepository,
                   ),
                 ),
                 BlocProvider<CategoryPagePaginationBloc>(
-                  create: (context) =>
-                      CategoryPagePaginationBloc(categoryDataRepository: AppRepositories.categoryDataRepository),
+                  create: (context) => CategoryPagePaginationBloc(
+                      categoryDataRepository:
+                          AppRepositories.categoryDataRepository),
                 ),
               ],
               child: CategoryPage(category: args.args['category']),
@@ -232,7 +238,8 @@ class AppRouter {
                 ),
                 BlocProvider(
                   create: (context) => SearchPageDominantColorCubit(
-                    searchResultBloc: BlocProvider.of<SearchResultBloc>(context),
+                    searchResultBloc:
+                        BlocProvider.of<SearchResultBloc>(context),
                   ),
                 ),
                 BlocProvider(
@@ -242,7 +249,8 @@ class AppRouter {
                   create: (context) => SearchCancelCubit(),
                 ),
               ],
-              child: SearchResultPage(isVoiceTyping: args.args['isVoiceTyping']),
+              child:
+                  SearchResultPage(isVoiceTyping: args.args['isVoiceTyping']),
             );
         break;
       case AppRouterPaths.searchResultDedicatedRoute:

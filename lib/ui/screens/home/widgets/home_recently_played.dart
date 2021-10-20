@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_recently_played.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -73,8 +74,9 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 item: recentlyPlayed.elementAt(i),
                 playingFrom: PlayingFrom(
                   from: "playing from recently played",
-                  title: recentlyPlayed.elementAt(i).songName.textAm,
-                  songSyncPlayedFrom:SongSyncPlayedFrom.RECENTLY_PLAYED,
+                  title: L10nUtil.translateLocale(
+                      recentlyPlayed.elementAt(i).songName, context),
+                  songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
                   songSyncPlayedFromId: -1,
                 ),
                 context: context,
@@ -87,7 +89,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
             isDiscountAvailable:
                 recentlyPlayed.elementAt(i).isDiscountAvailable,
-            title: recentlyPlayed.elementAt(i).songName.textAm,
+            title: L10nUtil.translateLocale(
+                recentlyPlayed.elementAt(i).songName, context),
             discountPercentage: recentlyPlayed.elementAt(i).discountPercentage,
             isFree: recentlyPlayed.elementAt(i).isFree,
             price: recentlyPlayed.elementAt(i).priceEtb,

@@ -7,7 +7,7 @@ import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/screens/cart/widgets/remove_from_cart_button.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';import 'package:elf_play/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 
 class CartPlaylistItem extends StatelessWidget {
@@ -55,7 +55,7 @@ class CartPlaylistItem extends StatelessWidget {
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(
-              playlist.playlistNameText.textAm,
+              L10nUtil.translateLocale(playlist.playlistNameText, context),
               maxLines: 2,
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,

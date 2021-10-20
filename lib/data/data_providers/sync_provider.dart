@@ -7,9 +7,25 @@ import 'package:elf_play/util/api_util.dart';
 class SyncProvider {
   late Dio dio;
 
-  void saveSyncData(SongSync songSync) {
+  void saveSyncData(
+      SongSync songSync, Duration currentDuration, Duration previousDuration) {
     ///STORE SONG SYNC DATA IF NOT FOUND AND UPDATE IF FOUND
-    AppHiveBoxes.instance.songSyncBox.put(songSync.uuid, songSync);
+    if (AppHiveBoxes.instance.songSyncBox.containsKey(songSync.uuid)) {
+      SongSync preSongSync =
+          AppHiveBoxes.instance.songSyncBox.get(songSync.uuid);
+      int seconds =
+          preSongSync.secondsPlayed == null ? 0 : preSongSync.secondsPlayed!;
+      seconds =
+          seconds + (currentDuration.inSeconds - previousDuration.inSeconds);
+      AppHiveBoxes.instance.songSyncBox.put(
+        songSync.uuid,
+        songSync.copyWith(secondsPlayed: seconds),
+      );
+      print(
+          "SYNCEDDD DATEE= > ${songSync.uuid} CURRENT - PREVIOUS=> ${currentDuration.inSeconds - previousDuration.inSeconds} PREVIOUSLY SAVED SECONDS=> ${seconds}");
+    } else {
+      AppHiveBoxes.instance.songSyncBox.put(songSync.uuid, songSync);
+    }
   }
 
   syncSongs(List<SongSync> songSyncList) async {

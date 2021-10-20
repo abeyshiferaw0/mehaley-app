@@ -2,8 +2,6 @@ import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/api_response/search_page_result_data.dart';
@@ -14,10 +12,13 @@ import 'package:elf_play/ui/screens/search/widgets/search_header_gradient.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_footer_button.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_top_artist_song_item.dart';
+import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
   const SearchResultList(
@@ -107,7 +108,7 @@ class _SearchResultListState extends State<SearchResultList> {
               Padding(
                 padding: const EdgeInsets.only(left: AppPadding.padding_12),
                 child: Text(
-                  "Popular mezmur's by ${topArtistData.topArtist!.artistName.textAm}",
+                  "Popular mezmur's by ${L10nUtil.translateLocale(topArtistData.topArtist!.artistName, context)}",
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     color: AppColors.white,
@@ -150,8 +151,9 @@ class _SearchResultListState extends State<SearchResultList> {
     if (resultItem is Song) {
       return SearchResultItem(
         itemKey: Key("song_${resultItem.songId}"),
-        title: resultItem.songName.textAm,
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName),
+        title: L10nUtil.translateLocale(resultItem.songName, context),
+        subTitle:
+            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -163,7 +165,7 @@ class _SearchResultListState extends State<SearchResultList> {
     } else if (resultItem is Playlist) {
       return SearchResultItem(
         itemKey: Key("playlist_${resultItem.playlistId}"),
-        title: resultItem.playlistNameText.textAm,
+        title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
         subTitle: "",
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
@@ -176,8 +178,9 @@ class _SearchResultListState extends State<SearchResultList> {
     } else if (resultItem is Album) {
       return SearchResultItem(
         itemKey: Key("album_${resultItem.albumId}"),
-        title: resultItem.albumTitle.textAm,
-        subTitle: resultItem.artist.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,
@@ -189,7 +192,7 @@ class _SearchResultListState extends State<SearchResultList> {
     } else if (resultItem is Artist) {
       return SearchResultItem(
         itemKey: Key("artist_${resultItem.artistId}"),
-        title: resultItem.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.artistName, context),
         subTitle: "",
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,

@@ -1,0 +1,11 @@
+{
+    "current_language": "english",
+    "@language": {
+      "description": "the current language is english"
+    },
+    "current_language_test": "english_test",
+    "@language": {
+      "description": "the current language is english"
+    }
+
+}

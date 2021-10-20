@@ -7,8 +7,10 @@ import 'package:elf_play/data/models/remote_image.dart';
 import 'package:elf_play/data/models/sync/song_sync.dart';
 import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -185,6 +187,7 @@ class Song extends Equatable {
     DownloadUtil downloadUtil,
     List<Song> songs,
     PlayingFrom playingFrom,
+    BuildContext context,
   ) async {
     List<AudioSource> audioSources = [];
 
@@ -224,8 +227,8 @@ class Song extends Equatable {
         ///TAG MEDIA
         MediaItem tag = MediaItem(
           id: song.songId.toString(),
-          title: song.songName.textAm,
-          artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
+          title: L10nUtil.translateLocale(song.songName, context),
+          artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
@@ -264,8 +267,9 @@ class Song extends Equatable {
               "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
           tag: MediaItem(
             id: song.songId.toString(),
-            title: song.songName.textAm,
-            artist: PagesUtilFunctions.getArtistsNames(song.artistsName),
+            title: L10nUtil.translateLocale(song.songName, context),
+            artist:
+                PagesUtilFunctions.getArtistsNames(song.artistsName, context),
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),

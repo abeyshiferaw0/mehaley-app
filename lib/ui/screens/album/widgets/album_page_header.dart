@@ -12,6 +12,7 @@ import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +92,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                       songs: songs,
                       playingFrom: PlayingFrom(
                         from: "playing from album",
-                        title: album.albumTitle.textAm,
+                        title:
+                            L10nUtil.translateLocale(album.albumTitle, context),
                         songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
                         songSyncPlayedFromId: album.albumId,
                       ),
@@ -145,7 +147,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          album.albumTitle.textAm,
+          L10nUtil.translateLocale(album.albumTitle, context),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_24,
             color: AppColors.white,
@@ -158,7 +160,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "ALBUM BY " + album.artist.artistName.textAm,
+              "ALBUM BY " +
+                  L10nUtil.translateLocale(album.artist.artistName, context),
               style: albumSubTitleStyle,
             ),
             Padding(

@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/album/widgets/album_page_header.dart';
 import 'package:elf_play/ui/screens/album/widgets/shimmer_album.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,8 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                           songs: albumPageData.songs,
                           playingFrom: PlayingFrom(
                             from: "playing from album",
-                            title: albumPageData.album.albumTitle.textAm,
+                            title: L10nUtil.translateLocale(
+                                albumPageData.album.albumTitle, context),
                             songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
                             songSyncPlayedFromId: albumPageData.album.albumId,
                           ),
@@ -135,7 +137,8 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
         builder: (context, state) {
           if (state is AlbumPageLoadedState) {
             return Text(
-              state.albumPageData.album.albumTitle.textAm,
+              L10nUtil.translateLocale(
+                  state.albumPageData.album.albumTitle, context),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_16,
                 fontWeight: FontWeight.w500,
@@ -172,7 +175,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                 albumId: album.albumId,
                 album: album,
                 isLiked: album.isLiked,
-                title: album.albumTitle.textAm,
+                title: L10nUtil.translateLocale(album.albumTitle, context),
                 imageUrl:
                     AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
                 price: album.priceEtb,

@@ -17,6 +17,7 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:elf_play/util/color_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,9 +105,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 },
                 child: MultiBlocListener(
                   listeners: [
-                    BlocListener<SongPositionCubit, Duration>(
+                    BlocListener<SongPositionCubit, CurrentPlayingPosition>(
                       listener: (context, state) {
-                        progress = state.inSeconds.toDouble();
+                        progress = state.currentDuration.inSeconds.toDouble();
                       },
                     ),
                     BlocListener<SongBufferedCubit, Duration>(
@@ -277,7 +278,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           SizedBox(
             height: 25,
             child: AutoSizeText(
-              song != null ? song.songName.textAm : '',
+              song != null
+                  ? L10nUtil.translateLocale(song.songName, context)
+                  : '',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_16,
@@ -287,7 +290,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               minFontSize: AppFontSizes.font_size_16,
               maxFontSize: AppFontSizes.font_size_16,
               overflowReplacement: Marquee(
-                text: song != null ? song.songName.textAm : '',
+                text: song != null
+                    ? L10nUtil.translateLocale(song.songName, context)
+                    : '',
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
@@ -311,7 +316,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           ),
           Text(
             song != null
-                ? PagesUtilFunctions.getArtistsNames(song.artistsName)
+                ? PagesUtilFunctions.getArtistsNames(song.artistsName, context)
                 : '',
             style: TextStyle(
                 color: AppColors.lightGrey,
@@ -369,11 +374,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,
             ),
-            child: BlocBuilder<SongPositionCubit, Duration>(
+            child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
               builder: (context, state) {
                 return Slider(
                   value: AudioPlayerUtil.getCorrectProgress(
-                    state.inSeconds.toDouble(),
+                    state.currentDuration.inSeconds.toDouble(),
                     currentPlayingState.audioFile.audioDurationSeconds,
                   ),
                   min: 0.0,
@@ -384,7 +389,6 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                     BlocProvider.of<AudioPlayerBloc>(context).add(
                       SeekAudioPlayerEvent(
                         skipToDuration: Duration(seconds: value.toInt()),
-                        previousDuration: state,
                       ),
                     );
                   },

@@ -9,8 +9,9 @@ class SyncRepository {
 
   const SyncRepository({required this.syncProvider});
 
-  void saveSyncData(SongSync songSync) {
-    syncProvider.saveSyncData(songSync);
+  void saveSyncData(
+      SongSync songSync, Duration currentDuration, Duration previousDuration) {
+    syncProvider.saveSyncData(songSync, currentDuration, previousDuration);
   }
 
   cancelDio() {

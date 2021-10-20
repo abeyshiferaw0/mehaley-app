@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/artist.dart';
+import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';import 'package:elf_play/util/l10n_util.dart';
 
 class ItemSimilarArtistsPlaylist extends StatelessWidget {
   final Artist artist;
@@ -58,7 +58,7 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
               ),
               SizedBox(height: AppMargin.margin_8),
               Text(
-                artist.artistName.textAm,
+                L10nUtil.translateLocale(artist.artistName, context),
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,

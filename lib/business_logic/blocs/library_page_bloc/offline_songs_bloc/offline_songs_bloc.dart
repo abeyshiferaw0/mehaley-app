@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/enums.dart';
@@ -24,8 +25,11 @@ class OfflineSongsBloc extends Bloc<OfflineSongsEvent, OfflineSongsState> {
       // LOAD CACHE AND REFRESH
       yield OfflineSongsLoadingState();
 
-      final List<Song> offlineSongs = await libraryPageDataRepository
-          .getOfflineSongs(event.appLibrarySortTypes);
+      final List<Song> offlineSongs =
+          await libraryPageDataRepository.getOfflineSongs(
+        event.appLibrarySortTypes,
+        event.currentLocale,
+      );
 
       ///YIELD BASED ON PAGE
       yield OfflineSongsLoadedState(
@@ -34,7 +38,10 @@ class OfflineSongsBloc extends Bloc<OfflineSongsEvent, OfflineSongsState> {
     } else if (event is RefreshOfflineSongsEvent) {
       libraryPageDataRepository.cancelDio();
       this.add(
-        LoadOfflineSongsEvent(appLibrarySortTypes: event.appLibrarySortTypes),
+        LoadOfflineSongsEvent(
+          appLibrarySortTypes: event.appLibrarySortTypes,
+          currentLocale: event.currentLocale,
+        ),
       );
     }
   }

@@ -40,7 +40,10 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
   @override
   void initState() {
     BlocProvider.of<LyricBloc>(context).add(
-      LoadSongLyricEvent(songId: widget.song.songId),
+      LoadSongLyricEvent(
+        songId: widget.song.songId,
+        currentLocale: Localizations.localeOf(context),
+      ),
     );
     super.initState();
   }
@@ -71,7 +74,8 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               if (state is LyricDataLoaded) {
                 if (state.lyricList.length > 0 &&
                     state.songId == widget.song.songId) {
-                  return BlocListener<SongPositionCubit, Duration>(
+                  return BlocListener<SongPositionCubit,
+                          CurrentPlayingPosition>(
                       listener: (context, duration) {
                         //LISTEN TO LYRIC AND DURATION CHANGES
                         try {
@@ -79,7 +83,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                             LyricItem lyricItem =
                                 state.lyricList.firstWhere((element) {
                               if (element.startTimeMillisecond >
-                                  duration.inMilliseconds) {
+                                  duration.currentDuration.inMilliseconds) {
                                 return true;
                               }
                               return false;

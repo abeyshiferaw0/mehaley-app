@@ -11,6 +11,7 @@ import 'package:elf_play/ui/common/like_follow/playlist_follow_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -45,7 +46,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
+                imageUrl:
+                    AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     decoration: BoxDecoration(
@@ -63,7 +65,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
             SizedBox(height: AppMargin.margin_20),
             //PLAYLIST TITLE
             Text(
-              playlist.playlistNameText.textAm,
+              L10nUtil.translateLocale(playlist.playlistNameText, context),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -96,7 +98,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-                Text("${playlist.numberOfFollowers} FOLLOWERS", style: followersTextStyle),
+                Text("${playlist.numberOfFollowers} FOLLOWERS",
+                    style: followersTextStyle),
               ],
             )
           ],
@@ -110,7 +113,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
   final Playlist playlist;
   final List<Song> songs;
 
-  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs}) : super(key: key);
+  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +124,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: AppMargin.margin_32),
-          buildPlaylistDescription(),
+          buildPlaylistDescription(context),
           SizedBox(height: AppMargin.margin_32),
           Text(
             "PLAYLIST BY",
@@ -170,7 +174,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                                 isCentred: true,
                                 isFree: playlist.isFree,
                                 discountPercentage: playlist.discountPercentage,
-                                isDiscountAvailable: playlist.isDiscountAvailable,
+                                isDiscountAvailable:
+                                    playlist.isDiscountAvailable,
                                 isBought: playlist.isBought,
                               ),
                             )
@@ -184,9 +189,9 @@ class PlaylistInfoPageTwo extends StatelessWidget {
     );
   }
 
-  Text buildPlaylistDescription() {
+  Text buildPlaylistDescription(context) {
     return Text(
-      PagesUtilFunctions.getPlaylistDescription(playlist),
+      PagesUtilFunctions.getPlaylistDescription(playlist, context),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_16,

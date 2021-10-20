@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -54,7 +55,7 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
               ),
               SizedBox(height: AppMargin.margin_8),
               Text(
-                playlist.playlistNameText.textAm,
+                L10nUtil.translateLocale(playlist.playlistNameText, context),
                 maxLines: 2,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,

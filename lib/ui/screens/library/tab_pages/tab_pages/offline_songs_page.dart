@@ -33,6 +33,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
     BlocProvider.of<OfflineSongsBloc>(context).add(
       LoadOfflineSongsEvent(
         appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+        currentLocale: Localizations.localeOf(context),
       ),
     );
     super.initState();
@@ -68,6 +69,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   LoadOfflineSongsEvent(
                     appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
               },

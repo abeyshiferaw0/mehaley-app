@@ -6,6 +6,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/user_profile_pic.dart';
 import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -45,7 +46,7 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
             SizedBox(height: AppMargin.margin_20),
             //PLAYLIST TITLE
             Text(
-              myPlaylist.playlistNameText.textAm,
+              L10nUtil.translateLocale(myPlaylist.playlistNameText, context),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -88,7 +89,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: AppMargin.margin_32),
-          buildUserPlaylistDescription(),
+          buildUserPlaylistDescription(context),
           SizedBox(height: AppMargin.margin_32),
           Text(
             "PLAYLIST BY",
@@ -111,10 +112,11 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
     );
   }
 
-  Text buildUserPlaylistDescription() {
+  Text buildUserPlaylistDescription(context) {
     return Text(
       PagesUtilFunctions.getUserPlaylistDescription(
         myPlaylist,
+        context,
       ),
       textAlign: TextAlign.center,
       style: TextStyle(

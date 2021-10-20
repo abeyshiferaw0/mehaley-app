@@ -8,6 +8,7 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
 import 'package:elf_play/data/models/library_data/purchased_song.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ApiUtil {
@@ -18,7 +19,8 @@ class ApiUtil {
     CancelToken? cancelToken,
   }) async {
     ///GET USER TOKE
-    String token = AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
+    String token =
+        AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
     ///CONFIG HEADER
     Options options = Options(headers: {"Authorization": "Token $token"});
@@ -45,11 +47,15 @@ class ApiUtil {
 
     if (useToken) {
       ///GET USER TOKEN AND CSRF TOKEN
-      String token = AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
+      String token =
+          AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
       ///CONFIG HEADER TOKEN
       options = Options(
-        headers: {"Authorization": "Token $token", "content-type": "application/x-www-form-urlencoded"},
+        headers: {
+          "Authorization": "Token $token",
+          "content-type": "application/x-www-form-urlencoded"
+        },
       );
     }
     var response = await dio.post(
@@ -70,7 +76,8 @@ class ApiUtil {
     return;
   }
 
-  static List<PurchasedSong> sortPurchasedSongs(List<PurchasedSong> items, appLibrarySortTypes) {
+  static List<PurchasedSong> sortPurchasedSongs(
+      List<PurchasedSong> items, appLibrarySortTypes, context) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((a, b) => a.paymentDate.compareTo(b.paymentDate));
       return items;
@@ -79,12 +86,15 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z) {
       items.sort(
-        (a, b) => a.song.songName.textAm.compareTo(b.song.songName.textAm),
+        (a, b) => L10nUtil.translateLocale(a.song.songName, context)
+            .compareTo(L10nUtil.translateLocale(b.song.songName, context)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => a.song.artistsName[0].textAm.compareTo(b.song.artistsName[0].textAm),
+        (a, b) => L10nUtil.translateLocale(a.song.artistsName[0], context)
+            .compareTo(
+                L10nUtil.translateLocale(b.song.artistsName[0], context)),
       );
       return items;
     } else {
@@ -92,7 +102,8 @@ class ApiUtil {
     }
   }
 
-  static List<Song> sortDownloadedSongs(List<Song> items, appLibrarySortTypes, List<int> timeDownloaded) {
+  static List<Song> sortDownloadedSongs(List<Song> items, appLibrarySortTypes,
+      List<int> timeDownloaded, currentLocale) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((b, a) => a.releasedDate.compareTo(b.releasedDate));
       return items;
@@ -101,12 +112,18 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z) {
       items.sort(
-        (a, b) => a.songName.textAm.compareTo(b.songName.textAm),
+        (a, b) => L10nUtil.translateLocale(a.songName, null,
+                mCurrentLocale: currentLocale)
+            .compareTo(L10nUtil.translateLocale(b.songName, null,
+                mCurrentLocale: currentLocale)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => a.artistsName[0].textAm.compareTo(b.artistsName[0].textAm),
+        (a, b) => L10nUtil.translateLocale(a.artistsName[0], null,
+                mCurrentLocale: currentLocale)
+            .compareTo(L10nUtil.translateLocale(b.artistsName[0], null,
+                mCurrentLocale: currentLocale)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD) {
@@ -133,7 +150,8 @@ class ApiUtil {
     }
   }
 
-  static List<PurchasedPlaylist> sortPurchasedPlaylists(List<PurchasedPlaylist> items, appLibrarySortTypes) {
+  static List<PurchasedPlaylist> sortPurchasedPlaylists(
+      List<PurchasedPlaylist> items, appLibrarySortTypes, context) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((a, b) => a.paymentDate.compareTo(b.paymentDate));
       return items;
@@ -142,12 +160,16 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z) {
       items.sort(
-        (a, b) => a.playlist.playlistNameText.textAm.compareTo(b.playlist.playlistNameText.textAm),
+        (a, b) => L10nUtil.translateLocale(a.playlist.playlistNameText, context)
+            .compareTo(
+                L10nUtil.translateLocale(b.playlist.playlistNameText, context)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => a.playlist.playlistNameText.textAm.compareTo(b.playlist.playlistNameText.textAm),
+        (a, b) => L10nUtil.translateLocale(a.playlist.playlistNameText, context)
+            .compareTo(
+                L10nUtil.translateLocale(b.playlist.playlistNameText, context)),
       );
       return items;
     } else {

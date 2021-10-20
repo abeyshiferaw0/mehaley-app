@@ -13,6 +13,7 @@ import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -47,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         title: Text(
-          "Settings",
+          "Settings ${AppLocalizations.of(context)!.current_language}",
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w600,

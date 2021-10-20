@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class DialogSongPreviewMode extends StatelessWidget {
               SizedBox(
                 height: AppMargin.margin_16,
               ),
-              buildSongItem(),
+              buildSongItem(context),
               SizedBox(
                 height: AppMargin.margin_16,
               ),
@@ -71,7 +72,7 @@ class DialogSongPreviewMode extends StatelessWidget {
     );
   }
 
-  Container buildSongItem() {
+  Container buildSongItem(context) {
     return Container(
       child: Center(
         child: Row(
@@ -98,7 +99,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 SizedBox(
                   height: 25,
                   child: AutoSizeText(
-                    song.songName.textAm,
+                    L10nUtil.translateLocale(song.songName, context),
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: AppFontSizes.font_size_16,
@@ -108,7 +109,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                     minFontSize: AppFontSizes.font_size_16,
                     maxFontSize: AppFontSizes.font_size_16,
                     overflowReplacement: Marquee(
-                      text: song.songName.textAm,
+                      text: L10nUtil.translateLocale(song.songName, context),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w500,
@@ -131,7 +132,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  PagesUtilFunctions.getArtistsNames(song.artistsName),
+                  PagesUtilFunctions.getArtistsNames(song.artistsName, context),
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,

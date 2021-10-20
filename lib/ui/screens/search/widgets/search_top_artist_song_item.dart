@@ -8,6 +8,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -43,8 +44,9 @@ class SearchTopArtistSongItem extends StatelessWidget {
             appSearchItemTypes: AppSearchItemTypes.SONG,
             item: song,
             playingFrom: PlayingFrom(
-              from: "Playing From ${artist.artistName.textAm}",
-              title: song.songName.textAm,
+              from:
+                  "Playing From ${L10nUtil.translateLocale(artist.artistName, context)}",
+              title: L10nUtil.translateLocale(song.songName, context),
               songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
               songSyncPlayedFromId: -1,
             ),
@@ -89,7 +91,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: AppPadding.padding_4),
               child: Text(
-                song.songName.textAm,
+                L10nUtil.translateLocale(song.songName, context),
                 maxLines: 2,
                 textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,

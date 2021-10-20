@@ -11,8 +11,10 @@ import 'package:equatable/equatable.dart';
 part 'followed_artists_event.dart';
 part 'followed_artists_state.dart';
 
-class FollowedArtistsBloc extends Bloc<FollowedArtistsEvent, FollowedArtistsState> {
-  FollowedArtistsBloc({required this.libraryPageDataRepository}) : super(FollowedArtistsInitial());
+class FollowedArtistsBloc
+    extends Bloc<FollowedArtistsEvent, FollowedArtistsState> {
+  FollowedArtistsBloc({required this.libraryPageDataRepository})
+      : super(FollowedArtistsInitial());
 
   final LibraryPageDataRepository libraryPageDataRepository;
 
@@ -26,7 +28,8 @@ class FollowedArtistsBloc extends Bloc<FollowedArtistsEvent, FollowedArtistsStat
       yield FollowedArtistsLoadingState();
       try {
         //YIELD CACHE DATA
-        final FollowingItemsData followedItemsData = await libraryPageDataRepository.getFollowedItems(
+        final FollowingItemsData followedItemsData =
+            await libraryPageDataRepository.getFollowedItems(
           AppCacheStrategy.LOAD_CACHE_FIRST,
           AppFollowedPageItemTypes.ARTIST,
         );
@@ -39,12 +42,13 @@ class FollowedArtistsBloc extends Bloc<FollowedArtistsEvent, FollowedArtistsStat
         ///IF FROM CACHE TRY FRESH AGAIN
         if (isFromCatch(followedItemsData.response)) {
           try {
-            yield FollowedArtistsLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final FollowingItemsData followedArtistsData = await libraryPageDataRepository.getFollowedItems(
+            final FollowingItemsData followedArtistsData =
+                await libraryPageDataRepository.getFollowedItems(
               AppCacheStrategy.CACHE_LATER,
               AppFollowedPageItemTypes.ARTIST,
             );
+            yield FollowedArtistsLoadingState();
 
             ///YIELD BASED ON PAGE
             yield FollowedArtistsLoadedState(

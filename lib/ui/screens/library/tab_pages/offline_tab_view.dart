@@ -53,6 +53,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   RefreshOfflineSongsEvent(
                     appLibrarySortTypes: appLibrarySortTypes,
+                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
                 await BlocProvider.of<OfflineSongsBloc>(context).stream.first;
@@ -196,6 +197,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
@@ -216,6 +218,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.TITLE_A_Z,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
@@ -234,6 +237,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.NEWEST,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -251,6 +255,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.OLDEST,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -268,6 +273,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.ARTIST_A_Z,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);

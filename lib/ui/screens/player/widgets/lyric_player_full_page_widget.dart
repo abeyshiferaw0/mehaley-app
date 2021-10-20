@@ -51,14 +51,14 @@ class _LyricPlayerFullPageWidgetState extends State<LyricPlayerFullPageWidget> {
         if (state is LyricDataLoaded) {
           if (state.lyricList.length > 0 &&
               state.songId == widget.song.songId) {
-            return BlocListener<SongPositionCubit, Duration>(
+            return BlocListener<SongPositionCubit, CurrentPlayingPosition>(
               listener: (context, duration) {
                 //LISTEN TO LYRIC AND DURATION CHANGES
                 try {
                   if (state.lyricList.length > 0) {
                     LyricItem lyricItem = state.lyricList.firstWhere((element) {
                       if (element.startTimeMillisecond >
-                          duration.inMilliseconds) {
+                          duration.currentDuration.inMilliseconds) {
                         return true;
                       }
                       return false;

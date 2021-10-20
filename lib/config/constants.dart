@@ -171,7 +171,7 @@ class AppValues {
   static const String songExtraStr = "SONG_EXTRA";
   static const String songSyncExtraStr = "SONG_SYNC_EXTRA";
   static const double previewDialogSongItemSize = 60;
-  static const int songSyncTimerGapInSeconds = 5;
+  static const int songSyncTimerGapInSeconds = 120;
 
   //static const String languageRadioGroupValue = "LANGUAGE_RADIO";
 }

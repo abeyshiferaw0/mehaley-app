@@ -4,6 +4,7 @@ import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,8 @@ class UserPlaylistPlayShuffle extends StatelessWidget {
                     songs: songs,
                     playingFrom: PlayingFrom(
                       from: "playing from playlist",
-                      title: myPlaylist.playlistNameText.textAm,
+                      title: L10nUtil.translateLocale(
+                          myPlaylist.playlistNameText, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.USER_PLAYLIST,
                       songSyncPlayedFromId: myPlaylist.playlistId,
                     ),

@@ -6,6 +6,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
 import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -133,7 +134,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
                     mainButtonText: 'DELETE'.toUpperCase(),
                     cancelButtonText: 'CANCEL',
                     titleText:
-                        'Are you sure you want to Delete ${widget.song.songName.textAm} from downloads?',
+                        'Are you sure you want to Delete ${L10nUtil.translateLocale(widget.song.songName, context)} from downloads?',
                     onDelete: () {
                       BlocProvider.of<DownloadingSongBloc>(context).add(
                         DeleteDownloadedSongEvent(song: widget.song),
