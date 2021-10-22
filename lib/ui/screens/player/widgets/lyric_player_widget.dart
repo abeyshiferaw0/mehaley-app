@@ -39,12 +39,14 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
 
   @override
   void initState() {
-    BlocProvider.of<LyricBloc>(context).add(
-      LoadSongLyricEvent(
-        songId: widget.song.songId,
-        currentLocale: Localizations.localeOf(context),
-      ),
-    );
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      BlocProvider.of<LyricBloc>(context).add(
+        LoadSongLyricEvent(
+          songId: widget.song.songId,
+          currentLocale: Localizations.localeOf(context),
+        ),
+      );
+    });
     super.initState();
   }
 

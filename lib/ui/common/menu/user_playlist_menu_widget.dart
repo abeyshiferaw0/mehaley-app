@@ -11,6 +11,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -92,7 +93,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: false,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.plus_circle_light,
-                    title: "Add mezmurs",
+                    title: AppLocalizations.of(context)!.addMezmurs,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -100,7 +101,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.pencil_simple_light,
-                    title: "Edit playlist",
+                    title: AppLocalizations.of(context)!.editPlaylist,
                     onTap: () {
                       PagesUtilFunctions.openEditPlaylistPage(
                         context,
@@ -114,7 +115,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.x_light,
-                    title: "Delete playlist",
+                    title: AppLocalizations.of(context)!.deletePlaylist,
                     onTap: () {
                       showDialog(
                         context: context,
@@ -139,7 +140,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.magnifying_glass_light,
-                    title: "Find in playlist",
+                    title: AppLocalizations.of(context)!.findInPlaylist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -147,7 +148,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.sort_ascending_light,
-                    title: "Sort playlist",
+                    title: AppLocalizations.of(context)!.sortPlaylist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -155,7 +156,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.share_network_light,
-                    title: "Share playlist",
+                    title: AppLocalizations.of(context)!.sharePlaylist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -163,7 +164,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.device_mobile_camera_light,
-                    title: "Add to home screen",
+                    title: AppLocalizations.of(context)!.addToHomeScreen,
                     onTap: () {},
                   ),
                   SizedBox(height: AppMargin.margin_20),
@@ -203,7 +204,9 @@ class UserPlaylistMenuWidget extends StatelessWidget {
           BlocBuilder<AppUserWidgetsCubit, AppUser>(
             builder: (context, state) {
               return Text(
-                "BY ${AuthUtil.getUserName(state)}".toUpperCase(),
+                AppLocalizations.of(context)!
+                    .byUserName(AuthUtil.getUserName(state))
+                    .toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.txtGrey,

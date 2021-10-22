@@ -8,6 +8,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -20,10 +21,12 @@ class DialogSongPreviewCartButton extends StatefulWidget {
   final Song song;
 
   @override
-  _DialogSongPreviewCartButtonState createState() => _DialogSongPreviewCartButtonState();
+  _DialogSongPreviewCartButtonState createState() =>
+      _DialogSongPreviewCartButtonState();
 }
 
-class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButton> {
+class _DialogSongPreviewCartButtonState
+    extends State<DialogSongPreviewCartButton> {
   @override
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,9 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemovedSongCartEvent(
             song: widget.song,
-            appCartAddRemoveEvents: preButtonOnTap() ? AppCartAddRemoveEvents.REMOVE : AppCartAddRemoveEvents.ADD,
+            appCartAddRemoveEvents: preButtonOnTap()
+                ? AppCartAddRemoveEvents.REMOVE
+                : AppCartAddRemoveEvents.ADD,
           ),
         );
       },
@@ -88,10 +93,14 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
 
   Icon preCartIcon() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox.get(widget.song.songId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox.get(widget.song.songId);
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+            .containsKey(widget.song.songId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedSongBox
+            .containsKey(widget.song.songId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox
+          .get(widget.song.songId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox
+          .get(widget.song.songId);
       if (a > b) {
         return Icon(
           PhosphorIcons.shopping_cart_simple_fill,
@@ -108,7 +117,8 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+        .containsKey(widget.song.songId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_20,
@@ -117,7 +127,8 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox
+        .containsKey(widget.song.songId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_20,
@@ -143,41 +154,51 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
 
   String preCartText() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox.get(widget.song.songId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox.get(widget.song.songId);
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+            .containsKey(widget.song.songId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedSongBox
+            .containsKey(widget.song.songId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox
+          .get(widget.song.songId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox
+          .get(widget.song.songId);
       if (a > b) {
-        return "REMOVE FROM CART".toUpperCase();
+        return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
       } else {
-        return "ADD TO CART".toUpperCase();
+        return AppLocalizations.of(context)!.addToCart;
       }
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId)) {
-      return "REMOVE FROM CART".toUpperCase();
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+        .containsKey(widget.song.songId)) {
+      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
-      return "ADD TO CART".toUpperCase();
+    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox
+        .containsKey(widget.song.songId)) {
+      return AppLocalizations.of(context)!.addToCart.toUpperCase();
     }
 
     ///IF SONG IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.song.isInCart) {
-      return "REMOVE FROM CART".toUpperCase();
+      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
     } else {
-      return "ADD TO CART".toUpperCase();
+      return AppLocalizations.of(context)!.addToCart.toUpperCase();
     }
   }
 
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox.get(widget.song.songId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox.get(widget.song.songId);
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+            .containsKey(widget.song.songId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedSongBox
+            .containsKey(widget.song.songId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedSongBox
+          .get(widget.song.songId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox
+          .get(widget.song.songId);
       if (a > b) {
         return true;
       } else {
@@ -186,12 +207,14 @@ class _DialogSongPreviewCartButtonState extends State<DialogSongPreviewCartButto
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedSongBox.containsKey(widget.song.songId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedSongBox
+        .containsKey(widget.song.songId)) {
       return true;
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox.containsKey(widget.song.songId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedSongBox
+        .containsKey(widget.song.songId)) {
       return false;
     }
 

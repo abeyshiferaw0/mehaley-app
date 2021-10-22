@@ -6,6 +6,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PlaylistFollowMenuItem extends StatefulWidget {
@@ -112,29 +113,29 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return "Remove from followed playlist";
+        return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
       } else {
-        return "Follow playlist";
+        return AppLocalizations.of(context)!.followPlaylist;
       }
     }
 
     ///IF  FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return "Remove from followed playlist";
+      return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return "Follow playlist";
+      return AppLocalizations.of(context)!.followPlaylist;
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return "Remove from followed playlist";
+      return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
     } else {
-      return "Follow playlist";
+      return AppLocalizations.of(context)!.followPlaylist;
     }
   }
 
@@ -169,7 +170,6 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
-    print("preBorderColor isFollowing");
     if (widget.isFollowing) {
       return AppColors.darkGreen;
     } else {

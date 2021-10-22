@@ -4,7 +4,7 @@ import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/category.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
@@ -17,10 +17,12 @@ import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart'
 import 'package:elf_play/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category_top.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
 
@@ -175,6 +177,9 @@ class _CategoryPageState extends State<CategoryPage>
               ],
             );
           },
+          noItemsFoundIndicatorBuilder: (context) {
+            return buildEmptyCategory();
+          },
           newPageProgressIndicatorBuilder: (context) {
             return Padding(
               padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
@@ -212,6 +217,38 @@ class _CategoryPageState extends State<CategoryPage>
         ),
       ),
     );
+  }
+
+  Container buildEmptyCategory() {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          PhosphorIcons.music_note_simple_light,
+          size: AppIconSizes.icon_size_72,
+          color: AppColors.darkGrey.withOpacity(0.8),
+        ),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32 * 2,
+          ),
+          child: Text(
+            "Empty category",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.txtGrey,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 
   Column buildCategoryTopAlbumPlaylistItems(CategoryPageTopLoaded state) {

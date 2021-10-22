@@ -151,36 +151,30 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                       isPurchased: playlist.isBought,
                     ),
                   )
-                : Row(
-                    children: [
-                      Expanded(
-                        child: playlist.isFree || playlist.isBought
-                            ? SizedBox()
-                            : PlaylistInfoCartButton(
-                                playlist: playlist,
-                              ),
+                : playlist.isFree || playlist.isBought
+                    ? SizedBox()
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BuyItemBtnWidget(
+                            price: playlist.priceEtb,
+                            title: 'BUY PLAYLIST'.toUpperCase(),
+                            hasLeftMargin: false,
+                            showDiscount: false,
+                            isCentred: true,
+                            isFree: playlist.isFree,
+                            discountPercentage: playlist.discountPercentage,
+                            isDiscountAvailable: playlist.isDiscountAvailable,
+                            isBought: playlist.isBought,
+                          ),
+                          SizedBox(
+                            height: AppMargin.margin_8,
+                          ),
+                          PlaylistInfoCartButton(
+                            playlist: playlist,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: AppMargin.margin_16,
-                      ),
-                      playlist.isFree || playlist.isBought
-                          ? SizedBox()
-                          : Expanded(
-                              child: BuyItemBtnWidget(
-                                price: playlist.priceEtb,
-                                title: 'BUY',
-                                hasLeftMargin: false,
-                                showDiscount: false,
-                                isCentred: true,
-                                isFree: playlist.isFree,
-                                discountPercentage: playlist.discountPercentage,
-                                isDiscountAvailable:
-                                    playlist.isDiscountAvailable,
-                                isBought: playlist.isBought,
-                              ),
-                            )
-                    ],
-                  ),
           ),
           buildPlaylistDateAndTime(),
           SizedBox(height: AppMargin.margin_20),

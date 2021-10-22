@@ -21,6 +21,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -434,7 +435,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "BUY MEZMUR".toUpperCase(),
+              AppLocalizations.of(context)!.buyMezmur.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.bold,
@@ -468,7 +469,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               width: AppMargin.margin_4,
             ),
             Text(
-              "ADD TO CART".toUpperCase(),
+              AppLocalizations.of(context)!.addToCart.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.bold,

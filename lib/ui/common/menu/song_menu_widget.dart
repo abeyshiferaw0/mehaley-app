@@ -19,6 +19,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -34,13 +35,13 @@ class SongMenuWidget extends StatefulWidget {
     required this.song,
     required this.isForMyPlaylist,
     this.onRemoveSongFromPlaylist,
-    this.onCreateWithSongSuccess,
+    required this.onCreateWithSongSuccess,
   }) : super(key: key);
 
   final Song song;
   final bool isForMyPlaylist;
   final Function(Song song)? onRemoveSongFromPlaylist;
-  final Function(MyPlaylist myPlaylist)? onCreateWithSongSuccess;
+  final Function(MyPlaylist myPlaylist) onCreateWithSongSuccess;
 
   @override
   _SongMenuWidgetState createState() => _SongMenuWidgetState(song: song);
@@ -193,7 +194,8 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           hasTopMargin: true,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.minus_circle_light,
-                          title: "Remove from playlist",
+                          title:
+                              AppLocalizations.of(context)!.removeFromPlaylist,
                           onTap: () {
                             showDialog(
                               context: context,
@@ -224,7 +226,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.currency_circle_dollar_light,
-                    title: "Buy mezmur",
+                    title: AppLocalizations.of(context)!.buyMezmur,
                     onTap: () {},
                   ),
                   SongCartMenuItem(
@@ -241,7 +243,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.playlist_light,
-                    title: "Add to playlist",
+                    title: AppLocalizations.of(context)!.addToPlaylist,
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.of(context, rootNavigator: true).push(
@@ -266,7 +268,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.list_plus_light,
-                    title: "Add to queue",
+                    title: AppLocalizations.of(context)!.addToQueue,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -274,7 +276,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.disc_light,
-                    title: "View album",
+                    title: AppLocalizations.of(context)!.viewAlbum,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -282,7 +284,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.user_thin,
-                    title: "View artist",
+                    title: AppLocalizations.of(context)!.viewArtist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -290,7 +292,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.rows_light,
-                    title: "View mezmur's category",
+                    title: AppLocalizations.of(context)!.viewMezmursCategory,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -298,7 +300,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.share_network_light,
-                    title: "Share Mezmur",
+                    title: AppLocalizations.of(context)!.shareMezmur,
                     onTap: () {},
                   ),
                   SizedBox(height: AppMargin.margin_20),

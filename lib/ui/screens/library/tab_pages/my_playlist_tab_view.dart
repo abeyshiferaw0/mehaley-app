@@ -10,6 +10,7 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../widgets/library_sub_tab_button.dart';
@@ -85,7 +86,7 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
                   hasLeftMargin: false,
                 ),
                 LibraryPageSubTabButton(
-                  text: "FOLLOWING",
+                  text: AppLocalizations.of(context)!.following.toUpperCase(),
                   isSelected: false,
                   onTap: () {
                     widget.onGoToFollowedPlaylist();

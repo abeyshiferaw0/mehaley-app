@@ -116,7 +116,6 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton>
     ///IF SONG IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId)) {
       controller.forward();
-      print("animateee");
       songRecentlyLikedUnliked = true;
     }
 

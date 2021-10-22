@@ -6,6 +6,7 @@ import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/menu_items/artist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -63,7 +64,7 @@ class ArtistMenuWidget extends StatelessWidget {
               SizedBox(
                 height: ScreenUtil(context: context).getScreenHeight() * 0.2,
               ),
-              buildMenuHeader(),
+              buildMenuHeader(context),
               SizedBox(
                 height: AppMargin.margin_32,
               ),
@@ -80,7 +81,7 @@ class ArtistMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: "Share artist",
+                      title: AppLocalizations.of(context)!.shareArtist,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),
@@ -94,7 +95,7 @@ class ArtistMenuWidget extends StatelessWidget {
     );
   }
 
-  Container buildMenuHeader() {
+  Container buildMenuHeader(context) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -135,7 +136,7 @@ class ArtistMenuWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "$noOfAlbum Albums",
+                AppLocalizations.of(context)!.noOfAlbum(noOfSong),
                 style: TextStyle(
                   color: AppColors.lightGrey,
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -151,7 +152,7 @@ class ArtistMenuWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "$noOfSong Mezmurs",
+                AppLocalizations.of(context)!.noOfSongs(noOfSong),
                 style: TextStyle(
                   color: AppColors.lightGrey,
                   fontSize: AppFontSizes.font_size_10.sp,

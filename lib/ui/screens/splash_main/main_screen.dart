@@ -25,6 +25,8 @@ final AppRouter _appRouter = AppRouter();
 final _navigatorKey = GlobalKey<NavigatorState>();
 //INIT ROUTERS
 
+GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -320,7 +322,7 @@ class _MainScreenState extends State<MainScreen> {
     return Builder(
       builder: (context) {
         return WillPopScope(
-          key: GlobalKey(),
+          key: globalKey,
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {

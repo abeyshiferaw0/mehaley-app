@@ -8,6 +8,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
@@ -72,7 +73,8 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                   ),
                   buildProfileTab(
                     number: "${(state.profilePageData.numberOfFollowedItems)}",
-                    title: "following",
+                    title:
+                        AppLocalizations.of(context)!.following.toUpperCase(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,

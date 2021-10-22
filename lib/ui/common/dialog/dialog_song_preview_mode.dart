@@ -11,6 +11,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -41,7 +42,7 @@ class DialogSongPreviewMode extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               buildTopCard(context),
-              buildPreviewTitle(),
+              buildPreviewTitle(context),
               SizedBox(
                 height: AppMargin.margin_16,
               ),
@@ -57,11 +58,11 @@ class DialogSongPreviewMode extends StatelessWidget {
     );
   }
 
-  Padding buildPreviewTitle() {
+  Padding buildPreviewTitle(context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppMargin.margin_16),
       child: Text(
-        "Preview mode".toUpperCase(),
+        AppLocalizations.of(context)!.previewMode.toUpperCase(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
@@ -159,7 +160,7 @@ class DialogSongPreviewMode extends StatelessWidget {
             height: AppMargin.margin_16,
           ),
           Text(
-            "You are listing to a preview version, buy the mezmur to listen the full version",
+            AppLocalizations.of(context)!.uAreListingToPreviewDesc,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
@@ -182,7 +183,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 color: AppColors.green,
               ),
               child: Text(
-                "BUY MEZMUR".toUpperCase(),
+                AppLocalizations.of(context)!.buyMezmur.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w600,
@@ -237,7 +238,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   width: AppPadding.padding_8,
                 ),
                 Text(
-                  "Elf play",
+                  AppLocalizations.of(context)!.appName,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w700,

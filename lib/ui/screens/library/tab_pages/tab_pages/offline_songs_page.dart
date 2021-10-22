@@ -10,6 +10,7 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
     BlocProvider.of<OfflineSongsBloc>(context).add(
       LoadOfflineSongsEvent(
         appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
-        currentLocale: Localizations.localeOf(context),
+        currentLocale: L10nUtil.english,
       ),
     );
     super.initState();

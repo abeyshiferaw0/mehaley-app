@@ -10,6 +10,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class SongDownloadMenuItem extends StatefulWidget {
@@ -51,7 +52,6 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
     return BlocListener<DownloadingSongBloc, DownloadingSongState>(
       listener: (context, state) {
         if (state is DownloadingSongsRunningState) {
-          print("DownloadingSongsRunningState runiing");
           if (state.song != null) {
             if (state.song!.songId == widget.song.songId) {
               setState(() {
@@ -124,7 +124,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
           hasTopMargin: false,
           iconColor: AppColors.green,
           icon: PhosphorIcons.arrow_circle_down_fill,
-          title: "Delete mezmur",
+          title: AppLocalizations.of(context)!.deleteMezmur,
           onTap: () {
             showDialog(
               context: context,
@@ -156,7 +156,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         hasTopMargin: false,
         iconColor: AppColors.yellow,
         icon: PhosphorIcons.warning_fill,
-        title: "Retry download",
+        title: AppLocalizations.of(context)!.retryDownload,
         onTap: () {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
@@ -186,7 +186,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
             strokeWidth: 2,
           ),
         ),
-        title: "Downloading...",
+        title: AppLocalizations.of(context)!.downloading,
         onTap: () {},
       ),
     );
@@ -200,7 +200,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         hasTopMargin: false,
         iconColor: AppColors.grey.withOpacity(0.6),
         icon: PhosphorIcons.arrow_circle_down,
-        title: "Download mezmur",
+        title: AppLocalizations.of(context)!.downloadMezmur,
         onTap: () {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
