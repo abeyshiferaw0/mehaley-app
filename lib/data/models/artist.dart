@@ -61,9 +61,11 @@ class Artist extends Equatable {
       artistName: TextLan.fromMap(map['artist_name_text_id']),
       artistAboutBiography:
           TextLan.fromMap(map['artist_about_biography_text_id']),
-      artistImages: (map['artist_images'] as List)
-          .map((remoteImage) => RemoteImage.fromMap(remoteImage))
-          .toList(),
+      artistImages: (map['artist_images'] as List).length > 0
+          ? (map['artist_images'] as List)
+              .map((remoteImage) => RemoteImage.fromMap(remoteImage))
+              .toList()
+          : [RemoteImage.emptyRemoteImage()],
       isVerified: map['is_verified'] == 1 ? true : false,
       isSuggested: map['is_suggested'] == 1 ? true : false,
       artistAboutSocialLinks: map['artist_about_social_links'] as String,

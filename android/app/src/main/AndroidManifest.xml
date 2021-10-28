@@ -27,6 +27,25 @@
        </receiver>
        <!--FOR AUDIO SERVICE-->
 
+
+       <!--FOR HOME SCREEN WIDGETS-->
+       <receiver android:name="VersesWidgetProvider" android:label="Verses from mehaley">
+           <intent-filter>
+               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+           </intent-filter>
+           <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/verse_widget" />
+       </receiver>
+
+       <receiver android:name="MonthlyHolidaysWidgetProvider" android:label="Monthly holidays">
+           <intent-filter>
+               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+           </intent-filter>
+           <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/monthly_holidays_widget" />
+       </receiver>
+       <!--END FOR HOME SCREEN WIDGETS-->
+
        <!--   FACEBOOK AUTH    -->
        <meta-data android:name="com.facebook.sdk.ApplicationId"
            android:value="@string/facebook_app_id"/>

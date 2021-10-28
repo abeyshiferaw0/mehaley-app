@@ -122,8 +122,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: AppMargin.margin_32),
           buildPlaylistDescription(context),
           SizedBox(height: AppMargin.margin_32),
           Text(
@@ -187,6 +187,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
     return Text(
       PagesUtilFunctions.getPlaylistDescription(playlist, context),
       textAlign: TextAlign.center,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_16,
         color: AppColors.white,

@@ -177,6 +177,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         items: AudioPlayerUtil.getPlayingItems(resultItem, resultItems),
         isRecentSearchItem: true,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {},
       );
     } else if (resultItem is Playlist) {
       return SearchResultItem(
@@ -191,6 +192,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         items: [],
         isRecentSearchItem: true,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {},
       );
     } else if (resultItem is Album) {
       return SearchResultItem(
@@ -206,6 +208,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         items: [],
         isRecentSearchItem: true,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {},
       );
     } else if (resultItem is Artist) {
       return SearchResultItem(
@@ -220,6 +223,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         items: [],
         isRecentSearchItem: true,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {},
       );
     } else {
       return SizedBox();

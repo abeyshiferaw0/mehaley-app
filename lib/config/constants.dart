@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.65.202:8181/music";
-  static const String userBaseUrl = "http://192.168.65.202:8181/user";
-  static const String baseFileUrl = "http://192.168.65.202:8181";
+  static const String musicBaseUrl = "http://192.168.62.202:8181/music";
+  static const String userBaseUrl = "http://192.168.62.202:8181/user";
+  static const String baseFileUrl = "http://192.168.62.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -45,6 +45,7 @@ class AppValues {
   static const double homeCategoriesItemHeight = 70;
   static const double homeCategoriesItemWidth = 155;
   static const double customGroupHeaderImageSize = 45;
+  static const double featuredSongsPagerHeight = 90;
 
   //BOTTOM BAR
   static const double bottomBarActiveIconSize = 28;
@@ -190,6 +191,7 @@ class AppIconSizes {
   static const double icon_size_16 = 16;
   static const double icon_size_4 = 4;
   static const double icon_size_30 = 30;
+  static const double icon_size_10 = 10;
   static const double icon_size_8 = 8;
 }
 

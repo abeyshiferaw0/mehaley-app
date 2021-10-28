@@ -607,7 +607,7 @@ class PagesUtilFunctions {
       return ColorUtil.darken(
           ColorUtil.changeColorSaturation(
             HexColor(item.categoryImage.primaryColorHex),
-            0.9,
+            1,
           ),
           0.12);
     } else if (appItemsType == AppItemsType.ARTIST) {
@@ -615,7 +615,7 @@ class PagesUtilFunctions {
       return ColorUtil.darken(
           ColorUtil.changeColorSaturation(
             HexColor(item.artistImages[0].primaryColorHex),
-            0.9,
+            1,
           ),
           0.12);
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
@@ -623,7 +623,7 @@ class PagesUtilFunctions {
       return ColorUtil.darken(
           ColorUtil.changeColorSaturation(
             HexColor(item.albumArt.primaryColorHex),
-            0.9,
+            1,
           ),
           0.12);
     }

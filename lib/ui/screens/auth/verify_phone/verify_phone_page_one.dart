@@ -3,13 +3,12 @@ import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
+import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/widgets/country_code_picker_button.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_number_input.dart';
-import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -287,6 +286,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       shadowColor: AppColors.transparent,
       centerTitle: true,
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);

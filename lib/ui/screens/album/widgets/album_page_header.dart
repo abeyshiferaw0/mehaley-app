@@ -73,15 +73,17 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                 SizedBox(height: AppMargin.margin_16),
                 buildTitleAndSubTitle(album),
                 SizedBox(height: AppMargin.margin_16),
-                BuyItemBtnWidget(
-                  price: album.priceEtb,
-                  title: "BUY ALBUM",
-                  hasLeftMargin: false,
-                  isFree: album.isFree,
-                  discountPercentage: album.discountPercentage,
-                  isDiscountAvailable: album.isDiscountAvailable,
-                  isBought: album.isBought,
-                ),
+                (!album.isBought && !album.isFree)
+                    ? BuyItemBtnWidget(
+                        price: album.priceEtb,
+                        title: "BUY ALBUM",
+                        hasLeftMargin: false,
+                        isFree: album.isFree,
+                        discountPercentage: album.discountPercentage,
+                        isDiscountAvailable: album.isDiscountAvailable,
+                        isBought: album.isBought,
+                      )
+                    : SizedBox(),
                 SizedBox(height: AppMargin.margin_16),
                 PlayShuffleLgBtnWidget(
                   onTap: () {

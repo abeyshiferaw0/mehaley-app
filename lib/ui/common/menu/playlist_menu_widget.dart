@@ -84,16 +84,16 @@ class PlaylistMenuWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  isFree
-                      ? SizedBox()
-                      : MenuItem(
+                  (!playlist.isBought && !playlist.isFree)
+                      ? MenuItem(
                           isDisabled: false,
                           hasTopMargin: false,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.currency_circle_dollar_thin,
                           title: AppLocalizations.of(context)!.buyPlaylist,
                           onTap: () {},
-                        ),
+                        )
+                      : SizedBox(),
                   PlaylistCartMenuItem(
                     playlist: playlist,
                   ),

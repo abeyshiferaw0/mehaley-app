@@ -220,15 +220,17 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           },
                         )
                       : SizedBox(),
-                  song.isBought ? SongDownloadMenuItem(song: song) : SizedBox(),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.currency_circle_dollar_light,
-                    title: AppLocalizations.of(context)!.buyMezmur,
-                    onTap: () {},
-                  ),
+                  SongDownloadMenuItem(song: song),
+                  (!song.isBought && !song.isFree)
+                      ? MenuItem(
+                          isDisabled: false,
+                          hasTopMargin: true,
+                          iconColor: AppColors.grey.withOpacity(0.6),
+                          icon: PhosphorIcons.currency_circle_dollar_light,
+                          title: AppLocalizations.of(context)!.buyMezmur,
+                          onTap: () {},
+                        )
+                      : SizedBox(),
                   SongCartMenuItem(
                     song: song,
                   ),

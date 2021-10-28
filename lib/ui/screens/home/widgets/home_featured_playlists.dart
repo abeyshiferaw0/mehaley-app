@@ -79,16 +79,18 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 ),
               ),
             ),
-            BuyItemBtnWidget(
-              price: 0.0,
-              title: "BUY PLAYLIST",
-              hasLeftMargin: true,
-              isFree: playlist.isFree,
-              showDiscount: false,
-              discountPercentage: playlist.discountPercentage,
-              isDiscountAvailable: playlist.isDiscountAvailable,
-              isBought: playlist.isBought,
-            ),
+            (!playlist.isBought && !playlist.isFree)
+                ? BuyItemBtnWidget(
+                    price: 0.0,
+                    title: "BUY PLAYLIST",
+                    hasLeftMargin: true,
+                    isFree: playlist.isFree,
+                    showDiscount: false,
+                    discountPercentage: playlist.discountPercentage,
+                    isDiscountAvailable: playlist.isDiscountAvailable,
+                    isBought: playlist.isBought,
+                  )
+                : SizedBox(),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),

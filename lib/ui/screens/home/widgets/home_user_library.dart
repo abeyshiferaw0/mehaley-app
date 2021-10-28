@@ -1,7 +1,8 @@
-import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_home_user_lib.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeUserLibrary extends StatelessWidget {
@@ -31,43 +32,22 @@ class HomeUserLibrary extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
-            childAspectRatio: (3.3 / 1),
+            childAspectRatio: (3.3 / 1.1),
             crossAxisSpacing: AppMargin.margin_8,
             mainAxisSpacing: AppMargin.margin_8,
             crossAxisCount: 2,
             children: [
               ItemHomeUserLib(
-                text: "ኪዳስ",
-                type: "Category",
-                imageUrl:
-                    '${AppApi.baseFileUrl}/LatinCross-631151317-5a22dd90beba330037d3cecb.jpg',
+                text: "Purchased",
+                icon: PhosphorIcons.shopping_cart_simple_fill,
+                gradient: AppGradients().getOfflineLibraryGradient(),
+                onTap: () {},
               ),
               ItemHomeUserLib(
-                text: "በገና",
-                type: "Playlist",
-                imageUrl:
-                    '${AppApi.baseFileUrl}/LatinCross-631151317-5a22dd90beba330037d3cecb_DJ5BoQ9.jpg',
-              ),
-              ItemHomeUserLib(
-                text: "New Artists",
-                type: "Playlist",
-                imageUrl: '${AppApi.baseFileUrl}/Cherenet_Senay_YT3ky6K.jpg',
-              ),
-              ItemHomeUserLib(
-                text: "መዝሙር",
-                type: "Song",
-                imageUrl:
-                    '${AppApi.baseFileUrl}/Top_Tracks_Ethiopian_Orthodox_Tewahedo_dByUU8Q.jpg',
-              ),
-              ItemHomeUserLib(
-                text: "ሐና ካም",
-                type: "Artist",
-                imageUrl: '${AppApi.baseFileUrl}/Tsedale_XpfCO13.jpg',
-              ),
-              ItemHomeUserLib(
-                text: "ፌቨን ሎጣን",
-                type: "Artist",
-                imageUrl: '${AppApi.baseFileUrl}/Habtamu_Shibru_7IxFPYD.jpg',
+                text: "Offline",
+                icon: PhosphorIcons.caret_circle_down_fill,
+                gradient: AppGradients().getPurchasedLibraryGradient(),
+                onTap: () {},
               ),
             ],
           ),

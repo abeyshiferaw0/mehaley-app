@@ -29,6 +29,14 @@ class AppColors {
   static Color blue = HexColor("#1E96ED");
   static Color errorRed = Colors.redAccent;
   static Color yellow = HexColor("#f7c631");
+
+  ///HOME LIBRARY BUTTONS
+  static Color orange1 = HexColor("#E8A14D");
+  static Color orange2 = HexColor("#FF7C3E");
+  static Color orange3 = HexColor("#E57343");
+  static Color blue1 = HexColor("#66C7C5");
+  static Color blue2 = HexColor("#4997CB");
+  static Color blue3 = HexColor("#5C91EF");
 }
 
 class AppFontSizes {

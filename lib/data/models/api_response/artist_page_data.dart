@@ -12,19 +12,22 @@ class ArtistPageData extends Equatable {
   final int noOfAlbum;
   final List<Album> topAlbums;
   final List<Song> popularSongs;
+  final List<Song> newSongs;
   final List<Playlist> playlistsFeaturingArtists;
   final List<Artist> similarArtists;
   final Response response;
 
-  const ArtistPageData(
-      {required this.artist,
-      required this.noOfSong,
-      required this.noOfAlbum,
-      required this.topAlbums,
-      required this.popularSongs,
-      required this.playlistsFeaturingArtists,
-      required this.similarArtists,
-      required this.response});
+  const ArtistPageData({
+    required this.artist,
+    required this.noOfSong,
+    required this.noOfAlbum,
+    required this.topAlbums,
+    required this.newSongs,
+    required this.popularSongs,
+    required this.playlistsFeaturingArtists,
+    required this.similarArtists,
+    required this.response,
+  });
 
   @override
   List<Object?> get props => [
@@ -35,6 +38,7 @@ class ArtistPageData extends Equatable {
         popularSongs,
         playlistsFeaturingArtists,
         similarArtists,
+        newSongs,
         response
       ];
 }

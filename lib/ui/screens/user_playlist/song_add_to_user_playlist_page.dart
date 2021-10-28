@@ -14,6 +14,7 @@ import 'package:elf_play/ui/screens/library/widgets/playlists_refreshing_widget.
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
@@ -213,6 +214,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: AppColors.black,
       shadowColor: AppColors.transparent,
       leading: IconButton(

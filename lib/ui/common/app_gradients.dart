@@ -159,4 +159,28 @@ class AppGradients {
       ],
     );
   }
+
+  getPurchasedLibraryGradient() {
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        AppColors.orange1,
+        AppColors.orange2,
+        AppColors.orange3,
+      ],
+    );
+  }
+
+  getOfflineLibraryGradient() {
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        AppColors.blue1,
+        AppColors.blue2,
+        AppColors.blue3,
+      ],
+    );
+  }
 }

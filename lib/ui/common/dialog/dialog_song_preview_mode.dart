@@ -20,12 +20,14 @@ import '../app_card.dart';
 
 class DialogSongPreviewMode extends StatelessWidget {
   final Song song;
-  final Color dominantColor;
+  final bool isForDownload;
+  final bool isForPlaying;
 
   const DialogSongPreviewMode({
     Key? key,
-    required this.dominantColor,
     required this.song,
+    required this.isForDownload,
+    required this.isForPlaying,
   }) : super(key: key);
 
   @override
@@ -62,7 +64,11 @@ class DialogSongPreviewMode extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppMargin.margin_16),
       child: Text(
-        AppLocalizations.of(context)!.previewMode.toUpperCase(),
+        isForPlaying
+            ? AppLocalizations.of(context)!.previewMode.toUpperCase()
+            : isForDownload
+                ? "buy mezmur".toUpperCase()
+                : "",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
@@ -160,7 +166,11 @@ class DialogSongPreviewMode extends StatelessWidget {
             height: AppMargin.margin_16,
           ),
           Text(
-            AppLocalizations.of(context)!.uAreListingToPreviewDesc,
+            isForPlaying
+                ? AppLocalizations.of(context)!.uAreListingToPreviewDesc
+                : isForDownload
+                    ? "Buy the mezmur to download and listen offline"
+                    : "",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,

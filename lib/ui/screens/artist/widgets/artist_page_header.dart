@@ -170,9 +170,8 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
         padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(height: AppMargin.margin_52),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -195,17 +194,22 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             SizedBox(height: AppMargin.margin_4),
             Text(
               L10nUtil.translateLocale(
-                  artistPageData.artist.artistName, context),
+                artistPageData.artist.artistName,
+                context,
+              ),
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.lightGrey,
-                fontSize: AppFontSizes.font_size_32.sp,
+                fontSize: AppFontSizes.font_size_28.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(height: AppMargin.margin_16),
             Text(
               L10nUtil.translateLocale(
-                  artistPageData.artist.artistAboutBiography, context),
+                artistPageData.artist.artistAboutBiography,
+                context,
+              ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,

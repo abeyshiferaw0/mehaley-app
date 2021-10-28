@@ -62,4 +62,6 @@ dependencies {
     //FOR FIREBASE
     implementation 'com.android.support:multidex:2.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    //FOR WIDGETS
+    implementation 'net.danlew:android.joda:2.10.12.2'
 }

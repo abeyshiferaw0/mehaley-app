@@ -85,14 +85,16 @@ class AlbumMenuWidget extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: false,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.currency_circle_dollar_thin,
-                      title: AppLocalizations.of(context)!.buyAlbum,
-                      onTap: () {},
-                    ),
+                    (!album.isBought && !album.isFree)
+                        ? MenuItem(
+                            isDisabled: false,
+                            hasTopMargin: false,
+                            iconColor: AppColors.grey.withOpacity(0.6),
+                            icon: PhosphorIcons.currency_circle_dollar_thin,
+                            title: AppLocalizations.of(context)!.buyAlbum,
+                            onTap: () {},
+                          )
+                        : SizedBox(),
                     AlbumCartMenuItem(album: album),
                     AlbumFavoriteMenuItem(
                       hasTopMargin: true,

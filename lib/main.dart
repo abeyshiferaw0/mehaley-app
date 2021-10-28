@@ -260,11 +260,11 @@ class _MyAppState extends State<MyApp> {
                     builder: (BuildContext context, Widget? child) {
                       final MediaQueryData data = MediaQuery.of(context);
                       return MediaQuery(
-                        data: data.copyWith(textScaleFactor: 1),
+                        data: data.copyWith(textScaleFactor: 1.0),
                         child: child!,
                       );
                     },
-                    locale: state ,
+                    locale: state,
                     supportedLocales: L10nUtil.supportedLocales,
                     theme: App.theme,
                     initialRoute: AppRouterPaths.splashRoute,

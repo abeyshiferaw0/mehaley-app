@@ -90,24 +90,51 @@ class _CategoryPageState extends State<CategoryPage>
       },
       child: Scaffold(
         backgroundColor: AppColors.black,
-        body: CustomScrollView(
-          slivers: [
-            buildSliverHeader(widget.category),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_16),
+        body: Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                buildSliverHeader(widget.category),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_16),
+                ),
+                buildCategoryTopAlbumPlaylist(),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_48),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_16),
+                ),
+                buildCategorySongsList(),
+              ],
             ),
-            buildCategoryTopAlbumPlaylist(),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_48),
-            ),
-            buildCategorySongsHeader(),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_16),
-            ),
-            buildCategorySongsList(),
+            buildCategoryErrorBlocBuilder(),
           ],
         ),
       ),
+    );
+  }
+
+  BlocBuilder<CategoryPageBloc, CategoryPageState>
+      buildCategoryErrorBlocBuilder() {
+    return BlocBuilder<CategoryPageBloc, CategoryPageState>(
+      builder: (context, state) {
+        if (state is CategoryPageTopLoadingError) {
+          return AppError(
+            height: ScreenUtil(context: context).getScreenHeight(),
+            bgWidget: SizedBox(),
+            onRetry: () {
+              BlocProvider.of<CategoryPageBloc>(context).add(
+                LoadCategoryPageTopEvent(
+                  categoryId: widget.category.categoryId,
+                ),
+              );
+              _pagingController.refresh();
+            },
+          );
+        }
+        return SizedBox();
+      },
     );
   }
 
@@ -122,18 +149,7 @@ class _CategoryPageState extends State<CategoryPage>
             return CategoryTopShimmer();
           }
           if (state is CategoryPageTopLoadingError) {
-            return AppError(
-              height: ScreenUtil(context: context).getScreenHeight() * 0.5,
-              bgWidget: CategoryTopShimmer(),
-              onRetry: () {
-                BlocProvider.of<CategoryPageBloc>(context).add(
-                  LoadCategoryPageTopEvent(
-                    categoryId: widget.category.categoryId,
-                  ),
-                );
-                _pagingController.refresh();
-              },
-            );
+            return CategoryTopShimmer();
           }
           return CategoryTopShimmer();
         },
@@ -150,6 +166,7 @@ class _CategoryPageState extends State<CategoryPage>
           itemBuilder: (context, item, index) {
             return Column(
               children: [
+                index == 0 ? buildCategorySongsHeader() : SizedBox(),
                 SizedBox(height: AppMargin.margin_8),
                 SongItem(
                   song: item,
@@ -164,7 +181,9 @@ class _CategoryPageState extends State<CategoryPage>
                       playingFrom: PlayingFrom(
                         from: "playing from category",
                         title: L10nUtil.translateLocale(
-                            widget.category.categoryNameText, context),
+                          widget.category.categoryNameText,
+                          context,
+                        ),
                         songSyncPlayedFrom: SongSyncPlayedFrom.CATEGORY_DETAIL,
                         songSyncPlayedFromId: widget.category.categoryId,
                       ),
@@ -375,21 +394,22 @@ class _CategoryPageState extends State<CategoryPage>
     return items;
   }
 
-  SliverToBoxAdapter buildCategorySongsHeader() {
-    return SliverToBoxAdapter(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Mezmurs",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: AppFontSizes.font_size_18,
-              fontWeight: FontWeight.w600,
-            ),
+  Column buildCategorySongsHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "Mezmurs",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: AppFontSizes.font_size_18,
+            fontWeight: FontWeight.w600,
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: AppMargin.margin_16,
+        ),
+      ],
     );
   }
 

@@ -82,16 +82,18 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 ),
               ),
             ),
-            BuyItemBtnWidget(
-              price: 0.0,
-              title: "BUY ALBUM",
-              hasLeftMargin: true,
-              isFree: album.isFree,
-              showDiscount: false,
-              discountPercentage: album.discountPercentage,
-              isDiscountAvailable: album.isDiscountAvailable,
-              isBought: album.isBought,
-            ),
+            (!album.isBought && !album.isFree)
+                ? BuyItemBtnWidget(
+                    price: 0.0,
+                    title: "BUY ALBUM",
+                    hasLeftMargin: true,
+                    isFree: album.isFree,
+                    showDiscount: false,
+                    discountPercentage: album.discountPercentage,
+                    isDiscountAvailable: album.isDiscountAvailable,
+                    isBought: album.isBought,
+                  )
+                : SizedBox(),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),

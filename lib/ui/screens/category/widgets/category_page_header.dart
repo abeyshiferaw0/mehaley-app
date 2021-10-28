@@ -5,6 +5,7 @@ import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -63,6 +64,7 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
   AppBar buildAppBar(double shrinkPercentage, Category category) {
     return AppBar(
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       centerTitle: true,

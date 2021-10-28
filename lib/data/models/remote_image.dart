@@ -1,3 +1,4 @@
+import 'package:elf_play/config/themes.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
@@ -70,6 +71,23 @@ class RemoteImage extends Equatable {
       largeImageWidth: map['large_image_width'] as int,
       largeImageHeight: map['large_image_height'] as int,
       primaryColorHex: map['primary_color_hex'] as String,
+    );
+  }
+
+  factory RemoteImage.emptyRemoteImage() {
+    return new RemoteImage(
+      primaryColorHex:
+          "#${AppColors.appGradientDefaultColor.value.toRadixString(16)}",
+      imageId: -1,
+      imageSmallPath: "",
+      imageMediumPath: "",
+      imageLargePath: "",
+      smallImageWidth: 0,
+      smallImageHeight: 0,
+      mediumImageWidth: 0,
+      mediumImageHeight: 0,
+      largeImageWidth: 0,
+      largeImageHeight: 0,
     );
   }
 

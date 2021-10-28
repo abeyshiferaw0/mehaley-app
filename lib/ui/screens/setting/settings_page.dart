@@ -12,6 +12,7 @@ import 'package:elf_play/ui/screens/setting/widgets/preferred_payment_method_but
 import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
@@ -38,9 +39,12 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         brightness: Brightness.dark,
+        //systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: AppColors.darkGrey,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(
             PhosphorIcons.caret_left_light,
             size: AppIconSizes.icon_size_24,

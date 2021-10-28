@@ -18,6 +18,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -127,6 +128,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       backgroundColor: AppColors.darkGrey,
       shadowColor: AppColors.transparent,
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       leading: IconButton(
         icon: Icon(PhosphorIcons.caret_left_light),
         onPressed: () {

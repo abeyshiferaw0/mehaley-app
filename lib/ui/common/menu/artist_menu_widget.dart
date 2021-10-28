@@ -19,8 +19,8 @@ class ArtistMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.imageUrl,
-    required this.noOfAlbum,
-    required this.noOfSong,
+    this.noOfAlbum,
+    this.noOfSong,
     required this.isFollowing,
     required this.artistId,
   }) : super(key: key);
@@ -29,8 +29,8 @@ class ArtistMenuWidget extends StatelessWidget {
   final int artistId;
   final String title;
   final String imageUrl;
-  final int noOfAlbum;
-  final int noOfSong;
+  final int? noOfAlbum;
+  final int? noOfSong;
 
   @override
   Widget build(BuildContext context) {
@@ -135,14 +135,16 @@ class ArtistMenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                AppLocalizations.of(context)!.noOfAlbum(noOfSong),
-                style: TextStyle(
-                  color: AppColors.lightGrey,
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              noOfAlbum != null
+                  ? Text(
+                      AppLocalizations.of(context)!.noOfAlbum(noOfAlbum!),
+                      style: TextStyle(
+                        color: AppColors.lightGrey,
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  : SizedBox(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                 child: Icon(
@@ -151,14 +153,16 @@ class ArtistMenuWidget extends StatelessWidget {
                   size: AppIconSizes.icon_size_4,
                 ),
               ),
-              Text(
-                AppLocalizations.of(context)!.noOfSongs(noOfSong),
-                style: TextStyle(
-                  color: AppColors.lightGrey,
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              noOfSong != null
+                  ? Text(
+                      AppLocalizations.of(context)!.noOfSongs(noOfSong!),
+                      style: TextStyle(
+                        color: AppColors.lightGrey,
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ],

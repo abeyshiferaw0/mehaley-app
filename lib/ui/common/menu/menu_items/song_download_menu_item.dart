@@ -4,6 +4,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
+import 'package:elf_play/ui/common/dialog/dialog_song_preview_mode.dart';
 import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:elf_play/util/download_util.dart';
 import 'package:elf_play/util/l10n_util.dart';
@@ -44,6 +45,9 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         song: widget.song,
       ),
     );
+    if (widget.song.isBought || widget.song.isFree) {
+      showEmpty = true;
+    }
     super.initState();
   }
 
@@ -110,7 +114,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
           buildDownloadingIndicator(),
           buildSongDownloadedButton(context),
           buildSongDownloadFailedButton(context),
-          buildSizedBox(),
+          buildSongNotDownloaded(),
         ],
       ),
     );
@@ -192,7 +196,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
     );
   }
 
-  Visibility buildSizedBox() {
+  Visibility buildSongNotDownloaded() {
     return Visibility(
       visible: showEmpty,
       child: MenuItem(
@@ -202,12 +206,28 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         icon: PhosphorIcons.arrow_circle_down,
         title: AppLocalizations.of(context)!.downloadMezmur,
         onTap: () {
-          EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
-              () {
-            BlocProvider.of<DownloadingSongBloc>(context).add(
-              DownloadSongEvent(song: widget.song),
+          if (widget.song.isBought || widget.song.isFree) {
+            EasyDebounce.debounce(
+                "DOWNLOAD_BUTTON", Duration(milliseconds: 300), () {
+              BlocProvider.of<DownloadingSongBloc>(context).add(
+                DownloadSongEvent(song: widget.song),
+              );
+            });
+          } else {
+            ///SHOW BUY OR PURCHASE DIALOG
+            showDialog(
+              context: context,
+              builder: (context) {
+                return Center(
+                  child: DialogSongPreviewMode(
+                    isForDownload: true,
+                    isForPlaying: false,
+                    song: widget.song,
+                  ),
+                );
+              },
             );
-          });
+          }
         },
       ),
     );

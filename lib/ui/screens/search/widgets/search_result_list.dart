@@ -6,8 +6,13 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/api_response/search_page_result_data.dart';
 import 'package:elf_play/data/models/artist.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_header_gradient.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_footer_button.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
@@ -161,6 +166,17 @@ class _SearchResultListState extends State<SearchResultList> {
         items: AudioPlayerUtil.getPlayingItems(resultItem, resultItems),
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: SongMenuWidget(
+              song: resultItem,
+              isForMyPlaylist: false,
+              onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+            ),
+          );
+        },
       );
     } else if (resultItem is Playlist) {
       return SearchResultItem(
@@ -174,6 +190,26 @@ class _SearchResultListState extends State<SearchResultList> {
         items: [],
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: PlaylistMenuWidget(
+              playlist: resultItem,
+              title: L10nUtil.translateLocale(
+                  resultItem.playlistNameText, context),
+              imageUrl:
+                  AppApi.baseFileUrl + resultItem.playlistImage.imageMediumPath,
+              isFree: resultItem.isFree,
+              price: resultItem.priceEtb,
+              isDiscountAvailable: resultItem.isDiscountAvailable,
+              discountPercentage: resultItem.discountPercentage,
+              playlistId: resultItem.playlistId,
+              isFollowed: resultItem.isFollowed!,
+              isPurchased: resultItem.isBought,
+            ),
+          );
+        },
       );
     } else if (resultItem is Album) {
       return SearchResultItem(
@@ -188,6 +224,25 @@ class _SearchResultListState extends State<SearchResultList> {
         items: [],
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: AlbumMenuWidget(
+              albumId: resultItem.albumId,
+              album: resultItem,
+              isLiked: resultItem.isLiked,
+              title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+              imageUrl: AppApi.baseFileUrl +
+                  resultItem.albumImages[0].imageMediumPath,
+              price: resultItem.priceEtb,
+              isFree: resultItem.isFree,
+              isDiscountAvailable: resultItem.isDiscountAvailable,
+              discountPercentage: resultItem.discountPercentage,
+              isBought: resultItem.isBought,
+            ),
+          );
+        },
       );
     } else if (resultItem is Artist) {
       return SearchResultItem(
@@ -201,6 +256,19 @@ class _SearchResultListState extends State<SearchResultList> {
         items: [],
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: ArtistMenuWidget(
+              title: L10nUtil.translateLocale(resultItem.artistName, context),
+              imageUrl: AppApi.baseFileUrl +
+                  resultItem.artistImages[0].imageMediumPath,
+              isFollowing: resultItem.isFollowed!,
+              artistId: resultItem.artistId,
+            ),
+          );
+        },
       );
     } else if (resultItem is SearchResultOtherItems) {
       if (resultItem == SearchResultOtherItems.SEE_ALL_PLAYLISTS) {

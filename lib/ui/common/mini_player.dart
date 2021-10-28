@@ -96,8 +96,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       builder: (context) {
                         return Center(
                           child: DialogSongPreviewMode(
-                            dominantColor: dominantColor,
                             song: currentPlayingSong,
+                            isForDownload: false,
+                            isForPlaying: true,
                           ),
                         );
                       },
@@ -195,7 +196,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              "You are listing a preview, buy the mezmur to listen to the full version",
+              "You are listing a preview, buy the mezmur to listen the full version",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_8.sp,

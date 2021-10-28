@@ -31,6 +31,7 @@ class SearchResultItem extends StatefulWidget {
     required this.items,
     required this.isRecentSearchItem,
     required this.isPlaylistDedicatedResultPage,
+    required this.onMenuTap,
   }) : super(key: key);
 
   final Key itemKey;
@@ -43,6 +44,7 @@ class SearchResultItem extends StatefulWidget {
   final bool isRecentSearchItem;
   final bool isPlaylistDedicatedResultPage;
   final AppSearchItemTypes appSearchItemTypes;
+  final VoidCallback onMenuTap;
 
   @override
   _SearchResultItemState createState() => _SearchResultItemState(
@@ -56,6 +58,7 @@ class SearchResultItem extends StatefulWidget {
         items: items,
         isRecentSearchItem: isRecentSearchItem,
         isPlaylistDedicatedResultPage: isPlaylistDedicatedResultPage,
+        onMenuTap: onMenuTap,
       );
 }
 
@@ -71,6 +74,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
     required this.imagePath,
     required this.subTitle,
     required this.appSearchItemTypes,
+    required this.onMenuTap,
   });
 
   final Key itemKey;
@@ -83,6 +87,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
   final bool isRecentSearchItem;
   final bool isPlaylistDedicatedResultPage;
   final AppSearchItemTypes appSearchItemTypes;
+  final VoidCallback onMenuTap;
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +247,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   ),
                 )
               : AppBouncingButton(
-                  onTap: () {},
+                  onTap: onMenuTap,
                   child: Padding(
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
