@@ -147,7 +147,7 @@ class _BottomBarState extends State<BottomBar> {
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
                 icon: PhosphorIcons.stack_fill,
-                color: AppColors.darkGreen,
+                color: AppColors.green,
                 isForLibrary: true,
               ),
               icon: BottomBarIcon(

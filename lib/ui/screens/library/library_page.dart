@@ -174,7 +174,7 @@ class _LibraryPageState extends State<LibraryPage>
                 bottom: 0,
                 child: Icon(
                   PhosphorIcons.gear_six_bold,
-                  size: AppIconSizes.icon_size_16,
+                  size: AppIconSizes.icon_size_12,
                   color: AppColors.white,
                 ),
               )

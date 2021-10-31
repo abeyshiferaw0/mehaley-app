@@ -12,8 +12,9 @@ class SignUpPageGradient extends StatelessWidget {
     return Container(
       width: ScreenUtil(context: context).getScreenWidth(),
       height: ScreenUtil(context: context).getScreenHeight(),
-      decoration:
-          BoxDecoration(gradient: AppGradients().getSignInPageGradient()),
+      decoration: BoxDecoration(
+        gradient: AppGradients().getSignInPageGradient(),
+      ),
     );
   }
 }

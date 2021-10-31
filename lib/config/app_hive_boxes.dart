@@ -34,7 +34,6 @@ class AppHiveBoxes {
   late Box recentlyFollowedArtistBox;
   late Box recentlyUnFollowedArtistBox;
   late Box recentSearchesBox;
-  late Box recentlyPlayedBox;
   late Box recentlyCartAddedAlbumBox;
   late Box recentlyCartRemovedAlbumBox;
   late Box recentlyCartAddedSongBox;
@@ -56,11 +55,6 @@ class AppHiveBoxes {
     ///SONG SYNC OBJECTS
     songSyncBox = await Hive.openBox<SongSync>(
       AppValues.songSyncBox,
-    );
-
-    ///RECENTLY PLAYED
-    recentlyPlayedBox = await Hive.openBox<Song>(
-      AppValues.recentlyPlayedBox,
     );
 
     ///RECENTLY CART ADDED ALBUM

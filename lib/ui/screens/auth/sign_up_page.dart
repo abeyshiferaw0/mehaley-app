@@ -1,19 +1,13 @@
-import 'dart:ui';
-
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/frosted_glass.dart';
 import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
-import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_bg_video.dart';
 import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_front.dart';
 import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_gradient.dart';
 import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -46,8 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
         backgroundColor: AppColors.black,
         body: Stack(
           children: [
-            //SignUpPageStaggeredAnimatedList(),
-            SignupPageBgVideo(),
+            SignUpPageStaggeredAnimatedList(),
             // Center(
             //   child: Container(
             //     height: ScreenUtil(context: context).getScreenHeight(),
@@ -57,10 +50,6 @@ class _SignUpPageState extends State<SignUpPage> {
             //     ),
             //   ),
             // ),
-            FrostedGlassBox(
-              width: ScreenUtil(context: context).getScreenWidth(),
-              height: ScreenUtil(context: context).getScreenHeight(),
-            ),
             SignUpPageGradient(),
             SignUpPageFront(),
             BlocBuilder<AuthBloc, AuthState>(

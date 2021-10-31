@@ -5,5 +5,6 @@
     android:updatePeriodMillis="120000"
     android:initialLayout="@layout/verse_widget_layout"
     android:resizeMode="vertical|horizontal"
+    android:previewImage="@drawable/verses_preview"
     android:widgetCategory="home_screen">
 </appwidget-provider>

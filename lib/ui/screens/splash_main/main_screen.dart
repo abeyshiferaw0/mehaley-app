@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
@@ -252,6 +253,16 @@ class _MainScreenState extends State<MainScreen> {
                   icon: PhosphorIcons.wifi_x_light,
                   iconColor: AppColors.errorRed,
                 ),
+              );
+            }
+          },
+        ),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (BuildContext context, state) {
+            if (state is AuthLoggedOutState) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRouterPaths.splashRoute,
+                (Route<dynamic> route) => false,
               );
             }
           },

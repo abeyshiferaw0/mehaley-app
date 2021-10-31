@@ -4,6 +4,7 @@ import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
@@ -90,10 +91,18 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.settingRoute:
-        builder = (_) => BlocProvider(
-              create: (context) => SettingsPageBloc(
-                settingDataRepository: AppRepositories.settingDataRepository,
-              ),
+        builder = (_) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => SettingsPageBloc(
+                    settingDataRepository:
+                        AppRepositories.settingDataRepository,
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => OneSignalBloc(),
+                ),
+              ],
               child: SettingsPage(),
             );
         break;

@@ -8,6 +8,8 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/api_response/home_page_data.dart';
 import 'package:elf_play/data/models/group.dart';
 import 'package:elf_play/data/models/sync/song_sync.dart';
+import 'package:elf_play/ui/common/app_error.dart';
+import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_subscribe_card.dart';
 import 'package:elf_play/ui/common/no_internet_header.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_app_header.dart';
@@ -75,32 +77,32 @@ class _HomePageState extends State<HomePage>
       backgroundColor: AppColors.black,
       body: BlocBuilder<HomePageBloc, HomePageState>(
         builder: (context, state) {
-          // if (state is HomePageLoaded) {
-          //   return buildHomePageLoaded(homePageData: state.homePageData);
-          // }
-          // if (state is HomePageLoading) {
-          //   return AppLoading(size: AppValues.loadingWidgetSize);
-          // }
-          // if (state is HomePageLoadingError) {
-          //   return AppError(
-          //     bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
-          //     onRetry: () {
-          //       BlocProvider.of<HomePageBloc>(context).add(
-          //         LoadHomePageEvent(),
-          //       );
-          //     },
-          //   );
-          // }
-          // return AppLoading(size: AppValues.loadingWidgetSize);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HomeUserLibrary(),
-              SizedBox(height: AppMargin.margin_32),
-              HomeFeaturedSongs(),
-              SizedBox(height: AppMargin.margin_32),
-            ],
-          );
+          if (state is HomePageLoaded) {
+            return buildHomePageLoaded(homePageData: state.homePageData);
+          }
+          if (state is HomePageLoading) {
+            return AppLoading(size: AppValues.loadingWidgetSize);
+          }
+          if (state is HomePageLoadingError) {
+            return AppError(
+              bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
+              onRetry: () {
+                BlocProvider.of<HomePageBloc>(context).add(
+                  LoadHomePageEvent(),
+                );
+              },
+            );
+          }
+          return AppLoading(size: AppValues.loadingWidgetSize);
+          // return Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     HomeUserLibrary(),
+          //     SizedBox(height: AppMargin.margin_32),
+          //     HomeFeaturedSongs(),
+          //     SizedBox(height: AppMargin.margin_32),
+          //   ],
+          // );
         },
       ),
     );
@@ -131,12 +133,11 @@ class _HomePageState extends State<HomePage>
               SizedBox(height: AppMargin.margin_32),
 
               ///BUILD USER LIBRARY GRIDS
-              HomeFeaturedSongs(),
+              HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
               SizedBox(height: AppMargin.margin_32),
 
               ///BUILD RECENTLY PLAYED LIST
               HomeRecentlyPlayed(recentlyPlayed: homePageData.recentlyPlayed),
-              SizedBox(height: AppMargin.margin_32),
 
               ///BUILD HOME CATEGORIES
               HomeCategories(categories: homePageData.categories),

@@ -11,6 +11,7 @@ import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/app_router.dart';
+import 'package:elf_play/config/strings.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/screens/auth/sign_up_page.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
@@ -74,6 +76,10 @@ void main() async {
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
+
+  ///INIT ONE SIGNAl
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setAppId(AppStrings.oneSignalId);
 
   ///INIT LOCAL NOTIFICATIONS
   AwesomeNotifications().initialize(
@@ -133,7 +139,6 @@ class _MyAppState extends State<MyApp> {
             BlocProvider<AudioPlayerBloc>(
               create: (context) => AudioPlayerBloc(
                 audioPlayer: AudioPlayer(),
-                playerDataRepository: AppRepositories.playerDataRepository,
               ),
             ),
             BlocProvider<PlayerPagePlayingFromCubit>(

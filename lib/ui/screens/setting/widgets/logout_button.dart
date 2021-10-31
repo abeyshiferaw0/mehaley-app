@@ -1,8 +1,10 @@
+import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,7 +17,9 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: AppBouncingButton(
-        onTap: () async {},
+        onTap: () async {
+          BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+        },
         shrinkRatio: 3,
         child: Container(
           padding: EdgeInsets.symmetric(

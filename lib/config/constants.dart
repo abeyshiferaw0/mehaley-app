@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.62.202:8181/music";
-  static const String userBaseUrl = "http://192.168.62.202:8181/user";
-  static const String baseFileUrl = "http://192.168.62.202:8181";
+  static const String musicBaseUrl = "http://192.168.254.202:8181/music";
+  static const String userBaseUrl = "http://192.168.254.202:8181/user";
+  static const String baseFileUrl = "http://192.168.254.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -45,7 +45,7 @@ class AppValues {
   static const double homeCategoriesItemHeight = 70;
   static const double homeCategoriesItemWidth = 155;
   static const double customGroupHeaderImageSize = 45;
-  static const double featuredSongsPagerHeight = 90;
+  static const double featuredSongsPagerHeight = 80;
 
   //BOTTOM BAR
   static const double bottomBarActiveIconSize = 28;
@@ -111,7 +111,6 @@ class AppValues {
   static const String recentSearchesBox = "RECENT_SEARCHES";
   static const String userBox = "USER_BOX_KEY";
   static const String likedSongsBox = "LIKED_SONGS_BOX_KEY";
-  static const String recentlyPlayedBox = "RECENTLY_PLAYED_BOX";
   static const String recentlyUnLikedSongBox = "RECENTLY_LIKED_SONG_BOX";
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";

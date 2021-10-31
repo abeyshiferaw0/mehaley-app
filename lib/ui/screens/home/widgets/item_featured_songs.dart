@@ -1,39 +1,50 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/util/color_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class FeaturedSongsItem extends StatelessWidget {
-  const FeaturedSongsItem({Key? key}) : super(key: key);
+  const FeaturedSongsItem({Key? key, required this.song, required this.onTap})
+      : super(key: key);
+
+  final Song song;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        right: AppPadding.padding_16,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
-        child: Container(
-          height: double.infinity,
-          color: AppColors.darkGrey,
-          child: Row(
-            children: [
-              buildImageExpanded(),
-              buildDetailsExpanded(),
-            ],
+    return AppBouncingButton(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          right: AppPadding.padding_16,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: Container(
+            height: double.infinity,
+            color: AppColors.darkGrey,
+            child: Row(
+              children: [
+                buildImageExpanded(),
+                buildDetailsExpanded(context),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Expanded buildDetailsExpanded() {
+  Expanded buildDetailsExpanded(context) {
     return Expanded(
       flex: 75,
       child: Container(
@@ -47,24 +58,24 @@ class FeaturedSongsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Song name - artist name - artist  Song name - artist name - artist name",
+                      "${L10nUtil.translateLocale(song.songName, context)} - ${PagesUtilFunctions.getArtistsNames(song.artistsName, context)}",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: AppColors.lightGrey,
                         fontWeight: FontWeight.w500,
-                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontSize: (AppFontSizes.font_size_10 - 1).sp,
                       ),
                     ),
                     SizedBox(
                       height: AppMargin.margin_4,
                     ),
                     SmallTextPriceWidget(
-                      price: 2.00,
-                      isDiscountAvailable: true,
-                      discountPercentage: 0.5,
-                      isFree: false,
-                      isPurchased: false,
+                      price: song.priceEtb,
+                      isDiscountAvailable: song.isDiscountAvailable,
+                      discountPercentage: song.discountPercentage,
+                      isFree: song.isFree,
+                      isPurchased: song.isBought,
                     )
                   ],
                 ),
@@ -92,7 +103,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Expanded(
       flex: 25,
       child: CachedNetworkImage(
-        imageUrl: "",
+        imageUrl: AppApi.baseFileUrl + song.albumArt.imageSmallPath,
         imageBuilder: (context, imageProvider) => Stack(
           children: [
             Container(

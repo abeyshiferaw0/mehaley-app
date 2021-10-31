@@ -10,14 +10,23 @@ class SettingDataRepository {
 
   Future<SettingsPageData> getSettingsPageData() async {
     final DownloadSongQuality downloadSongQuality;
+    final Map<String, dynamic> notificationTags;
 
-    downloadSongQuality = await settingsDataProvider.getDownloadSongQuality();
+    notificationTags = await settingsDataProvider.getNotificationTags();
 
-    return SettingsPageData(downloadSongQuality: downloadSongQuality);
+    downloadSongQuality = settingsDataProvider.getDownloadSongQuality();
+
+    return SettingsPageData(
+        downloadSongQuality: downloadSongQuality,
+        notificationTags: notificationTags);
   }
 
   Future<void> changeSongDownloadQuality(
       DownloadSongQuality downloadSongQuality) async {
     await settingsDataProvider.changeSongDownloadQuality(downloadSongQuality);
+  }
+
+  DownloadSongQuality getDownloadQuality() {
+    return settingsDataProvider.getDownloadSongQuality();
   }
 }

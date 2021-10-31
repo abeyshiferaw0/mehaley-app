@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/api_response/save_user_data.dart';
 import 'package:elf_play/data/models/app_firebase_user.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/enums/user_login_type.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -110,9 +110,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthErrorState(error: event.error);
     } else if (event is SaveUserEvent) {
       try {
-        final SaveUserData saveUserData = await authRepository.saveUser(
-          event.appFireBaseUser,
-        );
+        await authRepository.setOneSignalExternalId(event.appFireBaseUser);
+        OneSignal.shared.disablePush(false);
+        await authRepository.saveUser(event.appFireBaseUser);
         yield AuthSuccessState();
       } catch (error) {
         yield AuthErrorState(error: error.toString());
@@ -129,6 +129,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (error) {
         yield AuthErrorState(error: error.toString());
       }
+    } else if (event is LogOutEvent) {
+      authRepository.logOut();
+      yield AuthLoggedOutState();
     }
   }
 

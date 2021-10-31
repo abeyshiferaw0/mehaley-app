@@ -26,7 +26,6 @@ import 'package:elf_play/data/repositories/library_page_data_repository.dart';
 import 'package:elf_play/data/repositories/like_follow_repository.dart';
 import 'package:elf_play/data/repositories/lyric_data_repository.dart';
 import 'package:elf_play/data/repositories/my_playlist_repository.dart';
-import 'package:elf_play/data/repositories/player_data_repository.dart';
 import 'package:elf_play/data/repositories/playlist_data_repository.dart';
 import 'package:elf_play/data/repositories/profile_data_repository.dart';
 import 'package:elf_play/data/repositories/search_data_repository.dart';
@@ -77,8 +76,6 @@ class AppRepositories {
       LibraryPageDataRepository(
     libraryPageDataProvider: LibraryPageDataProvider(),
   );
-
-  static PlayerDataRepository playerDataRepository = PlayerDataRepository();
 
   static SettingDataRepository settingDataRepository = SettingDataRepository(
     settingsDataProvider: SettingsDataProvider(),

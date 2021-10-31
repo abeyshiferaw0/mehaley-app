@@ -83,8 +83,8 @@ class ItemHomeUserLib extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                           color: AppColors.white,
-                          fontSize: AppFontSizes.font_size_10.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: (AppFontSizes.font_size_10 - 1).sp,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],

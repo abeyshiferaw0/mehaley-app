@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
-import 'package:elf_play/data/repositories/player_data_repository.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +16,8 @@ part 'audio_player_state.dart';
 
 class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioPlayer audioPlayer;
-  final PlayerDataRepository playerDataRepository;
 
   AudioPlayerBloc({
-    required this.playerDataRepository,
     required this.audioPlayer,
   }) : super(AudioPlayerInitialState()) {
     audioPlayer.setCanUseNetworkResourcesForLiveStreamingWhilePaused(true);
@@ -259,9 +255,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
         ///DEBUG ALSO CHECK FOR DATA SAVER
         //checkForVideoBg(mediaItem);
-
-        ///ADD SONG TO RECENTLY PLAYED LIST
-        playerDataRepository.addToRecentlyPlayed(song);
       },
     );
   }
@@ -452,6 +445,4 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       this.add(PlayerVolumeChangedEvent(volume: event));
     });
   }
-
-
 }
