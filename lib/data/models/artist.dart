@@ -19,8 +19,6 @@ class Artist extends Equatable {
   final bool isVerified;
   @HiveField(5)
   final bool isSuggested;
-  @HiveField(6)
-  final String artistAboutSocialLinks;
   @HiveField(7)
   final bool? isFollowed;
   @HiveField(8)
@@ -35,7 +33,6 @@ class Artist extends Equatable {
     required this.artistImages,
     required this.isVerified,
     required this.isSuggested,
-    required this.artistAboutSocialLinks,
     required this.isFollowed,
     required this.artistDateCreated,
     required this.artistDateUpdated,
@@ -49,7 +46,6 @@ class Artist extends Equatable {
         artistImages,
         isVerified,
         isSuggested,
-        artistAboutSocialLinks,
         isFollowed,
         artistDateCreated,
         artistDateUpdated,
@@ -68,7 +64,6 @@ class Artist extends Equatable {
           : [RemoteImage.emptyRemoteImage()],
       isVerified: map['is_verified'] == 1 ? true : false,
       isSuggested: map['is_suggested'] == 1 ? true : false,
-      artistAboutSocialLinks: map['artist_about_social_links'] as String,
       isFollowed: map['is_followed'] != null
           ? (map['is_followed'] == 1 ? true : false)
           : null,
@@ -86,7 +81,6 @@ class Artist extends Equatable {
       'artist_images': this.artistImages,
       'is_verified': this.isVerified,
       'is_suggested': this.isSuggested,
-      'artist_about_social_links': this.artistAboutSocialLinks,
       'is_followed': this.isFollowed,
       'artist_date_created': this.artistDateCreated,
       'artist_date_updated': this.artistDateUpdated,

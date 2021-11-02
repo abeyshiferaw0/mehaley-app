@@ -28,6 +28,7 @@ class SearchResultPage extends StatefulWidget {
 class _SearchResultPageState extends State<SearchResultPage> {
   //DOMINANT COLOR;
   Color dominantColor = AppColors.appGradientDefaultColorBlack;
+  late FocusNode focusNode;
 
   @override
   void initState() {
@@ -36,6 +37,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
         showSpeechSearchSheet();
       });
     }
+    focusNode = FocusNode();
     super.initState();
   }
 
@@ -67,6 +69,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                   return SearchResultList(
                     searchPageResultData: state.searchPageResultData,
                     searchKey: state.key,
+                    focusNode: focusNode,
                   );
                 } else {
                   return SearchEmptyMessage(
@@ -99,6 +102,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
         alignment: Alignment.topCenter,
         child: SearchPageInput(
           key: GlobalKey(debugLabel: "SEARCH_INPUT_KEY"),
+          focusNode: focusNode,
           onSearchEmpty: () {
             print("CancelSearchEvent");
             //REMOVE SEARCH
@@ -110,14 +114,14 @@ class _SearchResultPageState extends State<SearchResultPage> {
             //FETCH SEARCH REQUEST
             if (key != '') {
               EasyDebounce.debounce(
-                AppValues.searchPageDebouncer,
-                Duration(seconds: 1),
-                () => BlocProvider.of<SearchResultBloc>(context).add(
+                  AppValues.searchPageDebouncer, Duration(seconds: 1), () {
+                BlocProvider.of<SearchResultBloc>(context).add(
                   LoadSearchResultEvent(key: key),
-                ),
+                );
+              });
+              BlocProvider.of<SearchCancelCubit>(context).changeSearchingState(
+                cancelSearchingView: false,
               );
-              BlocProvider.of<SearchCancelCubit>(context)
-                  .changeSearchingState(cancelSearchingView: false);
             }
           },
         ),

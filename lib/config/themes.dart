@@ -34,9 +34,9 @@ class AppColors {
   static Color orange1 = HexColor("#E8A14D");
   static Color orange2 = HexColor("#FF7C3E");
   static Color orange3 = HexColor("#E57343");
-  static Color blue1 = HexColor("#66C7C5");
-  static Color blue2 = HexColor("#4997CB");
-  static Color blue3 = HexColor("#5C91EF");
+  static Color blue1 = HexColor("#11c6c5");
+  static Color blue2 = HexColor("#0885d6");
+  static Color blue3 = HexColor("#0458de");
 }
 
 class AppFontSizes {

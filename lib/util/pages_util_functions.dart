@@ -19,8 +19,12 @@ import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/enums/playlist_created_by.dart';
+import 'package:elf_play/data/models/home_shortcut/album_shortcut.dart';
+import 'package:elf_play/data/models/home_shortcut/category_shortcut.dart';
+import 'package:elf_play/data/models/home_shortcut/playlist_shortcut.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/playlist.dart';
+import 'package:elf_play/data/models/remote_image.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/data/models/text_lan.dart';
@@ -1020,5 +1024,100 @@ class PagesUtilFunctions {
     if (groupType == GroupType.ALBUM) return SongSyncPlayedFrom.ALBUM_GROUP;
     if (groupType == GroupType.SONG) return SongSyncPlayedFrom.SONG_GROUP;
     return SongSyncPlayedFrom.UNK;
+  }
+
+  static String getShortCutText(shortcut, context) {
+    if (shortcut is CategoryShortcut) {
+      return L10nUtil.translateLocale(shortcut.categoryNameText, context);
+    }
+    if (shortcut is AlbumShortcut) {
+      return L10nUtil.translateLocale(shortcut.albumTitle, context);
+    }
+    if (shortcut is PlaylistShortcut) {
+      return L10nUtil.translateLocale(shortcut.playlistNameText, context);
+    } else {
+      throw "shortcut type not valid";
+    }
+  }
+
+  static RemoteImage getImage(shortcut) {
+    if (shortcut is CategoryShortcut) {
+      return shortcut.categoryImage;
+    }
+    if (shortcut is AlbumShortcut) {
+      return shortcut.albumImages[0];
+    }
+    if (shortcut is PlaylistShortcut) {
+      return shortcut.playlistImage;
+    } else {
+      throw "shortcut type not valid";
+    }
+  }
+
+  static AppItemsType getAppItemsType(shortcut) {
+    if (shortcut is CategoryShortcut) {
+      return AppItemsType.OTHER;
+    }
+    if (shortcut is AlbumShortcut) {
+      return AppItemsType.ALBUM;
+    }
+    if (shortcut is PlaylistShortcut) {
+      return AppItemsType.PLAYLIST;
+    } else {
+      throw "shortcut type not valid";
+    }
+  }
+
+  static String getShortCutType(shortcut) {
+    if (shortcut is CategoryShortcut) {
+      return "Category";
+    }
+    if (shortcut is AlbumShortcut) {
+      return "Album";
+    }
+    if (shortcut is PlaylistShortcut) {
+      return "Playlist";
+    } else {
+      throw "shortcut type not valid";
+    }
+  }
+
+  static getShortCutClickAction(shortcut, context) {
+    if (shortcut is CategoryShortcut) {
+      Navigator.pushNamed(
+        context,
+        AppRouterPaths.categoryRoute,
+        arguments: ScreenArguments(
+          args: {
+            'category': Category(
+              categoryId: shortcut.categoryId,
+              categoryNameText: shortcut.categoryNameText,
+              categoryDescriptionText: shortcut.categoryNameText,
+              categoryImage: shortcut.categoryImage,
+              categoryDateCreated: DateTime.now(),
+              categoryDateUpdated: DateTime.now(),
+            )
+          },
+        ),
+      );
+    }
+    if (shortcut is AlbumShortcut) {
+      Navigator.pushNamed(
+        context,
+        AppRouterPaths.albumRoute,
+        arguments: ScreenArguments(args: {'albumId': shortcut.albumId}),
+      );
+    }
+    if (shortcut is PlaylistShortcut) {
+      Navigator.pushNamed(
+        context,
+        AppRouterPaths.playlistRoute,
+        arguments: ScreenArguments(
+          args: {'playlistId': shortcut.playlistId},
+        ),
+      );
+    } else {
+      throw "shortcut type not valid";
+    }
   }
 }

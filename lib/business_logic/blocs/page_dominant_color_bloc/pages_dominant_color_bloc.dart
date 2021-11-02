@@ -66,6 +66,12 @@ class PagesDominantColorBloc
         0.0,
       );
       yield ProfilePageDominantColorChangedState(color: dominantColor);
+    } else if (event is HomePageDominantColorChanged) {
+      Color dominantColor = ColorUtil.darken(
+        event.dominantColor,
+        0.0,
+      );
+      yield HomePageDominantColorChangedState(color: dominantColor);
     }
   }
 

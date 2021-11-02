@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.129.202:8181/music";
-  static const String userBaseUrl = "http://192.168.129.202:8181/user";
-  static const String baseFileUrl = "http://192.168.129.202:8181";
+  static const String musicBaseUrl = "http://192.168.110.202:8181/music";
+  static const String userBaseUrl = "http://192.168.110.202:8181/user";
+  static const String baseFileUrl = "http://192.168.110.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -46,6 +46,7 @@ class AppValues {
   static const double homeCategoriesItemWidth = 155;
   static const double customGroupHeaderImageSize = 45;
   static const double featuredSongsPagerHeight = 80;
+  static const double homeHeaderGradientColor = 400;
 
   //BOTTOM BAR
   static const double bottomBarActiveIconSize = 28;
@@ -165,13 +166,15 @@ class AppValues {
   static const double buttonBouncingScaleFactor4 = 0.2;
   static const String menuBarrierLabel = "MENU_DIALOG";
   static const double menuHeaderImageSize = 150;
-  static String searchPageDebouncer = "SEARCH_PAGE_DEBOUNCER";
+  static const String searchPageDebouncer = "SEARCH_PAGE_DEBOUNCER";
+  static const String bouncingButtonDebouncer="BOUNCING_BUTTON_DEBOUNCER";
   static const double createPlaylistImageSize = 180;
   static const String downloaderSendPort = "downloader_send_port";
   static const String songExtraStr = "SONG_EXTRA";
   static const String songSyncExtraStr = "SONG_SYNC_EXTRA";
   static const double previewDialogSongItemSize = 60;
   static const int songSyncTimerGapInSeconds = 120;
+
 
   //static const String languageRadioGroupValue = "LANGUAGE_RADIO";
 }

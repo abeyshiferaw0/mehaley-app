@@ -168,7 +168,11 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
             BlocProvider.of<DownloadingSongBloc>(context).add(
-              RetryDownloadSongEvent(song: widget.song),
+              RetryDownloadSongEvent(
+                song: widget.song,
+                notificationTitle:
+                    "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+              ),
             );
           });
         },
@@ -216,7 +220,11 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   EasyDebounce.debounce(
                       "DOWNLOAD_BUTTON", Duration(milliseconds: 300), () {
                     BlocProvider.of<DownloadingSongBloc>(context).add(
-                      DownloadSongEvent(song: widget.song),
+                      DownloadSongEvent(
+                        song: widget.song,
+                        notificationTitle:
+                            "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+                      ),
                     );
                   });
                 },

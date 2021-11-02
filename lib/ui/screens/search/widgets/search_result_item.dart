@@ -32,6 +32,7 @@ class SearchResultItem extends StatefulWidget {
     required this.isRecentSearchItem,
     required this.isPlaylistDedicatedResultPage,
     required this.onMenuTap,
+    this.focusNode,
   }) : super(key: key);
 
   final Key itemKey;
@@ -45,6 +46,7 @@ class SearchResultItem extends StatefulWidget {
   final bool isPlaylistDedicatedResultPage;
   final AppSearchItemTypes appSearchItemTypes;
   final VoidCallback onMenuTap;
+  final FocusNode? focusNode;
 
   @override
   _SearchResultItemState createState() => _SearchResultItemState(
@@ -98,17 +100,21 @@ class _SearchResultItemState extends State<SearchResultItem> {
             .add(AddRecentSearchEvent(item: item));
         //PERFORM CLICK ACTION
         PagesUtilFunctions.searchResultItemOnClick(
-            appSearchItemTypes: appSearchItemTypes,
-            item: item,
-            playingFrom: PlayingFrom(
-              from: "Playing From Search Result \"$searchKey\"",
-              title: title,
-              songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
-              songSyncPlayedFromId: -1,
-            ),
-            items: items,
-            context: context,
-            index: 0);
+          appSearchItemTypes: appSearchItemTypes,
+          item: item,
+          playingFrom: PlayingFrom(
+            from: "Playing From Search Result \"$searchKey\"",
+            title: title,
+            songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
+            songSyncPlayedFromId: -1,
+          ),
+          items: items,
+          context: context,
+          index: 0,
+        );
+        if (widget.focusNode != null) {
+          widget.focusNode!.unfocus();
+        }
       },
       child: isPlaylistDedicatedResultPage
           ? buildGridItem()
@@ -156,9 +162,10 @@ class _SearchResultItemState extends State<SearchResultItem> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: AppColors.lightGrey,
-                fontWeight: FontWeight.w600,
-                fontSize: AppFontSizes.font_size_10.sp),
+              color: AppColors.lightGrey,
+              fontWeight: FontWeight.w600,
+              fontSize: AppFontSizes.font_size_10.sp,
+            ),
           ),
         ],
       ),

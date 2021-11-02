@@ -20,11 +20,10 @@ import 'package:elf_play/ui/screens/home/widgets/home_featured_songs.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_groups.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_header_gradient.dart';
 import 'package:elf_play/ui/screens/home/widgets/home_recently_played.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_user_library.dart';
+import 'package:elf_play/ui/screens/home/widgets/home_shortcuts.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -119,21 +118,20 @@ class _HomePageState extends State<HomePage>
       physics: ClampingScrollPhysics(),
       child: Stack(
         children: [
-          HomeHeaderGradient(height: 400, color: HexColor("#8B1931")),
+          HomeHeaderGradient(),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(height: AppMargin.margin_62),
+              SizedBox(height: AppMargin.margin_48),
 
               ///NO INTERNET HEADER
               NoInternetHeader(),
 
               ///BUILD USER LIBRARY GRIDS
-              HomeUserLibrary(),
-              SizedBox(height: AppMargin.margin_32),
-
-              ///BUILD USER LIBRARY GRIDS
-              HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
+              HomeShortcuts(
+                shortcutData: homePageData.shortcutData,
+              ),
               SizedBox(height: AppMargin.margin_32),
 
               ///BUILD RECENTLY PLAYED LIST
@@ -141,7 +139,11 @@ class _HomePageState extends State<HomePage>
 
               ///BUILD HOME CATEGORIES
               HomeCategories(categories: homePageData.categories),
-              SizedBox(height: AppMargin.margin_28),
+              SizedBox(height: AppMargin.margin_32),
+
+              ///BUILD USER LIBRARY GRIDS
+              HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
+              SizedBox(height: AppMargin.margin_32),
 
               Container(
                 padding:
@@ -164,7 +166,7 @@ class _HomePageState extends State<HomePage>
             ],
           ),
           Positioned(
-            top: AppMargin.margin_48,
+            top: AppMargin.margin_32,
             left: AppMargin.margin_16,
             right: AppMargin.margin_16,
             child: HomeAppBar(),

@@ -23,7 +23,7 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       playedFromId: fields[2] as int?,
       isPreview: fields[3] as bool,
       isOffline: fields[4] as bool,
-      listenDate: fields[5] as DateTime,
+      listenDate: fields[5] as String,
       secondsPlayed: fields[6] as int?,
     );
   }

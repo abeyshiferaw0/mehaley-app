@@ -12,6 +12,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:uuid/uuid.dart';
@@ -216,7 +217,7 @@ class Song extends Equatable {
                 ? false
                 : true,
         isOffline: downloadedTaskWithSong != null ? true : false,
-        listenDate: DateTime.now(),
+        listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
         secondsPlayed: null,
       );
 

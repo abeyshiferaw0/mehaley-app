@@ -27,9 +27,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({Key? key, required this.category}) : super(key: key) {
-    print(category);
-  }
+  CategoryPage({Key? key, required this.category}) : super(key: key);
 
   final Category category;
 

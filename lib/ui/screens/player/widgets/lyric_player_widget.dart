@@ -95,6 +95,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                 value: BlocProvider.of<LyricBloc>(context),
                 child: LyricFullPage(
                   song: widget.song,
+                    dominantColor:dominantColor,
                 ),
               ),
             ),

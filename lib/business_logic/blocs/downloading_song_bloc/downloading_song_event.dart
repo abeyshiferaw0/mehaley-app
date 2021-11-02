@@ -6,24 +6,28 @@ abstract class DownloadingSongEvent extends Equatable {
 
 class DownloadSongEvent extends DownloadingSongEvent {
   final Song song;
+  final String notificationTitle;
 
   DownloadSongEvent({
     required this.song,
+    required this.notificationTitle,
   });
 
   @override
-  List<Object?> get props => [song];
+  List<Object?> get props => [song, notificationTitle];
 }
 
 class RetryDownloadSongEvent extends DownloadingSongEvent {
   final Song song;
+  final String notificationTitle;
 
   RetryDownloadSongEvent({
     required this.song,
+    required this.notificationTitle,
   });
 
   @override
-  List<Object?> get props => [song];
+  List<Object?> get props => [song, notificationTitle];
 }
 
 class DownloadIngSongProgressEvent extends DownloadingSongEvent {

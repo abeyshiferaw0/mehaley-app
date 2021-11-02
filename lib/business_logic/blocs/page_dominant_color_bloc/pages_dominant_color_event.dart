@@ -47,3 +47,12 @@ class UserProfilePageDominantColorChanged extends PagesDominantColorEvent {
   @override
   List<Object?> get props => [dominantColor];
 }
+
+class HomePageDominantColorChanged extends PagesDominantColorEvent {
+  final HexColor dominantColor;
+
+  HomePageDominantColorChanged({required this.dominantColor});
+
+  @override
+  List<Object?> get props => [dominantColor];
+}

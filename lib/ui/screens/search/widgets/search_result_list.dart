@@ -26,12 +26,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
-  const SearchResultList(
-      {Key? key, required this.searchPageResultData, required this.searchKey})
-      : super(key: key);
+  const SearchResultList({
+    Key? key,
+    required this.searchPageResultData,
+    required this.searchKey,
+    required this.focusNode,
+  }) : super(key: key);
 
   final SearchPageResultData searchPageResultData;
   final String searchKey;
+  final FocusNode focusNode;
 
   @override
   _SearchResultListState createState() => _SearchResultListState(
@@ -82,7 +86,10 @@ class _SearchResultListState extends State<SearchResultList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: buildSearchResultColumnList(
-                    resultItems, searchPageResultData.topArtistData, searchKey),
+                  resultItems,
+                  searchPageResultData.topArtistData,
+                  searchKey,
+                ),
               ),
             ),
           ),
@@ -166,6 +173,7 @@ class _SearchResultListState extends State<SearchResultList> {
         items: AudioPlayerUtil.getPlayingItems(resultItem, resultItems),
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        focusNode: widget.focusNode,
         onMenuTap: () {
           //SHOW MENU DIALOG
           PagesUtilFunctions.showMenuDialog(
@@ -188,6 +196,7 @@ class _SearchResultListState extends State<SearchResultList> {
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
@@ -222,6 +231,7 @@ class _SearchResultListState extends State<SearchResultList> {
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
@@ -254,6 +264,7 @@ class _SearchResultListState extends State<SearchResultList> {
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {

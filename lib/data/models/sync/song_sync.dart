@@ -17,7 +17,7 @@ class SongSync {
   @HiveField(4)
   final bool isOffline;
   @HiveField(5)
-  final DateTime listenDate;
+  final String listenDate;
   @HiveField(6)
   final int? secondsPlayed;
   @HiveField(7)
@@ -42,7 +42,7 @@ class SongSync {
       playedFromId: json["played_from_id"],
       isPreview: json["is_preview"],
       isOffline: json["is_offline"],
-      listenDate: DateTime.parse(json["listen_date"]),
+      listenDate: json["listen_date"],
       secondsPlayed:
           json["s_played"] != null ? int.parse(json["s_played"]) : null,
     );
@@ -56,7 +56,7 @@ class SongSync {
       "played_from_id": this.playedFromId,
       "is_preview": this.isPreview,
       "is_offline": this.isOffline,
-      "listen_date": this.listenDate.toIso8601String(),
+      "listen_date": this.listenDate,
       "s_played": this.secondsPlayed,
     };
   }
@@ -70,7 +70,7 @@ class SongSync {
             "\"${EnumToString.convertToString(this.playedFrom)}\"",
         "\"is_preview\"": this.isPreview ? 1 : 0,
         "\"is_offline\"": this.isOffline ? 1 : 0,
-        "\"listen_date\"": "\"${this.listenDate.toIso8601String()}\"",
+        "\"listen_date\"": "\"${this.listenDate}\"",
         "\"s_played\"": this.secondsPlayed,
       };
     }
@@ -81,7 +81,7 @@ class SongSync {
       "\"played_from_id\"": "\"${this.playedFromId}\"",
       "\"is_preview\"": this.isPreview ? 1 : 0,
       "\"is_offline\"": this.isOffline ? 1 : 0,
-      "\"listen_date\"": "\"${this.listenDate.toIso8601String()}\"",
+      "\"listen_date\"": "\"${this.listenDate}\"",
       "\"s_played\"": this.secondsPlayed,
     };
   }
@@ -92,7 +92,7 @@ class SongSync {
     int? playedFromId,
     bool? isPreview,
     bool? isOffline,
-    DateTime? listenDate,
+    String? listenDate,
     int? secondsPlayed,
     int? songId,
   }) {

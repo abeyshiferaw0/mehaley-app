@@ -1,7 +1,6 @@
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/util/auth_util.dart';
-import 'package:elf_play/util/debouncer.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -14,8 +13,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Debouncer(milliseconds: 2000).run(() {
-      ///DEBUG
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       ///CHECK AUTH HERE
       checkIfUserLoggedIn();
     });

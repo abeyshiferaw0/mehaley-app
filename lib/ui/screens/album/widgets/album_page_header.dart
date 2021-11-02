@@ -52,7 +52,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
   Widget build(BuildContext context) {
     return BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
       builder: (context, state) {
-        if (state is AlbumPageDominantColorChangedState) {
+        if (state is HomePageDominantColorChangedState) {
           dominantColor = state.color;
         }
         return AnimatedSwitcher(

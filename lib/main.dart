@@ -229,6 +229,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => SearchInputIsSearchingCubit(),
             ),
+
             BlocProvider(
               create: (context) => SongMenuBloc(
                 songMenuRepository: AppRepositories.songMenuRepository,

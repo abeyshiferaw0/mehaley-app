@@ -73,6 +73,7 @@ class DownloadingSongBloc
               event.song,
               downloadSongQuality,
             ),
+            notificationTitle: event.notificationTitle,
             showNotification: true,
             openFileFromNotification: false,
           );
@@ -94,7 +95,12 @@ class DownloadingSongBloc
           yield SongDownloadedNetworkNotAvailableState();
         }
       } else {
-        this.add(DownloadSongEvent(song: event.song));
+        this.add(
+          DownloadSongEvent(
+            song: event.song,
+            notificationTitle: event.notificationTitle,
+          ),
+        );
       }
     } else if (event is DownloadIngSongProgressEvent) {
       ///GET LIST OF DOWNLOADING SONGS
