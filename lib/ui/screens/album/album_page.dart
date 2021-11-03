@@ -4,6 +4,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/api_response/album_page_data.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
@@ -13,9 +14,11 @@ import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/album/widgets/album_page_header.dart';
 import 'package:elf_play/ui/screens/album/widgets/shimmer_album.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -31,7 +34,8 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
   @override
   void initState() {
-    BlocProvider.of<AlbumPageBloc>(context).add(LoadAlbumPageEvent(albumId: widget.albumId));
+    BlocProvider.of<AlbumPageBloc>(context)
+        .add(LoadAlbumPageEvent(albumId: widget.albumId));
     super.initState();
   }
 
@@ -74,7 +78,8 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AlbumPageHeader(album: albumPageData.album, songs: albumPageData.songs),
+          AlbumPageHeader(
+              album: albumPageData.album, songs: albumPageData.songs),
           Padding(
             padding: const EdgeInsets.only(left: AppPadding.padding_16),
             child: ListView.builder(
@@ -97,7 +102,10 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                           songs: albumPageData.songs,
                           playingFrom: PlayingFrom(
                             from: "playing from album",
-                            title: albumPageData.album.albumTitle.textAm,
+                            title: L10nUtil.translateLocale(
+                                albumPageData.album.albumTitle, context),
+                            songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
+                            songSyncPlayedFromId: albumPageData.album.albumId,
                           ),
                           startPlaying: true,
                           index: position,
@@ -120,6 +128,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       backgroundColor: AppColors.darkGrey,
       shadowColor: AppColors.transparent,
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       leading: IconButton(
         icon: Icon(PhosphorIcons.caret_left_light),
         onPressed: () {
@@ -130,7 +139,8 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
         builder: (context, state) {
           if (state is AlbumPageLoadedState) {
             return Text(
-              state.albumPageData.album.albumTitle.textAm,
+              L10nUtil.translateLocale(
+                  state.albumPageData.album.albumTitle, context),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_16,
                 fontWeight: FontWeight.w500,
@@ -167,8 +177,9 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                 albumId: album.albumId,
                 album: album,
                 isLiked: album.isLiked,
-                title: album.albumTitle.textAm,
-                imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+                title: L10nUtil.translateLocale(album.albumTitle, context),
+                imageUrl:
+                    AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
                 price: album.priceEtb,
                 isFree: album.isFree,
                 isDiscountAvailable: album.isDiscountAvailable,

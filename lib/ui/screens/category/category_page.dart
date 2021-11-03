@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
@@ -16,17 +17,17 @@ import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart'
 import 'package:elf_play/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category.dart';
 import 'package:elf_play/ui/screens/category/widgets/shimmer_category_top.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({Key? key, required this.category}) : super(key: key) {
-    print(category);
-  }
+  CategoryPage({Key? key, required this.category}) : super(key: key);
 
   final Category category;
 
@@ -87,24 +88,51 @@ class _CategoryPageState extends State<CategoryPage>
       },
       child: Scaffold(
         backgroundColor: AppColors.black,
-        body: CustomScrollView(
-          slivers: [
-            buildSliverHeader(widget.category),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_16),
+        body: Stack(
+          children: [
+            CustomScrollView(
+              slivers: [
+                buildSliverHeader(widget.category),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_16),
+                ),
+                buildCategoryTopAlbumPlaylist(),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_48),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppMargin.margin_16),
+                ),
+                buildCategorySongsList(),
+              ],
             ),
-            buildCategoryTopAlbumPlaylist(),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_48),
-            ),
-            buildCategorySongsHeader(),
-            SliverToBoxAdapter(
-              child: SizedBox(height: AppMargin.margin_16),
-            ),
-            buildCategorySongsList(),
+            buildCategoryErrorBlocBuilder(),
           ],
         ),
       ),
+    );
+  }
+
+  BlocBuilder<CategoryPageBloc, CategoryPageState>
+      buildCategoryErrorBlocBuilder() {
+    return BlocBuilder<CategoryPageBloc, CategoryPageState>(
+      builder: (context, state) {
+        if (state is CategoryPageTopLoadingError) {
+          return AppError(
+            height: ScreenUtil(context: context).getScreenHeight(),
+            bgWidget: SizedBox(),
+            onRetry: () {
+              BlocProvider.of<CategoryPageBloc>(context).add(
+                LoadCategoryPageTopEvent(
+                  categoryId: widget.category.categoryId,
+                ),
+              );
+              _pagingController.refresh();
+            },
+          );
+        }
+        return SizedBox();
+      },
     );
   }
 
@@ -119,18 +147,7 @@ class _CategoryPageState extends State<CategoryPage>
             return CategoryTopShimmer();
           }
           if (state is CategoryPageTopLoadingError) {
-            return AppError(
-              height: ScreenUtil(context: context).getScreenHeight() * 0.5,
-              bgWidget: CategoryTopShimmer(),
-              onRetry: () {
-                BlocProvider.of<CategoryPageBloc>(context).add(
-                  LoadCategoryPageTopEvent(
-                    categoryId: widget.category.categoryId,
-                  ),
-                );
-                _pagingController.refresh();
-              },
-            );
+            return CategoryTopShimmer();
           }
           return CategoryTopShimmer();
         },
@@ -147,6 +164,7 @@ class _CategoryPageState extends State<CategoryPage>
           itemBuilder: (context, item, index) {
             return Column(
               children: [
+                index == 0 ? buildCategorySongsHeader() : SizedBox(),
                 SizedBox(height: AppMargin.margin_8),
                 SongItem(
                   song: item,
@@ -160,7 +178,12 @@ class _CategoryPageState extends State<CategoryPage>
                       songs: [item],
                       playingFrom: PlayingFrom(
                         from: "playing from category",
-                        title: widget.category.categoryNameText.textAm,
+                        title: L10nUtil.translateLocale(
+                          widget.category.categoryNameText,
+                          context,
+                        ),
+                        songSyncPlayedFrom: SongSyncPlayedFrom.CATEGORY_DETAIL,
+                        songSyncPlayedFromId: widget.category.categoryId,
                       ),
                       startPlaying: true,
                       index: 0,
@@ -170,6 +193,9 @@ class _CategoryPageState extends State<CategoryPage>
                 SizedBox(height: AppMargin.margin_8),
               ],
             );
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return buildEmptyCategory();
           },
           newPageProgressIndicatorBuilder: (context) {
             return Padding(
@@ -208,6 +234,38 @@ class _CategoryPageState extends State<CategoryPage>
         ),
       ),
     );
+  }
+
+  Container buildEmptyCategory() {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          PhosphorIcons.music_note_simple_light,
+          size: AppIconSizes.icon_size_72,
+          color: AppColors.darkGrey.withOpacity(0.8),
+        ),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32 * 2,
+          ),
+          child: Text(
+            "Empty category",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.txtGrey,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 
   Column buildCategoryTopAlbumPlaylistItems(CategoryPageTopLoaded state) {
@@ -334,21 +392,22 @@ class _CategoryPageState extends State<CategoryPage>
     return items;
   }
 
-  SliverToBoxAdapter buildCategorySongsHeader() {
-    return SliverToBoxAdapter(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Mezmurs",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: AppFontSizes.font_size_18,
-              fontWeight: FontWeight.w600,
-            ),
+  Column buildCategorySongsHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "Mezmurs",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: AppFontSizes.font_size_18,
+            fontWeight: FontWeight.w600,
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: AppMargin.margin_16,
+        ),
+      ],
     );
   }
 

@@ -18,6 +18,7 @@ class ArtistDataRepository {
     final int noOfSong;
     final int noOfAlbum;
     final List<Song> popularSongs;
+    final List<Song> newSongs;
     final List<Album> topAlbums;
     final List<Playlist> playlistsFeaturingArtists;
     final List<Artist> similarArtists;
@@ -58,15 +59,22 @@ class ArtistDataRepository {
         .map((artist) => Artist.fromMap(artist))
         .toList();
 
+    //PARSE ARTISTS FOR ARTIST
+    newSongs = (response.data['new_songs'] as List)
+        .map((song) => Song.fromMap(song))
+        .toList();
+
     ArtistPageData artistPageData = ArtistPageData(
-        response: response,
-        similarArtists: similarArtists,
-        topAlbums: topAlbums,
-        popularSongs: popularSongs,
-        playlistsFeaturingArtists: playlistsFeaturingArtists,
-        artist: artist,
-        noOfSong: noOfSong,
-        noOfAlbum: noOfAlbum);
+      response: response,
+      similarArtists: similarArtists,
+      topAlbums: topAlbums,
+      popularSongs: popularSongs,
+      playlistsFeaturingArtists: playlistsFeaturingArtists,
+      artist: artist,
+      noOfSong: noOfSong,
+      noOfAlbum: noOfAlbum,
+      newSongs: newSongs,
+    );
 
     return artistPageData;
   }

@@ -8,6 +8,7 @@ import 'package:elf_play/ui/common/menu/menu_items/playlist_cart_menu_item.dart'
 import 'package:elf_play/ui/common/menu/menu_items/playlist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -73,7 +74,7 @@ class PlaylistMenuWidget extends StatelessWidget {
             SizedBox(
               height: ScreenUtil(context: context).getScreenHeight() * 0.2,
             ),
-            buildMenuHeader(),
+            buildMenuHeader(context),
             SizedBox(
               height: AppMargin.margin_32,
             ),
@@ -83,16 +84,16 @@ class PlaylistMenuWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  isFree
-                      ? SizedBox()
-                      : MenuItem(
+                  (!playlist.isBought && !playlist.isFree)
+                      ? MenuItem(
                           isDisabled: false,
                           hasTopMargin: false,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.currency_circle_dollar_thin,
-                          title: "Buy Playlist",
+                          title: AppLocalizations.of(context)!.buyPlaylist,
                           onTap: () {},
-                        ),
+                        )
+                      : SizedBox(),
                   PlaylistCartMenuItem(
                     playlist: playlist,
                   ),
@@ -105,7 +106,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.magnifying_glass_light,
-                    title: "Find in playlist",
+                    title: AppLocalizations.of(context)!.findInPlaylist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -113,7 +114,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.sort_ascending_light,
-                    title: "Sort playlist",
+                    title: AppLocalizations.of(context)!.sortPlaylist,
                     onTap: () {},
                   ),
                   MenuItem(
@@ -121,7 +122,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.share_network_light,
-                    title: "Share playlist",
+                    title: AppLocalizations.of(context)!.sharePlaylist,
                     onTap: () {},
                   ),
                   SizedBox(height: AppMargin.margin_20),
@@ -134,7 +135,7 @@ class PlaylistMenuWidget extends StatelessWidget {
     );
   }
 
-  Container buildMenuHeader() {
+  Container buildMenuHeader(context) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -179,7 +180,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                 ),
           SizedBox(height: AppMargin.margin_2),
           Text(
-            "BY ELF PLAY".toUpperCase(),
+            AppLocalizations.of(context)!.byElfPlay.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.txtGrey,

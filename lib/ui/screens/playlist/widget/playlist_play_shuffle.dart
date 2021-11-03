@@ -2,7 +2,9 @@ import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +48,10 @@ class PlaylistPlayShuffle extends StatelessWidget {
                     songs: songs,
                     playingFrom: PlayingFrom(
                       from: "playing from playlist",
-                      title: playlist.playlistNameText.textAm,
+                      title: L10nUtil.translateLocale(
+                          playlist.playlistNameText, context),
+                      songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_DETAIL,
+                      songSyncPlayedFromId: playlist.playlistId,
                     ),
                     index: PagesUtilFunctions.getRandomIndex(
                         min: 0, max: songs.length),

@@ -1,5 +1,6 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class ElfInfoWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class ElfInfoWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "elf play",
+            AppLocalizations.of(context)!.appName,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,

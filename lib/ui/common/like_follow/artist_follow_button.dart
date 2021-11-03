@@ -6,6 +6,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
@@ -37,7 +38,9 @@ class ArtistFollowButton extends StatelessWidget {
             onTap(context);
           },
           child: Container(
-            child: preButtonOnTap() ? buildFollowingBtn() : buildFollowBtn(),
+            child: preButtonOnTap()
+                ? buildFollowingBtn(context)
+                : buildFollowBtn(context),
           ),
         );
       },
@@ -124,14 +127,14 @@ class ArtistFollowButton extends StatelessWidget {
     return isFollowing;
   }
 
-  Container buildFollowingBtn() {
+  Container buildFollowingBtn(context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppMargin.margin_8,
         vertical: AppMargin.margin_6,
       ),
       child: Text(
-        "FOLLOWING",
+        AppLocalizations.of(context)!.following.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,
@@ -147,14 +150,14 @@ class ArtistFollowButton extends StatelessWidget {
     );
   }
 
-  Container buildFollowBtn() {
+  Container buildFollowBtn(context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppMargin.margin_16,
         vertical: AppMargin.margin_6,
       ),
       child: Text(
-        "FOLLOW",
+        AppLocalizations.of(context)!.follow.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,

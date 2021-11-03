@@ -45,7 +45,7 @@ class BuyItemBtnWidget extends StatelessWidget {
         onTap: () {},
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: AppPadding.padding_16,
+            horizontal: AppPadding.padding_20,
             vertical: AppPadding.padding_8,
           ),
           margin:
@@ -61,6 +61,7 @@ class BuyItemBtnWidget extends StatelessWidget {
             children: [
               Text(
                 title.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.bold,

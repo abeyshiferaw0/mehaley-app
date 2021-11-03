@@ -12,7 +12,8 @@ part 'artist_page_event.dart';
 part 'artist_page_state.dart';
 
 class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
-  ArtistPageBloc({required this.artistDataRepository}) : super(ArtistPageInitial());
+  ArtistPageBloc({required this.artistDataRepository})
+      : super(ArtistPageInitial());
 
   ArtistDataRepository artistDataRepository;
 
@@ -31,19 +32,21 @@ class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
       yield ArtistPageLoadingState();
       try {
         //YIELD CACHE DATA
-        final ArtistPageData artistPageData = await artistDataRepository.getArtistData(
+        final ArtistPageData artistPageData =
+            await artistDataRepository.getArtistData(
           event.artistId,
           AppCacheStrategy.LOAD_CACHE_FIRST,
         );
         yield ArtistPageLoadedState(artistPageData: artistPageData);
         if (isFromCatch(artistPageData.response)) {
           try {
-            yield ArtistPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final ArtistPageData artistPageData = await artistDataRepository.getArtistData(
+            final ArtistPageData artistPageData =
+                await artistDataRepository.getArtistData(
               event.artistId,
               AppCacheStrategy.CACHE_LATER,
             );
+            yield ArtistPageLoadingState();
             yield ArtistPageLoadedState(artistPageData: artistPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED

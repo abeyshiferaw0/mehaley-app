@@ -8,7 +8,9 @@ import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:sizer/sizer.dart';
 
 class PlaylistInfoCartButton extends StatefulWidget {
   const PlaylistInfoCartButton({
@@ -42,14 +44,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
           return AppBouncingButton(
             onTap: onTap,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppPadding.padding_16,
-                vertical: AppPadding.padding_8,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(100)),
-                color: AppColors.lightGrey,
-              ),
+              padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -62,10 +57,12 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
                   SizedBox(width: AppMargin.margin_8),
                   Text(
                     preCartText(),
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: AppFontSizes.font_size_14,
+                      fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.darkGrey,
+                      // color: AppColors.darkGrey,
+                      color: AppColors.lightGrey,
                     ),
                   ),
                 ],
@@ -86,7 +83,9 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemovePlaylistCartEvent(
             playlist: widget.playlist,
-            appCartAddRemoveEvents: preButtonOnTap() ? AppCartAddRemoveEvents.REMOVE : AppCartAddRemoveEvents.ADD,
+            appCartAddRemoveEvents: preButtonOnTap()
+                ? AppCartAddRemoveEvents.REMOVE
+                : AppCartAddRemoveEvents.ADD,
           ),
         );
       },
@@ -95,10 +94,14 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
 
   Icon preCartIcon() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.get(widget.playlist.playlistId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.get(widget.playlist.playlistId);
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+            .containsKey(widget.playlist.playlistId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+            .containsKey(widget.playlist.playlistId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+          .get(widget.playlist.playlistId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+          .get(widget.playlist.playlistId);
       if (a > b) {
         return Icon(
           PhosphorIcons.shopping_cart_simple_fill,
@@ -109,13 +112,14 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
         return Icon(
           PhosphorIcons.shopping_cart_simple_light,
           size: AppIconSizes.icon_size_20,
-          color: AppColors.black,
+          color: AppColors.lightGrey,
         );
       }
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_20,
@@ -124,11 +128,12 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.black,
+        color: AppColors.lightGrey,
       );
     }
 
@@ -143,48 +148,58 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.black,
+        color: AppColors.lightGrey,
       );
     }
   }
 
   String preCartText() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.get(widget.playlist.playlistId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.get(widget.playlist.playlistId);
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+            .containsKey(widget.playlist.playlistId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+            .containsKey(widget.playlist.playlistId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+          .get(widget.playlist.playlistId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+          .get(widget.playlist.playlistId);
       if (a > b) {
-        return "REMOVE FROM CART".toUpperCase();
+        return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
       } else {
-        return "ADD TO CART".toUpperCase();
+        return AppLocalizations.of(context)!.addToCart.toUpperCase();
       }
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId)) {
-      return "REMOVE FROM CART".toUpperCase();
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
+      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
-      return "ADD TO CART".toUpperCase();
+    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
+      return AppLocalizations.of(context)!.addToCart.toUpperCase();
     }
 
     ///IF PLAYLIST IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.playlist.isInCart) {
-      return "REMOVE FROM CART".toUpperCase();
+      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
     } else {
-      return "ADD TO CART".toUpperCase();
+      return AppLocalizations.of(context)!.addToCart.toUpperCase();
     }
   }
 
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.get(widget.playlist.playlistId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.get(widget.playlist.playlistId);
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+            .containsKey(widget.playlist.playlistId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+            .containsKey(widget.playlist.playlistId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+          .get(widget.playlist.playlistId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+          .get(widget.playlist.playlistId);
       if (a > b) {
         return true;
       } else {
@@ -193,12 +208,14 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.containsKey(widget.playlist.playlistId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
       return true;
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.containsKey(widget.playlist.playlistId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
+        .containsKey(widget.playlist.playlistId)) {
       return false;
     }
 

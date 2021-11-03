@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/api_response/settings_page_data.dart';
+import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/repositories/setting_data_repository.dart';
 import 'package:elf_play/util/download_util.dart';
@@ -52,8 +52,8 @@ class DownloadingSongBloc
   ) async* {
     if (event is DownloadSongEvent) {
       ///GET SONG QUALITY FROM SETTING
-      SettingsPageData settingsPageData =
-          await settingDataRepository.getSettingsPageData();
+      DownloadSongQuality downloadSongQuality =
+          settingDataRepository.getDownloadQuality();
 
       ///CHEK IF DOWNLOAD ALREADY QUEUED
       bool isAlreadyInQueue = await downloadUtil.isAlreadyInQueue(event.song);
@@ -66,13 +66,14 @@ class DownloadingSongBloc
           await FlutterDownloader.enqueue(
             url: downloadUtil.getDownloadUrl(
               event.song,
-              settingsPageData.downloadSongQuality,
+              downloadSongQuality,
             ),
             savedDir: saveDir,
             fileName: downloadUtil.getSongFileName(
               event.song,
-              settingsPageData.downloadSongQuality,
+              downloadSongQuality,
             ),
+            notificationTitle: event.notificationTitle,
             showNotification: true,
             openFileFromNotification: false,
           );
@@ -94,7 +95,12 @@ class DownloadingSongBloc
           yield SongDownloadedNetworkNotAvailableState();
         }
       } else {
-        this.add(DownloadSongEvent(song: event.song));
+        this.add(
+          DownloadSongEvent(
+            song: event.song,
+            notificationTitle: event.notificationTitle,
+          ),
+        );
       }
     } else if (event is DownloadIngSongProgressEvent) {
       ///GET LIST OF DOWNLOADING SONGS

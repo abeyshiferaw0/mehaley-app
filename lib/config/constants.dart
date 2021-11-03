@@ -6,9 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.65.202:8181/music";
-  static const String userBaseUrl = "http://192.168.65.202:8181/user";
-  static const String baseFileUrl = "http://192.168.65.202:8181";
+  static const String musicBaseUrl = "http://192.168.110.202:8181/music";
+  static const String userBaseUrl = "http://192.168.110.202:8181/user";
+  static const String baseFileUrl = "http://192.168.110.202:8181";
   //3.128.186.103:8000
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -45,6 +45,8 @@ class AppValues {
   static const double homeCategoriesItemHeight = 70;
   static const double homeCategoriesItemWidth = 155;
   static const double customGroupHeaderImageSize = 45;
+  static const double featuredSongsPagerHeight = 80;
+  static const double homeHeaderGradientColor = 400;
 
   //BOTTOM BAR
   static const double bottomBarActiveIconSize = 28;
@@ -106,24 +108,33 @@ class AppValues {
   static const double cartItemsSize = 120;
 
   //HIVE BOXES
+  static const String songSyncBox = "SONG_SYNC";
   static const String recentSearchesBox = "RECENT_SEARCHES";
   static const String userBox = "USER_BOX_KEY";
   static const String likedSongsBox = "LIKED_SONGS_BOX_KEY";
-  static const String recentlyPlayedBox = "RECENTLY_PLAYED_BOX";
   static const String recentlyUnLikedSongBox = "RECENTLY_LIKED_SONG_BOX";
   static const String recentlyLikedSongBox = "RECENTLY_UNLIKED_SONG_BOX";
   static const String recentlyLikedAlbumBox = "RECENTLY_LIKED_ALBUM_BOX";
   static const String recentlyUnLikedAlbumBox = "RECENTLY_UNLIKED_ALBUM_BOX";
-  static const String recentlyFollowedPlaylistBox = "RECENTLY_FOLLOWED_PLAYLIST_BOX";
-  static const String recentlyUnFollowedPlaylistBox = "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
-  static const String recentlyFollowedArtistBox = "RECENTLY_FOLLOWED_ARTIST_BOX";
-  static const String recentlyUnFollowedArtistBox = "RECENTLY_UNFOLLOWED_ARTIST_BOX";
-  static const String recentlyCartAddedAlbumBox = "RECENTLY_CART_ADDED_ALBUM_BOX";
-  static const String recentlyCartRemovedAlbumBox = "RECENTLY_CART_REMOVED_ALBUM_BOX";
+  static const String recentlyFollowedPlaylistBox =
+      "RECENTLY_FOLLOWED_PLAYLIST_BOX";
+  static const String recentlyUnFollowedPlaylistBox =
+      "RECENTLY_UNFOLLOWED_PLAYLIST_BOX";
+  static const String recentlyFollowedArtistBox =
+      "RECENTLY_FOLLOWED_ARTIST_BOX";
+  static const String recentlyUnFollowedArtistBox =
+      "RECENTLY_UNFOLLOWED_ARTIST_BOX";
+  static const String recentlyCartAddedAlbumBox =
+      "RECENTLY_CART_ADDED_ALBUM_BOX";
+  static const String recentlyCartRemovedAlbumBox =
+      "RECENTLY_CART_REMOVED_ALBUM_BOX";
   static const String recentlyCartAddedSongBox = "RECENTLY_CART_ADDED_SONG_BOX";
-  static const String recentlyCartRemovedSongBox = "RECENTLY_CART_REMOVED_SONG_BOX";
-  static const String recentlyCartAddedPlaylistBox = "RECENTLY_CART_ADDED_PLAYLIST_BOX";
-  static const String recentlyCartRemovedPlaylistBox = "RECENTLY_CART_REMOVED_PLAYLIST_BOX";
+  static const String recentlyCartRemovedSongBox =
+      "RECENTLY_CART_REMOVED_SONG_BOX";
+  static const String recentlyCartAddedPlaylistBox =
+      "RECENTLY_CART_ADDED_PLAYLIST_BOX";
+  static const String recentlyCartRemovedPlaylistBox =
+      "RECENTLY_CART_REMOVED_PLAYLIST_BOX";
 
   static const String settingsBox = "SETTINGS_BOX";
 
@@ -155,11 +166,15 @@ class AppValues {
   static const double buttonBouncingScaleFactor4 = 0.2;
   static const String menuBarrierLabel = "MENU_DIALOG";
   static const double menuHeaderImageSize = 150;
-  static String searchPageDebouncer = "SEARCH_PAGE_DEBOUNCER";
+  static const String searchPageDebouncer = "SEARCH_PAGE_DEBOUNCER";
+  static const String bouncingButtonDebouncer="BOUNCING_BUTTON_DEBOUNCER";
   static const double createPlaylistImageSize = 180;
   static const String downloaderSendPort = "downloader_send_port";
   static const String songExtraStr = "SONG_EXTRA";
+  static const String songSyncExtraStr = "SONG_SYNC_EXTRA";
   static const double previewDialogSongItemSize = 60;
+  static const int songSyncTimerGapInSeconds = 120;
+
 
   //static const String languageRadioGroupValue = "LANGUAGE_RADIO";
 }
@@ -178,6 +193,7 @@ class AppIconSizes {
   static const double icon_size_16 = 16;
   static const double icon_size_4 = 4;
   static const double icon_size_30 = 30;
+  static const double icon_size_10 = 10;
   static const double icon_size_8 = 8;
 }
 

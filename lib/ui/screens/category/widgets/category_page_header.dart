@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:sizer/sizer.dart';
+
 import 'category_header_gradient.dart';
 
 class CategoryPageHeader extends StatefulWidget {
@@ -61,6 +64,7 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
   AppBar buildAppBar(double shrinkPercentage, Category category) {
     return AppBar(
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       centerTitle: true,
@@ -77,7 +81,7 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
       title: Opacity(
         opacity: widget.shrinkPercentage,
         child: Text(
-          category.categoryNameText.textAm,
+          L10nUtil.translateLocale(category.categoryNameText, context),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_14.sp,
@@ -102,12 +106,17 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                category.categoryNameText.textAm,
-                style: TextStyle(
-                  color: AppColors.lightGrey,
-                  fontSize: AppFontSizes.font_size_24.sp,
-                  fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.padding_16),
+                child: Text(
+                  L10nUtil.translateLocale(category.categoryNameText, context),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.lightGrey,
+                    fontSize: AppFontSizes.font_size_24.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

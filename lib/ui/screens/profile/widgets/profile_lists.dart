@@ -6,6 +6,7 @@ import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/api_response/profile_page_data.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/playlist.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_similar_artists.dart';
 import 'package:elf_play/ui/screens/category/widgets/item_popular_album.dart';
@@ -60,6 +61,8 @@ class ProfileLists extends StatelessWidget {
                   playingFrom: PlayingFrom(
                     from: "playing from",
                     title: "purchased mezmurs",
+                    songSyncPlayedFrom: SongSyncPlayedFrom.PROFILE_PAGE,
+                    songSyncPlayedFromId: -1,
                   ),
                   startPlaying: true,
                   index: position,

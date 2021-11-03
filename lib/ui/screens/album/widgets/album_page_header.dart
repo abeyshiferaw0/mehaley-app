@@ -6,11 +6,13 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +52,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
   Widget build(BuildContext context) {
     return BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
       builder: (context, state) {
-        if (state is AlbumPageDominantColorChangedState) {
+        if (state is HomePageDominantColorChangedState) {
           dominantColor = state.color;
         }
         return AnimatedSwitcher(
@@ -71,15 +73,17 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                 SizedBox(height: AppMargin.margin_16),
                 buildTitleAndSubTitle(album),
                 SizedBox(height: AppMargin.margin_16),
-                BuyItemBtnWidget(
-                  price: album.priceEtb,
-                  title: "BUY ALBUM",
-                  hasLeftMargin: false,
-                  isFree: album.isFree,
-                  discountPercentage: album.discountPercentage,
-                  isDiscountAvailable: album.isDiscountAvailable,
-                  isBought: album.isBought,
-                ),
+                (!album.isBought && !album.isFree)
+                    ? BuyItemBtnWidget(
+                        price: album.priceEtb,
+                        title: "BUY ALBUM",
+                        hasLeftMargin: false,
+                        isFree: album.isFree,
+                        discountPercentage: album.discountPercentage,
+                        isDiscountAvailable: album.isDiscountAvailable,
+                        isBought: album.isBought,
+                      )
+                    : SizedBox(),
                 SizedBox(height: AppMargin.margin_16),
                 PlayShuffleLgBtnWidget(
                   onTap: () {
@@ -90,10 +94,15 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                       songs: songs,
                       playingFrom: PlayingFrom(
                         from: "playing from album",
-                        title: album.albumTitle.textAm,
+                        title:
+                            L10nUtil.translateLocale(album.albumTitle, context),
+                        songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
+                        songSyncPlayedFromId: album.albumId,
                       ),
                       index: PagesUtilFunctions.getRandomIndex(
-                          min: 0, max: songs.length),
+                        min: 0,
+                        max: songs.length,
+                      ),
                     );
                   },
                 ),
@@ -140,7 +149,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          album.albumTitle.textAm,
+          L10nUtil.translateLocale(album.albumTitle, context),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_24,
             color: AppColors.white,
@@ -153,7 +162,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "ALBUM BY " + album.artist.artistName.textAm,
+              "ALBUM BY " +
+                  L10nUtil.translateLocale(album.artist.artistName, context),
               style: albumSubTitleStyle,
             ),
             Padding(

@@ -36,7 +36,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.elf_play"
+        applicationId "com.marathonsys.mehaley"
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
@@ -62,4 +62,21 @@ dependencies {
     //FOR FIREBASE
     implementation 'com.android.support:multidex:2.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    //FOR WIDGETS
+    implementation 'net.danlew:android.joda:2.10.12.2'
 }
+
+
+buildscript {
+    repositories {
+        // ...
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+    }
+    dependencies {
+        // ...
+        // OneSignal-Gradle-Plugin
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.10, 0.99.99]'
+    }
+}
+
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'

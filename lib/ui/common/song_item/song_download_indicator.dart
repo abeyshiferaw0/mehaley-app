@@ -6,6 +6,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
 import 'package:elf_play/util/download_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -134,7 +135,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   mainButtonText: 'DELETE'.toUpperCase(),
                   cancelButtonText: 'CANCEL',
                   titleText:
-                      'Are you sure you want to Delete ${widget.song.songName.textAm} from downloads?',
+                      'Are you sure you want to Delete ${L10nUtil.translateLocale(widget.song.songName, context)} from downloads?',
                   onDelete: () {
                     BlocProvider.of<DownloadingSongBloc>(context).add(
                       DeleteDownloadedSongEvent(song: widget.song),
@@ -167,7 +168,11 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
               () {
             BlocProvider.of<DownloadingSongBloc>(context).add(
-              RetryDownloadSongEvent(song: widget.song),
+              RetryDownloadSongEvent(
+                song: widget.song,
+                notificationTitle:
+                    "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+              ),
             );
           });
         },
@@ -215,7 +220,11 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   EasyDebounce.debounce(
                       "DOWNLOAD_BUTTON", Duration(milliseconds: 300), () {
                     BlocProvider.of<DownloadingSongBloc>(context).add(
-                      DownloadSongEvent(song: widget.song),
+                      DownloadSongEvent(
+                        song: widget.song,
+                        notificationTitle:
+                            "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+                      ),
                     );
                   });
                 },

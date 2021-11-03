@@ -7,12 +7,14 @@ import 'package:elf_play/data/models/api_response/artist_page_data.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_artist_album.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_artist_featured_playlist.dart';
 import 'package:elf_play/ui/screens/artist/widgets/item_similar_artists.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,66 +92,29 @@ class _ArtistPageState extends State<ArtistPage> {
             SizedBox(
               height: AppMargin.margin_32,
             ),
-            buildPopularSongsHeader(),
-            buildArtistSongList(
+            buildArtistPopularSongList(
               artistPageData.popularSongs,
               artistPageData.artist,
             ),
-            SizedBox(height: AppMargin.margin_12),
-            buildAlbumsHeader(),
+            SizedBox(height: AppMargin.margin_16),
+            buildArtistLatestSongList(
+              artistPageData.newSongs,
+              artistPageData.artist,
+            ),
+            SizedBox(height: AppMargin.margin_38),
             buildArtistAlbumsList(artistPageData.topAlbums),
-            SizedBox(height: AppMargin.margin_32),
-            buildFeaturingArtistPlaylistHeader(artistPageData.artist),
-            SizedBox(height: AppMargin.margin_4),
+            SizedBox(height: AppMargin.margin_38),
             buildArtistFeaturingPlaylistList(
               artistPageData.playlistsFeaturingArtists,
+              artistPageData.artist,
             ),
-            SizedBox(height: AppMargin.margin_32),
-            buildOtherArtistsHeader(),
-            SizedBox(height: AppMargin.margin_4),
+            SizedBox(height: AppMargin.margin_38),
             buildSimilarArtistList(artistPageData.similarArtists),
             SizedBox(height: AppMargin.margin_16),
           ],
         ),
       ),
     );
-    // return CustomScrollView(
-    //   slivers: [
-    //     buildSliverHeader(artistPageData),
-    //     buildSliverPlayShuffleButton(
-    //         artistPageData.popularSongs, artistPageData.artist),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(
-    //         height: AppMargin.margin_12,
-    //       ),
-    //     ),
-    //     buildPopularSongsHeader(),
-    //     buildArtistSongList(artistPageData.popularSongs, artistPageData.artist),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(
-    //         height: AppMargin.margin_12,
-    //       ),
-    //     ),
-    //     buildAlbumsHeader(),
-    //     buildArtistAlbumsList(artistPageData.topAlbums),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_32),
-    //     ),
-    //     buildFeaturingArtistPlaylistHeader(artistPageData.artist),
-    //     SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_4)),
-    //     buildArtistFeaturingPlaylistList(
-    //         artistPageData.playlistsFeaturingArtists),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_32),
-    //     ),
-    //     buildOtherArtistsHeader(),
-    //     SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_4)),
-    //     buildSimilarArtistList(artistPageData.similarArtists),
-    //     SliverToBoxAdapter(
-    //       child: SizedBox(height: AppMargin.margin_16),
-    //     ),
-    //   ],
-    // );
   }
 
   SliverPersistentHeader buildSliverHeader(ArtistPageData artistPageData) {
@@ -204,48 +169,7 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  Padding buildArtistSongList(List<Song> popularSongs, Artist artist) {
-    return Padding(
-      padding: const EdgeInsets.only(left: AppPadding.padding_16),
-      child: ListView.builder(
-        itemCount: popularSongs.length,
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (BuildContext context, int position) {
-          return Column(
-            children: [
-              SizedBox(height: AppMargin.margin_8),
-              SongItem(
-                position: position + 1,
-                isForMyPlaylist: false,
-                song: popularSongs[position],
-                onPressed: () {
-                  //OPEN SONG
-                  PagesUtilFunctions.openSong(
-                    context: context,
-                    songs: popularSongs,
-                    playingFrom: PlayingFrom(
-                      from: "playing from artist",
-                      title: artist.artistName.textAm,
-                    ),
-                    startPlaying: true,
-                    index: position,
-                  );
-                },
-                thumbUrl: AppApi.baseFileUrl +
-                    popularSongs[position].albumArt.imageSmallPath,
-                thumbSize: AppValues.artistSongItemSize,
-              ),
-              SizedBox(height: AppMargin.margin_8),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  Container buildAlbumsHeader() {
+  Container buildLatestSongsHeader() {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppPadding.padding_16,
@@ -258,7 +182,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Top Albums",
+                "Latest Releases",
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
                   color: AppColors.white,
@@ -280,6 +204,128 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
+  Padding buildArtistPopularSongList(List<Song> popularSongs, Artist artist) {
+    return Padding(
+      padding: const EdgeInsets.only(left: AppPadding.padding_16),
+      child: ListView.builder(
+        itemCount: popularSongs.length,
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int position) {
+          return Column(
+            children: [
+              position == 0 ? buildPopularSongsHeader() : SizedBox(),
+              SizedBox(height: AppMargin.margin_8),
+              SongItem(
+                position: position + 1,
+                isForMyPlaylist: false,
+                song: popularSongs[position],
+                onPressed: () {
+                  //OPEN SONG
+                  PagesUtilFunctions.openSong(
+                    context: context,
+                    songs: popularSongs,
+                    playingFrom: PlayingFrom(
+                      from: "playing from artist",
+                      title:
+                          L10nUtil.translateLocale(artist.artistName, context),
+                      songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
+                      songSyncPlayedFromId: artist.artistId,
+                    ),
+                    startPlaying: true,
+                    index: position,
+                  );
+                },
+                thumbUrl: AppApi.baseFileUrl +
+                    popularSongs[position].albumArt.imageSmallPath,
+                thumbSize: AppValues.artistSongItemSize,
+              ),
+              SizedBox(height: AppMargin.margin_8),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Padding buildArtistLatestSongList(List<Song> newSongs, Artist artist) {
+    return Padding(
+      padding: const EdgeInsets.only(left: AppPadding.padding_16),
+      child: ListView.builder(
+        itemCount: newSongs.length,
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int position) {
+          return Column(
+            children: [
+              position == 0 ? buildLatestSongsHeader() : SizedBox(),
+              SizedBox(height: AppMargin.margin_8),
+              SongItem(
+                position: position + 1,
+                isForMyPlaylist: false,
+                song: newSongs[position],
+                onPressed: () {
+                  //OPEN SONG
+                  PagesUtilFunctions.openSong(
+                    context: context,
+                    songs: newSongs,
+                    playingFrom: PlayingFrom(
+                      from: "playing from artist",
+                      title:
+                          L10nUtil.translateLocale(artist.artistName, context),
+                      songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
+                      songSyncPlayedFromId: artist.artistId,
+                    ),
+                    startPlaying: true,
+                    index: position,
+                  );
+                },
+                thumbUrl: AppApi.baseFileUrl +
+                    newSongs[position].albumArt.imageSmallPath,
+                thumbSize: AppValues.artistSongItemSize,
+              ),
+              SizedBox(height: AppMargin.margin_8),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Column buildAlbumsHeader() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Top Albums",
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_14.sp,
+                color: AppColors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 2),
+              child: Icon(
+                Icons.navigate_next,
+                color: AppColors.lightGrey,
+                size: AppIconSizes.icon_size_24,
+              ),
+            )
+          ],
+        ),
+        SizedBox(
+          height: AppMargin.margin_12,
+        ),
+      ],
+    );
+  }
+
   ListView buildArtistAlbumsList(List<Album> topAlbums) {
     return ListView.builder(
       itemCount: topAlbums.length,
@@ -289,6 +335,7 @@ class _ArtistPageState extends State<ArtistPage> {
       itemBuilder: (BuildContext context, int position) {
         return Column(
           children: [
+            position == 0 ? buildAlbumsHeader() : SizedBox(),
             //SizedBox(height: AppMargin.margin_4),
             ArtistAlbumItem(position: position, album: topAlbums[position]),
             //SizedBox(height: AppMargin.margin_4),
@@ -298,30 +345,41 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  Center buildFeaturingArtistPlaylistHeader(Artist artist) {
-    return Center(
-      child: Text(
-        "Featuring ${artist.artistName.textAm}",
-        style: TextStyle(
-          fontSize: AppFontSizes.font_size_14.sp,
-          color: AppColors.white,
-          letterSpacing: 0.4,
-          fontWeight: FontWeight.w500,
-        ),
+  Text buildFeaturingArtistPlaylistHeader(Artist artist) {
+    return Text(
+      "Featuring ${L10nUtil.translateLocale(artist.artistName, context)}",
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: AppFontSizes.font_size_14.sp,
+        color: AppColors.white,
+        letterSpacing: 0.4,
+        fontWeight: FontWeight.w500,
       ),
     );
   }
 
   Container buildArtistFeaturingPlaylistList(
-      List<Playlist> playlistsFeaturingArtists) {
+    List<Playlist> playlistsFeaturingArtists,
+    Artist artist,
+  ) {
     return Container(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: buildPlaylistsFeaturingArtist(playlistsFeaturingArtists),
-        ),
+      child: Column(
+        children: [
+          playlistsFeaturingArtists.length > 0
+              ? buildFeaturingArtistPlaylistHeader(artist)
+              : SizedBox(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+                  buildPlaylistsFeaturingArtist(playlistsFeaturingArtists),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -359,15 +417,20 @@ class _ArtistPageState extends State<ArtistPage> {
 
   Container buildSimilarArtistList(List<Artist> artists) {
     return Container(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: buildSimilarArtist(
-            artists,
+      child: Column(
+        children: [
+          artists.length > 0 ? buildOtherArtistsHeader() : SizedBox(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: buildSimilarArtist(
+                artists,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

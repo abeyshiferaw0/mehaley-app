@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -104,7 +105,8 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             child: Opacity(
               opacity: shrinkPercentage,
               child: Text(
-                artistPageData.artist.artistName.textAm,
+                L10nUtil.translateLocale(
+                    artistPageData.artist.artistName, context),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
@@ -137,7 +139,8 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                     PagesUtilFunctions.showMenuDialog(
                       context: context,
                       child: ArtistMenuWidget(
-                        title: artistPageData.artist.artistName.textAm,
+                        title: L10nUtil.translateLocale(
+                            artistPageData.artist.artistName, context),
                         imageUrl: AppApi.baseFileUrl +
                             artistPageData
                                 .artist.artistImages[0].imageMediumPath,
@@ -167,9 +170,8 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
         padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(height: AppMargin.margin_52),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -191,16 +193,23 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             ),
             SizedBox(height: AppMargin.margin_4),
             Text(
-              artistPageData.artist.artistName.textAm,
+              L10nUtil.translateLocale(
+                artistPageData.artist.artistName,
+                context,
+              ),
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.lightGrey,
-                fontSize: AppFontSizes.font_size_32.sp,
+                fontSize: AppFontSizes.font_size_28.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(height: AppMargin.margin_16),
             Text(
-              artistPageData.artist.artistAboutBiography.textAm,
+              L10nUtil.translateLocale(
+                artistPageData.artist.artistAboutBiography,
+                context,
+              ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,

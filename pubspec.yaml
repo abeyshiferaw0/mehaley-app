@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
+
 
   #BLOC
   flutter_bloc: ^7.1.0
@@ -21,27 +24,24 @@ dependencies:
   flutter_remix: ^0.0.1
   cupertino_icons: ^1.0.2
   flutter_phosphor_icons: ^0.0.1+5
-  palette_generator: ^0.3.0
-  lyrics_parser: ^1.0.0-nullsafety.0
-  page_view_indicators: ^2.0.0
   auto_size_text: ^3.0.0-nullsafety.0
   flutter_masked_text2: ^0.9.1
+  #PAGE VIEW INDICATORS
+  page_view_indicators: ^2.0.0
+  #LYRIC PARSE
+  lyrics_parser: ^1.0.0-nullsafety.0
   #PIN PUT
   pinput: ^1.2.0
   #COUNTRY CODE
   country_code_picker: ^2.0.2
   #SCROLLABLE POSITIONED LIST
   scrollable_positioned_list: ^0.2.0-nullsafety.0
-  #TAB STYLER
-  tab_indicator_styler: ^2.0.0
   #NATIVE SPLASH
   flutter_native_splash: ^1.2.1
   #LOTTIE
   lottie: ^1.1.0
   #SHIMMER
   shimmer: ^2.0.0
-  #tab_indicator_styler: ^1.0.0
-  #bouncing_widget: ^2.0.0
   #RESPONSIVE FONT SIZE
   sizer: ^2.0.13
   #CATCH
@@ -65,8 +65,6 @@ dependencies:
   #DB
   hive: ^2.0.4
   path_provider: ^2.0.2
-  #VIDEO PLAYERS
-  video_player: ^2.1.12
   #CONNECTIVITY
   connectivity_plus: ^1.0.6
   #IMAGE PICKER
@@ -80,7 +78,14 @@ dependencies:
   #LOCAL NOTIFICATIONS
   awesome_notifications: ^0.0.6+10
   #DOWNLOADER
-  flutter_downloader: ^1.7.0
+  #flutter_downloader: ^1.7.0
+  flutter_downloader:
+    git:
+      url: git://github.com/abeyshiferaw0/flutter_downloader
+  #UUID
+  uuid: 3.0.5
+  #ONE SIGNAL
+  onesignal_flutter: ^3.2.4
 
 
 
@@ -90,6 +95,7 @@ dev_dependencies:
   logger: ^1.0.0
   hive_generator: ^1.1.0
   build_runner: ^2.1.1
+  change_app_package_name: ^1.0.0
 
 flutter:
   assets:
@@ -110,5 +116,5 @@ flutter:
         - asset: assets/fonts/poppins/poppins_bold.ttf
           weight: 700
 
-
+  generate: true
   uses-material-design: true

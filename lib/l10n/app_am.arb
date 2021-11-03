@@ -1,0 +1,67 @@
+{
+  "appName": "Elf play am",
+  "byElfPlay":"by elf play am",
+  "removeFromCart": "Remove from cart am",
+  "addToCart":"Add to cart am",
+  "previewMode":"Preview mode am",
+  "buyMezmur":"Buy Mezmur am",
+  "buyAlbum":"Buy album am",
+  "buyPlaylist":"Buy Playlist am",
+  "follow":"follow am",
+  "following":"following am",
+  "addToFavorite":"Add to favorite am",
+  "removeFromFavorite":"Remove from favorite am",
+  "followArtist":"Follow artist am",
+  "removeFromFollowedArtist":"Remove from followed artist am",
+  "followPlaylist":"Follow playlist am",
+  "removeFromFollowedPlaylist":"Remove from followed playlist am",
+  "uAreListingToPreviewDesc":"You are listing to a preview version, buy the mezmur to listen the full version am",
+  "downloadMezmur":"Download mezmur am",
+  "downloading":"Downloading... am",
+  "retryDownload":"Retry download am",
+  "deleteMezmur":"Delete mezmur am",
+  "shareAlbum":"Share album am",
+  "shareArtist":"Share artist am",
+  "sharePlaylist":"Share playlist am",
+  "share":"Share am",
+  "shareMezmur":"Share Mezmur am",
+  "viewArtist":"View artist am",
+  "noOfSongs":"{noOfSong} Mezmurs am",
+      "@noOfSongs":{
+        "placeholders":{
+            "noOfSong":{
+                "type":"int"
+            }
+        }
+      },
+  "noOfAlbum":"{noOfAlbums} Albums am",
+    "@noOfAlbum":{
+      "placeholders":{
+          "noOfAlbums":{
+              "type":"int"
+          }
+      }
+    },
+  "sortPlaylist":"Sort playlist am",
+  "findInPlaylist":"Find in playlist am",
+  "editProfile":"Edit profile am",
+  "viewMezmursCategory":"View mezmur's category am",
+  "viewArtist":"View artist am",
+  "viewAlbum":"View album am",
+  "addToQueue":"Add to queue am",
+  "addToPlaylist":"Add to playlist am",
+  "removeFromPlaylist":"Remove from playlist am",
+  "addMezmurs":"Add mezmurs am",
+  "byUserName":"by {userName} am",
+  "@byUserName":{
+    "placeholders":{
+        "userName":{
+            "type":"String"
+        }
+    }
+  },
+  "addToHomeScreen":"Add to home screen am",
+  "editPlaylist":"Edit playlist am",
+  "deletePlaylist":"Delete playlist am"
+}
+

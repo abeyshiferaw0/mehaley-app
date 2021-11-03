@@ -1,4 +1,5 @@
-import 'package:elf_play/util/debouncer.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:elf_play/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppBouncingButton extends StatefulWidget {
@@ -93,9 +94,13 @@ class _AppBouncingButtonState extends State<AppBouncingButton>
   }
 
   _onTapUp(details) async {
-    Debouncer(milliseconds: 100).run(() {
-      _controller.reverse().then((value) => widget.onTap());
-    });
+    EasyDebounce.debounce(
+      AppValues.bouncingButtonDebouncer,
+      Duration(microseconds: 100),
+      () {
+        _controller.reverse().then((value) => widget.onTap());
+      },
+    );
   }
 
   _cancelTap() {

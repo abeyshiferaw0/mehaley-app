@@ -12,6 +12,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_albums_page.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_all_songs_page.dart';
@@ -223,6 +224,8 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               playingFrom: PlayingFrom(
                 from: "playing from",
                 title: "purchased mezmurs",
+                songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
+                songSyncPlayedFromId: -1,
               ),
               index: PagesUtilFunctions.getRandomIndex(
                 min: 0,
@@ -249,6 +252,8 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               playingFrom: PlayingFrom(
                 from: "playing from",
                 title: "purchased mezmurs",
+                songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
+                songSyncPlayedFromId: -1,
               ),
               index: PagesUtilFunctions.getRandomIndex(
                 min: 0,

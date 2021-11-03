@@ -8,14 +8,16 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchPageInput extends StatefulWidget {
-  const SearchPageInput(
-      {Key? key,
-      required this.onSearchQueryChange,
-      required this.onSearchEmpty})
-      : super(key: key);
+  SearchPageInput({
+    Key? key,
+    required this.onSearchQueryChange,
+    required this.onSearchEmpty,
+    required this.focusNode,
+  }) : super(key: key);
 
   final Function(String) onSearchQueryChange;
   final VoidCallback onSearchEmpty;
+  final FocusNode focusNode;
 
   @override
   _SearchPageInputState createState() => _SearchPageInputState();
@@ -36,9 +38,6 @@ class _SearchPageInputState extends State<SearchPageInput> {
   final double barAnimPadding = 8.0;
   final Color bgDimColor = AppColors.white.withOpacity(0.1);
 
-  ///FOCUS NODE
-  FocusNode focusNode = FocusNode();
-
   @override
   void didChangeDependencies() {
     //SHOW FOCUS FIRST TIME
@@ -54,14 +53,8 @@ class _SearchPageInputState extends State<SearchPageInput> {
   }
 
   @override
-  void di() {
-    //AppFocusNode.focusNode.unfocus();
-    super.deactivate();
-  }
-
-  @override
   void dispose() {
-    focusNode.unfocus();
+    widget.focusNode.unfocus();
     super.dispose();
   }
 
@@ -102,8 +95,8 @@ class _SearchPageInputState extends State<SearchPageInput> {
         child: TextField(
           textAlignVertical: TextAlignVertical.center,
           controller: searchTextController,
-          autofocus: true,
-          focusNode: focusNode,
+          // autofocus: true,
+          focusNode: widget.focusNode,
           cursorColor: AppColors.darkGreen,
           onChanged: (key) {
             if (key.isEmpty || key == '') {
@@ -131,7 +124,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             disabledBorder: InputBorder.none,
             hintText: "Search elf for mezmurs, albums, playlists",
             hintStyle: TextStyle(
-              color: AppColors.txtGrey,
+              color: AppColors.lightGrey.withOpacity(0.8),
               fontSize: AppFontSizes.font_size_10.sp,
             ),
             prefixIcon: IconButton(
@@ -139,7 +132,6 @@ class _SearchPageInputState extends State<SearchPageInput> {
               iconSize: AppIconSizes.icon_size_20,
               icon: Icon(PhosphorIcons.arrow_left_light),
               onPressed: () {
-                print("asdasdasd 2");
                 setSearching(mIsSearching: false);
                 searchTextController.clear();
                 BlocProvider.of<SearchCancelCubit>(context)
@@ -189,12 +181,11 @@ class _SearchPageInputState extends State<SearchPageInput> {
     if (mIsSearching) {
       setState(() {
         padding = 0;
-        //AppFocusNode.focusNode.requestFocus();
+        widget.focusNode.requestFocus();
       });
     } else {
       setState(() {
         padding = barAnimPadding;
-        //AppFocusNode.focusNode.unfocus();
       });
     }
     BlocProvider.of<SearchInputIsSearchingCubit>(context)

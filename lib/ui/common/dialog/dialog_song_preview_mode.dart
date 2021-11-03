@@ -7,9 +7,11 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -18,12 +20,14 @@ import '../app_card.dart';
 
 class DialogSongPreviewMode extends StatelessWidget {
   final Song song;
-  final Color dominantColor;
+  final bool isForDownload;
+  final bool isForPlaying;
 
   const DialogSongPreviewMode({
     Key? key,
-    required this.dominantColor,
     required this.song,
+    required this.isForDownload,
+    required this.isForPlaying,
   }) : super(key: key);
 
   @override
@@ -40,11 +44,11 @@ class DialogSongPreviewMode extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               buildTopCard(context),
-              buildPreviewTitle(),
+              buildPreviewTitle(context),
               SizedBox(
                 height: AppMargin.margin_16,
               ),
-              buildSongItem(),
+              buildSongItem(context),
               SizedBox(
                 height: AppMargin.margin_16,
               ),
@@ -56,11 +60,15 @@ class DialogSongPreviewMode extends StatelessWidget {
     );
   }
 
-  Padding buildPreviewTitle() {
+  Padding buildPreviewTitle(context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppMargin.margin_16),
       child: Text(
-        "Preview mode".toUpperCase(),
+        isForPlaying
+            ? AppLocalizations.of(context)!.previewMode.toUpperCase()
+            : isForDownload
+                ? "buy mezmur".toUpperCase()
+                : "",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
@@ -71,7 +79,7 @@ class DialogSongPreviewMode extends StatelessWidget {
     );
   }
 
-  Container buildSongItem() {
+  Container buildSongItem(context) {
     return Container(
       child: Center(
         child: Row(
@@ -98,7 +106,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 SizedBox(
                   height: 25,
                   child: AutoSizeText(
-                    song.songName.textAm,
+                    L10nUtil.translateLocale(song.songName, context),
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: AppFontSizes.font_size_16,
@@ -108,7 +116,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                     minFontSize: AppFontSizes.font_size_16,
                     maxFontSize: AppFontSizes.font_size_16,
                     overflowReplacement: Marquee(
-                      text: song.songName.textAm,
+                      text: L10nUtil.translateLocale(song.songName, context),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w500,
@@ -131,7 +139,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  PagesUtilFunctions.getArtistsNames(song.artistsName),
+                  PagesUtilFunctions.getArtistsNames(song.artistsName, context),
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -158,7 +166,11 @@ class DialogSongPreviewMode extends StatelessWidget {
             height: AppMargin.margin_16,
           ),
           Text(
-            "You are listing to a preview version, buy the mezmur to listen the full version",
+            isForPlaying
+                ? AppLocalizations.of(context)!.uAreListingToPreviewDesc
+                : isForDownload
+                    ? "Buy the mezmur to download and listen offline"
+                    : "",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
@@ -181,7 +193,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 color: AppColors.green,
               ),
               child: Text(
-                "BUY MEZMUR".toUpperCase(),
+                AppLocalizations.of(context)!.buyMezmur.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w600,
@@ -236,7 +248,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   width: AppPadding.padding_8,
                 ),
                 Text(
-                  "Elf play",
+                  AppLocalizations.of(context)!.appName,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w700,

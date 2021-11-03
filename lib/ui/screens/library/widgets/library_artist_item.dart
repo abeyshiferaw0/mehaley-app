@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/ui/common/like_follow/artist_follow_button.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -49,7 +50,8 @@ class LibraryArtistsItem extends StatelessWidget {
           SizedBox(width: AppMargin.margin_16),
           Expanded(
             child: Text(
-              artist.artistName.textAm + artist.artistName.textEn,
+              L10nUtil.translateLocale(artist.artistName, context) +
+                  L10nUtil.translateLocale(artist.artistName, context),
               maxLines: 2,
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,
@@ -92,7 +94,8 @@ class LibraryArtistsItem extends StatelessWidget {
           ),
           ArtistFollowButton(
             isFollowing: artist.isFollowed!,
-            artistId: artist.artistId, askDialog: true,
+            artistId: artist.artistId,
+            askDialog: true,
           ),
           SizedBox(
             width: AppMargin.margin_16,

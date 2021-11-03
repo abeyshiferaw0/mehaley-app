@@ -13,8 +13,10 @@ import 'package:meta/meta.dart';
 part 'user_playlist_page_event.dart';
 part 'user_playlist_page_state.dart';
 
-class UserPlaylistPageBloc extends Bloc<UserPlaylistPageEvent, UserPlaylistPageState> {
-  UserPlaylistPageBloc({required this.userPLayListRepository}) : super(UserPlaylistPageInitial());
+class UserPlaylistPageBloc
+    extends Bloc<UserPlaylistPageEvent, UserPlaylistPageState> {
+  UserPlaylistPageBloc({required this.userPLayListRepository})
+      : super(UserPlaylistPageInitial());
 
   final UserPLayListRepository userPLayListRepository;
 
@@ -28,18 +30,22 @@ class UserPlaylistPageBloc extends Bloc<UserPlaylistPageEvent, UserPlaylistPageS
       try {
         //YIELD CACHE DATA
         final UserPlaylistPageData userPlaylistPageData =
-            await userPLayListRepository.getUserPlaylistData(event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
-        yield UserPlaylistPageLoadedState(userPlaylistPageData: userPlaylistPageData);
+            await userPLayListRepository.getUserPlaylistData(
+                event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
+        yield UserPlaylistPageLoadedState(
+            userPlaylistPageData: userPlaylistPageData);
 
         if (isFromCatch(userPlaylistPageData.response!)) {
           try {
-            yield UserPlaylistPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final UserPlaylistPageData userPlaylistPageData = await userPLayListRepository.getUserPlaylistData(
+            final UserPlaylistPageData userPlaylistPageData =
+                await userPLayListRepository.getUserPlaylistData(
               event.playlistId,
               AppCacheStrategy.CACHE_LATER,
             );
-            yield UserPlaylistPageLoadedState(userPlaylistPageData: userPlaylistPageData);
+            yield UserPlaylistPageLoadingState();
+            yield UserPlaylistPageLoadedState(
+                userPlaylistPageData: userPlaylistPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
           }
@@ -67,24 +73,28 @@ class UserPlaylistPageBloc extends Bloc<UserPlaylistPageEvent, UserPlaylistPageS
       try {
         //YIELD CACHE DATA
         final UserPlaylistPageData userPlaylistPageData =
-            await userPLayListRepository.getUserPlaylistData(event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
+            await userPLayListRepository.getUserPlaylistData(
+                event.playlistId, AppCacheStrategy.LOAD_CACHE_FIRST);
 
         ///REMOVE THE REMOVED SONGS
         if (userPlaylistPageData.songs.contains(event.song)) {
           userPlaylistPageData.songs.remove(event.song);
         }
 
-        yield UserPlaylistPageLoadedState(userPlaylistPageData: userPlaylistPageData);
+        yield UserPlaylistPageLoadedState(
+            userPlaylistPageData: userPlaylistPageData);
 
         if (isFromCatch(userPlaylistPageData.response!)) {
           try {
-            yield UserPlaylistPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final UserPlaylistPageData userPlaylistPageData = await userPLayListRepository.getUserPlaylistData(
+            final UserPlaylistPageData userPlaylistPageData =
+                await userPLayListRepository.getUserPlaylistData(
               event.playlistId,
               AppCacheStrategy.CACHE_LATER,
             );
-            yield UserPlaylistPageLoadedState(userPlaylistPageData: userPlaylistPageData);
+            yield UserPlaylistPageLoadingState();
+            yield UserPlaylistPageLoadedState(
+                userPlaylistPageData: userPlaylistPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
           }

@@ -6,18 +6,22 @@ abstract class OfflineSongsEvent extends Equatable {
 
 class LoadOfflineSongsEvent extends OfflineSongsEvent {
   final AppLibrarySortTypes appLibrarySortTypes;
+  final Locale currentLocale;
 
-  LoadOfflineSongsEvent({required this.appLibrarySortTypes});
+  LoadOfflineSongsEvent(
+      {required this.appLibrarySortTypes, required this.currentLocale});
 
   @override
-  List<Object?> get props => [appLibrarySortTypes];
+  List<Object?> get props => [appLibrarySortTypes, currentLocale];
 }
 
 class RefreshOfflineSongsEvent extends OfflineSongsEvent {
   final AppLibrarySortTypes appLibrarySortTypes;
+  final Locale currentLocale;
 
-  RefreshOfflineSongsEvent({required this.appLibrarySortTypes});
+  RefreshOfflineSongsEvent(
+      {required this.appLibrarySortTypes, required this.currentLocale});
 
   @override
-  List<Object?> get props => [appLibrarySortTypes];
+  List<Object?> get props => [appLibrarySortTypes, currentLocale];
 }

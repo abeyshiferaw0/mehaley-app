@@ -12,6 +12,7 @@ import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
     nameMaxLength = 35;
     descriptionInputController = TextEditingController();
     nameInputController = TextEditingController();
-    initPreviousValues();
+    WidgetsBinding.instance!.addPostFrameCallback((_) => initPreviousValues());
     super.initState();
   }
 
@@ -81,7 +82,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
               msg:
-                  "Playlist ${state.myPlaylist.playlistNameText.textAm} updated",
+                  "Playlist ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)} updated",
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -530,10 +531,13 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   }
 
   void initPreviousValues() {
-    nameInputController.text = widget.myPlaylist.playlistNameText.textAm;
-    descriptionInputController.text =
-        widget.myPlaylist.playlistDescriptionText.textAm;
-    if (widget.myPlaylist.playlistDescriptionText.textAm.isNotEmpty) {
+    nameInputController.text =
+        L10nUtil.translateLocale(widget.myPlaylist.playlistNameText, context);
+    descriptionInputController.text = L10nUtil.translateLocale(
+        widget.myPlaylist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(
+            widget.myPlaylist.playlistDescriptionText, context)
+        .isNotEmpty) {
       showDescription = true;
     }
   }

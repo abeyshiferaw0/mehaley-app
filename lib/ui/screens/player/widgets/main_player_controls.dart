@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/Muted_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'package:elf_play/business_logic/cubits/player_cubits/muted_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
@@ -16,6 +16,7 @@ import 'package:elf_play/ui/common/custom_track_shape.dart';
 import 'package:elf_play/ui/common/like_follow/song_favorite_button.dart';
 import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
 import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,9 +46,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<SongPositionCubit, Duration>(
+        BlocListener<SongPositionCubit, CurrentPlayingPosition>(
           listener: (context, state) {
-            progress = state.inSeconds.toDouble();
+            progress = state.currentDuration.inSeconds.toDouble();
           },
         ),
         BlocListener<SongBufferedCubit, Duration>(
@@ -79,7 +80,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             SizedBox(
                               height: 30,
                               child: AutoSizeText(
-                                state != null ? state.songName.textAm : '',
+                                L10nUtil.translateLocale(
+                                    state.songName, context),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: AppFontSizes.font_size_18,
@@ -89,7 +91,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                 minFontSize: AppFontSizes.font_size_18,
                                 maxFontSize: AppFontSizes.font_size_18,
                                 overflowReplacement: Marquee(
-                                  text: state != null ? state.songName.textAm : '',
+                                  text: L10nUtil.translateLocale(
+                                      state.songName, context),
                                   style: TextStyle(
                                     fontSize: AppFontSizes.font_size_18,
                                     fontWeight: FontWeight.w500,
@@ -103,7 +106,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                   startPadding: AppPadding.padding_16,
                                   accelerationDuration: Duration(seconds: 1),
                                   accelerationCurve: Curves.easeIn,
-                                  decelerationDuration: Duration(milliseconds: 500),
+                                  decelerationDuration:
+                                      Duration(milliseconds: 500),
                                   decelerationCurve: Curves.easeOut,
                                   showFadingOnlyWhenScrolling: false,
                                   fadingEdgeEndFraction: 0.2,
@@ -115,7 +119,10 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               height: AppMargin.margin_2,
                             ),
                             Text(
-                              state != null ? PagesUtilFunctions.getArtistsNames(state.artistsName) : '',
+                              PagesUtilFunctions.getArtistsNames(
+                                state.artistsName,
+                                context,
+                              ),
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
@@ -160,23 +167,28 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                       trackShape: CustomTrackShape(),
                       trackHeight: 2.0,
                       thumbColor: AppColors.white,
-                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 6.0),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 6.0),
                       overlayColor: AppColors.white.withOpacity(0.24),
-                      overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 16.0),
                     ),
-                    child: BlocBuilder<SongPositionCubit, Duration>(
+                    child:
+                        BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
                       builder: (context, state) {
                         return Slider(
                           value: AudioPlayerUtil.getCorrectProgress(
-                            state.inSeconds.toDouble(),
+                            state.currentDuration.inSeconds.toDouble(),
                             currentPlayingState.audioFile.audioDurationSeconds,
                           ),
                           min: 0.0,
-                          max: PagesUtilFunctions.getSongLength(currentPlayingState),
+                          max: PagesUtilFunctions.getSongLength(
+                              currentPlayingState),
                           onChanged: (value) {
                             BlocProvider.of<AudioPlayerBloc>(context).add(
                               SeekAudioPlayerEvent(
-                                duration: Duration(seconds: value.toInt()),
+                                skipToDuration:
+                                    Duration(seconds: value.toInt()),
                               ),
                             );
                           },
@@ -192,11 +204,12 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BlocBuilder<SongPositionCubit, Duration>(
+                BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
                   builder: (context, state) {
                     return Text(
                       PagesUtilFunctions.formatSongDurationTimeTo(
-                        Duration(seconds: state.inSeconds.toInt()),
+                        Duration(
+                            seconds: state.currentDuration.inSeconds.toInt()),
                       ),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
@@ -233,7 +246,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   builder: (context, state) {
                     return AppBouncingButton(
                       onTap: () {
-                        BlocProvider.of<AudioPlayerBloc>(context).add(ShufflePlayerQueueEvent());
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(ShufflePlayerQueueEvent());
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -259,7 +273,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
                 AppBouncingButton(
                   onTap: () {
-                    BlocProvider.of<AudioPlayerBloc>(context).add(PlayPreviousSongEvent());
+                    BlocProvider.of<AudioPlayerBloc>(context)
+                        .add(PlayPreviousSongEvent());
                   },
                   child: Icon(
                     Icons.skip_previous_sharp,
@@ -276,7 +291,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         );
                       },
                       child: Icon(
-                        state ? Icons.pause_circle_filled_sharp : FlutterRemix.play_circle_fill,
+                        state
+                            ? Icons.pause_circle_filled_sharp
+                            : FlutterRemix.play_circle_fill,
                         size: AppIconSizes.icon_size_72,
                         color: AppColors.white,
                       ),
@@ -285,7 +302,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
                 AppBouncingButton(
                   onTap: () {
-                    BlocProvider.of<AudioPlayerBloc>(context).add(PlayNextSongEvent());
+                    BlocProvider.of<AudioPlayerBloc>(context)
+                        .add(PlayNextSongEvent());
                   },
                   child: Icon(
                     Icons.skip_next_sharp,
@@ -297,7 +315,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   builder: (context, state) {
                     return AppBouncingButton(
                       onTap: () {
-                        BlocProvider.of<AudioPlayerBloc>(context).add(LoopPlayerQueueEvent());
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(LoopPlayerQueueEvent());
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -305,7 +324,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           children: [
                             Icon(
                               PagesUtilFunctions.getLoopIcon(state),
-                              color: PagesUtilFunctions.getLoopButtonColor(state),
+                              color:
+                                  PagesUtilFunctions.getLoopButtonColor(state),
                               size: AppIconSizes.icon_size_20,
                             ),
                             state != LoopMode.off
@@ -335,12 +355,15 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   builder: (context, state) {
                     return AppBouncingButton(
                       onTap: () {
-                        BlocProvider.of<AudioPlayerBloc>(context).add(SetMutedEvent());
+                        BlocProvider.of<AudioPlayerBloc>(context)
+                            .add(SetMutedEvent());
                       },
                       child: Padding(
                         padding: EdgeInsets.all(AppPadding.padding_16),
                         child: Icon(
-                          state ? PhosphorIcons.speaker_slash_light : PhosphorIcons.speaker_high_thin,
+                          state
+                              ? PhosphorIcons.speaker_slash_light
+                              : PhosphorIcons.speaker_high_thin,
                           color: AppColors.lightGrey,
                           size: AppIconSizes.icon_size_20,
                         ),

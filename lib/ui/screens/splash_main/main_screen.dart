@@ -1,7 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:elf_play/business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
+import 'package:elf_play/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_input_is_searching_cubit.dart';
@@ -12,6 +15,7 @@ import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/bottom_bar.dart';
 import 'package:elf_play/ui/common/mini_player.dart';
 import 'package:elf_play/ui/common/no_internet_indicator_small.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -22,6 +26,8 @@ final AppRouter _appRouter = AppRouter();
 final _navigatorKey = GlobalKey<NavigatorState>();
 //INIT ROUTERS
 
+// GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -30,6 +36,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    ///START LISTING SYNC RECORDING
+    BlocProvider.of<SongListenRecorderBloc>(context).add(StartRecordEvent());
+    BlocProvider.of<SongSyncBloc>(context).add(StartSongSyncEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
@@ -222,7 +236,8 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                     bgColor: AppColors.white,
                     isFloating: true,
-                    msg: "${state.song!.songName.textAm} Download complete",
+                    msg:
+                        "${L10nUtil.translateLocale(state.song!.songName, context)} Download complete",
                     txtColor: AppColors.black,
                     icon: PhosphorIcons.check_circle_fill,
                     iconColor: AppColors.darkGreen),
@@ -238,6 +253,16 @@ class _MainScreenState extends State<MainScreen> {
                   icon: PhosphorIcons.wifi_x_light,
                   iconColor: AppColors.errorRed,
                 ),
+              );
+            }
+          },
+        ),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (BuildContext context, state) {
+            if (state is AuthLoggedOutState) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRouterPaths.splashRoute,
+                (Route<dynamic> route) => false,
               );
             }
           },
@@ -308,11 +333,11 @@ class _MainScreenState extends State<MainScreen> {
     return Builder(
       builder: (context) {
         return WillPopScope(
-          key: GlobalKey(),
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(false);
+              BlocProvider.of<SearchInputIsSearchingCubit>(context)
+                  .changeIsSearching(false);
               return Future<bool>.value(false);
             }
             //DEFAULT BEHAVIOUR
@@ -329,7 +354,9 @@ class _MainScreenState extends State<MainScreen> {
             key: _navigatorKey,
             initialRoute: AppRouterPaths.homeRoute,
             onGenerateRoute: _appRouter.generateRoute,
-            observers: <RouteObserver<ModalRoute<void>>>[AppRouterPaths.routeObserver],
+            observers: <RouteObserver<ModalRoute<void>>>[
+              AppRouterPaths.routeObserver
+            ],
           ),
         );
       },

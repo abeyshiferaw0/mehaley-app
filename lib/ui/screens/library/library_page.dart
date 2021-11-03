@@ -18,6 +18,7 @@ import 'package:elf_play/ui/screens/library/tab_pages/purchased_tab_view.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_persistant_header.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
@@ -151,6 +152,7 @@ class _LibraryPageState extends State<LibraryPage>
   SliverAppBar buildAppBar() {
     return SliverAppBar(
       brightness: Brightness.dark,
+      //systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: AppColors.darkGrey,
       shadowColor: AppColors.transparent,
       floating: true,
@@ -172,7 +174,7 @@ class _LibraryPageState extends State<LibraryPage>
                 bottom: 0,
                 child: Icon(
                   PhosphorIcons.gear_six_bold,
-                  size: AppIconSizes.icon_size_16,
+                  size: AppIconSizes.icon_size_12,
                   color: AppColors.white,
                 ),
               )

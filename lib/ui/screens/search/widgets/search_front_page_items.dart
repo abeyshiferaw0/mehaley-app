@@ -41,7 +41,7 @@ class _SearchFrontPageItemsState extends State<SearchFrontPageItems> {
             Container(
               decoration: BoxDecoration(
                 color: widget.dominantColor,
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
             Positioned(
@@ -76,10 +76,10 @@ class _SearchFrontPageItemsState extends State<SearchFrontPageItems> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        offset: Offset(0, 0),
-                        blurRadius: 18,
-                        spreadRadius: 6,
-                        color: AppColors.completelyBlack.withOpacity(0.3),
+                        offset: Offset(-4, -3),
+                        blurRadius: 8,
+                        spreadRadius: 3,
+                        color: AppColors.completelyBlack.withOpacity(0.25),
                       ),
                     ],
                     borderRadius: widget.appItemType == AppItemsType.ARTIST
@@ -108,7 +108,7 @@ class _SearchFrontPageItemsState extends State<SearchFrontPageItems> {
                                 widget.appItemType == AppItemsType.ARTIST
                                     ? BorderRadius.circular(
                                         AppValues.searchFrontPageItemsImageSize)
-                                    : BorderRadius.circular(0),
+                                    : BorderRadius.circular(2),
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,

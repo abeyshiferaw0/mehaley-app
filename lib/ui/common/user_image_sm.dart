@@ -72,7 +72,7 @@ class UserImageSm extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(size / 2),
-        border: hasBorder ? Border.all(color: color, width: 1.5) : null,
+        border: hasBorder ? Border.all(color: color, width: 1) : null,
       ),
       width: size,
       height: size,
@@ -98,7 +98,7 @@ class UserImageSm extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(size / 2),
-        border: hasBorder ? Border.all(color: color, width: 1.5) : null,
+        border: hasBorder ? Border.all(color: color, width: 1) : null,
       ),
       width: size,
       height: size,

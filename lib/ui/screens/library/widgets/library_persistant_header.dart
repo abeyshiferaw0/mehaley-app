@@ -2,6 +2,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +32,7 @@ class LibraryHeader extends StatelessWidget {
                   width: AppMargin.margin_16,
                 ),
                 Expanded(
-                  child: buildTabs(),
+                  child: buildTabs(context),
                 ),
               ],
             ),
@@ -64,7 +65,7 @@ class LibraryHeader extends StatelessWidget {
     );
   }
 
-  TabBar buildTabs() {
+  TabBar buildTabs(context) {
     return TabBar(
       controller: tabController,
       isScrollable: true,
@@ -84,7 +85,7 @@ class LibraryHeader extends StatelessWidget {
         buildTabItem("OFFLINE"),
         buildTabItem("MY PLAYLIST"),
         buildTabItem("FAVORITES"),
-        buildTabItem("FOLLOWING"),
+        buildTabItem(AppLocalizations.of(context)!.following.toUpperCase()),
       ],
     );
   }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_monthly_holidays_bg"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_open_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="OPEN APP"
+                android:textAllCaps="true"
+                android:textColor="#DDDDDD"
+                android:textFontWeight="600"
+                android:textSize="12sp" />
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_mehaleye" />
+
+        </RelativeLayout>
+
+        <TextView
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="28dp"
+
+            android:id="@+id/txt_verses_form_mehaley"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verses From Mehaley"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textFontWeight="600"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/txt_verse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="ሞት ጣር ያዘኝ፤ የዓመፅ ፈሳሽም አስፈራኝ፤ የሲኦል ጣር ከበበኝ፤ የሞት ወጥመድ ደረሰብኝ። በጨነቀኝ ጊዜ እግዚአብሔርን ጠራሁት፥ ወደ አምላኬም ጮኽሁ፤ ከመቅደሱም ቃሌን ሰማኝ፥ ጩኸቴም በፊቱ ወደ ጆሮው ገባ።  ወደ አምላኬም ጮኽሁ፤ ከመቅደሱም ቃሌን ሰማኝ፥ ጩኸቴም በፊቱ ወደ ጆሮው ገባ።  ወደ አምላኬም ጮኽሁ፤ ከመቅደሱም ቃሌን ሰማኝ፥ ጩኸቴም በፊቱ ወደ ጆሮው ገባ። "
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:shadowColor="#D6D6D6"
+            android:shadowDx="0"
+            android:shadowRadius="6"
+            android:shadowDy="0"
+            android:textFontWeight="600"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/txt_verse_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            android:gravity="center_horizontal"
+            android:text="መጽሐፈ ሳሙኤል ካል 22:5-7"
+            android:textAlignment="center"
+            android:textColor="#DBDBDB"
+            android:textFontWeight="700"
+            android:textSize="16sp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_change_lang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="20dp"
+                android:text="English"
+                android:textColor="#fff"
+                android:textFontWeight="600"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/btn_change_verse"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/widget_verse_button_bg"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_arrows_clockwise" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -13,25 +14,8 @@ part 'lyric_state.dart';
 
 class LyricBloc extends Bloc<LyricEvent, LyricState> {
   LyricBloc({required this.lyricDataRepository, required this.audioPlayerBloc})
-      : super(LyricInitial()) {
-    // subscription = audioPlayerBloc.stream.listen((state) {
-    //   if (state is AudioPlayerCurrentSongChangeState) {
-    //     ///LOAD LYRIC IF AVAILABLE
-    //     if (state.song.lyricIncluded) {
-    //       this.add(
-    //         LoadSongLyricEvent(songId: state.song.songId),
-    //       );
-    //     } else {
-    //       ///REMOVE LYRIC IF NOT AVAILABLE
-    //       this.add(
-    //         RemoveLyricWidgetEvent(songId: state.song.songId),
-    //       );
-    //     }
-    //   }
-    // });
-  }
+      : super(LyricInitial());
 
-  //late StreamSubscription subscription;
   final AudioPlayerBloc audioPlayerBloc;
   final LyricDataRepository lyricDataRepository;
 
@@ -48,6 +32,7 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
             await lyricDataRepository.getLyricData(
           event.songId,
           AppCacheStrategy.LOAD_CACHE_FIRST,
+          event.currentLocale,
         );
         yield LyricDataLoaded(lyricList: lyricList, songId: event.songId);
         try {
@@ -56,6 +41,7 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
               await lyricDataRepository.getLyricData(
             event.songId,
             AppCacheStrategy.CACHE_LATER,
+            event.currentLocale,
           );
           yield LyricDataLoading();
           yield LyricDataLoaded(lyricList: lyricList, songId: event.songId);
@@ -76,10 +62,4 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
       yield LyricDataLoaded(lyricList: [], songId: event.songId);
     }
   }
-
-  // @override
-  // Future<void> close() {
-  //   subscription.cancel();
-  //   return super.close();
-  // }
 }

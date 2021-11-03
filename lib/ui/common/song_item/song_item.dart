@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
 import 'package:elf_play/ui/screens/cart/widgets/remove_from_cart_button.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -159,7 +160,7 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           Text(
                             PagesUtilFunctions.getArtistsNames(
-                                song.artistsName),
+                                song.artistsName, context),
                             style: TextStyle(
                               fontSize: AppFontSizes.font_size_14,
                               color: AppColors.txtGrey,
@@ -316,7 +317,7 @@ class SongIsPlayingText extends StatelessWidget {
           }
         }
         return Text(
-          song.songName.textAm,
+          L10nUtil.translateLocale(song.songName, context),
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_16,

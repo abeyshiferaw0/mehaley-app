@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_front_page_items.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class SearchFrontPageGroups extends StatelessWidget {
               title: PagesUtilFunctions.getSearchFrontPageItemTitle(
                 appItemsType,
                 items.elementAt(index),
+                context,
               ),
               imageUrl: PagesUtilFunctions.getSearchFrontPageItemImageUrl(
                 appItemsType,
@@ -84,7 +86,11 @@ class SearchFrontPageGroups extends StatelessWidget {
                     songs: [items.elementAt(index)],
                     startPlaying: true,
                     playingFrom: PlayingFrom(
-                        from: "Playing from", title: "most listened"),
+                      from: "Playing from",
+                      title: "most listened",
+                      songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
+                      songSyncPlayedFromId: -1,
+                    ),
                     index: index,
                   );
                 }

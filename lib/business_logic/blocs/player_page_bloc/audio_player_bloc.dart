@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/player_data_repository.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +16,12 @@ part 'audio_player_state.dart';
 
 class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioPlayer audioPlayer;
-  final PlayerDataRepository playerDataRepository;
 
   AudioPlayerBloc({
-    required this.playerDataRepository,
     required this.audioPlayer,
   }) : super(AudioPlayerInitialState()) {
     audioPlayer.setCanUseNetworkResourcesForLiveStreamingWhilePaused(true);
     //audioPlayer.setSkipSilenceEnabled(true);
-
     //INITIALIZE AUDIO SESSION
     AudioPlayerUtil.initAudioSession();
 
@@ -111,7 +107,9 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       yield AudioPlayerLoopChangedState(loopMode: event.loopMode);
     } else if (event is PositionChangedEvent) {
       //PLAYER SONG POSITION LISTENER
-      yield AudioPlayerPositionChangedState(duration: event.duration);
+      yield AudioPlayerPositionChangedState(
+        duration: event.duration,
+      );
     } else if (event is BufferedPositionChangedEvent) {
       //PLAYER SONG (TOTAL) DURATION LISTENER
       yield AudioPlayerBufferedPositionChangedState(duration: event.duration);
@@ -120,7 +118,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       yield AudioPlayerDurationChangedState(duration: event.duration);
     } else if (event is SeekAudioPlayerEvent) {
       //SEEK PLAYER DURATION POSITION
-      seekPlayerPosition(event.duration);
+      seekPlayerPosition(event.skipToDuration);
+      yield AudioPlayerSkipChangedState(
+        skipToDuration: event.skipToDuration,
+      );
     } else if (event is SeekAudioPlayerToEvent) {
       //SEEK PLAYER DURATION POSITION
       seekPlayerToPosition(event.song);
@@ -254,9 +255,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
         ///DEBUG ALSO CHECK FOR DATA SAVER
         //checkForVideoBg(mediaItem);
-
-        ///ADD SONG TO RECENTLY PLAYED LIST
-        playerDataRepository.addToRecentlyPlayed(song);
       },
     );
   }
@@ -279,7 +277,11 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   void audioPlayerPositionListen() {
     audioPlayer.positionStream.listen((duration) {
-      this.add(PositionChangedEvent(duration: duration));
+      this.add(
+        PositionChangedEvent(
+          duration: duration,
+        ),
+      );
     });
   }
 
@@ -291,10 +293,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   void audioPlayerDurationListen() {
     audioPlayer.durationStream.listen((duration) {
-      print("audioPlayer.durationStream ${duration.toString()}");
       this.add(
         DurationChangedEvent(
-            duration: duration != null ? duration : Duration.zero),
+          duration: duration != null ? duration : Duration.zero,
+        ),
       );
     });
   }

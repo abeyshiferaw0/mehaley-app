@@ -2,30 +2,40 @@ import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/api_response/search_page_result_data.dart';
 import 'package:elf_play/data/models/artist.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
+import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_header_gradient.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_footer_button.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_top_artist_song_item.dart';
+import 'package:elf_play/util/audio_player_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
-  const SearchResultList(
-      {Key? key, required this.searchPageResultData, required this.searchKey})
-      : super(key: key);
+  const SearchResultList({
+    Key? key,
+    required this.searchPageResultData,
+    required this.searchKey,
+    required this.focusNode,
+  }) : super(key: key);
 
   final SearchPageResultData searchPageResultData;
   final String searchKey;
+  final FocusNode focusNode;
 
   @override
   _SearchResultListState createState() => _SearchResultListState(
@@ -76,7 +86,10 @@ class _SearchResultListState extends State<SearchResultList> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: buildSearchResultColumnList(
-                    resultItems, searchPageResultData.topArtistData, searchKey),
+                  resultItems,
+                  searchPageResultData.topArtistData,
+                  searchKey,
+                ),
               ),
             ),
           ),
@@ -107,7 +120,7 @@ class _SearchResultListState extends State<SearchResultList> {
               Padding(
                 padding: const EdgeInsets.only(left: AppPadding.padding_12),
                 child: Text(
-                  "Popular mezmur's by ${topArtistData.topArtist!.artistName.textAm}",
+                  "Popular mezmur's by ${L10nUtil.translateLocale(topArtistData.topArtist!.artistName, context)}",
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     color: AppColors.white,
@@ -150,8 +163,9 @@ class _SearchResultListState extends State<SearchResultList> {
     if (resultItem is Song) {
       return SearchResultItem(
         itemKey: Key("song_${resultItem.songId}"),
-        title: resultItem.songName.textAm,
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName),
+        title: L10nUtil.translateLocale(resultItem.songName, context),
+        subTitle:
+            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -159,45 +173,113 @@ class _SearchResultListState extends State<SearchResultList> {
         items: AudioPlayerUtil.getPlayingItems(resultItem, resultItems),
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        focusNode: widget.focusNode,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: SongMenuWidget(
+              song: resultItem,
+              isForMyPlaylist: false,
+              onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+            ),
+          );
+        },
       );
     } else if (resultItem is Playlist) {
       return SearchResultItem(
         itemKey: Key("playlist_${resultItem.playlistId}"),
-        title: resultItem.playlistNameText.textAm,
+        title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
         subTitle: "",
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: PlaylistMenuWidget(
+              playlist: resultItem,
+              title: L10nUtil.translateLocale(
+                  resultItem.playlistNameText, context),
+              imageUrl:
+                  AppApi.baseFileUrl + resultItem.playlistImage.imageMediumPath,
+              isFree: resultItem.isFree,
+              price: resultItem.priceEtb,
+              isDiscountAvailable: resultItem.isDiscountAvailable,
+              discountPercentage: resultItem.discountPercentage,
+              playlistId: resultItem.playlistId,
+              isFollowed: resultItem.isFollowed!,
+              isPurchased: resultItem.isBought,
+            ),
+          );
+        },
       );
     } else if (resultItem is Album) {
       return SearchResultItem(
         itemKey: Key("album_${resultItem.albumId}"),
-        title: resultItem.albumTitle.textAm,
-        subTitle: resultItem.artist.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: AlbumMenuWidget(
+              albumId: resultItem.albumId,
+              album: resultItem,
+              isLiked: resultItem.isLiked,
+              title: L10nUtil.translateLocale(resultItem.albumTitle, context),
+              imageUrl: AppApi.baseFileUrl +
+                  resultItem.albumImages[0].imageMediumPath,
+              price: resultItem.priceEtb,
+              isFree: resultItem.isFree,
+              isDiscountAvailable: resultItem.isDiscountAvailable,
+              discountPercentage: resultItem.discountPercentage,
+              isBought: resultItem.isBought,
+            ),
+          );
+        },
       );
     } else if (resultItem is Artist) {
       return SearchResultItem(
         itemKey: Key("artist_${resultItem.artistId}"),
-        title: resultItem.artistName.textAm,
+        title: L10nUtil.translateLocale(resultItem.artistName, context),
         subTitle: "",
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,
         searchKey: searchKey,
         item: resultItem,
         items: [],
+        focusNode: widget.focusNode,
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
+        onMenuTap: () {
+          //SHOW MENU DIALOG
+          PagesUtilFunctions.showMenuDialog(
+            context: context,
+            child: ArtistMenuWidget(
+              title: L10nUtil.translateLocale(resultItem.artistName, context),
+              imageUrl: AppApi.baseFileUrl +
+                  resultItem.artistImages[0].imageMediumPath,
+              isFollowing: resultItem.isFollowed!,
+              artistId: resultItem.artistId,
+            ),
+          );
+        },
       );
     } else if (resultItem is SearchResultOtherItems) {
       if (resultItem == SearchResultOtherItems.SEE_ALL_PLAYLISTS) {

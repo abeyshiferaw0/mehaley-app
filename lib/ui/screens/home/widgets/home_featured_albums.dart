@@ -4,8 +4,10 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/buy_item_btn.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -73,21 +75,25 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 child: GroupHeaderWidget(
                   groupHeaderImageUrl:
                       AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
-                  groupSubTitle: album.artist.artistName.textAm,
-                  groupTitle: album.albumTitle.textAm,
+                  groupSubTitle: L10nUtil.translateLocale(
+                      album.artist.artistName, context),
+                  groupTitle:
+                      L10nUtil.translateLocale(album.albumTitle, context),
                 ),
               ),
             ),
-            BuyItemBtnWidget(
-              price: 0.0,
-              title: "BUY ALBUM",
-              hasLeftMargin: true,
-              isFree: album.isFree,
-              showDiscount: false,
-              discountPercentage: album.discountPercentage,
-              isDiscountAvailable: album.isDiscountAvailable,
-              isBought: album.isBought,
-            ),
+            (!album.isBought && !album.isFree)
+                ? BuyItemBtnWidget(
+                    price: 0.0,
+                    title: "BUY ALBUM",
+                    hasLeftMargin: true,
+                    isFree: album.isFree,
+                    showDiscount: false,
+                    discountPercentage: album.discountPercentage,
+                    isDiscountAvailable: album.isDiscountAvailable,
+                    isBought: album.isBought,
+                  )
+                : SizedBox(),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),
@@ -123,7 +129,11 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 item: album.songs![i],
                 playingFrom: PlayingFrom(
                   from: "playing from featured album",
-                  title: album.albumTitle.textAm,
+                  title: L10nUtil.translateLocale(
+                      L10nUtil.translateLocale(album.albumTitle, context),
+                      context),
+                  songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_GROUP,
+                  songSyncPlayedFromId: album.albumId,
                 ),
                 context: context,
                 index: i,

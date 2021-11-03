@@ -4,11 +4,13 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
     BlocProvider.of<OfflineSongsBloc>(context).add(
       LoadOfflineSongsEvent(
         appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+        currentLocale: L10nUtil.english,
       ),
     );
     super.initState();
@@ -67,6 +70,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   LoadOfflineSongsEvent(
                     appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
               },
@@ -119,6 +123,8 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                   playingFrom: PlayingFrom(
                     from: "playing from",
                     title: "offline mezmurs",
+                    songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
+                    songSyncPlayedFromId: -1,
                   ),
                   index: position,
                 );

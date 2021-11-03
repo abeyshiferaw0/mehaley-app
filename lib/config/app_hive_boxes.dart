@@ -1,10 +1,27 @@
+import 'dart:io';
+
+import 'package:elf_play/data/models/album.dart';
+import 'package:elf_play/data/models/app_user.dart';
+import 'package:elf_play/data/models/artist.dart';
+import 'package:elf_play/data/models/audio_file.dart';
+import 'package:elf_play/data/models/bg_video.dart';
+import 'package:elf_play/data/models/enums/playlist_created_by.dart';
 import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
+import 'package:elf_play/data/models/enums/user_login_type.dart';
+import 'package:elf_play/data/models/lyric.dart';
+import 'package:elf_play/data/models/playlist.dart';
+import 'package:elf_play/data/models/remote_image.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
+import 'package:elf_play/data/models/text_lan.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
 import 'constants.dart';
 
 class AppHiveBoxes {
+  late Box songSyncBox;
   late Box likedSongsBox;
   late Box userBox;
   late Box settingsBox;
@@ -17,7 +34,6 @@ class AppHiveBoxes {
   late Box recentlyFollowedArtistBox;
   late Box recentlyUnFollowedArtistBox;
   late Box recentSearchesBox;
-  late Box recentlyPlayedBox;
   late Box recentlyCartAddedAlbumBox;
   late Box recentlyCartRemovedAlbumBox;
   late Box recentlyCartAddedSongBox;
@@ -33,9 +49,12 @@ class AppHiveBoxes {
 
   ///OPEN HIVE BOXES
   initHiveBoxes() async {
-    ///RECENTLY PLAYED
-    recentlyPlayedBox = await Hive.openBox<Song>(
-      AppValues.recentlyPlayedBox,
+    ///REGISTER HIVE ADAPTERS
+    await initHiveAdapters();
+
+    ///SONG SYNC OBJECTS
+    songSyncBox = await Hive.openBox<SongSync>(
+      AppValues.songSyncBox,
     );
 
     ///RECENTLY CART ADDED ALBUM
@@ -163,5 +182,26 @@ class AppHiveBoxes {
         DownloadSongQuality.MEDIUM_QUALITY,
       );
     }
+  }
+
+  Future<void> initHiveAdapters() async {
+    //INIT HIVE
+    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+    Hive.init(directory.path);
+    Hive.registerAdapter(SongAdapter());
+    Hive.registerAdapter(PlaylistAdapter());
+    Hive.registerAdapter(AlbumAdapter());
+    Hive.registerAdapter(ArtistAdapter());
+    Hive.registerAdapter(AudioFileAdapter());
+    Hive.registerAdapter(BgVideoAdapter());
+    Hive.registerAdapter(LyricAdapter());
+    Hive.registerAdapter(RemoteImageAdapter());
+    Hive.registerAdapter(TextLanAdapter());
+    Hive.registerAdapter(PlaylistCreatedByAdapter());
+    Hive.registerAdapter(AppUserAdapter());
+    Hive.registerAdapter(UserLoginTypeAdapter());
+    Hive.registerAdapter(DownloadSongQualityAdapter());
+    Hive.registerAdapter(SongSyncAdapter());
+    Hive.registerAdapter(SongSyncPlayedFromAdapter());
   }
 }

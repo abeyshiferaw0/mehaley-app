@@ -4,6 +4,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/cart/song_cart.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/dialog/dialog_remove_from_cart.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
@@ -90,6 +91,8 @@ class _CartSongsListState extends State<CartSongsList> {
                           playingFrom: PlayingFrom(
                             from: "playing from cart",
                             title: "mezmurs",
+                            songSyncPlayedFrom: SongSyncPlayedFrom.CART_PAGE,
+                            songSyncPlayedFromId: -1,
                           ),
                           startPlaying: true,
                           index: 0,

@@ -2,6 +2,7 @@ import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cub
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
@@ -86,6 +87,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                       child: SongMenuWidget(
                         song: state,
                         isForMyPlaylist: false,
+                        onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
                       ),
                     );
                   },

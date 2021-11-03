@@ -1,16 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
-import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class SearchPageDominantColorCubit extends Cubit<Color> {
   final SearchResultBloc searchResultBloc;
@@ -22,11 +20,8 @@ class SearchPageDominantColorCubit extends Cubit<Color> {
       (state) {
         if (state is SearchResultPageLoadedState) {
           if (state.searchPageResultData.topArtistData.topArtist != null) {
-            changePlayingFrom(
-              AppApi.baseFileUrl +
-                  state.searchPageResultData.topArtistData.topArtist!
-                      .artistImages[0].imageSmallPath,
-            );
+            changePlayingFrom(state.searchPageResultData.topArtistData
+                .topArtist!.artistImages[0].primaryColorHex);
           } else {
             if (state.searchPageResultData.result.length > 0) {
               changePlayingFrom(
@@ -45,27 +40,21 @@ class SearchPageDominantColorCubit extends Cubit<Color> {
     return super.close();
   }
 
-  void changePlayingFrom(String imageUrl) async {
-    ImageProvider? imageProvider = ColorUtil.getImageProvider(imageUrl);
-    if (imageProvider != null) {
-      print("changePlayingFrom2 $imageUrl");
-      Color dominantColor = await ColorUtil.getDarkImagePalette(imageProvider);
-      print("changePlayingFrom3 ${dominantColor.toString()}");
-      emit(dominantColor);
-    }
+  void changePlayingFrom(String colorHex) async {
+    emit(HexColor(colorHex));
   }
 
   String parseSearchResult(dynamic item) {
-    String imageUrl = "";
+    String colorHex = "";
     if (item is Artist) {
-      imageUrl = AppApi.baseFileUrl + item.artistImages[0].imageSmallPath;
+      colorHex = item.artistImages[0].primaryColorHex;
     } else if (item is Playlist) {
-      imageUrl = AppApi.baseFileUrl + item.playlistImage.imageSmallPath;
+      colorHex = item.playlistImage.primaryColorHex;
     } else if (item is Song) {
-      imageUrl = AppApi.baseFileUrl + item.albumArt.imageSmallPath;
+      colorHex = item.albumArt.primaryColorHex;
     } else if (item is Album) {
-      imageUrl = AppApi.baseFileUrl + item.albumImages[0].imageSmallPath;
+      colorHex = item.albumImages[0].primaryColorHex;
     }
-    return imageUrl;
+    return colorHex;
   }
 }

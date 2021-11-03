@@ -23,7 +23,6 @@ class ArtistAdapter extends TypeAdapter<Artist> {
       artistImages: (fields[3] as List).cast<RemoteImage>(),
       isVerified: fields[4] as bool,
       isSuggested: fields[5] as bool,
-      artistAboutSocialLinks: fields[6] as String,
       isFollowed: fields[7] as bool?,
       artistDateCreated: fields[8] as DateTime,
       artistDateUpdated: fields[9] as DateTime,
@@ -33,7 +32,7 @@ class ArtistAdapter extends TypeAdapter<Artist> {
   @override
   void write(BinaryWriter writer, Artist obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.artistId)
       ..writeByte(1)
@@ -46,8 +45,6 @@ class ArtistAdapter extends TypeAdapter<Artist> {
       ..write(obj.isVerified)
       ..writeByte(5)
       ..write(obj.isSuggested)
-      ..writeByte(6)
-      ..write(obj.artistAboutSocialLinks)
       ..writeByte(7)
       ..write(obj.isFollowed)
       ..writeByte(8)

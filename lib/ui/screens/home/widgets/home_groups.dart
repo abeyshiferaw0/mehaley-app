@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import 'group_header_widget.dart';
 
 class HomeGroups extends StatelessWidget {
+  final int? groupId;
   final String? groupSubTitle;
   final String? groupHeaderImageUrl;
   final GroupUiType groupUiType;
@@ -19,6 +20,7 @@ class HomeGroups extends StatelessWidget {
   final List<dynamic> groupItems;
 
   const HomeGroups({
+    required this.groupId,
     required this.groupUiType,
     required this.groupType,
     required this.groupTitle,
@@ -73,6 +75,11 @@ class HomeGroups extends StatelessWidget {
                     playingFrom: PlayingFrom(
                       from: "playing from",
                       title: groupTitle,
+                      songSyncPlayedFrom:
+                          PagesUtilFunctions.getSongSyncPlayedFromGroupType(
+                        groupType,
+                      ),
+                      songSyncPlayedFromId: groupId == null ? -1 : groupId!,
                     ),
                     context: context,
                     index: index,
@@ -166,6 +173,11 @@ class HomeGroups extends StatelessWidget {
                 playingFrom: PlayingFrom(
                   from: "playing from",
                   title: groupTitle,
+                  songSyncPlayedFrom:
+                      PagesUtilFunctions.getSongSyncPlayedFromGroupType(
+                    groupType,
+                  ),
+                  songSyncPlayedFromId: groupId == null ? -1 : groupId!,
                 ),
                 context: context,
                 index: i,

@@ -107,3 +107,8 @@ class EditUserEvent extends AuthEvent {
         imageChanged,
       ];
 }
+
+class LogOutEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}

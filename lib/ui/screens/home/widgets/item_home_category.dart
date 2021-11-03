@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class ItemHomeCategory extends StatelessWidget {
   final Category category;
@@ -47,13 +47,22 @@ class ItemHomeCategory extends StatelessWidget {
                 width: AppValues.homeCategoriesItemWidth,
                 color: AppColors.black.withOpacity(0.6),
               ),
-              Center(
-                child: Text(
-                  category.categoryNameText.textAm,
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: AppFontSizes.font_size_12.sp,
-                    fontWeight: FontWeight.w600,
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.padding_8),
+                child: Center(
+                  child: Text(
+                    L10nUtil.translateLocale(
+                      category.categoryNameText,
+                      context,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: AppFontSizes.font_size_12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               )

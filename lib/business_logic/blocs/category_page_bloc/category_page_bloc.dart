@@ -12,7 +12,8 @@ part 'category_page_event.dart';
 part 'category_page_state.dart';
 
 class CategoryPageBloc extends Bloc<CategoryPageEvent, CategoryPageState> {
-  CategoryPageBloc({required this.categoryDataRepository}) : super(CategoryPageInitial());
+  CategoryPageBloc({required this.categoryDataRepository})
+      : super(CategoryPageInitial());
 
   final CategoryDataRepository categoryDataRepository;
 
@@ -31,15 +32,17 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent, CategoryPageState> {
       try {
         //YIELD CACHE DATA
         final CategoryPageTopData categoryPageTopData =
-            await categoryDataRepository.getCategoryTopData(event.categoryId, AppCacheStrategy.LOAD_CACHE_FIRST);
+            await categoryDataRepository.getCategoryTopData(
+                event.categoryId, AppCacheStrategy.LOAD_CACHE_FIRST);
         yield CategoryPageTopLoaded(categoryPageTopData: categoryPageTopData);
 
         if (isFromCatch(categoryPageTopData.response)) {
           try {
-            yield CategoryPageTopLoading();
             //REFRESH AFTER CACHE YIELD
             final CategoryPageTopData categoryPageTopData =
-                await categoryDataRepository.getCategoryTopData(event.categoryId, AppCacheStrategy.CACHE_LATER);
+                await categoryDataRepository.getCategoryTopData(
+                    event.categoryId, AppCacheStrategy.CACHE_LATER);
+            yield CategoryPageTopLoading();
             yield CategoryPageTopLoaded(
               categoryPageTopData: categoryPageTopData,
             );

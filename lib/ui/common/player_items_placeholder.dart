@@ -30,9 +30,9 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
 
   IconData? getIconData() {
     if (appItemsType == AppItemsType.PLAYLIST) {
-      return PhosphorIcons.disc_thin;
+      return PhosphorIcons.playlist;
     } else if (appItemsType == AppItemsType.ALBUM) {
-      return PhosphorIcons.music_notes_light;
+      return PhosphorIcons.disc_light;
     } else if (appItemsType == AppItemsType.ARTIST) {
       return PhosphorIcons.user_thin;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {

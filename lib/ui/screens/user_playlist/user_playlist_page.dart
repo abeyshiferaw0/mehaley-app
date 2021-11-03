@@ -5,6 +5,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
@@ -13,6 +14,7 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/playlist/widget/shimmer_playlist.dart';
 import 'package:elf_play/ui/screens/user_playlist/widget/user_palaylist_add_songs_button.dart';
 import 'package:elf_play/ui/screens/user_playlist/widget/user_playlist_sliver_deligates.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +56,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               bgColor: AppColors.white,
               isFloating: true,
               msg:
-                  "${state.song.songName.textAm} removed from ${state.myPlaylist.playlistNameText.textAm}",
+                  "${L10nUtil.translateLocale(state.song.songName, context)} removed from ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)}",
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -73,7 +75,8 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg: "${state.myPlaylist.playlistNameText.textAm} deleted",
+              msg:
+                  "${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)} deleted",
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -269,7 +272,11 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           startPlaying: true,
                           playingFrom: PlayingFrom(
                             from: "playing from playlist",
-                            title: playlist.playlistNameText.textAm,
+                            title: L10nUtil.translateLocale(
+                                playlist.playlistNameText, context),
+                            songSyncPlayedFrom:
+                                SongSyncPlayedFrom.USER_PLAYLIST,
+                            songSyncPlayedFromId: playlist.playlistId,
                           ),
                           index: position,
                         );

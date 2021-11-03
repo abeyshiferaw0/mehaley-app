@@ -6,6 +6,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import 'menu_item.dart';
@@ -63,7 +64,9 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemoveAlbumCartEvent(
             album: widget.album,
-            appCartAddRemoveEvents: preButtonOnTap() ? AppCartAddRemoveEvents.REMOVE : AppCartAddRemoveEvents.ADD,
+            appCartAddRemoveEvents: preButtonOnTap()
+                ? AppCartAddRemoveEvents.REMOVE
+                : AppCartAddRemoveEvents.ADD,
           ),
         );
       },
@@ -72,10 +75,14 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
 
   IconData preCartIcon() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
         return PhosphorIcons.shopping_cart_simple_fill;
       } else {
@@ -84,12 +91,14 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return PhosphorIcons.shopping_cart_simple_fill;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return PhosphorIcons.shopping_cart_simple_light;
     }
 
@@ -103,10 +112,14 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
 
   Color preCartIconColor() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
         return AppColors.darkGreen;
       } else {
@@ -115,12 +128,14 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return AppColors.darkGreen;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return AppColors.grey.withOpacity(0.6);
     }
 
@@ -134,41 +149,51 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
 
   String preCartText() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
-        return "Remove from cart";
+        return AppLocalizations.of(context)!.removeFromCart;
       } else {
-        return "Add to cart";
+        return AppLocalizations.of(context)!.addToCart;
       }
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
-      return "Remove from cart";
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
+      return AppLocalizations.of(context)!.removeFromCart;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      return "Add to cart";
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
+      return AppLocalizations.of(context)!.addToCart;
     }
 
     ///IF ALBUM IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.album.isInCart) {
-      return "Remove from cart";
+      return AppLocalizations.of(context)!.removeFromCart;
     } else {
-      return "Add to cart";
+      return AppLocalizations.of(context)!.addToCart;
     }
   }
 
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
         return true;
       } else {
@@ -177,12 +202,14 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return true;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return false;
     }
 

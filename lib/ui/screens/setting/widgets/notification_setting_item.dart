@@ -13,26 +13,30 @@ class NotificationSettingItem extends StatelessWidget {
 
   final bool isEnabled;
   final String text;
-  final Function(bool isEnabled) onSwitched;
+  final VoidCallback onSwitched;
 
   @override
   Widget build(BuildContext context) {
     return AppBouncingButton(
-      onTap: () {},
-      shrinkRatio: 6,
+      onTap: () {
+        onSwitched();
+      },
+      shrinkRatio: 2,
       child: Container(
         // padding: EdgeInsets.symmetric(t: AppMargin.margin_8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Transform.scale(
-              scale: 0.7,
+              scale: 0.9,
               child: Switch(
                 value: isEnabled,
                 activeColor: AppColors.darkGreen,
                 activeTrackColor: AppColors.green.withOpacity(0.3),
                 inactiveTrackColor: AppColors.grey,
-                onChanged: onSwitched,
+                onChanged: (val) {
+                  onSwitched();
+                },
               ),
             ),
             SizedBox(

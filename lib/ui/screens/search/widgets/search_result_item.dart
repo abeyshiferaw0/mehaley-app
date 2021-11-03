@@ -5,17 +5,18 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
+import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
+import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:flutter/material.dart';
 
 class SearchResultItem extends StatefulWidget {
   const SearchResultItem({
@@ -30,6 +31,8 @@ class SearchResultItem extends StatefulWidget {
     required this.items,
     required this.isRecentSearchItem,
     required this.isPlaylistDedicatedResultPage,
+    required this.onMenuTap,
+    this.focusNode,
   }) : super(key: key);
 
   final Key itemKey;
@@ -42,6 +45,8 @@ class SearchResultItem extends StatefulWidget {
   final bool isRecentSearchItem;
   final bool isPlaylistDedicatedResultPage;
   final AppSearchItemTypes appSearchItemTypes;
+  final VoidCallback onMenuTap;
+  final FocusNode? focusNode;
 
   @override
   _SearchResultItemState createState() => _SearchResultItemState(
@@ -55,6 +60,7 @@ class SearchResultItem extends StatefulWidget {
         items: items,
         isRecentSearchItem: isRecentSearchItem,
         isPlaylistDedicatedResultPage: isPlaylistDedicatedResultPage,
+        onMenuTap: onMenuTap,
       );
 }
 
@@ -70,6 +76,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
     required this.imagePath,
     required this.subTitle,
     required this.appSearchItemTypes,
+    required this.onMenuTap,
   });
 
   final Key itemKey;
@@ -82,6 +89,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
   final bool isRecentSearchItem;
   final bool isPlaylistDedicatedResultPage;
   final AppSearchItemTypes appSearchItemTypes;
+  final VoidCallback onMenuTap;
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +100,21 @@ class _SearchResultItemState extends State<SearchResultItem> {
             .add(AddRecentSearchEvent(item: item));
         //PERFORM CLICK ACTION
         PagesUtilFunctions.searchResultItemOnClick(
-            appSearchItemTypes: appSearchItemTypes,
-            item: item,
-            playingFrom: PlayingFrom(
-                from: "Playing From Search Result \"$searchKey\"",
-                title: title),
-            items: items,
-            context: context,
-            index: 0);
+          appSearchItemTypes: appSearchItemTypes,
+          item: item,
+          playingFrom: PlayingFrom(
+            from: "Playing From Search Result \"$searchKey\"",
+            title: title,
+            songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
+            songSyncPlayedFromId: -1,
+          ),
+          items: items,
+          context: context,
+          index: 0,
+        );
+        if (widget.focusNode != null) {
+          widget.focusNode!.unfocus();
+        }
       },
       child: isPlaylistDedicatedResultPage
           ? buildGridItem()
@@ -147,9 +162,10 @@ class _SearchResultItemState extends State<SearchResultItem> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: AppColors.lightGrey,
-                fontWeight: FontWeight.w600,
-                fontSize: AppFontSizes.font_size_10.sp),
+              color: AppColors.lightGrey,
+              fontWeight: FontWeight.w600,
+              fontSize: AppFontSizes.font_size_10.sp,
+            ),
           ),
         ],
       ),
@@ -238,7 +254,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   ),
                 )
               : AppBouncingButton(
-                  onTap: () {},
+                  onTap: onMenuTap,
                   child: Padding(
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(

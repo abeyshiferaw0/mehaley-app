@@ -1,13 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class ItemCustomGroup extends StatelessWidget {
   final double width;
@@ -70,7 +67,7 @@ class ItemCustomGroup extends StatelessWidget {
                   : AppMargin.margin_6,
             ),
             Text(
-              PagesUtilFunctions.getGroupItemTitle(groupType, item),
+              PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
               maxLines: 2,
               textAlign: groupType == GroupType.ARTIST
                   ? TextAlign.center

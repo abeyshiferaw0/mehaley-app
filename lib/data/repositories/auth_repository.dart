@@ -8,12 +8,26 @@ import 'package:elf_play/data/models/api_response/save_user_data.dart';
 import 'package:elf_play/data/models/app_firebase_user.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/util/auth_util.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class AuthRepository {
   //INIT PROVIDER FOR API CALL
   final AuthProvider authProvider;
 
   const AuthRepository({required this.authProvider});
+
+  Future<void> setOneSignalExternalId(AppFireBaseUser appFireBaseUser) async {
+    ///SET ONE SIGNAL EXTERNAL ID
+    OneSignal.shared.setExternalUserId(appFireBaseUser.authLoginId).then(
+      (results) {
+        return;
+      },
+    ).catchError(
+      (error) {
+        throw error.toString();
+      },
+    );
+  }
 
   Future<SaveUserData> saveUser(AppFireBaseUser appFireBaseUser) async {
     Response response = await authProvider.saveUser(appFireBaseUser);
@@ -80,5 +94,11 @@ class AuthRepository {
       AuthUtil.generateTemporaryUserColor().value.toString(),
     );
     return appUser;
+  }
+
+  logOut() {
+    AppHiveBoxes.instance.userBox.clear();
+    OneSignal.shared.removeExternalUserId();
+    OneSignal.shared.disablePush(true);
   }
 }

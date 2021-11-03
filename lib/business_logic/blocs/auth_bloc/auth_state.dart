@@ -85,3 +85,8 @@ class AuthProfileUpdatingState extends AuthState {
   @override
   List<Object?> get props => [];
 }
+
+class AuthLoggedOutState extends AuthState {
+  @override
+  List<Object?> get props => [];
+}

@@ -6,6 +6,7 @@ import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/menu_items/artist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,8 +19,8 @@ class ArtistMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.imageUrl,
-    required this.noOfAlbum,
-    required this.noOfSong,
+    this.noOfAlbum,
+    this.noOfSong,
     required this.isFollowing,
     required this.artistId,
   }) : super(key: key);
@@ -28,8 +29,8 @@ class ArtistMenuWidget extends StatelessWidget {
   final int artistId;
   final String title;
   final String imageUrl;
-  final int noOfAlbum;
-  final int noOfSong;
+  final int? noOfAlbum;
+  final int? noOfSong;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class ArtistMenuWidget extends StatelessWidget {
               SizedBox(
                 height: ScreenUtil(context: context).getScreenHeight() * 0.2,
               ),
-              buildMenuHeader(),
+              buildMenuHeader(context),
               SizedBox(
                 height: AppMargin.margin_32,
               ),
@@ -80,7 +81,7 @@ class ArtistMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: "Share artist",
+                      title: AppLocalizations.of(context)!.shareArtist,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),
@@ -94,7 +95,7 @@ class ArtistMenuWidget extends StatelessWidget {
     );
   }
 
-  Container buildMenuHeader() {
+  Container buildMenuHeader(context) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -134,14 +135,16 @@ class ArtistMenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "$noOfAlbum Albums",
-                style: TextStyle(
-                  color: AppColors.lightGrey,
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              noOfAlbum != null
+                  ? Text(
+                      AppLocalizations.of(context)!.noOfAlbum(noOfAlbum!),
+                      style: TextStyle(
+                        color: AppColors.lightGrey,
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  : SizedBox(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                 child: Icon(
@@ -150,14 +153,16 @@ class ArtistMenuWidget extends StatelessWidget {
                   size: AppIconSizes.icon_size_4,
                 ),
               ),
-              Text(
-                "$noOfSong Mezmurs",
-                style: TextStyle(
-                  color: AppColors.lightGrey,
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+              noOfSong != null
+                  ? Text(
+                      AppLocalizations.of(context)!.noOfSongs(noOfSong!),
+                      style: TextStyle(
+                        color: AppColors.lightGrey,
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ],

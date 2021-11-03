@@ -251,6 +251,14 @@ class DownloadUtil {
     }
     return null;
   }
+
+  Future<int> getNumberOfDownloads() async {
+    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+        query:
+            "SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}");
+    if (tasks == null) return 0;
+    return tasks.length;
+  }
 }
 
 class DownloadedTaskWithSong {

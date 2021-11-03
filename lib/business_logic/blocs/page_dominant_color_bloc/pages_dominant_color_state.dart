@@ -59,3 +59,12 @@ class ProfilePageDominantColorChangedState extends PagesDominantColorState {
   @override
   List<Object?> get props => [color];
 }
+
+class HomePageDominantColorChangedState extends PagesDominantColorState {
+  final Color color;
+
+  HomePageDominantColorChangedState({required this.color});
+
+  @override
+  List<Object?> get props => [color];
+}

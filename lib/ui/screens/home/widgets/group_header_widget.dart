@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:sizer/sizer.dart';
-import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class GroupHeaderWidget extends StatelessWidget {
   const GroupHeaderWidget({

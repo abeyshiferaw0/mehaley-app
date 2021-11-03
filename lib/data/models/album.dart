@@ -98,8 +98,14 @@ class Album extends Equatable {
       albumId: map['album_id'] as int,
       albumTitle: TextLan.fromMap(map['album_title_text_id']),
       albumDescription: TextLan.fromMap(map['album_description_text_id']),
-      albumImages: (map['album_images'] as List).map((remoteImage) => RemoteImage.fromMap(remoteImage)).toList(),
-      songs: map['songs'] != null ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList() : null,
+      albumImages: (map['album_images'] as List).length > 0
+          ? (map['album_images'] as List)
+              .map((remoteImage) => RemoteImage.fromMap(remoteImage))
+              .toList()
+          : [RemoteImage.emptyRemoteImage()],
+      songs: map['songs'] != null
+          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
+          : null,
       artist: Artist.fromMap(map['artist_id']),
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,

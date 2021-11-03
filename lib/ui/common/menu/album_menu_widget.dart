@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/menu_items/album_favorite_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -84,14 +85,16 @@ class AlbumMenuWidget extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: false,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.currency_circle_dollar_thin,
-                      title: "Buy album",
-                      onTap: () {},
-                    ),
+                    (!album.isBought && !album.isFree)
+                        ? MenuItem(
+                            isDisabled: false,
+                            hasTopMargin: false,
+                            iconColor: AppColors.grey.withOpacity(0.6),
+                            icon: PhosphorIcons.currency_circle_dollar_thin,
+                            title: AppLocalizations.of(context)!.buyAlbum,
+                            onTap: () {},
+                          )
+                        : SizedBox(),
                     AlbumCartMenuItem(album: album),
                     AlbumFavoriteMenuItem(
                       hasTopMargin: true,
@@ -104,7 +107,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.user_light,
-                      title: "View artist",
+                      title: AppLocalizations.of(context)!.viewArtist,
                       onTap: () {},
                     ),
                     MenuItem(
@@ -112,7 +115,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: "Share album",
+                      title: AppLocalizations.of(context)!.shareAlbum,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),

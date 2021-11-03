@@ -9,6 +9,7 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/user_playlist_menu_widget.dart';
 import 'package:elf_play/ui/screens/user_playlist/widget/user_playlist_info_pages.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,7 +113,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             child: Opacity(
               opacity: shrinkPercentage,
               child: Text(
-                myPlaylist.playlistNameText.textAm,
+                L10nUtil.translateLocale(myPlaylist.playlistNameText, context),
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -135,7 +136,8 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                 context: context,
                 child: UserPlaylistMenuWidget(
                   myPlaylist: myPlaylist,
-                  title: myPlaylist.playlistNameText.textAm,
+                  title: L10nUtil.translateLocale(
+                      myPlaylist.playlistNameText, context),
                   imageUrl: "",
                   isFree: myPlaylist.isFree,
                   price: myPlaylist.priceEtb,
@@ -145,7 +147,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                   isFollowed: myPlaylist.isFollowed!,
                   onUpdateSuccess: (myPlaylist) {
                     print(
-                        "onUpdateSuccess 2 ${myPlaylist.playlistNameText.textAm}");
+                        "onUpdateSuccess 2 ${L10nUtil.translateLocale(myPlaylist.playlistNameText, context)}");
                     BlocProvider.of<UserPlaylistPageBloc>(context).add(
                       RefreshUserPlaylistPageEvent(
                         myPlaylist: myPlaylist,

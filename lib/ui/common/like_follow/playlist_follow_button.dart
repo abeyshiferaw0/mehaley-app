@@ -6,6 +6,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistFollowButton extends StatefulWidget {
@@ -130,29 +131,29 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return "FOLLOWING";
+        return AppLocalizations.of(context)!.following.toUpperCase();
       } else {
-        return "FOLLOW";
+        return AppLocalizations.of(context)!.follow.toUpperCase();
       }
     }
 
     ///IF  FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return "FOLLOWING";
+      return AppLocalizations.of(context)!.following.toUpperCase();
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return "FOLLOW";
+      return AppLocalizations.of(context)!.follow.toUpperCase();
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return "FOLLOWING";
+      return AppLocalizations.of(context)!.following.toUpperCase();
     } else {
-      return "FOLLOW";
+      return AppLocalizations.of(context)!.follow.toUpperCase();
     }
   }
 
@@ -177,19 +178,16 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
     ///IF FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      print("preBorderColor recentlyFollowedPlaylistBox");
       return AppColors.darkGreen;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      print("preBorderColor recentlyUnFollowedPlaylistBox");
       return AppColors.white;
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
-    print("preBorderColor isFollowing");
     if (widget.isFollowing) {
       return AppColors.green;
     } else {

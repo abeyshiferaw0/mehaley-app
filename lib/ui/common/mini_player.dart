@@ -17,9 +17,11 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
 import 'package:elf_play/util/audio_player_util.dart';
 import 'package:elf_play/util/color_util.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -55,7 +57,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0)).animate(controller);
+    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+        .animate(controller);
     // controller.forward();
     super.initState();
   }
@@ -79,7 +82,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   ///OPEN PLAYER PAGE IF PURCHASED OR FREE
-                  if (currentPlayingSong.isBought || currentPlayingSong.isFree) {
+                  if (currentPlayingSong.isBought ||
+                      currentPlayingSong.isFree) {
                     Navigator.of(context, rootNavigator: true).push(
                       PagesUtilFunctions.createBottomToUpAnimatedRoute(
                         page: PlayerPage(),
@@ -92,8 +96,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       builder: (context) {
                         return Center(
                           child: DialogSongPreviewMode(
-                            dominantColor: dominantColor,
                             song: currentPlayingSong,
+                            isForDownload: false,
+                            isForPlaying: true,
                           ),
                         );
                       },
@@ -102,9 +107,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 },
                 child: MultiBlocListener(
                   listeners: [
-                    BlocListener<SongPositionCubit, Duration>(
+                    BlocListener<SongPositionCubit, CurrentPlayingPosition>(
                       listener: (context, state) {
-                        progress = state.inSeconds.toDouble();
+                        progress = state.currentDuration.inSeconds.toDouble();
                       },
                     ),
                     BlocListener<SongBufferedCubit, Duration>(
@@ -118,7 +123,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       },
                     ),
                   ],
-                  child: BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
+                  child: BlocBuilder<PagesDominantColorBloc,
+                      PagesDominantColorState>(
                     builder: (context, state) {
                       if (state is PlayerPageDominantColorChangedState) {
                         dominantColor = ColorUtil.darken(
@@ -130,16 +136,20 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       return AnimatedSwitcher(
                         switchInCurve: Curves.easeIn,
                         switchOutCurve: Curves.easeOut,
-                        duration: Duration(milliseconds: AppValues.colorChangeAnimationDuration),
+                        duration: Duration(
+                            milliseconds:
+                                AppValues.colorChangeAnimationDuration),
                         child: Container(
                           key: ValueKey<int>(state.hashCode),
                           color: dominantColor,
                           child: Wrap(
                             children: [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  !currentPlayingSong.isBought && !currentPlayingSong.isFree
+                                  !currentPlayingSong.isBought &&
+                                          !currentPlayingSong.isFree
                                       ? buildBuyContainer(currentPlayingSong)
                                       : SizedBox(),
                                   buildPlayerControls(currentPlayingSong),
@@ -186,7 +196,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              "You are listing a preview, buy the mezmur to listen to the full version",
+              "You are listing a preview, buy the mezmur to listen the full version",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -270,7 +280,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           SizedBox(
             height: 25,
             child: AutoSizeText(
-              song != null ? song.songName.textAm : '',
+              song != null
+                  ? L10nUtil.translateLocale(song.songName, context)
+                  : '',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_16,
@@ -280,7 +292,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               minFontSize: AppFontSizes.font_size_16,
               maxFontSize: AppFontSizes.font_size_16,
               overflowReplacement: Marquee(
-                text: song != null ? song.songName.textAm : '',
+                text: song != null
+                    ? L10nUtil.translateLocale(song.songName, context)
+                    : '',
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
@@ -303,8 +317,12 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             ),
           ),
           Text(
-            song != null ? PagesUtilFunctions.getArtistsNames(song.artistsName) : '',
-            style: TextStyle(color: AppColors.lightGrey, fontSize: AppFontSizes.font_size_12),
+            song != null
+                ? PagesUtilFunctions.getArtistsNames(song.artistsName, context)
+                : '',
+            style: TextStyle(
+                color: AppColors.lightGrey,
+                fontSize: AppFontSizes.font_size_12),
           )
         ],
       ),
@@ -317,7 +335,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(
-          imageUrl: song != null ? AppApi.baseFileUrl + song.albumArt.imageSmallPath : '',
+          imageUrl: song != null
+              ? AppApi.baseFileUrl + song.albumArt.imageSmallPath
+              : '',
           fit: BoxFit.cover,
           height: AppValues.miniPlayerAlbumArtSize,
           width: AppValues.miniPlayerAlbumArtSize,
@@ -356,11 +376,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,
             ),
-            child: BlocBuilder<SongPositionCubit, Duration>(
+            child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
               builder: (context, state) {
                 return Slider(
                   value: AudioPlayerUtil.getCorrectProgress(
-                    state.inSeconds.toDouble(),
+                    state.currentDuration.inSeconds.toDouble(),
                     currentPlayingState.audioFile.audioDurationSeconds,
                   ),
                   min: 0.0,
@@ -370,7 +390,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   onChanged: (value) {
                     BlocProvider.of<AudioPlayerBloc>(context).add(
                       SeekAudioPlayerEvent(
-                        duration: Duration(seconds: value.toInt()),
+                        skipToDuration: Duration(seconds: value.toInt()),
                       ),
                     );
                   },
@@ -416,7 +436,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "BUY MEZMUR".toUpperCase(),
+              AppLocalizations.of(context)!.buyMezmur.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.bold,
@@ -450,7 +470,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               width: AppMargin.margin_4,
             ),
             Text(
-              "ADD TO CART".toUpperCase(),
+              AppLocalizations.of(context)!.addToCart.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.bold,

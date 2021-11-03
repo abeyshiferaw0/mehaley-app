@@ -1,0 +1,67 @@
+{
+  "appName": "Elf play",
+  "byElfPlay":"by elf play",
+  "removeFromCart": "Remove from cart",
+  "addToCart":"Add to cart",
+  "previewMode":"Preview mode",
+  "buyMezmur":"Buy Mezmur",
+  "buyAlbum":"Buy album",
+  "buyPlaylist":"Buy Playlist",
+  "follow":"follow",
+  "following":"following",
+  "addToFavorite":"Add to favorite",
+  "removeFromFavorite":"Remove from favorite",
+  "followArtist":"Follow artist",
+  "removeFromFollowedArtist":"Remove from followed artist",
+  "followPlaylist":"Follow playlist",
+  "removeFromFollowedPlaylist":"Remove from followed playlist",
+  "uAreListingToPreviewDesc":"You are listing to a preview version, buy the mezmur to listen the full version",
+  "downloadMezmur":"Download mezmur",
+  "downloading":"Downloading...",
+  "retryDownload":"Retry download",
+  "deleteMezmur":"Delete mezmur",
+  "shareAlbum":"Share album",
+  "shareArtist":"Share artist",
+  "sharePlaylist":"Share playlist",
+  "share":"Share",
+  "shareMezmur":"Share Mezmur",
+  "viewArtist":"View artist",
+  "noOfSongs":"{noOfSong} Mezmurs",
+      "@noOfSongs":{
+        "placeholders":{
+            "noOfSong":{
+                "type":"int"
+            }
+        }
+      },
+  "noOfAlbum":"{noOfAlbums} Albums",
+    "@noOfAlbum":{
+      "placeholders":{
+          "noOfAlbums":{
+              "type":"int"
+          }
+      }
+    },
+  "sortPlaylist":"Sort playlist",
+  "findInPlaylist":"Find in playlist",
+  "editProfile":"Edit profile",
+  "viewMezmursCategory":"View mezmur's category",
+  "viewArtist":"View artist",
+  "viewAlbum":"View album",
+  "addToQueue":"Add to queue",
+  "addToPlaylist":"Add to playlist",
+  "removeFromPlaylist":"Remove from playlist",
+  "addMezmurs":"Add mezmurs",
+  "byUserName":"by {userName}",
+  "@byUserName":{
+    "placeholders":{
+        "userName":{
+            "type":"String"
+        }
+    }
+  },
+  "addToHomeScreen":"Add to home screen",
+  "editPlaylist":"Edit playlist",
+  "deletePlaylist":"Delete playlist"
+}
+

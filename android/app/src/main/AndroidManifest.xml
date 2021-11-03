@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.elf_play">
+    package="com.marathonsys.mehaley">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -26,6 +26,25 @@
            </intent-filter>
        </receiver>
        <!--FOR AUDIO SERVICE-->
+
+
+       <!--FOR HOME SCREEN WIDGETS-->
+       <receiver android:name="VersesWidgetProvider" android:label="ጥቅሶች ከመሃልዬ">
+           <intent-filter>
+               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+           </intent-filter>
+           <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/verse_widget" />
+       </receiver>
+
+       <receiver android:name="MonthlyHolidaysWidgetProvider" android:label="ወርሃዊ በዓላት">
+           <intent-filter>
+               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+           </intent-filter>
+           <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/monthly_holidays_widget" />
+       </receiver>
+       <!--END FOR HOME SCREEN WIDGETS-->
 
        <!--   FACEBOOK AUTH    -->
        <meta-data android:name="com.facebook.sdk.ApplicationId"
@@ -70,7 +89,7 @@
                  Flutter's first frame. -->
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
+              android:resource="@drawable/widget_monthly_holidays_bg"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

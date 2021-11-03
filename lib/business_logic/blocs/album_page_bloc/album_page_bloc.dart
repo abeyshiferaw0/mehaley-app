@@ -12,7 +12,8 @@ part 'album_page_event.dart';
 part 'album_page_state.dart';
 
 class AlbumPageBloc extends Bloc<AlbumPageEvent, AlbumPageState> {
-  AlbumPageBloc({required this.albumDataRepository}) : super(AlbumPageInitial());
+  AlbumPageBloc({required this.albumDataRepository})
+      : super(AlbumPageInitial());
 
   final AlbumDataRepository albumDataRepository;
 
@@ -31,15 +32,15 @@ class AlbumPageBloc extends Bloc<AlbumPageEvent, AlbumPageState> {
       yield AlbumPageLoadingState();
       try {
         //YIELD CACHE DATA
-        final AlbumPageData albumPageData =
-            await albumDataRepository.getAlbumData(event.albumId, AppCacheStrategy.LOAD_CACHE_FIRST);
+        final AlbumPageData albumPageData = await albumDataRepository
+            .getAlbumData(event.albumId, AppCacheStrategy.LOAD_CACHE_FIRST);
         yield AlbumPageLoadedState(albumPageData: albumPageData);
         if (isFromCatch(albumPageData.response)) {
           try {
-            yield AlbumPageLoadingState();
             //REFRESH AFTER CACHE YIELD
-            final AlbumPageData albumPageData =
-                await albumDataRepository.getAlbumData(event.albumId, AppCacheStrategy.CACHE_LATER);
+            final AlbumPageData albumPageData = await albumDataRepository
+                .getAlbumData(event.albumId, AppCacheStrategy.CACHE_LATER);
+            yield AlbumPageLoadingState();
             yield AlbumPageLoadedState(albumPageData: albumPageData);
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED

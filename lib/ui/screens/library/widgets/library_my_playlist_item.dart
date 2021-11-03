@@ -2,6 +2,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -37,7 +38,8 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    myPlaylist.playlistNameText.textAm,
+                    L10nUtil.translateLocale(
+                        myPlaylist.playlistNameText, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,

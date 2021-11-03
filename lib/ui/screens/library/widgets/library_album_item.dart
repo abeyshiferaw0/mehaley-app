@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -50,7 +51,8 @@ class LibraryAlbumItem extends StatelessWidget {
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
+                imageUrl:
+                    AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),
@@ -60,7 +62,7 @@ class LibraryAlbumItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  album.albumTitle.textAm,
+                  L10nUtil.translateLocale(album.albumTitle, context),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
                     color: AppColors.white,
@@ -73,7 +75,8 @@ class LibraryAlbumItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      album.artist.artistName.textAm,
+                      L10nUtil.translateLocale(
+                          album.artist.artistName, context),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.txtGrey,
@@ -120,8 +123,9 @@ class LibraryAlbumItem extends StatelessWidget {
                     albumId: album.albumId,
                     album: album,
                     isLiked: album.isLiked,
-                    title: album.albumTitle.textAm,
-                    imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+                    title: L10nUtil.translateLocale(album.albumTitle, context),
+                    imageUrl: AppApi.baseFileUrl +
+                        album.albumImages[0].imageMediumPath,
                     price: album.priceEtb,
                     isFree: album.isFree,
                     isDiscountAvailable: album.isDiscountAvailable,

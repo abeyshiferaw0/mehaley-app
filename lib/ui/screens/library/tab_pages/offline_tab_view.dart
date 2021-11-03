@@ -5,6 +5,7 @@ import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
+import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/offline_songs_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_icon_button.dart';
@@ -52,6 +53,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   RefreshOfflineSongsEvent(
                     appLibrarySortTypes: appLibrarySortTypes,
+                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
                 await BlocProvider.of<OfflineSongsBloc>(context).stream.first;
@@ -137,6 +139,8 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 playingFrom: PlayingFrom(
                   from: "playing from",
                   title: "purchased mezmurs",
+                  songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
+                  songSyncPlayedFromId: -1,
                 ),
                 index: PagesUtilFunctions.getRandomIndex(
                   min: 0,
@@ -193,6 +197,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
@@ -213,6 +218,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.TITLE_A_Z,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
@@ -231,6 +237,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.NEWEST,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -248,6 +255,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.OLDEST,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -265,6 +273,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.ARTIST_A_Z,
+                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
