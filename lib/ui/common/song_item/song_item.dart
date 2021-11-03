@@ -134,6 +134,16 @@ class _SongItemState extends State<SongItem> {
                       Row(
                         children: [
                           //////////
+                          //SONG OTHER BADGES
+                          //////////
+                          //////////
+                          //LYRIC BADGE
+                          //////////
+                          song.lyricIncluded ? SongItemBadge(tag: 'LYRIC') : SizedBox(),
+                          Row(
+                            children: getOtherBadges(badges),
+                          ),
+                          //////////
                           //PRICE BADGE
                           //////////
                           getPriceBadge(
@@ -143,29 +153,21 @@ class _SongItemState extends State<SongItem> {
                             song.discountPercentage,
                             song.isBought,
                           ),
-                          //////////
-                          //SONG OTHER BADGES
-                          //////////
-                          //////////
-                          //LYRIC BADGE
-                          //////////
-                          song.lyricIncluded
-                              ? SongItemBadge(tag: 'LYRIC')
-                              : SizedBox(),
-                          Row(
-                            children: getOtherBadges(badges),
-                          ),
+
                           //////////
                           //ARTIST NAMES
                           //////////
-                          Text(
-                            PagesUtilFunctions.getArtistsNames(
-                                song.artistsName, context),
-                            style: TextStyle(
-                              fontSize: AppFontSizes.font_size_14,
-                              color: AppColors.txtGrey,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w400,
+                          Expanded(
+                            child: Text(
+                              PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: AppFontSizes.font_size_14,
+                                color: AppColors.txtGrey,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           )
                         ],
@@ -246,8 +248,7 @@ class _SongItemState extends State<SongItem> {
     }
   }
 
-  getPriceBadge(double price, bool isFree, bool isDiscountAvailable,
-      double discountPercentage, bool isBought) {
+  getPriceBadge(double price, bool isFree, bool isDiscountAvailable, double discountPercentage, bool isBought) {
     // if (isSongFree) {
     //   return SongItemBadge(
     //     tag: 'FREE',

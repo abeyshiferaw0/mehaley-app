@@ -2,21 +2,9 @@ import 'package:elf_play/util/enum_values.dart';
 
 enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM }
 
-enum GroupUiType {
-  LINEAR_HORIZONTAL,
-  LINEAR_HORIZONTAL_WITH_HEADER,
-  GRID_VERTICAL
-}
+enum GroupUiType { LINEAR_HORIZONTAL, LINEAR_HORIZONTAL_WITH_HEADER, GRID_VERTICAL }
 
-enum AppItemsType {
-  ALBUM,
-  ARTIST,
-  SINGLE_TRACK,
-  PLAYLIST,
-  GROUP,
-  OTHER,
-  CATEGORY
-}
+enum AppItemsType { ALBUM, ARTIST, SINGLE_TRACK, PLAYLIST, GROUP, OTHER, CATEGORY }
 
 enum SearchResultOtherItems {
   SEE_ALL_PLAYLISTS,

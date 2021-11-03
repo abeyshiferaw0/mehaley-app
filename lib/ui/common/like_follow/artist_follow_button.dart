@@ -16,10 +16,7 @@ class ArtistFollowButton extends StatelessWidget {
   final int artistId;
   final bool askDialog;
 
-  const ArtistFollowButton(
-      {required this.isFollowing,
-      required this.artistId,
-      required this.askDialog});
+  const ArtistFollowButton({required this.isFollowing, required this.artistId, required this.askDialog});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +35,7 @@ class ArtistFollowButton extends StatelessWidget {
             onTap(context);
           },
           child: Container(
-            child: preButtonOnTap()
-                ? buildFollowingBtn(context)
-                : buildFollowBtn(context),
+            child: preButtonOnTap() ? buildFollowingBtn(context) : buildFollowBtn(context),
           ),
         );
       },
@@ -51,7 +46,7 @@ class ArtistFollowButton extends StatelessWidget {
     if (askDialog && preButtonOnTap()) {
       showDialog(
         context: context,
-        builder: (context) {
+        builder: (_) {
           return Center(
             child: DialogUlLikeUnFollow(
               mainButtonText: 'UNFOLLOW'.toUpperCase(),
@@ -63,12 +58,11 @@ class ArtistFollowButton extends StatelessWidget {
                   "ARTIST_FOLLOW",
                   Duration(milliseconds: 800),
                   () {
+                    print("artistId $artistId");
                     BlocProvider.of<LibraryBloc>(context).add(
                       FollowUnFollowArtistEvent(
                         id: artistId,
-                        appLikeFollowEvents: preButtonOnTap()
-                            ? AppLikeFollowEvents.UNFOLLOW
-                            : AppLikeFollowEvents.FOLLOW,
+                        appLikeFollowEvents: preButtonOnTap() ? AppLikeFollowEvents.UNFOLLOW : AppLikeFollowEvents.FOLLOW,
                       ),
                     );
                   },
@@ -87,9 +81,7 @@ class ArtistFollowButton extends StatelessWidget {
           BlocProvider.of<LibraryBloc>(context).add(
             FollowUnFollowArtistEvent(
               id: artistId,
-              appLikeFollowEvents: preButtonOnTap()
-                  ? AppLikeFollowEvents.UNFOLLOW
-                  : AppLikeFollowEvents.FOLLOW,
+              appLikeFollowEvents: preButtonOnTap() ? AppLikeFollowEvents.UNFOLLOW : AppLikeFollowEvents.FOLLOW,
             ),
           );
         },
@@ -100,8 +92,7 @@ class ArtistFollowButton extends StatelessWidget {
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY FOLLOWED AND UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedArtistBox.containsKey(artistId) &&
-        AppHiveBoxes.instance.recentlyUnFollowedArtistBox
-            .containsKey(artistId)) {
+        AppHiveBoxes.instance.recentlyUnFollowedArtistBox.containsKey(artistId)) {
       int a = AppHiveBoxes.instance.recentlyFollowedArtistBox.get(artistId);
 
       int b = AppHiveBoxes.instance.recentlyUnFollowedArtistBox.get(artistId);
@@ -118,8 +109,7 @@ class ArtistFollowButton extends StatelessWidget {
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
-    if (AppHiveBoxes.instance.recentlyUnFollowedArtistBox
-        .containsKey(artistId)) {
+    if (AppHiveBoxes.instance.recentlyUnFollowedArtistBox.containsKey(artistId)) {
       return false;
     }
 

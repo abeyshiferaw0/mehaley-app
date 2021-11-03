@@ -1,5 +1,6 @@
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
@@ -39,16 +40,26 @@ class LibraryPage extends StatefulWidget {
   _LibraryPageState createState() => _LibraryPageState();
 }
 
-class _LibraryPageState extends State<LibraryPage>
-    with TickerProviderStateMixin, RouteAware {
+class _LibraryPageState extends State<LibraryPage> with TickerProviderStateMixin, RouteAware {
   ///TAB CONTROLLER
   late TabController _tabController;
 
   @override
   void didPopNext() {
-    BlocProvider.of<BottomBarCubit>(context).changeScreen(
-      BottomBarPages.LIBRARY,
-    );
+    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.LIBRARY);
+    BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
+  }
+
+  @override
+  void didPushNext() {
+    BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(false);
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(false);
+    super.didPop();
   }
 
   @override

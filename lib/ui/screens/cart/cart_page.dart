@@ -1,12 +1,13 @@
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/api_response/cart_page_data.dart';
-import 'package:elf_play/data/models/cart/cart.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/data/models/cart/cart.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
@@ -18,6 +19,7 @@ import 'package:elf_play/ui/screens/cart/widgets/cart_summery.dart';
 import 'package:elf_play/ui/screens/cart/widgets/list_cart_albums.dart';
 import 'package:elf_play/ui/screens/cart/widgets/list_cart_playlist.dart';
 import 'package:elf_play/ui/screens/cart/widgets/list_cart_songs.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -40,10 +42,20 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   @override
   void didPopNext() {
-    print("routeObserver didPopNext HOME");
-    BlocProvider.of<BottomBarCubit>(context).changeScreen(
-      BottomBarPages.CART,
-    );
+    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.CART);
+    BlocProvider.of<BottomBarCartCubit>(context).setPageShowing(true);
+  }
+
+  @override
+  void didPushNext() {
+    BlocProvider.of<BottomBarCartCubit>(context).setPageShowing(false);
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    BlocProvider.of<BottomBarCartCubit>(context).setPageShowing(false);
+    super.didPop();
   }
 
   @override
@@ -73,8 +85,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
       listener: (context, state) {
         ///ERROR MESSAGES WHEN REMOVING FROM CART
         if (state is CartUtilSongAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
-            return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -88,8 +99,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
         if (state is CartUtilAlbumAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
-            return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -103,8 +113,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
         if (state is CartUtilPlaylistAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
-            return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
@@ -144,8 +153,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
               buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: true,
-                  msg:
-                      "${L10nUtil.translateLocale(state.song.songName, context)} removed from cart",
+                  msg: "${L10nUtil.translateLocale(state.song.songName, context)} removed from cart",
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.check_circle_fill,
                   iconColor: AppColors.darkGreen),
@@ -162,14 +170,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
         }
 
         if (state is CartUtilAlbumAddedSuccessState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
-            return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg:
-                    "${L10nUtil.translateLocale(state.album.albumTitle, context)} removed from cart",
+                msg: "${L10nUtil.translateLocale(state.album.albumTitle, context)} removed from cart",
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -185,14 +191,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
         }
 
         if (state is CartUtilPlaylistAddedSuccessState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
-            return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg:
-                    "${L10nUtil.translateLocale(state.playlist.playlistNameText, context)} removed from cart",
+                msg: "${L10nUtil.translateLocale(state.playlist.playlistNameText, context)} removed from cart",
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),

@@ -1,11 +1,16 @@
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/user_image_sm.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -40,8 +45,8 @@ class _BottomBarState extends State<BottomBar> {
           ),
           currentIndex: getBottomBarIndex(state),
           onTap: (pos) {
-            if (getBottomBarIndex(state) != pos) {
-              if (pos == 0) {
+            if (pos == 0) {
+              if (!BlocProvider.of<BottomBarHomeCubit>(context).state) {
                 BlocProvider.of<BottomBarCubit>(context).changeScreen(
                   BottomBarPages.HOME,
                 );
@@ -56,7 +61,9 @@ class _BottomBarState extends State<BottomBar> {
                 // widget.navigatorKey.currentState!.pushNamed(
                 //   AppRouterPaths.homeRoute,
                 // );
-              } else if (pos == 1) {
+              }
+            } else if (pos == 1) {
+              if (!BlocProvider.of<BottomBarSearchCubit>(context).state) {
                 BlocProvider.of<BottomBarCubit>(context).changeScreen(
                   BottomBarPages.SEARCH,
                 );
@@ -71,7 +78,9 @@ class _BottomBarState extends State<BottomBar> {
                 // widget.navigatorKey.currentState!.pushNamed(
                 //   AppRouterPaths.searchRoute,
                 // );
-              } else if (pos == 2) {
+              }
+            } else if (pos == 2) {
+              if (!BlocProvider.of<BottomBarLibraryCubit>(context).state) {
                 BlocProvider.of<BottomBarCubit>(context).changeScreen(
                   BottomBarPages.LIBRARY,
                 );
@@ -89,7 +98,9 @@ class _BottomBarState extends State<BottomBar> {
                 // widget.navigatorKey.currentState!.pushNamed(
                 //   AppRouterPaths.libraryRoute,
                 // );
-              } else if (pos == 3) {
+              }
+            } else if (pos == 3) {
+              if (!BlocProvider.of<BottomBarCartCubit>(context).state) {
                 BlocProvider.of<BottomBarCubit>(context).changeScreen(
                   BottomBarPages.CART,
                 );
@@ -183,6 +194,7 @@ class _BottomBarState extends State<BottomBar> {
   }
 
   int getBottomBarIndex(BottomBarPages state) {
+    print("roughtAware => ${EnumToString.convertToString(state)}");
     if (state == BottomBarPages.HOME) {
       return 0;
     } else if (state == BottomBarPages.SEARCH) {

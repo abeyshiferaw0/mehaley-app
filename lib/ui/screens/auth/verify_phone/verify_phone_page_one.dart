@@ -26,8 +26,7 @@ class VerifyPhonePageOne extends StatefulWidget {
 class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
-  MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-000');
+  MaskedTextController controller = new MaskedTextController(mask: '000-000-000');
   CountryCode selectedCountryCode = CountryCode.fromCountryCode("ET");
 
   @override
@@ -73,6 +72,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: buildAppBar(context),
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(

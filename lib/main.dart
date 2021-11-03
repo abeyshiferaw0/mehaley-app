@@ -39,6 +39,10 @@ import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
+import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
+import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
+import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'business_logic/cubits/localization_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
@@ -73,8 +77,7 @@ void main() async {
 
   ///INITIALIZE DOWNLOADER
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(
-      debug: true // optional: set false to disable printing logs to console
+  await FlutterDownloader.initialize(debug: true // optional: set false to disable printing logs to console
       );
 
   ///INIT ONE SIGNAl
@@ -226,10 +229,21 @@ class _MyAppState extends State<MyApp> {
             BlocProvider<BottomBarCubit>(
               create: (context) => BottomBarCubit(),
             ),
+            BlocProvider<BottomBarHomeCubit>(
+              create: (context) => BottomBarHomeCubit(),
+            ),
+            BlocProvider<BottomBarCartCubit>(
+              create: (context) => BottomBarCartCubit(),
+            ),
+            BlocProvider<BottomBarLibraryCubit>(
+              create: (context) => BottomBarLibraryCubit(),
+            ),
+            BlocProvider<BottomBarSearchCubit>(
+              create: (context) => BottomBarSearchCubit(),
+            ),
             BlocProvider(
               create: (context) => SearchInputIsSearchingCubit(),
             ),
-
             BlocProvider(
               create: (context) => SongMenuBloc(
                 songMenuRepository: AppRepositories.songMenuRepository,
@@ -281,15 +295,11 @@ class _MyAppState extends State<MyApp> {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     routes: {
-                      AppRouterPaths.splashRoute: (context) =>
-                          const SplashPage(),
+                      AppRouterPaths.splashRoute: (context) => const SplashPage(),
                       AppRouterPaths.signUp: (context) => const SignUpPage(),
-                      AppRouterPaths.mainScreen: (context) =>
-                          const MainScreen(),
-                      AppRouterPaths.verifyPhonePageOne: (context) =>
-                          const VerifyPhonePageOne(),
-                      AppRouterPaths.verifyPhonePageTwo: (context) =>
-                          const VerifyPhonePageTwo(),
+                      AppRouterPaths.mainScreen: (context) => const MainScreen(),
+                      AppRouterPaths.verifyPhonePageOne: (context) => const VerifyPhonePageOne(),
+                      AppRouterPaths.verifyPhonePageTwo: (context) => const VerifyPhonePageTwo(),
                     },
                   );
                 },

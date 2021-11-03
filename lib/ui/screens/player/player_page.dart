@@ -1,7 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/fake_data.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
@@ -97,8 +96,6 @@ class _PlayerPageState extends State<PlayerPage> {
 
   void playerPageListners(BuildContext context, AudioPlayerState state) {
     if (state is AudioPlayerErrorState) {
-      print("${AppTestValues.debugTxt} Error code: ${state.error}");
-      print("${AppTestValues.debugTxt} Error message: ${state.msg}");
       ScaffoldMessenger.of(context).showSnackBar(
         buildAppSnackBar(
           bgColor: AppColors.errorRed,
@@ -107,16 +104,13 @@ class _PlayerPageState extends State<PlayerPage> {
         ),
       );
     }
-    // if (state is AudioPlayerCurrentSongChangeState) {
-    //   ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
-    //   print(
-    //       "AudioPlayerCurrentSongChangeStatePOPPED ${state.song.isFree}  //  ${state.song.isBought} // ${isPagePopped}");
-    //
-    //   if (!state.song.isFree && !state.song.isBought && !isPagePopped) {
-    //     isPagePopped = true;
-    //     Navigator.pop(context);
-    //   }
-    // }
+    if (state is AudioPlayerCurrentSongChangeState) {
+      ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
+      if (!state.song.isFree && !state.song.isBought && !isPagePopped) {
+        isPagePopped = true;
+        Navigator.pop(context);
+      }
+    }
   }
 
   void checkIfShouldPop() {
@@ -124,24 +118,18 @@ class _PlayerPageState extends State<PlayerPage> {
       "PLAYER_DEBOUNCE",
       Duration(milliseconds: 100),
       () {
-        print("PLAYER_INIT ");
-        if (BlocProvider.of<AudioPlayerBloc>(context)
-                .audioPlayer
-                .sequenceState !=
-            null) {
+        if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState != null) {
           IndexedAudioSource? currentItem =
-              BlocProvider.of<AudioPlayerBloc>(context)
-                  .audioPlayer
-                  .sequenceState!
-                  .currentSource;
-          print("PLAYER_INIT currentItem");
+              BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState!.currentSource;
           if (currentItem != null) {
-            MediaItem mediaItem = (currentItem!.tag as MediaItem);
+            MediaItem mediaItem = (currentItem.tag as MediaItem);
             Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
-            print("PLAYER_INIT song${song.songId}");
             if (!song.isFree && !song.isBought) {
-              print("PLAYER_INIT song.isFree && !song.isBought ");
-              Navigator.pop(context);
+              ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
+              if (!isPagePopped) {
+                Navigator.pop(context);
+                isPagePopped = true;
+              }
             }
           }
         }

@@ -1,5 +1,6 @@
 import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -30,15 +31,32 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     AppRouterPaths.routeObserver.subscribe(this, ModalRoute.of(context)!);
 
     ///CANCEL PAGE REQUEST
-    BlocProvider.of<SearchFrontPageBloc>(context)
-        .add(CancelSearchFrontPageEvent());
+    BlocProvider.of<SearchFrontPageBloc>(context).add(CancelSearchFrontPageEvent());
   }
 
   @override
   void didPopNext() {
-    BlocProvider.of<BottomBarCubit>(context).changeScreen(
-      BottomBarPages.SEARCH,
-    );
+    print("rouutheaware=> didPopNext");
+    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.SEARCH);
+    BlocProvider.of<BottomBarSearchCubit>(context).setPageShowing(true);
+  }
+
+  @override
+  void didPushNext() {
+    BlocProvider.of<BottomBarSearchCubit>(context).setPageShowing(false);
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    BlocProvider.of<BottomBarSearchCubit>(context).setPageShowing(false);
+    super.didPop();
+  }
+
+  @override
+  void didPush() {
+    // TODO: implement didPush
+    super.didPush();
   }
 
   @override
@@ -49,8 +67,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   @override
   void initState() {
-    BlocProvider.of<SearchFrontPageBloc>(context)
-        .add(LoadSearchFrontPageEvent());
+    BlocProvider.of<SearchFrontPageBloc>(context).add(LoadSearchFrontPageEvent());
     super.initState();
   }
 
@@ -107,8 +124,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     );
   }
 
-  SingleChildScrollView buildSearchPageLoaded(
-      SearchFrontPageLoadedState state) {
+  SingleChildScrollView buildSearchPageLoaded(SearchFrontPageLoadedState state) {
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),
       child: Column(

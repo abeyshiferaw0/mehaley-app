@@ -51,7 +51,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
       children: [
         ExpansionPanel(
           canTapOnHeader: true,
-          hasIcon: false,
+          //hasIcon: false,
           backgroundColor: AppColors.black,
           headerBuilder: (context, isExpanded) {
             return Container(
@@ -68,9 +68,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                   ),
                   Expanded(child: SizedBox()),
                   Icon(
-                    isExpanded
-                        ? PhosphorIcons.caret_up_light
-                        : PhosphorIcons.caret_down_light,
+                    isExpanded ? PhosphorIcons.caret_up_light : PhosphorIcons.caret_down_light,
                     size: AppIconSizes.icon_size_24,
                     color: AppColors.white,
                   )
@@ -111,7 +109,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ),
         ExpansionPanel(
           canTapOnHeader: true,
-          hasIcon: false,
+          //hasIcon: false,
           backgroundColor: AppColors.black,
           headerBuilder: (context, isExpanded) {
             return Container(
@@ -128,9 +126,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                   ),
                   Expanded(child: SizedBox()),
                   Icon(
-                    isExpanded
-                        ? PhosphorIcons.caret_up_light
-                        : PhosphorIcons.caret_down_light,
+                    isExpanded ? PhosphorIcons.caret_up_light : PhosphorIcons.caret_down_light,
                     size: AppIconSizes.icon_size_24,
                     color: AppColors.white,
                   )
@@ -154,16 +150,14 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       BlocProvider.of<OneSignalBloc>(context).add(
                         SetNotificationTagEvent(
                           notificationTags: notificationTags,
-                          appUserNotificationTypes: AppUserNotificationTypes
-                              .RECEIVE_ADMIN_NOTIFICATIONS,
+                          appUserNotificationTypes: AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS,
                         ),
                       );
                     },
                   ),
                   NotificationSettingItem(
                     isEnabled: isNotificationEnabled(
-                      AppUserNotificationTypes
-                          .RECEIVE_NEW_RELEASES_NOTIFICATIONS,
+                      AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS,
                       notificationTags,
                     ),
                     text: 'New Releases',
@@ -172,16 +166,14 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       BlocProvider.of<OneSignalBloc>(context).add(
                         SetNotificationTagEvent(
                           notificationTags: notificationTags,
-                          appUserNotificationTypes: AppUserNotificationTypes
-                              .RECEIVE_NEW_RELEASES_NOTIFICATIONS,
+                          appUserNotificationTypes: AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS,
                         ),
                       );
                     },
                   ),
                   NotificationSettingItem(
                     isEnabled: isNotificationEnabled(
-                      AppUserNotificationTypes
-                          .RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
+                      AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
                       notificationTags,
                     ),
                     text: 'Latest Updates',
@@ -190,16 +182,14 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       BlocProvider.of<OneSignalBloc>(context).add(
                         SetNotificationTagEvent(
                           notificationTags: notificationTags,
-                          appUserNotificationTypes: AppUserNotificationTypes
-                              .RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
+                          appUserNotificationTypes: AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
                         ),
                       );
                     },
                   ),
                   NotificationSettingItem(
                     isEnabled: isNotificationEnabled(
-                      AppUserNotificationTypes
-                          .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
+                      AppUserNotificationTypes.RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
                       notificationTags,
                     ),
                     text: 'Daily Ceremonies',
@@ -208,8 +198,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       BlocProvider.of<OneSignalBloc>(context).add(
                         SetNotificationTagEvent(
                           notificationTags: notificationTags,
-                          appUserNotificationTypes: AppUserNotificationTypes
-                              .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
+                          appUserNotificationTypes: AppUserNotificationTypes.RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
                         ),
                       );
                     },
@@ -236,8 +225,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
     if (notificationTags.containsKey(
       EnumToString.convertToString(appUserNotificationTypes),
     )) {
-      String val = notificationTags[
-          EnumToString.convertToString(appUserNotificationTypes)];
+      String val = notificationTags[EnumToString.convertToString(appUserNotificationTypes)];
       if (int.parse(val) == 1) {
         return true;
       }
