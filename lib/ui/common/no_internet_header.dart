@@ -6,9 +6,9 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter/material.dart';
 
 class NoInternetHeader extends StatelessWidget {
   const NoInternetHeader({
@@ -30,8 +30,9 @@ class NoInternetHeader extends StatelessWidget {
 
   Container buildNoInternetHeader(context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 70),
+      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_32 * 2),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(

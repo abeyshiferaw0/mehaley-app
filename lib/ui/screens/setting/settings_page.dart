@@ -52,8 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
             buildAppSnackBar(
               bgColor: AppColors.blue,
               isFloating: false,
-              msg:
-                  "Couldn't connect to the internet, check your internet connection",
+              msg: "Couldn't connect to the internet, check your internet connection",
               txtColor: AppColors.white,
             ),
           );
@@ -62,8 +61,10 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
-          brightness: Brightness.dark,
-          //systemOverlayStyle: SystemUiOverlayStyle.light,
+          //brightness: Brightness.dark,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.dark,
+          ),
           backgroundColor: AppColors.darkGrey,
           leading: IconButton(
             onPressed: () {
@@ -126,8 +127,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ProfileButton(),
                     SettingRadioItem(
                       title: "Data Saver",
-                      subTitle:
-                          "Lowers the quality of your mezmurs streams, for lower data usage",
+                      subTitle: "Lowers the quality of your mezmurs streams, for lower data usage",
                       isEnabled: true,
                       onSwitched: (bool value) {},
                     ),
@@ -136,14 +136,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     SettingLargeButton(
                       title: "Preferred Payment method",
-                      subTitle:
-                          "Choose your preferred payment method for all purchases",
+                      subTitle: "Choose your preferred payment method for all purchases",
                       onTap: () {},
                     ),
                     SettingRadioItem(
                       title: "Auto Download",
-                      subTitle:
-                          "Start Downloading Purchased Mezmurs Automatically",
+                      subTitle: "Start Downloading Purchased Mezmurs Automatically",
                       isEnabled: true,
                       onSwitched: (bool value) {},
                     ),

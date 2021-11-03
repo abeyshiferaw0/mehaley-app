@@ -25,9 +25,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
-  const SearchResultDedicated(
-      {Key? key, required this.searchKey, required this.appSearchItemTypes})
-      : super(key: key);
+  const SearchResultDedicated({Key? key, required this.searchKey, required this.appSearchItemTypes}) : super(key: key);
 
   final String searchKey;
   final AppSearchItemTypes appSearchItemTypes;
@@ -55,8 +53,10 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         centerTitle: true,
-        brightness: Brightness.dark,
-        //systemOverlayStyle: SystemUiOverlayStyle.light,
+        //brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.dark,
+        ),
         backgroundColor: AppColors.darkGrey,
         leading: IconButton(
           iconSize: AppIconSizes.icon_size_24,
@@ -107,8 +107,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     );
   }
 
-  Widget buildSearchResultDedicatedList(
-      SearchResultPageDedicatedLoadedState state) {
+  Widget buildSearchResultDedicatedList(SearchResultPageDedicatedLoadedState state) {
     if (state.appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
       return Padding(
         padding: const EdgeInsets.only(
@@ -172,8 +171,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       return SearchResultItem(
         itemKey: Key("song_${resultItem.songId}"),
         title: L10nUtil.translateLocale(resultItem.songName, context),
-        subTitle:
-            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
+        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -212,10 +210,8 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
-              title: L10nUtil.translateLocale(
-                  resultItem.playlistNameText, context),
-              imageUrl:
-                  AppApi.baseFileUrl + resultItem.playlistImage.imageMediumPath,
+              title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
+              imageUrl: AppApi.baseFileUrl + resultItem.playlistImage.imageMediumPath,
               isFree: resultItem.isFree,
               price: resultItem.priceEtb,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -232,8 +228,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       return SearchResultItem(
         itemKey: Key("album_${resultItem.albumId}"),
         title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-        subTitle:
-            L10nUtil.translateLocale(resultItem.artist.artistName, context),
+        subTitle: L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: widget.searchKey,
@@ -250,8 +245,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               album: resultItem,
               isLiked: resultItem.isLiked,
               title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl: AppApi.baseFileUrl +
-                  resultItem.albumImages[0].imageMediumPath,
+              imageUrl: AppApi.baseFileUrl + resultItem.albumImages[0].imageMediumPath,
               price: resultItem.priceEtb,
               isFree: resultItem.isFree,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -280,8 +274,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),
-              imageUrl: AppApi.baseFileUrl +
-                  resultItem.artistImages[0].imageMediumPath,
+              imageUrl: AppApi.baseFileUrl + resultItem.artistImages[0].imageMediumPath,
               isFollowing: resultItem.isFollowed!,
               artistId: resultItem.artistId,
             ),

@@ -209,8 +209,10 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       backgroundColor: AppColors.black,
       shadowColor: AppColors.transparent,
       centerTitle: true,
-      brightness: Brightness.dark,
-      //systemOverlayStyle: SystemUiOverlayStyle.light,
+      //brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+      ),
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);

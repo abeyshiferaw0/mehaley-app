@@ -30,8 +30,7 @@ class SongAddToUserPlaylistPage extends StatefulWidget {
   final Function(MyPlaylist) onCreateWithSongSuccess;
 
   @override
-  _SongAddToUserPlaylistPageState createState() =>
-      _SongAddToUserPlaylistPageState();
+  _SongAddToUserPlaylistPageState createState() => _SongAddToUserPlaylistPageState();
 }
 
 class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
@@ -75,8 +74,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg:
-                  "Unable add mezmur to playlist\ncheck your internet connection",
+              msg: "Unable add mezmur to playlist\ncheck your internet connection",
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -160,13 +158,11 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                             )
                           : SizedBox(),
                       LibraryMyPlaylistItem(
-                        myPlaylist: state.myPlaylistPageData.myPlaylists
-                            .elementAt(index),
+                        myPlaylist: state.myPlaylistPageData.myPlaylists.elementAt(index),
                         onTap: () {
                           BlocProvider.of<UserPlaylistBloc>(context).add(
                             AddSongUserPlaylistEvent(
-                              myPlaylist: state.myPlaylistPageData.myPlaylists
-                                  .elementAt(index),
+                              myPlaylist: state.myPlaylistPageData.myPlaylists.elementAt(index),
                               song: widget.song,
                             ),
                           );
@@ -180,8 +176,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             } else {
               return LibraryEmptyPage(
                 icon: PhosphorIcons.playlist_light,
-                msg:
-                    "You haven't created any playlists press new playlist to start adding.",
+                msg: "You haven't created any playlists press new playlist to start adding.",
               );
             }
           } else if (state is MyPlaylistLoadingErrorState) {
@@ -213,8 +208,10 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      brightness: Brightness.dark,
-      //systemOverlayStyle: SystemUiOverlayStyle.light,
+      //brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+      ),
       backgroundColor: AppColors.black,
       shadowColor: AppColors.transparent,
       leading: IconButton(

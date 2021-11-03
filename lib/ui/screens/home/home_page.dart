@@ -112,7 +112,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Rout
         children: [
           HomeHeaderGradient(),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(height: AppMargin.margin_48),

@@ -162,8 +162,10 @@ class _LibraryPageState extends State<LibraryPage> with TickerProviderStateMixin
 
   SliverAppBar buildAppBar() {
     return SliverAppBar(
-      brightness: Brightness.dark,
-      //systemOverlayStyle: SystemUiOverlayStyle.light,
+      //brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+      ),
       backgroundColor: AppColors.darkGrey,
       shadowColor: AppColors.transparent,
       floating: true,

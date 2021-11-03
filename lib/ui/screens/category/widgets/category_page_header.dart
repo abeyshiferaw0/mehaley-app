@@ -33,16 +33,14 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
           fit: BoxFit.cover,
           height: 360,
           width: double.infinity,
-          imageUrl: AppApi.baseFileUrl +
-              widget.category.categoryImage.imageMediumPath,
+          imageUrl: AppApi.baseFileUrl + widget.category.categoryImage.imageMediumPath,
           placeholder: (context, url) => buildCategoryHeaderGradient(),
           errorWidget: (context, url, e) => buildCategoryHeaderGradient(),
         ),
         Container(
           height: 360,
           decoration: BoxDecoration(
-            gradient: AppGradients()
-                .getCategoryFilterGradient(AppColors.appGradientDefaultColor),
+            gradient: AppGradients().getCategoryFilterGradient(AppColors.appGradientDefaultColor),
           ),
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
@@ -63,8 +61,10 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
 
   AppBar buildAppBar(double shrinkPercentage, Category category) {
     return AppBar(
-      brightness: Brightness.dark,
-      //systemOverlayStyle: SystemUiOverlayStyle.light,
+      //brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.dark,
+      ),
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       centerTitle: true,
@@ -107,8 +107,7 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.padding_16),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
                 child: Text(
                   L10nUtil.translateLocale(category.categoryNameText, context),
                   textAlign: TextAlign.center,
