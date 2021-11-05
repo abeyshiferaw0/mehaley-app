@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
@@ -297,13 +299,31 @@ class _QueueListPageState extends State<QueueListPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: AppMargin.margin_16),
-          Text(
-            'Queue',
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_16.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.white,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Queue',
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+              ),
+              Expanded(child: SizedBox()),
+              Platform.isIOS
+                  ? AppBouncingButton(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        PhosphorIcons.x_light,
+                        size: AppIconSizes.icon_size_24,
+                        color: AppColors.white,
+                      ),
+                    )
+                  : SizedBox()
+            ],
           ),
           SizedBox(height: AppMargin.margin_16),
           Text(

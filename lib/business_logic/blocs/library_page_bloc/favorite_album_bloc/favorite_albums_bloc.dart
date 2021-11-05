@@ -27,7 +27,7 @@ class FavoriteAlbumsBloc
       // LOAD CACHE AND REFRESH
       yield FavoriteAlbumsLoadingState();
       try {
-        //YIELD CACHE DATA
+        ///YIELD CACHE DATA
         final FavoriteItemsData favoriteItemsData =
             await libraryPageDataRepository.getFavoriteItems(
           AppCacheStrategy.LOAD_CACHE_FIRST,

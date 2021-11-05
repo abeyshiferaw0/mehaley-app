@@ -437,7 +437,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
 
   void initPreviousValues() {
     nameInputController.text = AuthUtil.getUserName(
-        BlocProvider.of<AppUserWidgetsCubit>(context).state);
+      BlocProvider.of<AppUserWidgetsCubit>(context).state,
+    );
   }
 }
 

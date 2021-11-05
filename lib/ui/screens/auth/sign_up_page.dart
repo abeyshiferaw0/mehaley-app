@@ -38,6 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Scaffold(
         backgroundColor: AppColors.black,
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             SignUpPageStaggeredAnimatedList(),

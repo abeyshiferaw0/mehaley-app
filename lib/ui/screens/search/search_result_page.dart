@@ -50,7 +50,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
         children: [
           buildResultBlocBuilder(),
           buildSearchInputHeader(context),
-          buildVoiceSearchButton()
+          //buildVoiceSearchButton()
         ],
       ),
     );

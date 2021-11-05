@@ -46,8 +46,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           Navigator.pop(context, true);
         }
         if (state is AuthSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRouterPaths.mainScreen, ModalRoute.withName(AppRouterPaths.splashRoute));
+          Navigator.pushNamedAndRemoveUntil(context, AppRouterPaths.mainScreen,
+              ModalRoute.withName(AppRouterPaths.splashRoute));
         }
         if (state is AuthErrorState) {
           Navigator.pop(context);
@@ -56,7 +56,6 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: buildAppBar(context),
-        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(
@@ -91,7 +90,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                         onTap: () {
                           //VERIFY PIN CODE
                           if (_pinPutController.text.length == 6) {
-                            print("_pinPutController.value.text.length ${_pinPutController.text.length}");
+                            print(
+                                "_pinPutController.value.text.length ${_pinPutController.text.length}");
                             BlocProvider.of<AuthBloc>(context).add(
                               VerifyPhoneEvent(
                                 pinCode: _pinPutController.text,
@@ -156,7 +156,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             BlocProvider.of<AuthBloc>(context).add(
               ResendPinCodeEvent(
                 resendToken: resendToken,
-                phoneNumber: "${args.args['countryCode']}${(args.args['phoneNumber'] as String).replaceAll("-", "")}",
+                phoneNumber:
+                    "${args.args['countryCode']}${(args.args['phoneNumber'] as String).replaceAll("-", "")}",
               ),
             );
           },

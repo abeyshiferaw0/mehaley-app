@@ -14,31 +14,32 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
     return makeSolid ? buildSolidButton() : buildNonSolidButton();
   }
 
-  AppBouncingButton buildNonSolidButton() {
-    return AppBouncingButton(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_20,
-          vertical: AppPadding.padding_6,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: AppColors.white.withOpacity(0.3),
-            width: 1,
-          ),
-        ),
-        child: Text(
-          "ADD MEZMURS".toUpperCase(),
-          style: TextStyle(
-            fontSize: AppFontSizes.font_size_8.sp,
-            color: AppColors.white,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    );
+  Widget buildNonSolidButton() {
+    return SizedBox();
+    // return AppBouncingButton(
+    //   onTap: () {},
+    //   child: Container(
+    //     padding: EdgeInsets.symmetric(
+    //       horizontal: AppPadding.padding_20,
+    //       vertical: AppPadding.padding_6,
+    //     ),
+    //     decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(20),
+    //       border: Border.all(
+    //         color: AppColors.white.withOpacity(0.3),
+    //         width: 1,
+    //       ),
+    //     ),
+    //     child: Text(
+    //       "ADD MEZMURS".toUpperCase(),
+    //       style: TextStyle(
+    //         fontSize: AppFontSizes.font_size_8.sp,
+    //         color: AppColors.white,
+    //         fontWeight: FontWeight.w600,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Container buildSolidButton() {
@@ -57,24 +58,24 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppPadding.padding_32,
-                vertical: AppPadding.padding_8,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                "ADD MEZMURS".toUpperCase(),
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_12.sp,
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(
+            //     horizontal: AppPadding.padding_32,
+            //     vertical: AppPadding.padding_8,
+            //   ),
+            //   decoration: BoxDecoration(
+            //     color: AppColors.white,
+            //     borderRadius: BorderRadius.circular(30),
+            //   ),
+            //   child: Text(
+            //     "ADD MEZMURS".toUpperCase(),
+            //     style: TextStyle(
+            //       fontSize: AppFontSizes.font_size_12.sp,
+            //       color: AppColors.black,
+            //       fontWeight: FontWeight.w600,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

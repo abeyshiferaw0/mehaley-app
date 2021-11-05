@@ -154,14 +154,14 @@ class _ArtistPageState extends State<ArtistPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 2),
-                child: Icon(
-                  Icons.navigate_next,
-                  color: AppColors.lightGrey,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              )
+              // Padding(
+              //   padding: EdgeInsets.only(top: 2),
+              //   child: Icon(
+              //     Icons.navigate_next,
+              //     color: AppColors.lightGrey,
+              //     size: AppIconSizes.icon_size_24,
+              //   ),
+              // )
             ],
           ),
         ],
@@ -189,14 +189,14 @@ class _ArtistPageState extends State<ArtistPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 2),
-                child: Icon(
-                  Icons.navigate_next,
-                  color: AppColors.lightGrey,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              )
+              // Padding(
+              //   padding: EdgeInsets.only(top: 2),
+              //   child: Icon(
+              //     Icons.navigate_next,
+              //     color: AppColors.lightGrey,
+              //     size: AppIconSizes.icon_size_24,
+              //   ),
+              // )
             ],
           ),
         ],
@@ -309,14 +309,14 @@ class _ArtistPageState extends State<ArtistPage> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 2),
-              child: Icon(
-                Icons.navigate_next,
-                color: AppColors.lightGrey,
-                size: AppIconSizes.icon_size_24,
-              ),
-            )
+            // Padding(
+            //   padding: EdgeInsets.only(top: 2),
+            //   child: Icon(
+            //     Icons.navigate_next,
+            //     color: AppColors.lightGrey,
+            //     size: AppIconSizes.icon_size_24,
+            //   ),
+            // )
           ],
         ),
         SizedBox(

@@ -5,6 +5,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/menu_items/album_favorite_menu_item.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,6 +31,7 @@ class AlbumMenuWidget extends StatelessWidget {
     required this.isLiked,
     required this.isBought,
     required this.album,
+    required this.rootContext,
   }) : super(key: key);
 
   final int albumId;
@@ -42,6 +44,7 @@ class AlbumMenuWidget extends StatelessWidget {
   final bool isLiked;
   final bool isBought;
   final Album album;
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +111,13 @@ class AlbumMenuWidget extends StatelessWidget {
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.user_light,
                       title: AppLocalizations.of(context)!.viewArtist,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                        PagesUtilFunctions.artistItemOnClick(
+                          album.artist,
+                          rootContext,
+                        );
+                      },
                     ),
                     MenuItem(
                       isDisabled: false,

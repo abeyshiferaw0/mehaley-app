@@ -9,7 +9,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_download_menu_item.dart';
 import 'package:elf_play/ui/common/menu/menu_items/song_favorite_menu_item.dart';
@@ -56,9 +55,9 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
 
   @override
   void initState() {
-    BlocProvider.of<SongMenuBloc>(context).add(
-      LoadSearchLeftOverMenusEvent(song: song),
-    );
+    // BlocProvider.of<SongMenuBloc>(context).add(
+    //   LoadSearchLeftOverMenusEvent(song: song),
+    // );
     super.initState();
   }
 
@@ -70,25 +69,30 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
         height: ScreenUtil(context: context).getScreenHeight(),
         child: BlocBuilder<SongMenuBloc, SongMenuState>(
           builder: (context, state) {
-            if (state is SongMenuLeftOverDataLoading) {
-              return AppLoading(
-                size: AppValues.loadingWidgetSize * 0.5,
-              );
-            } else if (state is SongMenuLeftOverDataLoaded) {
-              return buildMenuList(
-                context,
-                true,
-                widget.onCreateWithSongSuccess,
-              );
-            } else if (state is SongMenuLeftOverDataNotLoaded) {
-              return buildMenuList(
-                context,
-                false,
-                widget.onCreateWithSongSuccess,
-              );
-            }
-            return AppLoading(
-              size: AppValues.loadingWidgetSize * 0.5,
+            // if (state is SongMenuLeftOverDataLoading) {
+            //   return AppLoading(
+            //     size: AppValues.loadingWidgetSize * 0.5,
+            //   );
+            // } else if (state is SongMenuLeftOverDataLoaded) {
+            //   return buildMenuList(
+            //     context,
+            //     true,
+            //     widget.onCreateWithSongSuccess,
+            //   );
+            // } else if (state is SongMenuLeftOverDataNotLoaded) {
+            //   return buildMenuList(
+            //     context,
+            //     false,
+            //     widget.onCreateWithSongSuccess,
+            //   );
+            // }
+            // return AppLoading(
+            //   size: AppValues.loadingWidgetSize * 0.5,
+            // );
+            return buildMenuList(
+              context,
+              false,
+              widget.onCreateWithSongSuccess,
             );
           },
         ),
@@ -265,38 +269,40 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                       );
                     },
                   ),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.list_plus_light,
-                    title: AppLocalizations.of(context)!.addToQueue,
-                    onTap: () {},
-                  ),
-                  MenuItem(
-                    isDisabled: !isLeftOverLoaded,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.disc_light,
-                    title: AppLocalizations.of(context)!.viewAlbum,
-                    onTap: () {},
-                  ),
-                  MenuItem(
-                    isDisabled: !isLeftOverLoaded,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.user_thin,
-                    title: AppLocalizations.of(context)!.viewArtist,
-                    onTap: () {},
-                  ),
-                  MenuItem(
-                    isDisabled: !isLeftOverLoaded,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.rows_light,
-                    title: AppLocalizations.of(context)!.viewMezmursCategory,
-                    onTap: () {},
-                  ),
+                  // MenuItem(
+                  //   isDisabled:false,
+                  //   hasTopMargin: true,
+                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   icon: PhosphorIcons.list_plus_light,
+                  //   title: AppLocalizations.of(context)!.addToQueue,
+                  //   onTap: () async {
+                  //
+                  //   },
+                  // ),
+                  // MenuItem(
+                  //   isDisabled: !isLeftOverLoaded,
+                  //   hasTopMargin: true,
+                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   icon: PhosphorIcons.disc_light,
+                  //   title: AppLocalizations.of(context)!.viewAlbum,
+                  //   onTap: () {},
+                  // ),
+                  // MenuItem(
+                  //   isDisabled: !isLeftOverLoaded,
+                  //   hasTopMargin: true,
+                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   icon: PhosphorIcons.user_thin,
+                  //   title: AppLocalizations.of(context)!.viewArtist,
+                  //   onTap: () {},
+                  // ),
+                  // MenuItem(
+                  //   isDisabled: !isLeftOverLoaded,
+                  //   hasTopMargin: true,
+                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   icon: PhosphorIcons.rows_light,
+                  //   title: AppLocalizations.of(context)!.viewMezmursCategory,
+                  //   onTap: () {},
+                  // ),
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,

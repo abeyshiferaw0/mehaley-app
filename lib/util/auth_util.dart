@@ -32,7 +32,6 @@ class AuthUtil {
     if (appUser.userEmail != null) {
       return appUser.userEmail!;
     }
-
     return AppHiveBoxes.instance.userBox.get(
       AppValues.userTemporaryNameKey,
     );

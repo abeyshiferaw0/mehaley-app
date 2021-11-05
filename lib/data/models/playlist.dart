@@ -42,8 +42,6 @@ class Playlist extends Equatable {
   final bool? isFollowed;
   @HiveField(15)
   final bool isInCart;
-  @HiveField(16)
-  final int? numberOfFollowers;
   @HiveField(17)
   final DateTime playlistDateCreated;
   @HiveField(18)
@@ -53,7 +51,6 @@ class Playlist extends Equatable {
 
   const Playlist({
     required this.isBought,
-    this.numberOfFollowers,
     required this.songs,
     required this.playlistId,
     required this.playlistNameText,
@@ -95,7 +92,6 @@ class Playlist extends Equatable {
         playlistDateCreated,
         playlistDateUpdated,
         songs,
-        numberOfFollowers,
       ];
 
   factory Playlist.fromMap(Map<String, dynamic> map) {
@@ -110,7 +106,9 @@ class Playlist extends Equatable {
       playlistImage: RemoteImage.fromMap(
         map['playlist_image_id'],
       ),
-      songs: map['songs'] != null ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList() : null,
+      songs: map['songs'] != null
+          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
+          : null,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,
@@ -119,9 +117,10 @@ class Playlist extends Equatable {
       discountPercentage: map['discount_percentage'] as double,
       isVerified: map['is_verified'] == 1 ? true : false,
       isFeatured: map['is_featured'] == 1 ? true : false,
-      isFollowed: map['is_followed'] != null ? (map['is_followed'] == 1 ? true : false) : null,
+      isFollowed: map['is_followed'] != null
+          ? (map['is_followed'] == 1 ? true : false)
+          : null,
       isInCart: map['is_in_cart'] == 1 ? true : false,
-      numberOfFollowers: map['number_of_followers'] != null ? map['number_of_followers'] : null,
       createdBy: EnumToString.fromString(
         PlaylistCreatedBy.values,
         map['created_by'],
@@ -155,7 +154,6 @@ class Playlist extends Equatable {
       'created_by_id': this.createdById,
       'is_followed': this.isFollowed,
       'is_in_cart': this.isInCart,
-      'number_of_followers': this.numberOfFollowers,
       'playlist_date_created': this.playlistDateCreated,
       'playlist_date_updated': this.playlistDateUpdated,
     } as Map<String, dynamic>;

@@ -102,7 +102,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
           ),
           SizedBox(height: AppMargin.margin_12),
           buildUserPlaylistOwnerProfilePic(context),
-          SizedBox(height: AppMargin.margin_12),
+          SizedBox(height: AppMargin.margin_16),
           buildProfileOwnerNameTag(context),
           Expanded(child: SizedBox()),
           buildUserPlaylistDateAndTime(),
@@ -152,8 +152,8 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
   Container buildProfileOwnerNameTag(context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_16,
-        vertical: AppPadding.padding_4,
+        horizontal: AppPadding.padding_32,
+        vertical: AppPadding.padding_2,
       ),
       decoration: BoxDecoration(
         color: AppColors.grey.withOpacity(0.5),

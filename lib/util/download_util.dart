@@ -5,7 +5,6 @@ import 'dart:ui';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,17 +23,11 @@ class DownloadUtil {
     if (downloadSongQuality == DownloadSongQuality.HIGH_QUALITY) {
       downloadPath = song.audioFile.audioLargePath;
     }
-    print(
-        "DOWNLOADINGGG URL => ${AppApi.baseFileUrl}$downloadPath?song=${Song.toBase64Str(song)}");
-    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
-    return "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    return "${AppApi.baseFileUrl}$downloadPath?song=${Song.toBase64Str(song)}";
   }
 
-  getSongFileName(
-    Song song,
-    DownloadSongQuality appDownloadQualityOptions,
-  ) {
-    return "SONG_${EnumToString.convertToString(appDownloadQualityOptions)}_${song.songId}.mp3";
+  getSongFileName(Song song) {
+    return "SONG_${song.songId}.mp3";
   }
 
   Future<String> getSaveDir(Song song) async {
@@ -127,12 +120,10 @@ class DownloadUtil {
 
   Future<DownloadTaskStatus> isSongDownloadedCheckWithDb(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
-    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
-    final String url =
-        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    final String fileName = getSongFileName(song);
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
-      query: "SELECT * FROM task WHERE url='$url'",
+      query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
     if (tasks == null) return DownloadTaskStatus.undefined;
@@ -146,12 +137,10 @@ class DownloadUtil {
 
   Future<DownloadTask?> isSongDownloadedForPlayback(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
-    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
-    final String url =
-        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    final String fileName = getSongFileName(song);
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
-      query: "SELECT * FROM task WHERE url='$url'",
+      query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
     if (tasks == null) return null;
@@ -189,9 +178,11 @@ class DownloadUtil {
   }
 
   Future<DownloadTask?> getDownloadTask(Song song) async {
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-        query:
-            "SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}");
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query:
+          "SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}",
+    );
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
@@ -216,12 +207,10 @@ class DownloadUtil {
 
   Future<bool> isAlreadyInQueue(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
-    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
-    final String url =
-        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    final String fileName = getSongFileName(song);
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
-      query: "SELECT * FROM task WHERE url='$url'",
+      query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
     if (tasks == null) return false;
@@ -235,12 +224,10 @@ class DownloadUtil {
 
   Future<String?> getFailedTaskId(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
-    //return "${AppApi.baseFileUrl}$downloadPath?song=${songJsonToStr(song)}";
-    final String url =
-        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3?song=${Song.toBase64Str(song)}";
+    final String fileName = getSongFileName(song);
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
-      query: "SELECT * FROM task WHERE url='$url'",
+      query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
     if (tasks == null) return null;

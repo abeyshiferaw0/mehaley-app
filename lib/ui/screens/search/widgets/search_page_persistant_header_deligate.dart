@@ -57,20 +57,20 @@ class SearchPersistentSliverHeaderDelegate
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  AppRouterPaths.searchResultRoute,
-                  arguments: ScreenArguments(args: {'isVoiceTyping': true}),
-                );
-              },
-              icon: Icon(
-                PhosphorIcons.microphone_thin,
-                color: AppColors.lightGrey,
-                size: AppIconSizes.icon_size_28,
-              ),
-            )
+            // IconButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(
+            //       context,
+            //       AppRouterPaths.searchResultRoute,
+            //       arguments: ScreenArguments(args: {'isVoiceTyping': true}),
+            //     );
+            //   },
+            //   icon: Icon(
+            //     PhosphorIcons.microphone_thin,
+            //     color: AppColors.lightGrey,
+            //     size: AppIconSizes.icon_size_28,
+            //   ),
+            // )
           ],
         ),
       ),

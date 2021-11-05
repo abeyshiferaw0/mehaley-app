@@ -9,10 +9,8 @@ import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/common/app_error.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/download_all_purchased.dart';
 import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/playlist/widget/shimmer_playlist.dart';
-import 'package:elf_play/ui/screens/user_playlist/widget/user_palaylist_add_songs_button.dart';
 import 'package:elf_play/ui/screens/user_playlist/widget/user_playlist_sliver_deligates.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
@@ -231,12 +229,13 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: AppMargin.margin_16),
-                      UserPlaylistAddMezmursBtn(
-                        makeSolid: false,
-                      ),
+                      // UserPlaylistAddMezmursBtn(
+                      //   makeSolid: false,
+                      // ),
                       SizedBox(height: AppMargin.margin_16),
-                      DownloadAllPurchased(
-                          downloadAllSelected: downloadAllSelected),
+                      // DownloadAllPurchased(
+                      //   downloadAllSelected: downloadAllSelected,
+                      // ),
                       SizedBox(height: AppMargin.margin_16),
                     ],
                   )

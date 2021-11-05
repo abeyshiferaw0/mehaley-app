@@ -203,7 +203,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                 },
                 children: [
                   PlaylistInfoPageOne(
-                    playlist: widget.playlistPageData.playlist,
+                    playlistPageData: widget.playlistPageData,
                   ),
                   PlaylistInfoPageTwo(
                     songs: widget.playlistPageData.songs,

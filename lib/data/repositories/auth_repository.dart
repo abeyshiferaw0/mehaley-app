@@ -8,6 +8,8 @@ import 'package:elf_play/data/models/api_response/save_user_data.dart';
 import 'package:elf_play/data/models/app_firebase_user.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/util/auth_util.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class AuthRepository {
@@ -98,6 +100,8 @@ class AuthRepository {
 
   logOut() {
     AppHiveBoxes.instance.userBox.clear();
+    FirebaseAuth.instance.signOut();
+    FacebookAuth.instance.logOut();
     OneSignal.shared.removeExternalUserId();
     OneSignal.shared.disablePush(true);
   }

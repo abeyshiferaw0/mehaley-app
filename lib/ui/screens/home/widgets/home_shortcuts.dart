@@ -46,6 +46,9 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
             ),
           ),
         ),
+        SizedBox(
+          height: AppMargin.margin_12,
+        ),
         Visibility(
           visible: getNumberOfItems() > 2 ? true : false,
           child: Padding(

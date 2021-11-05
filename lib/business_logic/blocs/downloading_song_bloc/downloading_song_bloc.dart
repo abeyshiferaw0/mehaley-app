@@ -71,7 +71,6 @@ class DownloadingSongBloc
             savedDir: saveDir,
             fileName: downloadUtil.getSongFileName(
               event.song,
-              downloadSongQuality,
             ),
             notificationTitle: event.notificationTitle,
             showNotification: true,

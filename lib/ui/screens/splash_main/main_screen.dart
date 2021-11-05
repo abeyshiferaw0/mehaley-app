@@ -261,7 +261,7 @@ class _MainScreenState extends State<MainScreen> {
           listener: (BuildContext context, state) {
             if (state is AuthLoggedOutState) {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                AppRouterPaths.splashRoute,
+                AppRouterPaths.signUp,
                 (Route<dynamic> route) => false,
               );
             }

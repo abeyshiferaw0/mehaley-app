@@ -123,6 +123,7 @@ class LibraryAlbumItem extends StatelessWidget {
                     albumId: album.albumId,
                     album: album,
                     isLiked: album.isLiked,
+                    rootContext: context,
                     title: L10nUtil.translateLocale(album.albumTitle, context),
                     imageUrl: AppApi.baseFileUrl +
                         album.albumImages[0].imageMediumPath,

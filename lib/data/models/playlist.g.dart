@@ -18,7 +18,6 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
     };
     return Playlist(
       isBought: fields[10] as bool,
-      numberOfFollowers: fields[16] as int?,
       songs: (fields[19] as List?)?.cast<Song>(),
       playlistId: fields[0] as int,
       playlistNameText: fields[1] as TextLan,
@@ -76,8 +75,6 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       ..write(obj.isFollowed)
       ..writeByte(15)
       ..write(obj.isInCart)
-      ..writeByte(16)
-      ..write(obj.numberOfFollowers)
       ..writeByte(17)
       ..write(obj.playlistDateCreated)
       ..writeByte(18)

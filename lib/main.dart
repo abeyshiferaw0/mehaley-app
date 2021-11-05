@@ -1,6 +1,5 @@
 import 'dart:isolate';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
@@ -66,7 +65,7 @@ void main() async {
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Elf play',
     androidNotificationOngoing: true,
-    //notificationColor: AppColors.appGradientDefaultColor,
+    notificationColor: AppColors.darkGreen,
   );
 
   ///INIT HIVE BOXES
@@ -77,29 +76,13 @@ void main() async {
 
   ///INITIALIZE DOWNLOADER
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(debug: true // optional: set false to disable printing logs to console
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
       );
 
   ///INIT ONE SIGNAl
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
   OneSignal.shared.setAppId(AppStrings.oneSignalId);
-
-  ///INIT LOCAL NOTIFICATIONS
-  AwesomeNotifications().initialize(
-      // set the icon to null if you want to use the default app icon
-      //'resource://drawable/res_app_icon',
-      null,
-      [
-        NotificationChannel(
-            icon: 'resource://drawable/res_download_icon',
-            channelKey: 'progress_bar',
-            channelName: 'Progress bar notifications',
-            channelDescription: 'Notifications with a progress bar layout',
-            defaultColor: Colors.deepPurple,
-            ledColor: Colors.deepPurple,
-            vibrationPattern: lowVibrationPattern,
-            onlyAlertOnce: true),
-      ]);
 
   ///RUN APP
   // runApp(
@@ -295,11 +278,15 @@ class _MyAppState extends State<MyApp> {
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     routes: {
-                      AppRouterPaths.splashRoute: (context) => const SplashPage(),
+                      AppRouterPaths.splashRoute: (context) =>
+                          const SplashPage(),
                       AppRouterPaths.signUp: (context) => const SignUpPage(),
-                      AppRouterPaths.mainScreen: (context) => const MainScreen(),
-                      AppRouterPaths.verifyPhonePageOne: (context) => const VerifyPhonePageOne(),
-                      AppRouterPaths.verifyPhonePageTwo: (context) => const VerifyPhonePageTwo(),
+                      AppRouterPaths.mainScreen: (context) =>
+                          const MainScreen(),
+                      AppRouterPaths.verifyPhonePageOne: (context) =>
+                          const VerifyPhonePageOne(),
+                      AppRouterPaths.verifyPhonePageTwo: (context) =>
+                          const VerifyPhonePageTwo(),
                     },
                   );
                 },

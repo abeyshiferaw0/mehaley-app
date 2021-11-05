@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_card.dart';
@@ -18,9 +19,10 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
-  PlaylistInfoPageOne({Key? key, required this.playlist}) : super(key: key);
+  PlaylistInfoPageOne({Key? key, required this.playlistPageData})
+      : super(key: key);
 
-  final Playlist playlist;
+  final PlaylistPageData playlistPageData;
 
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
@@ -46,8 +48,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl:
-                    AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
+                imageUrl: AppApi.baseFileUrl +
+                    playlistPageData.playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     decoration: BoxDecoration(
@@ -65,7 +67,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
             SizedBox(height: AppMargin.margin_20),
             //PLAYLIST TITLE
             Text(
-              L10nUtil.translateLocale(playlist.playlistNameText, context),
+              L10nUtil.translateLocale(
+                  playlistPageData.playlist.playlistNameText, context),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -79,27 +82,33 @@ class PlaylistInfoPageOne extends StatelessWidget {
 
             ///FOLLOW UNFOLLOW PLAYLIST BTN
             PlaylistFollowButton(
-              playlistId: playlist.playlistId,
-              isFollowing: playlist.isFollowed!,
+              playlistId: playlistPageData.playlist.playlistId,
+              isFollowing: playlistPageData.playlist.isFollowed!,
             ),
             SizedBox(height: AppMargin.margin_16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  PagesUtilFunctions.getPlaylistBy(playlist),
+                  PagesUtilFunctions.getPlaylistBy(playlistPageData.playlist),
                   style: followersTextStyle,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(AppMargin.margin_4),
-                  child: Icon(
-                    Icons.circle,
-                    size: AppIconSizes.icon_size_4,
-                    color: AppColors.white,
-                  ),
-                ),
-                Text("${playlist.numberOfFollowers} FOLLOWERS",
-                    style: followersTextStyle),
+                playlistPageData.numberOfFollowers == 0
+                    ? SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.all(AppMargin.margin_4),
+                        child: Icon(
+                          Icons.circle,
+                          size: AppIconSizes.icon_size_4,
+                          color: AppColors.white,
+                        ),
+                      ),
+                playlistPageData.numberOfFollowers == 0
+                    ? SizedBox()
+                    : Text(
+                        "${playlistPageData.numberOfFollowers} FOLLOWERS",
+                        style: followersTextStyle,
+                      ),
               ],
             )
           ],

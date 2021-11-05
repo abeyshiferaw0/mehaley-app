@@ -288,6 +288,103 @@ class Song extends Equatable {
     return audioSources;
   }
 
+  static Future<AudioSource> toAudioSourceStreamUri(
+    DownloadUtil downloadUtil,
+    Song song,
+    PlayingFrom playingFrom,
+    BuildContext context,
+  ) async {
+    ///GET ALL DOWNLOADS SONGS AND TASKS
+    List<DownloadedTaskWithSong> allDownloads =
+        await downloadUtil.getAllDownloadedSongs();
+
+    ///CHECK IF DOWNLOADED
+    DownloadedTaskWithSong? downloadedTaskWithSong =
+        downloadUtil.isSongDownloaded(song, allDownloads);
+
+    ///GENERATE SONG SYNC OBJECT
+    var uuid = Uuid();
+    SongSync songSync = SongSync(
+      songId: song.songId,
+      uuid: uuid.v5(
+        Uuid.NAMESPACE_NIL,
+        "${DateTime.now().toString()}_${song.songId}",
+      ),
+      playedFrom: playingFrom.songSyncPlayedFrom,
+      playedFromId: playingFrom.songSyncPlayedFromId,
+      isPreview: song.isFree
+          ? false
+          : song.isBought
+              ? false
+              : true,
+      isOffline: downloadedTaskWithSong != null ? true : false,
+      listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
+      secondsPlayed: null,
+    );
+
+    if (downloadedTaskWithSong == null) {
+      ///SONG IS NOT DOWNLOADED
+      ClippingAudioSource clippingAudioSource;
+
+      ///TAG MEDIA
+      MediaItem tag = MediaItem(
+        id: song.songId.toString(),
+        title: L10nUtil.translateLocale(song.songName, context),
+        artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+        duration: Duration(
+          seconds: song.audioFile.audioDurationSeconds.toInt(),
+        ),
+        artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+        extras: {
+          AppValues.songExtraStr: song.toMap(),
+          AppValues.songSyncExtraStr: songSync.toMap(),
+        },
+      );
+
+      ///CHECK IF SONG BOUGHT
+      HlsAudioSource hlsAudioSource = HlsAudioSource(
+        Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
+        tag: tag,
+      );
+      print("song.isBought => ${song.isBought} ${song.isFree}");
+      if (!song.isBought && !song.isFree) {
+        ///CLIP IF NOT BOUGHT
+        clippingAudioSource = ClippingAudioSource(
+          child: hlsAudioSource,
+          tag: tag,
+          start: Duration(seconds: AppValues.playerPreviewStartSecond),
+          end: Duration(
+            seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
+                AppValues.playerPreviewStartSecond,
+          ),
+        );
+        return clippingAudioSource;
+      } else {
+        return hlsAudioSource;
+      }
+    } else {
+      ///SONG IS DOWNLOADED
+      AudioSource audioSource = AudioSource.uri(
+        Uri.file(
+            "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
+        tag: MediaItem(
+          id: song.songId.toString(),
+          title: L10nUtil.translateLocale(song.songName, context),
+          artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+          duration: Duration(
+            seconds: song.audioFile.audioDurationSeconds.toInt(),
+          ),
+          artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+          extras: {
+            AppValues.songExtraStr: song.toMap(),
+            AppValues.songSyncExtraStr: songSync.toMap(),
+          },
+        ),
+      );
+      return audioSource;
+    }
+  }
+
   static String toBase64Str(Song song) {
     ///CONVERT JSON TO STRING
     String str = json.encode(song.toMap());

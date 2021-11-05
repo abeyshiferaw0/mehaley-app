@@ -53,7 +53,7 @@ class LibraryEmptyPage extends StatelessWidget {
             ),
           ),
           buildEmptyMyPlaylist(context),
-          buildOffline(context),
+          //buildOffline(context),
         ],
       ),
     );

@@ -7,9 +7,11 @@ import '../playlist.dart';
 class PlaylistPageData extends Equatable {
   final List<Song> songs;
   final Playlist playlist;
+  final int numberOfFollowers;
   final Response response;
 
   const PlaylistPageData({
+    required this.numberOfFollowers,
     required this.songs,
     required this.playlist,
     required this.response,
@@ -20,5 +22,6 @@ class PlaylistPageData extends Equatable {
         songs,
         playlist,
         response,
+        numberOfFollowers,
       ];
 }

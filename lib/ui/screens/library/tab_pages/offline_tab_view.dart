@@ -91,22 +91,22 @@ class _OfflineTabViewState extends State<OfflineTabView>
   Row buildSubTabs() {
     return Row(
       children: [
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Row(
-              children: [
-                LibraryPageSubTabButton(
-                  text: "DOWNLOAD ALL PURCHASED".toUpperCase(),
-                  isSelected: false,
-                  onTap: () {},
-                  hasLeftMargin: false,
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Expanded(
+        //   child: SingleChildScrollView(
+        //     scrollDirection: Axis.horizontal,
+        //     physics: BouncingScrollPhysics(),
+        //     child: Row(
+        //       children: [
+        //         LibraryPageSubTabButton(
+        //           text: "DOWNLOAD ALL PURCHASED".toUpperCase(),
+        //           isSelected: false,
+        //           onTap: () {},
+        //           hasLeftMargin: false,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Builder(
           builder: (context) {
             return LibraryPageSubTabButton(
@@ -126,8 +126,8 @@ class _OfflineTabViewState extends State<OfflineTabView>
             );
           },
         ),
-        SizedBox(
-          width: AppMargin.margin_16,
+        Expanded(
+          child: SizedBox(),
         ),
         LibraryIconButton(
           onTap: () {

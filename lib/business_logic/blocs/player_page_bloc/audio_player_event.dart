@@ -20,6 +20,7 @@ class SetPlayerQueueEvent extends AudioPlayerEvent {
   List<Object?> get props => [queue];
 }
 
+
 class PlayerStateChangedEvent extends AudioPlayerEvent {
   final PlayerState playerState;
 
@@ -107,7 +108,7 @@ class PlayerLoopChangedEvent extends AudioPlayerEvent {
 class PositionChangedEvent extends AudioPlayerEvent {
   final Duration duration;
 
-  PositionChangedEvent({ required this.duration});
+  PositionChangedEvent({required this.duration});
 
   @override
   List<Object?> get props => [duration];

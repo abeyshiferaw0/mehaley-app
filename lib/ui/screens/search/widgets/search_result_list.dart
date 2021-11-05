@@ -241,6 +241,7 @@ class _SearchResultListState extends State<SearchResultList> {
             child: AlbumMenuWidget(
               albumId: resultItem.albumId,
               album: resultItem,
+              rootContext: context,
               isLiked: resultItem.isLiked,
               title: L10nUtil.translateLocale(resultItem.albumTitle, context),
               imageUrl: AppApi.baseFileUrl +

@@ -40,13 +40,15 @@ class LibraryPage extends StatefulWidget {
   _LibraryPageState createState() => _LibraryPageState();
 }
 
-class _LibraryPageState extends State<LibraryPage> with TickerProviderStateMixin, RouteAware {
+class _LibraryPageState extends State<LibraryPage>
+    with TickerProviderStateMixin, RouteAware {
   ///TAB CONTROLLER
   late TabController _tabController;
 
   @override
   void didPopNext() {
-    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.LIBRARY);
+    BlocProvider.of<BottomBarCubit>(context)
+        .changeScreen(BottomBarPages.LIBRARY);
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
   }
 
@@ -207,14 +209,14 @@ class _LibraryPageState extends State<LibraryPage> with TickerProviderStateMixin
         },
       ),
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            PhosphorIcons.bell_simple_light,
-            color: AppColors.white,
-            size: AppIconSizes.icon_size_24,
-          ),
-        )
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(
+        //     PhosphorIcons.bell_simple_light,
+        //     color: AppColors.white,
+        //     size: AppIconSizes.icon_size_24,
+        //   ),
+        // )
       ],
       centerTitle: true,
     );

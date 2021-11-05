@@ -109,14 +109,14 @@ class PlaylistMenuWidget extends StatelessWidget {
                     title: AppLocalizations.of(context)!.findInPlaylist,
                     onTap: () {},
                   ),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.sort_ascending_light,
-                    title: AppLocalizations.of(context)!.sortPlaylist,
-                    onTap: () {},
-                  ),
+                  // MenuItem(
+                  //   isDisabled: false,
+                  //   hasTopMargin: true,
+                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   icon: PhosphorIcons.sort_ascending_light,
+                  //   title: AppLocalizations.of(context)!.sortPlaylist,
+                  //   onTap: () {},
+                  // ),
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
