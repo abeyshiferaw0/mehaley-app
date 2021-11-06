@@ -6,12 +6,13 @@ import 'package:elf_play/data/models/api_response/settings_page_data.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/app_subscribe_card.dart';
+import 'package:elf_play/ui/common/dialog/complete_payment_dialog.dart';
 import 'package:elf_play/ui/screens/setting/widgets/download_quality_picker.dart';
 import 'package:elf_play/ui/screens/setting/widgets/drop_down_options_picker.dart';
 import 'package:elf_play/ui/screens/setting/widgets/elf_info_widget.dart';
 import 'package:elf_play/ui/screens/setting/widgets/logout_button.dart';
-import 'package:elf_play/ui/screens/setting/widgets/preferred_payment_method_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
+import 'package:elf_play/ui/screens/setting/widgets/setting_large_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -140,7 +141,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       title: "Preferred Payment method",
                       subTitle:
                           "Choose your preferred payment method for all purchases",
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CompletePaymentDialog();
+                          },
+                        );
+                      },
                     ),
                     // SettingRadioItem(
                     //   title: "Auto Download",
