@@ -1,12 +1,18 @@
 {
-  "appName": "Elf play",
+  "appName":"Elf play",
+  "appVersion":"version 1.0.0",
+  "byAppName":"By Elf play",
+  "appTermsAndCondition":"Some text about elf and terms and conditions and privacy policy, Some text about elf and terms and conditions and privacy policy ,Some text about elf and terms and conditions and privacy policy",
+  "logOut":"Log out",
   "byElfPlay":"by elf play",
-  "removeFromCart": "Remove from cart",
+  "removeFromCart":"Remove from cart?",
   "addToCart":"Add to cart",
   "previewMode":"Preview mode",
   "buyMezmur":"Buy Mezmur",
   "buyAlbum":"Buy album",
+  "buy":"Buy",
   "buyPlaylist":"Buy Playlist",
+  "buyMezmurToListenOffline":"Buy the mezmur to download and listen offline",
   "follow":"follow",
   "following":"following",
   "addToFavorite":"Add to favorite",
@@ -17,7 +23,7 @@
   "removeFromFollowedPlaylist":"Remove from followed playlist",
   "uAreListingToPreviewDesc":"You are listing to a preview version, buy the mezmur to listen the full version",
   "downloadMezmur":"Download mezmur",
-  "downloading":"Downloading...",
+  "downloadProgressing":"Downloading...",
   "retryDownload":"Retry download",
   "deleteMezmur":"Delete mezmur",
   "shareAlbum":"Share album",
@@ -27,7 +33,7 @@
   "shareMezmur":"Share Mezmur",
   "viewArtist":"View artist",
   "noOfSongs":"{noOfSong} Mezmurs",
-      "@noOfSongs":{
+  "@noOfSongs":{
         "placeholders":{
             "noOfSong":{
                 "type":"int"
@@ -50,7 +56,7 @@
   "viewAlbum":"View album",
   "addToQueue":"Add to queue",
   "addToPlaylist":"Add to playlist",
-  "removeFromPlaylist":"Remove from playlist",
+  "removeFromPlaylistMsg":"Remove from playlist",
   "addMezmurs":"Add mezmurs",
   "byUserName":"by {userName}",
   "@byUserName":{
@@ -62,7 +68,9 @@
   },
   "addToHomeScreen":"Add to home screen",
   "editPlaylist":"Edit playlist",
-  "deletePlaylist":"Delete playlist"
+  "deletePlaylist":"Delete playlist",
+  "delete":"Delete",
+  "cancel":"Cancel",
   "downloading":"Downloading",
   "noInternetMsg":"No internet connection",
   "noInternetMsgDetail":"You don't have a working internet connection, Check your internet connection",
@@ -77,67 +85,88 @@
   "libraryShort":"Li",
   "downAllPurchased":"Download all purchased",
   "yourOffline":"Your offline",
-  "goToDownloadsMsg": "Go to downloads to listen offline",
-  "free": "FREE",
-  "purchased": "Purchased",
-  "albumBy": "ALBUM BY",
-  "playingFromAlbum": "Playing from album",
-  "playingFromArtist": "Playing from artist",
-  "playingFromCart": "Playing from cart",
-  "playingFromCategory": "Playing from category",
-  "playingFromFeaturedAlbum": "Playing from featured album",
-  "playingFromFeaturedPlaylist": "Playing from featured playlist",
-  "playingFromFeaturedMezmurs": "Playing from featured mezmurs",
+  "goToDownloadsMsg":"Go to downloads to listen offline",
+  "free":"FREE",
+  "purchased":"Purchased",
+  "albumBy":"ALBUM BY",
+  "playingFromPlaylist":"Playing from playlist",
+  "playingFromAlbum":"Playing from album",
+  "playingFromArtist":"Playing from artist",
+  "playingFromCart":"Playing from cart",
+  "playingFromCategory":"Playing from category",
+  "playingFromFeaturedAlbum":"Playing from featured album",
+  "playingFromFeaturedPlaylist":"Playing from featured playlist",
+  "playingFromFeaturedMezmurs":"Playing from featured mezmurs",
   "playingFromRecentlyPlayed":"Playing from recently played",
-  "playingFrom": "Playing from",
-
-  "verifiedArtist": "Verified Artist",
-  "albums": "Albums",
+  "playingFrom":"Playing from",
+  "playingFromSearchResult":"Playing From Search Result {searchKey}",
+  "@playingFromSearchResult":{
+    "placeholders":{
+        "searchKey":{
+            "type":"String"
+        }
+    }
+  },
+  "playingFromArtistName":"Playing From {artistName}",
+  "@playingFromArtistName":{
+    "placeholders":{
+        "artistName":{
+            "type":"String"
+        }
+    }
+  },
+  "mostListened":"most listened",
+  "verifiedArtist":"Verified Artist",
+  "albums":"Albums",
   "playlists":"Playlists",
-  "mezmurs": "Mezmurs",
-  "album": ""Album",
+  "playlist":"playlist",
+  "mezmurs":"Mezmurs",
+  "album":"Album",
+  "category":"Category",
   "artists":"Artists",
-  "popular": "Popular",
-  "latestReleases": "Latest Releases",
-  "topAlbums": "Top Albums",
-  "featuring": "Featuring",
-  "similarArtist": "Similar Artists",
-  "enterYourPhoneNumber": "enter your phoneNumber",
-  "invalidPhoneNumber": "Invalid phone number",
-  "whatIsYourPhoneNumber": "Invalid phone number",
-  "whatIsYourPhoneNumber": "What is your\nphone number ?",
-  "phoneVerificationMsg": "We'll' text you a verification code to verify\nyour identity",
-  "sendSms": "Send SMS",
-  "sendingSms": "Sending SMS",
-  "continueWithPhoneNumber": "Continue with phone",
-  "searchForCountryCode": "Search for country code",
-  "invalidPhoneNumber": "Invalid phone number !",
-  "noCountryCode": "No country found",
-  "pinAlreadySent": "Pin code already sent\ntry again after a while",
-  "verifying": "Verifying",
-  "verify": "Verify",
-  "pinNotFilled": "Pin not filled",
-  "didntReciveSms": "Didn't receive SMS?",
-  "resendCode": "Resend Code",
+  "popular":"Popular",
+  "latestReleases":"Latest Releases",
+  "topAlbums":"Top Albums",
+  "featuring":"Featuring",
+  "similarArtist":"Similar Artists",
+  "enterYourPhoneNumber":"enter your phoneNumber",
+  "invalidPhoneNumber":"Invalid phone number",
+  "whatIsYourPhoneNumber":"Invalid phone number",
+  "whatIsYourPhoneNumber":"What is your\nphone number ?",
+  "phoneVerificationMsg":"We will text you a verification code to verify\nyour identity",
+  "sendSms":"Send SMS",
+  "sendingSms":"Sending SMS",
+  "continueWithPhoneNumber":"Continue with phone",
+  "searchForCountryCode":"Search for country code",
+  "invalidPhoneNumber":"Invalid phone number !",
+  "noCountryCode":"No country found",
+  "pinAlreadySent":"Pin code already sent\ntry again after a while",
+  "verifying" :"Verifying",
+  "verify":"Verify",
+  "pinNotFilled":"Pin not filled",
+  "didntReciveSms":"Didn't receive SMS?",
+  "resendCode":"Resend Code",
   "enterSixDigitMenu":"Enter the  6 digit pin sent to\n",
   "enterYourCode":"Enter your code",
-  "enterYourCode":"Verify your phone",
+  "verifyYourPhone":"Verify your phone",
   "continueWithApple":"Continue with apple",
   "continueWithFacebook":"Continue with facebook",
   "continueWithGoogle":"Continue with google",
   "continueWithPhone":"Continue with phone",
   "appWelcomeTxt":"ሰላም ፣ ወደ ኤልፊ ጨዋታ እንኳን\nበደህና መጡ",
   "authenticationFailedMsg":"Authentication Failed!\nCheck your internet connection",
+  "couldntConnectMsg":"Couldn't connect to the internet, check your internet connection",
   "unableToRemoveFromCart":"Unable to remove {unabledName} from cart\ncheck your internet connection",
-  "@unabledName":{
+  "@unableToRemoveFromCart":{
     "placeholders":{
         "unabledName":{
             "type":"String"
         }
     }
   },
+  "queue":"Queue",
   "removeedFromCart":"{removedName} removed from cart",
-  "@removedName":{
+  "@removeedFromCart":{
     "placeholders":{
         "removedName":{
             "type":"String"
@@ -145,7 +174,7 @@
     }
   },
   "unableToClearCart":"Unable to clear cart\ncheck your internet connection",
-  "cartCleared":""Cart cleared"",
+"cartCleared":"Cart cleared",
 "cartIsEmpty":"Your cart is currently empty",
 "empityCartCheckOutMsg":"Before proceeding to check out you, must add some items to yor cart",
 "goToHomeScreen":"Go to home screen",
@@ -160,16 +189,20 @@
 "checkYourInternetConnection":"Check your internet Connection",
 "categories":"Categories",
 "numberOfMezmurs":"{numberOf} numberOfMezmurs",
-"@numberOf":{
+"@numberOfMezmurs":{
     "placeholders":{
         "numberOf":{
             "type":"String"
         }
     }
   },
-  "featuredMezmurs":"Featured Mezmurs",
+"featuredMezmurs":"Featured Mezmurs",
 "recentlyPlayed":"Recently Played",
 "purchasedMezmurs":"Purchased Mezmurs",
+"purchasedAlbums":"purchased albums",
+"purchasedPlaylists":"purchased playlists",
+"followedArtists":"followed artists",
+"followedPlaylists":"followed playlists",
 "listenOffline":"Listen Offline",
 "favoriteMezmurs":"favorite mezmurs",
 "noMezmursToPlay":"no mezmurs to play",
@@ -189,7 +222,7 @@
 "uDontHaveFavMezmurs":"You don't have any favorite\nMezmurs",
 "favoriteMezmurs":"favorite mezmurs",
 "uAreNotFollowingArtist":"You are not following any\nArtist",
-"uAreNotFollowingPlaylist":""You are not following any\nPlaylist"",
+"uAreNotFollowingPlaylist":"You are not following any\nPlaylist",
 "uHaventCreatedPlaylist":"You haven't created any playlists",
 "createNewPlaylist":"Create New playlist",
 "uDontHaveDownloads":"You don't have any downloads",
@@ -199,11 +232,250 @@
 "uDontHavePurchasedPlaylists":"You don't have any purchased\nPlaylists",
 "uDontHavePurchasedMezmurs":"You don't have any purchased\nMezmurs",
 "autoDownload":"Auto download",
-"newPlaylist": "New playlist",
-"somethingWentWrong":"Something went wrong",
+"autoDownloadMsg":"Start Downloading Purchased Mezmurs Automatically",
+"newPlaylist":"New playlist",
+"somethingWentWrong":"Something Went Wrong",
 "offline":"Offline",
 "favorites":"Favorites",
 "refreshing":"Refreshing ...",
+"dailyQuotes":"Daily Quotes",
+"lyrics":"Lyrics",
+"cantLoadLyrics":"Can't load lyric",
+"numberOfFollowers":"{numberOf} Followers",
+"@numberOfFollowers":{
+    "placeholders":{
+        "numberOf":{
+            "type":"String"
+      }
+   }
+},
+"playlistBy":"Playlist By",
+"unableToUpdateProfile":"Unable to update profile\ncheck your internet connection",
+"profileUpdated":"Profile updated",
+"profileName":"Profile Name",
+"chooseImage":"Choose Image",
+"trackAPhoto":"Tack a Photo",
+"pickFromGallery":"Pick From Gallery",
+"removeImage":"Remove Image",
+"changeImage":"change image",
+"editProfile":"Edit Profile",
+"userNameCantBeEmpty":"User name can't be empty",
+"save":"Save",
+"notingToShow":"Noting to show",
+"seeAll":"See All",
+"purchases":"Purchases",
+"allCategories":"All Categories",
+"topCategories":"Top Categories",
+"topMezmurs":"Top Mezmurs",
+"topArtists":"Top Artists",
+"searchTitle":"Search Elf",
+"searchDedicatedTitle":"{searchKey} in {appItemType}",
+"@searchDedicatedTitle":{
+    "placeholders":{
+        "searchKey":{
+            "type":"String"
+      },
+        "appItemType":{
+            "type":"String"
+      }
+   }
+},
+"cantFind":"Can't find {searchKey}",
+"@cantFind":{
+    "placeholders":{
+        "searchKey":{
+            "type":"String"
+      }
+   }
+},
+"changeYourSearchKey":"Try changing your search key",
+"searchHint":"Search elf for mezmurs, albums, playlists",
+"searchHint2":"Albums , artists , playlist's ...",
+"searchElfFor":"Search Elf For",
+"recentSearches":"Recent Searches",
+"clearRecentSearches":"Clear Recent Searches",
+"popularSongsBy":"Popular mezmur's by {artistName}",
+"@popularSongsBy":{
+    "placeholders":{
+        "artistName":{
+            "type":"String"
+      }
+   }
+},
+"seeAllPlaylists":"see all playlists",
+"seeAllAlbums":"see all albums",
+"seeAllArtists":"see all artists",
+"seeAllMezmurs":"see all mezmurs",
+"preferredPaymentChangedTo":"Preferred payment changed to {paymentName}",
+"@preferredPaymentChangedTo":{
+    "placeholders":{
+        "paymentName":{
+            "type":"String"
+      }
+   }
+},
+"settings":"Settings",
+"dataSaver":"Data Saver",
+"dataSaverMsg":"Lowers the quality of your mezmurs streams, for lower data usage",
+"preferredPaymentMethod":"Preferred Payment method",
+"chooseYourPreferredMethod":"Choose your preferred payment method for all purchases",
+"preferredDownlaodQuality":"Preferred download quality",
+"preferredDownlaodQualityMsg":"Choose your preferred audio quality for all downloads",
+"chooseYourLanguge":"Choose Your Language",
+"reciveNotifications":"Receive Notifications",
+"viewProfile":"View profile",
+"couldntConnect":"Couldn't connect to the internet",
+"songAddedToFavorites":"Mezmur added to favorites",
+"songRemovedToFavorites":"Mezmur removed from favorites",
+"albumAddedToFavorites":"Album added to favorites",
+"albumRemovedToFavorites":"Album removed from favorites",
+"playlistAddedToFavorites":"Playlist added to followed",
+"playlistRemovedToFavorites":"Playlist removed from followed",
+"artistsAddedToFavorites":"Artists added to followed",
+"artistsRemovedToFavorites":"Artists removed from followed",
+"albumAddedToCart":"Album added to cart",
+"albumRemovedToCart":"Album removed from cart",
+"songAddedToCart":"Mezmur added to cart",
+"songRemovedToCart":"Mezmur removed from cart",
+"playlistAddedToCart":"Playlist added to cart",
+"playlistRemovedToCart":"Playlist removed from cart",
+"downloadComplete":"{songName} Download complete",
+"@downloadComplete":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      }
+   }
+},
+"by":"By",
+"yourNotConnected":"You're not connected to the internet",
+"helloCash":"Hello Cash",
+"mbirr":"Mbirr",
+"cbeBirr":"CBE Birr",
+"amole":"Amole",
+"visa":"Visa",
+"mastercard":"MasterCard",
+"alwaysUsePayment":"Always use selected payment method?",
+"completeYourPurchase":"Complete your purchase",
+"currentlySeletced":"Currently Selected",
+"selectPaymentMethod":"Select Payment Method",
+"paymentMethod":"Payment Method",
+"areYouSureUwantDeleteFromDownloads":"Are you sure you want to Delete {songName} from downloads?",
+"@areYouSureUwantDeleteFromDownloads":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      }
+   }
+},
+"selectYourPrefrredPayment":"Select your preferred payment method for all purchases, you can change it at any time",
+"unFollow":"UnFollow",
+"removeFromFollowedArtist":"Remove From Followed Artists?",
+"removeFromFavoriteMezmurs":"Remove From Favorite Mezmurs?",
+"songRemoveFromPlaylist":"Remove {songName} From this playlist?",
+"@songRemoveFromPlaylist":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      }
+   }
+},
+"deletePlaylistPermanently":"Delete playlist permanently?",
+"areUSureYouWantToDeleteFromDownloads":"Are you sure you want to Delete {songName} from downloads?",
+"@areUSureYouWantToDeleteFromDownloads":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      }
+   }
+},
+"downloading":"Downloading {songName}",
+"@downloading":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      }
+   }
+},
+"invalidPhoneNumber":"Invalid phone number",
+"clearAll":"Clear All",
+"areYouSureUWantToClearCart":"Are you sure you want to clear your cart?",
+"goodMorning":"Good Morning",
+"goodAfterNoon":"Good Afternoon",
+"goodEvening":"Good Evening",
+"goodNight":"Good Night",
+"nowPlaying":"Now Playing",
+"nextUp":"Next Up",
+"pushNotifications":"Push notifications",
+"newReleases":"New Releases",
+"latestUpdates":"Latest Updates",
+"dailyCerlabrations":"Daily Ceremonies",
+"unableToCreatePlaylist":"Unable to create playlist\ncheck your internet connection",
+"playlistCreated":"Playlist {playlistName} created",
+"@playlistCreated":{
+    "placeholders":{
+        "playlistName":{
+            "type":"String"
+      }
+   }
+},
+"createPlaylist":"Create Playlist",
+"addSomeDescription":"Add some description",
+"addDescripption":"Add Description",
+"createPlaylistMsg":"Create and manage your own customized playlists with elf play",
+"playlistName":"Playlist Name",
+"chooseImage":"Choose Image",
+"takeAPhoto":"Take a Photo",
+"pickFromGallery":"Pick From Gallery",
+"removeIImage":"Remove Image",
+"playlistNameCantBeEmpty":"Playlist name can't be empty",
+"unableUpdatePlaylist":"Unable to update playlist\ncheck your internet connection",
+"playlistUpdated":"Playlist {playlistName} updated",
+"@playlistUpdated":{
+    "placeholders":{
+        "playlistName":{
+            "type":"String"
+      }
+   }
+},
+"addSomeDescription":"Add some description",
+"addDescription":"Add Description",
+"songAddedToPlaylist":"{songName} added to {playlistName}",
+"@songAddedToPlaylist":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      },
+      "playlistName":{
+            "type":"String"
+      }
+   }
+},
+"addToExistingPlaylist":"Add to existing playlists",
+"youHaventCreatedAnyPlaylistMsg":"You haven't created any playlists press new playlist to start adding.",
+"addToNewPlaylist":"Add to newly created playlist",
+"unableToAddMezmur":"Unable add mezmur to playlist\ncheck your internet connection",
+"songRemovedPlaylist":"{songName} removed from {playlistName}",
+"@songRemovedPlaylist":{
+    "placeholders":{
+        "songName":{
+            "type":"String"
+      },
+      "playlistName":{
+            "type":"String"
+      }
+   }
+},
+"playlistDeleted":"{playlistName} deleted",
+"@playlistDeleted":{
+    "placeholders":{
+        "playlistName":{
+            "type":"String"
+      }
+   }
+},
+"unableToRemoveFromPlaylist":"Unable remove mezmur from playlist\ncheck your internet connection",
+"unableToDeletePlaylist":"Unable to delete playlist\ncheck your internet connection",
+"addSongs":"Add Mezmurs",
+"addSongsToPlaylist":"Add Mezmurs to your playlist"
 }
-
-

@@ -1,6 +1,7 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/screens/player/widgets/share_btn_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DailyQuotesWidget extends StatefulWidget {
@@ -14,8 +15,7 @@ class DailyQuotesWidget extends StatefulWidget {
 
 class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
   final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener =
-      ItemPositionsListener.create();
+  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
   late final result;
 
   @override
@@ -38,7 +38,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "DAILY QUOTES",
+            AppLocalizations.of(context)!.dailyQuotes.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14,
               color: AppColors.lightGrey,

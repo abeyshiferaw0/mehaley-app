@@ -4,8 +4,8 @@ import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 class PlayerPagePlayingFromCubit extends Cubit<PlayingFrom> {
   PlayerPagePlayingFromCubit()
       : super(PlayingFrom(
-          from: "",
-          title: "",
+          from: '',
+          title: '',
           songSyncPlayedFrom: SongSyncPlayedFrom.UNK,
           songSyncPlayedFromId: -1,
         ));

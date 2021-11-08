@@ -8,6 +8,7 @@ import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_gradient.dart';
 import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -32,8 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
           );
         }
         if (state is AuthSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(context, AppRouterPaths.mainScreen,
-              ModalRoute.withName(AppRouterPaths.splashRoute));
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRouterPaths.mainScreen, ModalRoute.withName(AppRouterPaths.splashRoute));
         }
       },
       child: Scaffold(
@@ -46,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
             //   child: Container(
             //     height: ScreenUtil(context: context).getScreenHeight(),
             //     child: LottieBuilder.network(
-            //       "https://assets7.lottiefiles.com/private_files/lf30_k9aqcmp8.json",
+            //       'https://assets7.lottiefiles.com/private_files/lf30_k9aqcmp8.json',
             //       fit: BoxFit.cover,
             //     ),
             //   ),

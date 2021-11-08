@@ -22,6 +22,7 @@ import 'package:elf_play/ui/screens/cart/widgets/list_cart_songs.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -90,8 +91,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.song.songName, context)),
+              msg: AppLocalizations.of(context)!
+                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -104,8 +105,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.album.albumTitle, context))
-              
+              msg: AppLocalizations.of(context)!
+                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -118,9 +119,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context))
-              
-                 
+              msg: AppLocalizations.of(context)!
+                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -154,7 +154,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
               buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: true,
-                  msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.song.songName, context)),
+                  msg:
+                      AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.song.songName, context)),
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.check_circle_fill,
                   iconColor: AppColors.darkGreen),
@@ -176,7 +177,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
+                msg: AppLocalizations.of(context)!
+                    .removeedFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -197,7 +199,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
+                msg: AppLocalizations.of(context)!
+                    .removeedFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -397,7 +400,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     width: AppIconSizes.icon_size_64 * 3,
                     child: Center(
                       child: LottieBuilder.asset(
-                        "assets/lottie/cart_empty.json",
+                        'assets/lottie/cart_empty.json',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -406,7 +409,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_32,
                   ),
                   Text(
-                   AppLocalizations.of(context)!.cartIsEmpty ,
+                    AppLocalizations.of(context)!.cartIsEmpty,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
@@ -418,7 +421,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_4,
                   ),
                   Text(
-                AppLocalizations.of(context)!.empityCartCheckOutMsg    ,
+                    AppLocalizations.of(context)!.empityCartCheckOutMsg,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
@@ -448,7 +451,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                         color: AppColors.darkGreen,
                       ),
                       child: Text(
-                    AppLocalizations.of(context)!.goToHomeScreen    ,
+                        AppLocalizations.of(context)!.goToHomeScreen,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,

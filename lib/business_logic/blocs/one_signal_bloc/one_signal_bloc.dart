@@ -46,10 +46,10 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
       String val = notificationTags[
           EnumToString.convertToString(appUserNotificationTypes)];
       if (int.parse(val) == 1) {
-        return "0";
+        return '0';
       }
-      return "1";
+      return '1';
     }
-    return "1";
+    return '1';
   }
 }

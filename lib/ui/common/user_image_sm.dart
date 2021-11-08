@@ -41,10 +41,8 @@ class UserImageSm extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(size / 2),
-              border:
-                  hasBorder ? Border.all(color: borderColor, width: 1) : null,
-              color:
-                  hasBorder ? AppColors.darkGrey : AuthUtil.getUserColor(state),
+              border: hasBorder ? Border.all(color: borderColor, width: 1) : null,
+              color: hasBorder ? AppColors.darkGrey : AuthUtil.getUserColor(state),
             ),
             width: size,
             height: size,

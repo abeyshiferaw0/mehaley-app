@@ -10,6 +10,7 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'card_header_title.dart';
 
@@ -36,7 +37,7 @@ class _CartSongsListState extends State<CartSongsList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CartHeaderTitle(
-            title: 'Mezmurs',
+            title: AppLocalizations.of(context)!.mezmurs,
           ),
           SizedBox(
             height: AppMargin.margin_16,
@@ -64,15 +65,14 @@ class _CartSongsListState extends State<CartSongsList> {
                           builder: (_) {
                             return Center(
                               child: DialogRemoveFromCart(
-                                mainButtonText: 'REMOVE'.toUpperCase(),
-                                cancelButtonText: 'CANCEL',
-                                titleText: 'Remove From Cart?',
+                                mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
+                                cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                                titleText: AppLocalizations.of(context)!.removeFromCart,
                                 onRemove: () {
                                   BlocProvider.of<CartUtilBloc>(context).add(
                                     AddRemovedSongCartEvent(
                                       song: songCart.items.elementAt(index),
-                                      appCartAddRemoveEvents:
-                                          AppCartAddRemoveEvents.REMOVE,
+                                      appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
                                     ),
                                   );
                                 },
@@ -82,11 +82,7 @@ class _CartSongsListState extends State<CartSongsList> {
                         );
                       },
                       position: (index + 1),
-                      thumbUrl: AppApi.baseUrl +
-                          songCart.items
-                              .elementAt(index)
-                              .albumArt
-                              .imageSmallPath,
+                      thumbUrl: AppApi.baseUrl + songCart.items.elementAt(index).albumArt.imageSmallPath,
                       thumbSize: AppValues.categorySongItemSize,
                       onPressed: () {
                         //OPEN SONG

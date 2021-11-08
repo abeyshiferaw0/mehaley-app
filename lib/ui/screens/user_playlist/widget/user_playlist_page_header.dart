@@ -138,7 +138,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                   myPlaylist: myPlaylist,
                   title: L10nUtil.translateLocale(
                       myPlaylist.playlistNameText, context),
-                  imageUrl: "",
+                  imageUrl: '',
                   isFree: myPlaylist.isFree,
                   price: myPlaylist.priceEtb,
                   isDiscountAvailable: myPlaylist.isDiscountAvailable,
@@ -146,8 +146,6 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                   playlistId: myPlaylist.playlistId,
                   isFollowed: myPlaylist.isFollowed!,
                   onUpdateSuccess: (myPlaylist) {
-                    print(
-                        "onUpdateSuccess 2 ${L10nUtil.translateLocale(myPlaylist.playlistNameText, context)}");
                     BlocProvider.of<UserPlaylistPageBloc>(context).add(
                       RefreshUserPlaylistPageEvent(
                         myPlaylist: myPlaylist,

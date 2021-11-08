@@ -11,6 +11,7 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchTopArtistSongItem extends StatelessWidget {
@@ -45,7 +46,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
             item: song,
             playingFrom: PlayingFrom(
               from:
-                  "Playing From ${L10nUtil.translateLocale(artist.artistName, context)}",
+                  AppLocalizations.of(context)!.playingFromArtistName(L10nUtil.translateLocale(artist.artistName, context)),
               title: L10nUtil.translateLocale(song.songName, context),
               songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
               songSyncPlayedFromId: -1,
@@ -81,8 +82,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
                   ],
                 ),
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
+                errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
               ),
             ),
             SizedBox(

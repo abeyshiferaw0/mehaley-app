@@ -10,6 +10,7 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -25,8 +26,7 @@ class ArtistPageHeader extends StatefulWidget {
   final ArtistPageData artistPageData;
 
   @override
-  _ArtistPageHeaderState createState() =>
-      _ArtistPageHeaderState(artistPageData);
+  _ArtistPageHeaderState createState() => _ArtistPageHeaderState(artistPageData);
 }
 
 class _ArtistPageHeaderState extends State<ArtistPageHeader> {
@@ -49,8 +49,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
           fit: BoxFit.cover,
           height: 360,
           width: double.infinity,
-          imageUrl: AppApi.baseUrl +
-              artistPageData.artist.artistImages[0].imageMediumPath,
+          imageUrl: AppApi.baseUrl + artistPageData.artist.artistImages[0].imageMediumPath,
           placeholder: (context, url) => buildImagePlaceHolder(),
           errorWidget: (context, url, e) => buildImagePlaceHolder(),
         ),
@@ -76,8 +75,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
     );
   }
 
-  Container buildAppBar(
-      double shrinkPercentage, ArtistPageData artistPageData) {
+  Container buildAppBar(double shrinkPercentage, ArtistPageData artistPageData) {
     return Container(
       height: 90,
       width: double.infinity,
@@ -105,8 +103,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             child: Opacity(
               opacity: shrinkPercentage,
               child: Text(
-                L10nUtil.translateLocale(
-                    artistPageData.artist.artistName, context),
+                L10nUtil.translateLocale(artistPageData.artist.artistName, context),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
@@ -139,11 +136,8 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                     PagesUtilFunctions.showMenuDialog(
                       context: context,
                       child: ArtistMenuWidget(
-                        title: L10nUtil.translateLocale(
-                            artistPageData.artist.artistName, context),
-                        imageUrl: AppApi.baseUrl +
-                            artistPageData
-                                .artist.artistImages[0].imageMediumPath,
+                        title: L10nUtil.translateLocale(artistPageData.artist.artistName, context),
+                        imageUrl: AppApi.baseUrl + artistPageData.artist.artistImages[0].imageMediumPath,
                         noOfAlbum: artistPageData.noOfAlbum,
                         noOfSong: artistPageData.noOfSong,
                         isFollowing: artistPageData.artist.isFollowed!,
@@ -224,7 +218,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${artistPageData.noOfAlbum} ${AppLocalizations.of(context)!.albums}",
+                  '${artistPageData.noOfAlbum} ${AppLocalizations.of(context)!.albums}',
                   style: TextStyle(
                     color: AppColors.lightGrey,
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -240,7 +234,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   ),
                 ),
                 Text(
-                  "${artistPageData.noOfSong} ${AppLocalizations.of(context)!.Mezmurs}",
+                  AppLocalizations.of(context)!.noOfSongs(artistPageData.noOfSong),
                   style: TextStyle(
                     color: AppColors.lightGrey,
                     fontSize: AppFontSizes.font_size_10.sp,

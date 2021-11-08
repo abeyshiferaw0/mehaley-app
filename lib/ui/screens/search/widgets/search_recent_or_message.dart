@@ -13,6 +13,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,12 +28,12 @@ class SearchRecentOrMessage extends StatelessWidget {
       builder: (context, state) {
         if (state is RecentChangedState) {
           if (state.items.isEmpty) {
-            return buildSearchElfMessage();
+            return buildSearchElfMessage(context);
           } else {
             return buildRecentItems(state.items, context);
           }
         } else {
-          return buildSearchElfMessage();
+          return buildSearchElfMessage(context);
         }
       },
     );
@@ -54,7 +55,7 @@ class SearchRecentOrMessage extends StatelessWidget {
     );
   }
 
-  Container buildSearchElfMessage() {
+  Container buildSearchElfMessage(context) {
     return Container(
       child: Center(
         child: Column(
@@ -63,7 +64,7 @@ class SearchRecentOrMessage extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                "Search Elf For",
+                AppLocalizations.of(context)!.searchElfFor,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
@@ -77,7 +78,7 @@ class SearchRecentOrMessage extends StatelessWidget {
             ),
             Center(
               child: Text(
-                "Albums , artists , playlist's ...",
+                AppLocalizations.of(context)!.searchHint2,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
@@ -98,7 +99,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         padding: const EdgeInsets.only(left: AppPadding.padding_12),
         margin: const EdgeInsets.only(bottom: AppMargin.margin_16),
         child: Text(
-          "Recent Searches",
+          AppLocalizations.of(context)!.recentSearches,
           style: TextStyle(
             color: AppColors.white,
             fontSize: AppFontSizes.font_size_12.sp,
@@ -111,7 +112,7 @@ class SearchRecentOrMessage extends StatelessWidget {
     recentItems.forEach(
       (element) {
         widgetItems.add(
-          buildRecentSearchItems(element, "", recentItems, context),
+          buildRecentSearchItems(element, '', recentItems, context),
         );
       },
     );
@@ -135,7 +136,7 @@ class SearchRecentOrMessage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Clear Recent Searches",
+                AppLocalizations.of(context)!.clearRecentSearches,
                 style: TextStyle(
                   color: AppColors.txtGrey,
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -161,15 +162,13 @@ class SearchRecentOrMessage extends StatelessWidget {
     return widgetItems;
   }
 
-  Widget buildRecentSearchItems(dynamic resultItem, String searchKey,
-      List<dynamic> resultItems, BuildContext context) {
+  Widget buildRecentSearchItems(dynamic resultItem, String searchKey, List<dynamic> resultItems, BuildContext context) {
     if (resultItem is Song) {
       return SearchResultItem(
-        key: Key("song_${resultItem.songId}"),
-        itemKey: Key("song_${resultItem.songId}"),
+        key: Key('song_${resultItem.songId}'),
+        itemKey: Key('song_${resultItem.songId}'),
         title: L10nUtil.translateLocale(resultItem.songName, context),
-        subTitle:
-            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
+        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -181,10 +180,10 @@ class SearchRecentOrMessage extends StatelessWidget {
       );
     } else if (resultItem is Playlist) {
       return SearchResultItem(
-        key: Key("playlist_${resultItem.playlistId}"),
-        itemKey: Key("playlist_${resultItem.playlistId}"),
+        key: Key('playlist_${resultItem.playlistId}'),
+        itemKey: Key('playlist_${resultItem.playlistId}'),
         title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
-        subTitle: "",
+        subTitle: '',
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
         searchKey: searchKey,
@@ -196,11 +195,10 @@ class SearchRecentOrMessage extends StatelessWidget {
       );
     } else if (resultItem is Album) {
       return SearchResultItem(
-        key: Key("album_${resultItem.albumId}"),
-        itemKey: Key("album_${resultItem.albumId}"),
+        key: Key('album_${resultItem.albumId}'),
+        itemKey: Key('album_${resultItem.albumId}'),
         title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-        subTitle:
-            L10nUtil.translateLocale(resultItem.artist.artistName, context),
+        subTitle: L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,
@@ -212,10 +210,10 @@ class SearchRecentOrMessage extends StatelessWidget {
       );
     } else if (resultItem is Artist) {
       return SearchResultItem(
-        key: Key("artist_${resultItem.artistId}"),
-        itemKey: Key("artist_${resultItem.artistId}"),
+        key: Key('artist_${resultItem.artistId}'),
+        itemKey: Key('artist_${resultItem.artistId}'),
         title: L10nUtil.translateLocale(resultItem.artistName, context),
-        subTitle: "",
+        subTitle: '',
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,
         searchKey: searchKey,

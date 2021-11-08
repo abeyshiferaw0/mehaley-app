@@ -4,12 +4,14 @@ import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:elf_play/data/models/home_shortcut/shortcut_data.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_home_shortcut.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sizer/sizer.dart';
@@ -78,13 +80,13 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     var timeNow = DateTime.now().hour;
 
     if (timeNow <= 12) {
-      return 'Good Morning';
+      return AppLocalizations.of(context)!.goodMorning;
     } else if ((timeNow > 12) && (timeNow <= 16)) {
-      return 'Good Afternoon';
+      return AppLocalizations.of(context)!.goodAfterNoon;
     } else if ((timeNow > 16) && (timeNow < 20)) {
-      return 'Good Evening';
+      return AppLocalizations.of(context)!.goodEvening;
     } else {
-      return 'Good Night';
+      return AppLocalizations.of(context)!.goodNight;
     }
   }
 
@@ -126,8 +128,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       ///CHANGE DOMINANT COLOR
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         HomePageDominantColorChanged(
-          dominantColor:
-              HexColor("#${AppColors.blue2.value.toRadixString(16)}"),
+          dominantColor: HexColor('#${AppColors.blue2.value.toRadixString(16)}'),
         ),
       );
       shortcutsSize = shortcutsSize - 1;
@@ -164,8 +165,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       ///CHANGE DOMINANT COLOR
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         HomePageDominantColorChanged(
-          dominantColor:
-              HexColor("#${AppColors.orange1.value.toRadixString(16)}"),
+          dominantColor: HexColor('#${AppColors.orange1.value.toRadixString(16)}'),
         ),
       );
       shortcutsSize = shortcutsSize - 1;
@@ -176,8 +176,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       if (shortcutsSize > 0) {
         shortCuts.add(
           ItemHomeShortcut(
-            text: PagesUtilFunctions.getShortCutText(
-                widget.shortcutData.shortcuts[i], context),
+            text: PagesUtilFunctions.getShortCutText(widget.shortcutData.shortcuts[i], context),
             image: PagesUtilFunctions.getImage(
               widget.shortcutData.shortcuts[i],
             ),
@@ -187,6 +186,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
             textMaxLines: 1,
             shortcutType: PagesUtilFunctions.getShortCutType(
               widget.shortcutData.shortcuts[i],
+              context,
             ),
             icon: PhosphorIcons.caret_circle_down_fill,
             gradient: AppGradients().getPurchasedLibraryGradient(),
@@ -198,9 +198,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
             },
           ),
         );
-        if (i == 0 &&
-            widget.shortcutData.purchasedCount < 1 &&
-            widget.shortcutData.downloadCount < 1) {
+        if (i == 0 && widget.shortcutData.purchasedCount < 1 && widget.shortcutData.downloadCount < 1) {
           BlocProvider.of<PagesDominantColorBloc>(context).add(
             HomePageDominantColorChanged(
               dominantColor: HexColor(

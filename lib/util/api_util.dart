@@ -23,7 +23,7 @@ class ApiUtil {
         AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
     ///CONFIG HEADER
-    Options options = Options(headers: {"Authorization": "Token $token"});
+    Options options = Options(headers: {'Authorization': 'Token $token'});
 
     var response = await dio.get(
       url,
@@ -53,8 +53,8 @@ class ApiUtil {
       ///CONFIG HEADER TOKEN
       options = Options(
         headers: {
-          "Authorization": "Token $token",
-          "content-type": "application/x-www-form-urlencoded"
+          'Authorization': 'Token $token',
+          'content-type': 'application/x-www-form-urlencoded'
         },
       );
     }
@@ -98,7 +98,7 @@ class ApiUtil {
       );
       return items;
     } else {
-      throw "SORT TYPE NOT CORRECT";
+      throw 'SORT TYPE NOT CORRECT';
     }
   }
 
@@ -146,7 +146,7 @@ class ApiUtil {
     }
 
     {
-      throw "SORT TYPE NOT CORRECT";
+      throw 'SORT TYPE NOT CORRECT';
     }
   }
 
@@ -173,7 +173,7 @@ class ApiUtil {
       );
       return items;
     } else {
-      throw "SORT TYPE NOT CORRECT";
+      throw 'SORT TYPE NOT CORRECT';
     }
   }
 }

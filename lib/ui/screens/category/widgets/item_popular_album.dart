@@ -48,8 +48,7 @@ class ItemPopularAlbum extends StatelessWidget {
                 ],
               ),
               placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) =>
-                  buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(

@@ -21,13 +21,12 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
-  const SearchResultDedicated(
-      {Key? key, required this.searchKey, required this.appSearchItemTypes})
-      : super(key: key);
+  const SearchResultDedicated({Key? key, required this.searchKey, required this.appSearchItemTypes}) : super(key: key);
 
   final String searchKey;
   final AppSearchItemTypes appSearchItemTypes;
@@ -68,7 +67,10 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           icon: Icon(PhosphorIcons.caret_left),
         ),
         title: Text(
-          "\"${widget.searchKey}\" in ${getItemType(widget.appSearchItemTypes)}",
+          AppLocalizations.of(context)!.searchDedicatedTitle(
+            widget.searchKey,
+            getItemType(widget.appSearchItemTypes),
+          ),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
             color: AppColors.lightGrey,
@@ -109,8 +111,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     );
   }
 
-  Widget buildSearchResultDedicatedList(
-      SearchResultPageDedicatedLoadedState state) {
+  Widget buildSearchResultDedicatedList(SearchResultPageDedicatedLoadedState state) {
     if (state.appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
       return Padding(
         padding: const EdgeInsets.only(
@@ -153,15 +154,15 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
 
   String getItemType(AppSearchItemTypes appSearchItemTypes) {
     if (appSearchItemTypes == AppSearchItemTypes.SONG) {
-      return "Mezmurs";
+      return AppLocalizations.of(context)!.mezmurs;
     } else if (appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
-      return "Playlists";
+      return AppLocalizations.of(context)!.playlists;
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
-      return "Albums";
+      return AppLocalizations.of(context)!.albums;
     } else if (appSearchItemTypes == AppSearchItemTypes.ARTIST) {
-      return "Artists";
+      return AppLocalizations.of(context)!.artists;
     }
-    return "";
+    return '';
   }
 
   Widget buildSearchedItem(
@@ -172,10 +173,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     if (appSearchItemTypes == AppSearchItemTypes.SONG) {
       resultItem as Song;
       return SearchResultItem(
-        itemKey: Key("song_${resultItem.songId}"),
+        itemKey: Key('song_${resultItem.songId}'),
         title: L10nUtil.translateLocale(resultItem.songName, context),
-        subTitle:
-            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
+        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -198,9 +198,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     } else if (appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
       resultItem as Playlist;
       return SearchResultItem(
-        itemKey: Key("playlist_${resultItem.playlistId}"),
+        itemKey: Key('playlist_${resultItem.playlistId}'),
         title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
-        subTitle: "",
+        subTitle: '',
         imagePath: resultItem.playlistImage.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.PLAYLIST,
         searchKey: widget.searchKey,
@@ -214,10 +214,8 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
-              title: L10nUtil.translateLocale(
-                  resultItem.playlistNameText, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
+              title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
+              imageUrl: AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
               isFree: resultItem.isFree,
               price: resultItem.priceEtb,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -232,10 +230,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
       resultItem as Album;
       return SearchResultItem(
-        itemKey: Key("album_${resultItem.albumId}"),
+        itemKey: Key('album_${resultItem.albumId}'),
         title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-        subTitle:
-            L10nUtil.translateLocale(resultItem.artist.artistName, context),
+        subTitle: L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: widget.searchKey,
@@ -253,8 +250,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               rootContext: context,
               isLiked: resultItem.isLiked,
               title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
+              imageUrl: AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
               price: resultItem.priceEtb,
               isFree: resultItem.isFree,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -267,9 +263,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
     } else if (appSearchItemTypes == AppSearchItemTypes.ARTIST) {
       resultItem as Artist;
       return SearchResultItem(
-        itemKey: Key("artist_${resultItem.artistId}"),
+        itemKey: Key('artist_${resultItem.artistId}'),
         title: L10nUtil.translateLocale(resultItem.artistName, context),
-        subTitle: "",
+        subTitle: '',
         imagePath: resultItem.artistImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ARTIST,
         searchKey: widget.searchKey,
@@ -283,8 +279,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
+              imageUrl: AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
               isFollowing: resultItem.isFollowed!,
               artistId: resultItem.artistId,
             ),

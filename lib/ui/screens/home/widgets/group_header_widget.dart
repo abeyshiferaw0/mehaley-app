@@ -33,7 +33,7 @@ class GroupHeaderWidget extends StatelessWidget {
               height: AppValues.customGroupHeaderImageSize,
               fit: BoxFit.cover,
               imageUrl:
-                  groupHeaderImageUrl != null ? "$groupHeaderImageUrl" : "",
+                  groupHeaderImageUrl != null ? '$groupHeaderImageUrl' : '',
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
@@ -45,7 +45,7 @@ class GroupHeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  groupSubTitle != null ? "$groupSubTitle" : "",
+                  groupSubTitle != null ? '$groupSubTitle' : '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

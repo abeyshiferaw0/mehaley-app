@@ -154,8 +154,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
     );
   }
 
-  SingleChildScrollView buildMenuList(
-      context, isLeftOverLoaded, onCreateWithSongSuccess) {
+  SingleChildScrollView buildMenuList(context, isLeftOverLoaded, onCreateWithSongSuccess) {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
@@ -199,21 +198,20 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           hasTopMargin: true,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.minus_circle_light,
-                          title:
-                              AppLocalizations.of(context)!.removeFromPlaylist,
+                          title: AppLocalizations.of(context)!.removeFromPlaylistMsg,
                           onTap: () {
                             showDialog(
                               context: context,
                               builder: (context) {
                                 return Center(
                                   child: DialogDeleteSong(
-                                    mainButtonText: 'REMOVE'.toUpperCase(),
-                                    cancelButtonText: 'CANCEL',
-                                    titleText:
-                                        'Remove ${L10nUtil.translateLocale(song.songName, context)} From this playlist?',
+                                    mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
+                                    cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                                    titleText: AppLocalizations.of(context)!.songRemoveFromPlaylist(
+                                      L10nUtil.translateLocale(song.songName, context),
+                                    ),
                                     onDelete: () {
-                                      if (widget.onRemoveSongFromPlaylist !=
-                                          null) {
+                                      if (widget.onRemoveSongFromPlaylist != null) {
                                         widget.onRemoveSongFromPlaylist!(song);
                                       }
                                       Navigator.pop(context);
@@ -258,8 +256,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           setting: AppRouterPaths.songAddToPlaylist,
                           page: BlocProvider(
                             create: (context) => UserPlaylistBloc(
-                              userPLayListRepository:
-                                  AppRepositories.userPLayListRepository,
+                              userPLayListRepository: AppRepositories.userPLayListRepository,
                             ),
                             child: SongAddToUserPlaylistPage(
                               song: song,

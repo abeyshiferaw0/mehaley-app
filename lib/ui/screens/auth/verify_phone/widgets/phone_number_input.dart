@@ -3,6 +3,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class PhoneNumberInput extends StatelessWidget {
@@ -49,7 +50,7 @@ class PhoneNumberInput extends StatelessWidget {
                     if (text == null || text.isEmpty) {
                       return '';
                     } else {
-                      if (text.length < 11) return 'Invalid phone number';
+                      if (text.length < 11) return AppLocalizations.of(context)!.invalidPhoneNumber;
                       return null;
                     }
                   },
@@ -66,7 +67,7 @@ class PhoneNumberInput extends StatelessWidget {
                     required isFocused,
                   }) =>
                       Text(
-                    "$currentLength/$maxLength",
+                    '$currentLength/$maxLength',
                     style: TextStyle(
                       color: AppColors.darkGreen,
                       fontSize: AppFontSizes.font_size_10,
@@ -90,8 +91,7 @@ class PhoneNumberInput extends StatelessWidget {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    hintText:
-                        AppLocalizations.of(context)!.enterYourPhoneNumber,
+                    hintText: AppLocalizations.of(context)!.enterYourPhoneNumber,
                     hintStyle: TextStyle(
                       color: AppColors.txtGrey,
                       fontSize: AppFontSizes.font_size_14,

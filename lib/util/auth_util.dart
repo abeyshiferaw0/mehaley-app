@@ -56,7 +56,7 @@ class AuthUtil {
     int r2 = min + rnd.nextInt(max - min);
     int r3 = min + rnd.nextInt(max - min);
 
-    return "User$r$r1$r2$r3";
+    return 'User$r$r1$r2$r3';
   }
 
   static Color generateTemporaryUserColor() {
@@ -72,7 +72,7 @@ class AuthUtil {
     }
 
     return HexColor(
-      "#${getUserColor(appUser).value.toRadixString(16)}",
+      '#${getUserColor(appUser).value.toRadixString(16)}',
     );
   }
 }

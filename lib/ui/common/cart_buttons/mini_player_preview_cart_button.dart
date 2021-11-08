@@ -78,7 +78,7 @@ class _MiniPlayerPreviewCartButtonState
   void onTap() {
     ///LIKE UNLIKE SONG
     EasyDebounce.debounce(
-      "SONG_LIKE",
+      'SONG_LIKE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(

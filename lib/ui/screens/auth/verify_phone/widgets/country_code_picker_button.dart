@@ -37,7 +37,7 @@ class CountryPickerButton extends StatelessWidget {
             width: AppMargin.margin_8,
           ),
           Text(
-            "$countryCode",
+            '$countryCode',
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12,
               color: AppColors.white,

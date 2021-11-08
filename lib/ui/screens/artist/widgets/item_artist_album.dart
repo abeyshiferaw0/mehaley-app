@@ -8,6 +8,7 @@ import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class ArtistAlbumItem extends StatelessWidget {

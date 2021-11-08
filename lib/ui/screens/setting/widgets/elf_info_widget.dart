@@ -24,7 +24,7 @@ class ElfInfoWidget extends StatelessWidget {
             height: AppMargin.margin_4,
           ),
           Text(
-            "version 1.0.0",
+            AppLocalizations.of(context)!.appVersion,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
@@ -35,7 +35,7 @@ class ElfInfoWidget extends StatelessWidget {
             height: AppMargin.margin_16,
           ),
           Text(
-            "Some text about elf and terms and conditions and privacy policy, Some text about elf and terms and conditions and privacy policy ,Some text about elf and terms and conditions and privacy policy",
+            AppLocalizations.of(context)!.appTermsAndCondition,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,

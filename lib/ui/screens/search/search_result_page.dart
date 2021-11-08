@@ -101,10 +101,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
       child: Align(
         alignment: Alignment.topCenter,
         child: SearchPageInput(
-          key: GlobalKey(debugLabel: "SEARCH_INPUT_KEY"),
+          key: GlobalKey(debugLabel: 'SEARCH_INPUT_KEY'),
           focusNode: focusNode,
           onSearchEmpty: () {
-            print("CancelSearchEvent");
             //REMOVE SEARCH
             BlocProvider.of<SearchCancelCubit>(context).changeSearchingState(
               cancelSearchingView: true,

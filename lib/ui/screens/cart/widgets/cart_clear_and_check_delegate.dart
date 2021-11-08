@@ -6,6 +6,7 @@ import 'package:elf_play/ui/common/dialog/dialog_clear_cart.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -89,7 +90,7 @@ class CheckOutButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-        AppLocalizations.of(context)!.checkOut.toUpperCase()      ,
+            AppLocalizations.of(context)!.checkOut.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: ColorUtil.darken(
@@ -130,9 +131,9 @@ class ClearAllButton extends StatelessWidget {
           builder: (_) {
             return Center(
               child: DialogClearCart(
-                mainButtonText: 'CLEAR ALL'.toUpperCase(),
-                cancelButtonText: 'CANCEL',
-                titleText: 'Are you sure you want to clear your cart?',
+                mainButtonText: AppLocalizations.of(context)!.clearAll.toUpperCase(),
+                cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                titleText: AppLocalizations.of(context)!.areYouSureUWantToClearCart,
                 onClear: () {
                   BlocProvider.of<CartUtilBloc>(context).add(
                     ClearAllCartEvent(),
@@ -156,7 +157,7 @@ class ClearAllButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-           AppLocalizations.of(context)!.clearAll.toUpperCase(),
+            AppLocalizations.of(context)!.clearAll.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               color: AppColors.white,

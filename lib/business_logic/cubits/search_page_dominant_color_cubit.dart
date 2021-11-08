@@ -45,7 +45,7 @@ class SearchPageDominantColorCubit extends Cubit<Color> {
   }
 
   String parseSearchResult(dynamic item) {
-    String colorHex = "";
+    String colorHex = '';
     if (item is Artist) {
       colorHex = item.artistImages[0].primaryColorHex;
     } else if (item is Playlist) {

@@ -16,12 +16,12 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class EditUserPlaylistPage extends StatefulWidget {
-  const EditUserPlaylistPage({Key? key, required this.myPlaylist})
-      : super(key: key);
+  const EditUserPlaylistPage({Key? key, required this.myPlaylist}) : super(key: key);
 
   final MyPlaylist myPlaylist;
 
@@ -69,7 +69,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: "Unable to update playlist\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableUpdatePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -81,8 +81,9 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg:
-                  "Playlist ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)} updated",
+              msg: AppLocalizations.of(context)!.playlistUpdated(
+                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+              ),
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -185,7 +186,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
-              hintText: "Add some description",
+              hintText: AppLocalizations.of(context)!.addSomeDescription,
               hintStyle: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -225,7 +226,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 border: Border.all(width: 1, color: AppColors.lightGrey),
               ),
               child: Text(
-                "Add Description".toUpperCase(),
+                AppLocalizations.of(context)!.addDescription.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
@@ -260,7 +261,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         required isFocused,
       }) =>
           Text(
-        "$currentLength/$maxLength",
+        '$currentLength/$maxLength',
         style: TextStyle(
           color: AppColors.darkGreen,
           fontSize: AppFontSizes.font_size_10,
@@ -280,7 +281,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: "Playlist Name",
+        hintText: AppLocalizations.of(context)!.playlistName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -319,7 +320,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Choose Image",
+                                AppLocalizations.of(context)!.chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -332,31 +333,28 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromCamera();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
                               Navigator.pop(context);
                             },
-                            text: "Tack a Photo",
+                            text: AppLocalizations.of(context)!.takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromGallery();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
                               Navigator.pop(context);
                             },
-                            text: "Pick From Gallery",
+                            text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
                               Navigator.pop(context);
                             },
-                            text: "Remove Image",
+                            text: AppLocalizations.of(context)!.removeIImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -373,20 +371,17 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 child: BlocBuilder<ImagePickerCubit, File?>(
                   builder: (context, state) {
                     if (!imageChanged) {
-                      selectedImage = File("");
+                      selectedImage = File('');
 
                       ///IMAGE FROM NETWORK
                       if (widget.myPlaylist.playlistImage != null) {
                         return CachedNetworkImage(
                           width: AppValues.createPlaylistImageSize,
                           height: AppValues.createPlaylistImageSize,
-                          imageUrl: AppApi.baseUrl +
-                              widget.myPlaylist.playlistImage!.imageMediumPath,
+                          imageUrl: AppApi.baseUrl + widget.myPlaylist.playlistImage!.imageMediumPath,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) =>
-                              buildImagePlaceHolder(),
+                          placeholder: (context, url) => buildImagePlaceHolder(),
+                          errorWidget: (context, url, error) => buildImagePlaceHolder(),
                         );
                       } else {
                         return Container(
@@ -406,7 +401,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                           image: FileImage(selectedImage),
                         );
                       } else {
-                        selectedImage = File("");
+                        selectedImage = File('');
                         return Container(
                           width: AppValues.createPlaylistImageSize,
                           height: AppValues.createPlaylistImageSize,
@@ -421,7 +416,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 height: AppMargin.margin_12,
               ),
               Text(
-                "change image".toUpperCase(),
+                AppLocalizations.of(context)!.changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -462,7 +457,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                "Edit Playlist",
+                AppLocalizations.of(context)!.editPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -490,7 +485,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: "Playlist name can't be empty",
+                      msg: AppLocalizations.of(context)!.playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -511,7 +506,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   ),
                 ),
                 child: Text(
-                  "Save".toUpperCase(),
+                  AppLocalizations.of(context)!.save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
@@ -531,13 +526,9 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   }
 
   void initPreviousValues() {
-    nameInputController.text =
-        L10nUtil.translateLocale(widget.myPlaylist.playlistNameText, context);
-    descriptionInputController.text = L10nUtil.translateLocale(
-        widget.myPlaylist.playlistDescriptionText, context);
-    if (L10nUtil.translateLocale(
-            widget.myPlaylist.playlistDescriptionText, context)
-        .isNotEmpty) {
+    nameInputController.text = L10nUtil.translateLocale(widget.myPlaylist.playlistNameText, context);
+    descriptionInputController.text = L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText, context).isNotEmpty) {
       showDescription = true;
     }
   }

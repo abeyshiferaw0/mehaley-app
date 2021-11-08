@@ -19,6 +19,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -58,8 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg:
-                      "Couldn't connect to the internet, check your internet connection",
+                  msg: AppLocalizations.of(context)!.couldntConnectMsg,
                   txtColor: AppColors.white,
                 ),
               );
@@ -73,8 +73,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Preferred payment changed to ${PagesUtilFunctions.getPaymentMethodName(state.appPaymentMethod)}",
+                  msg: AppLocalizations.of(context)!
+                      .preferredPaymentChangedTo(PagesUtilFunctions.getPaymentMethodName(state.appPaymentMethod, context)),
                   txtColor: AppColors.white,
                 ),
               );
@@ -100,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           title: Text(
-            "Settings",
+            AppLocalizations.of(context)!.settings,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
@@ -150,9 +150,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     ProfileButton(),
                     SettingRadioItem(
-                      title: "Data Saver",
-                      subTitle:
-                          "Lowers the quality of your mezmurs streams, for lower data usage",
+                      title: AppLocalizations.of(context)!.dataSaver,
+                      subTitle: AppLocalizations.of(context)!.dataSaverMsg,
                       isEnabled: true,
                       onSwitched: (bool value) {},
                     ),
@@ -160,9 +159,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       notificationTags: settingsPageData.notificationTags,
                     ),
                     SettingLargeButton(
-                      title: "Preferred Payment method",
-                      subTitle:
-                          "Choose your preferred payment method for all purchases",
+                      title: AppLocalizations.of(context)!.preferredPaymentMethod,
+                      subTitle: AppLocalizations.of(context)!.chooseYourPreferredMethod,
                       onTap: () {
                         showDialog(
                           context: context,
@@ -174,8 +172,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                     ),
                     // SettingRadioItem(
-                    //   title: "Auto Download",
-                    //   subTitle: "Start Downloading Purchased Mezmurs Automatically",
+                    //   title: AppLocalizations.of(context)!.autoDownload,
+                    //   subTitle: AppLocalizations.of(context)!.autoDownloadMsg,
                     //   isEnabled: true,
                     //   onSwitched: (bool value) {},
                     // ),

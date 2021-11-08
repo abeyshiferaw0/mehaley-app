@@ -10,6 +10,7 @@ import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/followed_playlis
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/library_sub_tab_button.dart';
 
@@ -20,8 +21,7 @@ class FollowingTabView extends StatefulWidget {
   _FollowingTabViewState createState() => _FollowingTabViewState();
 }
 
-class _FollowingTabViewState extends State<FollowingTabView>
-    with AutomaticKeepAliveClientMixin {
+class _FollowingTabViewState extends State<FollowingTabView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -32,14 +32,12 @@ class _FollowingTabViewState extends State<FollowingTabView>
       providers: [
         BlocProvider(
           create: (context) => FollowedArtistsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
         BlocProvider(
           create: (context) => FollowedPlaylistsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
       ],
@@ -63,13 +61,11 @@ class _FollowingTabViewState extends State<FollowingTabView>
                   children: [
                     SizedBox(height: AppMargin.margin_8),
                     buildSubTabs(),
-                    BlocBuilder<FollowingTabPagesCubit,
-                        AppFollowedPageItemTypes>(
+                    BlocBuilder<FollowingTabPagesCubit, AppFollowedPageItemTypes>(
                       builder: (context, state) {
                         if (state == AppFollowedPageItemTypes.ARTIST) {
                           return FollowedArtistsPage();
-                        } else if (state ==
-                            AppFollowedPageItemTypes.PLAYLISTS) {
+                        } else if (state == AppFollowedPageItemTypes.PLAYLISTS) {
                           return FollowedPlaylistsPage();
                         } else {
                           return SizedBox();
@@ -103,8 +99,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
                       isSelected: state == AppFollowedPageItemTypes.ARTIST,
                       onTap: () {
                         if (!(state == AppFollowedPageItemTypes.ARTIST))
-                          BlocProvider.of<FollowingTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
                             AppFollowedPageItemTypes.ARTIST,
                           );
                       },
@@ -115,8 +110,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
                       isSelected: state == AppFollowedPageItemTypes.PLAYLISTS,
                       onTap: () {
                         if (!(state == AppFollowedPageItemTypes.PLAYLISTS))
-                          BlocProvider.of<FollowingTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
                             AppFollowedPageItemTypes.PLAYLISTS,
                           );
                       },
@@ -138,8 +132,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
   }
 
   Future<void> refreshPage(BuildContext builderContext) async {
-    AppFollowedPageItemTypes appFollowedPageItemTypes =
-        BlocProvider.of<FollowingTabPagesCubit>(builderContext).state;
+    AppFollowedPageItemTypes appFollowedPageItemTypes = BlocProvider.of<FollowingTabPagesCubit>(builderContext).state;
     if (appFollowedPageItemTypes == AppFollowedPageItemTypes.PLAYLISTS) {
       BlocProvider.of<FollowedPlaylistsBloc>(builderContext).add(
         RefreshFollowedPlaylistsEvent(),

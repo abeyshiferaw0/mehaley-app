@@ -85,7 +85,7 @@ class _SongFavoriteMenuItemState extends State<SongFavoriteMenuItem>
                               child: Opacity(
                                 opacity: preButtonOnTap() ? 1.0 : 0.3,
                                 child: LottieBuilder.asset(
-                                  "assets/lottie/heart.json",
+                                  'assets/lottie/heart.json',
                                   controller: controller,
                                   fit: BoxFit.cover,
                                   onLoaded: (composition) {
@@ -122,7 +122,7 @@ class _SongFavoriteMenuItemState extends State<SongFavoriteMenuItem>
   void onTap() {
     ///LIKE UNLIKE SONG
     EasyDebounce.debounce(
-      "SONG_LIKE",
+      'SONG_LIKE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<LibraryBloc>(context).add(

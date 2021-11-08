@@ -20,6 +20,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class AlbumPage extends StatefulWidget {
@@ -34,8 +35,7 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
   @override
   void initState() {
-    BlocProvider.of<AlbumPageBloc>(context)
-        .add(LoadAlbumPageEvent(albumId: widget.albumId));
+    BlocProvider.of<AlbumPageBloc>(context).add(LoadAlbumPageEvent(albumId: widget.albumId));
     super.initState();
   }
 
@@ -78,8 +78,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
     return SingleChildScrollView(
       child: Column(
         children: [
-          AlbumPageHeader(
-              album: albumPageData.album, songs: albumPageData.songs),
+          AlbumPageHeader(album: albumPageData.album, songs: albumPageData.songs),
           Padding(
             padding: const EdgeInsets.only(left: AppPadding.padding_16),
             child: ListView.builder(
@@ -102,8 +101,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                           songs: albumPageData.songs,
                           playingFrom: PlayingFrom(
                             from: AppLocalizations.of(context)!.playingFromAlbum,
-                            title: L10nUtil.translateLocale(
-                                albumPageData.album.albumTitle, context),
+                            title: L10nUtil.translateLocale(albumPageData.album.albumTitle, context),
                             songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
                             songSyncPlayedFromId: albumPageData.album.albumId,
                           ),
@@ -141,15 +139,14 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
         builder: (context, state) {
           if (state is AlbumPageLoadedState) {
             return Text(
-              L10nUtil.translateLocale(
-                  state.albumPageData.album.albumTitle, context),
+              L10nUtil.translateLocale(state.albumPageData.album.albumTitle, context),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_16,
                 fontWeight: FontWeight.w500,
               ),
             );
           } else {
-            return Text("");
+            return Text('');
           }
         },
       ),

@@ -1,6 +1,7 @@
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SmallTextPriceWidget extends StatelessWidget {
@@ -28,7 +29,7 @@ class SmallTextPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isPurchased) {
-      return buildPurchased();
+      return buildPurchased(context);
     } else {
       if (!isFree) {
         if (isDiscountAvailable && showDiscount) {
@@ -37,12 +38,12 @@ class SmallTextPriceWidget extends StatelessWidget {
           return buildPrice();
         }
       } else {
-        return buildFreeText();
+        return buildFreeText(context);
       }
     }
   }
 
-  Text buildPurchased() {
+  Text buildPurchased(context) {
     return Text(
       AppLocalizations.of(context)!.purchased.toUpperCase(),
       maxLines: 2,
@@ -50,14 +51,12 @@ class SmallTextPriceWidget extends StatelessWidget {
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText
-            ? AppFontSizes.font_size_12.sp
-            : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
       ),
     );
   }
 
-  Text buildFreeText() {
+  Text buildFreeText(context) {
     return Text(
       AppLocalizations.of(context)!.free.toUpperCase(),
       maxLines: 2,
@@ -65,24 +64,20 @@ class SmallTextPriceWidget extends StatelessWidget {
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText
-            ? AppFontSizes.font_size_12.sp
-            : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
       ),
     );
   }
 
   Text buildPrice() {
     return Text(
-      "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
+      '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText
-            ? AppFontSizes.font_size_12.sp
-            : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
       ),
     );
   }
@@ -93,29 +88,25 @@ class SmallTextPriceWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
+          '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: AppColors.darkGreen.withOpacity(0.7),
             decoration: TextDecoration.lineThrough,
             fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-            fontSize: useLargerText
-                ? AppFontSizes.font_size_10.sp
-                : AppFontSizes.font_size_8.sp,
+            fontSize: useLargerText ? AppFontSizes.font_size_10.sp : AppFontSizes.font_size_8.sp,
           ),
         ),
         SizedBox(width: AppMargin.margin_4),
         Text(
-          "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${(price - (price * discountPercentage)).toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
+          '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${(price - (price * discountPercentage)).toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: AppColors.darkGreen,
             fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-            fontSize: useLargerText
-                ? AppFontSizes.font_size_12.sp
-                : AppFontSizes.font_size_10.sp,
+            fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
           ),
         )
       ],

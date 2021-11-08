@@ -1,5 +1,6 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_bouncing_button.dart';
@@ -25,7 +26,7 @@ class AppSubscribeCard extends StatelessWidget {
               BlendMode.dstATop,
             ),
             image: NetworkImage(
-                "https://ichef.bbci.co.uk/news/976/cpsprodpb/68A6/production/_116609762_gettyimages-1230667435.jpg"),
+                'https://ichef.bbci.co.uk/news/976/cpsprodpb/68A6/production/_116609762_gettyimages-1230667435.jpg'),
             fit: BoxFit.cover,
           ),
         ),

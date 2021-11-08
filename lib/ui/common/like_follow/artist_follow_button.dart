@@ -49,16 +49,16 @@ class ArtistFollowButton extends StatelessWidget {
         builder: (_) {
           return Center(
             child: DialogUlLikeUnFollow(
-              mainButtonText: 'UNFOLLOW'.toUpperCase(),
-              cancelButtonText: 'CANCEL',
-              titleText: 'Remove From Followed Artists?',
+              mainButtonText: AppLocalizations.of(context)!.unFollow.toUpperCase(),
+              cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+              titleText: AppLocalizations.of(context)!.removeFromFollowedArtist,
               onUnLikeUnFollow: () {
                 ///FOLLOW UNFOLLOW ARTIST
                 EasyDebounce.debounce(
-                  "ARTIST_FOLLOW",
+                  'ARTIST_FOLLOW',
                   Duration(milliseconds: 800),
                   () {
-                    print("artistId $artistId");
+                    print('artistId $artistId');
                     BlocProvider.of<LibraryBloc>(context).add(
                       FollowUnFollowArtistEvent(
                         id: artistId,
@@ -75,7 +75,7 @@ class ArtistFollowButton extends StatelessWidget {
     } else {
       ///FOLLOW UNFOLLOW ARTIST
       EasyDebounce.debounce(
-        "ARTIST_FOLLOW",
+        'ARTIST_FOLLOW',
         Duration(milliseconds: 800),
         () {
           BlocProvider.of<LibraryBloc>(context).add(

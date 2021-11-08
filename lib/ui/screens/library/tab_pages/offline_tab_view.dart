@@ -16,6 +16,7 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -26,8 +27,7 @@ class OfflineTabView extends StatefulWidget {
   _OfflineTabViewState createState() => _OfflineTabViewState();
 }
 
-class _OfflineTabViewState extends State<OfflineTabView>
-    with AutomaticKeepAliveClientMixin {
+class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -35,8 +35,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
   late List<Song> offlineSongs = [];
 
   ///
-  late AppLibrarySortTypes appLibrarySortTypes =
-      AppLibrarySortTypes.LATEST_DOWNLOAD;
+  late AppLibrarySortTypes appLibrarySortTypes = AppLibrarySortTypes.LATEST_DOWNLOAD;
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +151,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:AppLocalizations.of(context)!.noMezmursToPlay,
+                  msg: AppLocalizations.of(context)!.noMezmursToPlay,
                   txtColor: AppColors.white,
                 ),
               );
@@ -178,7 +177,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-           AppLocalizations.of(context)!.sortBy,
+            AppLocalizations.of(context)!.sortBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               color: AppColors.txtGrey,
@@ -203,11 +202,10 @@ class _OfflineTabViewState extends State<OfflineTabView>
 
               Navigator.pop(dialogContext);
             },
-            isSelected:
-                appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD,
+            isSelected: appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD,
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.titleAz ,
+            text: AppLocalizations.of(context)!.titleAz,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {

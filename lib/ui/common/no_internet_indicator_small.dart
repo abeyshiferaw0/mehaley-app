@@ -1,17 +1,16 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class NoInternetIndicatorSmall extends StatefulWidget {
   const NoInternetIndicatorSmall({Key? key}) : super(key: key);
 
   @override
-  _NoInternetIndicatorSmallState createState() =>
-      _NoInternetIndicatorSmallState();
+  _NoInternetIndicatorSmallState createState() => _NoInternetIndicatorSmallState();
 }
 
-class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
-    with TickerProviderStateMixin {
+class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> offset;
 
@@ -22,8 +21,7 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
-    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
-        .animate(controller);
+    offset = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0)).animate(controller);
     controller.forward();
     super.initState();
   }

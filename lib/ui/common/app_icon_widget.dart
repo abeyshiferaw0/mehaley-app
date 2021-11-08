@@ -12,7 +12,7 @@ class AppIconWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 5, top: 5),
       child: SvgPicture.asset(
-        "assets/icons/ic_app.svg",
+        'assets/icons/ic_app.svg',
         width: AppIconSizes.icon_size_20,
         color: Colors.white,
       ),

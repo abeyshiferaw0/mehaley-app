@@ -17,6 +17,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlaylistPage extends StatefulWidget {
   const PlaylistPage({Key? key, required this.playlistId}) : super(key: key);
@@ -34,8 +35,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   @override
   void initState() {
-    BlocProvider.of<PlaylistPageBloc>(context)
-        .add(LoadPlaylistPageEvent(playlistId: widget.playlistId));
+    BlocProvider.of<PlaylistPageBloc>(context).add(LoadPlaylistPageEvent(playlistId: widget.playlistId));
 
     super.initState();
   }
@@ -53,8 +53,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
             ///CHANGE PLAYLIST DOMINANT COLOR
             BlocProvider.of<PagesDominantColorBloc>(context).add(
               PlaylistPageDominantColorChanged(
-                dominantColor: state
-                    .playlistPageData.playlist.playlistImage.primaryColorHex,
+                dominantColor: state.playlistPageData.playlist.playlistImage.primaryColorHex,
               ),
             );
             return buildPlaylistPageLoaded(state.playlistPageData);
@@ -95,15 +94,13 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   SliverPersistentHeader buildSliverHeader(playlistPageData) {
     return SliverPersistentHeader(
-      delegate:
-          PlaylistPageSliverHeaderDelegate(playlistPageData: playlistPageData),
+      delegate: PlaylistPageSliverHeaderDelegate(playlistPageData: playlistPageData),
       floating: true,
       pinned: true,
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(
-      List<Song> songs, Playlist playlist) {
+  SliverPersistentHeader buildSliverPlayShuffleButton(List<Song> songs, Playlist playlist) {
     return SliverPersistentHeader(
       pinned: true,
       delegate: PlaylistPlayShuffleDelegate(songs: songs, playlist: playlist),
@@ -132,8 +129,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     SongItem(
                       song: songs[position],
                       isForMyPlaylist: false,
-                      thumbUrl: AppApi.baseUrl +
-                          songs[position].albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseUrl + songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG
@@ -142,11 +138,9 @@ class _PlaylistPageState extends State<PlaylistPage> {
                           songs: songs,
                           startPlaying: true,
                           playingFrom: PlayingFrom(
-                            from: "playing from playlist",
-                            title: L10nUtil.translateLocale(
-                                playlist.playlistNameText, context),
-                            songSyncPlayedFrom:
-                                SongSyncPlayedFrom.PLAYLIST_DETAIL,
+                            from: AppLocalizations.of(context)!.playingFromPlaylist,
+                            title: L10nUtil.translateLocale(playlist.playlistNameText, context),
+                            songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_DETAIL,
                             songSyncPlayedFromId: playlist.playlistId,
                           ),
                           index: position,

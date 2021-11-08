@@ -139,24 +139,24 @@ class _LibraryPageState extends State<LibraryPage>
       controller: _tabController,
       children: [
         PurchasedTabView(
-          key: Key("PurchasedTabView"),
+          key: Key('PurchasedTabView'),
         ),
         OfflineTabView(
-          key: Key("OfflineTabView"),
+          key: Key('OfflineTabView'),
         ),
         MyPlaylistTabView(
           key: Key(
-            "MyPlaylistTabView",
+            'MyPlaylistTabView',
           ),
           onGoToFollowedPlaylist: () {
             _tabController.animateTo(4);
           },
         ),
         FavoriteTabView(
-          key: Key("FavoriteTabView"),
+          key: Key('FavoriteTabView'),
         ),
         FollowingTabView(
-          key: Key("FollowingTabView"),
+          key: Key('FollowingTabView'),
         ),
       ],
     );

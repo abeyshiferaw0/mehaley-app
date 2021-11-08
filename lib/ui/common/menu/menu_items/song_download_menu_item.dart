@@ -135,10 +135,10 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
               builder: (context) {
                 return Center(
                   child: DialogDeleteSong(
-                    mainButtonText: 'DELETE'.toUpperCase(),
-                    cancelButtonText: 'CANCEL',
-                    titleText:
-                        'Are you sure you want to Delete ${L10nUtil.translateLocale(widget.song.songName, context)} from downloads?',
+                    mainButtonText: AppLocalizations.of(context)!.delete.toUpperCase(),
+                    cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                    titleText: AppLocalizations.of(context)!
+                        .areUSureYouWantToDeleteFromDownloads(L10nUtil.translateLocale(widget.song.songName, context)),
                     onDelete: () {
                       BlocProvider.of<DownloadingSongBloc>(context).add(
                         DeleteDownloadedSongEvent(song: widget.song),
@@ -162,13 +162,13 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         icon: PhosphorIcons.warning_fill,
         title: AppLocalizations.of(context)!.retryDownload,
         onTap: () {
-          EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
-              () {
+          EasyDebounce.debounce('DOWNLOAD_BUTTON', Duration(milliseconds: 300), () {
             BlocProvider.of<DownloadingSongBloc>(context).add(
               RetryDownloadSongEvent(
                 song: widget.song,
-                notificationTitle:
-                    "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+                notificationTitle: AppLocalizations.of(context)!.downloading(
+                  L10nUtil.translateLocale(widget.song.songName, context),
+                ),
               ),
             );
           });
@@ -194,7 +194,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
             strokeWidth: 2,
           ),
         ),
-        title: AppLocalizations.of(context)!.downloading,
+        title: AppLocalizations.of(context)!.downloadProgressing,
         onTap: () {},
       ),
     );
@@ -212,15 +212,19 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         onTap: () {
           if (widget.song.isBought || widget.song.isFree) {
             EasyDebounce.debounce(
-                "DOWNLOAD_BUTTON", Duration(milliseconds: 300), () {
-              BlocProvider.of<DownloadingSongBloc>(context).add(
-                DownloadSongEvent(
-                  song: widget.song,
-                  notificationTitle:
-                      "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
-                ),
-              );
-            });
+              'DOWNLOAD_BUTTON',
+              Duration(milliseconds: 300),
+              () {
+                BlocProvider.of<DownloadingSongBloc>(context).add(
+                  DownloadSongEvent(
+                    song: widget.song,
+                    notificationTitle: AppLocalizations.of(context)!.downloading(
+                      L10nUtil.translateLocale(widget.song.songName, context),
+                    ),
+                  ),
+                );
+              },
+            );
           } else {
             ///SHOW BUY OR PURCHASE DIALOG
             showDialog(
@@ -242,8 +246,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
   }
 
   void showInitialStatus(DownloadTaskStatus downloadTaskStatus) async {
-    if (downloadTaskStatus == DownloadTaskStatus.running ||
-        downloadTaskStatus == DownloadTaskStatus.enqueued) {
+    if (downloadTaskStatus == DownloadTaskStatus.running || downloadTaskStatus == DownloadTaskStatus.enqueued) {
       showDownloading = true;
       showDownloaded = false;
       showDownloadFailed = false;

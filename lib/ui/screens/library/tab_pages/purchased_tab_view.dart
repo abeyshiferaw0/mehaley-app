@@ -23,6 +23,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../widgets/library_sub_tab_button.dart';
@@ -34,8 +35,7 @@ class PurchasedTabView extends StatefulWidget {
   _PurchasedTabViewState createState() => _PurchasedTabViewState();
 }
 
-class _PurchasedTabViewState extends State<PurchasedTabView>
-    with AutomaticKeepAliveClientMixin {
+class _PurchasedTabViewState extends State<PurchasedTabView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -52,26 +52,22 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
       providers: [
         BlocProvider(
           create: (context) => PurchasedAllSongsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
         BlocProvider(
           create: (context) => PurchasedSongsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
         BlocProvider(
           create: (context) => PurchasedAlbumsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
         BlocProvider(
           create: (context) => PurchasedPlaylistBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         )
       ],
@@ -94,8 +90,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                   children: [
                     SizedBox(height: AppMargin.margin_8),
                     buildSubTabs(),
-                    BlocBuilder<PurchasedTabPagesCubit,
-                        AppPurchasedPageItemTypes>(
+                    BlocBuilder<PurchasedTabPagesCubit, AppPurchasedPageItemTypes>(
                       builder: (context, state) {
                         if (state == AppPurchasedPageItemTypes.ALL_SONGS) {
                           return PurchasedAllSongsPage(
@@ -118,8 +113,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                               purchaseAlbums.addAll(albums);
                             },
                           );
-                        } else if (state ==
-                            AppPurchasedPageItemTypes.PLAYLISTS) {
+                        } else if (state == AppPurchasedPageItemTypes.PLAYLISTS) {
                           return PurchasedPlaylistsPage(
                             onPlaylistsLoaded: (playlists) {
                               purchasePlaylists.clear();
@@ -157,8 +151,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       isSelected: state == AppPurchasedPageItemTypes.ALL_SONGS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.ALL_SONGS))
-                          BlocProvider.of<PurchasedTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
                             AppPurchasedPageItemTypes.ALL_SONGS,
                           );
                       },
@@ -169,8 +162,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       isSelected: state == AppPurchasedPageItemTypes.SONGS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.SONGS))
-                          BlocProvider.of<PurchasedTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
                             AppPurchasedPageItemTypes.SONGS,
                           );
                       },
@@ -181,8 +173,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       isSelected: state == AppPurchasedPageItemTypes.ALBUMS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.ALBUMS))
-                          BlocProvider.of<PurchasedTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
                             AppPurchasedPageItemTypes.ALBUMS,
                           );
                       },
@@ -193,8 +184,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       isSelected: state == AppPurchasedPageItemTypes.PLAYLISTS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.PLAYLISTS))
-                          BlocProvider.of<PurchasedTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
                             AppPurchasedPageItemTypes.PLAYLISTS,
                           );
                       },
@@ -211,8 +201,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
     );
   }
 
-  LibraryIconButton buildShuffleButton(
-      AppPurchasedPageItemTypes appPurchasedPageItemTypes) {
+  LibraryIconButton buildShuffleButton(AppPurchasedPageItemTypes appPurchasedPageItemTypes) {
     return LibraryIconButton(
       onTap: () {
         if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
@@ -222,8 +211,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               songs: allPurchasedSongs,
               startPlaying: true,
               playingFrom: PlayingFrom(
-                from: 
-                AppLocalizations.of(context)!.playingFrom,
+                from: AppLocalizations.of(context)!.playingFrom,
                 title: AppLocalizations.of(context)!.purchasedMezmurs,
                 songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                 songSyncPlayedFromId: -1,
@@ -243,8 +231,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               ),
             );
           }
-        } else if (appPurchasedPageItemTypes ==
-            AppPurchasedPageItemTypes.SONGS) {
+        } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.SONGS) {
           if (purchasedSongs.length > 0) {
             PagesUtilFunctions.openSongShuffled(
               context: context,
@@ -252,8 +239,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               startPlaying: true,
               playingFrom: PlayingFrom(
                 from: AppLocalizations.of(context)!.playingFrom,
-                title: 
-                AppLocalizations.of(context)!.purchasedMezmurs,
+                title: AppLocalizations.of(context)!.purchasedMezmurs,
                 songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                 songSyncPlayedFromId: -1,
               ),
@@ -272,8 +258,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               ),
             );
           }
-        } else if (appPurchasedPageItemTypes ==
-            AppPurchasedPageItemTypes.ALBUMS) {
+        } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALBUMS) {
           if (purchaseAlbums.length > 0) {
             int rand = PagesUtilFunctions.getRandomIndex(
               min: 0,
@@ -296,8 +281,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               ),
             );
           }
-        } else if (appPurchasedPageItemTypes ==
-            AppPurchasedPageItemTypes.PLAYLISTS) {
+        } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.PLAYLISTS) {
           if (purchasePlaylists.length > 0) {
             int rand = PagesUtilFunctions.getRandomIndex(
               min: 0,
@@ -307,9 +291,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               context,
               AppRouterPaths.playlistRoute,
               arguments: ScreenArguments(
-                args: {
-                  'playlistId': purchasePlaylists.elementAt(rand).playlistId
-                },
+                args: {'playlistId': purchasePlaylists.elementAt(rand).playlistId},
               ),
             );
           } else {
@@ -330,8 +312,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
   }
 
   Future<void> refreshPage(BuildContext builderContext) async {
-    AppPurchasedPageItemTypes appPurchasedPageItemTypes =
-        BlocProvider.of<PurchasedTabPagesCubit>(builderContext).state;
+    AppPurchasedPageItemTypes appPurchasedPageItemTypes = BlocProvider.of<PurchasedTabPagesCubit>(builderContext).state;
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.SONGS) {
       BlocProvider.of<PurchasedSongsBloc>(builderContext).add(
         RefreshPurchasedSongsEvent(),

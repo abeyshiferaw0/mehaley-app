@@ -122,9 +122,9 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                         builder: (_) {
                           return Center(
                             child: DialogDeleteUserPlaylist(
-                              mainButtonText: 'DELETE'.toUpperCase(),
-                              cancelButtonText: 'CANCEL',
-                              titleText: 'Delete playlist permanently?',
+                              mainButtonText: AppLocalizations.of(context)!.delete.toUpperCase(),
+                              cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                              titleText: AppLocalizations.of(context)!.deletePlaylistPermanently,
                               onDelete: () {
                                 onPlaylistDelete(myPlaylist);
                                 Navigator.pop(context);
@@ -204,9 +204,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
           BlocBuilder<AppUserWidgetsCubit, AppUser>(
             builder: (context, state) {
               return Text(
-                AppLocalizations.of(context)!
-                    .byUserName(AuthUtil.getUserName(state))
-                    .toUpperCase(),
+                AppLocalizations.of(context)!.byUserName(AuthUtil.getUserName(state)).toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.txtGrey,

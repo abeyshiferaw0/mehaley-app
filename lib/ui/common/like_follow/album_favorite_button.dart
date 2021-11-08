@@ -70,7 +70,7 @@ class _AlbumFavoriteButtonState extends State<AlbumFavoriteButton>
               height: AppIconSizes.icon_size_36,
               padding: EdgeInsets.all(AppPadding.padding_4),
               child: LottieBuilder.asset(
-                "assets/lottie/heart.json",
+                'assets/lottie/heart.json',
                 controller: controller,
                 fit: BoxFit.cover,
                 onLoaded: (composition) {
@@ -87,7 +87,7 @@ class _AlbumFavoriteButtonState extends State<AlbumFavoriteButton>
   void onTap() {
     ///LIKE UNLIKE ALBUM
     EasyDebounce.debounce(
-      "ALBUM_LIKE",
+      'ALBUM_LIKE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<LibraryBloc>(context).add(

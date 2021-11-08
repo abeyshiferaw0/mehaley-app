@@ -9,6 +9,7 @@ import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_b
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
@@ -28,8 +29,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-    verificationId = args.args["verificationId"];
-    resendToken = args.args["resendToken"];
+    verificationId = args.args['verificationId'];
+    resendToken = args.args['resendToken'];
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LastSmsStillActiveState) {
@@ -46,8 +47,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           Navigator.pop(context, true);
         }
         if (state is AuthSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(context, AppRouterPaths.mainScreen,
-              ModalRoute.withName(AppRouterPaths.splashRoute));
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRouterPaths.mainScreen, ModalRoute.withName(AppRouterPaths.splashRoute));
         }
         if (state is AuthErrorState) {
           Navigator.pop(context);
@@ -79,7 +80,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                         return PhoneAuthLargeButton(
                           disableBouncing: true,
                           isLoading: true,
-                          text: AppLocalizations.of(context)!.verfing,
+                          text: AppLocalizations.of(context)!.verifying,
                           onTap: () {},
                         );
                       }
@@ -154,14 +155,13 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             BlocProvider.of<AuthBloc>(context).add(
               ResendPinCodeEvent(
                 resendToken: resendToken,
-                phoneNumber:
-                    "${args.args['countryCode']}${(args.args['phoneNumber'] as String).replaceAll("-", "")}",
+                phoneNumber: '${args.args['countryCode']}${(args.args['phoneNumber'] as String).replaceAll('-', '')}',
               ),
             );
           },
           shrinkRatio: 9,
           child: Text(
-            AppLocalizations.of(context)!.recendColde,
+            AppLocalizations.of(context)!.resendCode,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppFontSizes.font_size_12,
@@ -181,7 +181,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         horizontal: AppPadding.padding_16,
       ),
       child: Text(
-        "${AppLocalizations.of(context)!.enterSixDigitMenu}${args.args['countryCode']}-${args.args['phoneNumber']}",
+        '${AppLocalizations.of(context)!.enterSixDigitMenu}${args.args['countryCode']}-${args.args['phoneNumber']}',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12,
@@ -193,7 +193,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   Text buildEnterYourCodeText() {
     return Text(
-      "${AppLocalizations.of(context)!.enterYourCode}".toUpperCase(),
+      '${AppLocalizations.of(context)!.enterYourCode}'.toUpperCase(),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_18,

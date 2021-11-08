@@ -59,7 +59,7 @@ class FeaturedSongsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${L10nUtil.translateLocale(song.songName, context)} - ${PagesUtilFunctions.getArtistsNames(song.artistsName, context)}",
+                      '${L10nUtil.translateLocale(song.songName, context)} - ${PagesUtilFunctions.getArtistsNames(song.artistsName, context)}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

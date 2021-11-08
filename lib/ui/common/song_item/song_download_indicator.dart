@@ -10,6 +10,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class SongDownloadIndicator extends StatefulWidget {
@@ -132,10 +133,10 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             builder: (context) {
               return Center(
                 child: DialogDeleteSong(
-                  mainButtonText: 'DELETE'.toUpperCase(),
-                  cancelButtonText: 'CANCEL',
-                  titleText:
-                      'Are you sure you want to Delete ${L10nUtil.translateLocale(widget.song.songName, context)} from downloads?',
+                  mainButtonText: AppLocalizations.of(context)!.delete.toUpperCase(),
+                  cancelButtonText: AppLocalizations.of(context)!.cancel,
+                  titleText: AppLocalizations.of(context)!
+                      .areYouSureUwantDeleteFromDownloads(L10nUtil.translateLocale(widget.song.songName, context)),
                   onDelete: () {
                     BlocProvider.of<DownloadingSongBloc>(context).add(
                       DeleteDownloadedSongEvent(song: widget.song),
@@ -151,9 +152,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           child: Icon(
             PhosphorIcons.arrow_circle_down_fill,
             color: AppColors.green,
-            size: widget.isForPlayerPage
-                ? AppIconSizes.icon_size_28
-                : AppIconSizes.icon_size_24,
+            size: widget.isForPlayerPage ? AppIconSizes.icon_size_28 : AppIconSizes.icon_size_24,
           ),
         ),
       ),
@@ -165,16 +164,20 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
       visible: showDownloadFailed,
       child: AppBouncingButton(
         onTap: () {
-          EasyDebounce.debounce("DOWNLOAD_BUTTON", Duration(milliseconds: 300),
-              () {
-            BlocProvider.of<DownloadingSongBloc>(context).add(
-              RetryDownloadSongEvent(
-                song: widget.song,
-                notificationTitle:
-                    "${AppLocalizations.of(context)!.downloading} ${L10nUtil.translateLocale(widget.song.songName, context)}",
-              ),
-            );
-          });
+          EasyDebounce.debounce(
+            'DOWNLOAD_BUTTON',
+            Duration(milliseconds: 300),
+            () {
+              BlocProvider.of<DownloadingSongBloc>(context).add(
+                RetryDownloadSongEvent(
+                  song: widget.song,
+                  notificationTitle: AppLocalizations.of(context)!.downloading(
+                    L10nUtil.translateLocale(widget.song.songName, context),
+                  ),
+                ),
+              );
+            },
+          );
         },
         child: Padding(
           padding: EdgeInsets.all(
@@ -183,9 +186,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           child: Icon(
             PhosphorIcons.warning_fill,
             color: AppColors.yellow,
-            size: widget.isForPlayerPage
-                ? AppIconSizes.icon_size_24
-                : AppIconSizes.icon_size_20,
+            size: widget.isForPlayerPage ? AppIconSizes.icon_size_24 : AppIconSizes.icon_size_20,
           ),
         ),
       ),
@@ -196,12 +197,8 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
     return Visibility(
       visible: showDownloading,
       child: Container(
-        width: widget.isForPlayerPage
-            ? AppIconSizes.icon_size_24
-            : AppIconSizes.icon_size_16,
-        height: widget.isForPlayerPage
-            ? AppIconSizes.icon_size_24
-            : AppIconSizes.icon_size_16,
+        width: widget.isForPlayerPage ? AppIconSizes.icon_size_24 : AppIconSizes.icon_size_16,
+        height: widget.isForPlayerPage ? AppIconSizes.icon_size_24 : AppIconSizes.icon_size_16,
         margin: EdgeInsets.all(AppPadding.padding_8),
         child: CircularProgressIndicator(
           color: AppColors.green,
@@ -218,24 +215,26 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             ? AppBouncingButton(
                 onTap: () {
                   EasyDebounce.debounce(
-                      "DOWNLOAD_BUTTON", Duration(milliseconds: 300), () {
-                    BlocProvider.of<DownloadingSongBloc>(context).add(
-                      DownloadSongEvent(
-                        song: widget.song,
-                        notificationTitle:
-                            "${AppLocalizations.of(context)!.downloading} ${L10nUtil.translateLocale(widget.song.songName, context)}",
-                      ),
-                    );
-                  });
+                    'DOWNLOAD_BUTTON',
+                    Duration(milliseconds: 300),
+                    () {
+                      BlocProvider.of<DownloadingSongBloc>(context).add(
+                        DownloadSongEvent(
+                          song: widget.song,
+                          notificationTitle: AppLocalizations.of(context)!.downloading(
+                            L10nUtil.translateLocale(widget.song.songName, context),
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
                 child: Padding(
                   padding: EdgeInsets.all(AppPadding.padding_8),
                   child: Icon(
                     PhosphorIcons.arrow_circle_down_light,
                     color: AppColors.lightGrey,
-                    size: widget.isForPlayerPage
-                        ? AppIconSizes.icon_size_28
-                        : AppIconSizes.icon_size_24,
+                    size: widget.isForPlayerPage ? AppIconSizes.icon_size_28 : AppIconSizes.icon_size_24,
                   ),
                 ),
               )
@@ -243,8 +242,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
   }
 
   void showInitialStatus(DownloadTaskStatus downloadTaskStatus) async {
-    if (downloadTaskStatus == DownloadTaskStatus.running ||
-        downloadTaskStatus == DownloadTaskStatus.enqueued) {
+    if (downloadTaskStatus == DownloadTaskStatus.running || downloadTaskStatus == DownloadTaskStatus.enqueued) {
       showDownloading = true;
       showDownloaded = false;
       showDownloadFailed = false;

@@ -45,6 +45,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,39 +55,34 @@ import 'package:sizer/sizer.dart';
 
 class PagesUtilFunctions {
   static String getPlaylistDescription(Playlist playlist, context) {
-    if (L10nUtil.translateLocale(playlist.playlistDescriptionText, context)
-        .isNotEmpty) {
-      return L10nUtil.translateLocale(
-          playlist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(playlist.playlistDescriptionText, context).isNotEmpty) {
+      return L10nUtil.translateLocale(playlist.playlistDescriptionText, context);
     } else {
       return L10nUtil.translateLocale(playlist.playlistNameText, context);
     }
   }
 
   static String getPlaylistOwnerProfilePic(Playlist playlist) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
-        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return "https://www.thoughtco.com/thmb/VfrRj6idAT6dCdaR8kEyLQD6P50=/2120x1414/filters:no_upscale():max_bytes(150000):strip_icc()/LatinCross-631151317-5a22dd90beba330037d3cecb.jpg";
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+      return 'https://www.thoughtco.com/thmb/VfrRj6idAT6dCdaR8kEyLQD6P50=/2120x1414/filters:no_upscale():max_bytes(150000):strip_icc()/LatinCross-631151317-5a22dd90beba330037d3cecb.jpg';
     } else {
-      return "https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg";
+      return 'https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg';
     }
   }
 
-  static String getPlaylistOwner(Playlist playlist) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
-        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return "ELF PLAY";
+  static String getPlaylistOwner(Playlist playlist, context) {
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+      return AppLocalizations.of(context)!.appName.toUpperCase();
     } else {
-      return "SOMEONE ELSE";
+      return '';
     }
   }
 
-  static String getPlaylistBy(Playlist playlist) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
-        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return "BY ELF PLAY";
+  static String getPlaylistBy(Playlist playlist, context) {
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+      return AppLocalizations.of(context)!.byAppName;
     } else {
-      return "BY SOMEONE ELSE";
+      return '';
     }
   }
 
@@ -121,16 +117,16 @@ class PagesUtilFunctions {
     }
 
     return tokens.join('  ');
-    //return "${totalDurationInSeconds}";
+    //return '${totalDurationInSeconds}';
   }
 
   static String getArtistsNames(List<TextLan> artistsName, context) {
-    String names = "";
+    String names = '';
     for (TextLan name in artistsName) {
       if (names.isEmpty) {
         names = names + L10nUtil.translateLocale(name, context);
       } else {
-        names = names + " , " + L10nUtil.translateLocale(name, context);
+        names = names + ' , ' + L10nUtil.translateLocale(name, context);
       }
     }
     return names;
@@ -150,7 +146,7 @@ class PagesUtilFunctions {
     } else if (groupType == GroupType.ARTIST) {
       return AppApi.baseUrl + (item as Artist).artistImages[0].imageMediumPath;
     } else {
-      return "";
+      return '';
     }
   }
 
@@ -214,22 +210,20 @@ class PagesUtilFunctions {
       String title = L10nUtil.translateLocale((item as Song).songName, context);
 
       if (item.artistsName.length > 0) {
-        title =
-            "$title - ${L10nUtil.translateLocale(item.artistsName[0], context)}";
+        title = '$title - ${L10nUtil.translateLocale(item.artistsName[0], context)}';
       }
 
       return title;
     } else if (groupType == GroupType.PLAYLIST) {
-      return L10nUtil.translateLocale(
-          (item as Playlist).playlistNameText, context);
+      return L10nUtil.translateLocale((item as Playlist).playlistNameText, context);
     } else if (groupType == GroupType.ALBUM) {
       String title =
-          "${L10nUtil.translateLocale((item as Album).albumTitle, context)} - ${L10nUtil.translateLocale(item.artist.artistName, context)}";
+          '${L10nUtil.translateLocale((item as Album).albumTitle, context)} - ${L10nUtil.translateLocale(item.artist.artistName, context)}';
       return title;
     } else if (groupType == GroupType.ARTIST) {
       return L10nUtil.translateLocale((item as Artist).artistName, context);
     } else {
-      return "";
+      return '';
     }
   }
 
@@ -283,7 +277,7 @@ class PagesUtilFunctions {
 
   static String albumTitle(Album album, context) {
     String title =
-        "${L10nUtil.translateLocale(album.albumTitle, context)} - ${L10nUtil.translateLocale(album.artist.artistName, context)}";
+        '${L10nUtil.translateLocale(album.albumTitle, context)} - ${L10nUtil.translateLocale(album.artist.artistName, context)}';
     return title;
   }
 
@@ -320,8 +314,7 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.playlistRoute,
-        arguments: ScreenArguments(
-            args: {'playlistId': (item as Playlist).playlistId}),
+        arguments: ScreenArguments(args: {'playlistId': (item as Playlist).playlistId}),
       );
     } else if (groupType == GroupType.ALBUM) {
       Navigator.pushNamed(
@@ -333,8 +326,7 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.artistRoute,
-        arguments:
-            ScreenArguments(args: {'artistId': (item as Artist).artistId}),
+        arguments: ScreenArguments(args: {'artistId': (item as Artist).artistId}),
       );
     }
   }
@@ -372,8 +364,7 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.playlistRoute,
-        arguments: ScreenArguments(
-            args: {'playlistId': (item as Playlist).playlistId}),
+        arguments: ScreenArguments(args: {'playlistId': (item as Playlist).playlistId}),
       );
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
       Navigator.pushNamed(
@@ -385,8 +376,7 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.artistRoute,
-        arguments:
-            ScreenArguments(args: {'artistId': (item as Artist).artistId}),
+        arguments: ScreenArguments(args: {'artistId': (item as Artist).artistId}),
       );
     }
   }
@@ -441,8 +431,7 @@ class PagesUtilFunctions {
     //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
     // //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(
-          queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
   }
 
@@ -455,13 +444,11 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
-        downloadUtil, songs, playingFrom, context);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom, context);
     //List<AudioSource> audioSourceItems = [Song.toAudioSourceStreamUri(song)];
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(
-          queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
     //SET PLAYING FROM CUBIT
     BlocProvider.of<PlayerPagePlayingFromCubit>(context).changePlayingFrom(
@@ -484,12 +471,10 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
-        downloadUtil, songs, playingFrom, context);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom, context);
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(
-          queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
     //SHUFFLE QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(ShufflePlayerOnQueueEvent());
@@ -505,8 +490,7 @@ class PagesUtilFunctions {
     );
   }
 
-  static Route createBottomToUpAnimatedRoute(
-      {required Widget page, String? setting}) {
+  static Route createBottomToUpAnimatedRoute({required Widget page, String? setting}) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       settings: setting != null ? RouteSettings(name: setting) : null,
@@ -515,8 +499,7 @@ class PagesUtilFunctions {
         const end = Offset.zero;
         const curve = Curves.easeIn;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -568,31 +551,28 @@ class PagesUtilFunctions {
   }
 
   static String formatSongDurationTimeTo(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
+    return '$twoDigitMinutes:$twoDigitSeconds';
   }
 
   static int getRandomIndex({required int min, required int max}) {
     return min + Random().nextInt(max - min);
   }
 
-  static String getSearchFrontPageItemTitle(
-      AppItemsType appItemsType, dynamic item, context) {
+  static String getSearchFrontPageItemTitle(AppItemsType appItemsType, dynamic item, context) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return L10nUtil.translateLocale(
-          (item as Category).categoryNameText, context);
+      return L10nUtil.translateLocale((item as Category).categoryNameText, context);
     } else if (appItemsType == AppItemsType.ARTIST) {
       return L10nUtil.translateLocale((item as Artist).artistName, context);
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
       return L10nUtil.translateLocale((item as Song).songName, context);
     }
-    return "";
+    return '';
   }
 
-  static String getSearchFrontPageItemImageUrl(
-      AppItemsType appItemsType, dynamic item) {
+  static String getSearchFrontPageItemImageUrl(AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
       return AppApi.baseUrl + (item as Category).categoryImage.imageSmallPath;
     } else if (appItemsType == AppItemsType.ARTIST) {
@@ -600,11 +580,10 @@ class PagesUtilFunctions {
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
       return AppApi.baseUrl + (item as Song).albumArt.imageSmallPath;
     }
-    return "";
+    return '';
   }
 
-  static Color getSearchFrontPageDominantColor(
-      AppItemsType appItemsType, dynamic item) {
+  static Color getSearchFrontPageDominantColor(AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
       item as Category;
 
@@ -681,28 +660,28 @@ class PagesUtilFunctions {
 
   static getRecentItemId(item) {
     if (item is Song) {
-      return "${EnumToString.convertToString(AppItemsType.SINGLE_TRACK)}_${item.songId}";
+      return '${EnumToString.convertToString(AppItemsType.SINGLE_TRACK)}_${item.songId}';
     } else if (item is Playlist) {
-      return "${EnumToString.convertToString(AppItemsType.PLAYLIST)}_${item.playlistId}";
+      return '${EnumToString.convertToString(AppItemsType.PLAYLIST)}_${item.playlistId}';
     } else if (item is Artist) {
-      return "${EnumToString.convertToString(AppItemsType.ARTIST)}_${item.artistId}";
+      return '${EnumToString.convertToString(AppItemsType.ARTIST)}_${item.artistId}';
     } else if (item is Album) {
-      return "${EnumToString.convertToString(AppItemsType.ALBUM)}_${item.albumId}";
+      return '${EnumToString.convertToString(AppItemsType.ALBUM)}_${item.albumId}';
     }
-    throw "ITEM NOT SEARCHED TYPES";
+    throw 'ITEM NOT SEARCHED TYPES';
   }
 
   static String getItemKey(dynamic item) {
     if (item is Song) {
-      return "song_${item.songId}";
+      return 'song_${item.songId}';
     } else if (item is Playlist) {
-      return "playlist_${item.playlistId}";
+      return 'playlist_${item.playlistId}';
     } else if (item is Album) {
-      return "album_${item.albumId}";
+      return 'album_${item.albumId}';
     } else if (item is Artist) {
-      return "artist_${item.artistId}";
+      return 'artist_${item.artistId}';
     } else {
-      throw "Unknown Recent type";
+      throw 'Unknown Recent type';
     }
   }
 
@@ -740,10 +719,8 @@ class PagesUtilFunctions {
     }
   }
 
-  static void openEditPlaylistPage(context, MyPlaylist myPlaylist,
-      Function(MyPlaylist myPlaylist) onUpdateSuccess) async {
-    final updatedMyPlaylist =
-        await Navigator.of(context, rootNavigator: true).push(
+  static void openEditPlaylistPage(context, MyPlaylist myPlaylist, Function(MyPlaylist myPlaylist) onUpdateSuccess) async {
+    final updatedMyPlaylist = await Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
           providers: [
@@ -767,16 +744,13 @@ class PagesUtilFunctions {
     if (updatedMyPlaylist != null) {
       if (updatedMyPlaylist is MyPlaylist) {
         ///UPDATE PLAYLIST PAGE WITH NEW DATA
-        print(
-            "onUpdateSuccess 1 ${L10nUtil.translateLocale(myPlaylist.playlistNameText, context)}");
         onUpdateSuccess(updatedMyPlaylist);
         Navigator.pop(context);
       }
     }
   }
 
-  static void openCreatePlaylistPageForAdding(
-      context, Song song, Function(MyPlaylist) onCreateWithSongSuccess) async {
+  static void openCreatePlaylistPageForAdding(context, Song song, Function(MyPlaylist) onCreateWithSongSuccess) async {
     final shouldPop = await Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
@@ -815,10 +789,8 @@ class PagesUtilFunctions {
           height: AppValues.libraryMusicItemSize,
           fit: BoxFit.cover,
           imageUrl: AppApi.baseUrl + myPlaylist.playlistImage!.imageMediumPath,
-          placeholder: (context, url) =>
-              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-          errorWidget: (context, url, e) =>
-              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
         ),
       );
     }
@@ -829,12 +801,9 @@ class PagesUtilFunctions {
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
             fit: BoxFit.cover,
-            imageUrl: AppApi.baseUrl +
-                myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
-            placeholder: (context, url) =>
-                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-            errorWidget: (context, url, e) =>
-                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+            imageUrl: AppApi.baseUrl + myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
+            placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+            errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
           ),
         );
       }
@@ -851,12 +820,9 @@ class PagesUtilFunctions {
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl +
-                    myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
-                placeholder: (context, url) =>
-                    buildImagePlaceHolder(AppItemsType.OTHER),
-                errorWidget: (context, url, e) =>
-                    buildImagePlaceHolder(AppItemsType.OTHER),
+                imageUrl: AppApi.baseUrl + myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
+                placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.OTHER),
+                errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.OTHER),
               );
             },
           ),
@@ -869,10 +835,8 @@ class PagesUtilFunctions {
         height: AppValues.libraryMusicItemSize,
         fit: BoxFit.cover,
         imageUrl: AppApi.baseUrl,
-        placeholder: (context, url) =>
-            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-        errorWidget: (context, url, e) =>
-            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
       ),
     );
   }
@@ -887,30 +851,26 @@ class PagesUtilFunctions {
   }
 
   static String getUserPlaylistByText(MyPlaylist myPlaylist, context) {
-    return "BY ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}";
+    return '${AppLocalizations.of(context)!.by.toUpperCase()} ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}';
   }
 
   static String getUserPlaylistDescription(MyPlaylist myPlaylist, context) {
-    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context)
-        .isNotEmpty) {
-      return L10nUtil.translateLocale(
-          myPlaylist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context).isNotEmpty) {
+      return L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context);
     } else {
       return L10nUtil.translateLocale(myPlaylist.playlistNameText, context);
     }
   }
 
   static String getUserPlaylistOwner(MyPlaylist myPlaylist, context) {
-    return AuthUtil.getUserName(
-        BlocProvider.of<AppUserWidgetsCubit>(context).state);
+    return AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state);
   }
 
   static getUserPlaylistDateCreated(MyPlaylist myPlaylist) {
     return DateFormat.yMMMd().format(myPlaylist.playlistDateCreated).toString();
   }
 
-  static void changeUserPlaylistDominantColor(
-      MyPlaylist myPlaylist, BuildContext context) {
+  static void changeUserPlaylistDominantColor(MyPlaylist myPlaylist, BuildContext context) {
     if (myPlaylist.playlistImage != null) {
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         UserPlaylistPageDominantColorChanged(
@@ -933,7 +893,7 @@ class PagesUtilFunctions {
         BlocProvider.of<PagesDominantColorBloc>(context).add(
           UserPlaylistPageDominantColorChanged(
             dominantColor: HexColor(
-              "#${dominantColor.value.toRadixString(16)}",
+              '#${dominantColor.value.toRadixString(16)}',
             ),
           ),
         );
@@ -942,8 +902,7 @@ class PagesUtilFunctions {
       if (myPlaylist.gridSongImages.length <= 3) {
         BlocProvider.of<PagesDominantColorBloc>(context).add(
           UserPlaylistPageDominantColorChanged(
-            dominantColor:
-                HexColor(myPlaylist.gridSongImages[0].primaryColorHex),
+            dominantColor: HexColor(myPlaylist.gridSongImages[0].primaryColorHex),
           ),
         );
         return;
@@ -1015,11 +974,9 @@ class PagesUtilFunctions {
     );
   }
 
-  static SongSyncPlayedFrom getSongSyncPlayedFromGroupType(
-      GroupType groupType) {
+  static SongSyncPlayedFrom getSongSyncPlayedFromGroupType(GroupType groupType) {
     if (groupType == GroupType.ARTIST) return SongSyncPlayedFrom.ARTIST_GROUP;
-    if (groupType == GroupType.PLAYLIST)
-      return SongSyncPlayedFrom.PLAYLIST_GROUP;
+    if (groupType == GroupType.PLAYLIST) return SongSyncPlayedFrom.PLAYLIST_GROUP;
     if (groupType == GroupType.ALBUM) return SongSyncPlayedFrom.ALBUM_GROUP;
     if (groupType == GroupType.SONG) return SongSyncPlayedFrom.SONG_GROUP;
     return SongSyncPlayedFrom.UNK;
@@ -1035,7 +992,7 @@ class PagesUtilFunctions {
     if (shortcut is PlaylistShortcut) {
       return L10nUtil.translateLocale(shortcut.playlistNameText, context);
     } else {
-      throw "shortcut type not valid";
+      throw 'shortcut type not valid';
     }
   }
 
@@ -1049,7 +1006,7 @@ class PagesUtilFunctions {
     if (shortcut is PlaylistShortcut) {
       return shortcut.playlistImage;
     } else {
-      throw "shortcut type not valid";
+      throw 'shortcut type not valid';
     }
   }
 
@@ -1063,21 +1020,21 @@ class PagesUtilFunctions {
     if (shortcut is PlaylistShortcut) {
       return AppItemsType.PLAYLIST;
     } else {
-      throw "shortcut type not valid";
+      throw 'shortcut type not valid';
     }
   }
 
-  static String getShortCutType(shortcut) {
+  static String getShortCutType(shortcut, context) {
     if (shortcut is CategoryShortcut) {
-      return "Category";
+      return AppLocalizations.of(context)!.category;
     }
     if (shortcut is AlbumShortcut) {
-      return "Album";
+      return AppLocalizations.of(context)!.album;
     }
     if (shortcut is PlaylistShortcut) {
-      return "Playlist";
+      return AppLocalizations.of(context)!.playlist;
     } else {
-      throw "shortcut type not valid";
+      throw 'shortcut type not valid';
     }
   }
 
@@ -1116,43 +1073,43 @@ class PagesUtilFunctions {
         ),
       );
     } else {
-      throw "shortcut type not valid";
+      throw 'shortcut type not valid';
     }
   }
 
-  static String getPaymentMethodName(AppPaymentMethods appPaymentMethod) {
+  static String getPaymentMethodName(AppPaymentMethods appPaymentMethod, context) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return "Hello Cash";
+      return AppLocalizations.of(context)!.helloCash;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return "Mbirr";
+      return AppLocalizations.of(context)!.mbirr;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return "CBE Birr";
+      return AppLocalizations.of(context)!.cbeBirr;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return "Amole";
+      return AppLocalizations.of(context)!.amole;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return "Visa";
+      return AppLocalizations.of(context)!.visa;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return "MasterCard";
+      return AppLocalizations.of(context)!.mastercard;
     } else {
-      return "Unknown";
+      return 'Unknown';
     }
   }
 
   static String getPaymentMethodIcon(AppPaymentMethods appPaymentMethod) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return "assets/images/ic_hello_cash.png";
+      return 'assets/images/ic_hello_cash.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return "assets/images/ic_mbirr.png";
+      return 'assets/images/ic_mbirr.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return "assets/images/ic_cbe_birr.png";
+      return 'assets/images/ic_cbe_birr.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return "assets/images/ic_amole.png";
+      return 'assets/images/ic_amole.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return "assets/images/ic_visa.png";
+      return 'assets/images/ic_visa.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return "assets/images/ic_mastercard.png";
+      return 'assets/images/ic_mastercard.png';
     } else {
-      return "";
+      return '';
     }
   }
 }

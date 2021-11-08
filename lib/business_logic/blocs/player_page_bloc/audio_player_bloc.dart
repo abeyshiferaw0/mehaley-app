@@ -138,7 +138,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       //UPDATE QUEUE MOVED ITEMS
       updateQueueItemsMoved(event.newMedia, event.oldMedia);
     } else {
-      throw "EVENT NOT RECOGNIZED";
+      throw 'EVENT NOT RECOGNIZED';
     }
   }
 
@@ -165,7 +165,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           audioPlayer.pause();
           this.add(
             ReportPlayerEvent(
-              msg: "Unable to play audio",
+              msg: 'Unable to play audio',
               error: error.toString(),
             ),
           );
@@ -173,13 +173,13 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       );
     } on PlayerException catch (error) {
       this.add(ReportPlayerEvent(
-          msg: "Something Went Wrong With Player", error: error.toString()));
+          msg: 'Something Went Wrong With Player', error: error.toString()));
     } on PlayerInterruptedException catch (error) {
       this.add(ReportPlayerEvent(
-          msg: "Something Went Wrong With Player", error: error.toString()));
+          msg: 'Something Went Wrong With Player', error: error.toString()));
     } catch (error) {
       this.add(ReportPlayerEvent(
-          msg: "Something Went Wrong With Player", error: error.toString()));
+          msg: 'Something Went Wrong With Player', error: error.toString()));
     }
 
     //START PLAYING

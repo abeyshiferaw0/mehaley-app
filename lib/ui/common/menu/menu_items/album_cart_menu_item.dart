@@ -58,7 +58,7 @@ class _AlbumCartMenuItemState extends State<AlbumCartMenuItem> {
   void onTap() {
     ///ADD REMOVE ALBUM
     EasyDebounce.debounce(
-      "ALBUM_CART_ADD_REMOVE",
+      'ALBUM_CART_ADD_REMOVE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(

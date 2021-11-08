@@ -13,6 +13,7 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -26,9 +27,8 @@ class VerifyPhonePageOne extends StatefulWidget {
 class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
-  MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-000');
-  CountryCode selectedCountryCode = CountryCode.fromCountryCode("ET");
+  MaskedTextController controller = new MaskedTextController(mask: '000-000-000');
+  CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               BlocProvider.of<AuthBloc>(context).add(
                 ContinueWithPhoneEvent(
                   countryCode: selectedCountryCode.dialCode!,
-                  phoneNumber: controller.text.replaceAll("-", ""),
+                  phoneNumber: controller.text.replaceAll('-', ''),
                 ),
               );
             }
@@ -164,7 +164,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
                 BlocProvider.of<AuthBloc>(context).add(
                   ContinueWithPhoneEvent(
                     countryCode: selectedCountryCode.dialCode!,
-                    phoneNumber: controller.text.replaceAll("-", ""),
+                    phoneNumber: controller.text.replaceAll('-', ''),
                   ),
                 );
               } else {

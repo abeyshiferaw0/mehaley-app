@@ -6,6 +6,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -59,7 +60,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
               child: Row(
                 children: [
                   Text(
-                    "Choose Your Language",
+                    AppLocalizations.of(context)!.chooseYourLanguge,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,
@@ -82,22 +83,22 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
               child: Column(
                 children: [
                   LanguageSettingItem(
-                    text: "ኣማርኟ",
+                    text: 'ኣማርኟ',
                     isSelected: isLocaleSelected(L10nUtil.amharic),
                     locale: L10nUtil.amharic,
                   ),
                   LanguageSettingItem(
-                    text: "English",
+                    text: 'English',
                     isSelected: isLocaleSelected(L10nUtil.english),
                     locale: L10nUtil.english,
                   ),
                   LanguageSettingItem(
-                    text: "Oromiffa",
+                    text: 'Oromiffa',
                     isSelected: false,
                     locale: L10nUtil.amharic,
                   ),
                   LanguageSettingItem(
-                    text: "Tigrinya",
+                    text: 'Tigrinya',
                     isSelected: false,
                     locale: L10nUtil.amharic,
                   ),
@@ -117,7 +118,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
               child: Row(
                 children: [
                   Text(
-                    "Receive Notifications",
+                    AppLocalizations.of(context)!.reciveNotifications,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,
@@ -144,7 +145,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: 'Push notifications',
+                    text: AppLocalizations.of(context)!.pushNotifications,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -160,7 +161,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: 'New Releases',
+                    text: AppLocalizations.of(context)!.newReleases,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -176,7 +177,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: 'Latest Updates',
+                    text: AppLocalizations.of(context)!.latestUpdates,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -192,7 +193,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       AppUserNotificationTypes.RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: 'Daily Ceremonies',
+                    text: AppLocalizations.of(context)!.dailyCerlabrations,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(

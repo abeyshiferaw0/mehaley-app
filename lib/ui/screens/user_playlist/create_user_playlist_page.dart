@@ -4,7 +4,7 @@ import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_b
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
@@ -12,18 +12,16 @@ import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class CreateUserPlaylistPage extends StatefulWidget {
-  const CreateUserPlaylistPage(
-      {Key? key,
-      required this.createWithSong,
-      required this.song,
-      this.onCreateWithSongSuccess})
+  const CreateUserPlaylistPage({Key? key, required this.createWithSong, required this.song, this.onCreateWithSongSuccess})
       : super(key: key);
 
   final bool createWithSong;
@@ -70,7 +68,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: "Unable to create playlist\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToCreatePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -83,8 +81,8 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg:
-                  "Playlist ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)} created",
+              msg: AppLocalizations.of(context)!
+                  .playlistCreated(L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)),
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -95,9 +93,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
             ///POP UNTIL ADD SONG TO PLAYLIST PAGE
             ///GO TO PLAYLIST DETAIL PAGE
             Navigator.pop(context, true);
-            print("widget.createWithSong 123");
             if (widget.onCreateWithSongSuccess != null) {
-              print("widget.createWithSong 321");
               widget.onCreateWithSongSuccess!(state.myPlaylist);
             }
           } else {
@@ -203,7 +199,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
-              hintText: "Add some description",
+              hintText: AppLocalizations.of(context)!.addSomeDescription,
               hintStyle: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -243,7 +239,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 border: Border.all(width: 1, color: AppColors.lightGrey),
               ),
               child: Text(
-                "Add Description".toUpperCase(),
+                AppLocalizations.of(context)!.addDescripption.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
@@ -264,7 +260,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         horizontal: AppPadding.padding_32 * 2,
       ),
       child: Text(
-        "Create and manage your own customized playlists with elf play",
+        AppLocalizations.of(context)!.createPlaylistMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
@@ -295,7 +291,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         required isFocused,
       }) =>
           Text(
-        "$currentLength/$maxLength",
+        '$currentLength/$maxLength',
         style: TextStyle(
           color: AppColors.darkGreen,
           fontSize: AppFontSizes.font_size_10,
@@ -315,7 +311,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: "Playlist Name",
+        hintText: AppLocalizations.of(context)!.playlistName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -354,7 +350,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Choose Image",
+                                AppLocalizations.of(context)!.chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -366,29 +362,26 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromCamera();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
                               Navigator.pop(context);
                             },
-                            text: "Tack a Photo",
+                            text: AppLocalizations.of(context)!.takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromGallery();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
                               Navigator.pop(context);
                             },
-                            text: "Pick From Gallery",
+                            text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
                               Navigator.pop(context);
                             },
-                            text: "Remove Image",
+                            text: AppLocalizations.of(context)!.removeIImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -413,7 +406,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                         image: FileImage(selectedImage),
                       );
                     } else {
-                      selectedImage = File("");
+                      selectedImage = File('');
                       return Container(
                         width: AppValues.createPlaylistImageSize,
                         height: AppValues.createPlaylistImageSize,
@@ -427,7 +420,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 height: AppMargin.margin_12,
               ),
               Text(
-                "change image".toUpperCase(),
+                AppLocalizations.of(context)!.changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -468,7 +461,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                "Create Playlist",
+                AppLocalizations.of(context)!.createPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -495,7 +488,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: "Playlist name can't be empty",
+                      msg: AppLocalizations.of(context)!.playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -516,7 +509,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   ),
                 ),
                 child: Text(
-                  "Save".toUpperCase(),
+                  AppLocalizations.of(context)!.save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

@@ -13,11 +13,11 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FavoriteSongsPage extends StatefulWidget {
-  const FavoriteSongsPage({Key? key, required this.onSongsLoaded})
-      : super(key: key);
+  const FavoriteSongsPage({Key? key, required this.onSongsLoaded}) : super(key: key);
 
   final Function(List<Song>) onSongsLoaded;
 
@@ -84,10 +84,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
 
   Widget buildPageLoaded(List<FavoriteSong> favoriteSongs) {
     return Column(
-      children: [
-        SizedBox(height: AppMargin.margin_8),
-        buildSongsList(favoriteSongs)
-      ],
+      children: [SizedBox(height: AppMargin.margin_8), buildSongsList(favoriteSongs)],
     );
   }
 
@@ -101,8 +98,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
           children: [
             SizedBox(height: AppMargin.margin_8),
             SongItem(
-              thumbUrl: AppApi.baseUrl +
-                  favoriteSongs[position].song.albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl + favoriteSongs[position].song.albumArt.imageSmallPath,
               song: favoriteSongs[position].song,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {
@@ -113,8 +109,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
                   startPlaying: true,
                   playingFrom: PlayingFrom(
                     from: AppLocalizations.of(context)!.playingFrom,
-                    title: AppLocalizations.of(context)!.favoriteMezmurs
-                     ,
+                    title: AppLocalizations.of(context)!.favoriteMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.FAVORITE_SONG,
                     songSyncPlayedFromId: -1,
                   ),

@@ -12,6 +12,7 @@ import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/user_image_sm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class BottomBar extends StatefulWidget {
@@ -225,12 +226,12 @@ class BottomBarIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppUserWidgetsCubit, AppUser>(
       builder: (context, state) {
-        return Container(child: getProfilePic(state));
+        return Container(child: getProfilePic(state, context));
       },
     );
   }
 
-  Widget getProfilePic(AppUser appUser) {
+  Widget getProfilePic(AppUser appUser, context) {
     if (isForLibrary) {
       if (appUser.profileImageId != null) {
         return UserImageSm(

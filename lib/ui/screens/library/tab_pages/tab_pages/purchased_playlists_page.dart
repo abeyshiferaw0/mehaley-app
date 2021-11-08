@@ -11,11 +11,11 @@ import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedPlaylistsPage extends StatefulWidget {
-  const PurchasedPlaylistsPage({Key? key, required this.onPlaylistsLoaded})
-      : super(key: key);
+  const PurchasedPlaylistsPage({Key? key, required this.onPlaylistsLoaded}) : super(key: key);
 
   final Function(List<Playlist>) onPlaylistsLoaded;
 
@@ -27,8 +27,7 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
   @override
   void initState() {
     ///INITIALLY LOAD ALL PURCHASED PlaylistS
-    BlocProvider.of<PurchasedPlaylistBloc>(context)
-        .add(LoadPurchasedPlaylistsEvent());
+    BlocProvider.of<PurchasedPlaylistBloc>(context).add(LoadPurchasedPlaylistsEvent());
     super.initState();
   }
 
@@ -60,8 +59,7 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
             height: ScreenUtil(context: context).getScreenHeight() * 0.5,
             child: LibraryErrorWidget(
               onRetry: () {
-                BlocProvider.of<PurchasedPlaylistBloc>(context)
-                    .add(LoadPurchasedPlaylistsEvent());
+                BlocProvider.of<PurchasedPlaylistBloc>(context).add(LoadPurchasedPlaylistsEvent());
               },
             ),
           );

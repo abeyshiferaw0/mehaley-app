@@ -18,15 +18,15 @@ class _SignUpPageStaggeredAnimatedListState
   ScrollController scrollController = ScrollController();
 
   List<String> imageUrls = [
-    "https://images.unsplash.com/photo-1599386918765-917d878d3304?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1612937373987-b1b7db233867?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1612937373987-b1b7db233867?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1625268448699-8fdb2073a94c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFuJTIwb3J0b2RveHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://pbs.twimg.com/media/ENqiwFMWsAIENaQ.jpg",
-    "https://m.psecn.photoshelter.com/img-get2/I00004kO4aPjhTdU/fit=1000x750/7487-2a.jpg",
-    "https://photos.lensculture.com/large/653a1a6f-ac81-425f-84bd-6f7207aaabfd.jpg",
-    "https://render.fineartamerica.com/images/rendered/search/poster/5.5/8/break/images/artworkimages/medium/1/orthodox-ethiopian-priest-five-dominyk-lever.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSv1jYqt1McCFCAOcwYv0ilp0n1U0JVvCDHQ&usqp=CAU",
+    'https://images.unsplash.com/photo-1599386918765-917d878d3304?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1612937373987-b1b7db233867?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1612937373987-b1b7db233867?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1625268448699-8fdb2073a94c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZXRoaW9waWFuJTIwb3J0b2RveHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    'https://pbs.twimg.com/media/ENqiwFMWsAIENaQ.jpg',
+    'https://m.psecn.photoshelter.com/img-get2/I00004kO4aPjhTdU/fit=1000x750/7487-2a.jpg',
+    'https://photos.lensculture.com/large/653a1a6f-ac81-425f-84bd-6f7207aaabfd.jpg',
+    'https://render.fineartamerica.com/images/rendered/search/poster/5.5/8/break/images/artworkimages/medium/1/orthodox-ethiopian-priest-five-dominyk-lever.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSv1jYqt1McCFCAOcwYv0ilp0n1U0JVvCDHQ&usqp=CAU',
   ];
 
   @override
@@ -94,7 +94,7 @@ class _SignUpPageStaggeredAnimatedListState
       color: AppColors.darkGrey,
       child: Center(
         child: SvgPicture.asset(
-          "assets/icons/ic_app.svg",
+          'assets/icons/ic_app.svg',
           width: AppIconSizes.icon_size_24,
           color: AppColors.grey,
         ),

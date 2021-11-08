@@ -47,7 +47,7 @@
 //     final SendPort? send =
 //         IsolateNameServer.lookupPortByName('downloader_send_port');
 //     send!.send([id, status, progress]);
-//     print("DOWNLOAD => id$id  $status $progress");
+//     print('DOWNLOAD => id$id  $status $progress');
 //   }
 //
 //   @override
@@ -70,40 +70,40 @@
 //                 List<FileSystemEntity> entities = directory.listSync();
 //
 //                 entities.forEach((element) {
-//                   print("DOWNLOADING  ${element}");
+//                   print('DOWNLOADING  ${element}');
 //                 });
 //
 //                 // File f = File('$ddd/testt.mov');
 //                 // if (f.existsSync()) {
-//                 //   print("DOWNLOADING  FOUNEDEDED");
+//                 //   print('DOWNLOADING  FOUNEDEDED');
 //                 // } else {
-//                 //   print("DOWNLOADING   NOT FOUNEDE XXS");
+//                 //   print('DOWNLOADING   NOT FOUNEDE XXS');
 //                 // }
 //               },
-//               child: (Text("Check file")),
+//               child: (Text('Check file')),
 //             ),
 //             FlatButton(
 //               color: AppColors.errorRed,
 //               onPressed: () {
 //                 EasyDebounce.debounce(
-//                   "DOWNLOADING_TAG",
+//                   'DOWNLOADING_TAG',
 //                   Duration(seconds: 1),
 //                   () {
 //                     _downloadFD();
 //                   },
 //                 );
 //               },
-//               child: (Text("Download")),
+//               child: (Text('Download')),
 //             ),
 //             FlatButton(
 //               color: AppColors.green,
 //               onPressed: () async {
 //                 final tasks = await FlutterDownloader.loadTasks();
 //                 tasks!.forEach((element) {
-//                   element.print("DOWNLOADING  ${element.toString()}");
+//                   element.print('DOWNLOADING  ${element.toString()}');
 //                 });
 //               },
-//               child: (Text("load all")),
+//               child: (Text('load all')),
 //             ),
 //           ],
 //         ),
@@ -132,13 +132,13 @@
 //   void _downloadFD() async {
 //     Directory? directory = await getApplicationSupportDirectory();
 //
-//     String ddd = directory!.path + "";
-//     print("DOWNLOAD => path => $ddd");
+//     String ddd = directory!.path + '';
+//     print('DOWNLOAD => path => $ddd');
 //     final taskId = await FlutterDownloader.enqueue(
 //       url:
 //           'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_640_3MG.mp4?obj${jsonToStr()}',
 //       savedDir: ddd,
-//       fileName: "nowwwwwwwwwww.mp4",
+//       fileName: 'nowwwwwwwwwww.mp4',
 //       showNotification:
 //           true, // show download progress in status bar (for Android)
 //       openFileFromNotification:
@@ -148,23 +148,23 @@
 //
 //   String jsonToStr() {
 //     var j = json.encode({
-//       "glossary": {
-//         "title": "example glossary",
-//         "GlossDiv": {
-//           "title": "S",
-//           "GlossList": {
-//             "GlossEntry": {
-//               "ID": "SGML",
-//               "SortAs": "SGML",
-//               "GlossTerm": "Standard Generalized Markup Language",
-//               "Acronym": "SGML",
-//               "Abbrev": "ISO 8879:1986",
-//               "GlossDef": {
-//                 "para":
-//                     "A meta-markup language, used to create markup languages such as DocBook.",
-//                 "GlossSeeAlso": ["GML", "XML"]
+//       'glossary': {
+//         'title': 'example glossary',
+//         'GlossDiv': {
+//           'title': 'S',
+//           'GlossList': {
+//             'GlossEntry': {
+//               'ID': 'SGML',
+//               'SortAs': 'SGML',
+//               'GlossTerm': 'Standard Generalized Markup Language',
+//               'Acronym': 'SGML',
+//               'Abbrev': 'ISO 8879:1986',
+//               'GlossDef': {
+//                 'para':
+//                     'A meta-markup language, used to create markup languages such as DocBook.',
+//                 'GlossSeeAlso': ['GML', 'XML']
 //               },
-//               "GlossSee": "markup"
+//               'GlossSee': 'markup'
 //             }
 //           }
 //         }

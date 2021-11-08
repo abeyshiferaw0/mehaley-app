@@ -2,13 +2,12 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class RemoveFromCartButton extends StatelessWidget {
-  const RemoveFromCartButton(
-      {Key? key, required this.onRemoveFromCart, required this.isWithText})
-      : super(key: key);
+  const RemoveFromCartButton({Key? key, required this.onRemoveFromCart, required this.isWithText}) : super(key: key);
 
   final VoidCallback onRemoveFromCart;
   final bool isWithText;
@@ -16,13 +15,13 @@ class RemoveFromCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isWithText) {
-      return buildWithText();
+      return buildWithText(context);
     } else {
       return buildWithOutText();
     }
   }
 
-  AppBouncingButton buildWithText() {
+  AppBouncingButton buildWithText(context) {
     return AppBouncingButton(
       onTap: onRemoveFromCart,
       child: Padding(
@@ -47,7 +46,7 @@ class RemoveFromCartButton extends StatelessWidget {
               width: AppMargin.margin_6,
             ),
             Text(
-           AppLocalizations.of(context)!.remove.toUpperCase(),
+              AppLocalizations.of(context)!.remove.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 color: AppColors.txtGrey,

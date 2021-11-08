@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 class App {
   static ThemeData theme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    fontFamily: "Poppins",
+    fontFamily: 'Poppins',
     primaryColor: AppColors.black,
     textSelectionTheme: TextSelectionThemeData(
       selectionHandleColor: AppColors.green,
@@ -14,29 +14,29 @@ class App {
 }
 
 class AppColors {
-  static Color appGradientDefaultColorBlack = HexColor("#95999d");
-  static Color appGradientDefaultColor = HexColor("#1E96ED");
-  static Color green = HexColor("#27D660");
-  static Color darkGreen = HexColor("#1db954");
-  static Color black = HexColor("#121212");
-  static Color completelyBlack = HexColor("#000000");
-  static Color lightGrey = HexColor("#DFE0E5");
-  static Color txtGrey = HexColor("#a5a6ab");
-  static Color grey = HexColor("#88898D");
-  static Color darkGrey = HexColor("#333333");
-  static Color white = HexColor("#ffffff");
+  static Color appGradientDefaultColorBlack = HexColor('#95999d');
+  static Color appGradientDefaultColor = HexColor('#1E96ED');
+  static Color green = HexColor('#27D660');
+  static Color darkGreen = HexColor('#1db954');
+  static Color black = HexColor('#121212');
+  static Color completelyBlack = HexColor('#000000');
+  static Color lightGrey = HexColor('#DFE0E5');
+  static Color txtGrey = HexColor('#a5a6ab');
+  static Color grey = HexColor('#88898D');
+  static Color darkGrey = HexColor('#333333');
+  static Color white = HexColor('#ffffff');
   static Color transparent = Colors.transparent;
-  static Color blue = HexColor("#1E96ED");
+  static Color blue = HexColor('#1E96ED');
   static Color errorRed = Colors.redAccent;
-  static Color yellow = HexColor("#f7c631");
+  static Color yellow = HexColor('#f7c631');
 
   ///HOME LIBRARY BUTTONS
-  static Color orange1 = HexColor("#E8A14D");
-  static Color orange2 = HexColor("#FF7C3E");
-  static Color orange3 = HexColor("#E57343");
-  static Color blue1 = HexColor("#11c6c5");
-  static Color blue2 = HexColor("#0885d6");
-  static Color blue3 = HexColor("#0458de");
+  static Color orange1 = HexColor('#E8A14D');
+  static Color orange2 = HexColor('#FF7C3E');
+  static Color orange3 = HexColor('#E57343');
+  static Color blue1 = HexColor('#11c6c5');
+  static Color blue2 = HexColor('#0885d6');
+  static Color blue3 = HexColor('#0458de');
 }
 
 class AppFontSizes {

@@ -51,7 +51,7 @@ class _ArtistFollowMenuItemState extends State<ArtistFollowMenuItem> {
   void onTap() {
     ///FOLLOW UNFOLLOW ARTIST
     EasyDebounce.debounce(
-      "ARTIST_FOLLOW",
+      'ARTIST_FOLLOW',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<LibraryBloc>(context).add(

@@ -42,15 +42,13 @@ class LibraryArtistsItem extends StatelessWidget {
                 ),
               ),
               placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) =>
-                  buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
             ),
           ),
           SizedBox(width: AppMargin.margin_16),
           Expanded(
             child: Text(
-              L10nUtil.translateLocale(artist.artistName, context) +
-                  L10nUtil.translateLocale(artist.artistName, context),
+              L10nUtil.translateLocale(artist.artistName, context) + L10nUtil.translateLocale(artist.artistName, context),
               maxLines: 2,
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,

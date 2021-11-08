@@ -58,7 +58,7 @@ class _SongCartMenuItemState extends State<SongCartMenuItem> {
   void onTap() {
     ///ADD REMOVE SONG
     EasyDebounce.debounce(
-      "SONG_CART_ADD_REMOVE",
+      'SONG_CART_ADD_REMOVE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(

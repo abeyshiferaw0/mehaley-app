@@ -50,13 +50,15 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
   void onTap() {
     ///LIKE UNLIKE ALBUM
     EasyDebounce.debounce(
-      "ALBUM_LIKE",
+      'ALBUM_LIKE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemoveAlbumCartEvent(
             album: widget.album,
-            appCartAddRemoveEvents: preButtonOnTap() ? AppCartAddRemoveEvents.REMOVE : AppCartAddRemoveEvents.ADD,
+            appCartAddRemoveEvents: preButtonOnTap()
+                ? AppCartAddRemoveEvents.REMOVE
+                : AppCartAddRemoveEvents.ADD,
           ),
         );
       },
@@ -65,10 +67,14 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
 
   Icon preCartIcon() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
         return Icon(
           PhosphorIcons.shopping_cart_simple_fill,
@@ -85,7 +91,8 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_24,
@@ -94,7 +101,8 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_24,
@@ -120,10 +128,14 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
 
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY CART ADDED AND CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId) &&
-        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox.get(widget.album.albumId);
-      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.get(widget.album.albumId);
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+            .containsKey(widget.album.albumId) &&
+        AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+            .containsKey(widget.album.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+          .get(widget.album.albumId);
+      int b = AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+          .get(widget.album.albumId);
       if (a > b) {
         return true;
       } else {
@@ -132,12 +144,14 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART ADDED
-    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return true;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY CART REMOVED
-    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.containsKey(widget.album.albumId)) {
+    if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
+        .containsKey(widget.album.albumId)) {
       return false;
     }
 

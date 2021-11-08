@@ -15,6 +15,7 @@ import 'package:elf_play/ui/screens/search/widgets/search_page_persistant_header
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -36,7 +37,6 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   @override
   void didPopNext() {
-    print("rouutheaware=> didPopNext");
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.SEARCH);
     BlocProvider.of<BottomBarSearchCubit>(context).setPageShowing(true);
   }
@@ -153,7 +153,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildAllCategoriesSection({required List<Category> allCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: "All Categories",
+      mainTitle: AppLocalizations.of(context)!.allCategories,
       appItemsType: AppItemsType.CATEGORY,
       items: allCategories,
     );
@@ -161,7 +161,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopCategoriesSection({required List<Category> topCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: "Top Categories",
+      mainTitle: AppLocalizations.of(context)!.topCategories,
       appItemsType: AppItemsType.CATEGORY,
       items: topCategories,
     );
@@ -169,7 +169,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopMusicSection({required List<Song> topSongs}) {
     return SearchFrontPageGroups(
-      mainTitle: "Top Mezmurs",
+      mainTitle: AppLocalizations.of(context)!.topMezmurs,
       appItemsType: AppItemsType.SINGLE_TRACK,
       items: topSongs,
     );
@@ -177,7 +177,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildLatestTopArtistsSection({required List<Artist> topArtists}) {
     return SearchFrontPageGroups(
-      mainTitle: "TOP ARTISTS",
+      mainTitle: AppLocalizations.of(context)!.topArtists.toUpperCase(),
       appItemsType: AppItemsType.ARTIST,
       items: topArtists,
     );
@@ -193,7 +193,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   SliverToBoxAdapter buildSearchElf() {
     return SliverToBoxAdapter(
       child: Text(
-        "Search Elf",
+        AppLocalizations.of(context)!.searchTitle,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_28,
           fontWeight: FontWeight.w600,

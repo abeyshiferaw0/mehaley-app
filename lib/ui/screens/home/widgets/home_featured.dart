@@ -26,7 +26,7 @@
 //         Padding(
 //           padding: EdgeInsets.only(left: AppMargin.margin_16),
 //           child: Text(
-//             "Custom Groups From Elf",
+//             'Custom Groups From Elf',
 //             style: TextStyle(
 //               color: Colors.white,
 //               fontSize: AppFontSizes.font_size_22,
@@ -49,19 +49,19 @@
 //             crossAxisCount: 2,
 //             children: [
 //               ItemCustomGroupGrid(
-//                 imgUrl: "https://picsum.photos/seed/picsum/200/300",
+//                 imgUrl: 'https://picsum.photos/seed/picsum/200/300',
 //                 playerItemsType: AppItemsType.ARTIST,
 //               ),
 //               ItemCustomGroupGrid(
-//                 imgUrl: "https://picsum.photos/seed/picsum/200/300",
+//                 imgUrl: 'https://picsum.photos/seed/picsum/200/300',
 //                 playerItemsType: AppItemsType.SINGLE_TRACK,
 //               ),
 //               ItemCustomGroupGrid(
-//                 imgUrl: "https://picsum.photos/seed/picsum/200/300",
+//                 imgUrl: 'https://picsum.photos/seed/picsum/200/300',
 //                 playerItemsType: AppItemsType.ALBUM,
 //               ),
 //               ItemCustomGroupGrid(
-//                 imgUrl: "https://picsum.photos/seed/picsum/200/300",
+//                 imgUrl: 'https://picsum.photos/seed/picsum/200/300',
 //                 playerItemsType: AppItemsType.PLAYLIST,
 //               )
 //             ],
@@ -78,7 +78,7 @@
 //         Padding(
 //           padding: EdgeInsets.only(left: AppMargin.margin_16),
 //           child: Text(
-//             "Custom Groups From Elf",
+//             'Custom Groups From Elf',
 //             style: TextStyle(
 //               color: Colors.white,
 //               fontSize: AppFontSizes.font_size_22,

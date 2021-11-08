@@ -81,7 +81,7 @@ class PaymentMethodItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Some message for sub title message sub title message",
+                    'Some message for sub title message sub title message',
                     style: TextStyle(
                       color: AppColors.txtGrey,
                       fontWeight: FontWeight.w400,

@@ -17,6 +17,7 @@ import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -63,7 +64,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: "Unable to update profile\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToUpdateProfile,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -75,7 +76,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg: "Profile updated",
+              msg: AppLocalizations.of(context)!.profileUpdated,
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -166,7 +167,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         required isFocused,
       }) =>
           Text(
-        "$currentLength/$maxLength",
+        '$currentLength/$maxLength',
         style: TextStyle(
           color: AppColors.darkGreen,
           fontSize: AppFontSizes.font_size_10,
@@ -186,7 +187,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: "Profile Name",
+        hintText: AppLocalizations.of(context)!.profileName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -225,7 +226,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Choose Image",
+                                AppLocalizations.of(context)!.chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -238,31 +239,28 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromCamera();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
                               Navigator.pop(context);
                             },
-                            text: "Tack a Photo",
+                            text: AppLocalizations.of(context)!.trackAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .getFromGallery();
+                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
                               Navigator.pop(context);
                             },
-                            text: "Pick From Gallery",
+                            text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context)
-                                  .removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
                               Navigator.pop(context);
                             },
-                            text: "Remove Image",
+                            text: AppLocalizations.of(context)!.removeImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -280,20 +278,17 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 child: BlocBuilder<ImagePickerCubit, File?>(
                   builder: (context, state) {
                     if (!imageChanged) {
-                      selectedImage = File("");
+                      selectedImage = File('');
 
                       ///IMAGE FROM NETWORK
                       if (appUser.profileImageId != null) {
                         return CachedNetworkImage(
                           width: AppValues.editProfileImageSize,
                           height: AppValues.editProfileImageSize,
-                          imageUrl: AppApi.baseUrl +
-                              appUser.profileImageId!.imageMediumPath,
+                          imageUrl: AppApi.baseUrl + appUser.profileImageId!.imageMediumPath,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) =>
-                              buildImagePlaceHolder(),
+                          placeholder: (context, url) => buildImagePlaceHolder(),
+                          errorWidget: (context, url, error) => buildImagePlaceHolder(),
                         );
                       } else {
                         return Container(
@@ -313,7 +308,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                           image: FileImage(selectedImage),
                         );
                       } else {
-                        selectedImage = File("");
+                        selectedImage = File('');
                         return Container(
                           width: AppValues.editProfileImageSize,
                           height: AppValues.editProfileImageSize,
@@ -328,7 +323,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 height: AppMargin.margin_16,
               ),
               Text(
-                "change image".toUpperCase(),
+                AppLocalizations.of(context)!.changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -369,7 +364,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                "Edit Profile",
+                AppLocalizations.of(context)!.editProfile,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -395,7 +390,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: "User name can't be empty",
+                      msg: AppLocalizations.of(context)!.userNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -416,7 +411,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   ),
                 ),
                 child: Text(
-                  "Save".toUpperCase(),
+                  AppLocalizations.of(context)!.save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

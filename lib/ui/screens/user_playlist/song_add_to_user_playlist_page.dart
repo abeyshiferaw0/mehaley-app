@@ -16,6 +16,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -52,8 +53,10 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg:
-                  "${L10nUtil.translateLocale(state.song.songName, context)} added to ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)}",
+              msg: AppLocalizations.of(context)!.songAddedToPlaylist(
+                L10nUtil.translateLocale(state.song.songName, context),
+                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+              ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -74,7 +77,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: "Unable add mezmur to playlist\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToAddMezmur,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -147,7 +150,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                                 bottom: AppPadding.padding_16,
                               ),
                               child: Text(
-                                "Add to existing playlists",
+                                AppLocalizations.of(context)!.addToExistingPlaylist,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   color: AppColors.txtGrey,
@@ -176,7 +179,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             } else {
               return LibraryEmptyPage(
                 icon: PhosphorIcons.playlist_light,
-                msg: "You haven't created any playlists press new playlist to start adding.",
+                msg: AppLocalizations.of(context)!.youHaventCreatedAnyPlaylistMsg,
               );
             }
           } else if (state is MyPlaylistLoadingErrorState) {
@@ -224,7 +227,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
       ),
       centerTitle: true,
       title: Text(
-        "Add to playlist",
+        AppLocalizations.of(context)!.addToPlaylist,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
           color: AppColors.white,
@@ -277,7 +280,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  "New playlist".toUpperCase(),
+                  AppLocalizations.of(context)!.newPlaylist.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
@@ -293,7 +296,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           height: AppMargin.margin_16,
         ),
         Text(
-          "Add to newly created playlist",
+          AppLocalizations.of(context)!.addToNewPlaylist,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.txtGrey,

@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserPlaylistPlayShuffle extends StatelessWidget {
   const UserPlaylistPlayShuffle({
@@ -47,14 +48,12 @@ class UserPlaylistPlayShuffle extends StatelessWidget {
                     startPlaying: true,
                     songs: songs,
                     playingFrom: PlayingFrom(
-                      from: "playing from playlist",
-                      title: L10nUtil.translateLocale(
-                          myPlaylist.playlistNameText, context),
+                      from: AppLocalizations.of(context)!.playingFromPlaylist,
+                      title: L10nUtil.translateLocale(myPlaylist.playlistNameText, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.USER_PLAYLIST,
                       songSyncPlayedFromId: myPlaylist.playlistId,
                     ),
-                    index: PagesUtilFunctions.getRandomIndex(
-                        min: 0, max: songs.length),
+                    index: PagesUtilFunctions.getRandomIndex(min: 0, max: songs.length),
                   );
                 },
               ),

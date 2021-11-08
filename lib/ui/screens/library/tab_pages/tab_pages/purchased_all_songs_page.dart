@@ -14,6 +14,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedAllSongsPage extends StatefulWidget {
@@ -32,8 +33,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
   @override
   void initState() {
     ///INITIALLY LOAD ALL PURCHASED SONGS
-    BlocProvider.of<PurchasedAllSongsBloc>(context)
-        .add(LoadAllPurchasedSongsEvent());
+    BlocProvider.of<PurchasedAllSongsBloc>(context).add(LoadAllPurchasedSongsEvent());
     super.initState();
   }
 
@@ -65,8 +65,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
             height: ScreenUtil(context: context).getScreenHeight() * 0.5,
             child: LibraryErrorWidget(
               onRetry: () {
-                BlocProvider.of<PurchasedAllSongsBloc>(context)
-                    .add(LoadAllPurchasedSongsEvent());
+                BlocProvider.of<PurchasedAllSongsBloc>(context).add(LoadAllPurchasedSongsEvent());
               },
             ),
           );
@@ -105,8 +104,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
             SongItem(
               song: allPurchasedSong[position].song,
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl +
-                  allPurchasedSong[position].song.albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl + allPurchasedSong[position].song.albumArt.imageSmallPath,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {
                 //OPEN SONG
@@ -115,7 +113,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
                   songs: allPurchasedSong.map((e) => e.song).toList(),
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from:AppLocalizations.of(context)!.playingFrom,
+                    from: AppLocalizations.of(context)!.playingFrom,
                     title: AppLocalizations.of(context)!.purchasedMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                     songSyncPlayedFromId: -1,

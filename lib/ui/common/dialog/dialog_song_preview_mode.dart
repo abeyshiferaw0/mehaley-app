@@ -67,8 +67,8 @@ class DialogSongPreviewMode extends StatelessWidget {
         isForPlaying
             ? AppLocalizations.of(context)!.previewMode.toUpperCase()
             : isForDownload
-                ? "buy mezmur".toUpperCase()
-                : "",
+                ? AppLocalizations.of(context)!.buyMezmur.toUpperCase()
+                : '',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
@@ -169,8 +169,8 @@ class DialogSongPreviewMode extends StatelessWidget {
             isForPlaying
                 ? AppLocalizations.of(context)!.uAreListingToPreviewDesc
                 : isForDownload
-                    ? "Buy the mezmur to download and listen offline"
-                    : "",
+                    ? AppLocalizations.of(context)!.buyMezmurToListenOffline
+                    : '',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,

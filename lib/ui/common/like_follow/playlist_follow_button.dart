@@ -70,7 +70,7 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
   void onTap() {
     ///FOLLOW UNFOLLOW PLAYLIST
     EasyDebounce.debounce(
-      "PLAYLIST_FOLLOW",
+      'PLAYLIST_FOLLOW',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<LibraryBloc>(context).add(

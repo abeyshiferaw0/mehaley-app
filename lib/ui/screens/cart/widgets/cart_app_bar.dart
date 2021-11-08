@@ -2,6 +2,7 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/cart/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class CartAppBar extends StatelessWidget {
@@ -29,7 +30,7 @@ class CartAppBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                  AppLocalizations.of(context)!.cartTitle  ,
+                    AppLocalizations.of(context)!.cartTitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_16.sp,
@@ -44,7 +45,7 @@ class CartAppBar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.total  ,
+                              AppLocalizations.of(context)!.total,
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_12.sp,
                                 fontWeight: FontWeight.w500,
@@ -77,7 +78,7 @@ class CartAppBar extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "\$${getTotalPrice(cart).toStringAsFixed(2)}",
+          '\$${getTotalPrice(cart).toStringAsFixed(2)}',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -89,7 +90,7 @@ class CartAppBar extends StatelessWidget {
         ),
         SizedBox(width: AppMargin.margin_4),
         Text(
-          "\$${getDeductedPrice(cart).toStringAsFixed(2)}",
+          '\$${getDeductedPrice(cart).toStringAsFixed(2)}',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -104,7 +105,7 @@ class CartAppBar extends StatelessWidget {
 
   Text buildTotalPrice(Cart cart) {
     return Text(
-      "\$${getDeductedPrice(cart).toStringAsFixed(2)}",
+      '\$${getDeductedPrice(cart).toStringAsFixed(2)}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(

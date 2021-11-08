@@ -39,7 +39,7 @@ class SongQueueItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "$position",
+              '$position',
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.white.withOpacity(0.9),

@@ -41,7 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (appFireBaseUser != null) {
           this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
         } else {
-          yield AuthErrorState(error: "appFireBaseUser is null");
+          yield AuthErrorState(error: 'appFireBaseUser is null');
         }
       } catch (e) {
         yield AuthErrorState(error: e.toString());
@@ -53,7 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (appFireBaseUser != null) {
           this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
         } else {
-          yield AuthErrorState(error: "appFireBaseUser is null");
+          yield AuthErrorState(error: 'appFireBaseUser is null');
         }
       } catch (e) {
         yield AuthErrorState(error: e.toString());
@@ -75,7 +75,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
         } else {
           yield PhoneAuthErrorState(
-              error: "Unable to authenticate\nCheck your pin");
+              error: 'Unable to authenticate\nCheck your pin');
         }
       } catch (e) {
         yield AuthErrorState(error: e.toString());
@@ -154,10 +154,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (firebaseUser.user != null) {
         return getAppFirebaseUser(firebaseUser: firebaseUser);
       } else {
-        throw "Auth bloc googleAuth user is null";
+        throw 'Auth bloc googleAuth user is null';
       }
     } else {
-      throw "Auth bloc googleAuth is null";
+      throw 'Auth bloc googleAuth is null';
     }
   }
 
@@ -180,17 +180,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return getAppFirebaseUser(firebaseUser: firebaseUser);
       } else {
         return null;
-        //throw "Auth bloc googleAuth user is null";
+        //throw 'Auth bloc googleAuth user is null';
       }
     } else {
-      throw "Auth bloc signInWithFacebook loginResult.accessToken is null";
+      throw 'Auth bloc signInWithFacebook loginResult.accessToken is null';
     }
   }
 
   Future<AppFireBaseUser?> signInWithPhoneNumber(
       String countryCode, String phoneNumber, int? resendToken) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "$countryCode$phoneNumber",
+      phoneNumber: '$countryCode$phoneNumber',
       forceResendingToken: resendToken,
       verificationCompleted: (PhoneAuthCredential credential) async {
         UserCredential firebaseUser =
@@ -208,7 +208,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
           this.add(PhoneAuthErrorEvent(
-              error: "Unable to send sms, chek your internet connection"));
+              error: 'Unable to send sms, chek your internet connection'));
         } else {
           this.add(AuthErrorEvent(error: e.code));
         }

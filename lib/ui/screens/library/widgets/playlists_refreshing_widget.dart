@@ -1,6 +1,7 @@
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistsRefreshingWidget extends StatelessWidget {
@@ -46,7 +47,7 @@ class PlaylistsRefreshingWidget extends StatelessWidget {
               width: AppMargin.margin_16,
             ),
             Text(
-           AppLocalizations.of(context)!.refreshing,
+              AppLocalizations.of(context)!.refreshing,
               style: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_8.sp,

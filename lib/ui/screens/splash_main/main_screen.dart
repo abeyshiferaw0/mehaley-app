@@ -18,6 +18,7 @@ import 'package:elf_play/ui/common/no_internet_indicator_small.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -56,8 +57,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Mezmur ${state.appLikeFollowEvents == AppLikeFollowEvents.LIKE ? "added to favorites" : "removed from favorites"}",
+                  msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
+                      ? AppLocalizations.of(context)!.songAddedToFavorites
+                      : AppLocalizations.of(context)!.songRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -69,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -81,8 +83,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Album ${state.appLikeFollowEvents == AppLikeFollowEvents.LIKE ? "added to favorites" : "removed from favorites"}",
+                  msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
+                      ? AppLocalizations.of(context)!.albumAddedToFavorites
+                      : AppLocalizations.of(context)!.albumRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -94,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -106,8 +109,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Playlist ${state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW ? "added to followed" : "removed from favorites"}",
+                  msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
+                      ? AppLocalizations.of(context)!.playlistAddedToFavorites
+                      : AppLocalizations.of(context)!.playlistRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -119,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -131,8 +135,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Artist ${state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW ? "added to followed" : "removed from favorites"}",
+                  msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
+                      ? AppLocalizations.of(context)!.artistsAddedToFavorites
+                      : AppLocalizations.of(context)!.artistsRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -144,7 +149,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -159,8 +164,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Album ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                      ? AppLocalizations.of(context)!.albumAddedToCart
+                      : AppLocalizations.of(context)!.albumRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -172,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -184,8 +190,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Mezmur ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                      ? AppLocalizations.of(context)!.songAddedToCart
+                      : AppLocalizations.of(context)!.songRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -197,7 +204,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -209,8 +216,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Playlist ${state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD ? "added to cart" : "removed from cart"}",
+                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                      ? AppLocalizations.of(context)!.playlistAddedToCart
+                      : AppLocalizations.of(context)!.playlistRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -222,7 +230,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: "Couldn't connect to the internet",
+                  msg: AppLocalizations.of(context)!.couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -236,8 +244,8 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                     bgColor: AppColors.white,
                     isFloating: true,
-                    msg:
-                        "${L10nUtil.translateLocale(state.song!.songName, context)} Download complete",
+                    msg: AppLocalizations.of(context)!
+                        .downloadComplete(L10nUtil.translateLocale(state.song!.songName, context)),
                     txtColor: AppColors.black,
                     icon: PhosphorIcons.check_circle_fill,
                     iconColor: AppColors.darkGreen),
@@ -248,7 +256,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: false,
-                  msg: "You're not connected to the internet",
+                  msg: AppLocalizations.of(context)!.yourNotConnected,
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.wifi_x_light,
                   iconColor: AppColors.errorRed,
@@ -336,8 +344,7 @@ class _MainScreenState extends State<MainScreen> {
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context)
-                  .changeIsSearching(false);
+              BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(false);
               return Future<bool>.value(false);
             }
             //DEFAULT BEHAVIOUR
@@ -354,9 +361,7 @@ class _MainScreenState extends State<MainScreen> {
             key: _navigatorKey,
             initialRoute: AppRouterPaths.homeRoute,
             onGenerateRoute: _appRouter.generateRoute,
-            observers: <RouteObserver<ModalRoute<void>>>[
-              AppRouterPaths.routeObserver
-            ],
+            observers: <RouteObserver<ModalRoute<void>>>[AppRouterPaths.routeObserver],
           ),
         );
       },

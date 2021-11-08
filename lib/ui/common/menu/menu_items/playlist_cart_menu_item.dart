@@ -58,7 +58,7 @@ class _PlaylistCartMenuItemState extends State<PlaylistCartMenuItem> {
   void onTap() {
     ///ADD REMOVE PLAYLIST
     EasyDebounce.debounce(
-      "PLAYLIST_CART_ADD_REMOVE",
+      'PLAYLIST_CART_ADD_REMOVE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(

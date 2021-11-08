@@ -1,10 +1,10 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class DownloadAllPurchased extends StatelessWidget {
-  DownloadAllPurchased({Key? key, required this.downloadAllSelected})
-      : super(key: key);
+  DownloadAllPurchased({Key? key, required this.downloadAllSelected}) : super(key: key);
 
   final bool downloadAllSelected;
 

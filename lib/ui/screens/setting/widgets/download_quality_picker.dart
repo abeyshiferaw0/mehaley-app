@@ -7,6 +7,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -30,7 +31,7 @@ class DownloadQualityPicker extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Preferred download quality",
+                  AppLocalizations.of(context)!.preferredDownlaodQuality,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
@@ -41,7 +42,7 @@ class DownloadQualityPicker extends StatelessWidget {
                   height: AppMargin.margin_8,
                 ),
                 Text(
-                  "Choose your preferred audio quality for all downloads",
+                  AppLocalizations.of(context)!.preferredDownlaodQualityMsg,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
@@ -78,20 +79,17 @@ class DownloadQualityPicker extends StatelessWidget {
               buildDropdownMenuItem(
                 context: context,
                 appDownloadQualityOptions: DownloadSongQuality.LOW_QUALITY,
-                isActive: settingsPageData.downloadSongQuality ==
-                    DownloadSongQuality.LOW_QUALITY,
+                isActive: settingsPageData.downloadSongQuality == DownloadSongQuality.LOW_QUALITY,
               ),
               buildDropdownMenuItem(
                 context: context,
                 appDownloadQualityOptions: DownloadSongQuality.MEDIUM_QUALITY,
-                isActive: settingsPageData.downloadSongQuality ==
-                    DownloadSongQuality.MEDIUM_QUALITY,
+                isActive: settingsPageData.downloadSongQuality == DownloadSongQuality.MEDIUM_QUALITY,
               ),
               buildDropdownMenuItem(
                 context: context,
                 appDownloadQualityOptions: DownloadSongQuality.HIGH_QUALITY,
-                isActive: settingsPageData.downloadSongQuality ==
-                    DownloadSongQuality.HIGH_QUALITY,
+                isActive: settingsPageData.downloadSongQuality == DownloadSongQuality.HIGH_QUALITY,
               ),
             ],
           ),
@@ -101,9 +99,7 @@ class DownloadQualityPicker extends StatelessWidget {
   }
 
   DropdownMenuItem<DownloadSongQuality> buildDropdownMenuItem(
-      {required DownloadSongQuality appDownloadQualityOptions,
-      required bool isActive,
-      required BuildContext context}) {
+      {required DownloadSongQuality appDownloadQualityOptions, required bool isActive, required BuildContext context}) {
     return DropdownMenuItem<DownloadSongQuality>(
       onTap: () {
         BlocProvider.of<SettingsPageBloc>(context).add(
@@ -114,8 +110,7 @@ class DownloadQualityPicker extends StatelessWidget {
       },
       value: appDownloadQualityOptions,
       child: Text(
-        EnumToString.convertToString(appDownloadQualityOptions)
-            .replaceAll("_", " "),
+        EnumToString.convertToString(appDownloadQualityOptions).replaceAll('_', ' '),
         style: TextStyle(
           color: isActive ? AppColors.darkGreen : AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_10.sp,

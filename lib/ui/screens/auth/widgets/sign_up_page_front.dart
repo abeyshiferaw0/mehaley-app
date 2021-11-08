@@ -6,6 +6,7 @@ import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_button.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpPageFront extends StatelessWidget {
   const SignUpPageFront({
@@ -33,7 +34,7 @@ class SignUpPageFront extends StatelessWidget {
                     CircleAvatar(
                       radius: 30,
                       backgroundColor: AppColors.white,
-                      child: Text("ELF"),
+                      child: Text('ELF'),
                     ),
                     SizedBox(
                       height: AppMargin.margin_16,
@@ -78,7 +79,7 @@ class SignUpPageFront extends StatelessWidget {
                     SizedBox(height: AppMargin.margin_16),
                     SignUpButton(
                       title: AppLocalizations.of(context)!.continueWithPhone,
-                      icon: "assets/icons/ic_phone.svg",
+                      icon: 'assets/icons/ic_phone.svg',
                       userLoginType: UserLoginType.PHONE_NUMBER,
                       color: AppColors.darkGreen,
                       isFilled: true,
@@ -93,7 +94,7 @@ class SignUpPageFront extends StatelessWidget {
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
                       title: AppLocalizations.of(context)!.continueWithGoogle,
-                      icon: "assets/icons/ic_google.svg",
+                      icon: 'assets/icons/ic_google.svg',
                       userLoginType: UserLoginType.GOOGLE,
                       color: AppColors.grey,
                       isFilled: false,
@@ -108,7 +109,7 @@ class SignUpPageFront extends StatelessWidget {
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
                       title: AppLocalizations.of(context)!.continueWithFacebook,
-                      icon: "assets/icons/ic_facebook.svg",
+                      icon: 'assets/icons/ic_facebook.svg',
                       userLoginType: UserLoginType.FACEBOOK,
                       color: AppColors.grey,
                       isFilled: false,

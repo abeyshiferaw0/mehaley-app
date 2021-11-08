@@ -47,10 +47,10 @@ class ScreenArguments {
 
 class AppRouterPaths {
   static const String splashRoute = '/';
-  static const String signUp = "/sign_up";
+  static const String signUp = '/sign_up';
   static const String verifyPhonePageOne = '/verify_phone_page_one';
   static const String verifyPhonePageTwo = '/verify_phone_page_two';
-  static const String mainScreen = "/main_screen";
+  static const String mainScreen = '/main_screen';
   static const String homeRoute = 'home';
   static const String settingRoute = '/setting';
   static const String profileRoute = '/profile';
@@ -86,7 +86,7 @@ class AppRouter {
                 homeDataRepository: AppRepositories.homeDataRepository,
               ),
               child: HomePage(
-                key: Key("HOME_PAGE_KEY"),
+                key: Key('HOME_PAGE_KEY'),
               ),
             );
         break;

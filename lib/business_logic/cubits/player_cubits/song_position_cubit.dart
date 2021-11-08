@@ -21,7 +21,7 @@ class SongPositionCubit extends Cubit<CurrentPlayingPosition> {
     subscription = audioPlayerBloc.stream.listen((state) {
       if (state is AudioPlayerPositionChangedState) {
         print(
-            "SongPositionCubitttt=>  PRE=> ${this.state.currentDuration.toString()}  CUR=> ${state.duration.toString()}");
+            'SongPositionCubitttt=>  PRE=> ${this.state.currentDuration.toString()}  CUR=> ${state.duration.toString()}');
         emit(
           CurrentPlayingPosition(
             songSync: getCurrentPlayingSongSyncData(),

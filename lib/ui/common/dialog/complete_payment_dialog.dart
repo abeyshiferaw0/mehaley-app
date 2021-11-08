@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/dialog/widgets/payment_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -53,16 +54,14 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
             padding: EdgeInsets.all(
               AppPadding.padding_16,
             ),
-            child: BlocBuilder<PreferredPaymentMethodBloc,
-                PreferredPaymentMethodState>(
+            child: BlocBuilder<PreferredPaymentMethodBloc, PreferredPaymentMethodState>(
               builder: (context, state) {
                 if (state is PreferredPaymentMethodLoadedState) {
                   ///SET PREFERRED PAYMENT METHOD
                   preferredAppPaymentMethods = state.appPaymentMethod;
 
                   ///SET ALWAYS SELECTED CHECK BOX TO TRUE IF PREFERRED SELECTED
-                  if (preferredAppPaymentMethods !=
-                      AppPaymentMethods.METHOD_UNK) {
+                  if (preferredAppPaymentMethods != AppPaymentMethods.METHOD_UNK) {
                     alwaysUseSelected = true;
                   }
 
@@ -116,7 +115,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
           ),
         ),
         Text(
-          "Always use selected payment method?",
+          AppLocalizations.of(context)!.alwaysUsePayment,
           style: TextStyle(
             color: AppColors.txtGrey,
             fontWeight: FontWeight.w400,
@@ -153,7 +152,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Buy".toUpperCase(),
+                AppLocalizations.of(context)!.buy.toUpperCase(),
                 style: TextStyle(
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,
@@ -199,8 +198,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'Amole',
-                imagePath: "assets/images/ic_amole.png",
+                title: AppLocalizations.of(context)!.amole,
+                imagePath: 'assets/images/ic_amole.png',
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_AMOLE,
@@ -216,8 +215,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'CBE Birr',
-                imagePath: "assets/images/ic_cbe_birr.png",
+                title: AppLocalizations.of(context)!.cbeBirr,
+                imagePath: 'assets/images/ic_cbe_birr.png',
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_CBE_BIRR,
@@ -225,8 +224,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_CBE_BIRR,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods =
-                        AppPaymentMethods.METHOD_CBE_BIRR;
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_CBE_BIRR;
                   });
                 },
               ),
@@ -234,8 +232,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'Hello Cash',
-                imagePath: "assets/images/ic_hello_cash.png",
+                title: AppLocalizations.of(context)!.helloCash,
+                imagePath: 'assets/images/ic_hello_cash.png',
                 scale: 0.8,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_HELLO_CASH,
@@ -243,8 +241,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_HELLO_CASH,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods =
-                        AppPaymentMethods.METHOD_HELLO_CASH;
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_HELLO_CASH;
                   });
                 },
               ),
@@ -252,8 +249,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'Mbirr',
-                imagePath: "assets/images/ic_mbirr.png",
+                title: AppLocalizations.of(context)!.mbirr,
+                imagePath: 'assets/images/ic_mbirr.png',
                 scale: 1.3,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_MBIRR,
@@ -269,8 +266,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'Visa',
-                imagePath: "assets/images/ic_visa.png",
+                title: AppLocalizations.of(context)!.visa,
+                imagePath: 'assets/images/ic_visa.png',
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_VISA,
@@ -286,8 +283,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: 'Mastercard',
-                imagePath: "assets/images/ic_mastercard.png",
+                title: AppLocalizations.of(context)!.mastercard,
+                imagePath: 'assets/images/ic_mastercard.png',
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_MASTERCARD,
@@ -295,8 +292,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_MASTERCARD,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods =
-                        AppPaymentMethods.METHOD_MASTERCARD;
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_MASTERCARD;
                   });
                 },
               ),
@@ -310,8 +306,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
     );
   }
 
-  Column buildDialogHeader(
-      BuildContext context, AppPaymentMethods appPaymentMethod) {
+  Column buildDialogHeader(BuildContext context, AppPaymentMethods appPaymentMethod) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -320,7 +315,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
           children: [
             Center(
               child: Text(
-                "Complete your purchase",
+                AppLocalizations.of(context)!.completeYourPurchase,
                 style: TextStyle(
                   color: AppColors.black,
                   fontWeight: FontWeight.w500,

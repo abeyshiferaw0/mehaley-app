@@ -10,11 +10,11 @@ import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FavoriteAlbumsPage extends StatefulWidget {
-  const FavoriteAlbumsPage({Key? key, required this.onAlbumsLoaded})
-      : super(key: key);
+  const FavoriteAlbumsPage({Key? key, required this.onAlbumsLoaded}) : super(key: key);
 
   final Function(List<Album>) onAlbumsLoaded;
 
@@ -81,10 +81,7 @@ class _FavoriteAlbumsPageState extends State<FavoriteAlbumsPage> {
 
   Widget buildPageLoaded(List<FavoriteAlbum> favoriteAlbums) {
     return Column(
-      children: [
-        SizedBox(height: AppMargin.margin_8),
-        buildAlbumList(favoriteAlbums)
-      ],
+      children: [SizedBox(height: AppMargin.margin_8), buildAlbumList(favoriteAlbums)],
     );
   }
 

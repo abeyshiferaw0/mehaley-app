@@ -36,7 +36,7 @@ class _PlayerPageState extends State<PlayerPage> {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
-        listener: playerPageListners,
+        listener: playerPageListeners,
         child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
           builder: (context, state) {
             return SingleChildScrollView(
@@ -94,7 +94,7 @@ class _PlayerPageState extends State<PlayerPage> {
   //   );
   // }
 
-  void playerPageListners(BuildContext context, AudioPlayerState state) {
+  void playerPageListeners(BuildContext context, AudioPlayerState state) {
     if (state is AudioPlayerErrorState) {
       ScaffoldMessenger.of(context).showSnackBar(
         buildAppSnackBar(
@@ -115,12 +115,18 @@ class _PlayerPageState extends State<PlayerPage> {
 
   void checkIfShouldPop() {
     EasyDebounce.debounce(
-      "PLAYER_DEBOUNCE",
+      'PLAYER_DEBOUNCE',
       Duration(milliseconds: 100),
       () {
-        if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState != null) {
+        if (BlocProvider.of<AudioPlayerBloc>(context)
+                .audioPlayer
+                .sequenceState !=
+            null) {
           IndexedAudioSource? currentItem =
-              BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState!.currentSource;
+              BlocProvider.of<AudioPlayerBloc>(context)
+                  .audioPlayer
+                  .sequenceState!
+                  .currentSource;
           if (currentItem != null) {
             MediaItem mediaItem = (currentItem.tag as MediaItem);
             Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);

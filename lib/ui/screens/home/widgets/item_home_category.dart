@@ -33,14 +33,12 @@ class ItemHomeCategory extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl:
-                    AppApi.baseUrl + category.categoryImage.imageSmallPath,
+                imageUrl: AppApi.baseUrl + category.categoryImage.imageSmallPath,
                 fit: BoxFit.cover,
                 height: AppValues.homeCategoriesItemHeight,
                 width: AppValues.homeCategoriesItemWidth,
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
+                errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
               ),
               Container(
                 height: AppValues.homeCategoriesItemHeight,

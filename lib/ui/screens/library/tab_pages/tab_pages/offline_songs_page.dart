@@ -15,11 +15,11 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class OfflineSongsPage extends StatefulWidget {
-  const OfflineSongsPage({Key? key, required this.onSongsLoaded})
-      : super(key: key);
+  const OfflineSongsPage({Key? key, required this.onSongsLoaded}) : super(key: key);
 
   final Function(List<Song>) onSongsLoaded;
 
@@ -111,8 +111,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SongItem(
               song: offlineSong[position],
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl +
-                  offlineSong[position].albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl + offlineSong[position].albumArt.imageSmallPath,
               thumbSize: AppValues.offlineSongsSize,
               onPressed: () {
                 //OPEN SONG

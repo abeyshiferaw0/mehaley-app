@@ -17,6 +17,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../widgets/library_icon_button.dart';
@@ -29,8 +30,7 @@ class FavoriteTabView extends StatefulWidget {
   _FavoriteTabViewState createState() => _FavoriteTabViewState();
 }
 
-class _FavoriteTabViewState extends State<FavoriteTabView>
-    with AutomaticKeepAliveClientMixin {
+class _FavoriteTabViewState extends State<FavoriteTabView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -48,14 +48,12 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
         ),
         BlocProvider(
           create: (context) => FavoriteSongsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
         BlocProvider(
           create: (context) => FavoriteAlbumsBloc(
-            libraryPageDataRepository:
-                AppRepositories.libraryPageDataRepository,
+            libraryPageDataRepository: AppRepositories.libraryPageDataRepository,
           ),
         ),
       ],
@@ -79,8 +77,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
                   children: [
                     SizedBox(height: AppMargin.margin_8),
                     buildSubTabs(),
-                    BlocBuilder<FavoriteTabPagesCubit,
-                        AppFavoritePageItemTypes>(
+                    BlocBuilder<FavoriteTabPagesCubit, AppFavoritePageItemTypes>(
                       builder: (context, state) {
                         if (state == AppFavoritePageItemTypes.SONGS) {
                           return FavoriteSongsPage(
@@ -127,20 +124,18 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
                       isSelected: state == AppFavoritePageItemTypes.SONGS,
                       onTap: () {
                         if (!(state == AppFavoritePageItemTypes.SONGS))
-                          BlocProvider.of<FavoriteTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<FavoriteTabPagesCubit>(context).changePage(
                             AppFavoritePageItemTypes.SONGS,
                           );
                       },
                       hasLeftMargin: false,
                     ),
                     LibraryPageSubTabButton(
-                      text: AppLocalizations.of(context)!.albums.toUpperCase,
+                      text: AppLocalizations.of(context)!.albums.toUpperCase(),
                       isSelected: state == AppFavoritePageItemTypes.ALBUMS,
                       onTap: () {
                         if (!(state == AppFavoritePageItemTypes.ALBUMS))
-                          BlocProvider.of<FavoriteTabPagesCubit>(context)
-                              .changePage(
+                          BlocProvider.of<FavoriteTabPagesCubit>(context).changePage(
                             AppFavoritePageItemTypes.ALBUMS,
                           );
                       },
@@ -161,8 +156,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
     );
   }
 
-  LibraryIconButton buildShuffleButton(
-      AppFavoritePageItemTypes appFavoritePageItemTypes) {
+  LibraryIconButton buildShuffleButton(AppFavoritePageItemTypes appFavoritePageItemTypes) {
     return LibraryIconButton(
       onTap: () {
         if (appFavoritePageItemTypes == AppFavoritePageItemTypes.SONGS) {
@@ -187,13 +181,12 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg:AppLocalizations.of(context)!.noMezmursToPlay ,
+                msg: AppLocalizations.of(context)!.noMezmursToPlay,
                 txtColor: AppColors.white,
               ),
             );
           }
-        } else if (appFavoritePageItemTypes ==
-            AppFavoritePageItemTypes.ALBUMS) {
+        } else if (appFavoritePageItemTypes == AppFavoritePageItemTypes.ALBUMS) {
           if (favoriteAlbums.length > 0) {
             int rand = PagesUtilFunctions.getRandomIndex(
               min: 0,
@@ -224,8 +217,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
   }
 
   Future<void> refreshPage(BuildContext builderContext) async {
-    AppFavoritePageItemTypes appFollowedPageItemTypes =
-        BlocProvider.of<FavoriteTabPagesCubit>(builderContext).state;
+    AppFavoritePageItemTypes appFollowedPageItemTypes = BlocProvider.of<FavoriteTabPagesCubit>(builderContext).state;
     if (appFollowedPageItemTypes == AppFavoritePageItemTypes.ALBUMS) {
       BlocProvider.of<FavoriteAlbumsBloc>(builderContext).add(
         RefreshFavoriteAlbumsEvent(),

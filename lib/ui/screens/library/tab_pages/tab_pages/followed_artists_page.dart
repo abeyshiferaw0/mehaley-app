@@ -9,6 +9,7 @@ import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FollowedArtistsPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _FollowedArtistsPageState extends State<FollowedArtistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.hand_pointing_fill,
-                msg:AppLocalizations.of(context)!.uAreNotFollowingArtist ,
+                msg: AppLocalizations.of(context)!.uAreNotFollowingArtist,
               ),
             );
           }
@@ -73,10 +74,7 @@ class _FollowedArtistsPageState extends State<FollowedArtistsPage> {
 
   Widget buildPageLoaded(List<FollowedArtist> followedArtists) {
     return Column(
-      children: [
-        SizedBox(height: AppMargin.margin_8),
-        buildArtistList(followedArtists)
-      ],
+      children: [SizedBox(height: AppMargin.margin_8), buildArtistList(followedArtists)],
     );
   }
 

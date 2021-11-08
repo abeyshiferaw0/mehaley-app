@@ -74,8 +74,7 @@ class LibraryAlbumItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      L10nUtil.translateLocale(
-                          album.artist.artistName, context),
+                      L10nUtil.translateLocale(album.artist.artistName, context),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.txtGrey,
@@ -125,8 +124,7 @@ class LibraryAlbumItem extends StatelessWidget {
                     isLiked: album.isLiked,
                     rootContext: context,
                     title: L10nUtil.translateLocale(album.albumTitle, context),
-                    imageUrl:
-                        AppApi.baseUrl + album.albumImages[0].imageMediumPath,
+                    imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
                     price: album.priceEtb,
                     isFree: album.isFree,
                     isDiscountAvailable: album.isDiscountAvailable,

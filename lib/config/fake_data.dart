@@ -1,10 +1,10 @@
 class AppTestValues {
-  static const String debugTxt = "ELF_PLAY_DEBUG";
+  static const String debugTxt = 'ELF_PLAY_DEBUG';
   static const String albumArt =
-      "https://stylesatlife.com/wp-content/uploads/2017/07/Butterfly-Cross-Tattoo.jpg";
+      'https://stylesatlife.com/wp-content/uploads/2017/07/Butterfly-Cross-Tattoo.jpg';
   static String textBgVideo =
-      "https://assets.mixkit.co/video-templates/preview/mixkit-basic-story-template-703-large.mp4";
-  static String textSampleLyric = """
+      'https://assets.mixkit.co/video-templates/preview/mixkit-basic-story-template-703-large.mp4';
+  static String textSampleLyric = '''
 [00:00.000]ሁሉም ፡ ሩጠው ፡ አክሊል ፡ አንድ ፡ ያገኛል
 [00:01.000]ወንድሜ ፡ እንድታገኘው ፡ ጣር
 [00:11.210]ፊት ፡ የገቡት ፡ ወደ ፡ አምላክ ፡ ፀዳ
@@ -30,5 +30,5 @@ class AppTestValues {
 [01:32.950]በመድኃኒታችን ፡ ግን ፡ ስታምን
 [01:38.700]እስከ ፡ ሞት ፡ ድረስ ፡ የፀናህ ፡ ሁን
 [01:42.150]በመድኃኒታችን ፡ ግን ፡ ስታምን
-[01:57.050]እስከ ፡ ሞት ፡ ድረስ ፡ የፀናህ ፡ ሁን""";
+[01:57.050]እስከ ፡ ሞት ፡ ድረስ ፡ የፀናህ ፡ ሁን''';
 }

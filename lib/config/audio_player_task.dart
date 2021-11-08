@@ -58,7 +58,7 @@
 //   //     // In this example, we automatically start playing on start.
 //   //     onPlay();
 //   //   } catch (e) {
-//   //     print("Error: $e");
+//   //     print('Error: $e');
 //   //     onStop();
 //   //   }
 //   // }
@@ -106,7 +106,7 @@
 //       // In this example, we automatically start playing on start.
 //       onPlay();
 //     } catch (e) {
-//       print("Error: $e");
+//       print('Error: $e');
 //       onStop();
 //     }
 //   }
@@ -226,7 +226,7 @@
 //       case ProcessingState.completed:
 //         return AudioProcessingState.completed;
 //       default:
-//         throw Exception("Invalid state: ${_player.processingState}");
+//         throw Exception('Invalid state: ${_player.processingState}');
 //     }
 //   }
 // }

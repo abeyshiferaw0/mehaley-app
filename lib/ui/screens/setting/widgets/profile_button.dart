@@ -8,6 +8,7 @@ import 'package:elf_play/ui/common/user_profile_pic.dart';
 import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -41,8 +42,7 @@ class ProfileButton extends StatelessWidget {
                 )
               ],
             ),
-            child:
-            UserProfilePic(
+            child: UserProfilePic(
               fontSize: AppFontSizes.font_size_12.sp,
               size: AppValues.userPlaylistImageSize,
             ),
@@ -69,7 +69,7 @@ class ProfileButton extends StatelessWidget {
               //   height: AppMargin.margin_2,
               // ),
               Text(
-                "View profile",
+                AppLocalizations.of(context)!.viewProfile,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w300,

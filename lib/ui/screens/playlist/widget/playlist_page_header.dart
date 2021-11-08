@@ -58,8 +58,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
               child: Container(
                 height: 500,
                 decoration: BoxDecoration(
-                  gradient:
-                      AppGradients().getPlaylistHeaderGradient(dominantColor),
+                  gradient: AppGradients().getPlaylistHeaderGradient(dominantColor),
                 ),
                 child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
@@ -87,8 +86,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
     );
   }
 
-  Container buildAppBar(
-      double shrinkPercentage, PlaylistPageData playlistPageData) {
+  Container buildAppBar(double shrinkPercentage, PlaylistPageData playlistPageData) {
     return Container(
       height: 100,
       //color: AppColors.black.withOpacity(shrinkPercentage),
@@ -113,8 +111,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                   opacity: shrinkPercentage,
                   child: Center(
                     child: Text(
-                      L10nUtil.translateLocale(
-                          playlistPageData.playlist.playlistNameText, context),
+                      L10nUtil.translateLocale(playlistPageData.playlist.playlistNameText, context),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -138,10 +135,8 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                               price: playlistPageData.playlist.priceEtb,
                               isFree: playlistPageData.playlist.isFree,
                               useLargerText: true,
-                              isDiscountAvailable:
-                                  playlistPageData.playlist.isDiscountAvailable,
-                              discountPercentage:
-                                  playlistPageData.playlist.discountPercentage,
+                              isDiscountAvailable: playlistPageData.playlist.isDiscountAvailable,
+                              discountPercentage: playlistPageData.playlist.discountPercentage,
                               isPurchased: playlistPageData.playlist.isBought,
                               appCurrency: AppCurrency.ETB,
                             ),
@@ -163,16 +158,12 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                 context: context,
                 child: PlaylistMenuWidget(
                   playlist: playlistPageData.playlist,
-                  title: L10nUtil.translateLocale(
-                      playlistPageData.playlist.playlistNameText, context),
-                  imageUrl: AppApi.baseUrl +
-                      playlistPageData.playlist.playlistImage.imageMediumPath,
+                  title: L10nUtil.translateLocale(playlistPageData.playlist.playlistNameText, context),
+                  imageUrl: AppApi.baseUrl + playlistPageData.playlist.playlistImage.imageMediumPath,
                   isFree: playlistPageData.playlist.isFree,
                   price: playlistPageData.playlist.priceEtb,
-                  isDiscountAvailable:
-                      playlistPageData.playlist.isDiscountAvailable,
-                  discountPercentage:
-                      playlistPageData.playlist.discountPercentage,
+                  isDiscountAvailable: playlistPageData.playlist.isDiscountAvailable,
+                  discountPercentage: playlistPageData.playlist.discountPercentage,
                   playlistId: playlistPageData.playlist.playlistId,
                   isFollowed: playlistPageData.playlist.isFollowed!,
                   isPurchased: playlistPageData.playlist.isBought,

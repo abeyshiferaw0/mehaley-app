@@ -1,17 +1,17 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class UserPlaylistAddMezmursBtn extends StatelessWidget {
-  const UserPlaylistAddMezmursBtn({Key? key, required this.makeSolid})
-      : super(key: key);
+  const UserPlaylistAddMezmursBtn({Key? key, required this.makeSolid}) : super(key: key);
 
   final bool makeSolid;
 
   @override
   Widget build(BuildContext context) {
-    return makeSolid ? buildSolidButton() : buildNonSolidButton();
+    return makeSolid ? buildSolidButton(context) : buildNonSolidButton();
   }
 
   Widget buildNonSolidButton() {
@@ -31,7 +31,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
     //       ),
     //     ),
     //     child: Text(
-    //       "ADD MEZMURS".toUpperCase(),
+    //      AppLocalizations.of(context)!.addSongs.toUpperCase(),
     //       style: TextStyle(
     //         fontSize: AppFontSizes.font_size_8.sp,
     //         color: AppColors.white,
@@ -42,7 +42,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
     // );
   }
 
-  Container buildSolidButton() {
+  Container buildSolidButton(context) {
     return Container(
       height: 150,
       child: AppBouncingButton(
@@ -51,7 +51,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Add Mezmurs to your playlist",
+              AppLocalizations.of(context)!.addSongsToPlaylist,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.lightGrey,
@@ -68,7 +68,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
             //     borderRadius: BorderRadius.circular(30),
             //   ),
             //   child: Text(
-            //     "ADD MEZMURS".toUpperCase(),
+            //     AppLocalizations.of(context)!.addSongs.toUpperCase(),
             //     style: TextStyle(
             //       fontSize: AppFontSizes.font_size_12.sp,
             //       color: AppColors.black,

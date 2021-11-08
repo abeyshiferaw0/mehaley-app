@@ -18,6 +18,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
@@ -139,7 +140,11 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           //LYRIC BADGE
                           //////////
-                          song.lyricIncluded ? SongItemBadge(tag: 'LYRIC') : SizedBox(),
+                          song.lyricIncluded
+                              ? SongItemBadge(
+                                  tag: AppLocalizations.of(context)!.lyrics,
+                                )
+                              : SizedBox(),
                           Row(
                             children: getOtherBadges(badges),
                           ),
@@ -249,17 +254,6 @@ class _SongItemState extends State<SongItem> {
   }
 
   getPriceBadge(double price, bool isFree, bool isDiscountAvailable, double discountPercentage, bool isBought) {
-    // if (isSongFree) {
-    //   return SongItemBadge(
-    //     tag: 'FREE',
-    //     color: ColorUtil.darken(AppColors.darkGreen, 0.1),
-    //   );
-    // } else {
-    //   return SongItemBadge(
-    //     tag: '\$$price',
-    //     color: ColorUtil.darken(AppColors.darkGreen, 0.1),
-    //   );
-    // }
     return Padding(
       padding: const EdgeInsets.only(
         right: AppPadding.padding_8,
@@ -269,7 +263,8 @@ class _SongItemState extends State<SongItem> {
         isFree: isFree,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
-        isPurchased: isBought,appCurrency: AppCurrency.ETB,
+        isPurchased: isBought,
+        appCurrency: AppCurrency.ETB,
       ),
     );
   }

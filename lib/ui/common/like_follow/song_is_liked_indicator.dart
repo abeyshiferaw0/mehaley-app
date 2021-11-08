@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class SongIsLikedIndicator extends StatelessWidget {
@@ -31,16 +32,14 @@ class SongIsLikedIndicator extends StatelessWidget {
                 builder: (context) {
                   return Center(
                     child: DialogUlLikeUnFollow(
-                      mainButtonText: 'REMOVE'.toUpperCase(),
-                      cancelButtonText: 'CANCEL',
-                      titleText: 'Remove From Favorite Mezmurs?',
+                      mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
+                      cancelButtonText: AppLocalizations.of(context)!.cancel,
+                      titleText: AppLocalizations.of(context)!.removeFromFavoriteMezmurs,
                       onUnLikeUnFollow: () {
                         BlocProvider.of<LibraryBloc>(context).add(
                           LikeUnlikeSongEvent(
                             id: songId,
-                            appLikeFollowEvents: preAnimate()
-                                ? AppLikeFollowEvents.UNLIKE
-                                : AppLikeFollowEvents.LIKE,
+                            appLikeFollowEvents: preAnimate() ? AppLikeFollowEvents.UNLIKE : AppLikeFollowEvents.LIKE,
                           ),
                         );
                       },

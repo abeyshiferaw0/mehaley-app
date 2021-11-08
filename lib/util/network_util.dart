@@ -15,7 +15,6 @@ class NetworkUtil {
 
   static Future<bool> isInternetAvailable() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    print("connectivityResultconnectivityResult ${connectivityResult}");
     if (connectivityResult == ConnectivityResult.none) {
       return false;
     } else {

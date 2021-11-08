@@ -50,16 +50,14 @@ class BuyItemBtnWidget extends StatelessWidget {
             horizontal: AppPadding.padding_20,
             vertical: AppPadding.padding_8,
           ),
-          margin:
-              EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
+          margin: EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
             color: AppColors.lightGrey,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment:
-                isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
+            mainAxisAlignment: isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
               Text(
                 title.toUpperCase(),
@@ -78,7 +76,8 @@ class BuyItemBtnWidget extends StatelessWidget {
                 showDiscount: showDiscount,
                 isDiscountAvailable: isDiscountAvailable,
                 discountPercentage: discountPercentage,
-                isPurchased: isBought,appCurrency: AppCurrency.ETB,
+                isPurchased: isBought,
+                appCurrency: AppCurrency.ETB,
               )
             ],
           ),

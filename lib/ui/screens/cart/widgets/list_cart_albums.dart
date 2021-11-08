@@ -7,6 +7,7 @@ import 'package:elf_play/ui/common/dialog/dialog_remove_from_cart.dart';
 import 'package:elf_play/ui/screens/cart/widgets/item_cart_album.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'card_header_title.dart';
 
@@ -37,7 +38,7 @@ class _CartAlbumsListState extends State<CartAlbumsList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CartHeaderTitle(
-              title: 'Albums',
+              title: AppLocalizations.of(context)!.albums,
             ),
             SizedBox(
               height: AppMargin.margin_16,
@@ -77,9 +78,9 @@ class _CartAlbumsListState extends State<CartAlbumsList> {
                 builder: (_) {
                   return Center(
                     child: DialogRemoveFromCart(
-                      mainButtonText: 'REMOVE'.toUpperCase(),
-                      cancelButtonText: 'CANCEL',
-                      titleText: 'Remove From Cart?',
+                      mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
+                      cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
+                      titleText: AppLocalizations.of(context)!.removeFromCart,
                       onRemove: () {
                         BlocProvider.of<CartUtilBloc>(context).add(
                           AddRemoveAlbumCartEvent(

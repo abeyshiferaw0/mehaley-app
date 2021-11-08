@@ -9,6 +9,7 @@ import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_front_page_items.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchFrontPageGroups extends StatelessWidget {
   final String mainTitle;
@@ -86,8 +87,8 @@ class SearchFrontPageGroups extends StatelessWidget {
                     songs: [items.elementAt(index)],
                     startPlaying: true,
                     playingFrom: PlayingFrom(
-                      from: "Playing from",
-                      title: "most listened",
+                      from: AppLocalizations.of(context)!.playingFrom,
+                      title: AppLocalizations.of(context)!.mostListened,
                       songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
                       songSyncPlayedFromId: -1,
                     ),

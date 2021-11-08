@@ -10,6 +10,7 @@ import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
@@ -73,19 +74,16 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                   );
                 },
                 child: GroupHeaderWidget(
-                  groupHeaderImageUrl:
-                      AppApi.baseUrl + album.albumImages[0].imageSmallPath,
-                  groupSubTitle: L10nUtil.translateLocale(
-                      album.artist.artistName, context),
-                  groupTitle:
-                      L10nUtil.translateLocale(album.albumTitle, context),
+                  groupHeaderImageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
+                  groupSubTitle: L10nUtil.translateLocale(album.artist.artistName, context),
+                  groupTitle: L10nUtil.translateLocale(album.albumTitle, context),
                 ),
               ),
             ),
             (!album.isBought && !album.isFree)
                 ? BuyItemBtnWidget(
                     price: 0.0,
-                    title:AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
+                    title: AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: album.isFree,
                     showDiscount: false,
@@ -129,9 +127,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 item: album.songs![i],
                 playingFrom: PlayingFrom(
                   from: AppLocalizations.of(context)!.playingFromFeaturedAlbum,
-                  title: L10nUtil.translateLocale(
-                      L10nUtil.translateLocale(album.albumTitle, context),
-                      context),
+                  title: L10nUtil.translateLocale(L10nUtil.translateLocale(album.albumTitle, context), context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_GROUP,
                   songSyncPlayedFromId: album.albumId,
                 ),

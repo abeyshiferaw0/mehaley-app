@@ -13,11 +13,10 @@ import 'package:elf_play/ui/screens/category/widgets/item_popular_album.dart';
 import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileLists extends StatelessWidget {
-  const ProfileLists(
-      {Key? key, required this.profileListTypes, required this.profilePageData})
-      : super(key: key);
+  const ProfileLists({Key? key, required this.profileListTypes, required this.profilePageData}) : super(key: key);
 
   final ProfileListTypes profileListTypes;
   final ProfilePageData profilePageData;
@@ -59,8 +58,8 @@ class ProfileLists extends StatelessWidget {
                   context: context,
                   songs: profilePageData.boughtSongs,
                   playingFrom: PlayingFrom(
-                    from: "playing from",
-                    title: "purchased mezmurs",
+                    from: AppLocalizations.of(context)!.playingFrom,
+                    title: AppLocalizations.of(context)!.purchasedMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.PROFILE_PAGE,
                     songSyncPlayedFromId: -1,
                   ),
@@ -68,8 +67,7 @@ class ProfileLists extends StatelessWidget {
                   index: position,
                 );
               },
-              thumbUrl: AppApi.baseUrl +
-                  profilePageData.boughtSongs[position].albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl + profilePageData.boughtSongs[position].albumArt.imageSmallPath,
               thumbSize: AppValues.artistSongItemSize,
             ),
             SizedBox(height: AppMargin.margin_8),
@@ -79,8 +77,7 @@ class ProfileLists extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView buildPurchasedAlbumsList(
-      ProfilePageData profilePageData) {
+  SingleChildScrollView buildPurchasedAlbumsList(ProfilePageData profilePageData) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
@@ -91,21 +88,18 @@ class ProfileLists extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView buildPurchasedPlaylistsList(
-      ProfilePageData profilePageData) {
+  SingleChildScrollView buildPurchasedPlaylistsList(ProfilePageData profilePageData) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:
-            buildPurchasedPlaylistsHorizontal(profilePageData.boughtPlaylists),
+        children: buildPurchasedPlaylistsHorizontal(profilePageData.boughtPlaylists),
       ),
     );
   }
 
-  SingleChildScrollView buildFollowedArtistList(
-      ProfilePageData profilePageData) {
+  SingleChildScrollView buildFollowedArtistList(ProfilePageData profilePageData) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
@@ -118,16 +112,14 @@ class ProfileLists extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView buildFollowedPlaylistsList(
-      ProfilePageData profilePageData) {
+  SingleChildScrollView buildFollowedPlaylistsList(ProfilePageData profilePageData) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: buildPurchasedPlaylistsHorizontal(
-            profilePageData.followedPlaylists),
+        children: buildPurchasedPlaylistsHorizontal(profilePageData.followedPlaylists),
       ),
     );
   }

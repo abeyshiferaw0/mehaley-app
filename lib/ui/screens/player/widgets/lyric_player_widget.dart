@@ -13,6 +13,7 @@ import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sizer/sizer.dart';
 
@@ -28,8 +29,7 @@ class LyricPlayerWidget extends StatefulWidget {
 class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
   //SCROLLER CONTROLLER AND LISTENER
   final ItemScrollController lyricScrollController = ItemScrollController();
-  final ItemPositionsListener lyricPositionsListener =
-      ItemPositionsListener.create();
+  final ItemPositionsListener lyricPositionsListener = ItemPositionsListener.create();
 
   _LyricPlayerWidgetState();
 
@@ -62,8 +62,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
         return BlocBuilder<LyricBloc, LyricState>(
           builder: (context, state) {
             if (state is LyricDataLoaded) {
-              if (state.lyricList.length > 0 &&
-                  state.songId == widget.song.songId) {
+              if (state.lyricList.length > 0 && state.songId == widget.song.songId) {
                 return buildLyricLoaded(context, state);
               } else {
                 return SizedBox();
@@ -84,8 +83,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
     );
   }
 
-  GestureDetector buildLyricLoaded(
-      BuildContext context, LyricDataLoaded lyricData) {
+  GestureDetector buildLyricLoaded(BuildContext context, LyricDataLoaded lyricData) {
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -95,7 +93,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                 value: BlocProvider.of<LyricBloc>(context),
                 child: LyricFullPage(
                   song: widget.song,
-                    dominantColor:dominantColor,
+                  dominantColor: dominantColor,
                 ),
               ),
             ),
@@ -106,10 +104,8 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               //LISTEN TO LYRIC AND DURATION CHANGES
               try {
                 if (lyricData.lyricList.length > 0) {
-                  LyricItem lyricItem =
-                      lyricData.lyricList.firstWhere((element) {
-                    if (element.startTimeMillisecond >
-                        duration.currentDuration.inMilliseconds) {
+                  LyricItem lyricItem = lyricData.lyricList.firstWhere((element) {
+                    if (element.startTimeMillisecond > duration.currentDuration.inMilliseconds) {
                       return true;
                     }
                     return false;
@@ -142,7 +138,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "LYRICS",
+                    AppLocalizations.of(context)!.lyrics.toUpperCase(),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.white,
@@ -165,9 +161,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_16.sp,
                             color: currentLyricItem != null
-                                ? (currentLyricItem!.index == index
-                                    ? AppColors.white
-                                    : AppColors.black.withOpacity(0.7))
+                                ? (currentLyricItem!.index == index ? AppColors.white : AppColors.black.withOpacity(0.7))
                                 : AppColors.black.withOpacity(0.7),
                             fontWeight: FontWeight.w600,
                           ),
@@ -204,7 +198,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "LYRICS",
+            AppLocalizations.of(context)!.lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               color: AppColors.white,
@@ -218,7 +212,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Can't load lyric",
+                    AppLocalizations.of(context)!.cantLoadLyrics,
                     style: TextStyle(
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
@@ -229,7 +223,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                     height: AppMargin.margin_8,
                   ),
                   Text(
-                    "Check your internet Connection".toUpperCase(),
+                    AppLocalizations.of(context)!.checkYourInternetConnection.toUpperCase(),
                     style: TextStyle(
                       color: AppColors.lightGrey,
                       fontSize: AppFontSizes.font_size_10.sp,
@@ -257,7 +251,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                         borderRadius: BorderRadius.circular(120),
                       ),
                       child: Text(
-                        "Try Again".toUpperCase(),
+                        AppLocalizations.of(context)!.tryAgain.toUpperCase(),
                         style: TextStyle(
                           color: AppColors.black,
                           fontWeight: FontWeight.w600,

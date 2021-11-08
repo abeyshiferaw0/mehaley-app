@@ -77,7 +77,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
   void onTap() {
     ///LIKE UNLIKE PLAYLIST
     EasyDebounce.debounce(
-      "PLAYLIST_LIKE",
+      'PLAYLIST_LIKE',
       Duration(milliseconds: 800),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(

@@ -22,6 +22,7 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
@@ -35,11 +36,9 @@ class CategoryPage extends StatefulWidget {
   _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage>
-    with TickerProviderStateMixin {
+class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMixin {
   //PAGINATION CONTROLLER
-  final PagingController<int, Song> _pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Song> _pagingController = PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -70,8 +69,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CategoryPagePaginationBloc,
-        CategoryPagePaginationState>(
+    return BlocListener<CategoryPagePaginationBloc, CategoryPagePaginationState>(
       listener: (context, state) {
         if (state is CategoryPagePaginatedLoaded) {
           final isLastPage = state.songs.length < AppValues.pageSize;
@@ -113,8 +111,7 @@ class _CategoryPageState extends State<CategoryPage>
     );
   }
 
-  BlocBuilder<CategoryPageBloc, CategoryPageState>
-      buildCategoryErrorBlocBuilder() {
+  BlocBuilder<CategoryPageBloc, CategoryPageState> buildCategoryErrorBlocBuilder() {
     return BlocBuilder<CategoryPageBloc, CategoryPageState>(
       builder: (context, state) {
         if (state is CategoryPageTopLoadingError) {
@@ -255,7 +252,7 @@ class _CategoryPageState extends State<CategoryPage>
             horizontal: AppPadding.padding_32 * 2,
           ),
           child: Text(
-          AppLocalizations.of(context)!.emptyCategory,
+            AppLocalizations.of(context)!.emptyCategory,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
@@ -277,9 +274,7 @@ class _CategoryPageState extends State<CategoryPage>
             : SizedBox(),
         SizedBox(height: AppMargin.margin_32),
         //CHECK IF NO ALBUMS IS NOT EMPTY TO SHOW LIST VIEW
-        state.categoryPageTopData.topAlbum.length > 0
-            ? buildCategoryAlbums(state.categoryPageTopData.topAlbum)
-            : SizedBox(),
+        state.categoryPageTopData.topAlbum.length > 0 ? buildCategoryAlbums(state.categoryPageTopData.topAlbum) : SizedBox(),
       ],
     );
   }
@@ -289,7 +284,7 @@ class _CategoryPageState extends State<CategoryPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-         AppLocalizations.of(context)!.playlists,
+          AppLocalizations.of(context)!.playlists,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_14.sp,

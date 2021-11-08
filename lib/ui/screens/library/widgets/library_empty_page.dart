@@ -3,6 +3,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryEmptyPage extends StatelessWidget {
@@ -81,7 +82,7 @@ class LibraryEmptyPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-           AppLocalizations.of(context)!.newPlaylist.toUpperCase(),
+              AppLocalizations.of(context)!.newPlaylist.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
@@ -115,7 +116,7 @@ class LibraryEmptyPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-           AppLocalizations.of(context)!.downAllPurchased.toUpperCase(),
+              AppLocalizations.of(context)!.downAllPurchased.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,

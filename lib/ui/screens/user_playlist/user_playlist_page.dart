@@ -17,11 +17,11 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class UserPlaylistPage extends StatefulWidget {
-  const UserPlaylistPage({Key? key, required this.playlistId})
-      : super(key: key);
+  const UserPlaylistPage({Key? key, required this.playlistId}) : super(key: key);
 
   final int playlistId;
 
@@ -53,8 +53,8 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg:
-                  "${L10nUtil.translateLocale(state.song.songName, context)} removed from ${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)}",
+              msg: AppLocalizations.of(context)!.songRemovedPlaylist(L10nUtil.translateLocale(state.song.songName, context),
+                  L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -63,8 +63,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
 
           ///REMOVE REMOVED SONG TEMPORARILY
           BlocProvider.of<UserPlaylistPageBloc>(context).add(
-            SongRemovedFromPlaylistEvent(
-                song: state.song, playlistId: widget.playlistId),
+            SongRemovedFromPlaylistEvent(song: state.song, playlistId: widget.playlistId),
           );
         }
 
@@ -73,8 +72,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg:
-                  "${L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)} deleted",
+              msg: AppLocalizations.of(context)!.playlistDeleted(
+                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+              ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -88,8 +88,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg:
-                  "Unable remove mezmur from playlist\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToRemoveFromPlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -102,7 +101,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: "Unable to delete playlist\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToDeletePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -153,9 +152,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           headerSliverBuilder: (context, value) {
             return [
               buildSliverHeader(songs, myPlaylist),
-              songs.length > 0
-                  ? buildSliverPlayShuffleButton(songs, myPlaylist)
-                  : buildSliverAddSongsButton(),
+              songs.length > 0 ? buildSliverPlayShuffleButton(songs, myPlaylist) : buildSliverAddSongsButton(),
             ];
           },
           body: buildUserPlaylistSongList(
@@ -188,8 +185,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverHeader(
-      List<Song> songs, MyPlaylist myPlaylist) {
+  SliverPersistentHeader buildSliverHeader(List<Song> songs, MyPlaylist myPlaylist) {
     return SliverPersistentHeader(
       delegate: UserPlaylistPageSliverHeaderDelegate(
         songs: songs,
@@ -200,12 +196,10 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(
-      List<Song> songs, MyPlaylist myPlaylist) {
+  SliverPersistentHeader buildSliverPlayShuffleButton(List<Song> songs, MyPlaylist myPlaylist) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate:
-          UserPlaylistPlayShuffleDelegate(songs: songs, myPlaylist: myPlaylist),
+      delegate: UserPlaylistPlayShuffleDelegate(songs: songs, myPlaylist: myPlaylist),
     );
   }
 
@@ -260,8 +254,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           ),
                         );
                       },
-                      thumbUrl: AppApi.baseUrl +
-                          songs[position].albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseUrl + songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG
@@ -270,11 +263,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           songs: songs,
                           startPlaying: true,
                           playingFrom: PlayingFrom(
-                            from: "playing from playlist",
-                            title: L10nUtil.translateLocale(
-                                playlist.playlistNameText, context),
-                            songSyncPlayedFrom:
-                                SongSyncPlayedFrom.USER_PLAYLIST,
+                            from: AppLocalizations.of(context)!.playingFromPlaylist,
+                            title: L10nUtil.translateLocale(playlist.playlistNameText, context),
+                            songSyncPlayedFrom: SongSyncPlayedFrom.USER_PLAYLIST,
                             songSyncPlayedFromId: playlist.playlistId,
                           ),
                           index: position,
