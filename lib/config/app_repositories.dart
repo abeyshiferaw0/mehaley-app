@@ -9,6 +9,7 @@ import 'package:elf_play/data/data_providers/library_page_data_provider.dart';
 import 'package:elf_play/data/data_providers/like_follow_provider.dart';
 import 'package:elf_play/data/data_providers/lyric_data_provider.dart';
 import 'package:elf_play/data/data_providers/my_playlist_data_provider.dart';
+import 'package:elf_play/data/data_providers/payment_provider.dart';
 import 'package:elf_play/data/data_providers/playlist_data_provider.dart';
 import 'package:elf_play/data/data_providers/profile_data_provider.dart';
 import 'package:elf_play/data/data_providers/search_data_provider.dart';
@@ -26,6 +27,7 @@ import 'package:elf_play/data/repositories/library_page_data_repository.dart';
 import 'package:elf_play/data/repositories/like_follow_repository.dart';
 import 'package:elf_play/data/repositories/lyric_data_repository.dart';
 import 'package:elf_play/data/repositories/my_playlist_repository.dart';
+import 'package:elf_play/data/repositories/payment_repository.dart';
 import 'package:elf_play/data/repositories/playlist_data_repository.dart';
 import 'package:elf_play/data/repositories/profile_data_repository.dart';
 import 'package:elf_play/data/repositories/search_data_repository.dart';
@@ -99,5 +101,9 @@ class AppRepositories {
 
   static SyncRepository syncSongRepository = SyncRepository(
     syncProvider: SyncProvider(),
+  );
+
+  static PaymentRepository paymentRepository = PaymentRepository(
+    paymentProvider: PaymentProvider(),
   );
 }

@@ -73,7 +73,8 @@ class HomeGroups extends StatelessWidget {
                     items: groupItems,
                     item: groupItems[index],
                     playingFrom: PlayingFrom(
-                      from: "playing from",
+                      from: 
+                      AppLocalizations.of(context)!.playingFrom,
                       title: groupTitle,
                       songSyncPlayedFrom:
                           PagesUtilFunctions.getSongSyncPlayedFromGroupType(
@@ -171,7 +172,7 @@ class HomeGroups extends StatelessWidget {
                 items: groupItems,
                 item: groupItems[i],
                 playingFrom: PlayingFrom(
-                  from: "playing from",
+                  from: AppLocalizations.of(context)!.playingFrom,
                   title: groupTitle,
                   songSyncPlayedFrom:
                       PagesUtilFunctions.getSongSyncPlayedFromGroupType(

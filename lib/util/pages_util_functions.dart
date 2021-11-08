@@ -18,6 +18,7 @@ import 'package:elf_play/data/models/album.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/category.dart';
+import 'package:elf_play/data/models/enums/app_payment_methods.dart';
 import 'package:elf_play/data/models/enums/playlist_created_by.dart';
 import 'package:elf_play/data/models/home_shortcut/album_shortcut.dart';
 import 'package:elf_play/data/models/home_shortcut/category_shortcut.dart';
@@ -141,16 +142,13 @@ class PagesUtilFunctions {
 
   static String getGroupImageUrl(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
-      return AppApi.baseFileUrl + (item as Song).albumArt.imageMediumPath;
+      return AppApi.baseUrl + (item as Song).albumArt.imageMediumPath;
     } else if (groupType == GroupType.PLAYLIST) {
-      return AppApi.baseFileUrl +
-          (item as Playlist).playlistImage.imageMediumPath;
+      return AppApi.baseUrl + (item as Playlist).playlistImage.imageMediumPath;
     } else if (groupType == GroupType.ALBUM) {
-      return AppApi.baseFileUrl +
-          (item as Album).albumImages[0].imageMediumPath;
+      return AppApi.baseUrl + (item as Album).albumImages[0].imageMediumPath;
     } else if (groupType == GroupType.ARTIST) {
-      return AppApi.baseFileUrl +
-          (item as Artist).artistImages[0].imageMediumPath;
+      return AppApi.baseUrl + (item as Artist).artistImages[0].imageMediumPath;
     } else {
       return "";
     }
@@ -165,6 +163,7 @@ class PagesUtilFunctions {
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
+        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.PLAYLIST) {
       item as Playlist;
@@ -174,6 +173,7 @@ class PagesUtilFunctions {
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
+        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.ALBUM) {
       item as Album;
@@ -183,6 +183,7 @@ class PagesUtilFunctions {
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
+        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.ARTIST) {
       return SizedBox();
@@ -204,6 +205,7 @@ class PagesUtilFunctions {
       discountPercentage: discountPercentage,
       isFree: isFree,
       isPurchased: isPurchased,
+      appCurrency: AppCurrency.ETB,
     );
   }
 
@@ -592,13 +594,11 @@ class PagesUtilFunctions {
   static String getSearchFrontPageItemImageUrl(
       AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return AppApi.baseFileUrl +
-          (item as Category).categoryImage.imageSmallPath;
+      return AppApi.baseUrl + (item as Category).categoryImage.imageSmallPath;
     } else if (appItemsType == AppItemsType.ARTIST) {
-      return AppApi.baseFileUrl +
-          (item as Artist).artistImages[0].imageSmallPath;
+      return AppApi.baseUrl + (item as Artist).artistImages[0].imageSmallPath;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
-      return AppApi.baseFileUrl + (item as Song).albumArt.imageSmallPath;
+      return AppApi.baseUrl + (item as Song).albumArt.imageSmallPath;
     }
     return "";
   }
@@ -814,8 +814,7 @@ class PagesUtilFunctions {
           width: AppValues.libraryMusicItemSize,
           height: AppValues.libraryMusicItemSize,
           fit: BoxFit.cover,
-          imageUrl:
-              AppApi.baseFileUrl + myPlaylist.playlistImage!.imageMediumPath,
+          imageUrl: AppApi.baseUrl + myPlaylist.playlistImage!.imageMediumPath,
           placeholder: (context, url) =>
               buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
           errorWidget: (context, url, e) =>
@@ -830,7 +829,7 @@ class PagesUtilFunctions {
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
             fit: BoxFit.cover,
-            imageUrl: AppApi.baseFileUrl +
+            imageUrl: AppApi.baseUrl +
                 myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
             placeholder: (context, url) =>
                 buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
@@ -852,7 +851,7 @@ class PagesUtilFunctions {
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl +
+                imageUrl: AppApi.baseUrl +
                     myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
                 placeholder: (context, url) =>
                     buildImagePlaceHolder(AppItemsType.OTHER),
@@ -869,7 +868,7 @@ class PagesUtilFunctions {
         width: AppValues.libraryMusicItemSize,
         height: AppValues.libraryMusicItemSize,
         fit: BoxFit.cover,
-        imageUrl: AppApi.baseFileUrl,
+        imageUrl: AppApi.baseUrl,
         placeholder: (context, url) =>
             buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
         errorWidget: (context, url, e) =>
@@ -1118,6 +1117,42 @@ class PagesUtilFunctions {
       );
     } else {
       throw "shortcut type not valid";
+    }
+  }
+
+  static String getPaymentMethodName(AppPaymentMethods appPaymentMethod) {
+    if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
+      return "Hello Cash";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
+      return "Mbirr";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
+      return "CBE Birr";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
+      return "Amole";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
+      return "Visa";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
+      return "MasterCard";
+    } else {
+      return "Unknown";
+    }
+  }
+
+  static String getPaymentMethodIcon(AppPaymentMethods appPaymentMethod) {
+    if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
+      return "assets/images/ic_hello_cash.png";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
+      return "assets/images/ic_mbirr.png";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
+      return "assets/images/ic_cbe_birr.png";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
+      return "assets/images/ic_amole.png";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
+      return "assets/images/ic_visa.png";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
+      return "assets/images/ic_mastercard.png";
+    } else {
+      return "";
     }
   }
 }

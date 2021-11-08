@@ -171,7 +171,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
               RetryDownloadSongEvent(
                 song: widget.song,
                 notificationTitle:
-                    "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+                    "${AppLocalizations.of(context)!.downloading} ${L10nUtil.translateLocale(widget.song.songName, context)}",
               ),
             );
           });
@@ -223,7 +223,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                       DownloadSongEvent(
                         song: widget.song,
                         notificationTitle:
-                            "Downloading ${L10nUtil.translateLocale(widget.song.songName, context)}",
+                            "${AppLocalizations.of(context)!.downloading} ${L10nUtil.translateLocale(widget.song.songName, context)}",
                       ),
                     );
                   });

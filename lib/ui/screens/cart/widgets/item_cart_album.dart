@@ -32,8 +32,7 @@ class CartAlbumItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedNetworkImage(
-              imageUrl:
-                  AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+              imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
               width: AppValues.cartItemsSize,
               height: AppValues.cartItemsSize,
               imageBuilder: (context, imageProvider) => Stack(

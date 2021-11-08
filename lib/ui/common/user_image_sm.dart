@@ -107,8 +107,7 @@ class UserImageSm extends StatelessWidget {
         child: CachedNetworkImage(
           height: size,
           width: size,
-          imageUrl:
-              AppApi.baseFileUrl + appUser.profileImageId!.imageMediumPath,
+          imageUrl: AppApi.baseUrl + appUser.profileImageId!.imageMediumPath,
           fit: BoxFit.cover,
           placeholder: (context, url) => buildItemsImagePlaceHolder(),
           errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),

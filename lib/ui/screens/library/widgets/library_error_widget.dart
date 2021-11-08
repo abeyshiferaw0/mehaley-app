@@ -16,7 +16,7 @@ class LibraryErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Something went wrong",
+             AppLocalizations.of(context)!.somethingWentWrong ,
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
@@ -27,7 +27,7 @@ class LibraryErrorWidget extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             Text(
-              "Check your internet Connection",
+              AppLocalizations.of(context)!.checkYourInternetConnection,
               style: TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -50,7 +50,7 @@ class LibraryErrorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(120),
                 ),
                 child: Text(
-                  "Try Again",
+                  AppLocalizations.of(context)!.tryAgain,
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,

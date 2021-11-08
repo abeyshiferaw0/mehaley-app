@@ -83,7 +83,7 @@ class _CategoryPageState extends State<CategoryPage>
           }
         }
         if (state is CategoryPagePaginatedLoadingError) {
-          _pagingController.error = "Network Error";
+          _pagingController.error = AppLocalizations.of(context)!.networkError;
         }
       },
       child: Scaffold(
@@ -169,7 +169,7 @@ class _CategoryPageState extends State<CategoryPage>
                 SongItem(
                   song: item,
                   isForMyPlaylist: false,
-                  thumbUrl: AppApi.baseFileUrl + item.albumArt.imageSmallPath,
+                  thumbUrl: AppApi.baseUrl + item.albumArt.imageSmallPath,
                   thumbSize: AppValues.categorySongItemSize,
                   onPressed: () {
                     //OPEN SONG
@@ -177,7 +177,7 @@ class _CategoryPageState extends State<CategoryPage>
                       context: context,
                       songs: [item],
                       playingFrom: PlayingFrom(
-                        from: "playing from category",
+                        from: AppLocalizations.of(context)!.playingFromCategory,
                         title: L10nUtil.translateLocale(
                           widget.category.categoryNameText,
                           context,
@@ -255,7 +255,7 @@ class _CategoryPageState extends State<CategoryPage>
             horizontal: AppPadding.padding_32 * 2,
           ),
           child: Text(
-            "Empty category",
+          AppLocalizations.of(context)!.emptyCategory,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
@@ -289,7 +289,7 @@ class _CategoryPageState extends State<CategoryPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Playlists",
+         AppLocalizations.of(context)!.playlists,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_14.sp,
@@ -344,7 +344,7 @@ class _CategoryPageState extends State<CategoryPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Albums",
+          AppLocalizations.of(context)!.albums,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_14.sp,
@@ -397,7 +397,7 @@ class _CategoryPageState extends State<CategoryPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Mezmurs",
+          AppLocalizations.of(context)!.mezmurs,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_18,

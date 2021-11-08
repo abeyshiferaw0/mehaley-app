@@ -48,7 +48,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl +
+                imageUrl: AppApi.baseUrl +
                     playlistPageData.playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
@@ -158,6 +158,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       discountPercentage: playlist.discountPercentage,
                       isPurchased: playlist.isBought,
+                      appCurrency: AppCurrency.ETB,
                     ),
                   )
                 : playlist.isFree || playlist.isBought

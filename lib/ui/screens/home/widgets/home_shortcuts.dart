@@ -97,7 +97,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     if (widget.shortcutData.purchasedCount > 0) {
       shortCuts.add(
         ItemHomeShortcut(
-          text: "Purchased Mezmurs",
+          text: AppLocalizations.of(context)!.purchasedMezmurs,
           image: null,
           appItemsType: null,
           textMaxLines: 2,
@@ -137,7 +137,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     if (widget.shortcutData.downloadCount > 0) {
       shortCuts.add(
         ItemHomeShortcut(
-          text: "Listen Offline",
+          text: AppLocalizations.of(context)!.listenOffline,
           image: null,
           appItemsType: null,
           textMaxLines: 2,

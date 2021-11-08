@@ -178,6 +178,7 @@ class AlbumMenuWidget extends StatelessWidget {
             discountPercentage: discountPercentage,
             isDiscountAvailable: isDiscountAvailable,
             isPurchased: isBought,
+            appCurrency: AppCurrency.ETB,
           )
         ],
       ),

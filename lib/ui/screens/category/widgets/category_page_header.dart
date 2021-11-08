@@ -33,7 +33,7 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
           fit: BoxFit.cover,
           height: 360,
           width: double.infinity,
-          imageUrl: AppApi.baseFileUrl + widget.category.categoryImage.imageMediumPath,
+          imageUrl: AppApi.baseUrl + widget.category.categoryImage.imageMediumPath,
           placeholder: (context, url) => buildCategoryHeaderGradient(),
           errorWidget: (context, url, e) => buildCategoryHeaderGradient(),
         ),

@@ -380,7 +380,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                         return CachedNetworkImage(
                           width: AppValues.createPlaylistImageSize,
                           height: AppValues.createPlaylistImageSize,
-                          imageUrl: AppApi.baseFileUrl +
+                          imageUrl: AppApi.baseUrl +
                               widget.myPlaylist.playlistImage!.imageMediumPath,
                           fit: BoxFit.cover,
                           placeholder: (context, url) =>

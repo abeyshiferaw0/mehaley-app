@@ -1,14 +1,35 @@
+import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/enums/app_payment_methods.dart';
+import 'package:elf_play/ui/common/dialog/widgets/payment_item.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
 
-class PreferredPaymentDialog extends StatelessWidget {
+class PreferredPaymentDialog extends StatefulWidget {
   const PreferredPaymentDialog({Key? key}) : super(key: key);
+
+  @override
+  State<PreferredPaymentDialog> createState() => _PreferredPaymentDialogState();
+}
+
+class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
+  late AppPaymentMethods tempAppPaymentMethods;
+
+  @override
+  void initState() {
+    tempAppPaymentMethods = AppPaymentMethods.METHOD_UNK;
+    BlocProvider.of<PreferredPaymentMethodBloc>(context).add(
+      LoadPreferredPaymentMethodEvent(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,39 +48,31 @@ class PreferredPaymentDialog extends StatelessWidget {
             padding: EdgeInsets.all(
               AppPadding.padding_16,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildDialogHeader(context),
-                SizedBox(
-                  height: AppMargin.margin_32,
-                ),
-                buildPaymentMethodsList(),
-                SizedBox(
-                  height: AppMargin.margin_20,
-                ),
-                Text(
-                  "Currently Selected".toUpperCase(),
-                  style: TextStyle(
-                    color: AppColors.txtGrey,
-                    fontWeight: FontWeight.w600,
-                    fontSize: AppFontSizes.font_size_8.sp,
-                  ),
-                ),
-                SizedBox(
-                  height: AppMargin.margin_16,
-                ),
-                PaymentMethodItem(
-                  title: 'Hello Cash',
-                  imagePath: "assets/images/ic_hello_cash.png",
-                  scale: 0.8,
-                  isSelected: true,
-                ),
-                SizedBox(
-                  height: AppMargin.margin_20,
-                ),
-                buildSaveButton(),
-              ],
+            child: BlocBuilder<PreferredPaymentMethodBloc,
+                PreferredPaymentMethodState>(
+              builder: (context, state) {
+                if (state is PreferredPaymentMethodLoadedState) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildDialogHeader(context),
+                      SizedBox(
+                        height: AppMargin.margin_16,
+                      ),
+                      buildPaymentMethodsList(state.appPaymentMethod),
+                      SizedBox(
+                        height: AppMargin.margin_20,
+                      ),
+                      state.appPaymentMethod != AppPaymentMethods.METHOD_UNK
+                          ? buildCurrentlySelected(state.appPaymentMethod)
+                          : SizedBox(),
+                      buildSaveButton(),
+                    ],
+                  );
+                } else {
+                  return SizedBox();
+                }
+              },
             ),
           ),
         ],
@@ -67,28 +80,73 @@ class PreferredPaymentDialog extends StatelessWidget {
     );
   }
 
-  Container buildSaveButton() => Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_32,
-          vertical: AppPadding.padding_20,
+  Column buildCurrentlySelected(AppPaymentMethods appPaymentMethod) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Currently Selected".toUpperCase(),
+          style: TextStyle(
+            color: AppColors.txtGrey,
+            fontWeight: FontWeight.w600,
+            fontSize: AppFontSizes.font_size_8.sp,
+          ),
         ),
-        decoration: BoxDecoration(
-          color: AppColors.darkGreen,
-          borderRadius: BorderRadius.circular(40),
+        SizedBox(
+          height: AppMargin.margin_16,
         ),
-        child: Center(
-          child: Text(
-            "Change Payment Method".toUpperCase(),
-            style: TextStyle(
-              color: AppColors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: AppFontSizes.font_size_10.sp,
+        PaymentMethodItem(
+          title: PagesUtilFunctions.getPaymentMethodName(appPaymentMethod),
+          imagePath: PagesUtilFunctions.getPaymentMethodIcon(appPaymentMethod),
+          scale: 0.8,
+          isSelected: true,
+          appPaymentMethods: appPaymentMethod,
+          onTap: () {},
+        ),
+        SizedBox(
+          height: AppMargin.margin_20,
+        ),
+      ],
+    );
+  }
+
+  AppBouncingButton buildSaveButton() => AppBouncingButton(
+        onTap: () {
+          if (tempAppPaymentMethods == AppPaymentMethods.METHOD_UNK) {
+          } else {
+            BlocProvider.of<PreferredPaymentMethodBloc>(context).add(
+              SetPreferredPaymentMethodEvent(
+                appPaymentMethods: tempAppPaymentMethods,
+              ),
+            );
+            Navigator.pop(context);
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32,
+            vertical: AppPadding.padding_20,
+          ),
+          decoration: BoxDecoration(
+            color: tempAppPaymentMethods == AppPaymentMethods.METHOD_UNK
+                ? AppColors.txtGrey
+                : AppColors.darkGreen,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Center(
+            child: Text(
+              "Select Payment Method".toUpperCase(),
+              style: TextStyle(
+                color: AppColors.white,
+                fontWeight: FontWeight.w600,
+                fontSize: AppFontSizes.font_size_10.sp,
+              ),
             ),
           ),
         ),
       );
 
-  Expanded buildPaymentMethodsList() {
+  Expanded buildPaymentMethodsList(AppPaymentMethods paymentMethod) {
     return Expanded(
       child: ShaderMask(
         blendMode: BlendMode.dstOut,
@@ -117,7 +175,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'Amole',
                 imagePath: "assets/images/ic_amole.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_AMOLE,
+                appPaymentMethods: AppPaymentMethods.METHOD_AMOLE,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_AMOLE;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -126,7 +191,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'CBE Birr',
                 imagePath: "assets/images/ic_cbe_birr.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_CBE_BIRR,
+                appPaymentMethods: AppPaymentMethods.METHOD_CBE_BIRR,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_CBE_BIRR;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -135,7 +207,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'Hello Cash',
                 imagePath: "assets/images/ic_hello_cash.png",
                 scale: 0.8,
-                isSelected: false,
+                isSelected: tempAppPaymentMethods ==
+                    AppPaymentMethods.METHOD_HELLO_CASH,
+                appPaymentMethods: AppPaymentMethods.METHOD_HELLO_CASH,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_HELLO_CASH;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -144,7 +223,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'Mbirr',
                 imagePath: "assets/images/ic_mbirr.png",
                 scale: 1.3,
-                isSelected: false,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_MBIRR,
+                appPaymentMethods: AppPaymentMethods.METHOD_MBIRR,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_MBIRR;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -153,7 +239,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'Visa',
                 imagePath: "assets/images/ic_visa.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_VISA,
+                appPaymentMethods: AppPaymentMethods.METHOD_VISA,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_VISA;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -162,7 +255,14 @@ class PreferredPaymentDialog extends StatelessWidget {
                 title: 'Mastercard',
                 imagePath: "assets/images/ic_mastercard.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected: tempAppPaymentMethods ==
+                    AppPaymentMethods.METHOD_MASTERCARD,
+                appPaymentMethods: AppPaymentMethods.METHOD_MASTERCARD,
+                onTap: () {
+                  setState(() {
+                    tempAppPaymentMethods = AppPaymentMethods.METHOD_MASTERCARD;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -215,101 +315,6 @@ class PreferredPaymentDialog extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class PaymentMethodItem extends StatelessWidget {
-  const PaymentMethodItem({
-    Key? key,
-    required this.imagePath,
-    required this.title,
-    required this.scale,
-    required this.isSelected,
-  }) : super(key: key);
-
-  final String imagePath;
-  final String title;
-  final double scale;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: AppPadding.padding_8,
-          horizontal: AppPadding.padding_16,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-            color: isSelected
-                ? AppColors.darkGreen
-                : AppColors.grey.withOpacity(0.4),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.darkGrey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 6,
-              offset: Offset(0, 0),
-            ),
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Transform.scale(
-              scale: scale,
-              child: Container(
-                width: 60,
-                height: 50,
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-            SizedBox(width: AppMargin.margin_12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: AppFontSizes.font_size_12.sp,
-                    ),
-                  ),
-                  Text(
-                    "Some message for sub title message sub title message",
-                    style: TextStyle(
-                      color: AppColors.txtGrey,
-                      fontWeight: FontWeight.w400,
-                      fontSize: AppFontSizes.font_size_8.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: AppMargin.margin_8),
-            isSelected
-                ? Icon(
-                    PhosphorIcons.check_circle_fill,
-                    color: AppColors.darkGreen,
-                    size: AppIconSizes.icon_size_24,
-                  )
-                : SizedBox(),
-          ],
-        ),
-      ),
     );
   }
 }

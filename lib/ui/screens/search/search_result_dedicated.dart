@@ -217,7 +217,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               title: L10nUtil.translateLocale(
                   resultItem.playlistNameText, context),
               imageUrl:
-                  AppApi.baseFileUrl + resultItem.playlistImage.imageMediumPath,
+                  AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
               isFree: resultItem.isFree,
               price: resultItem.priceEtb,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -253,8 +253,8 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               rootContext: context,
               isLiked: resultItem.isLiked,
               title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl: AppApi.baseFileUrl +
-                  resultItem.albumImages[0].imageMediumPath,
+              imageUrl:
+                  AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
               price: resultItem.priceEtb,
               isFree: resultItem.isFree,
               isDiscountAvailable: resultItem.isDiscountAvailable,
@@ -283,8 +283,8 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),
-              imageUrl: AppApi.baseFileUrl +
-                  resultItem.artistImages[0].imageMediumPath,
+              imageUrl:
+                  AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
               isFollowing: resultItem.isFollowed!,
               artistId: resultItem.artistId,
             ),

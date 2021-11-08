@@ -56,7 +56,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.folder_fill,
-                msg: "You don't have any\nPurchases",
+                msg: AppLocalizations.of(context)!.uDontHavePurchase,
               ),
             );
           }
@@ -105,7 +105,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
             SongItem(
               song: allPurchasedSong[position].song,
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseFileUrl +
+              thumbUrl: AppApi.baseUrl +
                   allPurchasedSong[position].song.albumArt.imageSmallPath,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {
@@ -115,8 +115,8 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
                   songs: allPurchasedSong.map((e) => e.song).toList(),
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from: "playing from",
-                    title: "purchased mezmurs",
+                    from:AppLocalizations.of(context)!.playingFrom,
+                    title: AppLocalizations.of(context)!.purchasedMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                     songSyncPlayedFromId: -1,
                   ),

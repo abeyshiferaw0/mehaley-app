@@ -51,8 +51,7 @@ class LibraryAlbumItem extends StatelessWidget {
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl:
-                    AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
+                imageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),
@@ -111,6 +110,7 @@ class LibraryAlbumItem extends StatelessWidget {
                   discountPercentage: album.discountPercentage,
                   isDiscountAvailable: album.isDiscountAvailable,
                   isPurchased: album.isBought,
+                  appCurrency: AppCurrency.ETB,
                 ),
               ],
             ),
@@ -125,8 +125,8 @@ class LibraryAlbumItem extends StatelessWidget {
                     isLiked: album.isLiked,
                     rootContext: context,
                     title: L10nUtil.translateLocale(album.albumTitle, context),
-                    imageUrl: AppApi.baseFileUrl +
-                        album.albumImages[0].imageMediumPath,
+                    imageUrl:
+                        AppApi.baseUrl + album.albumImages[0].imageMediumPath,
                     price: album.priceEtb,
                     isFree: album.isFree,
                     isDiscountAvailable: album.isDiscountAvailable,

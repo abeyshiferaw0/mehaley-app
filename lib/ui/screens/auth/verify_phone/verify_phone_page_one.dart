@@ -40,10 +40,10 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             AppRouterPaths.verifyPhonePageTwo,
             arguments: ScreenArguments(
               args: {
-                "phoneNumber": controller.text,
-                "countryCode": selectedCountryCode.dialCode,
-                "verificationId": state.verificationId,
-                "resendToken": state.resendToken,
+                'phoneNumber': controller.text,
+                'countryCode': selectedCountryCode.dialCode,
+                'verificationId': state.verificationId,
+                'resendToken': state.resendToken,
               },
             ),
           );
@@ -113,7 +113,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
     return Container(
       margin: EdgeInsets.only(bottom: AppMargin.margin_48),
       child: Text(
-        "What is your\nphone number ?".toUpperCase(),
+        AppLocalizations.of(context)!.whatIsYourPhoneNumber.toUpperCase(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_18,
@@ -132,7 +132,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       ),
       margin: EdgeInsets.only(bottom: AppMargin.margin_16),
       child: Text(
-        "We'll' text you a verification code to verify\nyour identity",
+        AppLocalizations.of(context)!.phoneVerificationMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12,
@@ -149,14 +149,14 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           return PhoneAuthLargeButton(
             disableBouncing: true,
             isLoading: true,
-            text: "Sending SMS",
+            text: AppLocalizations.of(context)!.sendingSms,
             onTap: () {},
           );
         } else {
           return PhoneAuthLargeButton(
             isLoading: false,
             disableBouncing: false,
-            text: "Send SMS",
+            text: AppLocalizations.of(context)!.sendSms,
             onTap: () {
               //VALIDATE COUNTRY CODE AND PHONE NUMBER
               if (controller.text.length == 11) {
@@ -172,7 +172,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
                   buildAppSnackBar(
                     bgColor: AppColors.errorRed,
                     txtColor: AppColors.white,
-                    msg: "Invalid phone number !",
+                    msg: AppLocalizations.of(context)!.invalidPhoneNumber,
                     isFloating: false,
                   ),
                 );
@@ -219,7 +219,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               ),
               child: Center(
                 child: Text(
-                  "No country found",
+                  AppLocalizations.of(context)!.noCountryCode,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.grey,
@@ -256,7 +256,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             border: UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.darkGreen),
             ),
-            hintText: "Search for country code",
+            hintText: AppLocalizations.of(context)!.searchForCountryCode,
             hintStyle: TextStyle(
               color: AppColors.txtGrey,
               fontSize: AppFontSizes.font_size_14,
@@ -301,7 +301,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         ),
       ),
       title: Text(
-        "Continue with phone",
+        AppLocalizations.of(context)!.continueWithPhoneNumber,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14,
         ),

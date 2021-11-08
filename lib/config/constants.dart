@@ -6,10 +6,9 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String musicBaseUrl = "http://192.168.144.202:8181/music";
-  static const String userBaseUrl = "http://192.168.144.202:8181/user";
-  static const String baseFileUrl = "http://192.168.144.202:8181";
-  //3.128.186.103:8000
+  static const String baseUrl = "http://13.58.31.136:8000";
+  static const String musicBaseUrl = "$baseUrl/music";
+  static const String userBaseUrl = "$baseUrl/user";
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -146,6 +145,8 @@ class AppValues {
   static const String userTemporaryNameKey = "USER_TEMP_NAME";
   static const String userTemporaryColorKey = "USER_TEMP_COLOR";
   static const String downloadSongQualityKey = "DOWNLOAD_SONG_QUALITY";
+  static const String preferredPaymentMethodKey =
+      "PREFERRED_PAYMENT_METHOD_KEY";
 
   //system folders
   static const String folderSongs = "FOLDER_SONGS";

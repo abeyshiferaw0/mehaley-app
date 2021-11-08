@@ -10,7 +10,6 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/user_image_sm.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -134,7 +133,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: "Home",
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -151,7 +150,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: "Search",
+              label: AppLocalizations.of(context)!.search,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -168,7 +167,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: true,
               ),
-              label: "My Library",
+              label: AppLocalizations.of(context)!.myLibrary,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -185,7 +184,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: "Cart",
+              label: AppLocalizations.of(context)!.cart,
             ),
           ],
         );
@@ -194,7 +193,6 @@ class _BottomBarState extends State<BottomBar> {
   }
 
   int getBottomBarIndex(BottomBarPages state) {
-    print("roughtAware => ${EnumToString.convertToString(state)}");
     if (state == BottomBarPages.HOME) {
       return 0;
     } else if (state == BottomBarPages.SEARCH) {
@@ -242,7 +240,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: "Li",
+          letter: AppLocalizations.of(context)!.libraryShort,
         );
       } else if (appUser.socialProfileImgUrl != null) {
         return UserImageSm(
@@ -252,7 +250,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: "Li",
+          letter: AppLocalizations.of(context)!.libraryShort,
         );
       } else {
         return UserImageSm(
@@ -262,7 +260,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: "Li",
+          letter: AppLocalizations.of(context)!.libraryShort,
         );
       }
     } else {

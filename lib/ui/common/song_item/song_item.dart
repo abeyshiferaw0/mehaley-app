@@ -269,7 +269,7 @@ class _SongItemState extends State<SongItem> {
         isFree: isFree,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
-        isPurchased: isBought,
+        isPurchased: isBought,appCurrency: AppCurrency.ETB,
       ),
     );
   }

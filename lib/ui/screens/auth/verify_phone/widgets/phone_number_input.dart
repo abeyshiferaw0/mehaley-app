@@ -90,7 +90,8 @@ class PhoneNumberInput extends StatelessWidget {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    hintText: "enter your phoneNumber",
+                    hintText:
+                        AppLocalizations.of(context)!.enterYourPhoneNumber,
                     hintStyle: TextStyle(
                       color: AppColors.txtGrey,
                       fontSize: AppFontSizes.font_size_14,
@@ -104,7 +105,7 @@ class PhoneNumberInput extends StatelessWidget {
               Visibility(
                 visible: hasError,
                 child: Text(
-                  "Invalid phone number",
+                  AppLocalizations.of(context)!.invalidPhoneNumber,
                   maxLines: 1,
                   style: TextStyle(
                     color: AppColors.errorRed,

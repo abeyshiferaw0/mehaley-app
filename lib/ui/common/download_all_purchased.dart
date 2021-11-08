@@ -15,7 +15,7 @@ class DownloadAllPurchased extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Download all purchased",
+            AppLocalizations.of(context)!.downAllPurchased,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: AppColors.lightGrey,

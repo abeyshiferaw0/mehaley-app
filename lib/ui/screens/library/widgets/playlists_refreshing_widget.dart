@@ -46,7 +46,7 @@ class PlaylistsRefreshingWidget extends StatelessWidget {
               width: AppMargin.margin_16,
             ),
             Text(
-              "Refreshing ...",
+           AppLocalizations.of(context)!.refreshing,
               style: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_8.sp,

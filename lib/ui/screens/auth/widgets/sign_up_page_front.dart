@@ -39,7 +39,7 @@ class SignUpPageFront extends StatelessWidget {
                       height: AppMargin.margin_16,
                     ),
                     Text(
-                      "ኤልፊ ጨዋታ",
+                      AppLocalizations.of(context)!.appName,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_28,
                         fontWeight: FontWeight.w600,
@@ -50,7 +50,7 @@ class SignUpPageFront extends StatelessWidget {
                       height: AppMargin.margin_16,
                     ),
                     Text(
-                      "ሰላም ፣ ወደ ኤልፊ ጨዋታ እንኳን\nበደህና መጡ",
+                      AppLocalizations.of(context)!.appWelcomeTxt,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_20,
@@ -77,7 +77,7 @@ class SignUpPageFront extends StatelessWidget {
                   children: [
                     SizedBox(height: AppMargin.margin_16),
                     SignUpButton(
-                      title: 'Continue with phone',
+                      title: AppLocalizations.of(context)!.continueWithPhone,
                       icon: "assets/icons/ic_phone.svg",
                       userLoginType: UserLoginType.PHONE_NUMBER,
                       color: AppColors.darkGreen,
@@ -92,7 +92,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: 'Continue with google',
+                      title: AppLocalizations.of(context)!.continueWithGoogle,
                       icon: "assets/icons/ic_google.svg",
                       userLoginType: UserLoginType.GOOGLE,
                       color: AppColors.grey,
@@ -107,7 +107,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: 'Continue with facebook',
+                      title: AppLocalizations.of(context)!.continueWithFacebook,
                       icon: "assets/icons/ic_facebook.svg",
                       userLoginType: UserLoginType.FACEBOOK,
                       color: AppColors.grey,
@@ -122,8 +122,8 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: 'Continue with apple',
-                      icon: "assets/icons/ic_apple.svg",
+                      title: AppLocalizations.of(context)!.continueWithApple,
+                      icon: 'assets/icons/ic_apple.svg',
                       userLoginType: UserLoginType.APPLE,
                       color: AppColors.grey,
                       isFilled: false,

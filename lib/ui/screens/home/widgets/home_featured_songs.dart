@@ -72,7 +72,8 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
                 items: widget.featuredSongs,
                 item: widget.featuredSongs[index],
                 playingFrom: PlayingFrom(
-                  from: "playing from featured mezmurs",
+                  from: 
+                  AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
                   title: L10nUtil.translateLocale(
                       widget.featuredSongs[index].songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
@@ -106,7 +107,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
     return Padding(
       padding: EdgeInsets.only(left: AppMargin.margin_16),
       child: Text(
-        "Featured Mezmurs",
+       AppLocalizations.of(context)!.featuredMezmurs,
         style: TextStyle(
           color: Colors.white,
           fontSize: AppFontSizes.font_size_14.sp,

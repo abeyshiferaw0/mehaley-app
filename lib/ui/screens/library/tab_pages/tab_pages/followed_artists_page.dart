@@ -43,7 +43,7 @@ class _FollowedArtistsPageState extends State<FollowedArtistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.hand_pointing_fill,
-                msg: "You are not following any\nArtist",
+                msg:AppLocalizations.of(context)!.uAreNotFollowingArtist ,
               ),
             );
           }

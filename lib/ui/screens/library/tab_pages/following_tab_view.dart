@@ -99,7 +99,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
                 child: Row(
                   children: [
                     LibraryPageSubTabButton(
-                      text: "ARTISTS",
+                      text: AppLocalizations.of(context)!.artists.toUpperCase(),
                       isSelected: state == AppFollowedPageItemTypes.ARTIST,
                       onTap: () {
                         if (!(state == AppFollowedPageItemTypes.ARTIST))
@@ -111,7 +111,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
                       hasLeftMargin: false,
                     ),
                     LibraryPageSubTabButton(
-                      text: "PLAYLISTS",
+                      text: AppLocalizations.of(context)!.playlists.toUpperCase(),
                       isSelected: state == AppFollowedPageItemTypes.PLAYLISTS,
                       onTap: () {
                         if (!(state == AppFollowedPageItemTypes.PLAYLISTS))

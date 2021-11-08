@@ -91,7 +91,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 width: AppValues.previewDialogSongItemSize,
                 height: AppValues.previewDialogSongItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseFileUrl + song.albumArt.imageMediumPath,
+                imageUrl: AppApi.baseUrl + song.albumArt.imageMediumPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),

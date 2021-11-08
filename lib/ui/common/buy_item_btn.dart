@@ -1,3 +1,4 @@
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
@@ -39,6 +40,7 @@ class BuyItemBtnWidget extends StatelessWidget {
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
         isPurchased: isBought,
+        appCurrency: AppCurrency.ETB,
       );
     } else {
       return AppBouncingButton(
@@ -76,7 +78,7 @@ class BuyItemBtnWidget extends StatelessWidget {
                 showDiscount: showDiscount,
                 isDiscountAvailable: isDiscountAvailable,
                 discountPercentage: discountPercentage,
-                isPurchased: isBought,
+                isPurchased: isBought,appCurrency: AppCurrency.ETB,
               )
             ],
           ),

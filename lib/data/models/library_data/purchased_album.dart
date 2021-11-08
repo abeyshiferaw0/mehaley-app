@@ -1,4 +1,5 @@
 import 'package:elf_play/config/enums.dart';
+import 'package:elf_play/data/models/enums/app_payment_methods.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
 import '../album.dart';
@@ -7,7 +8,7 @@ class PurchasedAlbum {
   final int paymentId;
   final Album album;
   final DateTime paymentDate;
-  final AppPaymentMethod paymentMethod;
+  final AppPaymentMethods paymentMethod;
   final AppCurrency paymentCurrency;
   final double priceEtb;
   final double priceDollar;
@@ -28,9 +29,9 @@ class PurchasedAlbum {
       album: Album.fromMap(map["album"]),
       paymentDate: DateTime.parse(map["payment_date"]),
       paymentMethod: EnumToString.fromString(
-        AppPaymentMethod.values,
+        AppPaymentMethods.values,
         map["payment_method"],
-      ) as AppPaymentMethod,
+      ) as AppPaymentMethods,
       paymentCurrency: EnumToString.fromString(
         AppCurrency.values,
         map["payment_currency"],

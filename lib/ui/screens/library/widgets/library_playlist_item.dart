@@ -29,8 +29,7 @@ class LibraryPlaylistItem extends StatelessWidget {
         children: [
           Expanded(
             child: CachedNetworkImage(
-              imageUrl:
-                  AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
+              imageUrl: AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
               imageBuilder: (context, imageProvider) => Stack(
                 children: [
                   Container(

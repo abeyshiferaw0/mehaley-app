@@ -62,7 +62,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
           children: [
             ClipRRect(
               child: CachedNetworkImage(
-                imageUrl: AppApi.baseFileUrl + song.albumArt.imageSmallPath,
+                imageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
                 width: width,
                 height: width,
                 imageBuilder: (context, imageProvider) => Stack(

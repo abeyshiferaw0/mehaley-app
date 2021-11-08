@@ -126,7 +126,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                   width: AppValues.lyricFullPageSongItemSize,
                   height: AppValues.lyricFullPageSongItemSize,
                   fit: BoxFit.cover,
-                  imageUrl: AppApi.baseFileUrl + state.albumArt.imageMediumPath,
+                  imageUrl: AppApi.baseUrl + state.albumArt.imageMediumPath,
                   placeholder: (context, url) => buildImagePlaceHolder(),
                   errorWidget: (context, url, e) => buildImagePlaceHolder(),
                 ),

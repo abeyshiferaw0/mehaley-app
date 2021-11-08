@@ -71,9 +71,9 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                   );
                 },
                 child: GroupHeaderWidget(
-                  groupHeaderImageUrl: AppApi.baseFileUrl +
-                      playlist.playlistImage.imageSmallPath,
-                  groupSubTitle: "${playlist.songs!.length} Mezmurs",
+                  groupHeaderImageUrl:
+                      AppApi.baseUrl + playlist.playlistImage.imageSmallPath,
+                  groupSubTitle: AppLocalizations.of(context)!.numberOfMezmurs(playlist.songs!.length),
                   groupTitle: L10nUtil.translateLocale(
                       playlist.playlistNameText, context),
                 ),
@@ -82,7 +82,8 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
             (!playlist.isBought && !playlist.isFree)
                 ? BuyItemBtnWidget(
                     price: 0.0,
-                    title: "BUY PLAYLIST",
+                    title:AppLocalizations.of(context)!.buyPlaylist.toUpperCase()
+                     ,
                     hasLeftMargin: true,
                     isFree: playlist.isFree,
                     showDiscount: false,
@@ -125,7 +126,7 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 items: playlist.songs!,
                 item: playlist.songs![i],
                 playingFrom: PlayingFrom(
-                  from: "playing from featured playlist",
+                  from: AppLocalizations.of(context)!.playingFromFeaturedPlaylist,
                   title: L10nUtil.translateLocale(
                       playlist.playlistNameText, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_GROUP,

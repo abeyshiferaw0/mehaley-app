@@ -74,7 +74,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 },
                 child: GroupHeaderWidget(
                   groupHeaderImageUrl:
-                      AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
+                      AppApi.baseUrl + album.albumImages[0].imageSmallPath,
                   groupSubTitle: L10nUtil.translateLocale(
                       album.artist.artistName, context),
                   groupTitle:
@@ -85,7 +85,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
             (!album.isBought && !album.isFree)
                 ? BuyItemBtnWidget(
                     price: 0.0,
-                    title: "BUY ALBUM",
+                    title:AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: album.isFree,
                     showDiscount: false,
@@ -128,7 +128,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 items: album.songs!,
                 item: album.songs![i],
                 playingFrom: PlayingFrom(
-                  from: "playing from featured album",
+                  from: AppLocalizations.of(context)!.playingFromFeaturedAlbum,
                   title: L10nUtil.translateLocale(
                       L10nUtil.translateLocale(album.albumTitle, context),
                       context),

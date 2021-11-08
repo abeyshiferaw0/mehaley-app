@@ -1,10 +1,20 @@
-import 'package:elf_play/util/enum_values.dart';
-
 enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM }
 
-enum GroupUiType { LINEAR_HORIZONTAL, LINEAR_HORIZONTAL_WITH_HEADER, GRID_VERTICAL }
+enum GroupUiType {
+  LINEAR_HORIZONTAL,
+  LINEAR_HORIZONTAL_WITH_HEADER,
+  GRID_VERTICAL
+}
 
-enum AppItemsType { ALBUM, ARTIST, SINGLE_TRACK, PLAYLIST, GROUP, OTHER, CATEGORY }
+enum AppItemsType {
+  ALBUM,
+  ARTIST,
+  SINGLE_TRACK,
+  PLAYLIST,
+  GROUP,
+  OTHER,
+  CATEGORY
+}
 
 enum SearchResultOtherItems {
   SEE_ALL_PLAYLISTS,
@@ -20,19 +30,11 @@ enum AppCacheStrategy { NO_CACHE, LOAD_CACHE_FIRST, CACHE_LATER }
 
 enum BottomBarPages { HOME, SEARCH, LIBRARY, CART }
 
-final groupTypeEnumValues = EnumValues({
-  "SONG": GroupType.SONG,
-  "PLAYLIST": GroupType.PLAYLIST,
-  "ARTIST": GroupType.ARTIST,
-});
-
 enum AppLanguageOptions { ENGLISH, AMHARIC, OROMIFA, TIGRINYA }
 
 enum AppLikeFollowEvents { LIKE, UNLIKE, FOLLOW, UNFOLLOW }
 
 enum AppCartAddRemoveEvents { ADD, REMOVE }
-
-enum AppPaymentMethod { TYPE_ONE, TYPE_TWO, TYPE_THREE }
 
 enum AppCurrency { ETB, DOLLAR }
 

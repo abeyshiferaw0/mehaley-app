@@ -50,8 +50,7 @@ class ArtistAlbumItem extends StatelessWidget {
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl:
-                    AppApi.baseFileUrl + album.albumImages[0].imageSmallPath,
+                imageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),
@@ -93,7 +92,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Album",
+                      AppLocalizations.of(context)!.album,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.txtGrey,
@@ -110,6 +109,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       isDiscountAvailable: album.isDiscountAvailable,
                       discountPercentage: album.discountPercentage,
                       isPurchased: album.isBought,
+                      appCurrency: AppCurrency.ETB,
                     ),
                   ],
                 ),

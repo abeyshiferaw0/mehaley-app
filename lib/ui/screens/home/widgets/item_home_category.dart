@@ -34,7 +34,7 @@ class ItemHomeCategory extends StatelessWidget {
             children: [
               CachedNetworkImage(
                 imageUrl:
-                    AppApi.baseFileUrl + category.categoryImage.imageSmallPath,
+                    AppApi.baseUrl + category.categoryImage.imageSmallPath,
                 fit: BoxFit.cover,
                 height: AppValues.homeCategoriesItemHeight,
                 width: AppValues.homeCategoriesItemWidth,

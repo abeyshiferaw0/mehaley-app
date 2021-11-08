@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
@@ -76,6 +77,7 @@ class FeaturedSongsItem extends StatelessWidget {
                       discountPercentage: song.discountPercentage,
                       isFree: song.isFree,
                       isPurchased: song.isBought,
+                      appCurrency: AppCurrency.ETB,
                     )
                   ],
                 ),
@@ -103,7 +105,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Expanded(
       flex: 25,
       child: CachedNetworkImage(
-        imageUrl: AppApi.baseFileUrl + song.albumArt.imageSmallPath,
+        imageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
         imageBuilder: (context, imageProvider) => Stack(
           children: [
             Container(

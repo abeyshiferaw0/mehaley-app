@@ -37,7 +37,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             buildAppSnackBar(
               bgColor: AppColors.blue,
               txtColor: AppColors.white,
-              msg: "Pin code already sent\ntry again after a while",
+              msg: AppLocalizations.of(context)!.pinAlreadySent,
               isFloating: false,
             ),
           );
@@ -79,19 +79,17 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                         return PhoneAuthLargeButton(
                           disableBouncing: true,
                           isLoading: true,
-                          text: "verifying",
+                          text: AppLocalizations.of(context)!.verfing,
                           onTap: () {},
                         );
                       }
                       return PhoneAuthLargeButton(
                         disableBouncing: false,
                         isLoading: false,
-                        text: "verify",
+                        text: AppLocalizations.of(context)!.verify,
                         onTap: () {
                           //VERIFY PIN CODE
                           if (_pinPutController.text.length == 6) {
-                            print(
-                                "_pinPutController.value.text.length ${_pinPutController.text.length}");
                             BlocProvider.of<AuthBloc>(context).add(
                               VerifyPhoneEvent(
                                 pinCode: _pinPutController.text,
@@ -103,7 +101,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                               buildAppSnackBar(
                                 bgColor: AppColors.blue,
                                 txtColor: AppColors.white,
-                                msg: "Pin not filled",
+                                msg: AppLocalizations.of(context)!.pinNotFilled,
                                 isFloating: false,
                               ),
                             );
@@ -141,7 +139,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Didn't receive SMS? ",
+          AppLocalizations.of(context)!.didntReciveSms,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12,
@@ -163,7 +161,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           },
           shrinkRatio: 9,
           child: Text(
-            "Resend Code",
+            AppLocalizations.of(context)!.recendColde,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppFontSizes.font_size_12,
@@ -183,7 +181,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         horizontal: AppPadding.padding_16,
       ),
       child: Text(
-        "Enter the  6 digit pin sent to\n${args.args['countryCode']}-${args.args['phoneNumber']}",
+        "${AppLocalizations.of(context)!.enterSixDigitMenu}${args.args['countryCode']}-${args.args['phoneNumber']}",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12,
@@ -195,7 +193,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   Text buildEnterYourCodeText() {
     return Text(
-      "Enter your code".toUpperCase(),
+      "${AppLocalizations.of(context)!.enterYourCode}".toUpperCase(),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_18,
@@ -225,7 +223,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         ),
       ),
       title: Text(
-        "Verify your phone",
+        AppLocalizations.of(context)!.verifyYourPhone,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14,
         ),

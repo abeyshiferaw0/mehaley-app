@@ -48,7 +48,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                   ),
                   SizedBox(height: AppMargin.margin_2),
                   Text(
-                    "${myPlaylist.numberOfSongs} Mezmurs",
+                   AppLocalizations.of(context)!.numberOfMezmurs(myPlaylist.numberOfSongs),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
                       color: AppColors.grey,

@@ -43,7 +43,7 @@ class _FollowedPlaylistsPageState extends State<FollowedPlaylistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.hand_pointing_fill,
-                msg: "You are not following any\nPlaylist",
+                msg: AppLocalizations.of(context)!.uAreNotFollowingPlaylist,
               ),
             );
           }

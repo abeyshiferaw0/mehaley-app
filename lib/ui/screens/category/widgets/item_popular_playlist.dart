@@ -30,8 +30,7 @@ class ItemPopularPlaylist extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedNetworkImage(
-              imageUrl:
-                  AppApi.baseFileUrl + playlist.playlistImage.imageMediumPath,
+              imageUrl: AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
               width: AppValues.categoryPopularItemsSize,
               height: AppValues.categoryPopularItemsSize,
               imageBuilder: (context, imageProvider) => Stack(

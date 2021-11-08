@@ -3,12 +3,11 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/ui/common/app_card.dart';
 import 'package:elf_play/ui/common/app_icon_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
+import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:flutter/material.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:flutter/material.dart';
 
 class ItemSimilarArtistsPlaylist extends StatelessWidget {
   final Artist artist;
@@ -36,8 +35,8 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: AppValues.similarItemImageSize,
                   height: AppValues.similarItemImageSize,
-                  imageUrl: AppApi.baseFileUrl +
-                      artist.artistImages[0].imageMediumPath,
+                  imageUrl:
+                      AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
                   imageBuilder: (context, imageProvider) => Stack(
                     children: [
                       Container(

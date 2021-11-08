@@ -98,7 +98,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         //     child: Row(
         //       children: [
         //         LibraryPageSubTabButton(
-        //           text: "DOWNLOAD ALL PURCHASED".toUpperCase(),
+        //           text:AppLocalizations.of(context)!.downloadAllPurchased.toUpperCase(),
         //           isSelected: false,
         //           onTap: () {},
         //           hasLeftMargin: false,
@@ -110,7 +110,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         Builder(
           builder: (context) {
             return LibraryPageSubTabButton(
-              text: "SORT",
+              text: AppLocalizations.of(context)!.sort.toUpperCase(),
               prefixIcon: PhosphorIcons.sort_ascending,
               isSelected: true,
               onTap: () {
@@ -137,8 +137,8 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 songs: offlineSongs,
                 startPlaying: true,
                 playingFrom: PlayingFrom(
-                  from: "playing from",
-                  title: "purchased mezmurs",
+                  from: AppLocalizations.of(context)!.playingFrom,
+                  title: AppLocalizations.of(context)!.purchasedMezmurs,
                   songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                   songSyncPlayedFromId: -1,
                 ),
@@ -152,7 +152,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: "no mezmurs to play",
+                  msg:AppLocalizations.of(context)!.noMezmursToPlay,
                   txtColor: AppColors.white,
                 ),
               );
@@ -178,7 +178,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Sort by",
+           AppLocalizations.of(context)!.sortBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               color: AppColors.txtGrey,
@@ -186,7 +186,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             ),
           ),
           LibrarySortButton(
-            text: "Latest downloads",
+            text: AppLocalizations.of(context)!.latestDownloads,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -207,7 +207,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD,
           ),
           LibrarySortButton(
-            text: "Title(A-z)",
+            text: AppLocalizations.of(context)!.titleAz ,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -227,7 +227,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z,
           ),
           LibrarySortButton(
-            text: "Newest",
+            text: AppLocalizations.of(context)!.newest,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -245,7 +245,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.NEWEST,
           ),
           LibrarySortButton(
-            text: "Oldest",
+            text: AppLocalizations.of(context)!.oldest,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -263,7 +263,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.OLDEST,
           ),
           LibrarySortButton(
-            text: "Artist(A-z)",
+            text: AppLocalizations.of(context)!.artistAz,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {

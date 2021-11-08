@@ -134,7 +134,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 height: AppValues.customGroupItemSize,
-                imageUrl: AppApi.baseFileUrl + imagePath,
+                imageUrl: AppApi.baseUrl + imagePath,
                 placeholder: (context, url) =>
                     buildImagePlaceHolder(appSearchItemTypes),
                 errorWidget: (context, url, e) =>
@@ -190,7 +190,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
               width: AppValues.queueSongItemSize,
               height: AppValues.queueSongItemSize,
               fit: BoxFit.cover,
-              imageUrl: AppApi.baseFileUrl + imagePath,
+              imageUrl: AppApi.baseUrl + imagePath,
               placeholder: (context, url) =>
                   buildImagePlaceHolder(appSearchItemTypes),
               errorWidget: (context, url, e) =>

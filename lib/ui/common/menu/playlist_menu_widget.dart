@@ -177,6 +177,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   isFree: isFree,
                   discountPercentage: discountPercentage,
                   isPurchased: isPurchased,
+                  appCurrency: AppCurrency.ETB,
                 ),
           SizedBox(height: AppMargin.margin_2),
           Text(

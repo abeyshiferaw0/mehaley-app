@@ -110,7 +110,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           CachedNetworkImage(
             height: AppValues.menuHeaderImageSize,
             width: AppValues.menuHeaderImageSize,
-            imageUrl: AppApi.baseFileUrl + song.albumArt.imageMediumPath,
+            imageUrl: AppApi.baseUrl + song.albumArt.imageMediumPath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, error) => buildImagePlaceHolder(),
             imageBuilder: (context, imageProvider) => Container(
@@ -147,6 +147,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
             isFree: song.isFree,
             discountPercentage: song.discountPercentage,
             isPurchased: song.isBought,
+            appCurrency: AppCurrency.ETB,
           )
         ],
       ),

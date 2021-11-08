@@ -47,7 +47,7 @@ class RemoveFromCartButton extends StatelessWidget {
               width: AppMargin.margin_6,
             ),
             Text(
-              "Remove".toUpperCase(),
+           AppLocalizations.of(context)!.remove.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 color: AppColors.txtGrey,

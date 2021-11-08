@@ -52,7 +52,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
               child: LibraryEmptyPage(
                 emptyMyPlaylist: true,
                 icon: PhosphorIcons.plus_circle_fill,
-                msg: "You haven't created any playlists",
+                msg: AppLocalizations.of(context)!.uHaventCreatedPlaylist,
               ),
             );
           }
@@ -151,7 +151,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
             SizedBox(width: AppMargin.margin_16),
             Expanded(
               child: Text(
-                "Create New playlist",
+                AppLocalizations.of(context)!.createNewPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,

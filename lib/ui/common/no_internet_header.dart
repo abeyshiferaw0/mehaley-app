@@ -36,7 +36,7 @@ class NoInternetHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Your offline",
+            AppLocalizations.of(context)!.yourOffline,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
@@ -46,7 +46,7 @@ class NoInternetHeader extends StatelessWidget {
           ),
           SizedBox(height: AppMargin.margin_16),
           Text(
-            "No internet connection".toUpperCase(),
+            AppLocalizations.of(context)!.noInternetMsg.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
@@ -80,7 +80,7 @@ class NoInternetHeader extends StatelessWidget {
                 vertical: AppPadding.padding_8,
               ),
               child: Text(
-                "Go to downloads to listen offline",
+                AppLocalizations.of(context)!.goToDownloadsMsg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,

@@ -54,7 +54,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.heart_straight_fill,
-                msg: "You don't have any favorite\nMezmurs",
+                msg: AppLocalizations.of(context)!.uDontHaveFavMezmurs,
               ),
             );
           }
@@ -101,7 +101,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
           children: [
             SizedBox(height: AppMargin.margin_8),
             SongItem(
-              thumbUrl: AppApi.baseFileUrl +
+              thumbUrl: AppApi.baseUrl +
                   favoriteSongs[position].song.albumArt.imageSmallPath,
               song: favoriteSongs[position].song,
               thumbSize: AppValues.playlistSongItemSize,
@@ -112,8 +112,9 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
                   songs: favoriteSongs.map((e) => e.song).toList(),
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from: "playing from",
-                    title: "favorite mezmurs",
+                    from: AppLocalizations.of(context)!.playingFrom,
+                    title: AppLocalizations.of(context)!.favoriteMezmurs
+                     ,
                     songSyncPlayedFrom: SongSyncPlayedFrom.FAVORITE_SONG,
                     songSyncPlayedFromId: -1,
                   ),

@@ -123,7 +123,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
                 child: Row(
                   children: [
                     LibraryPageSubTabButton(
-                      text: "MEZMURS",
+                      text: AppLocalizations.of(context)!.mezmurs.toUpperCase(),
                       isSelected: state == AppFavoritePageItemTypes.SONGS,
                       onTap: () {
                         if (!(state == AppFavoritePageItemTypes.SONGS))
@@ -135,7 +135,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
                       hasLeftMargin: false,
                     ),
                     LibraryPageSubTabButton(
-                      text: "ALBUMS",
+                      text: AppLocalizations.of(context)!.albums.toUpperCase,
                       isSelected: state == AppFavoritePageItemTypes.ALBUMS,
                       onTap: () {
                         if (!(state == AppFavoritePageItemTypes.ALBUMS))
@@ -172,8 +172,8 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
               songs: favoriteSongs,
               startPlaying: true,
               playingFrom: PlayingFrom(
-                from: "playing from",
-                title: "favorite mezmurs",
+                from: AppLocalizations.of(context)!.playingFrom,
+                title: AppLocalizations.of(context)!.favoriteMezmurs,
                 songSyncPlayedFrom: SongSyncPlayedFrom.FAVORITE_SONG,
                 songSyncPlayedFromId: -1,
               ),
@@ -187,7 +187,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no mezmurs to play",
+                msg:AppLocalizations.of(context)!.noMezmursToPlay ,
                 txtColor: AppColors.white,
               ),
             );
@@ -211,7 +211,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no albums to select",
+                msg: AppLocalizations.of(context)!.noAlbumsToSelect,
                 txtColor: AppColors.white,
               ),
             );

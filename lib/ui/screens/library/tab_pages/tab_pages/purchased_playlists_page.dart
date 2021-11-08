@@ -51,7 +51,7 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.playlist_fill,
-                msg: "You don't have any purchased\nPlaylists",
+                msg: AppLocalizations.of(context)!.uDontHavePurchasedPlaylists,
               ),
             );
           }

@@ -1,3 +1,4 @@
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -10,6 +11,7 @@ class SmallTextPriceWidget extends StatelessWidget {
   final double discountPercentage;
   final bool showDiscount;
   final bool isPurchased;
+  final AppCurrency appCurrency;
 
   const SmallTextPriceWidget({
     Key? key,
@@ -20,6 +22,7 @@ class SmallTextPriceWidget extends StatelessWidget {
     this.useLargerText = false,
     this.showDiscount = true,
     required this.isPurchased,
+    required this.appCurrency,
   }) : super(key: key);
 
   @override
@@ -41,7 +44,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildPurchased() {
     return Text(
-      "PURCHASED",
+      AppLocalizations.of(context)!.purchased.toUpperCase(),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -56,7 +59,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildFreeText() {
     return Text(
-      "FREE",
+      AppLocalizations.of(context)!.free.toUpperCase(),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -71,7 +74,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      "\$${price.toStringAsFixed(2)}",
+      "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -90,7 +93,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "\$${price.toStringAsFixed(2)}",
+          "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -104,7 +107,7 @@ class SmallTextPriceWidget extends StatelessWidget {
         ),
         SizedBox(width: AppMargin.margin_4),
         Text(
-          "\$${(price - (price * discountPercentage)).toStringAsFixed(2)}",
+          "${appCurrency == AppCurrency.DOLLAR ? "\$" : ""}${(price - (price * discountPercentage)).toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? "ETB" : ""}",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(

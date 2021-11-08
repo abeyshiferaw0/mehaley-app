@@ -1,5 +1,6 @@
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
@@ -142,6 +143,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                               discountPercentage:
                                   playlistPageData.playlist.discountPercentage,
                               isPurchased: playlistPageData.playlist.isBought,
+                              appCurrency: AppCurrency.ETB,
                             ),
                           ),
                         ),
@@ -163,7 +165,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                   playlist: playlistPageData.playlist,
                   title: L10nUtil.translateLocale(
                       playlistPageData.playlist.playlistNameText, context),
-                  imageUrl: AppApi.baseFileUrl +
+                  imageUrl: AppApi.baseUrl +
                       playlistPageData.playlist.playlistImage.imageMediumPath,
                   isFree: playlistPageData.playlist.isFree,
                   price: playlistPageData.playlist.priceEtb,

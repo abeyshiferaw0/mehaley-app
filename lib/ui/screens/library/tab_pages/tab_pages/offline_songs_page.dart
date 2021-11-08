@@ -58,7 +58,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
               child: LibraryEmptyPage(
                 emptyOffline: true,
                 icon: PhosphorIcons.caret_circle_down_fill,
-                msg: "You don't have any downloads",
+                msg: AppLocalizations.of(context)!.uDontHaveDownloads,
               ),
             );
           }
@@ -111,7 +111,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SongItem(
               song: offlineSong[position],
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseFileUrl +
+              thumbUrl: AppApi.baseUrl +
                   offlineSong[position].albumArt.imageSmallPath,
               thumbSize: AppValues.offlineSongsSize,
               onPressed: () {
@@ -121,8 +121,8 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                   songs: offlineSong,
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from: "playing from",
-                    title: "offline mezmurs",
+                    from: AppLocalizations.of(context)!.playingFrom,
+                    title: AppLocalizations.of(context)!.offlineMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                     songSyncPlayedFromId: -1,
                   ),

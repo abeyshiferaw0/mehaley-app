@@ -19,7 +19,7 @@ class PaginationErrorWidget extends StatelessWidget {
               height: AppMargin.margin_16,
             ),
             Text(
-              "Check your internet Connection",
+            AppLocalizations.of(context)!.checkYourInternetConnection,
               style: TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -42,7 +42,7 @@ class PaginationErrorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(120),
                 ),
                 child: Text(
-                  "Try Again",
+              AppLocalizations.of(context)!.tryAgain,
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,

@@ -185,7 +185,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              "PREVIEW MODE".toUpperCase(),
+              AppLocalizations.of(context)!.previewMode.toUpperCase(),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -196,7 +196,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              "You are listing a preview, buy the mezmur to listen the full version",
+              AppLocalizations.of(context)!.uAreListingToPreviewDesc,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -335,9 +335,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(
-          imageUrl: song != null
-              ? AppApi.baseFileUrl + song.albumArt.imageSmallPath
-              : '',
+          imageUrl:
+              song != null ? AppApi.baseUrl + song.albumArt.imageSmallPath : '',
           fit: BoxFit.cover,
           height: AppValues.miniPlayerAlbumArtSize,
           width: AppValues.miniPlayerAlbumArtSize,

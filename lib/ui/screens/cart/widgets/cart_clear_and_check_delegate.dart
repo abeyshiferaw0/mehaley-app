@@ -89,7 +89,7 @@ class CheckOutButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "CHECK OUT",
+        AppLocalizations.of(context)!.checkOut.toUpperCase()      ,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: ColorUtil.darken(
@@ -156,7 +156,7 @@ class ClearAllButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "CLEAR ALL",
+           AppLocalizations.of(context)!.clearAll.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               color: AppColors.white,

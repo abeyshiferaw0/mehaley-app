@@ -1,14 +1,40 @@
+import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/enums/app_payment_methods.dart';
+import 'package:elf_play/ui/common/dialog/widgets/payment_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
+import '../small_text_price_widget.dart';
 
-class CompletePaymentDialog extends StatelessWidget {
+class CompletePaymentDialog extends StatefulWidget {
   const CompletePaymentDialog({Key? key}) : super(key: key);
+
+  @override
+  State<CompletePaymentDialog> createState() => _CompletePaymentDialogState();
+}
+
+class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
+  late AppPaymentMethods selectedAppPaymentMethods;
+  late AppPaymentMethods preferredAppPaymentMethods;
+  late bool alwaysUseSelected;
+
+  @override
+  void initState() {
+    selectedAppPaymentMethods = AppPaymentMethods.METHOD_UNK;
+    preferredAppPaymentMethods = AppPaymentMethods.METHOD_UNK;
+    alwaysUseSelected = false;
+    BlocProvider.of<PreferredPaymentMethodBloc>(context).add(
+      LoadPreferredPaymentMethodEvent(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +53,41 @@ class CompletePaymentDialog extends StatelessWidget {
             padding: EdgeInsets.all(
               AppPadding.padding_16,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildDialogHeader(context),
-                SizedBox(
-                  height: AppMargin.margin_8,
-                ),
-                buildPaymentMethodsList(),
-                SizedBox(
-                  height: AppMargin.margin_20,
-                ),
-                buildPayButton(),
-              ],
+            child: BlocBuilder<PreferredPaymentMethodBloc,
+                PreferredPaymentMethodState>(
+              builder: (context, state) {
+                if (state is PreferredPaymentMethodLoadedState) {
+                  ///SET PREFERRED PAYMENT METHOD
+                  preferredAppPaymentMethods = state.appPaymentMethod;
+
+                  ///SET ALWAYS SELECTED CHECK BOX TO TRUE IF PREFERRED SELECTED
+                  if (preferredAppPaymentMethods !=
+                      AppPaymentMethods.METHOD_UNK) {
+                    alwaysUseSelected = true;
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildDialogHeader(context, state.appPaymentMethod),
+                      SizedBox(
+                        height: AppMargin.margin_8,
+                      ),
+                      buildPaymentMethodsList(),
+                      SizedBox(
+                        height: AppMargin.margin_20,
+                      ),
+                      buildAlwaysSelectedCheckBox(),
+                      SizedBox(
+                        height: AppMargin.margin_8,
+                      ),
+                      buildPayButton(),
+                    ],
+                  );
+                } else {
+                  return SizedBox();
+                }
+              },
             ),
           ),
         ],
@@ -47,36 +95,81 @@ class CompletePaymentDialog extends StatelessWidget {
     );
   }
 
-  Container buildPayButton() => Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_32,
-          vertical: AppPadding.padding_16,
+  Row buildAlwaysSelectedCheckBox() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Material(
+          child: Checkbox(
+            value: alwaysUseSelected,
+            activeColor: AppColors.darkGreen,
+            fillColor: MaterialStateProperty.all(
+              AppColors.darkGreen,
+            ),
+            checkColor: AppColors.white,
+            onChanged: (bool? value) {
+              setState(() {
+                alwaysUseSelected = value == null ? false : value;
+              });
+            },
+          ),
         ),
-        decoration: BoxDecoration(
-          color: AppColors.darkGreen,
-          borderRadius: BorderRadius.circular(40),
+        Text(
+          "Always use selected payment method?",
+          style: TextStyle(
+            color: AppColors.txtGrey,
+            fontWeight: FontWeight.w400,
+            fontSize: AppFontSizes.font_size_8.sp,
+          ),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Buy".toUpperCase(),
-              style: TextStyle(
-                color: AppColors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: AppFontSizes.font_size_10.sp,
+      ],
+    );
+  }
+
+  AppBouncingButton buildPayButton() => AppBouncingButton(
+        onTap: () {
+          if (alwaysUseSelected) {
+            if (getSelectedPayment() != AppPaymentMethods.METHOD_UNK) {
+              BlocProvider.of<PreferredPaymentMethodBloc>(context).add(
+                SetPreferredPaymentMethodEvent(
+                  appPaymentMethods: getSelectedPayment(),
+                ),
+              );
+            }
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32,
+            vertical: AppPadding.padding_16,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.darkGreen,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Buy".toUpperCase(),
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: AppFontSizes.font_size_10.sp,
+                ),
               ),
-            ),
-            SizedBox(
-              width: AppPadding.padding_8,
-            ),
-            Icon(
-              PhosphorIcons.caret_right,
-              color: AppColors.white,
-              size: AppIconSizes.icon_size_20,
-            ),
-          ],
+              SizedBox(
+                width: AppPadding.padding_8,
+              ),
+              Icon(
+                PhosphorIcons.caret_right,
+                color: AppColors.white,
+                size: AppIconSizes.icon_size_20,
+              ),
+            ],
+          ),
         ),
       );
 
@@ -109,7 +202,15 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'Amole',
                 imagePath: "assets/images/ic_amole.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_AMOLE,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_AMOLE,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_AMOLE;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -118,7 +219,16 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'CBE Birr',
                 imagePath: "assets/images/ic_cbe_birr.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_CBE_BIRR,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_CBE_BIRR,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_CBE_BIRR;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -127,7 +237,16 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'Hello Cash',
                 imagePath: "assets/images/ic_hello_cash.png",
                 scale: 0.8,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_HELLO_CASH,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_HELLO_CASH,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_HELLO_CASH;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -136,7 +255,15 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'Mbirr',
                 imagePath: "assets/images/ic_mbirr.png",
                 scale: 1.3,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_MBIRR,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_MBIRR,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_MBIRR;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -145,7 +272,15 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'Visa',
                 imagePath: "assets/images/ic_visa.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_VISA,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_VISA,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_VISA;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -154,7 +289,16 @@ class CompletePaymentDialog extends StatelessWidget {
                 title: 'Mastercard',
                 imagePath: "assets/images/ic_mastercard.png",
                 scale: 1.0,
-                isSelected: false,
+                isSelected: isPaymentSelected(
+                  AppPaymentMethods.METHOD_MASTERCARD,
+                ),
+                appPaymentMethods: AppPaymentMethods.METHOD_MASTERCARD,
+                onTap: () {
+                  setState(() {
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_MASTERCARD;
+                  });
+                },
               ),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -166,136 +310,107 @@ class CompletePaymentDialog extends StatelessWidget {
     );
   }
 
-  Column buildDialogHeader(BuildContext context) {
+  Column buildDialogHeader(
+      BuildContext context, AppPaymentMethods appPaymentMethod) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        Stack(
+          //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Complete your purchase",
-              style: TextStyle(
-                color: AppColors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: AppFontSizes.font_size_12.sp,
+            Center(
+              child: Text(
+                "Complete your purchase",
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: AppFontSizes.font_size_12.sp,
+                ),
               ),
             ),
-            Expanded(
-              child: SizedBox(),
-            ),
-            AppBouncingButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                PhosphorIcons.x_light,
-                color: AppColors.black,
-                size: AppIconSizes.icon_size_24,
+            Align(
+              alignment: Alignment.centerRight,
+              child: AppBouncingButton(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  PhosphorIcons.x_light,
+                  color: AppColors.black,
+                  size: AppIconSizes.icon_size_24,
+                ),
               ),
             ),
           ],
         ),
         SizedBox(
-          height: AppMargin.margin_8,
+          height: AppMargin.margin_16,
         ),
-        SmallTextPriceWidget()
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Transform.scale(
+              scale: 1.3,
+              child: SmallTextPriceWidget(
+                isFree: false,
+                price: 23.0,
+                isPurchased: false,
+                discountPercentage: 0.1,
+                isDiscountAvailable: true,
+                appCurrency: getSelectedAppCurrency(),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
-}
 
-class PaymentMethodItem extends StatelessWidget {
-  const PaymentMethodItem({
-    Key? key,
-    required this.imagePath,
-    required this.title,
-    required this.scale,
-    required this.isSelected,
-  }) : super(key: key);
+  bool isPaymentSelected(AppPaymentMethods appPaymentMethods) {
+    ///FIRST USER USER NEWLY SELECTED
+    if (selectedAppPaymentMethods == appPaymentMethods) {
+      return true;
+    }
 
-  final String imagePath;
-  final String title;
-  final double scale;
-  final bool isSelected;
+    ///IF NOT NEWLY SELECTED PAYMENT BLOCK FROM CHECKING PREFERRED
+    if (selectedAppPaymentMethods == AppPaymentMethods.METHOD_UNK) {
+      ///LASTLY CHECK IF PREFERRED METHOD IS SET
+      if (preferredAppPaymentMethods == appPaymentMethods) {
+        return true;
+      }
+    } else {
+      return false;
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: AppPadding.padding_8,
-          horizontal: AppPadding.padding_16,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-            color: isSelected
-                ? AppColors.darkGreen
-                : AppColors.grey.withOpacity(0.4),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.darkGrey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 6,
-              offset: Offset(0, 0),
-            ),
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Transform.scale(
-              scale: scale,
-              child: Container(
-                width: 60,
-                height: 50,
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-            SizedBox(width: AppMargin.margin_12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: AppFontSizes.font_size_12.sp,
-                    ),
-                  ),
-                  Text(
-                    "Some message for sub title message sub title message",
-                    style: TextStyle(
-                      color: AppColors.txtGrey,
-                      fontWeight: FontWeight.w400,
-                      fontSize: AppFontSizes.font_size_8.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: AppMargin.margin_8),
-            isSelected
-                ? Icon(
-                    PhosphorIcons.check_circle_fill,
-                    color: AppColors.darkGreen,
-                    size: AppIconSizes.icon_size_24,
-                  )
-                : SizedBox(),
-          ],
-        ),
-      ),
-    );
+    return false;
+  }
+
+  AppPaymentMethods getSelectedPayment() {
+    ///FIRST USER USER NEWLY SELECTED
+    if (selectedAppPaymentMethods != AppPaymentMethods.METHOD_UNK) {
+      return selectedAppPaymentMethods;
+    }
+
+    ///IF NOT NEWLY SELECTED PAYMENT BLOCK FROM CHECKING PREFERRED
+    if (selectedAppPaymentMethods == AppPaymentMethods.METHOD_UNK) {
+      ///LASTLY CHECK IF PREFERRED METHOD IS SET
+      if (preferredAppPaymentMethods != AppPaymentMethods.METHOD_UNK) {
+        return preferredAppPaymentMethods;
+      }
+    } else {
+      return AppPaymentMethods.METHOD_UNK;
+    }
+
+    return AppPaymentMethods.METHOD_UNK;
+  }
+
+  AppCurrency getSelectedAppCurrency() {
+    if (getSelectedPayment() == AppPaymentMethods.METHOD_VISA) {
+      return AppCurrency.DOLLAR;
+    } else if (getSelectedPayment() == AppPaymentMethods.METHOD_MASTERCARD) {
+      return AppCurrency.DOLLAR;
+    } else {
+      return AppCurrency.ETB;
+    }
   }
 }

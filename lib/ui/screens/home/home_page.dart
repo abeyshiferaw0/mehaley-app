@@ -188,8 +188,7 @@ class _HomePageState extends State<HomePage>
                     groups[index].groupSubTitleText!, context)
                 : null,
             groupHeaderImageUrl: groups[index].headerImageId != null
-                ? AppApi.baseFileUrl +
-                    groups[index].headerImageId!.imageSmallPath
+                ? AppApi.baseUrl + groups[index].headerImageId!.imageSmallPath
                 : null,
             groupUiType: groups[index].groupUiType,
             groupItems: groups[index].groupItems,

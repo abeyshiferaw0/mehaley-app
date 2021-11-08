@@ -29,7 +29,7 @@ class CartAppBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Elf Cart",
+                  AppLocalizations.of(context)!.cartTitle  ,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_16.sp,
@@ -44,7 +44,7 @@ class CartAppBar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "Total",
+                              AppLocalizations.of(context)!.total  ,
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_12.sp,
                                 fontWeight: FontWeight.w500,

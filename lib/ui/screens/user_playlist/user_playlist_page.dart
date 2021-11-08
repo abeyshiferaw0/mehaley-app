@@ -260,7 +260,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           ),
                         );
                       },
-                      thumbUrl: AppApi.baseFileUrl +
+                      thumbUrl: AppApi.baseUrl +
                           songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {

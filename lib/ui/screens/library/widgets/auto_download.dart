@@ -14,7 +14,7 @@ class AutoDownloadRadio extends StatelessWidget {
     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     //     children: [
     //       Text(
-    //         "Auto download",
+    //         AppLocalizations.of(context)!.autoDownload,
     //         style: TextStyle(
     //           fontSize: AppFontSizes.font_size_12.sp,
     //           color: AppColors.lightGrey,

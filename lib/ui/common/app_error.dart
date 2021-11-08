@@ -81,7 +81,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                         ),
                         SizedBox(height: AppMargin.margin_4),
                         Text(
-                          "No internet connection",
+                          AppLocalizations.of(context)!.noInternetMsg,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
@@ -92,7 +92,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                         ),
                         SizedBox(height: AppMargin.margin_8),
                         Text(
-                          "You don't have a working internet connection, Check your internet connection",
+                          AppLocalizations.of(context)!.noInternetMsgDetail,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
@@ -123,7 +123,9 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                               vertical: AppPadding.padding_8,
                             ),
                             child: Text(
-                              "TRY AGAIN",
+                              AppLocalizations.of(context)!
+                                  .tryAgain
+                                  .toUpperCase(),
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
                                 color: AppColors.white,

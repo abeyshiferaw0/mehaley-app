@@ -81,10 +81,10 @@ class LibraryHeader extends StatelessWidget {
       ),
       indicatorPadding: EdgeInsets.zero,
       tabs: [
-        buildTabItem("PURCHASED"),
-        buildTabItem("OFFLINE"),
-        buildTabItem("MY PLAYLIST"),
-        buildTabItem("FAVORITES"),
+        buildTabItem(AppLocalizations.of(context)!.purchased.toUpperCase()),
+        buildTabItem(AppLocalizations.of(context)!.offline.toUpperCase()),
+        buildTabItem(AppLocalizations.of(context)!.myPlaylists.toUpperCase()),
+        buildTabItem(AppLocalizations.of(context)!.favorites.toUpperCase()),
         buildTabItem(AppLocalizations.of(context)!.following.toUpperCase()),
       ],
     );

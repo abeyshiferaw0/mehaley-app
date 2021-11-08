@@ -80,7 +80,7 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 LibraryPageSubTabButton(
-                  text: "MY PLAYLISTS",
+                  text: AppLocalizations.of(context)!.myPlaylists.toUpperCase(),
                   isSelected: true,
                   onTap: () {},
                   hasLeftMargin: false,

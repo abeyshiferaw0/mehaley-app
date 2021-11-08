@@ -42,7 +42,7 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
   @override
   void write(BinaryWriter writer, Playlist obj) {
     writer
-      ..writeByte(20)
+      ..writeByte(19)
       ..writeByte(0)
       ..write(obj.playlistId)
       ..writeByte(1)

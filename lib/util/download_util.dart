@@ -23,7 +23,7 @@ class DownloadUtil {
     if (downloadSongQuality == DownloadSongQuality.HIGH_QUALITY) {
       downloadPath = song.audioFile.audioLargePath;
     }
-    return "${AppApi.baseFileUrl}$downloadPath?song=${Song.toBase64Str(song)}";
+    return "${AppApi.baseUrl}$downloadPath?song=${Song.toBase64Str(song)}";
   }
 
   getSongFileName(Song song) {

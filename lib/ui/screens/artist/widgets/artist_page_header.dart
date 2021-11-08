@@ -49,7 +49,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
           fit: BoxFit.cover,
           height: 360,
           width: double.infinity,
-          imageUrl: AppApi.baseFileUrl +
+          imageUrl: AppApi.baseUrl +
               artistPageData.artist.artistImages[0].imageMediumPath,
           placeholder: (context, url) => buildImagePlaceHolder(),
           errorWidget: (context, url, e) => buildImagePlaceHolder(),
@@ -141,7 +141,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                       child: ArtistMenuWidget(
                         title: L10nUtil.translateLocale(
                             artistPageData.artist.artistName, context),
-                        imageUrl: AppApi.baseFileUrl +
+                        imageUrl: AppApi.baseUrl +
                             artistPageData
                                 .artist.artistImages[0].imageMediumPath,
                         noOfAlbum: artistPageData.noOfAlbum,
@@ -182,7 +182,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 ),
                 SizedBox(width: AppMargin.margin_4),
                 Text(
-                  "VERIFIED ARTIST",
+                  AppLocalizations.of(context)!.verifiedArtist.toUpperCase(),
                   style: TextStyle(
                     color: AppColors.lightGrey,
                     fontSize: AppFontSizes.font_size_12.sp,
@@ -224,7 +224,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${artistPageData.noOfAlbum} Albums",
+                  "${artistPageData.noOfAlbum} ${AppLocalizations.of(context)!.albums}",
                   style: TextStyle(
                     color: AppColors.lightGrey,
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -240,7 +240,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   ),
                 ),
                 Text(
-                  "${artistPageData.noOfSong} Mezmurs",
+                  "${artistPageData.noOfSong} ${AppLocalizations.of(context)!.Mezmurs}",
                   style: TextStyle(
                     color: AppColors.lightGrey,
                     fontSize: AppFontSizes.font_size_10.sp,

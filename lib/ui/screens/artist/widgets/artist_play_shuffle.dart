@@ -42,7 +42,7 @@ class ArtistPlayShuffle extends StatelessWidget {
                     startPlaying: true,
                     songs: popularSongs,
                     playingFrom: PlayingFrom(
-                      from: "playing from artist",
+                      from: AppLocalizations.of(context)!.playingFromArtist,
                       title:
                           L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,

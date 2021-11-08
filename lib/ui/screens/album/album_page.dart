@@ -101,7 +101,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                           context: context,
                           songs: albumPageData.songs,
                           playingFrom: PlayingFrom(
-                            from: "playing from album",
+                            from: AppLocalizations.of(context)!.playingFromAlbum,
                             title: L10nUtil.translateLocale(
                                 albumPageData.album.albumTitle, context),
                             songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
@@ -180,8 +180,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                 album: album,
                 isLiked: album.isLiked,
                 title: L10nUtil.translateLocale(album.albumTitle, context),
-                imageUrl:
-                    AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+                imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
                 price: album.priceEtb,
                 isFree: album.isFree,
                 isDiscountAvailable: album.isDiscountAvailable,

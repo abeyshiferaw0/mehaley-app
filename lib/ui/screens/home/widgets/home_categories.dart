@@ -17,7 +17,7 @@ class HomeCategories extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: AppMargin.margin_16),
           child: Text(
-            "Categories",
+          AppLocalizations.of(context)!.categories,
             style: TextStyle(
               color: Colors.white,
               fontSize: AppFontSizes.font_size_14.sp,

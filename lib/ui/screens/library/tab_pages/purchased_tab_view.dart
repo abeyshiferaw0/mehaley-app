@@ -153,7 +153,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                 child: Row(
                   children: [
                     LibraryPageSubTabButton(
-                      text: "ALL",
+                      text: AppLocalizations.of(context)!.all.toUpperCase(),
                       isSelected: state == AppPurchasedPageItemTypes.ALL_SONGS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.ALL_SONGS))
@@ -165,7 +165,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       hasLeftMargin: false,
                     ),
                     LibraryPageSubTabButton(
-                      text: "MEZMURS",
+                      text: AppLocalizations.of(context)!.mezmurs.toUpperCase(),
                       isSelected: state == AppPurchasedPageItemTypes.SONGS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.SONGS))
@@ -177,7 +177,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       hasLeftMargin: true,
                     ),
                     LibraryPageSubTabButton(
-                      text: "ALBUMS",
+                      text: AppLocalizations.of(context)!.albums.toUpperCase(),
                       isSelected: state == AppPurchasedPageItemTypes.ALBUMS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.ALBUMS))
@@ -189,7 +189,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                       hasLeftMargin: true,
                     ),
                     LibraryPageSubTabButton(
-                      text: "PLAYLISTS",
+                      text: AppLocalizations.of(context)!.playlists.toUpperCase(),
                       isSelected: state == AppPurchasedPageItemTypes.PLAYLISTS,
                       onTap: () {
                         if (!(state == AppPurchasedPageItemTypes.PLAYLISTS))
@@ -222,8 +222,9 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               songs: allPurchasedSongs,
               startPlaying: true,
               playingFrom: PlayingFrom(
-                from: "playing from",
-                title: "purchased mezmurs",
+                from: 
+                AppLocalizations.of(context)!.playingFrom,
+                title: AppLocalizations.of(context)!.purchasedMezmurs,
                 songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                 songSyncPlayedFromId: -1,
               ),
@@ -237,7 +238,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no mezmurs to play",
+                msg: AppLocalizations.of(context)!.noMezmursToPlay,
                 txtColor: AppColors.white,
               ),
             );
@@ -250,8 +251,9 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               songs: purchasedSongs,
               startPlaying: true,
               playingFrom: PlayingFrom(
-                from: "playing from",
-                title: "purchased mezmurs",
+                from: AppLocalizations.of(context)!.playingFrom,
+                title: 
+                AppLocalizations.of(context)!.purchasedMezmurs,
                 songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                 songSyncPlayedFromId: -1,
               ),
@@ -265,7 +267,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no mezmurs to play",
+                msg: AppLocalizations.of(context)!.noMezmursToPlay,
                 txtColor: AppColors.white,
               ),
             );
@@ -289,7 +291,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no albums to select",
+                msg: AppLocalizations.of(context)!.noAlbumsToSelect,
                 txtColor: AppColors.white,
               ),
             );
@@ -315,7 +317,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
               buildAppSnackBar(
                 bgColor: AppColors.blue,
                 isFloating: true,
-                msg: "no playlists to select",
+                msg: AppLocalizations.of(context)!.noPlaylistToSelect,
                 txtColor: AppColors.white,
               ),
             );

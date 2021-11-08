@@ -12,7 +12,7 @@ class CartSummery extends StatelessWidget {
         children: [
           SizedBox(height: AppMargin.margin_16),
           Text(
-            "Cart Summery",
+          AppLocalizations.of(context)!.cartSummery  ,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,

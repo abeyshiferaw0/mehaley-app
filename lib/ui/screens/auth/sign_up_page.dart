@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
             buildAppSnackBar(
               bgColor: AppColors.errorRed,
               txtColor: AppColors.white,
-              msg: "Authentication Failed!\nCheck your internet connection",
+              msg: AppLocalizations.of(context)!.authenticationFailedMsg,
               isFloating: false,
             ),
           );

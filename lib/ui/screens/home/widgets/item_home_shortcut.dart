@@ -151,7 +151,7 @@ class ItemHomeShortcut extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         child: CachedNetworkImage(
-          imageUrl: AppApi.baseFileUrl + image!.imageSmallPath,
+          imageUrl: AppApi.baseUrl + image!.imageSmallPath,
           fit: BoxFit.cover,
           height: AppValues.homeCategoriesItemHeight,
           width: AppValues.homeCategoriesItemWidth,

@@ -35,6 +35,7 @@ import 'package:sizer/sizer.dart';
 import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
@@ -170,6 +171,12 @@ class _MyAppState extends State<MyApp> {
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),
+            BlocProvider<PreferredPaymentMethodBloc>(
+              create: (context) => PreferredPaymentMethodBloc(
+                paymentRepository: AppRepositories.paymentRepository,
+              ),
+            ),
+
             BlocProvider(
               create: (context) => CartUtilBloc(
                 cartRepository: AppRepositories.cartRepository,

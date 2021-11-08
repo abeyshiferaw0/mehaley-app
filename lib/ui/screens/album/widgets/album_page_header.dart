@@ -76,7 +76,9 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                 (!album.isBought && !album.isFree)
                     ? BuyItemBtnWidget(
                         price: album.priceEtb,
-                        title: "BUY ALBUM",
+                        title: AppLocalizations.of(context)!
+                            .buyAlbum
+                            .toUpperCase(),
                         hasLeftMargin: false,
                         isFree: album.isFree,
                         discountPercentage: album.discountPercentage,
@@ -93,7 +95,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                       startPlaying: true,
                       songs: songs,
                       playingFrom: PlayingFrom(
-                        from: "playing from album",
+                        from: AppLocalizations.of(context)!.playingAlbumFrom,
                         title:
                             L10nUtil.translateLocale(album.albumTitle, context),
                         songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
@@ -121,7 +123,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
         width: AppValues.albumPageImageSize,
         height: AppValues.albumPageImageSize,
         fit: BoxFit.cover,
-        imageUrl: AppApi.baseFileUrl + album.albumImages[0].imageMediumPath,
+        imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
         imageBuilder: (context, imageProvider) {
           //CHANGE DOMINANT COLOR
           BlocProvider.of<PagesDominantColorBloc>(context).add(
@@ -162,8 +164,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "ALBUM BY " +
-                  L10nUtil.translateLocale(album.artist.artistName, context),
+              "${AppLocalizations.of(context)!.albumBy} ${L10nUtil.translateLocale(album.artist.artistName, context)}",
               style: albumSubTitleStyle,
             ),
             Padding(

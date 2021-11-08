@@ -1,4 +1,5 @@
 import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -14,6 +15,7 @@ import 'package:elf_play/ui/screens/setting/widgets/logout_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_large_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,33 +35,53 @@ class _SettingsPageState extends State<SettingsPage> {
     BlocProvider.of<SettingsPageBloc>(context).add(
       LoadSettingsDataEvent(),
     );
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OneSignalBloc, OneSignalState>(
-      listener: (context, state) {
-        ///ONE SIGNAL SENDING TAGS SUCCESSFUL RELOAD PAGE
-        if (state is OneSignalTagAdded) {
-          BlocProvider.of<SettingsPageBloc>(context).add(
-            LoadSettingsDataEvent(),
-          );
-        }
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<OneSignalBloc, OneSignalState>(
+          listener: (context, state) {
+            ///ONE SIGNAL SENDING TAGS SUCCESSFUL RELOAD PAGE
+            if (state is OneSignalTagAdded) {
+              BlocProvider.of<SettingsPageBloc>(context).add(
+                LoadSettingsDataEvent(),
+              );
+            }
 
-        ///ONE SIGNAL SENDING TAGS ERROR
-        if (state is OneSignalTagAddingError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            buildAppSnackBar(
-              bgColor: AppColors.blue,
-              isFloating: false,
-              msg:
-                  "Couldn't connect to the internet, check your internet connection",
-              txtColor: AppColors.white,
-            ),
-          );
-        }
-      },
+            ///ONE SIGNAL SENDING TAGS ERROR
+            if (state is OneSignalTagAddingError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: false,
+                  msg:
+                      "Couldn't connect to the internet, check your internet connection",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<PreferredPaymentMethodBloc, PreferredPaymentMethodState>(
+          listener: (context, state) {
+            if (state is PreferredPaymentMethodChangedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg:
+                      "Preferred payment changed to ${PagesUtilFunctions.getPaymentMethodName(state.appPaymentMethod)}",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+          },
+        ),
+      ],
       child: Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
@@ -146,6 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           context: context,
                           builder: (context) {
                             return CompletePaymentDialog();
+                            //return PreferredPaymentDialog();
                           },
                         );
                       },

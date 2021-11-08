@@ -51,7 +51,7 @@ class _FavoriteAlbumsPageState extends State<FavoriteAlbumsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.heart_straight_fill,
-                msg: "You don't have any favorite\nAlbums",
+                msg: AppLocalizations.of(context)!.uDontHaveFavAlbums,
               ),
             );
           }

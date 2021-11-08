@@ -233,7 +233,7 @@ class Song extends Equatable {
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
-          artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+          artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
           extras: {
             AppValues.songExtraStr: song.toMap(),
             AppValues.songSyncExtraStr: songSync.toMap(),
@@ -242,7 +242,7 @@ class Song extends Equatable {
 
         ///CHECK IF SONG BOUGHT
         HlsAudioSource hlsAudioSource = HlsAudioSource(
-          Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
+          Uri.parse(AppApi.baseUrl + song.audioFile.audio128KpsStreamPath),
           tag: tag,
         );
         print("song.isBought => ${song.isBought} ${song.isFree}");
@@ -274,8 +274,7 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri:
-                Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+            artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
             extras: {
               AppValues.songExtraStr: song.toMap(),
               AppValues.songSyncExtraStr: songSync.toMap(),
@@ -334,7 +333,7 @@ class Song extends Equatable {
         duration: Duration(
           seconds: song.audioFile.audioDurationSeconds.toInt(),
         ),
-        artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+        artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
         extras: {
           AppValues.songExtraStr: song.toMap(),
           AppValues.songSyncExtraStr: songSync.toMap(),
@@ -343,7 +342,7 @@ class Song extends Equatable {
 
       ///CHECK IF SONG BOUGHT
       HlsAudioSource hlsAudioSource = HlsAudioSource(
-        Uri.parse(AppApi.baseFileUrl + song.audioFile.audio128KpsStreamPath),
+        Uri.parse(AppApi.baseUrl + song.audioFile.audio128KpsStreamPath),
         tag: tag,
       );
       print("song.isBought => ${song.isBought} ${song.isFree}");
@@ -374,7 +373,7 @@ class Song extends Equatable {
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
-          artUri: Uri.parse(AppApi.baseFileUrl + song.albumArt.imageSmallPath),
+          artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
           extras: {
             AppValues.songExtraStr: song.toMap(),
             AppValues.songSyncExtraStr: songSync.toMap(),

@@ -34,7 +34,7 @@ class AppSubscribeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Subscribe To Elf Play".toUpperCase(),
+              AppLocalizations.of(context)!.subscribeDialogTitle.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.white,
@@ -46,7 +46,7 @@ class AppSubscribeCard extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             Text(
-              "Subscribe to elf play and get unlimited access to all streams.",
+              AppLocalizations.of(context)!.subscribeDialogMsg,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -70,7 +70,7 @@ class AppSubscribeCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Text(
-                  "Subscribe Now".toUpperCase(),
+                  AppLocalizations.of(context)!.subscribeNow.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,

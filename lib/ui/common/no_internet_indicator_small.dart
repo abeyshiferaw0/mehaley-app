@@ -1,9 +1,6 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoInternetIndicatorSmall extends StatefulWidget {
   const NoInternetIndicatorSmall({Key? key}) : super(key: key);
@@ -51,7 +48,7 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
               padding: EdgeInsets.symmetric(vertical: AppPadding.padding_4),
               child: Center(
                 child: Text(
-                  "No Internet Connection",
+                  AppLocalizations.of(context)!.noInternetMsg,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

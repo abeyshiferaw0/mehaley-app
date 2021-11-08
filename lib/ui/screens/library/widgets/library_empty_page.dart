@@ -81,7 +81,7 @@ class LibraryEmptyPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              "New playlist".toUpperCase(),
+           AppLocalizations.of(context)!.newPlaylist.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
@@ -115,7 +115,7 @@ class LibraryEmptyPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              "DOWNLOAD ALL PURCHASED".toUpperCase(),
+           AppLocalizations.of(context)!.downAllPurchased.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,

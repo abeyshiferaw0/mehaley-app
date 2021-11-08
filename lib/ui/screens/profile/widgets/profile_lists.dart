@@ -68,7 +68,7 @@ class ProfileLists extends StatelessWidget {
                   index: position,
                 );
               },
-              thumbUrl: AppApi.baseFileUrl +
+              thumbUrl: AppApi.baseUrl +
                   profilePageData.boughtSongs[position].albumArt.imageSmallPath,
               thumbSize: AppValues.artistSongItemSize,
             ),

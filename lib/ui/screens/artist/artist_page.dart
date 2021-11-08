@@ -51,8 +51,6 @@ class _ArtistPageState extends State<ArtistPage> {
             return AppLoading(size: AppValues.loadingWidgetSize);
           }
           if (state is ArtistPageLoadedState) {
-            print(
-                "ArtistPageLoadedStateArtistPageLoadedState ${state.artistPageData.artist.isFollowed}");
             return Scaffold(
               backgroundColor: AppColors.black,
               body: buildArtistPageLoaded(state.artistPageData),
@@ -147,7 +145,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Popular",
+                AppLocalizations.of(context)!.popular,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
                   color: AppColors.white,
@@ -182,7 +180,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Latest Releases",
+                AppLocalizations.of(context)!.latestReleases,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
                   color: AppColors.white,
@@ -227,7 +225,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     context: context,
                     songs: popularSongs,
                     playingFrom: PlayingFrom(
-                      from: "playing from artist",
+                      from: AppLocalizations.of(context)!.playingFromArtist,
                       title:
                           L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
@@ -237,7 +235,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: AppApi.baseFileUrl +
+                thumbUrl: AppApi.baseUrl +
                     popularSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
@@ -272,7 +270,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     context: context,
                     songs: newSongs,
                     playingFrom: PlayingFrom(
-                      from: "playing from artist",
+                      from: AppLocalizations.of(context)!.playingFromArtist,
                       title:
                           L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
@@ -282,8 +280,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: AppApi.baseFileUrl +
-                    newSongs[position].albumArt.imageSmallPath,
+                thumbUrl:
+                    AppApi.baseUrl + newSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -302,7 +300,7 @@ class _ArtistPageState extends State<ArtistPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Top Albums",
+              AppLocalizations.of(context)!.topAlbums,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_14.sp,
                 color: AppColors.white,
@@ -347,7 +345,7 @@ class _ArtistPageState extends State<ArtistPage> {
 
   Text buildFeaturingArtistPlaylistHeader(Artist artist) {
     return Text(
-      "Featuring ${L10nUtil.translateLocale(artist.artistName, context)}",
+      "${AppLocalizations.of(context)!.featuring} ${L10nUtil.translateLocale(artist.artistName, context)}",
       textAlign: TextAlign.center,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -404,7 +402,7 @@ class _ArtistPageState extends State<ArtistPage> {
   Center buildOtherArtistsHeader() {
     return Center(
       child: Text(
-        "Similar Artists",
+        AppLocalizations.of(context)!.similarArtist,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
           color: AppColors.white,

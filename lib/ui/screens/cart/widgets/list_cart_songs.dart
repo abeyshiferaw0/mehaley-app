@@ -71,7 +71,8 @@ class _CartSongsListState extends State<CartSongsList> {
                                   BlocProvider.of<CartUtilBloc>(context).add(
                                     AddRemovedSongCartEvent(
                                       song: songCart.items.elementAt(index),
-                                      appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
+                                      appCartAddRemoveEvents:
+                                          AppCartAddRemoveEvents.REMOVE,
                                     ),
                                   );
                                 },
@@ -81,7 +82,11 @@ class _CartSongsListState extends State<CartSongsList> {
                         );
                       },
                       position: (index + 1),
-                      thumbUrl: AppApi.baseFileUrl + songCart.items.elementAt(index).albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseUrl +
+                          songCart.items
+                              .elementAt(index)
+                              .albumArt
+                              .imageSmallPath,
                       thumbSize: AppValues.categorySongItemSize,
                       onPressed: () {
                         //OPEN SONG
@@ -89,8 +94,8 @@ class _CartSongsListState extends State<CartSongsList> {
                           context: context,
                           songs: [songCart.items.elementAt(index)],
                           playingFrom: PlayingFrom(
-                            from: "playing from cart",
-                            title: "mezmurs",
+                            from: AppLocalizations.of(context)!.playingFromCart,
+                            title: AppLocalizations.of(context)!.mezmurs,
                             songSyncPlayedFrom: SongSyncPlayedFrom.CART_PAGE,
                             songSyncPlayedFromId: -1,
                           ),

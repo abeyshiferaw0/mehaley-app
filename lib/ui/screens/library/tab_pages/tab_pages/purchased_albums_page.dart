@@ -51,7 +51,7 @@ class _PurchasedAlbumsPageState extends State<PurchasedAlbumsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.disc_fill,
-                msg: "You don't have any purchased\nAlbums",
+                msg: AppLocalizations.of(context)!.uDontHavePurchasedAlbums,
               ),
             );
           }

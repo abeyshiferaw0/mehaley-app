@@ -82,6 +82,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
               discountPercentage: discountPercentage,
               isFree: isFree,
               isPurchased: isBought,
+              appCurrency: AppCurrency.ETB,
             )
           ],
         ),

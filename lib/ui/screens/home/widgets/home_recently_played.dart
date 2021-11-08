@@ -29,7 +29,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: AppMargin.margin_16),
                   child: Text(
-                    "Recently Played",
+                    AppLocalizations.of(context)!.recentlyPlayed,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: AppFontSizes.font_size_14.sp,
@@ -79,7 +79,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 items: recentlyPlayed,
                 item: recentlyPlayed.elementAt(i),
                 playingFrom: PlayingFrom(
-                  from: "playing from recently played",
+                  from: AppLocalizations.of(context)!.playingFromRecentlyPlayed,
                   title: L10nUtil.translateLocale(
                       recentlyPlayed.elementAt(i).songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
@@ -91,7 +91,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
             },
             width: AppValues.recentlyPlayedItemSize,
             height: AppValues.recentlyPlayedItemSize,
-            imgUrl: AppApi.baseFileUrl +
+            imgUrl: AppApi.baseUrl +
                 recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
             isDiscountAvailable:
                 recentlyPlayed.elementAt(i).isDiscountAvailable,

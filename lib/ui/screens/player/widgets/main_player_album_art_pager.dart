@@ -70,7 +70,7 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
                   ),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: AppApi.baseFileUrl +
+                    imageUrl: AppApi.baseUrl +
                         state.queue[index].albumArt.imageMediumPath,
                     errorWidget: (context, url, error) =>
                         buildImagePlaceHolder(),

@@ -91,7 +91,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
               bgColor: AppColors.white,
               isFloating: false,
               msg:
-                  "Unable to remove ${L10nUtil.translateLocale(state.song.songName, context)} from cart\ncheck your internet connection",
+                  AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -104,8 +104,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  "Unable to remove ${L10nUtil.translateLocale(state.album.albumTitle, context)} from cart\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.album.albumTitle, context))
+              
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -118,8 +118,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg:
-                  "Unable to remove ${L10nUtil.translateLocale(state.playlist.playlistNameText, context)} from cart\ncheck your internet connection",
+              msg:AppLocalizations.of(context)!.unableToRemoveFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context))
+              
+                 
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -131,7 +132,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: "Unable to clear cart\ncheck your internet connection",
+              msg: AppLocalizations.of(context)!.unableToClearCart,
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -153,7 +154,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
               buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: true,
-                  msg: "${L10nUtil.translateLocale(state.song.songName, context)} removed from cart",
+                  msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.song.songName, context)),
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.check_circle_fill,
                   iconColor: AppColors.darkGreen),
@@ -175,7 +176,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: "${L10nUtil.translateLocale(state.album.albumTitle, context)} removed from cart",
+                msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -196,7 +197,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: "${L10nUtil.translateLocale(state.playlist.playlistNameText, context)} removed from cart",
+                msg: AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -216,7 +217,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: "Cart cleared",
+                msg: AppLocalizations.of(context)!.cartCleared,
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -405,7 +406,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_32,
                   ),
                   Text(
-                    "Your cart is currently empty",
+                   AppLocalizations.of(context)!.cartIsEmpty ,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
@@ -417,7 +418,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_4,
                   ),
                   Text(
-                    "Before proceeding to check out you, must add some items to yor cart",
+                AppLocalizations.of(context)!.empityCartCheckOutMsg    ,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
@@ -447,7 +448,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                         color: AppColors.darkGreen,
                       ),
                       child: Text(
-                        "Go to home screen",
+                    AppLocalizations.of(context)!.goToHomeScreen    ,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
