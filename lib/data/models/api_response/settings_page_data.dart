@@ -4,11 +4,16 @@ import 'package:equatable/equatable.dart';
 class SettingsPageData extends Equatable {
   final DownloadSongQuality downloadSongQuality;
   final Map<String, dynamic> notificationTags;
+  final bool isDataSaverTurnedOn;
 
-  SettingsPageData(
-      {required this.notificationTags, required this.downloadSongQuality});
+  SettingsPageData({
+    required this.notificationTags,
+    required this.downloadSongQuality,
+    required this.isDataSaverTurnedOn,
+  });
 
   @override
   // TODO: implement props
-  List<Object?> get props => [downloadSongQuality, notificationTags];
+  List<Object?> get props =>
+      [downloadSongQuality, notificationTags, isDataSaverTurnedOn];
 }

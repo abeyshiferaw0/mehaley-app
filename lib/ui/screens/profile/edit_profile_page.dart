@@ -14,6 +14,7 @@ import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/auth_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -237,19 +238,25 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                             ],
                           ),
                           ImagePickerDialogItems(
-                            onTap: () {
-                              imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
-                              Navigator.pop(context);
+                            onTap: () async {
+                              PagesUtilFunctions.takeAPhoto(
+                                context: context,
+                                onImageChanged: () {
+                                  imageChanged = true;
+                                },
+                              );
                             },
                             text: AppLocalizations.of(context)!.trackAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
-                              Navigator.pop(context);
+                              PagesUtilFunctions.getFromGallery(
+                                context: context,
+                                onImageChanged: () {
+                                  imageChanged = true;
+                                },
+                              );
                             },
                             text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
@@ -257,7 +264,8 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context)
+                                  .removeImage();
                               Navigator.pop(context);
                             },
                             text: AppLocalizations.of(context)!.removeImage,
@@ -285,10 +293,13 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         return CachedNetworkImage(
                           width: AppValues.editProfileImageSize,
                           height: AppValues.editProfileImageSize,
-                          imageUrl: AppApi.baseUrl + appUser.profileImageId!.imageMediumPath,
+                          imageUrl: AppApi.baseUrl +
+                              appUser.profileImageId!.imageMediumPath,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) => buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) => buildImagePlaceHolder(),
+                          placeholder: (context, url) =>
+                              buildImagePlaceHolder(),
+                          errorWidget: (context, url, error) =>
+                              buildImagePlaceHolder(),
                         );
                       } else {
                         return Container(

@@ -165,7 +165,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           audioPlayer.pause();
           this.add(
             ReportPlayerEvent(
-              msg: 'Unable to play audio',
+              msg: 'Unable to play audio,\ncheck your internet connection',
               error: error.toString(),
             ),
           );

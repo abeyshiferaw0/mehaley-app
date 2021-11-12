@@ -32,6 +32,12 @@ class SettingsPageBloc extends Bloc<SettingsPageEvent, SettingsPageState> {
       SettingsPageData settingsPageData =
           await settingDataRepository.getSettingsPageData();
       yield SettingPageLoadedState(settingsPageData: settingsPageData);
+    } else if (event is ChangeDataSaverStatusEvent) {
+      yield SettingPageLoadingState();
+      await settingDataRepository.changeDataSaverStatus();
+      SettingsPageData settingsPageData =
+          await settingDataRepository.getSettingsPageData();
+      yield SettingPageLoadedState(settingsPageData: settingsPageData);
     }
   }
 }

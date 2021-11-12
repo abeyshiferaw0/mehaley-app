@@ -73,8 +73,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: AppLocalizations.of(context)!
-                      .preferredPaymentChangedTo(PagesUtilFunctions.getPaymentMethodName(state.appPaymentMethod, context)),
+                  msg: AppLocalizations.of(context)!.preferredPaymentChangedTo(
+                      PagesUtilFunctions.getPaymentMethodName(
+                          state.appPaymentMethod, context)),
                   txtColor: AppColors.white,
                 ),
               );
@@ -152,15 +153,23 @@ class _SettingsPageState extends State<SettingsPage> {
                     SettingRadioItem(
                       title: AppLocalizations.of(context)!.dataSaver,
                       subTitle: AppLocalizations.of(context)!.dataSaverMsg,
-                      isEnabled: true,
-                      onSwitched: (bool value) {},
+                      isEnabled: settingsPageData.isDataSaverTurnedOn,
+                      onSwitched: (bool value) {
+                        BlocProvider.of<SettingsPageBloc>(context).add(
+                          ChangeDataSaverStatusEvent(),
+                        );
+                      },
                     ),
+                    SizedBox(height: AppMargin.margin_16),
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
                     ),
+                    SizedBox(height: AppMargin.margin_16),
                     SettingLargeButton(
-                      title: AppLocalizations.of(context)!.preferredPaymentMethod,
-                      subTitle: AppLocalizations.of(context)!.chooseYourPreferredMethod,
+                      title:
+                          AppLocalizations.of(context)!.preferredPaymentMethod,
+                      subTitle: AppLocalizations.of(context)!
+                          .chooseYourPreferredMethod,
                       onTap: () {
                         showDialog(
                           context: context,
@@ -178,6 +187,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     //   onSwitched: (bool value) {},
                     // ),
                     DownloadQualityPicker(settingsPageData: settingsPageData),
+                    SizedBox(height: AppMargin.margin_32),
+                    SettingLargeButton(
+                      title: AppLocalizations.of(context)!.rateApp,
+                      subTitle: AppLocalizations.of(context)!.rateAppMsg,
+                      onTap: () {
+                        PagesUtilFunctions.rateApp();
+                      },
+                    ),
                     SizedBox(
                       height: AppMargin.margin_48,
                     ),
@@ -190,6 +207,12 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         BlocBuilder<OneSignalBloc, OneSignalState>(
+          buildWhen: (preState, state) {
+            if (state is OneSignalTagAdding) {
+              return true;
+            }
+            return false;
+          },
           builder: (context, state) {
             if (state is OneSignalTagAdding) {
               return Container(

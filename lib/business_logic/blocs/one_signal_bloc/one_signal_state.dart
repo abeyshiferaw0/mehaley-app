@@ -26,3 +26,21 @@ class OneSignalTagAdded extends OneSignalState {
   @override
   List<Object> get props => [];
 }
+
+class NotificationClickedState extends OneSignalState {
+  final int itemId;
+  final AppItemsType itemType;
+
+  NotificationClickedState({required this.itemId, required this.itemType});
+
+  @override
+  List<Object> get props => [itemId, itemType];
+}
+
+class NotificationClickedErrorState extends OneSignalState {
+  final String error;
+
+  NotificationClickedErrorState({required this.error});
+  @override
+  List<Object> get props => [error];
+}

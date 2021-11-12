@@ -29,7 +29,7 @@ SnackBar buildAppSnackBar({
     margin: isFloating
         ? EdgeInsets.symmetric(
             horizontal: AppMargin.margin_16,
-            vertical: AppMargin.margin_16,
+            vertical: AppMargin.margin_32,
           )
         : null,
     // padding: EdgeInsets.symmetric(vertical: AppPadding.padding_2),

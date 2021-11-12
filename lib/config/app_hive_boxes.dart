@@ -191,6 +191,14 @@ class AppHiveBoxes {
         AppPaymentMethods.METHOD_UNK,
       );
     }
+
+    ///DATA SAVER
+    if (!settingsBox.containsKey(AppValues.isDataSaverTurnedOnKey)) {
+      await settingsBox.put(
+        AppValues.isDataSaverTurnedOnKey,
+        false,
+      );
+    }
   }
 
   Future<void> initHiveAdapters() async {

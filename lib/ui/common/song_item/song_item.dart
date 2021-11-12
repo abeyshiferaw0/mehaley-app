@@ -142,7 +142,9 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           song.lyricIncluded
                               ? SongItemBadge(
-                                  tag: AppLocalizations.of(context)!.lyrics,
+                                  tag: AppLocalizations.of(context)!
+                                      .lyrics
+                                      .toUpperCase(),
                                 )
                               : SizedBox(),
                           Row(
@@ -164,7 +166,8 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           Expanded(
                             child: Text(
-                              PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+                              PagesUtilFunctions.getArtistsNames(
+                                  song.artistsName, context),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -253,7 +256,8 @@ class _SongItemState extends State<SongItem> {
     }
   }
 
-  getPriceBadge(double price, bool isFree, bool isDiscountAvailable, double discountPercentage, bool isBought) {
+  getPriceBadge(double price, bool isFree, bool isDiscountAvailable,
+      double discountPercentage, bool isBought) {
     return Padding(
       padding: const EdgeInsets.only(
         right: AppPadding.padding_8,

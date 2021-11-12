@@ -3,6 +3,8 @@ import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'package:elf_play/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
@@ -111,7 +113,8 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocalizations.of(context)!.playlistAddedToFavorites
-                      : AppLocalizations.of(context)!.playlistRemovedToFavorites,
+                      : AppLocalizations.of(context)!
+                          .playlistRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -164,9 +167,10 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                      ? AppLocalizations.of(context)!.albumAddedToCart
-                      : AppLocalizations.of(context)!.albumRemovedToCart,
+                  msg:
+                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                          ? AppLocalizations.of(context)!.albumAddedToCart
+                          : AppLocalizations.of(context)!.albumRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -190,9 +194,10 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                      ? AppLocalizations.of(context)!.songAddedToCart
-                      : AppLocalizations.of(context)!.songRemovedToCart,
+                  msg:
+                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                          ? AppLocalizations.of(context)!.songAddedToCart
+                          : AppLocalizations.of(context)!.songRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -216,9 +221,10 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                      ? AppLocalizations.of(context)!.playlistAddedToCart
-                      : AppLocalizations.of(context)!.playlistRemovedToCart,
+                  msg:
+                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
+                          ? AppLocalizations.of(context)!.playlistAddedToCart
+                          : AppLocalizations.of(context)!.playlistRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -244,8 +250,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                     bgColor: AppColors.white,
                     isFloating: true,
-                    msg: AppLocalizations.of(context)!
-                        .downloadComplete(L10nUtil.translateLocale(state.song!.songName, context)),
+                    msg: AppLocalizations.of(context)!.downloadComplete(
+                        L10nUtil.translateLocale(
+                            state.song!.songName, context)),
                     txtColor: AppColors.black,
                     icon: PhosphorIcons.check_circle_fill,
                     iconColor: AppColors.darkGreen),
@@ -271,6 +278,44 @@ class _MainScreenState extends State<MainScreen> {
               Navigator.of(context).pushNamedAndRemoveUntil(
                 AppRouterPaths.signUp,
                 (Route<dynamic> route) => false,
+              );
+            }
+          },
+        ),
+        BlocListener<OneSignalBloc, OneSignalState>(
+          listener: (BuildContext context, state) {
+            if (state is NotificationClickedState) {
+              if (state.itemType == AppItemsType.PLAYLIST) {
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.playlistRoute,
+                  arguments: ScreenArguments(
+                    args: {
+                      'playlistId': state.itemId,
+                    },
+                  ),
+                );
+              }
+              if (state.itemType == AppItemsType.ALBUM) {
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.albumRoute,
+                  arguments: ScreenArguments(
+                    args: {'albumId': state.itemId},
+                  ),
+                );
+              }
+            }
+          },
+        ),
+        BlocListener<AudioPlayerBloc, AudioPlayerState>(
+          listener: (BuildContext context, state) {
+            if (state is AudioPlayerErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  txtColor: AppColors.white,
+                  msg: state.msg,
+                  isFloating: false,
+                ),
               );
             }
           },
@@ -344,7 +389,8 @@ class _MainScreenState extends State<MainScreen> {
           onWillPop: () async {
             //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
             if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(false);
+              BlocProvider.of<SearchInputIsSearchingCubit>(context)
+                  .changeIsSearching(false);
               return Future<bool>.value(false);
             }
             //DEFAULT BEHAVIOUR
@@ -361,7 +407,9 @@ class _MainScreenState extends State<MainScreen> {
             key: _navigatorKey,
             initialRoute: AppRouterPaths.homeRoute,
             onGenerateRoute: _appRouter.generateRoute,
-            observers: <RouteObserver<ModalRoute<void>>>[AppRouterPaths.routeObserver],
+            observers: <RouteObserver<ModalRoute<void>>>[
+              AppRouterPaths.routeObserver
+            ],
           ),
         );
       },

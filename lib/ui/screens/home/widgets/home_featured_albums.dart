@@ -127,7 +127,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 item: album.songs![i],
                 playingFrom: PlayingFrom(
                   from: AppLocalizations.of(context)!.playingFromFeaturedAlbum,
-                  title: L10nUtil.translateLocale(L10nUtil.translateLocale(album.albumTitle, context), context),
+                  title: L10nUtil.translateLocale(album.albumTitle, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_GROUP,
                   songSyncPlayedFromId: album.albumId,
                 ),

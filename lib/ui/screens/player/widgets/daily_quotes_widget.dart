@@ -1,8 +1,13 @@
+import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/screens/player/widgets/share_btn_widget.dart';
+import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:page_view_indicators/circle_page_indicator.dart';
+import 'package:sizer/sizer.dart';
 
 class DailyQuotesWidget extends StatefulWidget {
   final Color dominantColor;
@@ -14,61 +19,126 @@ class DailyQuotesWidget extends StatefulWidget {
 }
 
 class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
-  final ItemScrollController itemScrollController = ItemScrollController();
-  final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
-  late final result;
+  late final _currentPageNotifier;
+  late PageController _pageController;
+
+  //DOMINANT COLOR INIT
+  Color dominantColor = AppColors.appGradientDefaultColor;
 
   @override
   void initState() {
+    _currentPageNotifier = ValueNotifier<int>(0);
+    _pageController = PageController();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      BlocProvider.of<QuotesBloc>(context).add(
+        LoadRandomQuotesEvent(
+          limit: 5,
+          locale: Localizations.localeOf(context),
+        ),
+      );
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(AppPadding.padding_14),
-      margin: EdgeInsets.all(AppMargin.margin_16),
-      decoration: BoxDecoration(
-        color: widget.dominantColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AppLocalizations.of(context)!.dailyQuotes.toUpperCase(),
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_14,
-              color: AppColors.lightGrey,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.2,
-            ),
-          ),
-          SizedBox(
-            height: AppMargin.margin_32,
-          ),
-          Container(
-            child: Text(
-              'Jesus said unto him, Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy mind. This is the first and great commandment. And the second is like unto it, Thou shalt love thy neighbour as thyself. On these two commandments hang all the law and the prophets. Matthew 22:37-40',
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.clip,
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_24,
-                color: AppColors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ShareBtnWidget(),
-          )
-        ],
+    return BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
+      builder: (context, state) {
+        if (state is PlayerPageDominantColorChangedState) {
+          dominantColor = ColorUtil.changeColorSaturation(state.color, 0.9);
+        }
+        return BlocBuilder<QuotesBloc, QuotesState>(
+          builder: (context, state) {
+            if (state is QuotesLoadedState) {
+              return Container(
+                height: AppValues.lyricPlayerHeight,
+                padding: EdgeInsets.all(AppPadding.padding_14),
+                margin: EdgeInsets.all(AppMargin.margin_16),
+                decoration: BoxDecoration(
+                  color: dominantColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!
+                          .dailyQuotesFromApp
+                          .toUpperCase(),
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                    SizedBox(
+                      height: AppMargin.margin_28,
+                    ),
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: state.verseList.length,
+                        onPageChanged: (index) {
+                          _currentPageNotifier.value = index;
+                        },
+                        itemBuilder: (context, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                state.verseList.elementAt(index).verse,
+                                textAlign: TextAlign.left,
+                                maxLines: 6,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: AppFontSizes.font_size_16.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: AppMargin.margin_16,
+                              ),
+                              Text(
+                                state.verseList.elementAt(index).reference,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(
+                                  fontSize: AppFontSizes.font_size_14.sp,
+                                  color: AppColors.black.withOpacity(0.6),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    buildIndicators(state.verseList),
+                  ],
+                ),
+              );
+            }
+            return SizedBox();
+          },
+        );
+      },
+    );
+  }
+
+  Padding buildIndicators(versesList) {
+    return Padding(
+      padding: EdgeInsets.only(left: AppMargin.margin_16),
+      child: CirclePageIndicator(
+        itemCount: versesList.length,
+        size: AppIconSizes.icon_size_10,
+        selectedSize: AppIconSizes.icon_size_12,
+        selectedDotColor: AppColors.black.withOpacity(0.6),
+        dotColor: AppColors.lightGrey,
+        currentPageNotifier: _currentPageNotifier,
       ),
     );
   }

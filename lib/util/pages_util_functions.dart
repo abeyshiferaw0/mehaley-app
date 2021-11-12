@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
@@ -14,7 +15,9 @@ import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/models/album.dart';
+import 'package:elf_play/data/models/app_permission.dart';
 import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/category.dart';
@@ -30,6 +33,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/data/models/text_lan.dart';
 import 'package:elf_play/ui/common/app_card.dart';
+import 'package:elf_play/ui/common/dialog/dialog_permission_permanent_refused.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/ui/screens/player/player_page.dart';
@@ -49,21 +53,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
 
 class PagesUtilFunctions {
   static String getPlaylistDescription(Playlist playlist, context) {
-    if (L10nUtil.translateLocale(playlist.playlistDescriptionText, context).isNotEmpty) {
-      return L10nUtil.translateLocale(playlist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(playlist.playlistDescriptionText, context)
+        .isNotEmpty) {
+      return L10nUtil.translateLocale(
+          playlist.playlistDescriptionText, context);
     } else {
       return L10nUtil.translateLocale(playlist.playlistNameText, context);
     }
   }
 
   static String getPlaylistOwnerProfilePic(Playlist playlist) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
+        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
       return 'https://www.thoughtco.com/thmb/VfrRj6idAT6dCdaR8kEyLQD6P50=/2120x1414/filters:no_upscale():max_bytes(150000):strip_icc()/LatinCross-631151317-5a22dd90beba330037d3cecb.jpg';
     } else {
       return 'https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg';
@@ -71,7 +80,8 @@ class PagesUtilFunctions {
   }
 
   static String getPlaylistOwner(Playlist playlist, context) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
+        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
       return AppLocalizations.of(context)!.appName.toUpperCase();
     } else {
       return '';
@@ -79,7 +89,8 @@ class PagesUtilFunctions {
   }
 
   static String getPlaylistBy(Playlist playlist, context) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN || playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
+    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
+        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
       return AppLocalizations.of(context)!.byAppName;
     } else {
       return '';
@@ -210,12 +221,14 @@ class PagesUtilFunctions {
       String title = L10nUtil.translateLocale((item as Song).songName, context);
 
       if (item.artistsName.length > 0) {
-        title = '$title - ${L10nUtil.translateLocale(item.artistsName[0], context)}';
+        title =
+            '$title - ${L10nUtil.translateLocale(item.artistsName[0], context)}';
       }
 
       return title;
     } else if (groupType == GroupType.PLAYLIST) {
-      return L10nUtil.translateLocale((item as Playlist).playlistNameText, context);
+      return L10nUtil.translateLocale(
+          (item as Playlist).playlistNameText, context);
     } else if (groupType == GroupType.ALBUM) {
       String title =
           '${L10nUtil.translateLocale((item as Album).albumTitle, context)} - ${L10nUtil.translateLocale(item.artist.artistName, context)}';
@@ -288,6 +301,7 @@ class PagesUtilFunctions {
     required List<dynamic> items,
     required BuildContext context,
     required int index,
+    bool openPlayerPage = true,
   }) {
     if (groupType == GroupType.SONG) {
       //SET PLAYER QUEUE
@@ -304,17 +318,20 @@ class PagesUtilFunctions {
         playingFrom,
       );
 
-      //NAVIGATE TO PLAYER PAGE
-      Navigator.of(context, rootNavigator: true).push(
-        createBottomToUpAnimatedRoute(
-          page: PlayerPage(),
-        ),
-      );
+      if (openPlayerPage) {
+        //NAVIGATE TO PLAYER PAGE
+        Navigator.of(context, rootNavigator: true).push(
+          createBottomToUpAnimatedRoute(
+            page: PlayerPage(),
+          ),
+        );
+      }
     } else if (groupType == GroupType.PLAYLIST) {
       Navigator.pushNamed(
         context,
         AppRouterPaths.playlistRoute,
-        arguments: ScreenArguments(args: {'playlistId': (item as Playlist).playlistId}),
+        arguments: ScreenArguments(
+            args: {'playlistId': (item as Playlist).playlistId}),
       );
     } else if (groupType == GroupType.ALBUM) {
       Navigator.pushNamed(
@@ -326,7 +343,8 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.artistRoute,
-        arguments: ScreenArguments(args: {'artistId': (item as Artist).artistId}),
+        arguments:
+            ScreenArguments(args: {'artistId': (item as Artist).artistId}),
       );
     }
   }
@@ -364,7 +382,8 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.playlistRoute,
-        arguments: ScreenArguments(args: {'playlistId': (item as Playlist).playlistId}),
+        arguments: ScreenArguments(
+            args: {'playlistId': (item as Playlist).playlistId}),
       );
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
       Navigator.pushNamed(
@@ -376,7 +395,8 @@ class PagesUtilFunctions {
       Navigator.pushNamed(
         context,
         AppRouterPaths.artistRoute,
-        arguments: ScreenArguments(args: {'artistId': (item as Artist).artistId}),
+        arguments:
+            ScreenArguments(args: {'artistId': (item as Artist).artistId}),
       );
     }
   }
@@ -426,12 +446,14 @@ class PagesUtilFunctions {
       items as List<Song>,
       playingFrom,
       context,
+      SettingsDataProvider(),
     );
     // List<AudioSource> audioSourceItems =
     //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
     // //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(
+          queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
   }
 
@@ -444,11 +466,18 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom, context);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
+      downloadUtil,
+      songs,
+      playingFrom,
+      context,
+      SettingsDataProvider(),
+    );
     //List<AudioSource> audioSourceItems = [Song.toAudioSourceStreamUri(song)];
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(
+          queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
     //SET PLAYING FROM CUBIT
     BlocProvider.of<PlayerPagePlayingFromCubit>(context).changePlayingFrom(
@@ -471,10 +500,17 @@ class PagesUtilFunctions {
   }) async {
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
-    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(downloadUtil, songs, playingFrom, context);
+    List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
+      downloadUtil,
+      songs,
+      playingFrom,
+      context,
+      SettingsDataProvider(),
+    );
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
-      SetPlayerQueueEvent(queue: audioSourceItems, startPlaying: startPlaying, index: index),
+      SetPlayerQueueEvent(
+          queue: audioSourceItems, startPlaying: startPlaying, index: index),
     );
     //SHUFFLE QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(ShufflePlayerOnQueueEvent());
@@ -490,7 +526,8 @@ class PagesUtilFunctions {
     );
   }
 
-  static Route createBottomToUpAnimatedRoute({required Widget page, String? setting}) {
+  static Route createBottomToUpAnimatedRoute(
+      {required Widget page, String? setting}) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       settings: setting != null ? RouteSettings(name: setting) : null,
@@ -499,7 +536,8 @@ class PagesUtilFunctions {
         const end = Offset.zero;
         const curve = Curves.easeIn;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -561,9 +599,11 @@ class PagesUtilFunctions {
     return min + Random().nextInt(max - min);
   }
 
-  static String getSearchFrontPageItemTitle(AppItemsType appItemsType, dynamic item, context) {
+  static String getSearchFrontPageItemTitle(
+      AppItemsType appItemsType, dynamic item, context) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return L10nUtil.translateLocale((item as Category).categoryNameText, context);
+      return L10nUtil.translateLocale(
+          (item as Category).categoryNameText, context);
     } else if (appItemsType == AppItemsType.ARTIST) {
       return L10nUtil.translateLocale((item as Artist).artistName, context);
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
@@ -572,7 +612,8 @@ class PagesUtilFunctions {
     return '';
   }
 
-  static String getSearchFrontPageItemImageUrl(AppItemsType appItemsType, dynamic item) {
+  static String getSearchFrontPageItemImageUrl(
+      AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
       return AppApi.baseUrl + (item as Category).categoryImage.imageSmallPath;
     } else if (appItemsType == AppItemsType.ARTIST) {
@@ -583,7 +624,8 @@ class PagesUtilFunctions {
     return '';
   }
 
-  static Color getSearchFrontPageDominantColor(AppItemsType appItemsType, dynamic item) {
+  static Color getSearchFrontPageDominantColor(
+      AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
       item as Category;
 
@@ -719,8 +761,10 @@ class PagesUtilFunctions {
     }
   }
 
-  static void openEditPlaylistPage(context, MyPlaylist myPlaylist, Function(MyPlaylist myPlaylist) onUpdateSuccess) async {
-    final updatedMyPlaylist = await Navigator.of(context, rootNavigator: true).push(
+  static void openEditPlaylistPage(context, MyPlaylist myPlaylist,
+      Function(MyPlaylist myPlaylist) onUpdateSuccess) async {
+    final updatedMyPlaylist =
+        await Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
           providers: [
@@ -750,7 +794,8 @@ class PagesUtilFunctions {
     }
   }
 
-  static void openCreatePlaylistPageForAdding(context, Song song, Function(MyPlaylist) onCreateWithSongSuccess) async {
+  static void openCreatePlaylistPageForAdding(
+      context, Song song, Function(MyPlaylist) onCreateWithSongSuccess) async {
     final shouldPop = await Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
@@ -789,8 +834,10 @@ class PagesUtilFunctions {
           height: AppValues.libraryMusicItemSize,
           fit: BoxFit.cover,
           imageUrl: AppApi.baseUrl + myPlaylist.playlistImage!.imageMediumPath,
-          placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-          errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          placeholder: (context, url) =>
+              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+          errorWidget: (context, url, e) =>
+              buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
         ),
       );
     }
@@ -801,9 +848,12 @@ class PagesUtilFunctions {
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
             fit: BoxFit.cover,
-            imageUrl: AppApi.baseUrl + myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
-            placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-            errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+            imageUrl: AppApi.baseUrl +
+                myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
+            placeholder: (context, url) =>
+                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+            errorWidget: (context, url, e) =>
+                buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
           ),
         );
       }
@@ -820,9 +870,12 @@ class PagesUtilFunctions {
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl + myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
-                placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.OTHER),
-                errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.OTHER),
+                imageUrl: AppApi.baseUrl +
+                    myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
+                placeholder: (context, url) =>
+                    buildImagePlaceHolder(AppItemsType.OTHER),
+                errorWidget: (context, url, e) =>
+                    buildImagePlaceHolder(AppItemsType.OTHER),
               );
             },
           ),
@@ -835,8 +888,10 @@ class PagesUtilFunctions {
         height: AppValues.libraryMusicItemSize,
         fit: BoxFit.cover,
         imageUrl: AppApi.baseUrl,
-        placeholder: (context, url) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
-        errorWidget: (context, url, e) => buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        placeholder: (context, url) =>
+            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
+        errorWidget: (context, url, e) =>
+            buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
       ),
     );
   }
@@ -855,22 +910,26 @@ class PagesUtilFunctions {
   }
 
   static String getUserPlaylistDescription(MyPlaylist myPlaylist, context) {
-    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context).isNotEmpty) {
-      return L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context)
+        .isNotEmpty) {
+      return L10nUtil.translateLocale(
+          myPlaylist.playlistDescriptionText, context);
     } else {
       return L10nUtil.translateLocale(myPlaylist.playlistNameText, context);
     }
   }
 
   static String getUserPlaylistOwner(MyPlaylist myPlaylist, context) {
-    return AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state);
+    return AuthUtil.getUserName(
+        BlocProvider.of<AppUserWidgetsCubit>(context).state);
   }
 
   static getUserPlaylistDateCreated(MyPlaylist myPlaylist) {
     return DateFormat.yMMMd().format(myPlaylist.playlistDateCreated).toString();
   }
 
-  static void changeUserPlaylistDominantColor(MyPlaylist myPlaylist, BuildContext context) {
+  static void changeUserPlaylistDominantColor(
+      MyPlaylist myPlaylist, BuildContext context) {
     if (myPlaylist.playlistImage != null) {
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         UserPlaylistPageDominantColorChanged(
@@ -902,7 +961,8 @@ class PagesUtilFunctions {
       if (myPlaylist.gridSongImages.length <= 3) {
         BlocProvider.of<PagesDominantColorBloc>(context).add(
           UserPlaylistPageDominantColorChanged(
-            dominantColor: HexColor(myPlaylist.gridSongImages[0].primaryColorHex),
+            dominantColor:
+                HexColor(myPlaylist.gridSongImages[0].primaryColorHex),
           ),
         );
         return;
@@ -974,9 +1034,11 @@ class PagesUtilFunctions {
     );
   }
 
-  static SongSyncPlayedFrom getSongSyncPlayedFromGroupType(GroupType groupType) {
+  static SongSyncPlayedFrom getSongSyncPlayedFromGroupType(
+      GroupType groupType) {
     if (groupType == GroupType.ARTIST) return SongSyncPlayedFrom.ARTIST_GROUP;
-    if (groupType == GroupType.PLAYLIST) return SongSyncPlayedFrom.PLAYLIST_GROUP;
+    if (groupType == GroupType.PLAYLIST)
+      return SongSyncPlayedFrom.PLAYLIST_GROUP;
     if (groupType == GroupType.ALBUM) return SongSyncPlayedFrom.ALBUM_GROUP;
     if (groupType == GroupType.SONG) return SongSyncPlayedFrom.SONG_GROUP;
     return SongSyncPlayedFrom.UNK;
@@ -1077,7 +1139,8 @@ class PagesUtilFunctions {
     }
   }
 
-  static String getPaymentMethodName(AppPaymentMethods appPaymentMethod, context) {
+  static String getPaymentMethodName(
+      AppPaymentMethods appPaymentMethod, context) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
       return AppLocalizations.of(context)!.helloCash;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
@@ -1110,6 +1173,105 @@ class PagesUtilFunctions {
       return 'assets/images/ic_mastercard.png';
     } else {
       return '';
+    }
+  }
+
+  static void takeAPhoto({
+    required BuildContext context,
+    required VoidCallback onImageChanged,
+  }) async {
+    var camStatus = await Permission.camera.status;
+    var photoStatus = await Permission.photos.status;
+
+    print("takeAPhoto00 ${camStatus}");
+    print("takeAPhoto00 ${photoStatus}");
+
+    ///ASK FOR CAMERA PERMISSION
+    List<AppPermission> permissionList = [];
+    if (camStatus.isPermanentlyDenied) {
+      permissionList.add(
+        AppPermission(
+          AppLocalizations.of(context)!.cameraAccess,
+          PhosphorIcons.camera_light,
+        ),
+      );
+    }
+
+    ///ASK FOR PHOTO PERMISSION
+    if (photoStatus.isPermanentlyDenied) {
+      permissionList.add(
+        AppPermission(
+          AppLocalizations.of(context)!.photoAccess,
+          PhosphorIcons.image_light,
+        ),
+      );
+    }
+
+    if (permissionList.length > 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return DialogPermissionPermanentlyRefused(
+            onGoToSetting: () {
+              ///GO TO APP SETTINGS TO ALLOW PERMISSIONS
+              AppSettings.openAppSettings();
+            },
+            permissionList: permissionList,
+          );
+        },
+      );
+    } else {
+      onImageChanged();
+      BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
+      Navigator.pop(context);
+    }
+  }
+
+  static void getFromGallery({
+    required BuildContext context,
+    required VoidCallback onImageChanged,
+  }) async {
+    var photoStatus = await Permission.photos.status;
+
+    List<AppPermission> permissionList = [];
+
+    ///ASK FOR PHOTO PERMISSION
+    if (photoStatus.isPermanentlyDenied) {
+      permissionList.add(
+        AppPermission(
+          AppLocalizations.of(context)!.photoAccess,
+          PhosphorIcons.image_light,
+        ),
+      );
+    }
+
+    if (permissionList.length > 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return DialogPermissionPermanentlyRefused(
+            onGoToSetting: () {
+              ///GO TO APP SETTINGS TO ALLOW PERMISSIONS
+              AppSettings.openAppSettings();
+            },
+            permissionList: permissionList,
+          );
+        },
+      );
+    } else {
+      onImageChanged();
+      BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
+      Navigator.pop(context);
+    }
+  }
+
+  static void rateApp() async {
+    final InAppReview inAppReview = InAppReview.instance;
+    bool isAvailable = await inAppReview.isAvailable();
+    if (isAvailable) {
+      inAppReview.requestReview();
+    } else {
+      inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
     }
   }
 }

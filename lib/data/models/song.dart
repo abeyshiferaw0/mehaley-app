@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/models/audio_file.dart';
 import 'package:elf_play/data/models/remote_image.dart';
 import 'package:elf_play/data/models/sync/song_sync.dart';
@@ -189,6 +190,7 @@ class Song extends Equatable {
     List<Song> songs,
     PlayingFrom playingFrom,
     BuildContext context,
+    SettingsDataProvider settingsDataProvider,
   ) async {
     List<AudioSource> audioSources = [];
 
@@ -242,10 +244,16 @@ class Song extends Equatable {
 
         ///CHECK IF SONG BOUGHT
         HlsAudioSource hlsAudioSource = HlsAudioSource(
-          Uri.parse(AppApi.baseUrl + song.audioFile.audio128KpsStreamPath),
+          Uri.parse(
+            AppApi.baseUrl +
+                (settingsDataProvider.isDataSaverTurnedOn()
+                    ? song.audioFile.audio96KpsStreamPath
+                    : song.audioFile.audio128KpsStreamPath),
+          ),
           tag: tag,
         );
-        print("song.isBought => ${song.isBought} ${song.isFree}");
+        print(
+            "settingsDataProvider.isDataSaverTurnedOn() => ${settingsDataProvider.isDataSaverTurnedOn()}  => ${hlsAudioSource.uri}");
         if (!song.isBought && !song.isFree) {
           ///CLIP IF NOT BOUGHT
           clippingAudioSource = ClippingAudioSource(
@@ -292,6 +300,7 @@ class Song extends Equatable {
     Song song,
     PlayingFrom playingFrom,
     BuildContext context,
+    SettingsDataProvider settingsDataProvider,
   ) async {
     ///GET ALL DOWNLOADS SONGS AND TASKS
     List<DownloadedTaskWithSong> allDownloads =
@@ -342,10 +351,16 @@ class Song extends Equatable {
 
       ///CHECK IF SONG BOUGHT
       HlsAudioSource hlsAudioSource = HlsAudioSource(
-        Uri.parse(AppApi.baseUrl + song.audioFile.audio128KpsStreamPath),
+        Uri.parse(
+          AppApi.baseUrl +
+              (settingsDataProvider.isDataSaverTurnedOn()
+                  ? song.audioFile.audio96KpsStreamPath
+                  : song.audioFile.audio128KpsStreamPath),
+        ),
         tag: tag,
       );
-      print("song.isBought => ${song.isBought} ${song.isFree}");
+      print(
+          "settingsDataProvider.isDataSaverTurnedOn() => ${settingsDataProvider.isDataSaverTurnedOn()}  => ${hlsAudioSource.uri}");
       if (!song.isBought && !song.isFree) {
         ///CLIP IF NOT BOUGHT
         clippingAudioSource = ClippingAudioSource(

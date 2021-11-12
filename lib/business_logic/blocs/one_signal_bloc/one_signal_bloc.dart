@@ -10,7 +10,52 @@ part 'one_signal_event.dart';
 part 'one_signal_state.dart';
 
 class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
-  OneSignalBloc() : super(OneSignalInitial());
+  OneSignalBloc() : super(OneSignalInitial()) {
+    OneSignal.shared.setNotificationOpenedHandler(
+      (OSNotificationOpenedResult result) async {
+        print(
+            "result.notification.rawPayload ${result.notification.additionalData}");
+        if (result.notification.additionalData != null) {
+          print(
+              "result.notification.rawPayload ${result.notification.additionalData}");
+          if (result.notification.additionalData!.isNotEmpty) {
+            if (result.notification.additionalData!.containsKey('item_id') &&
+                result.notification.additionalData!.containsKey('item_type')) {
+              try {
+                ///PARSE ITEM ID
+                ///CHECK IF ITEM ID IS INT OR STRING AND USE APPROPRIATELY
+                late int itemId;
+                if (result.notification.additionalData!['item_id'] is String) {
+                  itemId =
+                      int.parse(result.notification.additionalData!['item_id']);
+                }
+                if (result.notification.additionalData!['item_id'] is int) {
+                  itemId =
+                      result.notification.additionalData!['item_id'] as int;
+                }
+
+                ///PARSE ITEM TYPE
+                AppItemsType? itemType = EnumToString.fromString(
+                  AppItemsType.values,
+                  result.notification.additionalData!['item_type'] as String,
+                );
+                if (itemType != null) {
+                  this.add(
+                    NotificationClickedEvent(
+                      itemId: itemId,
+                      itemType: itemType,
+                    ),
+                  );
+                }
+              } catch (e) {
+                this.add(NotificationClickedErrorEvent(error: e.toString()));
+              }
+            }
+          }
+        }
+      },
+    );
+  }
 
   @override
   Stream<OneSignalState> mapEventToState(OneSignalEvent event) async* {
@@ -32,6 +77,13 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
       yield OneSignalTagAdded();
     } else if (event is SetNotificationTagErrorEvent) {
       yield OneSignalTagAddingError(error: event.error);
+    } else if (event is NotificationClickedEvent) {
+      yield NotificationClickedState(
+        itemId: event.itemId,
+        itemType: event.itemType,
+      );
+    } else if (event is NotificationClickedErrorEvent) {
+      yield NotificationClickedErrorState(error: event.error);
     }
   }
 

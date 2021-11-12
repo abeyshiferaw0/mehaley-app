@@ -20,6 +20,7 @@ import 'package:elf_play/ui/screens/cart/widgets/list_cart_albums.dart';
 import 'package:elf_play/ui/screens/cart/widgets/list_cart_playlist.dart';
 import 'package:elf_play/ui/screens/cart/widgets/list_cart_songs.dart';
 import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -86,13 +87,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
       listener: (context, state) {
         ///ERROR MESSAGES WHEN REMOVING FROM CART
         if (state is CartUtilSongAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
+            return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!
-                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.song.songName, context)),
+              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
+                  L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -100,13 +102,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
         if (state is CartUtilAlbumAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
+            return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!
-                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
+              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
+                  L10nUtil.translateLocale(state.album.albumTitle, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -114,13 +117,15 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
         if (state is CartUtilPlaylistAddingErrorState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
+            return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!
-                  .unableToRemoveFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
+              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
+                  L10nUtil.translateLocale(
+                      state.playlist.playlistNameText, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -154,8 +159,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
               buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: true,
-                  msg:
-                      AppLocalizations.of(context)!.removeedFromCart(L10nUtil.translateLocale(state.song.songName, context)),
+                  msg: AppLocalizations.of(context)!.removeedFromCart(
+                      L10nUtil.translateLocale(state.song.songName, context)),
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.check_circle_fill,
                   iconColor: AppColors.darkGreen),
@@ -172,13 +177,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
         }
 
         if (state is CartUtilAlbumAddedSuccessState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
+            return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!
-                    .removeedFromCart(L10nUtil.translateLocale(state.album.albumTitle, context)),
+                msg: AppLocalizations.of(context)!.removeedFromCart(
+                    L10nUtil.translateLocale(state.album.albumTitle, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -194,13 +200,15 @@ class _CartPageState extends State<CartPage> with RouteAware {
         }
 
         if (state is CartUtilPlaylistAddedSuccessState) {
-          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) return;
+          if (state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD)
+            return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!
-                    .removeedFromCart(L10nUtil.translateLocale(state.playlist.playlistNameText, context)),
+                msg: AppLocalizations.of(context)!.removeedFromCart(
+                    L10nUtil.translateLocale(
+                        state.playlist.playlistNameText, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -275,7 +283,8 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   floating: true,
                   pinned: false,
                   delegate: CartAppBarDelegate(
-                    height: 80,
+                    height:
+                        ScreenUtil(context: context).getScreenHeight() * 0.12,
                     cart: cart,
                   ),
                 ),
@@ -346,6 +355,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
           ),
           Expanded(
             child: Center(
@@ -386,6 +396,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
           ),
           Expanded(
             child: Padding(
@@ -477,6 +488,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
           ),
           Expanded(
             child: AppError(

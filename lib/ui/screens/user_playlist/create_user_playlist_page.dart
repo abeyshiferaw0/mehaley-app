@@ -13,6 +13,7 @@ import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,11 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class CreateUserPlaylistPage extends StatefulWidget {
-  const CreateUserPlaylistPage({Key? key, required this.createWithSong, required this.song, this.onCreateWithSongSuccess})
+  const CreateUserPlaylistPage(
+      {Key? key,
+      required this.createWithSong,
+      required this.song,
+      this.onCreateWithSongSuccess})
       : super(key: key);
 
   final bool createWithSong;
@@ -81,8 +86,9 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg: AppLocalizations.of(context)!
-                  .playlistCreated(L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)),
+              msg: AppLocalizations.of(context)!.playlistCreated(
+                  L10nUtil.translateLocale(
+                      state.myPlaylist.playlistNameText, context)),
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -362,23 +368,28 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
-                              Navigator.pop(context);
+                              PagesUtilFunctions.takeAPhoto(
+                                context: context,
+                                onImageChanged: () {},
+                              );
                             },
                             text: AppLocalizations.of(context)!.takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
-                              Navigator.pop(context);
+                              PagesUtilFunctions.getFromGallery(
+                                context: context,
+                                onImageChanged: () {},
+                              );
                             },
                             text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context)
+                                  .removeImage();
                               Navigator.pop(context);
                             },
                             text: AppLocalizations.of(context)!.removeIImage,
@@ -488,7 +499,8 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: AppLocalizations.of(context)!.playlistNameCantBeEmpty,
+                      msg:
+                          AppLocalizations.of(context)!.playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),

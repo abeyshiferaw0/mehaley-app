@@ -13,6 +13,7 @@ import 'package:elf_play/ui/common/app_loading.dart';
 import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,8 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class EditUserPlaylistPage extends StatefulWidget {
-  const EditUserPlaylistPage({Key? key, required this.myPlaylist}) : super(key: key);
+  const EditUserPlaylistPage({Key? key, required this.myPlaylist})
+      : super(key: key);
 
   final MyPlaylist myPlaylist;
 
@@ -82,7 +84,8 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
               msg: AppLocalizations.of(context)!.playlistUpdated(
-                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+                L10nUtil.translateLocale(
+                    state.myPlaylist.playlistNameText, context),
               ),
               bgColor: AppColors.white,
               isFloating: true,
@@ -332,18 +335,24 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).getFromCamera();
-                              Navigator.pop(context);
+                              PagesUtilFunctions.takeAPhoto(
+                                context: context,
+                                onImageChanged: () {
+                                  imageChanged = true;
+                                },
+                              );
                             },
                             text: AppLocalizations.of(context)!.takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
-                              imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
-                              Navigator.pop(context);
+                              PagesUtilFunctions.getFromGallery(
+                                context: context,
+                                onImageChanged: () {
+                                  imageChanged = true;
+                                },
+                              );
                             },
                             text: AppLocalizations.of(context)!.pickFromGallery,
                             icon: PhosphorIcons.image_light,
@@ -351,7 +360,8 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                           ImagePickerDialogItems(
                             onTap: () {
                               imageChanged = true;
-                              BlocProvider.of<ImagePickerCubit>(context).removeImage();
+                              BlocProvider.of<ImagePickerCubit>(context)
+                                  .removeImage();
                               Navigator.pop(context);
                             },
                             text: AppLocalizations.of(context)!.removeIImage,
@@ -378,10 +388,13 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                         return CachedNetworkImage(
                           width: AppValues.createPlaylistImageSize,
                           height: AppValues.createPlaylistImageSize,
-                          imageUrl: AppApi.baseUrl + widget.myPlaylist.playlistImage!.imageMediumPath,
+                          imageUrl: AppApi.baseUrl +
+                              widget.myPlaylist.playlistImage!.imageMediumPath,
                           fit: BoxFit.cover,
-                          placeholder: (context, url) => buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) => buildImagePlaceHolder(),
+                          placeholder: (context, url) =>
+                              buildImagePlaceHolder(),
+                          errorWidget: (context, url, error) =>
+                              buildImagePlaceHolder(),
                         );
                       } else {
                         return Container(
@@ -485,7 +498,8 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: AppLocalizations.of(context)!.playlistNameCantBeEmpty,
+                      msg:
+                          AppLocalizations.of(context)!.playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -526,9 +540,13 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   }
 
   void initPreviousValues() {
-    nameInputController.text = L10nUtil.translateLocale(widget.myPlaylist.playlistNameText, context);
-    descriptionInputController.text = L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText, context);
-    if (L10nUtil.translateLocale(widget.myPlaylist.playlistDescriptionText, context).isNotEmpty) {
+    nameInputController.text =
+        L10nUtil.translateLocale(widget.myPlaylist.playlistNameText, context);
+    descriptionInputController.text = L10nUtil.translateLocale(
+        widget.myPlaylist.playlistDescriptionText, context);
+    if (L10nUtil.translateLocale(
+            widget.myPlaylist.playlistDescriptionText, context)
+        .isNotEmpty) {
       showDescription = true;
     }
   }

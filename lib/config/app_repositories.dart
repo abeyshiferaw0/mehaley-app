@@ -12,6 +12,7 @@ import 'package:elf_play/data/data_providers/my_playlist_data_provider.dart';
 import 'package:elf_play/data/data_providers/payment_provider.dart';
 import 'package:elf_play/data/data_providers/playlist_data_provider.dart';
 import 'package:elf_play/data/data_providers/profile_data_provider.dart';
+import 'package:elf_play/data/data_providers/quotes_data_provider.dart';
 import 'package:elf_play/data/data_providers/search_data_provider.dart';
 import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/data_providers/song_menu_data_provider.dart';
@@ -30,6 +31,7 @@ import 'package:elf_play/data/repositories/my_playlist_repository.dart';
 import 'package:elf_play/data/repositories/payment_repository.dart';
 import 'package:elf_play/data/repositories/playlist_data_repository.dart';
 import 'package:elf_play/data/repositories/profile_data_repository.dart';
+import 'package:elf_play/data/repositories/quotes_data_repository.dart';
 import 'package:elf_play/data/repositories/search_data_repository.dart';
 import 'package:elf_play/data/repositories/setting_data_repository.dart';
 import 'package:elf_play/data/repositories/song_menu_repository.dart';
@@ -106,4 +108,9 @@ class AppRepositories {
   static PaymentRepository paymentRepository = PaymentRepository(
     paymentProvider: PaymentProvider(),
   );
+
+  static QuotesDataRepository quotesDataRepository = QuotesDataRepository(
+    quotesDataProvider: QuotesDataProvider(),
+  );
+
 }

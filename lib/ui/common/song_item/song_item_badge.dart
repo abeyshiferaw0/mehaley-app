@@ -27,7 +27,7 @@ class SongItemBadge extends StatelessWidget {
         style: TextStyle(
           fontSize: 8.sp,
           color: color != null ? color : null,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

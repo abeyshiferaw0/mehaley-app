@@ -29,4 +29,17 @@ class SettingsDataProvider {
     });
     return map;
   }
+
+  bool isDataSaverTurnedOn() {
+    return AppHiveBoxes.instance.settingsBox.get(
+      AppValues.isDataSaverTurnedOnKey,
+    );
+  }
+
+  void changeDataSaverStatus() {
+    AppHiveBoxes.instance.settingsBox.put(
+      AppValues.isDataSaverTurnedOnKey,
+      !this.isDataSaverTurnedOn(),
+    );
+  }
 }

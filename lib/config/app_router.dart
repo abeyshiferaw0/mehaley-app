@@ -4,9 +4,9 @@ import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
-import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
+import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
@@ -99,9 +99,6 @@ class AppRouter {
                         AppRepositories.settingDataRepository,
                   ),
                 ),
-                BlocProvider(
-                  create: (context) => OneSignalBloc(),
-                ),
               ],
               child: SettingsPage(),
             );
@@ -115,7 +112,12 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.playerRoute:
-        builder = (_) => PlayerPage();
+        builder = (_) => BlocProvider(
+              create: (context) => QuotesBloc(
+                quotesDataRepository: AppRepositories.quotesDataRepository,
+              ),
+              child: PlayerPage(),
+            );
         break;
       case AppRouterPaths.albumRoute:
         final args = settings.arguments as ScreenArguments;

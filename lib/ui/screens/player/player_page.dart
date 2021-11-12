@@ -1,9 +1,10 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
 import 'package:elf_play/ui/screens/player/widgets/bg_player_gradient.dart';
 import 'package:elf_play/ui/screens/player/widgets/main_player_widgets.dart';
 import 'package:flutter/material.dart';
@@ -33,45 +34,51 @@ class _PlayerPageState extends State<PlayerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
-        listener: playerPageListeners,
-        child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
-          builder: (context, state) {
-            return SingleChildScrollView(
-              controller: _singleChildScrollViewController,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  // if (BlocProvider.of<PlayerVideoModeCubit>(context).state) {
-                  //   BlocProvider.of<PlayerVideoModeRemoveControlsCubit>(context)
-                  //       .changeControls();
-                  // }
-                },
-                child: Container(
-                  child: Stack(
-                    children: [
-                      BgPlayerGradient(),
-                      // BlocBuilder<PlayerVideoModeCubit, bool>(
-                      //   builder: (context, state) {
-                      //     if (state) return BgShortVideo();
-                      //     return SizedBox();
-                      //   },
-                      // ),
-                      // BlocBuilder<PlayerVideoModeCubit, bool>(
-                      //   builder: (context, state) {
-                      //     if (state) return BgPlayerVideoGradient();
-                      //     return SizedBox();
-                      //   },
-                      // ),
-                      MainPlayerWidgets(),
-                    ],
+    ///PROVIDE QUOTES BLOC TO PAGE
+    return BlocProvider(
+      create: (context) => QuotesBloc(
+        quotesDataRepository: AppRepositories.quotesDataRepository,
+      ),
+      child: Scaffold(
+        backgroundColor: AppColors.black,
+        body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
+          listener: playerPageListeners,
+          child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+            builder: (context, state) {
+              return SingleChildScrollView(
+                controller: _singleChildScrollViewController,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    // if (BlocProvider.of<PlayerVideoModeCubit>(context).state) {
+                    //   BlocProvider.of<PlayerVideoModeRemoveControlsCubit>(context)
+                    //       .changeControls();
+                    // }
+                  },
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        BgPlayerGradient(),
+                        // BlocBuilder<PlayerVideoModeCubit, bool>(
+                        //   builder: (context, state) {
+                        //     if (state) return BgShortVideo();
+                        //     return SizedBox();
+                        //   },
+                        // ),
+                        // BlocBuilder<PlayerVideoModeCubit, bool>(
+                        //   builder: (context, state) {
+                        //     if (state) return BgPlayerVideoGradient();
+                        //     return SizedBox();
+                        //   },
+                        // ),
+                        MainPlayerWidgets(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -95,15 +102,6 @@ class _PlayerPageState extends State<PlayerPage> {
   // }
 
   void playerPageListeners(BuildContext context, AudioPlayerState state) {
-    if (state is AudioPlayerErrorState) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        buildAppSnackBar(
-          bgColor: AppColors.errorRed,
-          txtColor: AppColors.white,
-          msg: state.msg,
-        ),
-      );
-    }
     if (state is AudioPlayerCurrentSongChangeState) {
       ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
       if (!state.song.isFree && !state.song.isBought && !isPagePopped) {

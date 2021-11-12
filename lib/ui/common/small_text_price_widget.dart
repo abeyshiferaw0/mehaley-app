@@ -51,7 +51,9 @@ class SmallTextPriceWidget extends StatelessWidget {
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText
+            ? AppFontSizes.font_size_12.sp
+            : AppFontSizes.font_size_10.sp,
       ),
     );
   }
@@ -64,52 +66,58 @@ class SmallTextPriceWidget extends StatelessWidget {
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText
+            ? AppFontSizes.font_size_12.sp
+            : AppFontSizes.font_size_10.sp,
       ),
     );
   }
 
   Text buildPrice() {
     return Text(
-      '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
+      '${price.toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: AppColors.darkGreen,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-        fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
+        fontSize: useLargerText
+            ? AppFontSizes.font_size_12.sp
+            : AppFontSizes.font_size_10.sp,
       ),
     );
   }
 
-  Row buildDiscountAvailablePrice() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${price.toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: AppColors.darkGreen.withOpacity(0.7),
-            decoration: TextDecoration.lineThrough,
-            fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-            fontSize: useLargerText ? AppFontSizes.font_size_10.sp : AppFontSizes.font_size_8.sp,
-          ),
+  Text buildDiscountAvailablePrice() {
+    return Text.rich(
+      TextSpan(
+        text:
+            '${price.toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
+        style: TextStyle(
+          color: AppColors.darkGreen.withOpacity(0.7),
+          decoration: TextDecoration.lineThrough,
+          fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
+          fontSize: useLargerText
+              ? AppFontSizes.font_size_10.sp
+              : AppFontSizes.font_size_8.sp,
         ),
-        SizedBox(width: AppMargin.margin_4),
-        Text(
-          '${appCurrency == AppCurrency.DOLLAR ? '\$' : ''}${(price - (price * discountPercentage)).toStringAsFixed(2)}${appCurrency == AppCurrency.ETB ? 'ETB' : ''}',
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: AppColors.darkGreen,
-            fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
-            fontSize: useLargerText ? AppFontSizes.font_size_12.sp : AppFontSizes.font_size_10.sp,
-          ),
-        )
-      ],
+        children: <InlineSpan>[
+          TextSpan(
+            text:
+                ' ${(price - (price * discountPercentage)).toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
+            style: TextStyle(
+              color: AppColors.darkGreen,
+              decoration: TextDecoration.none,
+              fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
+              fontSize: useLargerText
+                  ? AppFontSizes.font_size_12.sp
+                  : AppFontSizes.font_size_10.sp,
+            ),
+          )
+        ],
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

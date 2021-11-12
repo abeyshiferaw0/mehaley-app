@@ -147,6 +147,7 @@ class AppValues {
   static const String downloadSongQualityKey = 'DOWNLOAD_SONG_QUALITY';
   static const String preferredPaymentMethodKey =
       'PREFERRED_PAYMENT_METHOD_KEY';
+  static const String isDataSaverTurnedOnKey = 'DATA_SAVER_KEY';
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';

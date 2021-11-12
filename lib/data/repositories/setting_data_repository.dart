@@ -11,14 +11,19 @@ class SettingDataRepository {
   Future<SettingsPageData> getSettingsPageData() async {
     final DownloadSongQuality downloadSongQuality;
     final Map<String, dynamic> notificationTags;
+    final bool isDataSaverTurnedOn;
 
     notificationTags = await settingsDataProvider.getNotificationTags();
 
     downloadSongQuality = settingsDataProvider.getDownloadSongQuality();
 
+    isDataSaverTurnedOn = settingsDataProvider.isDataSaverTurnedOn();
+
     return SettingsPageData(
-        downloadSongQuality: downloadSongQuality,
-        notificationTags: notificationTags);
+      downloadSongQuality: downloadSongQuality,
+      notificationTags: notificationTags,
+      isDataSaverTurnedOn: isDataSaverTurnedOn,
+    );
   }
 
   Future<void> changeSongDownloadQuality(
@@ -28,5 +33,9 @@ class SettingDataRepository {
 
   DownloadSongQuality getDownloadQuality() {
     return settingsDataProvider.getDownloadSongQuality();
+  }
+
+  changeDataSaverStatus() {
+    settingsDataProvider.changeDataSaverStatus();
   }
 }

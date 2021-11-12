@@ -28,3 +28,22 @@ class SetNotificationTagSuccessEvent extends OneSignalEvent {
   @override
   List<Object?> get props => [];
 }
+
+class NotificationClickedEvent extends OneSignalEvent {
+  final int itemId;
+  final AppItemsType itemType;
+
+  NotificationClickedEvent({required this.itemId, required this.itemType});
+
+  @override
+  List<Object?> get props => [itemId, itemType];
+}
+
+class NotificationClickedErrorEvent extends OneSignalEvent {
+  final String error;
+
+  NotificationClickedErrorEvent({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}

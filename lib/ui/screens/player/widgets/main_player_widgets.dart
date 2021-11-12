@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'daily_quotes_widget.dart';
 import 'lyric_player_widget.dart';
 import 'main_player_album_art_pager.dart';
 
@@ -62,13 +63,19 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
                   ),
                 );
               }
-              return SizedBox();
+
+              ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
+              return DailyQuotesWidget(
+                dominantColor: AppColors.appGradientDefaultColor,
+              );
             } else {
-              return SizedBox();
+              ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
+              return DailyQuotesWidget(
+                dominantColor: AppColors.appGradientDefaultColor,
+              );
             }
           },
         ),
-        //DailyQuotesWidget(dominantColor: AppColors.appGradientDefaultColor)
       ],
     );
   }

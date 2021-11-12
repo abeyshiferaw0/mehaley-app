@@ -6,16 +6,17 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/l10n_util.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 import 'item_featured_songs.dart';
 
 class HomeFeaturedSongs extends StatefulWidget {
-  const HomeFeaturedSongs({Key? key, required this.featuredSongs}) : super(key: key);
+  const HomeFeaturedSongs({Key? key, required this.featuredSongs})
+      : super(key: key);
 
   final List<Song> featuredSongs;
 
@@ -72,8 +73,28 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
                 items: widget.featuredSongs,
                 item: widget.featuredSongs[index],
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
-                  title: L10nUtil.translateLocale(widget.featuredSongs[index].songName, context),
+                  from:
+                      AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
+                  title: L10nUtil.translateLocale(
+                      widget.featuredSongs[index].songName, context),
+                  songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
+                  songSyncPlayedFromId: -1,
+                ),
+                context: context,
+                index: index,
+              );
+            },
+            onSmallPlayButtonTap: () {
+              PagesUtilFunctions.groupItemOnClick(
+                openPlayerPage: false,
+                groupType: GroupType.SONG,
+                items: widget.featuredSongs,
+                item: widget.featuredSongs[index],
+                playingFrom: PlayingFrom(
+                  from:
+                      AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
+                  title: L10nUtil.translateLocale(
+                      widget.featuredSongs[index].songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
                   songSyncPlayedFromId: -1,
                 ),

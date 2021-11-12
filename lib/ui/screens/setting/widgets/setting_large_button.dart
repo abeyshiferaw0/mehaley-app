@@ -22,47 +22,44 @@ class SettingLargeButton extends StatelessWidget {
     return AppBouncingButton(
       onTap: onTap,
       shrinkRatio: 6,
-      child: Container(
-        margin: EdgeInsets.only(top: AppMargin.margin_32),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
-                    ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.white,
                   ),
-                  SizedBox(
-                    height: AppMargin.margin_8,
+                ),
+                SizedBox(
+                  height: AppMargin.margin_8,
+                ),
+                Text(
+                  subTitle,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.txtGrey,
                   ),
-                  Text(
-                    subTitle,
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.txtGrey,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              width: AppMargin.margin_16,
-            ),
-            Icon(
-              PhosphorIcons.caret_right_light,
-              color: AppColors.lightGrey,
-              size: AppIconSizes.icon_size_24,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            width: AppMargin.margin_16,
+          ),
+          Icon(
+            PhosphorIcons.caret_right_light,
+            color: AppColors.lightGrey,
+            size: AppIconSizes.icon_size_24,
+          ),
+        ],
       ),
     );
   }

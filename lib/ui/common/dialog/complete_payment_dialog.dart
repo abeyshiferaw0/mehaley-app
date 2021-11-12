@@ -54,14 +54,16 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
             padding: EdgeInsets.all(
               AppPadding.padding_16,
             ),
-            child: BlocBuilder<PreferredPaymentMethodBloc, PreferredPaymentMethodState>(
+            child: BlocBuilder<PreferredPaymentMethodBloc,
+                PreferredPaymentMethodState>(
               builder: (context, state) {
                 if (state is PreferredPaymentMethodLoadedState) {
                   ///SET PREFERRED PAYMENT METHOD
                   preferredAppPaymentMethods = state.appPaymentMethod;
 
                   ///SET ALWAYS SELECTED CHECK BOX TO TRUE IF PREFERRED SELECTED
-                  if (preferredAppPaymentMethods != AppPaymentMethods.METHOD_UNK) {
+                  if (preferredAppPaymentMethods !=
+                      AppPaymentMethods.METHOD_UNK) {
                     alwaysUseSelected = true;
                   }
 
@@ -224,7 +226,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_CBE_BIRR,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_CBE_BIRR;
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_CBE_BIRR;
                   });
                 },
               ),
@@ -241,7 +244,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_HELLO_CASH,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_HELLO_CASH;
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_HELLO_CASH;
                   });
                 },
               ),
@@ -292,7 +296,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 appPaymentMethods: AppPaymentMethods.METHOD_MASTERCARD,
                 onTap: () {
                   setState(() {
-                    selectedAppPaymentMethods = AppPaymentMethods.METHOD_MASTERCARD;
+                    selectedAppPaymentMethods =
+                        AppPaymentMethods.METHOD_MASTERCARD;
                   });
                 },
               ),
@@ -306,16 +311,17 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
     );
   }
 
-  Column buildDialogHeader(BuildContext context, AppPaymentMethods appPaymentMethod) {
+  Column buildDialogHeader(
+      BuildContext context, AppPaymentMethods appPaymentMethod) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Text(
-                AppLocalizations.of(context)!.completeYourPurchase,
+                AppLocalizations.of(context)!.chooseYourPaymentMethod,
                 style: TextStyle(
                   color: AppColors.black,
                   fontWeight: FontWeight.w500,
@@ -337,6 +343,21 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
             ),
           ],
+        ),
+        SizedBox(
+          height: AppMargin.margin_4,
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+          child: Text(
+            AppLocalizations.of(context)!.chooseYourPaymentMethodMsg,
+            style: TextStyle(
+              color: AppColors.txtGrey,
+              fontWeight: FontWeight.w400,
+              fontSize: AppFontSizes.font_size_8.sp,
+            ),
+          ),
         ),
         SizedBox(
           height: AppMargin.margin_16,

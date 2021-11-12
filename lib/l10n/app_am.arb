@@ -5,7 +5,7 @@
   "appTermsAndCondition":"Some text about elf and terms and conditions and privacy policy, Some text about elf and terms and conditions and privacy policy ,Some text about elf and terms and conditions and privacy policy",
   "logOut":"Log out",
   "byElfPlay":"by elf play",
-  "removeFromCart":"Remove from cart?",
+  "removeFromCart":"Remove from cart",
   "addToCart":"Add to cart",
   "previewMode":"Preview mode",
   "buyMezmur":"Buy Mezmur",
@@ -356,7 +356,8 @@
 "visa":"Visa",
 "mastercard":"MasterCard",
 "alwaysUsePayment":"Always use selected payment method?",
-"completeYourPurchase":"Complete your purchase",
+"chooseYourPaymentMethod":"Choose your payment method",
+"chooseYourPaymentMethodMsg":"Complete your purchase with your preferred payment method",
 "currentlySeletced":"Currently Selected",
 "selectPaymentMethod":"Select Payment Method",
 "paymentMethod":"Payment Method",
@@ -477,5 +478,13 @@
 "unableToRemoveFromPlaylist":"Unable remove mezmur from playlist\ncheck your internet connection",
 "unableToDeletePlaylist":"Unable to delete playlist\ncheck your internet connection",
 "addSongs":"Add Mezmurs",
-"addSongsToPlaylist":"Add Mezmurs to your playlist"
+"addSongsToPlaylist":"Add Mezmurs to your playlist",
+"dailyQuotesFromApp":"Daily Quotes From Mehaley",
+"enablePermissions":"Enable Permissions",
+"enablePermissionsMsg" :"Following Permissions are Required To Continue, please go to system setting and allow permissions",
+"goToSystemSettings" : "Go To Settings",
+"cameraAccess"  : "Camera Access",
+"photoAccess" :"Photos Access",
+"rateApp":"Rate Elf play",
+"rateAppMsg":"Take a minute to rate our app and help support to improve more new features"
 }

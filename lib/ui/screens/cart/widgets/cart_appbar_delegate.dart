@@ -8,13 +8,13 @@ class CartAppBarDelegate extends SliverPersistentHeaderDelegate {
   CartAppBarDelegate({required this.cart, required this.height});
 
   final Cart cart;
-
   final double height;
 
   @override
   Widget build(context, double shrinkOffset, bool overlapsContent) {
     return CartAppBar(
       hasPrice: true,
+      height: height,
       cart: cart,
     );
   }

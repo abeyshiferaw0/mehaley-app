@@ -17,3 +17,10 @@ class ChangeSongDownloadQualityEvent extends SettingsPageEvent {
   @override
   List<Object?> get props => [downloadSongQuality];
 }
+
+class ChangeDataSaverStatusEvent extends SettingsPageEvent {
+  ChangeDataSaverStatusEvent();
+
+  @override
+  List<Object?> get props => [];
+}

@@ -14,11 +14,16 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class FeaturedSongsItem extends StatelessWidget {
-  const FeaturedSongsItem({Key? key, required this.song, required this.onTap})
+  const FeaturedSongsItem(
+      {Key? key,
+      required this.song,
+      required this.onTap,
+      required this.onSmallPlayButtonTap})
       : super(key: key);
 
   final Song song;
   final VoidCallback onTap;
+  final VoidCallback onSmallPlayButtonTap;
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +88,17 @@ class FeaturedSongsItem extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(AppPadding.padding_16),
-              child: Center(
-                child: Container(
-                  child: Icon(
-                    PhosphorIcons.play_circle_fill,
-                    size: AppIconSizes.icon_size_48,
-                    color: AppColors.white,
+            AppBouncingButton(
+              onTap: onSmallPlayButtonTap,
+              child: Container(
+                padding: EdgeInsets.all(AppPadding.padding_16),
+                child: Center(
+                  child: Container(
+                    child: Icon(
+                      PhosphorIcons.play_circle_fill,
+                      size: AppIconSizes.icon_size_48,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
               ),

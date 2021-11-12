@@ -4,7 +4,6 @@ import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:elf_play/data/models/home_shortcut/shortcut_data.dart';
 import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_home_shortcut.dart';
@@ -128,7 +127,8 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       ///CHANGE DOMINANT COLOR
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         HomePageDominantColorChanged(
-          dominantColor: HexColor('#${AppColors.blue2.value.toRadixString(16)}'),
+          dominantColor:
+              HexColor('#${AppColors.blue2.value.toRadixString(16)}'),
         ),
       );
       shortcutsSize = shortcutsSize - 1;
@@ -165,7 +165,8 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       ///CHANGE DOMINANT COLOR
       BlocProvider.of<PagesDominantColorBloc>(context).add(
         HomePageDominantColorChanged(
-          dominantColor: HexColor('#${AppColors.orange1.value.toRadixString(16)}'),
+          dominantColor:
+              HexColor('#${AppColors.orange1.value.toRadixString(16)}'),
         ),
       );
       shortcutsSize = shortcutsSize - 1;
@@ -176,7 +177,8 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
       if (shortcutsSize > 0) {
         shortCuts.add(
           ItemHomeShortcut(
-            text: PagesUtilFunctions.getShortCutText(widget.shortcutData.shortcuts[i], context),
+            text: PagesUtilFunctions.getShortCutText(
+                widget.shortcutData.shortcuts[i], context),
             image: PagesUtilFunctions.getImage(
               widget.shortcutData.shortcuts[i],
             ),
@@ -198,7 +200,9 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
             },
           ),
         );
-        if (i == 0 && widget.shortcutData.purchasedCount < 1 && widget.shortcutData.downloadCount < 1) {
+        if (i == 0 &&
+            widget.shortcutData.purchasedCount < 1 &&
+            widget.shortcutData.downloadCount < 1) {
           BlocProvider.of<PagesDominantColorBloc>(context).add(
             HomePageDominantColorChanged(
               dominantColor: HexColor(
