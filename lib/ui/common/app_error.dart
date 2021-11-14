@@ -1,11 +1,12 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class AppError extends StatefulWidget {
-  const AppError({Key? key, required this.onRetry, required this.bgWidget, this.height}) : super(key: key);
+  const AppError(
+      {Key? key, required this.onRetry, required this.bgWidget, this.height})
+      : super(key: key);
 
   final VoidCallback onRetry;
   final Widget bgWidget;
@@ -80,7 +81,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                         ),
                         SizedBox(height: AppMargin.margin_4),
                         Text(
-                          AppLocalizations.of(context)!.noInternetMsg,
+                          AppLocale.of().noInternetMsg,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
@@ -91,7 +92,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                         ),
                         SizedBox(height: AppMargin.margin_8),
                         Text(
-                          AppLocalizations.of(context)!.noInternetMsgDetail,
+                          AppLocale.of().noInternetMsgDetail,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
@@ -102,14 +103,19 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                         SizedBox(height: AppMargin.margin_16),
                         GestureDetector(
                           onTap: () {
-                            _controller.reverse().then((value) => widget.onRetry());
+                            _controller
+                                .reverse()
+                                .then((value) => widget.onRetry());
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColors.darkGreen,
                               borderRadius: BorderRadius.circular(30),
                               boxShadow: [
-                                BoxShadow(offset: Offset(0, 0), color: AppColors.black.withOpacity(0.2), blurRadius: 6)
+                                BoxShadow(
+                                    offset: Offset(0, 0),
+                                    color: AppColors.black.withOpacity(0.2),
+                                    blurRadius: 6)
                               ],
                             ),
                             padding: EdgeInsets.symmetric(
@@ -117,7 +123,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                               vertical: AppPadding.padding_8,
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!.tryAgain.toUpperCase(),
+                              AppLocale.of().tryAgain.toUpperCase(),
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
                                 color: AppColors.white,

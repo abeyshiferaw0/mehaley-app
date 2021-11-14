@@ -1,9 +1,7 @@
-import 'package:elf_play/business_logic/cubits/localization_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,20 +10,17 @@ class LanguageSettingItem extends StatelessWidget {
     Key? key,
     required this.isSelected,
     required this.text,
-    required this.locale,
+    required this.onTap,
   }) : super(key: key);
 
   final bool isSelected;
-  final Locale locale;
   final String text;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return AppBouncingButton(
-      onTap: () {
-        BlocProvider.of<LocalizationCubit>(context)
-            .changeLocale(locale: locale);
-      },
+      onTap: onTap,
       shrinkRatio: 6,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: AppMargin.margin_8),

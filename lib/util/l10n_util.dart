@@ -1,38 +1,34 @@
-import 'dart:ui';
-
+import 'package:elf_play/config/app_hive_boxes.dart';
+import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/data/models/enums/app_languages.dart';
 import 'package:elf_play/data/models/text_lan.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 
 class L10nUtil {
-  static final supportedLocales = [
-    const Locale('en'),
-    const Locale('am'),
-  ];
+  static translateLocale(TextLan textLan, BuildContext? context) {
+    AppLanguage currentLocale = getCurrentLocale();
 
-  static final amharic = Locale('am');
-  static final english = Locale('en');
-
-  static translateLocale(TextLan textLan, BuildContext? context,
-      {Locale? mCurrentLocale}) {
-    Locale currentLocale;
-    if (context == null) {
-      if (mCurrentLocale == null)
-        throw 'locale can not be null if context is null';
-      currentLocale = mCurrentLocale;
-    } else {
-      currentLocale = Localizations.localeOf(context);
-    }
-
-    if (currentLocale.languageCode == amharic.languageCode) {
+    if (currentLocale == AppLanguage.AMHARIC) {
       return textLan.textAm;
-    } else if (currentLocale.languageCode == english.languageCode) {
+    } else if (currentLocale == AppLanguage.ENGLISH) {
       return textLan.textEn;
+    } else if (currentLocale == AppLanguage.OROMIFA) {
+      return textLan.textOro;
     } else {
-      throw 'L10nUtil file locale doesn\'t exist';
+      throw '${EnumToString.convertToString(currentLocale)} LANGUAGE NOT SUPPORTED';
     }
   }
 
-  static bool getCurrentLocale() {
-    return false;
+  static AppLanguage getCurrentLocale() {
+    return AppHiveBoxes.instance.settingsBox.get(AppValues.appLanguageKey);
+  }
+
+  static AppLanguage changeLocale(AppLanguage appLanguage) {
+    AppHiveBoxes.instance.settingsBox.put(
+      AppValues.appLanguageKey,
+      appLanguage,
+    );
+    return AppHiveBoxes.instance.settingsBox.get(AppValues.appLanguageKey);
   }
 }

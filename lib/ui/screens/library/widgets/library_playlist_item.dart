@@ -10,6 +10,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 
 class LibraryPlaylistItem extends StatelessWidget {
   final Playlist playlist;
@@ -44,7 +45,8 @@ class LibraryPlaylistItem extends StatelessWidget {
                 ],
               ),
               placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) =>
+                  buildItemsImagePlaceHolder(),
             ),
           ),
           SizedBox(height: AppMargin.margin_8),
@@ -64,8 +66,8 @@ class LibraryPlaylistItem extends StatelessWidget {
               : PagesUtilFunctions.getItemPrice(
                   discountPercentage: playlist.discountPercentage,
                   isFree: playlist.isFree,
-            priceEtb: playlist.priceEtb,
-            priceUsd: playlist.priceDollar,
+                  priceEtb: playlist.priceEtb,
+                  priceUsd: playlist.priceDollar,
                   isDiscountAvailable: playlist.isDiscountAvailable,
                   isPurchased: playlist.isBought,
                 )

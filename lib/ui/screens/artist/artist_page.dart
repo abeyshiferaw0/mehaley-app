@@ -18,8 +18,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import 'widgets/artist_sliver_deligates.dart';
 
@@ -124,10 +123,12 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(List<Song> popularSongs, Artist artist) {
+  SliverPersistentHeader buildSliverPlayShuffleButton(
+      List<Song> popularSongs, Artist artist) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: ArtistPlayShuffleDelegate(popularSongs: popularSongs, artist: artist),
+      delegate:
+          ArtistPlayShuffleDelegate(popularSongs: popularSongs, artist: artist),
     );
   }
 
@@ -144,7 +145,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.popular,
+                AppLocale.of().popular,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
                   color: AppColors.white,
@@ -179,7 +180,7 @@ class _ArtistPageState extends State<ArtistPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.latestReleases,
+                AppLocale.of().latestReleases,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
                   color: AppColors.white,
@@ -224,8 +225,9 @@ class _ArtistPageState extends State<ArtistPage> {
                     context: context,
                     songs: popularSongs,
                     playingFrom: PlayingFrom(
-                      from: AppLocalizations.of(context)!.playingFromArtist,
-                      title: L10nUtil.translateLocale(artist.artistName, context),
+                      from: AppLocale.of().playingFromArtist,
+                      title:
+                          L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
                       songSyncPlayedFromId: artist.artistId,
                     ),
@@ -233,7 +235,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: AppApi.baseUrl + popularSongs[position].albumArt.imageSmallPath,
+                thumbUrl: AppApi.baseUrl +
+                    popularSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -267,8 +270,9 @@ class _ArtistPageState extends State<ArtistPage> {
                     context: context,
                     songs: newSongs,
                     playingFrom: PlayingFrom(
-                      from: AppLocalizations.of(context)!.playingFromArtist,
-                      title: L10nUtil.translateLocale(artist.artistName, context),
+                      from: AppLocale.of().playingFromArtist,
+                      title:
+                          L10nUtil.translateLocale(artist.artistName, context),
                       songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
                       songSyncPlayedFromId: artist.artistId,
                     ),
@@ -276,7 +280,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: AppApi.baseUrl + newSongs[position].albumArt.imageSmallPath,
+                thumbUrl:
+                    AppApi.baseUrl + newSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -295,7 +300,7 @@ class _ArtistPageState extends State<ArtistPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.topAlbums,
+              AppLocale.of().topAlbums,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_14.sp,
                 color: AppColors.white,
@@ -340,7 +345,7 @@ class _ArtistPageState extends State<ArtistPage> {
 
   Text buildFeaturingArtistPlaylistHeader(Artist artist) {
     return Text(
-      '${AppLocalizations.of(context)!.featuring} ${L10nUtil.translateLocale(artist.artistName, context)}',
+      '${AppLocale.of().featuring} ${L10nUtil.translateLocale(artist.artistName, context)}',
       textAlign: TextAlign.center,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
@@ -360,13 +365,16 @@ class _ArtistPageState extends State<ArtistPage> {
     return Container(
       child: Column(
         children: [
-          playlistsFeaturingArtists.length > 0 ? buildFeaturingArtistPlaylistHeader(artist) : SizedBox(),
+          playlistsFeaturingArtists.length > 0
+              ? buildFeaturingArtistPlaylistHeader(artist)
+              : SizedBox(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: buildPlaylistsFeaturingArtist(playlistsFeaturingArtists),
+              children:
+                  buildPlaylistsFeaturingArtist(playlistsFeaturingArtists),
             ),
           ),
         ],
@@ -394,7 +402,7 @@ class _ArtistPageState extends State<ArtistPage> {
   Center buildOtherArtistsHeader() {
     return Center(
       child: Text(
-        AppLocalizations.of(context)!.similarArtist,
+        AppLocale.of().similarArtist,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
           color: AppColors.white,

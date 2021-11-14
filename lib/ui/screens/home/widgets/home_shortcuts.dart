@@ -10,10 +10,10 @@ import 'package:elf_play/ui/screens/home/widgets/item_home_shortcut.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sizer/sizer.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 
 class HomeShortcuts extends StatefulWidget {
   final ShortcutData shortcutData;
@@ -79,13 +79,13 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     var timeNow = DateTime.now().hour;
 
     if (timeNow <= 12) {
-      return AppLocalizations.of(context)!.goodMorning;
+      return AppLocale.of().goodMorning;
     } else if ((timeNow > 12) && (timeNow <= 16)) {
-      return AppLocalizations.of(context)!.goodAfterNoon;
+      return AppLocale.of().goodAfterNoon;
     } else if ((timeNow > 16) && (timeNow < 20)) {
-      return AppLocalizations.of(context)!.goodEvening;
+      return AppLocale.of().goodEvening;
     } else {
-      return AppLocalizations.of(context)!.goodNight;
+      return AppLocale.of().goodNight;
     }
   }
 
@@ -98,7 +98,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     if (widget.shortcutData.purchasedCount > 0) {
       shortCuts.add(
         ItemHomeShortcut(
-          text: AppLocalizations.of(context)!.purchasedMezmurs,
+          text: AppLocale.of().purchasedMezmurs,
           image: null,
           appItemsType: null,
           textMaxLines: 2,
@@ -138,7 +138,7 @@ class _HomeShortcutsState extends State<HomeShortcuts> {
     if (widget.shortcutData.downloadCount > 0) {
       shortCuts.add(
         ItemHomeShortcut(
-          text: AppLocalizations.of(context)!.listenOffline,
+          text: AppLocale.of().listenOffline,
           image: null,
           appItemsType: null,
           textMaxLines: 2,

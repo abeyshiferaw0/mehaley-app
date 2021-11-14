@@ -8,9 +8,8 @@ import 'package:elf_play/ui/common/menu/menu_items/album_favorite_menu_item.dart
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import '../app_gradients.dart';
 import '../player_items_placeholder.dart';
@@ -96,7 +95,7 @@ class AlbumMenuWidget extends StatelessWidget {
                             hasTopMargin: false,
                             iconColor: AppColors.grey.withOpacity(0.6),
                             icon: PhosphorIcons.currency_circle_dollar_thin,
-                            title: AppLocalizations.of(context)!.buyAlbum,
+                            title: AppLocale.of().buyAlbum,
                             onTap: () {},
                           )
                         : SizedBox(),
@@ -112,7 +111,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.user_light,
-                      title: AppLocalizations.of(context)!.viewArtist,
+                      title: AppLocale.of().viewArtist,
                       onTap: () {
                         Navigator.pop(context);
                         PagesUtilFunctions.artistItemOnClick(
@@ -126,7 +125,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: AppLocalizations.of(context)!.shareAlbum,
+                      title: AppLocale.of().shareAlbum,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),

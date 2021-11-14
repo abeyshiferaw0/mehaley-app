@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -13,7 +14,6 @@ import 'package:elf_play/util/auth_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -28,7 +28,8 @@ class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(_, double shrinkOffset, bool overlapsContent) {
-    var shrinkPercentage = min(1, shrinkOffset / (maxExtent - minExtent)).toDouble();
+    var shrinkPercentage =
+        min(1, shrinkOffset / (maxExtent - minExtent)).toDouble();
 
     return ProfilePageHeader(
       shrinkPercentage: shrinkPercentage,
@@ -74,7 +75,10 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [buildAppBar(widget.shrinkPercentage, context), buildProfileInfo(widget.shrinkPercentage, context)],
+          children: [
+            buildAppBar(widget.shrinkPercentage, context),
+            buildProfileInfo(widget.shrinkPercentage, context)
+          ],
         ),
       ),
     );
@@ -96,7 +100,8 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                   height: AppValues.profilePagePicSize,
                   width: AppValues.profilePagePicSize,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppValues.profilePagePicSize),
+                    borderRadius:
+                        BorderRadius.circular(AppValues.profilePagePicSize),
                     boxShadow: [
                       BoxShadow(
                         color: AppColors.black.withOpacity(0.1),
@@ -134,12 +139,15 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       context,
                       (AppUser appUser) {
                         ///UPDATE USER LOCALLY
-                        BlocProvider.of<AppUserWidgetsCubit>(context).updateAppUser(appUser);
+                        BlocProvider.of<AppUserWidgetsCubit>(context)
+                            .updateAppUser(appUser);
 
                         ///CHANGE DOMINANT COLOR
                         BlocProvider.of<PagesDominantColorBloc>(context).add(
                           UserProfilePageDominantColorChanged(
-                            dominantColor: AuthUtil.getDominantColor(BlocProvider.of<AppUserWidgetsCubit>(context).state),
+                            dominantColor: AuthUtil.getDominantColor(
+                                BlocProvider.of<AppUserWidgetsCubit>(context)
+                                    .state),
                           ),
                         );
                       },
@@ -155,7 +163,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       horizontal: AppPadding.padding_16,
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.editProfile.toUpperCase(),
+                      AppLocale.of().editProfile.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
                         fontWeight: FontWeight.w500,
@@ -230,13 +238,17 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                           child: ProfileMenuWidget(
                             onUpdateSuccess: (AppUser appUser) {
                               ///UPDATE USER LOCALLY
-                              BlocProvider.of<AppUserWidgetsCubit>(context).updateAppUser(appUser);
+                              BlocProvider.of<AppUserWidgetsCubit>(context)
+                                  .updateAppUser(appUser);
 
                               ///CHANGE DOMINANT COLOR
-                              BlocProvider.of<PagesDominantColorBloc>(context).add(
+                              BlocProvider.of<PagesDominantColorBloc>(context)
+                                  .add(
                                 UserProfilePageDominantColorChanged(
-                                  dominantColor:
-                                      AuthUtil.getDominantColor(BlocProvider.of<AppUserWidgetsCubit>(context).state),
+                                  dominantColor: AuthUtil.getDominantColor(
+                                      BlocProvider.of<AppUserWidgetsCubit>(
+                                              context)
+                                          .state),
                                 ),
                               );
                             },

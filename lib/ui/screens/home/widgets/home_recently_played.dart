@@ -8,13 +8,13 @@ import 'package:elf_play/ui/screens/home/widgets/item_recently_played.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class HomeRecentlyPlayed extends StatelessWidget {
   final List<Song> recentlyPlayed;
 
-  const HomeRecentlyPlayed({Key? key, required this.recentlyPlayed}) : super(key: key);
+  const HomeRecentlyPlayed({Key? key, required this.recentlyPlayed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: AppMargin.margin_16),
                   child: Text(
-                    AppLocalizations.of(context)!.recentlyPlayed,
+                    AppLocale.of().recentlyPlayed,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: AppFontSizes.font_size_14.sp,
@@ -44,7 +44,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: buildRecentlyPlayedItems(recentlyPlayed, context),
+                      children:
+                          buildRecentlyPlayedItems(recentlyPlayed, context),
                     ),
                   ),
                 ),
@@ -59,7 +60,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
     }
   }
 
-  List<Widget> buildRecentlyPlayedItems(List<Song> recentlyPlayedItems, BuildContext context) {
+  List<Widget> buildRecentlyPlayedItems(
+      List<Song> recentlyPlayedItems, BuildContext context) {
     final items = <Widget>[];
 
     if (recentlyPlayedItems.length > 0) {
@@ -77,8 +79,9 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 items: recentlyPlayed,
                 item: recentlyPlayed.elementAt(i),
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFromRecentlyPlayed,
-                  title: L10nUtil.translateLocale(recentlyPlayed.elementAt(i).songName, context),
+                  from: AppLocale.of().playingFromRecentlyPlayed,
+                  title: L10nUtil.translateLocale(
+                      recentlyPlayed.elementAt(i).songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
                   songSyncPlayedFromId: -1,
                 ),
@@ -88,9 +91,12 @@ class HomeRecentlyPlayed extends StatelessWidget {
             },
             width: AppValues.recentlyPlayedItemSize,
             height: AppValues.recentlyPlayedItemSize,
-            imgUrl: AppApi.baseUrl + recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
-            isDiscountAvailable: recentlyPlayed.elementAt(i).isDiscountAvailable,
-            title: L10nUtil.translateLocale(recentlyPlayed.elementAt(i).songName, context),
+            imgUrl: AppApi.baseUrl +
+                recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
+            isDiscountAvailable:
+                recentlyPlayed.elementAt(i).isDiscountAvailable,
+            title: L10nUtil.translateLocale(
+                recentlyPlayed.elementAt(i).songName, context),
             discountPercentage: recentlyPlayed.elementAt(i).discountPercentage,
             isFree: recentlyPlayed.elementAt(i).isFree,
             priceEtb: recentlyPlayed.elementAt(i).priceEtb,

@@ -1,7 +1,7 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryErrorWidget extends StatelessWidget {
@@ -17,7 +17,7 @@ class LibraryErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.somethingWentWrong,
+              AppLocale.of().somethingWentWrong,
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
@@ -28,7 +28,7 @@ class LibraryErrorWidget extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             Text(
-              AppLocalizations.of(context)!.checkYourInternetConnection,
+              AppLocale.of().checkYourInternetConnection,
               style: TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -51,7 +51,7 @@ class LibraryErrorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(120),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.tryAgain,
+                  AppLocale.of().tryAgain,
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,

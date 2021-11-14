@@ -8,9 +8,9 @@ import 'package:elf_play/ui/common/menu/menu_items/playlist_cart_menu_item.dart'
 import 'package:elf_play/ui/common/menu/menu_items/playlist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import '../app_bouncing_button.dart';
 import '../player_items_placeholder.dart';
@@ -92,7 +92,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                           hasTopMargin: false,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.currency_circle_dollar_thin,
-                          title: AppLocalizations.of(context)!.buyPlaylist,
+                          title: AppLocale.of().buyPlaylist,
                           onTap: () {},
                         )
                       : SizedBox(),
@@ -108,7 +108,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.magnifying_glass_light,
-                    title: AppLocalizations.of(context)!.findInPlaylist,
+                    title: AppLocale.of().findInPlaylist,
                     onTap: () {},
                   ),
                   // MenuItem(
@@ -116,7 +116,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.sort_ascending_light,
-                  //   title: AppLocalizations.of(context)!.sortPlaylist,
+                  //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
                   // ),
                   MenuItem(
@@ -124,7 +124,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.share_network_light,
-                    title: AppLocalizations.of(context)!.sharePlaylist,
+                    title: AppLocale.of().sharePlaylist,
                     onTap: () {},
                   ),
                   SizedBox(height: AppMargin.margin_20),
@@ -183,7 +183,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                 ),
           SizedBox(height: AppMargin.margin_2),
           Text(
-            AppLocalizations.of(context)!.byElfPlay.toUpperCase(),
+            AppLocale.of().byElfPlay.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.txtGrey,

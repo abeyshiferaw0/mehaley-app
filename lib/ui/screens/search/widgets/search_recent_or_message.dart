@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -13,7 +14,6 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -64,7 +64,7 @@ class SearchRecentOrMessage extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                AppLocalizations.of(context)!.searchElfFor,
+                AppLocale.of().searchElfFor,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
@@ -78,7 +78,7 @@ class SearchRecentOrMessage extends StatelessWidget {
             ),
             Center(
               child: Text(
-                AppLocalizations.of(context)!.searchHint2,
+                AppLocale.of().searchHint2,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
@@ -99,7 +99,7 @@ class SearchRecentOrMessage extends StatelessWidget {
         padding: const EdgeInsets.only(left: AppPadding.padding_12),
         margin: const EdgeInsets.only(bottom: AppMargin.margin_16),
         child: Text(
-          AppLocalizations.of(context)!.recentSearches,
+          AppLocale.of().recentSearches,
           style: TextStyle(
             color: AppColors.white,
             fontSize: AppFontSizes.font_size_12.sp,
@@ -136,7 +136,7 @@ class SearchRecentOrMessage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.clearRecentSearches,
+                AppLocale.of().clearRecentSearches,
                 style: TextStyle(
                   color: AppColors.txtGrey,
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -162,13 +162,15 @@ class SearchRecentOrMessage extends StatelessWidget {
     return widgetItems;
   }
 
-  Widget buildRecentSearchItems(dynamic resultItem, String searchKey, List<dynamic> resultItems, BuildContext context) {
+  Widget buildRecentSearchItems(dynamic resultItem, String searchKey,
+      List<dynamic> resultItems, BuildContext context) {
     if (resultItem is Song) {
       return SearchResultItem(
         key: Key('song_${resultItem.songId}'),
         itemKey: Key('song_${resultItem.songId}'),
         title: L10nUtil.translateLocale(resultItem.songName, context),
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
+        subTitle:
+            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -198,7 +200,8 @@ class SearchRecentOrMessage extends StatelessWidget {
         key: Key('album_${resultItem.albumId}'),
         itemKey: Key('album_${resultItem.albumId}'),
         title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-        subTitle: L10nUtil.translateLocale(resultItem.artist.artistName, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,

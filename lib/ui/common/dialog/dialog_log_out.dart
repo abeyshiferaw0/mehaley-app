@@ -1,8 +1,8 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class DialogLogOut extends StatelessWidget {
@@ -31,7 +31,7 @@ class DialogLogOut extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.areUSureWantToLogOut,
+                  AppLocale.of().areUSureWantToLogOut,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -43,7 +43,7 @@ class DialogLogOut extends StatelessWidget {
                   height: AppMargin.margin_8,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.areUSureWantToLogOutMsg,
+                  AppLocale.of().areUSureWantToLogOutMsg,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,
@@ -69,7 +69,7 @@ class DialogLogOut extends StatelessWidget {
                       color: AppColors.green,
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.logOut.toUpperCase(),
+                      AppLocale.of().logOut.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,

@@ -11,8 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations: # Add this line
-    sdk: flutter
 
 
   #BLOC
@@ -122,5 +120,4 @@ flutter:
         - asset: assets/fonts/poppins/poppins_bold.ttf
           weight: 700
 
-  generate: true
   uses-material-design: true

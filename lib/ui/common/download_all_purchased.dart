@@ -1,10 +1,10 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class DownloadAllPurchased extends StatelessWidget {
-  DownloadAllPurchased({Key? key, required this.downloadAllSelected}) : super(key: key);
+  DownloadAllPurchased({Key? key, required this.downloadAllSelected})
+      : super(key: key);
 
   final bool downloadAllSelected;
 
@@ -15,7 +15,7 @@ class DownloadAllPurchased extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            AppLocalizations.of(context)!.downAllPurchased,
+            AppLocale.of().downAllPurchased,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: AppColors.lightGrey,

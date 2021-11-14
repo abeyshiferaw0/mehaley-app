@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PlaylistFollowMenuItem extends StatefulWidget {
@@ -113,29 +113,29 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
+        return AppLocale.of().removeFromFollowedPlaylist;
       } else {
-        return AppLocalizations.of(context)!.followPlaylist;
+        return AppLocale.of().followPlaylist;
       }
     }
 
     ///IF  FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
+      return AppLocale.of().removeFromFollowedPlaylist;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppLocalizations.of(context)!.followPlaylist;
+      return AppLocale.of().followPlaylist;
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppLocalizations.of(context)!.removeFromFollowedPlaylist;
+      return AppLocale.of().removeFromFollowedPlaylist;
     } else {
-      return AppLocalizations.of(context)!.followPlaylist;
+      return AppLocale.of().followPlaylist;
     }
   }
 

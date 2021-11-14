@@ -47,7 +47,8 @@ class ItemPopularPlaylist extends StatelessWidget {
                 ],
               ),
               placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) =>
+                  buildItemsImagePlaceHolder(),
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(
@@ -67,8 +68,8 @@ class ItemPopularPlaylist extends StatelessWidget {
                     isDiscountAvailable: playlist.isDiscountAvailable,
                     discountPercentage: playlist.discountPercentage,
                     isFree: playlist.isFree,
-              priceEtb: playlist.priceEtb,
-              priceUsd: playlist.priceDollar,
+                    priceEtb: playlist.priceEtb,
+                    priceUsd: playlist.priceDollar,
                     isPurchased: playlist.isBought,
                   )
           ],

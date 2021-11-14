@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -18,7 +19,6 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -46,7 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
     ///CHANGE DOMINANT COLOR
     BlocProvider.of<PagesDominantColorBloc>(context).add(
       UserProfilePageDominantColorChanged(
-        dominantColor: AuthUtil.getDominantColor(BlocProvider.of<AppUserWidgetsCubit>(context).state),
+        dominantColor: AuthUtil.getDominantColor(
+            BlocProvider.of<AppUserWidgetsCubit>(context).state),
       ),
     );
     super.initState();
@@ -120,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         SizedBox(height: AppMargin.margin_8),
         Text(
-          AppLocalizations.of(context)!.notingToShow,
+          AppLocale.of().notingToShow,
           style: TextStyle(
             color: AppColors.txtGrey,
             fontSize: AppFontSizes.font_size_10.sp,
@@ -169,8 +170,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         profilePageData.boughtSongs.length > 0
             ? buildProfileListHeader(
-                title: AppLocalizations.of(context)!.purchasedMezmurs,
-                actionTitle: AppLocalizations.of(context)!.seeAll,
+                title: AppLocale.of().purchasedMezmurs,
+                actionTitle: AppLocale.of().seeAll,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
@@ -179,7 +180,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       args: {
                         AppValues.isLibraryForOffline: false,
                         AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes: ProfileListTypes.PURCHASED_SONGS,
+                        AppValues.profileListTypes:
+                            ProfileListTypes.PURCHASED_SONGS,
                       },
                     ),
                   );
@@ -192,8 +194,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         profilePageData.boughtAlbums.length > 0
             ? buildProfileListHeader(
-                title: AppLocalizations.of(context)!.purchasedAlbums,
-                actionTitle: AppLocalizations.of(context)!.seeAll,
+                title: AppLocale.of().purchasedAlbums,
+                actionTitle: AppLocale.of().seeAll,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
@@ -202,7 +204,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       args: {
                         AppValues.isLibraryForOffline: false,
                         AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes: ProfileListTypes.PURCHASED_ALBUMS,
+                        AppValues.profileListTypes:
+                            ProfileListTypes.PURCHASED_ALBUMS,
                       },
                     ),
                   );
@@ -215,8 +218,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         profilePageData.boughtPlaylists.length > 0
             ? buildProfileListHeader(
-                title: AppLocalizations.of(context)!.purchasedPlaylists,
-                actionTitle: AppLocalizations.of(context)!.seeAll,
+                title: AppLocale.of().purchasedPlaylists,
+                actionTitle: AppLocale.of().seeAll,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
@@ -225,7 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       args: {
                         AppValues.isLibraryForOffline: false,
                         AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes: ProfileListTypes.PURCHASED_PLAYLISTS,
+                        AppValues.profileListTypes:
+                            ProfileListTypes.PURCHASED_PLAYLISTS,
                       },
                     ),
                   );
@@ -238,8 +242,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         profilePageData.followedArtists.length > 0
             ? buildProfileListHeader(
-                title: AppLocalizations.of(context)!.followedArtists,
-                actionTitle: AppLocalizations.of(context)!.seeAll,
+                title: AppLocale.of().followedArtists,
+                actionTitle: AppLocale.of().seeAll,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
@@ -248,7 +252,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       args: {
                         AppValues.isLibraryForOffline: false,
                         AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes: ProfileListTypes.FOLLOWED_ARTISTS,
+                        AppValues.profileListTypes:
+                            ProfileListTypes.FOLLOWED_ARTISTS,
                       },
                     ),
                   );
@@ -261,8 +266,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         profilePageData.followedPlaylists.length > 0
             ? buildProfileListHeader(
-                title: AppLocalizations.of(context)!.followedPlaylists,
-                actionTitle: AppLocalizations.of(context)!.seeAll,
+                title: AppLocale.of().followedPlaylists,
+                actionTitle: AppLocale.of().seeAll,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
@@ -271,7 +276,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       args: {
                         AppValues.isLibraryForOffline: false,
                         AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes: ProfileListTypes.FOLLOWED_PLAYLISTS,
+                        AppValues.profileListTypes:
+                            ProfileListTypes.FOLLOWED_PLAYLISTS,
                       },
                     ),
                   );

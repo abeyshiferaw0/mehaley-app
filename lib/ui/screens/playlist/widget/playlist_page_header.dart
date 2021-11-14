@@ -10,7 +10,6 @@ import 'package:elf_play/ui/screens/playlist/widget/playlist_info_pages.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -58,7 +57,8 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
               child: Container(
                 height: 500,
                 decoration: BoxDecoration(
-                  gradient: AppGradients().getPlaylistHeaderGradient(dominantColor),
+                  gradient:
+                      AppGradients().getPlaylistHeaderGradient(dominantColor),
                 ),
                 child: SingleChildScrollView(
                   physics: NeverScrollableScrollPhysics(),
@@ -86,7 +86,8 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
     );
   }
 
-  Container buildAppBar(double shrinkPercentage, PlaylistPageData playlistPageData) {
+  Container buildAppBar(
+      double shrinkPercentage, PlaylistPageData playlistPageData) {
     return Container(
       height: 100,
       //color: AppColors.black.withOpacity(shrinkPercentage),
@@ -111,7 +112,8 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                   opacity: shrinkPercentage,
                   child: Center(
                     child: Text(
-                      L10nUtil.translateLocale(playlistPageData.playlist.playlistNameText, context),
+                      L10nUtil.translateLocale(
+                          playlistPageData.playlist.playlistNameText, context),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -136,8 +138,10 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                               priceUsd: playlistPageData.playlist.priceDollar,
                               isFree: playlistPageData.playlist.isFree,
                               useLargerText: true,
-                              isDiscountAvailable: playlistPageData.playlist.isDiscountAvailable,
-                              discountPercentage: playlistPageData.playlist.discountPercentage,
+                              isDiscountAvailable:
+                                  playlistPageData.playlist.isDiscountAvailable,
+                              discountPercentage:
+                                  playlistPageData.playlist.discountPercentage,
                               isPurchased: playlistPageData.playlist.isBought,
                             ),
                           ),
@@ -158,13 +162,17 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                 context: context,
                 child: PlaylistMenuWidget(
                   playlist: playlistPageData.playlist,
-                  title: L10nUtil.translateLocale(playlistPageData.playlist.playlistNameText, context),
-                  imageUrl: AppApi.baseUrl + playlistPageData.playlist.playlistImage.imageMediumPath,
+                  title: L10nUtil.translateLocale(
+                      playlistPageData.playlist.playlistNameText, context),
+                  imageUrl: AppApi.baseUrl +
+                      playlistPageData.playlist.playlistImage.imageMediumPath,
                   isFree: playlistPageData.playlist.isFree,
                   priceEtb: playlistPageData.playlist.priceEtb,
                   priceUsd: playlistPageData.playlist.priceDollar,
-                  isDiscountAvailable: playlistPageData.playlist.isDiscountAvailable,
-                  discountPercentage: playlistPageData.playlist.discountPercentage,
+                  isDiscountAvailable:
+                      playlistPageData.playlist.isDiscountAvailable,
+                  discountPercentage:
+                      playlistPageData.playlist.discountPercentage,
                   playlistId: playlistPageData.playlist.playlistId,
                   isFollowed: playlistPageData.playlist.isFollowed!,
                   isPurchased: playlistPageData.playlist.isBought,

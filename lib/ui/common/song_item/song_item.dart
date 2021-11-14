@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
@@ -18,7 +19,6 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
@@ -142,9 +142,7 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           song.lyricIncluded
                               ? SongItemBadge(
-                                  tag: AppLocalizations.of(context)!
-                                      .lyrics
-                                      .toUpperCase(),
+                                  tag: AppLocale.of().lyrics.toUpperCase(),
                                 )
                               : SizedBox(),
                           Row(

@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/playlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import 'menu_item.dart';
@@ -158,29 +158,29 @@ class _PlaylistCartMenuItemState extends State<PlaylistCartMenuItem> {
       int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
           .get(widget.playlist.playlistId);
       if (a > b) {
-        return AppLocalizations.of(context)!.removeFromCart;
+        return AppLocale.of().removeFromCart;
       } else {
-        return AppLocalizations.of(context)!.addToCart;
+        return AppLocale.of().addToCart;
       }
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
     if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
-      return AppLocalizations.of(context)!.removeFromCart;
+      return AppLocale.of().removeFromCart;
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
     if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
-      return AppLocalizations.of(context)!.addToCart;
+      return AppLocale.of().addToCart;
     }
 
     ///IF PLAYLIST IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.playlist.isInCart) {
-      return AppLocalizations.of(context)!.removeFromCart;
+      return AppLocale.of().removeFromCart;
     } else {
-      return AppLocalizations.of(context)!.addToCart;
+      return AppLocale.of().addToCart;
     }
   }
 

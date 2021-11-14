@@ -8,8 +8,7 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
   final double height;
@@ -18,7 +17,8 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(_, double shrinkOffset, bool overlapsContent) {
-    var shrinkPercentage = min(1, shrinkOffset / (maxExtent - minExtent)).toDouble();
+    var shrinkPercentage =
+        min(1, shrinkOffset / (maxExtent - minExtent)).toDouble();
 
     return Container(
       height: height,
@@ -37,7 +37,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                 children: [
                   buildProfileTab(
                     number: '${state.profilePageData.numberOfBoughtItems}',
-                    title: AppLocalizations.of(context)!.purchases,
+                    title: AppLocale.of().purchases,
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -46,7 +46,8 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                           args: {
                             AppValues.isLibraryForOffline: false,
                             AppValues.isLibraryForProfile: true,
-                            AppValues.profileListTypes: ProfileListTypes.PURCHASED_SONGS,
+                            AppValues.profileListTypes:
+                                ProfileListTypes.PURCHASED_SONGS,
                           },
                         ),
                       );
@@ -54,7 +55,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                   ),
                   buildProfileTab(
                     number: '${state.profilePageData.numberOfUserPlaylists}',
-                    title: AppLocalizations.of(context)!.playlists,
+                    title: AppLocale.of().playlists,
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -71,7 +72,8 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                   ),
                   buildProfileTab(
                     number: '${(state.profilePageData.numberOfFollowedItems)}',
-                    title: AppLocalizations.of(context)!.following.toUpperCase(),
+                    title:
+                        AppLocale.of().following.toUpperCase(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -80,7 +82,8 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                           args: {
                             AppValues.isLibraryForOffline: false,
                             AppValues.isLibraryForProfile: true,
-                            AppValues.profileListTypes: ProfileListTypes.FOLLOWED_ARTISTS,
+                            AppValues.profileListTypes:
+                                ProfileListTypes.FOLLOWED_ARTISTS,
                           },
                         ),
                       );

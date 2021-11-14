@@ -7,7 +7,7 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import 'category_header_gradient.dart';
 
@@ -33,14 +33,16 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
           fit: BoxFit.cover,
           height: 360,
           width: double.infinity,
-          imageUrl: AppApi.baseUrl + widget.category.categoryImage.imageMediumPath,
+          imageUrl:
+              AppApi.baseUrl + widget.category.categoryImage.imageMediumPath,
           placeholder: (context, url) => buildCategoryHeaderGradient(),
           errorWidget: (context, url, e) => buildCategoryHeaderGradient(),
         ),
         Container(
           height: 360,
           decoration: BoxDecoration(
-            gradient: AppGradients().getCategoryFilterGradient(AppColors.appGradientDefaultColor),
+            gradient: AppGradients()
+                .getCategoryFilterGradient(AppColors.appGradientDefaultColor),
           ),
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
@@ -107,7 +109,8 @@ class _CategoryPageHeaderState extends State<CategoryPageHeader> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.padding_16),
                 child: Text(
                   L10nUtil.translateLocale(category.categoryNameText, context),
                   textAlign: TextAlign.center,

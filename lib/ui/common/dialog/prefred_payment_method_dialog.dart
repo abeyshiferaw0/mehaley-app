@@ -7,9 +7,9 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 
 import '../app_bouncing_button.dart';
 
@@ -49,7 +49,8 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             padding: EdgeInsets.all(
               AppPadding.padding_16,
             ),
-            child: BlocBuilder<PreferredPaymentMethodBloc, PreferredPaymentMethodState>(
+            child: BlocBuilder<PreferredPaymentMethodBloc,
+                PreferredPaymentMethodState>(
               builder: (context, state) {
                 if (state is PreferredPaymentMethodLoadedState) {
                   return Column(
@@ -85,7 +86,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.currentlySeletced.toUpperCase(),
+          AppLocale.of().currentlySeletced.toUpperCase(),
           style: TextStyle(
             color: AppColors.txtGrey,
             fontWeight: FontWeight.w600,
@@ -96,7 +97,8 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
           height: AppMargin.margin_16,
         ),
         PaymentMethodItem(
-          title: PagesUtilFunctions.getPaymentMethodName(appPaymentMethod, context),
+          title: PagesUtilFunctions.getPaymentMethodName(
+              appPaymentMethod, context),
           imagePath: PagesUtilFunctions.getPaymentMethodIcon(appPaymentMethod),
           scale: 0.8,
           isSelected: true,
@@ -128,12 +130,14 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             vertical: AppPadding.padding_20,
           ),
           decoration: BoxDecoration(
-            color: tempAppPaymentMethods == AppPaymentMethods.METHOD_UNK ? AppColors.txtGrey : AppColors.darkGreen,
+            color: tempAppPaymentMethods == AppPaymentMethods.METHOD_UNK
+                ? AppColors.txtGrey
+                : AppColors.darkGreen,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.selectPaymentMethod.toUpperCase(),
+              AppLocale.of().selectPaymentMethod.toUpperCase(),
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: FontWeight.w600,
@@ -170,10 +174,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.amole,
+                title: AppLocale.of().amole,
                 imagePath: 'assets/images/ic_amole.png',
                 scale: 1.0,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_AMOLE,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_AMOLE,
                 appPaymentMethods: AppPaymentMethods.METHOD_AMOLE,
                 onTap: () {
                   setState(() {
@@ -185,10 +190,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.cbeBirr,
+                title: AppLocale.of().cbeBirr,
                 imagePath: 'assets/images/ic_cbe_birr.png',
                 scale: 1.0,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_CBE_BIRR,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_CBE_BIRR,
                 appPaymentMethods: AppPaymentMethods.METHOD_CBE_BIRR,
                 onTap: () {
                   setState(() {
@@ -200,10 +206,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.cbeBirr,
+                title: AppLocale.of().cbeBirr,
                 imagePath: 'assets/images/ic_hello_cash.png',
                 scale: 0.8,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_HELLO_CASH,
+                isSelected: tempAppPaymentMethods ==
+                    AppPaymentMethods.METHOD_HELLO_CASH,
                 appPaymentMethods: AppPaymentMethods.METHOD_HELLO_CASH,
                 onTap: () {
                   setState(() {
@@ -215,10 +222,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.mbirr,
+                title: AppLocale.of().mbirr,
                 imagePath: 'assets/images/ic_mbirr.png',
                 scale: 1.3,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_MBIRR,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_MBIRR,
                 appPaymentMethods: AppPaymentMethods.METHOD_MBIRR,
                 onTap: () {
                   setState(() {
@@ -230,10 +238,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.visa,
+                title: AppLocale.of().visa,
                 imagePath: 'assets/images/ic_visa.png',
                 scale: 1.0,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_VISA,
+                isSelected:
+                    tempAppPaymentMethods == AppPaymentMethods.METHOD_VISA,
                 appPaymentMethods: AppPaymentMethods.METHOD_VISA,
                 onTap: () {
                   setState(() {
@@ -245,10 +254,11 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
                 height: AppMargin.margin_16,
               ),
               PaymentMethodItem(
-                title: AppLocalizations.of(context)!.mastercard,
+                title: AppLocale.of().mastercard,
                 imagePath: 'assets/images/ic_mastercard.png',
                 scale: 1.0,
-                isSelected: tempAppPaymentMethods == AppPaymentMethods.METHOD_MASTERCARD,
+                isSelected: tempAppPaymentMethods ==
+                    AppPaymentMethods.METHOD_MASTERCARD,
                 appPaymentMethods: AppPaymentMethods.METHOD_MASTERCARD,
                 onTap: () {
                   setState(() {
@@ -273,7 +283,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.paymentMethod,
+              AppLocale.of().paymentMethod,
               style: TextStyle(
                 color: AppColors.black,
                 fontWeight: FontWeight.w500,
@@ -299,7 +309,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
           height: AppMargin.margin_8,
         ),
         Text(
-          AppLocalizations.of(context)!.selectYourPrefrredPayment,
+          AppLocale.of().selectYourPrefrredPayment,
           style: TextStyle(
             color: AppColors.txtGrey,
             fontWeight: FontWeight.w400,

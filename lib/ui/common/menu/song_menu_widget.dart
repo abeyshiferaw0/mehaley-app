@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/config/app_repositories.dart';
@@ -18,7 +19,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -199,8 +199,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           hasTopMargin: true,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.minus_circle_light,
-                          title: AppLocalizations.of(context)!
-                              .removeFromPlaylistMsg,
+                          title: AppLocale.of().removeFromPlaylistMsg,
                           onTap: () {
                             showDialog(
                               context: context,
@@ -208,17 +207,15 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                                 return Center(
                                   child: DialogDeleteSong(
                                     mainButtonText:
-                                        AppLocalizations.of(context)!
-                                            .remove
-                                            .toUpperCase(),
+                                        AppLocale.of().remove.toUpperCase(),
                                     cancelButtonText:
-                                        AppLocalizations.of(context)!
-                                            .cancel
-                                            .toUpperCase(),
-                                    titleText: AppLocalizations.of(context)!
-                                        .songRemoveFromPlaylist(
-                                      L10nUtil.translateLocale(
-                                          song.songName, context),
+                                        AppLocale.of().cancel.toUpperCase(),
+                                    titleText:
+                                        AppLocale.of().songRemoveFromPlaylist(
+                                      songName: L10nUtil.translateLocale(
+                                        song.songName,
+                                        context,
+                                      ),
                                     ),
                                     onDelete: () {
                                       if (widget.onRemoveSongFromPlaylist !=
@@ -241,7 +238,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                           hasTopMargin: true,
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: PhosphorIcons.currency_circle_dollar_light,
-                          title: AppLocalizations.of(context)!.buyMezmur,
+                          title: AppLocale.of().buyMezmur,
                           onTap: () {},
                         )
                       : SizedBox(),
@@ -259,7 +256,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.playlist_light,
-                    title: AppLocalizations.of(context)!.addToPlaylist,
+                    title: AppLocale.of().addToPlaylist,
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.of(context, rootNavigator: true).push(
@@ -284,7 +281,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.list_plus_light,
-                  //   title: AppLocalizations.of(context)!.addToQueue,
+                  //   title: AppLocale.of().addToQueue,
                   //   onTap: () async {
                   //
                   //   },
@@ -294,7 +291,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.disc_light,
-                  //   title: AppLocalizations.of(context)!.viewAlbum,
+                  //   title: AppLocale.of().viewAlbum,
                   //   onTap: () {},
                   // ),
                   // MenuItem(
@@ -302,7 +299,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.user_thin,
-                  //   title: AppLocalizations.of(context)!.viewArtist,
+                  //   title: AppLocale.of().viewArtist,
                   //   onTap: () {},
                   // ),
                   // MenuItem(
@@ -310,7 +307,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.rows_light,
-                  //   title: AppLocalizations.of(context)!.viewMezmursCategory,
+                  //   title: AppLocale.of().viewMezmursCategory,
                   //   onTap: () {},
                   // ),
                   MenuItem(
@@ -318,7 +315,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.share_network_light,
-                    title: AppLocalizations.of(context)!.shareMezmur,
+                    title: AppLocale.of().shareMezmur,
                     onTap: () {},
                   ),
                   SizedBox(height: AppMargin.margin_20),

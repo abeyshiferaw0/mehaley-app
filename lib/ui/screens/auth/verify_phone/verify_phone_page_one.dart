@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
@@ -13,7 +14,6 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
@@ -27,7 +27,8 @@ class VerifyPhonePageOne extends StatefulWidget {
 class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
-  MaskedTextController controller = new MaskedTextController(mask: '000-000-000');
+  MaskedTextController controller =
+      new MaskedTextController(mask: '000-000-000');
   CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
@@ -113,7 +114,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
     return Container(
       margin: EdgeInsets.only(bottom: AppMargin.margin_48),
       child: Text(
-        AppLocalizations.of(context)!.whatIsYourPhoneNumber.toUpperCase(),
+        AppLocale.of().whatIsYourPhoneNumber.toUpperCase(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_18,
@@ -132,7 +133,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       ),
       margin: EdgeInsets.only(bottom: AppMargin.margin_16),
       child: Text(
-        AppLocalizations.of(context)!.phoneVerificationMsg,
+        AppLocale.of().phoneVerificationMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12,
@@ -149,14 +150,14 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           return PhoneAuthLargeButton(
             disableBouncing: true,
             isLoading: true,
-            text: AppLocalizations.of(context)!.sendingSms,
+            text: AppLocale.of().sendingSms,
             onTap: () {},
           );
         } else {
           return PhoneAuthLargeButton(
             isLoading: false,
             disableBouncing: false,
-            text: AppLocalizations.of(context)!.sendSms,
+            text: AppLocale.of().sendSms,
             onTap: () {
               //VALIDATE COUNTRY CODE AND PHONE NUMBER
               if (controller.text.length == 11) {
@@ -172,7 +173,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
                   buildAppSnackBar(
                     bgColor: AppColors.errorRed,
                     txtColor: AppColors.white,
-                    msg: AppLocalizations.of(context)!.invalidPhoneNumber,
+                    msg: AppLocale.of().invalidPhoneNumber,
                     isFloating: false,
                   ),
                 );
@@ -219,7 +220,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               ),
               child: Center(
                 child: Text(
-                  AppLocalizations.of(context)!.noCountryCode,
+                  AppLocale.of().noCountryCode,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.grey,
@@ -256,7 +257,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             border: UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.darkGreen),
             ),
-            hintText: AppLocalizations.of(context)!.searchForCountryCode,
+            hintText: AppLocale.of().searchForCountryCode,
             hintStyle: TextStyle(
               color: AppColors.txtGrey,
               fontSize: AppFontSizes.font_size_14,
@@ -301,7 +302,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         ),
       ),
       title: Text(
-        AppLocalizations.of(context)!.continueWithPhoneNumber,
+        AppLocale.of().continueWithPhoneNumber,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14,
         ),

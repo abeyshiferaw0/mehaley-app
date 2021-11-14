@@ -1,7 +1,7 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,7 +29,7 @@ class ShareBtnWidget extends StatelessWidget {
             width: AppMargin.margin_8,
           ),
           Text(
-            AppLocalizations.of(context)!.share.toUpperCase(),
+            AppLocale.of().share.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               color: AppColors.white,

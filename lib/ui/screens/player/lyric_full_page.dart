@@ -29,7 +29,9 @@ import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
 
 class LyricFullPage extends StatefulWidget {
-  const LyricFullPage({Key? key, required this.song, required this.dominantColor}) : super(key: key);
+  const LyricFullPage(
+      {Key? key, required this.song, required this.dominantColor})
+      : super(key: key);
 
   final Song song;
   final Color dominantColor;
@@ -150,7 +152,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         minFontSize: AppFontSizes.font_size_16,
                         maxFontSize: AppFontSizes.font_size_16,
                         overflowReplacement: Marquee(
-                          text: L10nUtil.translateLocale(state.songName, context),
+                          text:
+                              L10nUtil.translateLocale(state.songName, context),
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_16,
                             fontWeight: FontWeight.w500,
@@ -173,7 +176,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                       ),
                     ),
                     Text(
-                      PagesUtilFunctions.getArtistsNames(state.artistsName, context),
+                      PagesUtilFunctions.getArtistsNames(
+                          state.artistsName, context),
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
@@ -256,7 +260,8 @@ class _LyricFullPageState extends State<LyricFullPage> {
                     builder: (context, state) {
                       return Text(
                         PagesUtilFunctions.formatSongDurationTimeTo(
-                          Duration(seconds: state.currentDuration.inSeconds.toInt()),
+                          Duration(
+                              seconds: state.currentDuration.inSeconds.toInt()),
                         ),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
@@ -294,7 +299,9 @@ class _LyricFullPageState extends State<LyricFullPage> {
                               );
                             },
                             child: Icon(
-                              state ? Icons.pause_circle_filled_sharp : FlutterRemix.play_circle_fill,
+                              state
+                                  ? Icons.pause_circle_filled_sharp
+                                  : FlutterRemix.play_circle_fill,
                               size: AppIconSizes.icon_size_72,
                               color: AppColors.white,
                             ),

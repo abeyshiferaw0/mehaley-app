@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
@@ -10,7 +11,6 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../widgets/library_sub_tab_button.dart';
@@ -80,13 +80,13 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 LibraryPageSubTabButton(
-                  text: AppLocalizations.of(context)!.myPlaylists.toUpperCase(),
+                  text: AppLocale.of().myPlaylists.toUpperCase(),
                   isSelected: true,
                   onTap: () {},
                   hasLeftMargin: false,
                 ),
                 LibraryPageSubTabButton(
-                  text: AppLocalizations.of(context)!.following.toUpperCase(),
+                  text: AppLocale.of().following.toUpperCase(),
                   isSelected: false,
                   onTap: () {
                     widget.onGoToFollowedPlaylist();

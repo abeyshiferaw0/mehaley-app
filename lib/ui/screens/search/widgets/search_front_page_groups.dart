@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/enums.dart';
@@ -9,7 +10,6 @@ import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:elf_play/ui/screens/search/widgets/search_front_page_items.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchFrontPageGroups extends StatelessWidget {
   final String mainTitle;
@@ -87,8 +87,8 @@ class SearchFrontPageGroups extends StatelessWidget {
                     songs: [items.elementAt(index)],
                     startPlaying: true,
                     playingFrom: PlayingFrom(
-                      from: AppLocalizations.of(context)!.playingFrom,
-                      title: AppLocalizations.of(context)!.mostListened,
+                      from: AppLocale.of().playingFrom,
+                      title: AppLocale.of().mostListened,
                       songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
                       songSyncPlayedFromId: -1,
                     ),

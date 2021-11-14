@@ -24,12 +24,11 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class QueueListPage extends StatefulWidget {
   const QueueListPage({Key? key}) : super(key: key);
@@ -174,7 +173,8 @@ class _QueueListPageState extends State<QueueListPage> {
             builder: (context, state) {
               return AppBouncingButton(
                 onTap: () {
-                  BlocProvider.of<AudioPlayerBloc>(context).add(ShufflePlayerQueueEvent());
+                  BlocProvider.of<AudioPlayerBloc>(context)
+                      .add(ShufflePlayerQueueEvent());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -200,7 +200,8 @@ class _QueueListPageState extends State<QueueListPage> {
           ),
           AppBouncingButton(
             onTap: () {
-              BlocProvider.of<AudioPlayerBloc>(context).add(PlayPreviousSongEvent());
+              BlocProvider.of<AudioPlayerBloc>(context)
+                  .add(PlayPreviousSongEvent());
             },
             child: Icon(
               Icons.skip_previous_sharp,
@@ -217,7 +218,9 @@ class _QueueListPageState extends State<QueueListPage> {
                   );
                 },
                 child: Icon(
-                  state ? Icons.pause_circle_filled_sharp : FlutterRemix.play_circle_fill,
+                  state
+                      ? Icons.pause_circle_filled_sharp
+                      : FlutterRemix.play_circle_fill,
                   size: AppIconSizes.icon_size_72,
                   color: AppColors.white,
                 ),
@@ -226,7 +229,8 @@ class _QueueListPageState extends State<QueueListPage> {
           ),
           AppBouncingButton(
             onTap: () {
-              BlocProvider.of<AudioPlayerBloc>(context).add(PlayNextSongEvent());
+              BlocProvider.of<AudioPlayerBloc>(context)
+                  .add(PlayNextSongEvent());
             },
             child: Icon(
               Icons.skip_next_sharp,
@@ -238,7 +242,8 @@ class _QueueListPageState extends State<QueueListPage> {
             builder: (context, state) {
               return AppBouncingButton(
                 onTap: () {
-                  BlocProvider.of<AudioPlayerBloc>(context).add(LoopPlayerQueueEvent());
+                  BlocProvider.of<AudioPlayerBloc>(context)
+                      .add(LoopPlayerQueueEvent());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -298,7 +303,7 @@ class _QueueListPageState extends State<QueueListPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.queue,
+                AppLocale.of().queue,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16.sp,
                   fontWeight: FontWeight.w600,
@@ -322,7 +327,7 @@ class _QueueListPageState extends State<QueueListPage> {
           ),
           SizedBox(height: AppMargin.margin_16),
           Text(
-            AppLocalizations.of(context)!.nowPlaying,
+            AppLocale.of().nowPlaying,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
@@ -333,7 +338,7 @@ class _QueueListPageState extends State<QueueListPage> {
           buildNowPlayingItem(song),
           SizedBox(height: AppMargin.margin_32),
           Text(
-            AppLocalizations.of(context)!.nextUp,
+            AppLocale.of().nextUp,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
@@ -382,9 +387,12 @@ class _QueueListPageState extends State<QueueListPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  song.lyricIncluded ? SongItemBadge(tag: AppLocalizations.of(context)!.lyrics) : SizedBox(),
+                  song.lyricIncluded
+                      ? SongItemBadge(tag: AppLocale.of().lyrics)
+                      : SizedBox(),
                   Text(
-                    PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+                    PagesUtilFunctions.getArtistsNames(
+                        song.artistsName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.txtGrey,

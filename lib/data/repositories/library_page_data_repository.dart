@@ -131,7 +131,6 @@ class LibraryPageDataRepository {
 
   Future<List<Song>> getOfflineSongs(
     AppLibrarySortTypes appLibrarySortTypes,
-    currentLocale,
   ) async {
     ///GET FAILED DOWNLOADS
     final List<DownloadTask>? tasks =
@@ -152,7 +151,6 @@ class LibraryPageDataRepository {
           songs,
           appLibrarySortTypes,
           timeDownloaded,
-          currentLocale,
         );
       }
     }

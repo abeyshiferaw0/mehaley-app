@@ -1,6 +1,6 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchEmptyMessage extends StatelessWidget {
@@ -16,7 +16,7 @@ class SearchEmptyMessage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.cantFind(searchKey),
+              AppLocale.of().cantFind(searchKey: searchKey),
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
@@ -27,7 +27,7 @@ class SearchEmptyMessage extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             Text(
-              AppLocalizations.of(context)!.changeYourSearchKey,
+              AppLocale.of().changeYourSearchKey,
               style: TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSizes.font_size_8.sp,

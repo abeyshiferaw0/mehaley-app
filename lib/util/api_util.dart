@@ -102,8 +102,8 @@ class ApiUtil {
     }
   }
 
-  static List<Song> sortDownloadedSongs(List<Song> items, appLibrarySortTypes,
-      List<int> timeDownloaded, currentLocale) {
+  static List<Song> sortDownloadedSongs(
+      List<Song> items, appLibrarySortTypes, List<int> timeDownloaded) {
     if (appLibrarySortTypes == AppLibrarySortTypes.NEWEST) {
       items.sort((b, a) => a.releasedDate.compareTo(b.releasedDate));
       return items;
@@ -112,18 +112,14 @@ class ApiUtil {
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z) {
       items.sort(
-        (a, b) => L10nUtil.translateLocale(a.songName, null,
-                mCurrentLocale: currentLocale)
-            .compareTo(L10nUtil.translateLocale(b.songName, null,
-                mCurrentLocale: currentLocale)),
+        (a, b) => L10nUtil.translateLocale(a.songName, null)
+            .compareTo(L10nUtil.translateLocale(b.songName, null)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.ARTIST_A_Z) {
       items.sort(
-        (a, b) => L10nUtil.translateLocale(a.artistsName[0], null,
-                mCurrentLocale: currentLocale)
-            .compareTo(L10nUtil.translateLocale(b.artistsName[0], null,
-                mCurrentLocale: currentLocale)),
+        (a, b) => L10nUtil.translateLocale(a.artistsName[0], null)
+            .compareTo(L10nUtil.translateLocale(b.artistsName[0], null)),
       );
       return items;
     } else if (appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD) {

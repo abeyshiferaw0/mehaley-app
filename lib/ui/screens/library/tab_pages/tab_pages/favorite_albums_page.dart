@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/favorite_album_bloc/favorite_albums_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -10,11 +11,11 @@ import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FavoriteAlbumsPage extends StatefulWidget {
-  const FavoriteAlbumsPage({Key? key, required this.onAlbumsLoaded}) : super(key: key);
+  const FavoriteAlbumsPage({Key? key, required this.onAlbumsLoaded})
+      : super(key: key);
 
   final Function(List<Album>) onAlbumsLoaded;
 
@@ -51,7 +52,7 @@ class _FavoriteAlbumsPageState extends State<FavoriteAlbumsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.heart_straight_fill,
-                msg: AppLocalizations.of(context)!.uDontHaveFavAlbums,
+                msg: AppLocale.of().uDontHaveFavAlbums,
               ),
             );
           }
@@ -81,7 +82,10 @@ class _FavoriteAlbumsPageState extends State<FavoriteAlbumsPage> {
 
   Widget buildPageLoaded(List<FavoriteAlbum> favoriteAlbums) {
     return Column(
-      children: [SizedBox(height: AppMargin.margin_8), buildAlbumList(favoriteAlbums)],
+      children: [
+        SizedBox(height: AppMargin.margin_8),
+        buildAlbumList(favoriteAlbums)
+      ],
     );
   }
 

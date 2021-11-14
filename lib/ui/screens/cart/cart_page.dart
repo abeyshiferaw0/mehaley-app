@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
@@ -23,7 +24,6 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -93,8 +93,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
-                  L10nUtil.translateLocale(state.song.songName, context)),
+              msg: AppLocale.of().unableToRemoveFromCart(
+                  unabledName:
+                      L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -108,8 +109,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
-                  L10nUtil.translateLocale(state.album.albumTitle, context)),
+              msg: AppLocale.of().unableToRemoveFromCart(
+                  unabledName: L10nUtil.translateLocale(
+                      state.album.albumTitle, context)),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -123,9 +125,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!.unableToRemoveFromCart(
-                  L10nUtil.translateLocale(
-                      state.playlist.playlistNameText, context)),
+              msg: AppLocale.of().unableToRemoveFromCart(
+                unabledName: L10nUtil.translateLocale(
+                  state.playlist.playlistNameText,
+                  context,
+                ),
+              ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -137,7 +142,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: false,
-              msg: AppLocalizations.of(context)!.unableToClearCart,
+              msg: AppLocale.of().unableToClearCart,
               txtColor: AppColors.black,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
@@ -159,8 +164,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
               buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: true,
-                  msg: AppLocalizations.of(context)!.removeedFromCart(
-                      L10nUtil.translateLocale(state.song.songName, context)),
+                  msg: AppLocale.of().removeedFromCart(
+                      removedName: L10nUtil.translateLocale(
+                          state.song.songName, context)),
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.check_circle_fill,
                   iconColor: AppColors.darkGreen),
@@ -183,8 +189,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!.removeedFromCart(
-                    L10nUtil.translateLocale(state.album.albumTitle, context)),
+                msg: AppLocale.of().removeedFromCart(
+                    removedName: L10nUtil.translateLocale(
+                        state.album.albumTitle, context)),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -206,9 +213,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!.removeedFromCart(
-                    L10nUtil.translateLocale(
-                        state.playlist.playlistNameText, context)),
+                msg: AppLocale.of().removeedFromCart(
+                  removedName: L10nUtil.translateLocale(
+                    state.playlist.playlistNameText,
+                    context,
+                  ),
+                ),
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -228,7 +238,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             buildDownloadMsgSnackBar(
                 bgColor: AppColors.white,
                 isFloating: true,
-                msg: AppLocalizations.of(context)!.cartCleared,
+                msg: AppLocale.of().cartCleared,
                 txtColor: AppColors.black,
                 icon: PhosphorIcons.check_circle_fill,
                 iconColor: AppColors.darkGreen),
@@ -420,7 +430,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_32,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.cartIsEmpty,
+                    AppLocale.of().cartIsEmpty,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
@@ -432,7 +442,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     height: AppMargin.margin_4,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.empityCartCheckOutMsg,
+                    AppLocale.of().empityCartCheckOutMsg,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
@@ -462,7 +472,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                         color: AppColors.darkGreen,
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.goToHomeScreen,
+                        AppLocale.of().goToHomeScreen,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,

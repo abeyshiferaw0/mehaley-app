@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -17,7 +18,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -71,7 +71,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableUpdatePlaylist,
+              msg: AppLocale.of().unableUpdatePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -83,9 +83,11 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg: AppLocalizations.of(context)!.playlistUpdated(
-                L10nUtil.translateLocale(
-                    state.myPlaylist.playlistNameText, context),
+              msg: AppLocale.of().playlistUpdated(
+                playlistName: L10nUtil.translateLocale(
+                  state.myPlaylist.playlistNameText,
+                  context,
+                ),
               ),
               bgColor: AppColors.white,
               isFloating: true,
@@ -189,7 +191,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
-              hintText: AppLocalizations.of(context)!.addSomeDescription,
+              hintText: AppLocale.of().addSomeDescription,
               hintStyle: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -229,7 +231,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 border: Border.all(width: 1, color: AppColors.lightGrey),
               ),
               child: Text(
-                AppLocalizations.of(context)!.addDescription.toUpperCase(),
+                AppLocale.of().addDescription.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
@@ -284,7 +286,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: AppLocalizations.of(context)!.playlistName,
+        hintText: AppLocale.of().playlistName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -323,7 +325,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.chooseImage,
+                                AppLocale.of().chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -342,7 +344,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                                 },
                               );
                             },
-                            text: AppLocalizations.of(context)!.takeAPhoto,
+                            text: AppLocale.of().takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
@@ -354,7 +356,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                                 },
                               );
                             },
-                            text: AppLocalizations.of(context)!.pickFromGallery,
+                            text: AppLocale.of().pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
@@ -364,7 +366,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                                   .removeImage();
                               Navigator.pop(context);
                             },
-                            text: AppLocalizations.of(context)!.removeIImage,
+                            text: AppLocale.of().removeIImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -429,7 +431,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 height: AppMargin.margin_12,
               ),
               Text(
-                AppLocalizations.of(context)!.changeImage.toUpperCase(),
+                AppLocale.of().changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -470,7 +472,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                AppLocalizations.of(context)!.editPlaylist,
+                AppLocale.of().editPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -498,8 +500,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg:
-                          AppLocalizations.of(context)!.playlistNameCantBeEmpty,
+                      msg: AppLocale.of().playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -520,7 +521,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.save.toUpperCase(),
+                  AppLocale.of().save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

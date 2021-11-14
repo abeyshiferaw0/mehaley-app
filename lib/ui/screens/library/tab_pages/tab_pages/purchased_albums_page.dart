@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -11,11 +12,11 @@ import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedAlbumsPage extends StatefulWidget {
-  const PurchasedAlbumsPage({Key? key, required this.onAlbumsLoaded}) : super(key: key);
+  const PurchasedAlbumsPage({Key? key, required this.onAlbumsLoaded})
+      : super(key: key);
 
   final Function(List<Album>) onAlbumsLoaded;
 
@@ -27,7 +28,8 @@ class _PurchasedAlbumsPageState extends State<PurchasedAlbumsPage> {
   @override
   void initState() {
     ///INITIALLY LOAD ALL PURCHASED AlbumS
-    BlocProvider.of<PurchasedAlbumsBloc>(context).add(LoadPurchasedAlbumsEvent());
+    BlocProvider.of<PurchasedAlbumsBloc>(context)
+        .add(LoadPurchasedAlbumsEvent());
     super.initState();
   }
 
@@ -50,7 +52,7 @@ class _PurchasedAlbumsPageState extends State<PurchasedAlbumsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.disc_fill,
-                msg: AppLocalizations.of(context)!.uDontHavePurchasedAlbums,
+                msg: AppLocale.of().uDontHavePurchasedAlbums,
               ),
             );
           }
@@ -59,7 +61,8 @@ class _PurchasedAlbumsPageState extends State<PurchasedAlbumsPage> {
             height: ScreenUtil(context: context).getScreenHeight() * 0.5,
             child: LibraryErrorWidget(
               onRetry: () {
-                BlocProvider.of<PurchasedAlbumsBloc>(context).add(LoadPurchasedAlbumsEvent());
+                BlocProvider.of<PurchasedAlbumsBloc>(context)
+                    .add(LoadPurchasedAlbumsEvent());
               },
             ),
           );

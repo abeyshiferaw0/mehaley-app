@@ -8,9 +8,8 @@ import 'package:elf_play/data/models/playlist.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class PlaylistInfoCartButton extends StatefulWidget {
   const PlaylistInfoCartButton({
@@ -164,29 +163,29 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
       int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
           .get(widget.playlist.playlistId);
       if (a > b) {
-        return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
+        return AppLocale.of().removeFromCart.toUpperCase();
       } else {
-        return AppLocalizations.of(context)!.addToCart.toUpperCase();
+        return AppLocale.of().addToCart.toUpperCase();
       }
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
     if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
-      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
+      return AppLocale.of().removeFromCart.toUpperCase();
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
     if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
-      return AppLocalizations.of(context)!.addToCart.toUpperCase();
+      return AppLocale.of().addToCart.toUpperCase();
     }
 
     ///IF PLAYLIST IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.playlist.isInCart) {
-      return AppLocalizations.of(context)!.removeFromCart.toUpperCase();
+      return AppLocale.of().removeFromCart.toUpperCase();
     } else {
-      return AppLocalizations.of(context)!.addToCart.toUpperCase();
+      return AppLocale.of().addToCart.toUpperCase();
     }
   }
 

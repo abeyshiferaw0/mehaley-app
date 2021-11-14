@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
@@ -16,7 +16,10 @@ class ArtistFollowButton extends StatelessWidget {
   final int artistId;
   final bool askDialog;
 
-  const ArtistFollowButton({required this.isFollowing, required this.artistId, required this.askDialog});
+  const ArtistFollowButton(
+      {required this.isFollowing,
+      required this.artistId,
+      required this.askDialog});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,9 @@ class ArtistFollowButton extends StatelessWidget {
             onTap(context);
           },
           child: Container(
-            child: preButtonOnTap() ? buildFollowingBtn(context) : buildFollowBtn(context),
+            child: preButtonOnTap()
+                ? buildFollowingBtn(context)
+                : buildFollowBtn(context),
           ),
         );
       },
@@ -49,9 +54,9 @@ class ArtistFollowButton extends StatelessWidget {
         builder: (_) {
           return Center(
             child: DialogUlLikeUnFollow(
-              mainButtonText: AppLocalizations.of(context)!.unFollow.toUpperCase(),
-              cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
-              titleText: AppLocalizations.of(context)!.removeFromFollowedArtist,
+              mainButtonText: AppLocale.of().unFollow.toUpperCase(),
+              cancelButtonText: AppLocale.of().cancel.toUpperCase(),
+              titleText: AppLocale.of().removeFromFollowedArtist,
               onUnLikeUnFollow: () {
                 ///FOLLOW UNFOLLOW ARTIST
                 EasyDebounce.debounce(
@@ -62,7 +67,9 @@ class ArtistFollowButton extends StatelessWidget {
                     BlocProvider.of<LibraryBloc>(context).add(
                       FollowUnFollowArtistEvent(
                         id: artistId,
-                        appLikeFollowEvents: preButtonOnTap() ? AppLikeFollowEvents.UNFOLLOW : AppLikeFollowEvents.FOLLOW,
+                        appLikeFollowEvents: preButtonOnTap()
+                            ? AppLikeFollowEvents.UNFOLLOW
+                            : AppLikeFollowEvents.FOLLOW,
                       ),
                     );
                   },
@@ -81,7 +88,9 @@ class ArtistFollowButton extends StatelessWidget {
           BlocProvider.of<LibraryBloc>(context).add(
             FollowUnFollowArtistEvent(
               id: artistId,
-              appLikeFollowEvents: preButtonOnTap() ? AppLikeFollowEvents.UNFOLLOW : AppLikeFollowEvents.FOLLOW,
+              appLikeFollowEvents: preButtonOnTap()
+                  ? AppLikeFollowEvents.UNFOLLOW
+                  : AppLikeFollowEvents.FOLLOW,
             ),
           );
         },
@@ -92,7 +101,8 @@ class ArtistFollowButton extends StatelessWidget {
   bool preButtonOnTap() {
     ///IF FOUND IN BOTH RECENTLY FOLLOWED AND UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedArtistBox.containsKey(artistId) &&
-        AppHiveBoxes.instance.recentlyUnFollowedArtistBox.containsKey(artistId)) {
+        AppHiveBoxes.instance.recentlyUnFollowedArtistBox
+            .containsKey(artistId)) {
       int a = AppHiveBoxes.instance.recentlyFollowedArtistBox.get(artistId);
 
       int b = AppHiveBoxes.instance.recentlyUnFollowedArtistBox.get(artistId);
@@ -109,7 +119,8 @@ class ArtistFollowButton extends StatelessWidget {
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
-    if (AppHiveBoxes.instance.recentlyUnFollowedArtistBox.containsKey(artistId)) {
+    if (AppHiveBoxes.instance.recentlyUnFollowedArtistBox
+        .containsKey(artistId)) {
       return false;
     }
 
@@ -124,7 +135,7 @@ class ArtistFollowButton extends StatelessWidget {
         vertical: AppMargin.margin_6,
       ),
       child: Text(
-        AppLocalizations.of(context)!.following.toUpperCase(),
+        AppLocale.of().following.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,
@@ -147,7 +158,7 @@ class ArtistFollowButton extends StatelessWidget {
         vertical: AppMargin.margin_6,
       ),
       child: Text(
-        AppLocalizations.of(context)!.follow.toUpperCase(),
+        AppLocale.of().follow.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,

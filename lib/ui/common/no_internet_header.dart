@@ -2,14 +2,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
+import 'package:elf_play/config/constants.dart';import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class NoInternetHeader extends StatelessWidget {
   const NoInternetHeader({
@@ -37,7 +37,7 @@ class NoInternetHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppLocalizations.of(context)!.yourOffline,
+            AppLocale.of().yourOffline,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
@@ -47,7 +47,7 @@ class NoInternetHeader extends StatelessWidget {
           ),
           SizedBox(height: AppMargin.margin_16),
           Text(
-            AppLocalizations.of(context)!.noInternetMsg.toUpperCase(),
+            AppLocale.of().noInternetMsg.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
@@ -81,7 +81,7 @@ class NoInternetHeader extends StatelessWidget {
                 vertical: AppPadding.padding_8,
               ),
               child: Text(
-                AppLocalizations.of(context)!.goToDownloadsMsg,
+                AppLocale.of().goToDownloadsMsg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,

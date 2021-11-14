@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';import 'package:elf_play/util/l10n_util.dart';
+import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
@@ -15,7 +16,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -97,13 +97,14 @@ class _SearchResultItemState extends State<SearchResultItem> {
     return AppBouncingButton(
       onTap: () {
         //ADD TO RECENT SEARCHED ITEM
-        BlocProvider.of<RecentSearchBloc>(context).add(AddRecentSearchEvent(item: item));
+        BlocProvider.of<RecentSearchBloc>(context)
+            .add(AddRecentSearchEvent(item: item));
         //PERFORM CLICK ACTION
         PagesUtilFunctions.searchResultItemOnClick(
           appSearchItemTypes: appSearchItemTypes,
           item: item,
           playingFrom: PlayingFrom(
-            from: AppLocalizations.of(context)!.playingFromSearchResult(searchKey),
+            from: AppLocale.of().playingFromSearchResult(searchKey: searchKey),
             title: title,
             songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
             songSyncPlayedFromId: -1,
@@ -116,7 +117,9 @@ class _SearchResultItemState extends State<SearchResultItem> {
           widget.focusNode!.unfocus();
         }
       },
-      child: isPlaylistDedicatedResultPage ? buildGridItem() : buildListItem(context),
+      child: isPlaylistDedicatedResultPage
+          ? buildGridItem()
+          : buildListItem(context),
     );
   }
 
@@ -133,8 +136,10 @@ class _SearchResultItemState extends State<SearchResultItem> {
                 fit: BoxFit.cover,
                 height: AppValues.customGroupItemSize,
                 imageUrl: AppApi.baseUrl + imagePath,
-                placeholder: (context, url) => buildImagePlaceHolder(appSearchItemTypes),
-                errorWidget: (context, url, e) => buildImagePlaceHolder(appSearchItemTypes),
+                placeholder: (context, url) =>
+                    buildImagePlaceHolder(appSearchItemTypes),
+                errorWidget: (context, url, e) =>
+                    buildImagePlaceHolder(appSearchItemTypes),
                 imageBuilder: (context, imageProvider) => Stack(
                   children: [
                     Container(
@@ -179,14 +184,18 @@ class _SearchResultItemState extends State<SearchResultItem> {
       child: Row(
         children: [
           AppCard(
-            radius: appSearchItemTypes == AppSearchItemTypes.ARTIST ? AppValues.queueSongItemSize : 0.0,
+            radius: appSearchItemTypes == AppSearchItemTypes.ARTIST
+                ? AppValues.queueSongItemSize
+                : 0.0,
             child: CachedNetworkImage(
               width: AppValues.queueSongItemSize,
               height: AppValues.queueSongItemSize,
               fit: BoxFit.cover,
               imageUrl: AppApi.baseUrl + imagePath,
-              placeholder: (context, url) => buildImagePlaceHolder(appSearchItemTypes),
-              errorWidget: (context, url, e) => buildImagePlaceHolder(appSearchItemTypes),
+              placeholder: (context, url) =>
+                  buildImagePlaceHolder(appSearchItemTypes),
+              errorWidget: (context, url, e) =>
+                  buildImagePlaceHolder(appSearchItemTypes),
             ),
           ),
           SizedBox(width: AppMargin.margin_12),
@@ -209,7 +218,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   children: [
                     SongItemBadge(
                       tag: appSearchItemTypes == AppSearchItemTypes.SONG
-                          ? AppLocalizations.of(context)!.mezmurs.toUpperCase()
+                          ? AppLocale.of().mezmurs.toUpperCase()
                           : EnumToString.convertToString(appSearchItemTypes),
                     ),
                     Text(
@@ -262,7 +271,8 @@ class _SearchResultItemState extends State<SearchResultItem> {
   }
 }
 
-AppItemsImagePlaceHolder buildImagePlaceHolder(AppSearchItemTypes appSearchItemTypes) {
+AppItemsImagePlaceHolder buildImagePlaceHolder(
+    AppSearchItemTypes appSearchItemTypes) {
   if (appSearchItemTypes == AppSearchItemTypes.SONG) {
     return AppItemsImagePlaceHolder(appItemsType: AppItemsType.SINGLE_TRACK);
   }

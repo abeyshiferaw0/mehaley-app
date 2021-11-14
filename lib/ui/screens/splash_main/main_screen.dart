@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
@@ -20,7 +21,6 @@ import 'package:elf_play/ui/common/no_internet_indicator_small.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -60,8 +60,8 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
-                      ? AppLocalizations.of(context)!.songAddedToFavorites
-                      : AppLocalizations.of(context)!.songRemovedToFavorites,
+                      ? AppLocale.of().songAddedToFavorites
+                      : AppLocale.of().songRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -73,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -86,8 +86,8 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
-                      ? AppLocalizations.of(context)!.albumAddedToFavorites
-                      : AppLocalizations.of(context)!.albumRemovedToFavorites,
+                      ? AppLocale.of().albumAddedToFavorites
+                      : AppLocale.of().albumRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -99,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -112,9 +112,8 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
-                      ? AppLocalizations.of(context)!.playlistAddedToFavorites
-                      : AppLocalizations.of(context)!
-                          .playlistRemovedToFavorites,
+                      ? AppLocale.of().playlistAddedToFavorites
+                      : AppLocale.of().playlistRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -126,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -139,8 +138,8 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
-                      ? AppLocalizations.of(context)!.artistsAddedToFavorites
-                      : AppLocalizations.of(context)!.artistsRemovedToFavorites,
+                      ? AppLocale.of().artistsAddedToFavorites
+                      : AppLocale.of().artistsRemovedToFavorites,
                   txtColor: AppColors.white,
                 ),
               );
@@ -152,7 +151,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -169,8 +168,8 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocalizations.of(context)!.albumAddedToCart
-                          : AppLocalizations.of(context)!.albumRemovedToCart,
+                          ? AppLocale.of().albumAddedToCart
+                          : AppLocale.of().albumRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -182,7 +181,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -196,8 +195,8 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocalizations.of(context)!.songAddedToCart
-                          : AppLocalizations.of(context)!.songRemovedToCart,
+                          ? AppLocale.of().songAddedToCart
+                          : AppLocale.of().songRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -209,7 +208,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -223,8 +222,8 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocalizations.of(context)!.playlistAddedToCart
-                          : AppLocalizations.of(context)!.playlistRemovedToCart,
+                          ? AppLocale.of().playlistAddedToCart
+                          : AppLocale.of().playlistRemovedToCart,
                   txtColor: AppColors.white,
                 ),
               );
@@ -236,7 +235,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnect,
+                  msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
                 ),
               );
@@ -250,9 +249,12 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                     bgColor: AppColors.white,
                     isFloating: true,
-                    msg: AppLocalizations.of(context)!.downloadComplete(
-                        L10nUtil.translateLocale(
-                            state.song!.songName, context)),
+                    msg: AppLocale.of().downloadComplete(
+                      songName: L10nUtil.translateLocale(
+                        state.song!.songName,
+                        context,
+                      ),
+                    ),
                     txtColor: AppColors.black,
                     icon: PhosphorIcons.check_circle_fill,
                     iconColor: AppColors.darkGreen),
@@ -263,7 +265,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: AppColors.white,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.yourNotConnected,
+                  msg: AppLocale.of().yourNotConnected,
                   txtColor: AppColors.black,
                   icon: PhosphorIcons.wifi_x_light,
                   iconColor: AppColors.errorRed,

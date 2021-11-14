@@ -1,8 +1,8 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SmallTextPriceWidget extends StatelessWidget {
@@ -48,7 +48,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildPurchased(context) {
     return Text(
-      AppLocalizations.of(context)!.purchased.toUpperCase(),
+      AppLocale.of().purchased.toUpperCase(),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -63,7 +63,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildFreeText(context) {
     return Text(
-      AppLocalizations.of(context)!.free.toUpperCase(),
+      AppLocale.of().free.toUpperCase(),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(

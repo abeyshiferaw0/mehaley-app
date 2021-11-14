@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
@@ -23,7 +24,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
@@ -39,12 +39,13 @@ class SearchResultList extends StatefulWidget {
   final FocusNode focusNode;
 
   @override
-  _SearchResultListState createState() =>
-      _SearchResultListState(searchPageResultData: searchPageResultData, searchKey: searchKey);
+  _SearchResultListState createState() => _SearchResultListState(
+      searchPageResultData: searchPageResultData, searchKey: searchKey);
 }
 
 class _SearchResultListState extends State<SearchResultList> {
-  _SearchResultListState({required this.searchKey, required this.searchPageResultData});
+  _SearchResultListState(
+      {required this.searchKey, required this.searchPageResultData});
 
   final SearchPageResultData searchPageResultData;
   final String searchKey;
@@ -79,7 +80,8 @@ class _SearchResultListState extends State<SearchResultList> {
         ),
         SafeArea(
           child: Container(
-            margin: const EdgeInsets.only(top: AppValues.searchBarHeight + AppMargin.margin_8),
+            margin: const EdgeInsets.only(
+                top: AppValues.searchBarHeight + AppMargin.margin_8),
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
@@ -97,10 +99,12 @@ class _SearchResultListState extends State<SearchResultList> {
     );
   }
 
-  List<Widget> buildSearchResultColumnList(List<dynamic> resultItems, TopArtistData topArtistData, String searchKey) {
+  List<Widget> buildSearchResultColumnList(List<dynamic> resultItems,
+      TopArtistData topArtistData, String searchKey) {
     List<Widget> widgetItems = [];
 
-    if (topArtistData.topArtist != null && topArtistData.topArtistSongs != null) {
+    if (topArtistData.topArtist != null &&
+        topArtistData.topArtistSongs != null) {
       if (topArtistData.topArtistSongs!.isNotEmpty) {
         widgetItems.add(
           Column(
@@ -109,15 +113,20 @@ class _SearchResultListState extends State<SearchResultList> {
               SizedBox(
                 height: AppMargin.margin_12,
               ),
-              buildSearchResultItem(topArtistData.topArtist, searchKey, resultItems),
+              buildSearchResultItem(
+                  topArtistData.topArtist, searchKey, resultItems),
               SizedBox(
                 height: AppMargin.margin_20,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: AppPadding.padding_12),
                 child: Text(
-                  AppLocalizations.of(context)!
-                      .popularSongsBy(L10nUtil.translateLocale(topArtistData.topArtist!.artistName, context)),
+                  AppLocale.of().popularSongsBy(
+                    artistName: L10nUtil.translateLocale(
+                      topArtistData.topArtist!.artistName,
+                      context,
+                    ),
+                  ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     color: AppColors.white,
@@ -155,12 +164,14 @@ class _SearchResultListState extends State<SearchResultList> {
     return widgetItems;
   }
 
-  Widget buildSearchResultItem(dynamic resultItem, String searchKey, List<dynamic> resultItems) {
+  Widget buildSearchResultItem(
+      dynamic resultItem, String searchKey, List<dynamic> resultItems) {
     if (resultItem is Song) {
       return SearchResultItem(
         itemKey: Key('song_${resultItem.songId}'),
         title: L10nUtil.translateLocale(resultItem.songName, context),
-        subTitle: PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
+        subTitle:
+            PagesUtilFunctions.getArtistsNames(resultItem.artistsName, context),
         imagePath: resultItem.albumArt.imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.SONG,
         item: resultItem,
@@ -200,8 +211,10 @@ class _SearchResultListState extends State<SearchResultList> {
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
-              title: L10nUtil.translateLocale(resultItem.playlistNameText, context),
-              imageUrl: AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
+              title: L10nUtil.translateLocale(
+                  resultItem.playlistNameText, context),
+              imageUrl:
+                  AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
               isFree: resultItem.isFree,
               priceEtb: resultItem.priceEtb,
               priceUsd: resultItem.priceDollar,
@@ -218,7 +231,8 @@ class _SearchResultListState extends State<SearchResultList> {
       return SearchResultItem(
         itemKey: Key('album_${resultItem.albumId}'),
         title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-        subTitle: L10nUtil.translateLocale(resultItem.artist.artistName, context),
+        subTitle:
+            L10nUtil.translateLocale(resultItem.artist.artistName, context),
         imagePath: resultItem.albumImages[0].imageSmallPath,
         appSearchItemTypes: AppSearchItemTypes.ALBUM,
         searchKey: searchKey,
@@ -237,7 +251,8 @@ class _SearchResultListState extends State<SearchResultList> {
               rootContext: context,
               isLiked: resultItem.isLiked,
               title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl: AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
+              imageUrl:
+                  AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
               priceEtb: resultItem.priceEtb,
               priceUsd: resultItem.priceDollar,
               isFree: resultItem.isFree,
@@ -267,7 +282,8 @@ class _SearchResultListState extends State<SearchResultList> {
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),
-              imageUrl: AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
+              imageUrl:
+                  AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
               isFollowing: resultItem.isFollowed!,
               artistId: resultItem.artistId,
             ),
@@ -277,56 +293,68 @@ class _SearchResultListState extends State<SearchResultList> {
     } else if (resultItem is SearchResultOtherItems) {
       if (resultItem == SearchResultOtherItems.SEE_ALL_PLAYLISTS) {
         return SearchResultFooterButton(
-          text: AppLocalizations.of(context)!.seeAllPlaylists,
+          text: AppLocale.of().seeAllPlaylists,
           isForRecentItem: false,
           onTap: () {
             Navigator.pushNamed(
               context,
               AppRouterPaths.searchResultDedicatedRoute,
               arguments: ScreenArguments(
-                args: {'searchKey': searchKey, 'appSearchItemTypes': AppSearchItemTypes.PLAYLIST},
+                args: {
+                  'searchKey': searchKey,
+                  'appSearchItemTypes': AppSearchItemTypes.PLAYLIST
+                },
               ),
             );
           },
         );
       } else if (resultItem == SearchResultOtherItems.SEE_ALL_ALBUMS) {
         return SearchResultFooterButton(
-          text: AppLocalizations.of(context)!.seeAllAlbums,
+          text: AppLocale.of().seeAllAlbums,
           isForRecentItem: false,
           onTap: () {
             Navigator.pushNamed(
               context,
               AppRouterPaths.searchResultDedicatedRoute,
               arguments: ScreenArguments(
-                args: {'searchKey': searchKey, 'appSearchItemTypes': AppSearchItemTypes.ALBUM},
+                args: {
+                  'searchKey': searchKey,
+                  'appSearchItemTypes': AppSearchItemTypes.ALBUM
+                },
               ),
             );
           },
         );
       } else if (resultItem == SearchResultOtherItems.SEE_ALL_ARTISTS) {
         return SearchResultFooterButton(
-          text: AppLocalizations.of(context)!.seeAllArtists,
+          text: AppLocale.of().seeAllArtists,
           isForRecentItem: false,
           onTap: () {
             Navigator.pushNamed(
               context,
               AppRouterPaths.searchResultDedicatedRoute,
               arguments: ScreenArguments(
-                args: {'searchKey': searchKey, 'appSearchItemTypes': AppSearchItemTypes.ARTIST},
+                args: {
+                  'searchKey': searchKey,
+                  'appSearchItemTypes': AppSearchItemTypes.ARTIST
+                },
               ),
             );
           },
         );
       } else if (resultItem == SearchResultOtherItems.SEE_ALL_SONGS) {
         return SearchResultFooterButton(
-          text: AppLocalizations.of(context)!.seeAllMezmurs,
+          text: AppLocale.of().seeAllMezmurs,
           isForRecentItem: false,
           onTap: () {
             Navigator.pushNamed(
               context,
               AppRouterPaths.searchResultDedicatedRoute,
               arguments: ScreenArguments(
-                args: {'searchKey': searchKey, 'appSearchItemTypes': AppSearchItemTypes.SONG},
+                args: {
+                  'searchKey': searchKey,
+                  'appSearchItemTypes': AppSearchItemTypes.SONG
+                },
               ),
             );
           },

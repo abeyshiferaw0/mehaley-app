@@ -1,9 +1,9 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/shimmer_item.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
 
@@ -28,7 +28,7 @@ class ShimmerLyric extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.lyrics.toUpperCase(),
+            AppLocale.of().lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               color: AppColors.white,

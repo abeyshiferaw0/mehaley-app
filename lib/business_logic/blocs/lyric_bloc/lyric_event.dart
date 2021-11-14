@@ -6,12 +6,11 @@ abstract class LyricEvent extends Equatable {
 
 class LoadSongLyricEvent extends LyricEvent {
   final int songId;
-  final Locale currentLocale;
 
-  LoadSongLyricEvent({required this.currentLocale, required this.songId});
+  LoadSongLyricEvent({required this.songId});
 
   @override
-  List<Object?> get props => [songId, currentLocale];
+  List<Object?> get props => [songId];
 }
 
 class RemoveLyricWidgetEvent extends LyricEvent {

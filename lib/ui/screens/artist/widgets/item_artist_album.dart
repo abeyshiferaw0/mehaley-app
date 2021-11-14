@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
@@ -8,8 +9,6 @@ import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class ArtistAlbumItem extends StatelessWidget {
@@ -94,7 +93,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.album,
+                      AppLocale.of().album,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.txtGrey,
@@ -106,8 +105,8 @@ class ArtistAlbumItem extends StatelessWidget {
                       width: AppMargin.margin_4,
                     ),
                     SmallTextPriceWidget(
-                      priceEtb : album.priceEtb,
-                      priceUsd : album.priceDollar,
+                      priceEtb: album.priceEtb,
+                      priceUsd: album.priceDollar,
                       isFree: album.isFree,
                       isDiscountAvailable: album.isDiscountAvailable,
                       discountPercentage: album.discountPercentage,

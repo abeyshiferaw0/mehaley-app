@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/constants.dart';
@@ -7,7 +8,6 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class SongIsLikedIndicator extends StatelessWidget {
@@ -32,14 +32,16 @@ class SongIsLikedIndicator extends StatelessWidget {
                 builder: (context) {
                   return Center(
                     child: DialogUlLikeUnFollow(
-                      mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
-                      cancelButtonText: AppLocalizations.of(context)!.cancel,
-                      titleText: AppLocalizations.of(context)!.removeFromFavoriteMezmurs,
+                      mainButtonText: AppLocale.of().remove.toUpperCase(),
+                      cancelButtonText: AppLocale.of().cancel,
+                      titleText: AppLocale.of().removeFromFavoriteMezmurs,
                       onUnLikeUnFollow: () {
                         BlocProvider.of<LibraryBloc>(context).add(
                           LikeUnlikeSongEvent(
                             id: songId,
-                            appLikeFollowEvents: preAnimate() ? AppLikeFollowEvents.UNLIKE : AppLikeFollowEvents.LIKE,
+                            appLikeFollowEvents: preAnimate()
+                                ? AppLikeFollowEvents.UNLIKE
+                                : AppLikeFollowEvents.LIKE,
                           ),
                         );
                       },

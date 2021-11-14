@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/config/constants.dart';
@@ -16,7 +17,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +31,8 @@ class SongAddToUserPlaylistPage extends StatefulWidget {
   final Function(MyPlaylist) onCreateWithSongSuccess;
 
   @override
-  _SongAddToUserPlaylistPageState createState() => _SongAddToUserPlaylistPageState();
+  _SongAddToUserPlaylistPageState createState() =>
+      _SongAddToUserPlaylistPageState();
 }
 
 class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
@@ -53,9 +54,15 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg: AppLocalizations.of(context)!.songAddedToPlaylist(
-                L10nUtil.translateLocale(state.song.songName, context),
-                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+              msg: AppLocale.of().songAddedToPlaylist(
+                songName: L10nUtil.translateLocale(
+                  state.song.songName,
+                  context,
+                ),
+                playlistName: L10nUtil.translateLocale(
+                  state.myPlaylist.playlistNameText,
+                  context,
+                ),
               ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
@@ -77,7 +84,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableToAddMezmur,
+              msg: AppLocale.of().unableToAddMezmur,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -150,7 +157,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                                 bottom: AppPadding.padding_16,
                               ),
                               child: Text(
-                                AppLocalizations.of(context)!.addToExistingPlaylist,
+                                AppLocale.of().addToExistingPlaylist,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   color: AppColors.txtGrey,
@@ -161,11 +168,13 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                             )
                           : SizedBox(),
                       LibraryMyPlaylistItem(
-                        myPlaylist: state.myPlaylistPageData.myPlaylists.elementAt(index),
+                        myPlaylist: state.myPlaylistPageData.myPlaylists
+                            .elementAt(index),
                         onTap: () {
                           BlocProvider.of<UserPlaylistBloc>(context).add(
                             AddSongUserPlaylistEvent(
-                              myPlaylist: state.myPlaylistPageData.myPlaylists.elementAt(index),
+                              myPlaylist: state.myPlaylistPageData.myPlaylists
+                                  .elementAt(index),
                               song: widget.song,
                             ),
                           );
@@ -179,7 +188,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             } else {
               return LibraryEmptyPage(
                 icon: PhosphorIcons.playlist_light,
-                msg: AppLocalizations.of(context)!.youHaventCreatedAnyPlaylistMsg,
+                msg: AppLocale.of().youHaventCreatedAnyPlaylistMsg,
               );
             }
           } else if (state is MyPlaylistLoadingErrorState) {
@@ -227,7 +236,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
       ),
       centerTitle: true,
       title: Text(
-        AppLocalizations.of(context)!.addToPlaylist,
+        AppLocale.of().addToPlaylist,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
           color: AppColors.white,
@@ -280,7 +289,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.newPlaylist.toUpperCase(),
+                  AppLocale.of().newPlaylist.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
@@ -296,7 +305,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           height: AppMargin.margin_16,
         ),
         Text(
-          AppLocalizations.of(context)!.addToNewPlaylist,
+          AppLocale.of().addToNewPlaylist,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.txtGrey,

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
@@ -49,7 +50,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -83,7 +83,7 @@ class PagesUtilFunctions {
   static String getPlaylistOwner(Playlist playlist, context) {
     if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
         playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return AppLocalizations.of(context)!.appName.toUpperCase();
+      return AppLocale.of().appName.toUpperCase();
     } else {
       return '';
     }
@@ -92,7 +92,7 @@ class PagesUtilFunctions {
   static String getPlaylistBy(Playlist playlist, context) {
     if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
         playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return AppLocalizations.of(context)!.byAppName;
+      return AppLocale.of().byAppName;
     } else {
       return '';
     }
@@ -632,27 +632,30 @@ class PagesUtilFunctions {
       item as Category;
 
       return ColorUtil.darken(
-          ColorUtil.changeColorSaturation(
-            HexColor(item.categoryImage.primaryColorHex),
-            1,
-          ),
-          0.12);
+        ColorUtil.changeColorSaturation(
+          HexColor(item.categoryImage.primaryColorHex),
+          1,
+        ),
+        0.05,
+      );
     } else if (appItemsType == AppItemsType.ARTIST) {
       item as Artist;
       return ColorUtil.darken(
-          ColorUtil.changeColorSaturation(
-            HexColor(item.artistImages[0].primaryColorHex),
-            1,
-          ),
-          0.12);
+        ColorUtil.changeColorSaturation(
+          HexColor(item.artistImages[0].primaryColorHex),
+          1,
+        ),
+        0.05,
+      );
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
       item as Song;
       return ColorUtil.darken(
-          ColorUtil.changeColorSaturation(
-            HexColor(item.albumArt.primaryColorHex),
-            1,
-          ),
-          0.12);
+        ColorUtil.changeColorSaturation(
+          HexColor(item.albumArt.primaryColorHex),
+          1,
+        ),
+        0.05,
+      );
     }
     return AppColors.appGradientDefaultColor;
   }
@@ -908,7 +911,7 @@ class PagesUtilFunctions {
   }
 
   static String getUserPlaylistByText(MyPlaylist myPlaylist, context) {
-    return '${AppLocalizations.of(context)!.by.toUpperCase()} ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}';
+    return '${AppLocale.of().by.toUpperCase()} ${AuthUtil.getUserName(BlocProvider.of<AppUserWidgetsCubit>(context).state).toUpperCase()}';
   }
 
   static String getUserPlaylistDescription(MyPlaylist myPlaylist, context) {
@@ -1090,13 +1093,13 @@ class PagesUtilFunctions {
 
   static String getShortCutType(shortcut, context) {
     if (shortcut is CategoryShortcut) {
-      return AppLocalizations.of(context)!.category;
+      return AppLocale.of().category;
     }
     if (shortcut is AlbumShortcut) {
-      return AppLocalizations.of(context)!.album;
+      return AppLocale.of().album;
     }
     if (shortcut is PlaylistShortcut) {
-      return AppLocalizations.of(context)!.playlist;
+      return AppLocale.of().playlist;
     } else {
       throw 'shortcut type not valid';
     }
@@ -1144,17 +1147,17 @@ class PagesUtilFunctions {
   static String getPaymentMethodName(
       AppPaymentMethods appPaymentMethod, context) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return AppLocalizations.of(context)!.helloCash;
+      return AppLocale.of().helloCash;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return AppLocalizations.of(context)!.mbirr;
+      return AppLocale.of().mbirr;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return AppLocalizations.of(context)!.cbeBirr;
+      return AppLocale.of().cbeBirr;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return AppLocalizations.of(context)!.amole;
+      return AppLocale.of().amole;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return AppLocalizations.of(context)!.visa;
+      return AppLocale.of().visa;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return AppLocalizations.of(context)!.mastercard;
+      return AppLocale.of().mastercard;
     } else {
       return 'Unknown';
     }
@@ -1193,7 +1196,7 @@ class PagesUtilFunctions {
     if (camStatus.isPermanentlyDenied) {
       permissionList.add(
         AppPermission(
-          AppLocalizations.of(context)!.cameraAccess,
+          AppLocale.of().cameraAccess,
           PhosphorIcons.camera_light,
         ),
       );
@@ -1203,7 +1206,7 @@ class PagesUtilFunctions {
     if (photoStatus.isPermanentlyDenied) {
       permissionList.add(
         AppPermission(
-          AppLocalizations.of(context)!.photoAccess,
+          AppLocale.of().photoAccess,
           PhosphorIcons.image_light,
         ),
       );
@@ -1241,7 +1244,7 @@ class PagesUtilFunctions {
     if (photoStatus.isPermanentlyDenied) {
       permissionList.add(
         AppPermission(
-          AppLocalizations.of(context)!.photoAccess,
+          AppLocale.of().photoAccess,
           PhosphorIcons.image_light,
         ),
       );

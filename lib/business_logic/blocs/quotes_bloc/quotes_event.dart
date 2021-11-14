@@ -5,11 +5,10 @@ abstract class QuotesEvent extends Equatable {
 }
 
 class LoadRandomQuotesEvent extends QuotesEvent {
-  LoadRandomQuotesEvent({required this.limit,required this.locale});
+  LoadRandomQuotesEvent({required this.limit});
 
   final int limit;
-  final Locale locale;
 
   @override
-  List<Object?> get props => [limit,locale];
+  List<Object?> get props => [limit];
 }

@@ -6,7 +6,7 @@ import 'package:elf_play/data/models/song.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class LyricPlayerFullPageWidget extends StatefulWidget {
   const LyricPlayerFullPageWidget(

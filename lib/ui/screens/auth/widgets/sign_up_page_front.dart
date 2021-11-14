@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_button.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpPageFront extends StatelessWidget {
   const SignUpPageFront({
@@ -40,7 +40,7 @@ class SignUpPageFront extends StatelessWidget {
                       height: AppMargin.margin_16,
                     ),
                     Text(
-                      AppLocalizations.of(context)!.appName,
+                      AppLocale.of().appName,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_28,
                         fontWeight: FontWeight.w600,
@@ -51,7 +51,7 @@ class SignUpPageFront extends StatelessWidget {
                       height: AppMargin.margin_16,
                     ),
                     Text(
-                      AppLocalizations.of(context)!.appWelcomeTxt,
+                      AppLocale.of().appWelcomeTxt,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_20,
@@ -78,7 +78,7 @@ class SignUpPageFront extends StatelessWidget {
                   children: [
                     SizedBox(height: AppMargin.margin_16),
                     SignUpButton(
-                      title: AppLocalizations.of(context)!.continueWithPhone,
+                      title: AppLocale.of().continueWithPhone,
                       icon: 'assets/icons/ic_phone.svg',
                       userLoginType: UserLoginType.PHONE_NUMBER,
                       color: AppColors.darkGreen,
@@ -93,7 +93,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: AppLocalizations.of(context)!.continueWithGoogle,
+                      title: AppLocale.of().continueWithGoogle,
                       icon: 'assets/icons/ic_google.svg',
                       userLoginType: UserLoginType.GOOGLE,
                       color: AppColors.grey,
@@ -108,7 +108,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: AppLocalizations.of(context)!.continueWithFacebook,
+                      title: AppLocale.of().continueWithFacebook,
                       icon: 'assets/icons/ic_facebook.svg',
                       userLoginType: UserLoginType.FACEBOOK,
                       color: AppColors.grey,
@@ -123,7 +123,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     SizedBox(height: AppMargin.margin_12),
                     SignUpButton(
-                      title: AppLocalizations.of(context)!.continueWithApple,
+                      title: AppLocale.of().continueWithApple,
                       icon: 'assets/icons/ic_apple.svg',
                       userLoginType: UserLoginType.APPLE,
                       color: AppColors.grey,

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
@@ -21,7 +22,6 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -185,7 +185,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              AppLocalizations.of(context)!.previewMode.toUpperCase(),
+              AppLocale.of().previewMode.toUpperCase(),
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -196,7 +196,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               height: AppMargin.margin_4,
             ),
             Text(
-              AppLocalizations.of(context)!.uAreListingToPreviewDesc,
+              AppLocale.of().uAreListingToPreviewDesc,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -435,7 +435,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.buyMezmur.toUpperCase(),
+              AppLocale.of().buyMezmur.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.bold,
@@ -469,7 +469,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               width: AppMargin.margin_4,
             ),
             Text(
-              AppLocalizations.of(context)!.addToCart.toUpperCase(),
+              AppLocale.of().addToCart.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.bold,

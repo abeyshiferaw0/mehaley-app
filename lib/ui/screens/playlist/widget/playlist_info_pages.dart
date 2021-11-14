@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
@@ -15,12 +16,12 @@ import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
-  PlaylistInfoPageOne({Key? key, required this.playlistPageData}) : super(key: key);
+  PlaylistInfoPageOne({Key? key, required this.playlistPageData})
+      : super(key: key);
 
   final PlaylistPageData playlistPageData;
 
@@ -48,7 +49,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl + playlistPageData.playlist.playlistImage.imageMediumPath,
+                imageUrl: AppApi.baseUrl +
+                    playlistPageData.playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     decoration: BoxDecoration(
@@ -66,7 +68,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
             SizedBox(height: AppMargin.margin_20),
             //PLAYLIST TITLE
             Text(
-              L10nUtil.translateLocale(playlistPageData.playlist.playlistNameText, context),
+              L10nUtil.translateLocale(
+                  playlistPageData.playlist.playlistNameText, context),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -88,7 +91,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  PagesUtilFunctions.getPlaylistBy(playlistPageData.playlist, context),
+                  PagesUtilFunctions.getPlaylistBy(
+                      playlistPageData.playlist, context),
                   style: followersTextStyle,
                 ),
                 playlistPageData.numberOfFollowers == 0
@@ -104,8 +108,11 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 playlistPageData.numberOfFollowers == 0
                     ? SizedBox()
                     : Text(
-                        AppLocalizations.of(context)!
-                            .numberOfFollowers(playlistPageData.numberOfFollowers.toString())
+                        AppLocale.of()
+                            .numberOfFollowers(
+                              numberOf:
+                                  playlistPageData.numberOfFollowers.toString(),
+                            )
                             .toUpperCase(),
                         style: followersTextStyle,
                       ),
@@ -122,7 +129,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
   final Playlist playlist;
   final List<Song> songs;
 
-  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs}) : super(key: key);
+  PlaylistInfoPageTwo({Key? key, required this.playlist, required this.songs})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +143,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           buildPlaylistDescription(context),
           SizedBox(height: AppMargin.margin_32),
           Text(
-            AppLocalizations.of(context)!.playlistBy,
+            AppLocale.of().playlistBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10,
               color: AppColors.lightGrey,
@@ -168,7 +176,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                           BuyItemBtnWidget(
                             priceEtb: playlist.priceEtb,
                             priceUsd: playlist.priceDollar,
-                            title: AppLocalizations.of(context)!.buyPlaylist.toUpperCase(),
+                            title: AppLocale.of().buyPlaylist.toUpperCase(),
                             hasLeftMargin: false,
                             showDiscount: false,
                             isCentred: true,

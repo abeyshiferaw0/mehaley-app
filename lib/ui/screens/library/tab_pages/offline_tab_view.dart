@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/offline_songs_bloc/offline_songs_bloc.dart';
 import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
@@ -16,7 +17,6 @@ import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,7 +27,8 @@ class OfflineTabView extends StatefulWidget {
   _OfflineTabViewState createState() => _OfflineTabViewState();
 }
 
-class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAliveClientMixin {
+class _OfflineTabViewState extends State<OfflineTabView>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -35,7 +36,8 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
   late List<Song> offlineSongs = [];
 
   ///
-  late AppLibrarySortTypes appLibrarySortTypes = AppLibrarySortTypes.LATEST_DOWNLOAD;
+  late AppLibrarySortTypes appLibrarySortTypes =
+      AppLibrarySortTypes.LATEST_DOWNLOAD;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,6 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   RefreshOfflineSongsEvent(
                     appLibrarySortTypes: appLibrarySortTypes,
-                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
                 await BlocProvider.of<OfflineSongsBloc>(context).stream.first;
@@ -97,7 +98,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
         //     child: Row(
         //       children: [
         //         LibraryPageSubTabButton(
-        //           text:AppLocalizations.of(context)!.downloadAllPurchased.toUpperCase(),
+        //           text:AppLocale.of().downloadAllPurchased.toUpperCase(),
         //           isSelected: false,
         //           onTap: () {},
         //           hasLeftMargin: false,
@@ -109,7 +110,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
         Builder(
           builder: (context) {
             return LibraryPageSubTabButton(
-              text: AppLocalizations.of(context)!.sort.toUpperCase(),
+              text: AppLocale.of().sort.toUpperCase(),
               prefixIcon: PhosphorIcons.sort_ascending,
               isSelected: true,
               onTap: () {
@@ -136,8 +137,8 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
                 songs: offlineSongs,
                 startPlaying: true,
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFrom,
-                  title: AppLocalizations.of(context)!.purchasedMezmurs,
+                  from: AppLocale.of().playingFrom,
+                  title: AppLocale.of().purchasedMezmurs,
                   songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                   songSyncPlayedFromId: -1,
                 ),
@@ -151,7 +152,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: AppLocalizations.of(context)!.noMezmursToPlay,
+                  msg: AppLocale.of().noMezmursToPlay,
                   txtColor: AppColors.white,
                 ),
               );
@@ -177,7 +178,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.sortBy,
+            AppLocale.of().sortBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               color: AppColors.txtGrey,
@@ -185,7 +186,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
             ),
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.latestDownloads,
+            text: AppLocale.of().latestDownloads,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -196,16 +197,16 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
-                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
               Navigator.pop(dialogContext);
             },
-            isSelected: appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD,
+            isSelected:
+                appLibrarySortTypes == AppLibrarySortTypes.LATEST_DOWNLOAD,
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.titleAz,
+            text: AppLocale.of().titleAz,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -216,7 +217,6 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.TITLE_A_Z,
-                  currentLocale: Localizations.localeOf(context),
                 ),
               );
 
@@ -225,7 +225,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.TITLE_A_Z,
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.newest,
+            text: AppLocale.of().newest,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -235,7 +235,6 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.NEWEST,
-                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -243,7 +242,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.NEWEST,
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.oldest,
+            text: AppLocale.of().oldest,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -253,7 +252,6 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.OLDEST,
-                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);
@@ -261,7 +259,7 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
             isSelected: appLibrarySortTypes == AppLibrarySortTypes.OLDEST,
           ),
           LibrarySortButton(
-            text: AppLocalizations.of(context)!.artistAz,
+            text: AppLocale.of().artistAz,
             onTap: () {
               ///CHANGE SORT BY VALUES
               setState(() {
@@ -271,7 +269,6 @@ class _OfflineTabViewState extends State<OfflineTabView> with AutomaticKeepAlive
               BlocProvider.of<OfflineSongsBloc>(mContext).add(
                 LoadOfflineSongsEvent(
                   appLibrarySortTypes: AppLibrarySortTypes.ARTIST_A_Z,
-                  currentLocale: Localizations.localeOf(context),
                 ),
               );
               Navigator.pop(dialogContext);

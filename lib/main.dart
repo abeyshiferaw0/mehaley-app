@@ -12,6 +12,7 @@ import 'package:elf_play/config/app_repositories.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/strings.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/enums/app_languages.dart';
 import 'package:elf_play/ui/screens/auth/sign_up_page.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
 import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
@@ -19,14 +20,11 @@ import 'package:elf_play/ui/screens/splash_main/main_screen.dart';
 import 'package:elf_play/ui/screens/splash_main/splash_page.dart';
 import 'package:elf_play/util/app_bloc_deligate.dart';
 import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -266,8 +264,9 @@ class _MyAppState extends State<MyApp> {
           ],
           child: Builder(
             builder: (context) {
-              return BlocBuilder<LocalizationCubit, Locale?>(
+              return BlocBuilder<LocalizationCubit, AppLanguage>(
                 builder: (context, state) {
+                  print("LocalizationCubit=> ${state}");
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
                     builder: (BuildContext context, Widget? child) {
@@ -277,16 +276,8 @@ class _MyAppState extends State<MyApp> {
                         child: child!,
                       );
                     },
-                    locale: state,
-                    supportedLocales: L10nUtil.supportedLocales,
                     theme: App.theme,
                     initialRoute: AppRouterPaths.splashRoute,
-                    localizationsDelegates: [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
                     routes: {
                       AppRouterPaths.splashRoute: (context) =>
                           const SplashPage(),

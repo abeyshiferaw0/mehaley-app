@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -10,7 +11,6 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'card_header_title.dart';
 
@@ -37,7 +37,7 @@ class _CartSongsListState extends State<CartSongsList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CartHeaderTitle(
-            title: AppLocalizations.of(context)!.mezmurs,
+            title: AppLocale.of().mezmurs,
           ),
           SizedBox(
             height: AppMargin.margin_16,
@@ -65,14 +65,17 @@ class _CartSongsListState extends State<CartSongsList> {
                           builder: (_) {
                             return Center(
                               child: DialogRemoveFromCart(
-                                mainButtonText: AppLocalizations.of(context)!.remove.toUpperCase(),
-                                cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
-                                titleText: AppLocalizations.of(context)!.removeFromCart,
+                                mainButtonText:
+                                    AppLocale.of().remove.toUpperCase(),
+                                cancelButtonText:
+                                    AppLocale.of().cancel.toUpperCase(),
+                                titleText: AppLocale.of().removeFromCart,
                                 onRemove: () {
                                   BlocProvider.of<CartUtilBloc>(context).add(
                                     AddRemovedSongCartEvent(
                                       song: songCart.items.elementAt(index),
-                                      appCartAddRemoveEvents: AppCartAddRemoveEvents.REMOVE,
+                                      appCartAddRemoveEvents:
+                                          AppCartAddRemoveEvents.REMOVE,
                                     ),
                                   );
                                 },
@@ -82,7 +85,11 @@ class _CartSongsListState extends State<CartSongsList> {
                         );
                       },
                       position: (index + 1),
-                      thumbUrl: AppApi.baseUrl + songCart.items.elementAt(index).albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseUrl +
+                          songCart.items
+                              .elementAt(index)
+                              .albumArt
+                              .imageSmallPath,
                       thumbSize: AppValues.categorySongItemSize,
                       onPressed: () {
                         //OPEN SONG
@@ -90,8 +97,8 @@ class _CartSongsListState extends State<CartSongsList> {
                           context: context,
                           songs: [songCart.items.elementAt(index)],
                           playingFrom: PlayingFrom(
-                            from: AppLocalizations.of(context)!.playingFromCart,
-                            title: AppLocalizations.of(context)!.mezmurs,
+                            from: AppLocale.of().playingFromCart,
+                            title: AppLocale.of().mezmurs,
                             songSyncPlayedFrom: SongSyncPlayedFrom.CART_PAGE,
                             songSyncPlayedFromId: -1,
                           ),

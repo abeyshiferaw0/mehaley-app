@@ -8,9 +8,8 @@ import 'package:elf_play/util/color_util.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import 'item_featured_songs.dart';
 
@@ -74,7 +73,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
                 item: widget.featuredSongs[index],
                 playingFrom: PlayingFrom(
                   from:
-                      AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
+                      AppLocale.of().playingFromFeaturedMezmurs,
                   title: L10nUtil.translateLocale(
                       widget.featuredSongs[index].songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
@@ -92,7 +91,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
                 item: widget.featuredSongs[index],
                 playingFrom: PlayingFrom(
                   from:
-                      AppLocalizations.of(context)!.playingFromFeaturedMezmurs,
+                      AppLocale.of().playingFromFeaturedMezmurs,
                   title: L10nUtil.translateLocale(
                       widget.featuredSongs[index].songName, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.RECENTLY_PLAYED,
@@ -126,7 +125,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
     return Padding(
       padding: EdgeInsets.only(left: AppMargin.margin_16),
       child: Text(
-        AppLocalizations.of(context)!.featuredMezmurs,
+        AppLocale.of().featuredMezmurs,
         style: TextStyle(
           color: Colors.white,
           fontSize: AppFontSizes.font_size_14.sp,

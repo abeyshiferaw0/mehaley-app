@@ -1,8 +1,8 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -25,9 +25,9 @@ class LibraryHeader extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Row(
               children: [
-                Center(
-                  child: buildSearchBtn(),
-                ),
+                // Center(
+                //   child: buildSearchBtn(),
+                // ),
                 SizedBox(
                   width: AppMargin.margin_16,
                 ),
@@ -81,11 +81,11 @@ class LibraryHeader extends StatelessWidget {
       ),
       indicatorPadding: EdgeInsets.zero,
       tabs: [
-        buildTabItem(AppLocalizations.of(context)!.purchased.toUpperCase()),
-        buildTabItem(AppLocalizations.of(context)!.offline.toUpperCase()),
-        buildTabItem(AppLocalizations.of(context)!.myPlaylists.toUpperCase()),
-        buildTabItem(AppLocalizations.of(context)!.favorites.toUpperCase()),
-        buildTabItem(AppLocalizations.of(context)!.following.toUpperCase()),
+        buildTabItem(AppLocale.of().purchased.toUpperCase()),
+        buildTabItem(AppLocale.of().offline.toUpperCase()),
+        buildTabItem(AppLocale.of().myPlaylists.toUpperCase()),
+        buildTabItem(AppLocale.of().favorites.toUpperCase()),
+        buildTabItem(AppLocale.of().following.toUpperCase()),
       ],
     );
   }

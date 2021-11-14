@@ -3,11 +3,11 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
-class SearchPersistentSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
+class SearchPersistentSliverHeaderDelegate
+    extends SliverPersistentHeaderDelegate {
   @override
   Widget build(context, double shrinkOffset, bool overlapsContent) {
     return AppBouncingButton(
@@ -46,7 +46,7 @@ class SearchPersistentSliverHeaderDelegate extends SliverPersistentHeaderDelegat
                       width: AppMargin.margin_12,
                     ),
                     Text(
-                      AppLocalizations.of(context)!.searchHint,
+                      AppLocale.of().searchHint,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,

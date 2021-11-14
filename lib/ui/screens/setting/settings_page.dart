@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
@@ -20,7 +21,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -59,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocalizations.of(context)!.couldntConnectMsg,
+                  msg: AppLocale.of().couldntConnectMsg,
                   txtColor: AppColors.white,
                 ),
               );
@@ -73,9 +73,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: AppLocalizations.of(context)!.preferredPaymentChangedTo(
-                      PagesUtilFunctions.getPaymentMethodName(
-                          state.appPaymentMethod, context)),
+                  msg: AppLocale.of().preferredPaymentChangedTo(
+                    paymentName: PagesUtilFunctions.getPaymentMethodName(
+                      state.appPaymentMethod,
+                      context,
+                    ),
+                  ),
                   txtColor: AppColors.white,
                 ),
               );
@@ -101,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           title: Text(
-            AppLocalizations.of(context)!.settings,
+            AppLocale.of().settings,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
@@ -151,8 +154,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     ProfileButton(),
                     SettingRadioItem(
-                      title: AppLocalizations.of(context)!.dataSaver,
-                      subTitle: AppLocalizations.of(context)!.dataSaverMsg,
+                      title: AppLocale.of().dataSaver,
+                      subTitle: AppLocale.of().dataSaverMsg,
                       isEnabled: settingsPageData.isDataSaverTurnedOn,
                       onSwitched: (bool value) {
                         BlocProvider.of<SettingsPageBloc>(context).add(
@@ -163,13 +166,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     SizedBox(height: AppMargin.margin_16),
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
+                      onLanguageChanged: () {
+                        setState(() {});
+                      },
                     ),
                     SizedBox(height: AppMargin.margin_16),
                     SettingLargeButton(
-                      title:
-                          AppLocalizations.of(context)!.preferredPaymentMethod,
-                      subTitle: AppLocalizations.of(context)!
-                          .chooseYourPreferredMethod,
+                      title: AppLocale.of().preferredPaymentMethod,
+                      subTitle: AppLocale.of().chooseYourPreferredMethod,
                       onTap: () {
                         showDialog(
                           context: context,
@@ -181,8 +185,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                     ),
                     // SettingRadioItem(
-                    //   title: AppLocalizations.of(context)!.autoDownload,
-                    //   subTitle: AppLocalizations.of(context)!.autoDownloadMsg,
+                    //   title: AppLocale.of().autoDownload,
+                    //   subTitle: AppLocale.of().autoDownloadMsg,
                     //   isEnabled: true,
                     //   onSwitched: (bool value) {},
                     // ),
@@ -192,16 +196,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     PreferredCurrencyPicker(settingsPageData: settingsPageData),
                     SizedBox(height: AppMargin.margin_32),
                     SettingLargeButton(
-                      title: AppLocalizations.of(context)!.rateApp,
-                      subTitle: AppLocalizations.of(context)!.rateAppMsg,
+                      title: AppLocale.of().rateApp,
+                      subTitle: AppLocale.of().rateAppMsg,
                       onTap: () {
                         PagesUtilFunctions.rateApp();
                       },
                     ),
                     SizedBox(height: AppMargin.margin_32),
                     SettingLargeButton(
-                      title: AppLocalizations.of(context)!.shareApp,
-                      subTitle: AppLocalizations.of(context)!.shareAppMsg,
+                      title: AppLocale.of().shareApp,
+                      subTitle: AppLocale.of().shareAppMsg,
                       onTap: () {
                         PagesUtilFunctions.shareApp();
                       },

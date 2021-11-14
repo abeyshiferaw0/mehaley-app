@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/themes.dart';
@@ -8,7 +9,6 @@ import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_gradient.dart';
 import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -27,14 +27,14 @@ class _SignUpPageState extends State<SignUpPage> {
             buildAppSnackBar(
               bgColor: AppColors.errorRed,
               txtColor: AppColors.white,
-              msg: AppLocalizations.of(context)!.authenticationFailedMsg,
+              msg: AppLocale.of().authenticationFailedMsg,
               isFloating: false,
             ),
           );
         }
         if (state is AuthSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRouterPaths.mainScreen, ModalRoute.withName(AppRouterPaths.splashRoute));
+          Navigator.pushNamedAndRemoveUntil(context, AppRouterPaths.mainScreen,
+              ModalRoute.withName(AppRouterPaths.splashRoute));
         }
       },
       child: Scaffold(

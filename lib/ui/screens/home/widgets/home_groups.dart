@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/ui/screens/home/widgets/item_custom_group.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_custom_group_grid.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 import 'group_header_widget.dart';
@@ -74,9 +74,10 @@ class HomeGroups extends StatelessWidget {
                     items: groupItems,
                     item: groupItems[index],
                     playingFrom: PlayingFrom(
-                      from: AppLocalizations.of(context)!.playingFrom,
+                      from: AppLocale.of().playingFrom,
                       title: groupTitle,
-                      songSyncPlayedFrom: PagesUtilFunctions.getSongSyncPlayedFromGroupType(
+                      songSyncPlayedFrom:
+                          PagesUtilFunctions.getSongSyncPlayedFromGroupType(
                         groupType,
                       ),
                       songSyncPlayedFromId: groupId == null ? -1 : groupId!,
@@ -171,9 +172,10 @@ class HomeGroups extends StatelessWidget {
                 items: groupItems,
                 item: groupItems[i],
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFrom,
+                  from: AppLocale.of().playingFrom,
                   title: groupTitle,
-                  songSyncPlayedFrom: PagesUtilFunctions.getSongSyncPlayedFromGroupType(
+                  songSyncPlayedFrom:
+                      PagesUtilFunctions.getSongSyncPlayedFromGroupType(
                     groupType,
                   ),
                   songSyncPlayedFromId: groupId == null ? -1 : groupId!,

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
@@ -18,7 +19,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -65,7 +65,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableToUpdateProfile,
+              msg: AppLocale.of().unableToUpdateProfile,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -77,7 +77,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg: AppLocalizations.of(context)!.profileUpdated,
+              msg: AppLocale.of().profileUpdated,
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -188,7 +188,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: AppLocalizations.of(context)!.profileName,
+        hintText: AppLocale.of().profileName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -227,7 +227,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.chooseImage,
+                                AppLocale.of().chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -246,7 +246,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                 },
                               );
                             },
-                            text: AppLocalizations.of(context)!.trackAPhoto,
+                            text: AppLocale.of().trackAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
@@ -258,7 +258,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                 },
                               );
                             },
-                            text: AppLocalizations.of(context)!.pickFromGallery,
+                            text: AppLocale.of().pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
@@ -268,7 +268,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                   .removeImage();
                               Navigator.pop(context);
                             },
-                            text: AppLocalizations.of(context)!.removeImage,
+                            text: AppLocale.of().removeImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -334,7 +334,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 height: AppMargin.margin_16,
               ),
               Text(
-                AppLocalizations.of(context)!.changeImage.toUpperCase(),
+                AppLocale.of().changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -375,7 +375,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                AppLocalizations.of(context)!.editProfile,
+                AppLocale.of().editProfile,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -401,7 +401,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg: AppLocalizations.of(context)!.userNameCantBeEmpty,
+                      msg: AppLocale.of().userNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -422,7 +422,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.save.toUpperCase(),
+                  AppLocale.of().save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

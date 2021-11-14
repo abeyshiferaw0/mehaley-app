@@ -1,8 +1,8 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/category.dart';
 import 'package:elf_play/ui/screens/home/widgets/item_home_category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeCategories extends StatelessWidget {
@@ -18,7 +18,7 @@ class HomeCategories extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: AppMargin.margin_16),
           child: Text(
-            AppLocalizations.of(context)!.categories,
+            AppLocale.of().categories,
             style: TextStyle(
               color: Colors.white,
               fontSize: AppFontSizes.font_size_14.sp,

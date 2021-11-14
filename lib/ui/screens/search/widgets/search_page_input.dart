@@ -1,10 +1,10 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/search_cancel_cubit.dart';
 import 'package:elf_play/business_logic/cubits/search_input_is_searching_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -123,7 +123,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
-            hintText: AppLocalizations.of(context)!.searchHint,
+            hintText: AppLocale.of().searchHint,
             hintStyle: TextStyle(
               color: AppColors.lightGrey.withOpacity(0.8),
               fontSize: AppFontSizes.font_size_10.sp,
@@ -135,7 +135,8 @@ class _SearchPageInputState extends State<SearchPageInput> {
               onPressed: () {
                 setSearching(mIsSearching: false);
                 searchTextController.clear();
-                BlocProvider.of<SearchCancelCubit>(context).changeSearchingState(cancelSearchingView: true);
+                BlocProvider.of<SearchCancelCubit>(context)
+                    .changeSearchingState(cancelSearchingView: true);
               },
             ),
             suffixIcon: IconButton(
@@ -164,7 +165,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
           width: double.infinity,
           child: Center(
             child: Text(
-              AppLocalizations.of(context)!.search,
+              AppLocale.of().search,
               style: TextStyle(
                 color: AppColors.white,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -188,6 +189,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
         padding = barAnimPadding;
       });
     }
-    BlocProvider.of<SearchInputIsSearchingCubit>(context).changeIsSearching(mIsSearching);
+    BlocProvider.of<SearchInputIsSearchingCubit>(context)
+        .changeIsSearching(mIsSearching);
   }
 }

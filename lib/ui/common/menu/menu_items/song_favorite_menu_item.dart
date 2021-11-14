@@ -6,9 +6,8 @@ import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 import '../../app_bouncing_button.dart';
 
@@ -215,28 +214,28 @@ class _SongFavoriteMenuItemState extends State<SongFavoriteMenuItem>
       int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(widget.songId);
       int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(widget.songId);
       if (a > b) {
-        return AppLocalizations.of(context)!.removeFromFavorite;
+        return AppLocale.of().removeFromFavorite;
       } else {
-        return AppLocalizations.of(context)!.addToFavorite;
+        return AppLocale.of().addToFavorite;
       }
     }
 
     ///IF SONG IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId)) {
-      return AppLocalizations.of(context)!.removeFromFavorite;
+      return AppLocale.of().removeFromFavorite;
     }
 
     ///IF SONG IS FOUND IN RECENTLY UNLIKED
     if (AppHiveBoxes.instance.recentlyUnLikedSongBox
         .containsKey(widget.songId)) {
-      return AppLocalizations.of(context)!.addToFavorite;
+      return AppLocale.of().addToFavorite;
     }
 
     ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
     if (widget.isLiked) {
-      return AppLocalizations.of(context)!.removeFromFavorite;
+      return AppLocale.of().removeFromFavorite;
     } else {
-      return AppLocalizations.of(context)!.addToFavorite;
+      return AppLocale.of().addToFavorite;
     }
   }
 }

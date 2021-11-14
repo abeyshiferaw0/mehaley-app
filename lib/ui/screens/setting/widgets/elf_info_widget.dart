@@ -1,6 +1,6 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class ElfInfoWidget extends StatelessWidget {
@@ -13,7 +13,7 @@ class ElfInfoWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            AppLocalizations.of(context)!.appName,
+            AppLocale.of().appName,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
@@ -24,7 +24,7 @@ class ElfInfoWidget extends StatelessWidget {
             height: AppMargin.margin_4,
           ),
           Text(
-            AppLocalizations.of(context)!.appVersion,
+            AppLocale.of().appVersion,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
@@ -35,7 +35,7 @@ class ElfInfoWidget extends StatelessWidget {
             height: AppMargin.margin_16,
           ),
           Text(
-            AppLocalizations.of(context)!.appTermsAndCondition,
+            AppLocale.of().appTermsAndCondition,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,

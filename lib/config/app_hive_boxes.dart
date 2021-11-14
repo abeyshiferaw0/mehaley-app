@@ -5,6 +5,7 @@ import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/data/models/artist.dart';
 import 'package:elf_play/data/models/audio_file.dart';
 import 'package:elf_play/data/models/bg_video.dart';
+import 'package:elf_play/data/models/enums/app_languages.dart';
 import 'package:elf_play/data/models/enums/app_payment_methods.dart';
 import 'package:elf_play/data/models/enums/playlist_created_by.dart';
 import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
@@ -208,6 +209,14 @@ class AppHiveBoxes {
         false,
       );
     }
+
+    ///APP LANGUAGE
+    if (!settingsBox.containsKey(AppValues.appLanguageKey)) {
+      await settingsBox.put(
+        AppValues.appLanguageKey,
+        AppLanguage.AMHARIC,
+      );
+    }
   }
 
   Future<void> initHiveAdapters() async {
@@ -231,5 +240,6 @@ class AppHiveBoxes {
     Hive.registerAdapter(SongSyncPlayedFromAdapter());
     Hive.registerAdapter(AppPaymentMethodsAdapter());
     Hive.registerAdapter(AppCurrencyAdapter());
+    Hive.registerAdapter(AppLanguageAdapter());
   }
 }

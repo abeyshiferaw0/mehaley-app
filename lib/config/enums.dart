@@ -30,8 +30,6 @@ enum AppCacheStrategy { NO_CACHE, LOAD_CACHE_FIRST, CACHE_LATER }
 
 enum BottomBarPages { HOME, SEARCH, LIBRARY, CART }
 
-enum AppLanguageOptions { ENGLISH, AMHARIC, OROMIFA, TIGRINYA }
-
 enum AppLikeFollowEvents { LIKE, UNLIKE, FOLLOW, UNFOLLOW }
 
 enum AppCartAddRemoveEvents { ADD, REMOVE }

@@ -12,7 +12,7 @@ class LyricDataRepository {
   const LyricDataRepository({required this.lyricDataProvider});
 
   Future<List<LyricItem>> getLyricData(
-      int songId, AppCacheStrategy appCacheStrategy, currentLocale) async {
+      int songId, AppCacheStrategy appCacheStrategy) async {
     final TextLan lyricTxt;
 
     var response =
@@ -21,16 +21,15 @@ class LyricDataRepository {
     //PARSE LYRIC
     lyricTxt = TextLan.fromMap(response.data['lyric_text_id']);
 
-    List<LyricItem> lyricList = await parseLyric(lyricTxt, currentLocale);
+    List<LyricItem> lyricList = await parseLyric(lyricTxt);
 
     return lyricList;
   }
 
-  Future<List<LyricItem>> parseLyric(lyricTxt, currentLocale) async {
+  Future<List<LyricItem>> parseLyric(lyricTxt) async {
     final parser = LyricsParser(L10nUtil.translateLocale(
       lyricTxt,
       null,
-      mCurrentLocale: currentLocale,
     ));
     final result = await parser.parse();
     List<LyricItem> lyricList = [];

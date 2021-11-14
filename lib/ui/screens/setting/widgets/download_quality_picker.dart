@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -7,7 +8,6 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,7 +29,7 @@ class DownloadQualityPicker extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocalizations.of(context)!.preferredDownlaodQuality,
+                AppLocale.of().preferredDownlaodQuality,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
@@ -40,7 +40,7 @@ class DownloadQualityPicker extends StatelessWidget {
                 height: AppMargin.margin_8,
               ),
               Text(
-                AppLocalizations.of(context)!.preferredDownlaodQualityMsg,
+                AppLocale.of().preferredDownlaodQualityMsg,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,

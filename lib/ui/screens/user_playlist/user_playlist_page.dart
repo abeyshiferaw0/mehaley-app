@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
@@ -17,11 +18,11 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class UserPlaylistPage extends StatefulWidget {
-  const UserPlaylistPage({Key? key, required this.playlistId}) : super(key: key);
+  const UserPlaylistPage({Key? key, required this.playlistId})
+      : super(key: key);
 
   final int playlistId;
 
@@ -53,8 +54,16 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg: AppLocalizations.of(context)!.songRemovedPlaylist(L10nUtil.translateLocale(state.song.songName, context),
-                  L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context)),
+              msg: AppLocale.of().songRemovedPlaylist(
+                songName: L10nUtil.translateLocale(
+                  state.song.songName,
+                  context,
+                ),
+                playlistName: L10nUtil.translateLocale(
+                  state.myPlaylist.playlistNameText,
+                  context,
+                ),
+              ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
               iconColor: AppColors.darkGreen,
@@ -63,7 +72,8 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
 
           ///REMOVE REMOVED SONG TEMPORARILY
           BlocProvider.of<UserPlaylistPageBloc>(context).add(
-            SongRemovedFromPlaylistEvent(song: state.song, playlistId: widget.playlistId),
+            SongRemovedFromPlaylistEvent(
+                song: state.song, playlistId: widget.playlistId),
           );
         }
 
@@ -72,8 +82,11 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               bgColor: AppColors.white,
               isFloating: true,
-              msg: AppLocalizations.of(context)!.playlistDeleted(
-                L10nUtil.translateLocale(state.myPlaylist.playlistNameText, context),
+              msg: AppLocale.of().playlistDeleted(
+                playlistName: L10nUtil.translateLocale(
+                  state.myPlaylist.playlistNameText,
+                  context,
+                ),
               ),
               txtColor: AppColors.black,
               icon: PhosphorIcons.check_circle_fill,
@@ -88,7 +101,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableToRemoveFromPlaylist,
+              msg: AppLocale.of().unableToRemoveFromPlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -101,7 +114,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableToDeletePlaylist,
+              msg: AppLocale.of().unableToDeletePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -152,7 +165,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
           headerSliverBuilder: (context, value) {
             return [
               buildSliverHeader(songs, myPlaylist),
-              songs.length > 0 ? buildSliverPlayShuffleButton(songs, myPlaylist) : buildSliverAddSongsButton(),
+              songs.length > 0
+                  ? buildSliverPlayShuffleButton(songs, myPlaylist)
+                  : buildSliverAddSongsButton(),
             ];
           },
           body: buildUserPlaylistSongList(
@@ -185,7 +200,8 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverHeader(List<Song> songs, MyPlaylist myPlaylist) {
+  SliverPersistentHeader buildSliverHeader(
+      List<Song> songs, MyPlaylist myPlaylist) {
     return SliverPersistentHeader(
       delegate: UserPlaylistPageSliverHeaderDelegate(
         songs: songs,
@@ -196,10 +212,12 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(List<Song> songs, MyPlaylist myPlaylist) {
+  SliverPersistentHeader buildSliverPlayShuffleButton(
+      List<Song> songs, MyPlaylist myPlaylist) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: UserPlaylistPlayShuffleDelegate(songs: songs, myPlaylist: myPlaylist),
+      delegate:
+          UserPlaylistPlayShuffleDelegate(songs: songs, myPlaylist: myPlaylist),
     );
   }
 
@@ -254,7 +272,8 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           ),
                         );
                       },
-                      thumbUrl: AppApi.baseUrl + songs[position].albumArt.imageSmallPath,
+                      thumbUrl: AppApi.baseUrl +
+                          songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG
@@ -263,9 +282,11 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           songs: songs,
                           startPlaying: true,
                           playingFrom: PlayingFrom(
-                            from: AppLocalizations.of(context)!.playingFromPlaylist,
-                            title: L10nUtil.translateLocale(playlist.playlistNameText, context),
-                            songSyncPlayedFrom: SongSyncPlayedFrom.USER_PLAYLIST,
+                            from: AppLocale.of().playingFromPlaylist,
+                            title: L10nUtil.translateLocale(
+                                playlist.playlistNameText, context),
+                            songSyncPlayedFrom:
+                                SongSyncPlayedFrom.USER_PLAYLIST,
                             songSyncPlayedFromId: playlist.playlistId,
                           ),
                           index: position,

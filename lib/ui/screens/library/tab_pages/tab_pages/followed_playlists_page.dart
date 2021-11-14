@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/followed_playlist_bloc/followed_playlists_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -9,7 +10,6 @@ import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class FollowedPlaylistsPage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _FollowedPlaylistsPageState extends State<FollowedPlaylistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.hand_pointing_fill,
-                msg: AppLocalizations.of(context)!.uAreNotFollowingPlaylist,
+                msg: AppLocale.of().uAreNotFollowingPlaylist,
               ),
             );
           }
@@ -74,7 +74,10 @@ class _FollowedPlaylistsPageState extends State<FollowedPlaylistsPage> {
 
   Widget buildPageLoaded(List<FollowedPlaylist> followedPlaylists) {
     return Column(
-      children: [SizedBox(height: AppMargin.margin_8), buildPlaylistList(followedPlaylists)],
+      children: [
+        SizedBox(height: AppMargin.margin_8),
+        buildPlaylistList(followedPlaylists)
+      ],
     );
   }
 

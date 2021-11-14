@@ -9,9 +9,9 @@ import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 
 class UserPlaylistInfoPageOne extends StatelessWidget {
   UserPlaylistInfoPageOne({required this.myPlaylist});
@@ -93,7 +93,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
           buildUserPlaylistDescription(context),
           SizedBox(height: AppMargin.margin_32),
           Text(
-            AppLocalizations.of(context)!.playlistBy.toUpperCase(),
+            AppLocale.of().playlistBy.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10,
               color: AppColors.lightGrey,

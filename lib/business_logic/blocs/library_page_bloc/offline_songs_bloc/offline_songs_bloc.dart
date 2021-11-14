@@ -28,7 +28,6 @@ class OfflineSongsBloc extends Bloc<OfflineSongsEvent, OfflineSongsState> {
       final List<Song> offlineSongs =
           await libraryPageDataRepository.getOfflineSongs(
         event.appLibrarySortTypes,
-        event.currentLocale,
       );
 
       ///YIELD BASED ON PAGE
@@ -40,7 +39,6 @@ class OfflineSongsBloc extends Bloc<OfflineSongsEvent, OfflineSongsState> {
       this.add(
         LoadOfflineSongsEvent(
           appLibrarySortTypes: event.appLibrarySortTypes,
-          currentLocale: event.currentLocale,
         ),
       );
     }

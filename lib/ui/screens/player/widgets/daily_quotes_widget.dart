@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
 import 'package:elf_play/config/constants.dart';
@@ -5,7 +6,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,7 +33,6 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
       BlocProvider.of<QuotesBloc>(context).add(
         LoadRandomQuotesEvent(
           limit: 5,
-          locale: Localizations.localeOf(context),
         ),
       );
     });
@@ -64,9 +63,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!
-                          .dailyQuotesFromApp
-                          .toUpperCase(),
+                      AppLocale.of().dailyQuotesFromApp.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.white,

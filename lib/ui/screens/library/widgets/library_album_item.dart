@@ -3,7 +3,6 @@ import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
 import 'package:elf_play/ui/common/player_items_placeholder.dart';
@@ -75,7 +74,8 @@ class LibraryAlbumItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      L10nUtil.translateLocale(album.artist.artistName, context),
+                      L10nUtil.translateLocale(
+                          album.artist.artistName, context),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.txtGrey,
@@ -125,7 +125,8 @@ class LibraryAlbumItem extends StatelessWidget {
                     isLiked: album.isLiked,
                     rootContext: context,
                     title: L10nUtil.translateLocale(album.albumTitle, context),
-                    imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
+                    imageUrl:
+                        AppApi.baseUrl + album.albumImages[0].imageMediumPath,
                     priceEtb: album.priceEtb,
                     priceUsd: album.priceDollar,
                     isFree: album.isFree,

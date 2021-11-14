@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
@@ -22,7 +23,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
@@ -36,9 +36,11 @@ class CategoryPage extends StatefulWidget {
   _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMixin {
+class _CategoryPageState extends State<CategoryPage>
+    with TickerProviderStateMixin {
   //PAGINATION CONTROLLER
-  final PagingController<int, Song> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, Song> _pagingController =
+      PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -69,7 +71,8 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CategoryPagePaginationBloc, CategoryPagePaginationState>(
+    return BlocListener<CategoryPagePaginationBloc,
+        CategoryPagePaginationState>(
       listener: (context, state) {
         if (state is CategoryPagePaginatedLoaded) {
           final isLastPage = state.songs.length < AppValues.pageSize;
@@ -81,7 +84,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
           }
         }
         if (state is CategoryPagePaginatedLoadingError) {
-          _pagingController.error = AppLocalizations.of(context)!.networkError;
+          _pagingController.error = AppLocale.of().networkError;
         }
       },
       child: Scaffold(
@@ -111,7 +114,8 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
     );
   }
 
-  BlocBuilder<CategoryPageBloc, CategoryPageState> buildCategoryErrorBlocBuilder() {
+  BlocBuilder<CategoryPageBloc, CategoryPageState>
+      buildCategoryErrorBlocBuilder() {
     return BlocBuilder<CategoryPageBloc, CategoryPageState>(
       builder: (context, state) {
         if (state is CategoryPageTopLoadingError) {
@@ -174,7 +178,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
                       context: context,
                       songs: [item],
                       playingFrom: PlayingFrom(
-                        from: AppLocalizations.of(context)!.playingFromCategory,
+                        from: AppLocale.of().playingFromCategory,
                         title: L10nUtil.translateLocale(
                           widget.category.categoryNameText,
                           context,
@@ -252,7 +256,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
             horizontal: AppPadding.padding_32 * 2,
           ),
           child: Text(
-            AppLocalizations.of(context)!.emptyCategory,
+            AppLocale.of().emptyCategory,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
@@ -274,7 +278,9 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
             : SizedBox(),
         SizedBox(height: AppMargin.margin_32),
         //CHECK IF NO ALBUMS IS NOT EMPTY TO SHOW LIST VIEW
-        state.categoryPageTopData.topAlbum.length > 0 ? buildCategoryAlbums(state.categoryPageTopData.topAlbum) : SizedBox(),
+        state.categoryPageTopData.topAlbum.length > 0
+            ? buildCategoryAlbums(state.categoryPageTopData.topAlbum)
+            : SizedBox(),
       ],
     );
   }
@@ -284,7 +290,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context)!.playlists,
+          AppLocale.of().playlists,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_14.sp,
@@ -339,7 +345,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context)!.albums,
+          AppLocale.of().albums,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_14.sp,
@@ -392,7 +398,7 @@ class _CategoryPageState extends State<CategoryPage> with TickerProviderStateMix
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context)!.mezmurs,
+          AppLocale.of().mezmurs,
           style: TextStyle(
             color: Colors.white,
             fontSize: AppFontSizes.font_size_18,

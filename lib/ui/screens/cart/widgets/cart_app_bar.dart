@@ -5,8 +5,7 @@ import 'package:elf_play/data/models/cart/cart.dart';
 import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class CartAppBar extends StatelessWidget {
   const CartAppBar({
@@ -35,7 +34,7 @@ class CartAppBar extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.cartTitle,
+                    AppLocale.of().cartTitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_16.sp,
@@ -50,7 +49,7 @@ class CartAppBar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.total,
+                              AppLocale.of().total,
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_12.sp,
                                 fontWeight: FontWeight.w500,

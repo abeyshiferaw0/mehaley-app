@@ -1,12 +1,14 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:elf_play/business_logic/cubits/localization_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/models/enums/app_languages.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,9 +19,11 @@ class DropDownOptionsPicker extends StatefulWidget {
   const DropDownOptionsPicker({
     Key? key,
     required this.notificationTags,
+    this.onLanguageChanged,
   }) : super(key: key);
 
   final Map<String, dynamic> notificationTags;
+  final VoidCallback? onLanguageChanged;
 
   @override
   _DropDownOptionsPickerState createState() => _DropDownOptionsPickerState(
@@ -61,7 +65,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                 Row(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.chooseYourLanguge,
+                      AppLocale.of().chooseYourLanguge,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
@@ -89,23 +93,51 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                 children: [
                   LanguageSettingItem(
                     text: 'ኣማርኟ',
-                    isSelected: isLocaleSelected(L10nUtil.amharic),
-                    locale: L10nUtil.amharic,
+                    isSelected: isLocaleSelected(AppLanguage.AMHARIC),
+                    onTap: () {
+                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                        appLanguage: AppLanguage.AMHARIC,
+                      );
+                      if (widget.onLanguageChanged != null) {
+                        widget.onLanguageChanged!();
+                      }
+                    },
                   ),
                   LanguageSettingItem(
                     text: 'English',
-                    isSelected: isLocaleSelected(L10nUtil.english),
-                    locale: L10nUtil.english,
+                    isSelected: isLocaleSelected(AppLanguage.ENGLISH),
+                    onTap: () {
+                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                        appLanguage: AppLanguage.ENGLISH,
+                      );
+                      if (widget.onLanguageChanged != null) {
+                        widget.onLanguageChanged!();
+                      }
+                    },
                   ),
                   LanguageSettingItem(
                     text: 'Oromiffa',
-                    isSelected: false,
-                    locale: L10nUtil.english,
+                    isSelected: isLocaleSelected(AppLanguage.OROMIFA),
+                    onTap: () {
+                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                        appLanguage: AppLanguage.OROMIFA,
+                      );
+                      if (widget.onLanguageChanged != null) {
+                        widget.onLanguageChanged!();
+                      }
+                    },
                   ),
                   LanguageSettingItem(
                     text: 'Tigrinya',
                     isSelected: false,
-                    locale: L10nUtil.amharic,
+                    onTap: () {
+                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                        appLanguage: AppLanguage.AMHARIC,
+                      );
+                      if (widget.onLanguageChanged != null) {
+                        widget.onLanguageChanged!();
+                      }
+                    },
                   ),
                 ],
               ),
@@ -124,7 +156,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                 Row(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.reciveNotifications,
+                      AppLocale.of().reciveNotifications,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
@@ -155,7 +187,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: AppLocalizations.of(context)!.pushNotifications,
+                    text: AppLocale.of().pushNotifications,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -173,7 +205,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           .RECEIVE_NEW_RELEASES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: AppLocalizations.of(context)!.newReleases,
+                    text: AppLocale.of().newReleases,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -191,7 +223,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           .RECEIVE_LATEST_UPDATES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: AppLocalizations.of(context)!.latestUpdates,
+                    text: AppLocale.of().latestUpdates,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -209,7 +241,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS,
                       notificationTags,
                     ),
-                    text: AppLocalizations.of(context)!.dailyCerlabrations,
+                    text: AppLocale.of().dailyCerlabrations,
                     onSwitched: () {
                       ///CHANGE TAG
                       BlocProvider.of<OneSignalBloc>(context).add(
@@ -231,9 +263,9 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
     );
   }
 
-  isLocaleSelected(Locale locale) {
-    Locale cLocale = Localizations.localeOf(context);
-    return cLocale.languageCode == locale.languageCode;
+  isLocaleSelected(AppLanguage appLanguage) {
+    AppLanguage currentAppLanguage = L10nUtil.getCurrentLocale();
+    return currentAppLanguage == appLanguage;
   }
 
   bool isNotificationEnabled(

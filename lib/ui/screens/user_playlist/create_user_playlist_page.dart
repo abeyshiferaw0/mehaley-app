@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -17,7 +18,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -73,7 +73,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
-              msg: AppLocalizations.of(context)!.unableToCreatePlaylist,
+              msg: AppLocale.of().unableToCreatePlaylist,
               bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
@@ -86,9 +86,12 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
               txtColor: AppColors.black,
-              msg: AppLocalizations.of(context)!.playlistCreated(
-                  L10nUtil.translateLocale(
-                      state.myPlaylist.playlistNameText, context)),
+              msg: AppLocale.of().playlistCreated(
+                playlistName: L10nUtil.translateLocale(
+                  state.myPlaylist.playlistNameText,
+                  context,
+                ),
+              ),
               bgColor: AppColors.white,
               isFloating: true,
               iconColor: AppColors.darkGreen,
@@ -205,7 +208,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
-              hintText: AppLocalizations.of(context)!.addSomeDescription,
+              hintText: AppLocale.of().addSomeDescription,
               hintStyle: TextStyle(
                 color: AppColors.txtGrey,
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -245,7 +248,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 border: Border.all(width: 1, color: AppColors.lightGrey),
               ),
               child: Text(
-                AppLocalizations.of(context)!.addDescripption.toUpperCase(),
+                AppLocale.of().addDescripption.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
@@ -266,7 +269,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         horizontal: AppPadding.padding_32 * 2,
       ),
       child: Text(
-        AppLocalizations.of(context)!.createPlaylistMsg,
+        AppLocale.of().createPlaylistMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
@@ -317,7 +320,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
-        hintText: AppLocalizations.of(context)!.playlistName,
+        hintText: AppLocale.of().playlistName,
         hintStyle: TextStyle(
           color: AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_18.sp,
@@ -356,7 +359,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.chooseImage,
+                                AppLocale.of().chooseImage,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
@@ -373,7 +376,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                                 onImageChanged: () {},
                               );
                             },
-                            text: AppLocalizations.of(context)!.takeAPhoto,
+                            text: AppLocale.of().takeAPhoto,
                             icon: PhosphorIcons.camera_light,
                           ),
                           ImagePickerDialogItems(
@@ -383,7 +386,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                                 onImageChanged: () {},
                               );
                             },
-                            text: AppLocalizations.of(context)!.pickFromGallery,
+                            text: AppLocale.of().pickFromGallery,
                             icon: PhosphorIcons.image_light,
                           ),
                           ImagePickerDialogItems(
@@ -392,7 +395,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                                   .removeImage();
                               Navigator.pop(context);
                             },
-                            text: AppLocalizations.of(context)!.removeIImage,
+                            text: AppLocale.of().removeIImage,
                             icon: PhosphorIcons.minus_circle_light,
                           ),
                         ],
@@ -431,7 +434,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 height: AppMargin.margin_12,
               ),
               Text(
-                AppLocalizations.of(context)!.changeImage.toUpperCase(),
+                AppLocale.of().changeImage.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
@@ -472,7 +475,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 top: AppPadding.padding_6,
               ),
               child: Text(
-                AppLocalizations.of(context)!.createPlaylist,
+                AppLocale.of().createPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
@@ -499,8 +502,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
-                      msg:
-                          AppLocalizations.of(context)!.playlistNameCantBeEmpty,
+                      msg: AppLocale.of().playlistNameCantBeEmpty,
                       bgColor: AppColors.lightGrey,
                       isFloating: false,
                     ),
@@ -521,7 +523,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.save.toUpperCase(),
+                  AppLocale.of().save.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,

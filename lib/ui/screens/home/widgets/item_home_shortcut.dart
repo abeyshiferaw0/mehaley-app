@@ -155,14 +155,17 @@ class ItemHomeShortcut extends StatelessWidget {
           fit: BoxFit.cover,
           height: AppValues.homeCategoriesItemHeight,
           width: AppValues.homeCategoriesItemWidth,
-          placeholder: (context, url) => buildItemsImagePlaceHolder(appItemsType!),
-          errorWidget: (context, url, error) => buildItemsImagePlaceHolder(appItemsType!),
+          placeholder: (context, url) =>
+              buildItemsImagePlaceHolder(appItemsType!),
+          errorWidget: (context, url, error) =>
+              buildItemsImagePlaceHolder(appItemsType!),
         ),
       ),
     );
   }
 
-  AppItemsImagePlaceHolder buildItemsImagePlaceHolder(AppItemsType appItemsType) {
+  AppItemsImagePlaceHolder buildItemsImagePlaceHolder(
+      AppItemsType appItemsType) {
     return AppItemsImagePlaceHolder(appItemsType: appItemsType);
   }
 }

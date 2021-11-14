@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -11,7 +12,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -93,7 +93,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: false,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.plus_circle_light,
-                  //   title: AppLocalizations.of(context)!.addMezmurs,
+                  //   title: AppLocale.of().addMezmurs,
                   //   onTap: () {},
                   // ),
                   MenuItem(
@@ -101,7 +101,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.pencil_simple_light,
-                    title: AppLocalizations.of(context)!.editPlaylist,
+                    title: AppLocale.of().editPlaylist,
                     onTap: () {
                       PagesUtilFunctions.openEditPlaylistPage(
                         context,
@@ -115,16 +115,19 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: PhosphorIcons.x_light,
-                    title: AppLocalizations.of(context)!.deletePlaylist,
+                    title: AppLocale.of().deletePlaylist,
                     onTap: () {
                       showDialog(
                         context: context,
                         builder: (_) {
                           return Center(
                             child: DialogDeleteUserPlaylist(
-                              mainButtonText: AppLocalizations.of(context)!.delete.toUpperCase(),
-                              cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
-                              titleText: AppLocalizations.of(context)!.deletePlaylistPermanently,
+                              mainButtonText:
+                                  AppLocale.of().delete.toUpperCase(),
+                              cancelButtonText:
+                                  AppLocale.of().cancel.toUpperCase(),
+                              titleText:
+                                  AppLocale.of().deletePlaylistPermanently,
                               onDelete: () {
                                 onPlaylistDelete(myPlaylist);
                                 Navigator.pop(context);
@@ -140,7 +143,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.magnifying_glass_light,
-                  //   title: AppLocalizations.of(context)!.findInPlaylist,
+                  //   title: AppLocale.of().findInPlaylist,
                   //   onTap: () {},
                   // ),
                   // MenuItem(
@@ -148,7 +151,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.sort_ascending_light,
-                  //   title: AppLocalizations.of(context)!.sortPlaylist,
+                  //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
                   // ),
                   // MenuItem(
@@ -156,7 +159,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.share_network_light,
-                  //   title: AppLocalizations.of(context)!.sharePlaylist,
+                  //   title: AppLocale.of().sharePlaylist,
                   //   onTap: () {},
                   // ),
                   // MenuItem(
@@ -164,7 +167,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
                   //   icon: PhosphorIcons.device_mobile_camera_light,
-                  //   title: AppLocalizations.of(context)!.addToHomeScreen,
+                  //   title: AppLocale.of().addToHomeScreen,
                   //   onTap: () {},
                   // ),
                   SizedBox(height: AppMargin.margin_20),
@@ -204,7 +207,9 @@ class UserPlaylistMenuWidget extends StatelessWidget {
           BlocBuilder<AppUserWidgetsCubit, AppUser>(
             builder: (context, state) {
               return Text(
-                AppLocalizations.of(context)!.byUserName(AuthUtil.getUserName(state)).toUpperCase(),
+                AppLocale.of()
+                    .byUserName(userName: AuthUtil.getUserName(state))
+                    .toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.txtGrey,

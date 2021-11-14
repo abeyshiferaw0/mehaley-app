@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/ui/common/app_gradients.dart';
 import 'package:elf_play/ui/common/menu/menu_items/artist_follow_menu_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -81,7 +81,7 @@ class ArtistMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: AppLocalizations.of(context)!.shareArtist,
+                      title: AppLocale.of().shareArtist,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),
@@ -137,7 +137,9 @@ class ArtistMenuWidget extends StatelessWidget {
             children: [
               noOfAlbum != null
                   ? Text(
-                      AppLocalizations.of(context)!.noOfAlbum(noOfAlbum!),
+                      AppLocale.of().noOfAlbum(
+                        noOfAlbums: noOfAlbum.toString(),
+                      ),
                       style: TextStyle(
                         color: AppColors.lightGrey,
                         fontSize: AppFontSizes.font_size_10.sp,
@@ -155,7 +157,9 @@ class ArtistMenuWidget extends StatelessWidget {
               ),
               noOfSong != null
                   ? Text(
-                      AppLocalizations.of(context)!.noOfSongs(noOfSong!),
+                      AppLocale.of().noOfSongs(
+                        noOfSong: noOfSong.toString(),
+                      ),
                       style: TextStyle(
                         color: AppColors.lightGrey,
                         fontSize: AppFontSizes.font_size_10.sp,

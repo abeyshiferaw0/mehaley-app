@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -21,7 +22,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -69,9 +69,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           icon: Icon(PhosphorIcons.caret_left),
         ),
         title: Text(
-          AppLocalizations.of(context)!.searchDedicatedTitle(
-            widget.searchKey,
-            getItemType(widget.appSearchItemTypes),
+          AppLocale.of().searchDedicatedTitle(
+            searchKey: widget.searchKey,
+            appItemType: getItemType(widget.appSearchItemTypes),
           ),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
@@ -157,13 +157,13 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
 
   String getItemType(AppSearchItemTypes appSearchItemTypes) {
     if (appSearchItemTypes == AppSearchItemTypes.SONG) {
-      return AppLocalizations.of(context)!.mezmurs;
+      return AppLocale.of().mezmurs;
     } else if (appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
-      return AppLocalizations.of(context)!.playlists;
+      return AppLocale.of().playlists;
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
-      return AppLocalizations.of(context)!.albums;
+      return AppLocale.of().albums;
     } else if (appSearchItemTypes == AppSearchItemTypes.ARTIST) {
-      return AppLocalizations.of(context)!.artists;
+      return AppLocale.of().artists;
     }
     return '';
   }

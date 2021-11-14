@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
@@ -10,7 +11,6 @@ import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
@@ -74,17 +74,20 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                   );
                 },
                 child: GroupHeaderWidget(
-                  groupHeaderImageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
-                  groupSubTitle: L10nUtil.translateLocale(album.artist.artistName, context),
-                  groupTitle: L10nUtil.translateLocale(album.albumTitle, context),
+                  groupHeaderImageUrl:
+                      AppApi.baseUrl + album.albumImages[0].imageSmallPath,
+                  groupSubTitle: L10nUtil.translateLocale(
+                      album.artist.artistName, context),
+                  groupTitle:
+                      L10nUtil.translateLocale(album.albumTitle, context),
                 ),
               ),
             ),
             (!album.isBought && !album.isFree)
                 ? BuyItemBtnWidget(
                     priceEtb: album.priceEtb,
-              priceUsd: album.priceDollar,
-                    title: AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
+                    priceUsd: album.priceDollar,
+                    title: AppLocale.of().buyAlbum.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: album.isFree,
                     showDiscount: false,
@@ -127,7 +130,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 items: album.songs!,
                 item: album.songs![i],
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFromFeaturedAlbum,
+                  from: AppLocale.of().playingFromFeaturedAlbum,
                   title: L10nUtil.translateLocale(album.albumTitle, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_GROUP,
                   songSyncPlayedFromId: album.albumId,

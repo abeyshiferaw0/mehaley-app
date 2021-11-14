@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
@@ -13,7 +14,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -53,7 +53,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
               child: LibraryEmptyPage(
                 emptyMyPlaylist: true,
                 icon: PhosphorIcons.plus_circle_fill,
-                msg: AppLocalizations.of(context)!.uHaventCreatedPlaylist,
+                msg: AppLocale.of().uHaventCreatedPlaylist,
               ),
             );
           }
@@ -100,7 +100,9 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
                   context,
                   AppRouterPaths.userPlaylistRoute,
                   arguments: ScreenArguments(
-                    args: {'playlistId': myPlaylists.elementAt(index).playlistId},
+                    args: {
+                      'playlistId': myPlaylists.elementAt(index).playlistId
+                    },
                   ),
                 );
 
@@ -150,7 +152,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
             SizedBox(width: AppMargin.margin_16),
             Expanded(
               child: Text(
-                AppLocalizations.of(context)!.createNewPlaylist,
+                AppLocale.of().createNewPlaylist,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,

@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/ui/common/dialog/dialog_clear_cart.dart';
 import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -90,7 +90,7 @@ class CheckOutButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppLocalizations.of(context)!.checkOut.toUpperCase(),
+            AppLocale.of().checkOut.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: ColorUtil.darken(
@@ -131,9 +131,9 @@ class ClearAllButton extends StatelessWidget {
           builder: (_) {
             return Center(
               child: DialogClearCart(
-                mainButtonText: AppLocalizations.of(context)!.clearAll.toUpperCase(),
-                cancelButtonText: AppLocalizations.of(context)!.cancel.toUpperCase(),
-                titleText: AppLocalizations.of(context)!.areYouSureUWantToClearCart,
+                mainButtonText: AppLocale.of().clearAll.toUpperCase(),
+                cancelButtonText: AppLocale.of().cancel.toUpperCase(),
+                titleText: AppLocale.of().areYouSureUWantToClearCart,
                 onClear: () {
                   BlocProvider.of<CartUtilBloc>(context).add(
                     ClearAllCartEvent(),
@@ -157,7 +157,7 @@ class ClearAllButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            AppLocalizations.of(context)!.clearAll.toUpperCase(),
+            AppLocale.of().clearAll.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               color: AppColors.white,

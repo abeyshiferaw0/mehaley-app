@@ -1,4 +1,5 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:elf_play/config/app_hive_boxes.dart';
 import 'package:elf_play/config/enums.dart';
@@ -6,7 +7,6 @@ import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class ArtistFollowMenuItem extends StatefulWidget {
@@ -112,29 +112,29 @@ class _ArtistFollowMenuItemState extends State<ArtistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedArtistBox
           .get(widget.artistId);
       if (a > b) {
-        return AppLocalizations.of(context)!.removeFromFollowedArtist;
+        return AppLocale.of().removeFromFollowedArtist;
       } else {
-        return AppLocalizations.of(context)!.followArtist;
+        return AppLocale.of().followArtist;
       }
     }
 
     ///IF  FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedArtistBox
         .containsKey(widget.artistId)) {
-      return AppLocalizations.of(context)!.removeFromFollowedArtist;
+      return AppLocale.of().removeFromFollowedArtist;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedArtistBox
         .containsKey(widget.artistId)) {
-      return AppLocalizations.of(context)!.followArtist;
+      return AppLocale.of().followArtist;
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppLocalizations.of(context)!.removeFromFollowedArtist;
+      return AppLocale.of().removeFromFollowedArtist;
     } else {
-      return AppLocalizations.of(context)!.followArtist;
+      return AppLocale.of().followArtist;
     }
   }
 

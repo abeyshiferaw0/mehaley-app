@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -11,7 +12,6 @@ import 'package:elf_play/ui/common/player_items_placeholder.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchTopArtistSongItem extends StatelessWidget {
@@ -45,8 +45,12 @@ class SearchTopArtistSongItem extends StatelessWidget {
             appSearchItemTypes: AppSearchItemTypes.SONG,
             item: song,
             playingFrom: PlayingFrom(
-              from:
-                  AppLocalizations.of(context)!.playingFromArtistName(L10nUtil.translateLocale(artist.artistName, context)),
+              from: AppLocale.of().playingFromArtistName(
+                artistName: L10nUtil.translateLocale(
+                  artist.artistName,
+                  context,
+                ),
+              ),
               title: L10nUtil.translateLocale(song.songName, context),
               songSyncPlayedFrom: SongSyncPlayedFrom.SEARCH,
               songSyncPlayedFromId: -1,
@@ -82,7 +86,8 @@ class SearchTopArtistSongItem extends StatelessWidget {
                   ],
                 ),
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+                errorWidget: (context, url, error) =>
+                    buildItemsImagePlaceHolder(),
               ),
             ),
             SizedBox(

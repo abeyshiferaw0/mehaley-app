@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_songs_bloc/purchased_songs_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -14,11 +15,11 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedSongsPage extends StatefulWidget {
-  const PurchasedSongsPage({Key? key, required this.onSongsLoaded}) : super(key: key);
+  const PurchasedSongsPage({Key? key, required this.onSongsLoaded})
+      : super(key: key);
 
   final Function(List<Song>) onSongsLoaded;
 
@@ -53,7 +54,7 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 icon: PhosphorIcons.music_note_simple_light,
-                msg: AppLocalizations.of(context)!.uDontHavePurchasedMezmurs,
+                msg: AppLocale.of().uDontHavePurchasedMezmurs,
               ),
             );
           }
@@ -62,7 +63,8 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
             height: ScreenUtil(context: context).getScreenHeight() * 0.5,
             child: LibraryErrorWidget(
               onRetry: () {
-                BlocProvider.of<PurchasedSongsBloc>(context).add(LoadPurchasedSongsEvent());
+                BlocProvider.of<PurchasedSongsBloc>(context)
+                    .add(LoadPurchasedSongsEvent());
               },
             ),
           );
@@ -101,7 +103,8 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
             SongItem(
               song: purchasedSong[position].song,
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl + purchasedSong[position].song.albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl +
+                  purchasedSong[position].song.albumArt.imageSmallPath,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {
                 //OPEN SONG
@@ -110,8 +113,8 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
                   songs: purchasedSong.map((e) => e.song).toList(),
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from: AppLocalizations.of(context)!.playingFrom,
-                    title: AppLocalizations.of(context)!.purchasedMezmurs,
+                    from: AppLocale.of().playingFrom,
+                    title: AppLocale.of().purchasedMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
                     songSyncPlayedFromId: -1,
                   ),

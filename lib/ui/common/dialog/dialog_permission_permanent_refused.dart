@@ -1,10 +1,10 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/app_permission.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class DialogPermissionPermanentlyRefused extends StatelessWidget {
@@ -35,7 +35,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.enablePermissions,
+                  AppLocale.of().enablePermissions,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
@@ -47,7 +47,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                   height: AppMargin.margin_16,
                 ),
                 Text(
-                  AppLocalizations.of(context)!.enablePermissionsMsg,
+                  AppLocale.of().enablePermissionsMsg,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -110,9 +110,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                       color: AppColors.green,
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!
-                          .goToSystemSettings
-                          .toUpperCase(),
+                      AppLocale.of().goToSystemSettings.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
@@ -129,7 +127,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.cancel,
+                    AppLocale.of().cancel,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,

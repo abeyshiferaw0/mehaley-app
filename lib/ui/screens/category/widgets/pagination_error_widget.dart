@@ -1,8 +1,7 @@
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
 
 class PaginationErrorWidget extends StatelessWidget {
   const PaginationErrorWidget({required this.onRetry});
@@ -20,7 +19,7 @@ class PaginationErrorWidget extends StatelessWidget {
               height: AppMargin.margin_16,
             ),
             Text(
-              AppLocalizations.of(context)!.checkYourInternetConnection,
+              AppLocale.of().checkYourInternetConnection,
               style: TextStyle(
                 color: AppColors.lightGrey,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -43,7 +42,7 @@ class PaginationErrorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(120),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.tryAgain,
+                  AppLocale.of().tryAgain,
                   style: TextStyle(
                     color: AppColors.black,
                     fontWeight: FontWeight.w600,

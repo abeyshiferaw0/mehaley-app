@@ -1,6 +1,6 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_bouncing_button.dart';
@@ -35,7 +35,7 @@ class AppSubscribeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              AppLocalizations.of(context)!.subscribeDialogTitle.toUpperCase(),
+              AppLocale.of().subscribeDialogTitle.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.white,
@@ -47,7 +47,7 @@ class AppSubscribeCard extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             Text(
-              AppLocalizations.of(context)!.subscribeDialogMsg,
+              AppLocale.of().subscribeDialogMsg,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -71,7 +71,7 @@ class AppSubscribeCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.subscribeNow.toUpperCase(),
+                  AppLocale.of().subscribeNow.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,

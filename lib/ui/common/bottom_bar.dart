@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
@@ -12,7 +13,6 @@ import 'package:elf_play/data/models/app_user.dart';
 import 'package:elf_play/ui/common/user_image_sm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class BottomBar extends StatefulWidget {
@@ -134,7 +134,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: AppLocalizations.of(context)!.home,
+              label: AppLocale.of().home,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -151,7 +151,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: AppLocalizations.of(context)!.search,
+              label: AppLocale.of().search,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -168,7 +168,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: true,
               ),
-              label: AppLocalizations.of(context)!.myLibrary,
+              label: AppLocale.of().myLibrary,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
@@ -185,7 +185,7 @@ class _BottomBarState extends State<BottomBar> {
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
-              label: AppLocalizations.of(context)!.cart,
+              label: AppLocale.of().cart,
             ),
           ],
         );
@@ -241,7 +241,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: AppLocalizations.of(context)!.libraryShort,
+          letter: AppLocale.of().libraryShort,
         );
       } else if (appUser.socialProfileImgUrl != null) {
         return UserImageSm(
@@ -251,7 +251,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: AppLocalizations.of(context)!.libraryShort,
+          letter: AppLocale.of().libraryShort,
         );
       } else {
         return UserImageSm(
@@ -261,7 +261,7 @@ class BottomBarIcon extends StatelessWidget {
           borderColor: color,
           hasBorder: true,
           fontSize: AppFontSizes.font_size_8,
-          letter: AppLocalizations.of(context)!.libraryShort,
+          letter: AppLocale.of().libraryShort,
         );
       }
     } else {

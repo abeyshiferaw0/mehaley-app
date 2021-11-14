@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
@@ -15,7 +16,6 @@ import 'package:elf_play/ui/screens/search/widgets/search_page_persistant_header
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -32,12 +32,14 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     AppRouterPaths.routeObserver.subscribe(this, ModalRoute.of(context)!);
 
     ///CANCEL PAGE REQUEST
-    BlocProvider.of<SearchFrontPageBloc>(context).add(CancelSearchFrontPageEvent());
+    BlocProvider.of<SearchFrontPageBloc>(context)
+        .add(CancelSearchFrontPageEvent());
   }
 
   @override
   void didPopNext() {
-    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.SEARCH);
+    BlocProvider.of<BottomBarCubit>(context)
+        .changeScreen(BottomBarPages.SEARCH);
     BlocProvider.of<BottomBarSearchCubit>(context).setPageShowing(true);
   }
 
@@ -67,7 +69,8 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   @override
   void initState() {
-    BlocProvider.of<SearchFrontPageBloc>(context).add(LoadSearchFrontPageEvent());
+    BlocProvider.of<SearchFrontPageBloc>(context)
+        .add(LoadSearchFrontPageEvent());
     super.initState();
   }
 
@@ -124,7 +127,8 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     );
   }
 
-  SingleChildScrollView buildSearchPageLoaded(SearchFrontPageLoadedState state) {
+  SingleChildScrollView buildSearchPageLoaded(
+      SearchFrontPageLoadedState state) {
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),
       child: Column(
@@ -153,7 +157,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildAllCategoriesSection({required List<Category> allCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocalizations.of(context)!.allCategories,
+      mainTitle: AppLocale.of().allCategories,
       appItemsType: AppItemsType.CATEGORY,
       items: allCategories,
     );
@@ -161,7 +165,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopCategoriesSection({required List<Category> topCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocalizations.of(context)!.topCategories,
+      mainTitle: AppLocale.of().topCategories,
       appItemsType: AppItemsType.CATEGORY,
       items: topCategories,
     );
@@ -169,7 +173,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopMusicSection({required List<Song> topSongs}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocalizations.of(context)!.topMezmurs,
+      mainTitle: AppLocale.of().topMezmurs,
       appItemsType: AppItemsType.SINGLE_TRACK,
       items: topSongs,
     );
@@ -177,7 +181,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildLatestTopArtistsSection({required List<Artist> topArtists}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocalizations.of(context)!.topArtists.toUpperCase(),
+      mainTitle: AppLocale.of().topArtists.toUpperCase(),
       appItemsType: AppItemsType.ARTIST,
       items: topArtists,
     );
@@ -193,7 +197,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   SliverToBoxAdapter buildSearchElf() {
     return SliverToBoxAdapter(
       child: Text(
-        AppLocalizations.of(context)!.searchTitle,
+        AppLocale.of().searchTitle,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_28,
           fontWeight: FontWeight.w600,

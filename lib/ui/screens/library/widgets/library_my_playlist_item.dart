@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/my_playlist.dart';
@@ -5,7 +6,6 @@ import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -39,7 +39,8 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    L10nUtil.translateLocale(myPlaylist.playlistNameText, context),
+                    L10nUtil.translateLocale(
+                        myPlaylist.playlistNameText, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
@@ -48,7 +49,8 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                   ),
                   SizedBox(height: AppMargin.margin_2),
                   Text(
-                    AppLocalizations.of(context)!.numberOfMezmurs(myPlaylist.numberOfSongs.toString()),
+                    AppLocale.of().numberOfMezmurs(
+                        numberOf: myPlaylist.numberOfSongs.toString()),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
                       color: AppColors.grey,

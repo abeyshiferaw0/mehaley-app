@@ -1,6 +1,6 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class CartSummery extends StatelessWidget {
@@ -13,7 +13,7 @@ class CartSummery extends StatelessWidget {
         children: [
           SizedBox(height: AppMargin.margin_16),
           Text(
-            AppLocalizations.of(context)!.cartSummery,
+            AppLocale.of().cartSummery,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,

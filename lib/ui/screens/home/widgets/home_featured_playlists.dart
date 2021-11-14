@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/app_router.dart';
 import 'package:elf_play/config/constants.dart';
@@ -10,13 +11,13 @@ import 'package:elf_play/ui/common/buy_item_btn.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
 
 class HomeFeaturedPlaylists extends StatefulWidget {
-  const HomeFeaturedPlaylists({Key? key, required this.featuredPlaylists}) : super(key: key);
+  const HomeFeaturedPlaylists({Key? key, required this.featuredPlaylists})
+      : super(key: key);
 
   final List<Playlist> featuredPlaylists;
 
@@ -71,17 +72,20 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                   );
                 },
                 child: GroupHeaderWidget(
-                  groupHeaderImageUrl: AppApi.baseUrl + playlist.playlistImage.imageSmallPath,
-                  groupSubTitle: AppLocalizations.of(context)!.numberOfMezmurs(playlist.songs!.length.toString()),
-                  groupTitle: L10nUtil.translateLocale(playlist.playlistNameText, context),
+                  groupHeaderImageUrl:
+                      AppApi.baseUrl + playlist.playlistImage.imageSmallPath,
+                  groupSubTitle: AppLocale.of().numberOfMezmurs(
+                      numberOf: playlist.songs!.length.toString()),
+                  groupTitle: L10nUtil.translateLocale(
+                      playlist.playlistNameText, context),
                 ),
               ),
             ),
             (!playlist.isBought && !playlist.isFree)
                 ? BuyItemBtnWidget(
-              priceEtb: playlist.priceEtb,
-              priceUsd: playlist.priceDollar,
-                    title: AppLocalizations.of(context)!.buyPlaylist.toUpperCase(),
+                    priceEtb: playlist.priceEtb,
+                    priceUsd: playlist.priceDollar,
+                    title: AppLocale.of().buyPlaylist.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: playlist.isFree,
                     showDiscount: false,
@@ -124,8 +128,9 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 items: playlist.songs!,
                 item: playlist.songs![i],
                 playingFrom: PlayingFrom(
-                  from: AppLocalizations.of(context)!.playingFromFeaturedPlaylist,
-                  title: L10nUtil.translateLocale(playlist.playlistNameText, context),
+                  from: AppLocale.of().playingFromFeaturedPlaylist,
+                  title: L10nUtil.translateLocale(
+                      playlist.playlistNameText, context),
                   songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_GROUP,
                   songSyncPlayedFromId: playlist.playlistId,
                 ),

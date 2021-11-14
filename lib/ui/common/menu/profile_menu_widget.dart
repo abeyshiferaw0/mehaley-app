@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:elf_play/config/constants.dart';
 import 'package:elf_play/config/enums.dart';
@@ -9,7 +10,6 @@ import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:sizer/sizer.dart';
 
@@ -70,7 +70,7 @@ class ProfileMenuWidget extends StatelessWidget {
                       hasTopMargin: false,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.pencil_simple_light,
-                      title: AppLocalizations.of(context)!.editProfile,
+                      title: AppLocale.of().editProfile,
                       onTap: () {
                         Navigator.pop(context);
                         PagesUtilFunctions.openEditProfilePage(
@@ -86,7 +86,7 @@ class ProfileMenuWidget extends StatelessWidget {
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: PhosphorIcons.share_network_light,
-                      title: AppLocalizations.of(context)!.share,
+                      title: AppLocale.of().share,
                       onTap: () {},
                     ),
                     SizedBox(height: AppMargin.margin_20),

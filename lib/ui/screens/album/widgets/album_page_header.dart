@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -16,19 +17,21 @@ import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AlbumPageHeader extends StatefulWidget {
-  const AlbumPageHeader({Key? key, required this.album, required this.songs}) : super(key: key);
+  const AlbumPageHeader({Key? key, required this.album, required this.songs})
+      : super(key: key);
 
   final Album album;
   final List<Song> songs;
 
   @override
-  _AlbumPageHeaderState createState() => _AlbumPageHeaderState(album: album, songs: songs);
+  _AlbumPageHeaderState createState() =>
+      _AlbumPageHeaderState(album: album, songs: songs);
 }
 
-class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderStateMixin {
+class _AlbumPageHeaderState extends State<AlbumPageHeader>
+    with TickerProviderStateMixin {
   /////////////////////
   final Album album;
   final List<Song> songs;
@@ -56,7 +59,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderSt
         return AnimatedSwitcher(
           switchInCurve: Curves.easeIn,
           switchOutCurve: Curves.easeOut,
-          duration: Duration(milliseconds: AppValues.colorChangeAnimationDuration),
+          duration:
+              Duration(milliseconds: AppValues.colorChangeAnimationDuration),
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -72,9 +76,9 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderSt
                 SizedBox(height: AppMargin.margin_16),
                 (!album.isBought && !album.isFree)
                     ? BuyItemBtnWidget(
-                    priceEtb : album.priceEtb,
-                    priceUsd : album.priceDollar,
-                        title: AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
+                        priceEtb: album.priceEtb,
+                        priceUsd: album.priceDollar,
+                        title: AppLocale.of().buyAlbum.toUpperCase(),
                         hasLeftMargin: false,
                         isFree: album.isFree,
                         discountPercentage: album.discountPercentage,
@@ -91,8 +95,9 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderSt
                       startPlaying: true,
                       songs: songs,
                       playingFrom: PlayingFrom(
-                        from: AppLocalizations.of(context)!.playingFromAlbum,
-                        title: L10nUtil.translateLocale(album.albumTitle, context),
+                        from: AppLocale.of().playingFromAlbum,
+                        title:
+                            L10nUtil.translateLocale(album.albumTitle, context),
                         songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
                         songSyncPlayedFromId: album.albumId,
                       ),
@@ -159,7 +164,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderSt
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '${AppLocalizations.of(context)!.albumBy} ${L10nUtil.translateLocale(album.artist.artistName, context)}',
+              '${AppLocale.of().albumBy} ${L10nUtil.translateLocale(album.artist.artistName, context)}',
               style: albumSubTitleStyle,
             ),
             Padding(

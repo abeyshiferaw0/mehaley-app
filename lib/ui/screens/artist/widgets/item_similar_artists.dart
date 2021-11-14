@@ -35,7 +35,8 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: AppValues.similarItemImageSize,
                   height: AppValues.similarItemImageSize,
-                  imageUrl: AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
+                  imageUrl:
+                      AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
                   imageBuilder: (context, imageProvider) => Stack(
                     children: [
                       Container(
@@ -50,7 +51,8 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                     ],
                   ),
                   placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                  errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+                  errorWidget: (context, url, error) =>
+                      buildItemsImagePlaceHolder(),
                 ),
               ),
               SizedBox(height: AppMargin.margin_8),

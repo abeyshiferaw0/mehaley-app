@@ -1,3 +1,4 @@
+import 'package:elf_play/app_language/app_locale.dart';
 import 'package:elf_play/business_logic/blocs/library_page_bloc/offline_songs_bloc/offline_songs_bloc.dart';
 import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:elf_play/config/constants.dart';
@@ -10,16 +11,15 @@ import 'package:elf_play/ui/common/song_item/song_item.dart';
 import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class OfflineSongsPage extends StatefulWidget {
-  const OfflineSongsPage({Key? key, required this.onSongsLoaded}) : super(key: key);
+  const OfflineSongsPage({Key? key, required this.onSongsLoaded})
+      : super(key: key);
 
   final Function(List<Song>) onSongsLoaded;
 
@@ -34,7 +34,6 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
     BlocProvider.of<OfflineSongsBloc>(context).add(
       LoadOfflineSongsEvent(
         appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
-        currentLocale: L10nUtil.english,
       ),
     );
     super.initState();
@@ -58,7 +57,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
               child: LibraryEmptyPage(
                 emptyOffline: true,
                 icon: PhosphorIcons.caret_circle_down_fill,
-                msg: AppLocalizations.of(context)!.uDontHaveDownloads,
+                msg: AppLocale.of().uDontHaveDownloads,
               ),
             );
           }
@@ -70,7 +69,6 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                 BlocProvider.of<OfflineSongsBloc>(context).add(
                   LoadOfflineSongsEvent(
                     appLibrarySortTypes: AppLibrarySortTypes.LATEST_DOWNLOAD,
-                    currentLocale: Localizations.localeOf(context),
                   ),
                 );
               },
@@ -111,7 +109,8 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SongItem(
               song: offlineSong[position],
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl + offlineSong[position].albumArt.imageSmallPath,
+              thumbUrl: AppApi.baseUrl +
+                  offlineSong[position].albumArt.imageSmallPath,
               thumbSize: AppValues.offlineSongsSize,
               onPressed: () {
                 //OPEN SONG
@@ -120,8 +119,8 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
                   songs: offlineSong,
                   startPlaying: true,
                   playingFrom: PlayingFrom(
-                    from: AppLocalizations.of(context)!.playingFrom,
-                    title: AppLocalizations.of(context)!.offlineMezmurs,
+                    from: AppLocale.of().playingFrom,
+                    title: AppLocale.of().offlineMezmurs,
                     songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
                     songSyncPlayedFromId: -1,
                   ),
