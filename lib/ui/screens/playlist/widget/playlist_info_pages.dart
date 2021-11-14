@@ -151,13 +151,13 @@ class PlaylistInfoPageTwo extends StatelessWidget {
             child: playlist.isBought
                 ? Center(
                     child: SmallTextPriceWidget(
-                      price: playlist.priceEtb,
+                      priceEtb: playlist.priceEtb,
+                      priceUsd: playlist.priceDollar,
                       isFree: playlist.isFree,
                       useLargerText: true,
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       discountPercentage: playlist.discountPercentage,
                       isPurchased: playlist.isBought,
-                      appCurrency: AppCurrency.ETB,
                     ),
                   )
                 : playlist.isFree || playlist.isBought
@@ -166,7 +166,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           BuyItemBtnWidget(
-                            price: playlist.priceEtb,
+                            priceEtb: playlist.priceEtb,
+                            priceUsd: playlist.priceDollar,
                             title: AppLocalizations.of(context)!.buyPlaylist.toUpperCase(),
                             hasLeftMargin: false,
                             showDiscount: false,

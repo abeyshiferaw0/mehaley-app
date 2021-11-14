@@ -8,6 +8,7 @@ import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:elf_play/util/l10n_util.dart';
 import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
@@ -105,12 +106,12 @@ class ArtistAlbumItem extends StatelessWidget {
                       width: AppMargin.margin_4,
                     ),
                     SmallTextPriceWidget(
-                      price: album.priceEtb,
+                      priceEtb : album.priceEtb,
+                      priceUsd : album.priceDollar,
                       isFree: album.isFree,
                       isDiscountAvailable: album.isDiscountAvailable,
                       discountPercentage: album.discountPercentage,
                       isPurchased: album.isBought,
-                      appCurrency: AppCurrency.ETB,
                     ),
                   ],
                 ),

@@ -34,7 +34,8 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
               CachedNetworkImage(
                 width: AppValues.featuringArtistItemImageSize,
                 height: AppValues.featuringArtistItemImageSize,
-                imageUrl: AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
+                imageUrl:
+                    AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) => Stack(
                   children: [
                     Container(
@@ -49,7 +50,8 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
                   ],
                 ),
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+                errorWidget: (context, url, error) =>
+                    buildItemsImagePlaceHolder(),
               ),
               SizedBox(height: AppMargin.margin_8),
               Text(
@@ -68,7 +70,8 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
                   : PagesUtilFunctions.getItemPrice(
                       discountPercentage: playlist.discountPercentage,
                       isFree: playlist.isFree,
-                      price: playlist.priceEtb,
+                      priceEtb: playlist.priceEtb,
+                      priceUsd: playlist.priceDollar,
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       isPurchased: playlist.isBought,
                     )

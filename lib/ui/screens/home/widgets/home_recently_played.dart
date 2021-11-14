@@ -93,7 +93,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
             title: L10nUtil.translateLocale(recentlyPlayed.elementAt(i).songName, context),
             discountPercentage: recentlyPlayed.elementAt(i).discountPercentage,
             isFree: recentlyPlayed.elementAt(i).isFree,
-            price: recentlyPlayed.elementAt(i).priceEtb,
+            priceEtb: recentlyPlayed.elementAt(i).priceEtb,
+            priceUsd: recentlyPlayed.elementAt(i).priceDollar,
             isBought: recentlyPlayed.elementAt(i).isBought,
           ),
         );

@@ -12,6 +12,7 @@ import 'package:elf_play/ui/screens/setting/widgets/download_quality_picker.dart
 import 'package:elf_play/ui/screens/setting/widgets/drop_down_options_picker.dart';
 import 'package:elf_play/ui/screens/setting/widgets/elf_info_widget.dart';
 import 'package:elf_play/ui/screens/setting/widgets/logout_button.dart';
+import 'package:elf_play/ui/screens/setting/widgets/prefred_currency_picker.dart';
 import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_large_button.dart';
 import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
@@ -36,7 +37,6 @@ class _SettingsPageState extends State<SettingsPage> {
     BlocProvider.of<SettingsPageBloc>(context).add(
       LoadSettingsDataEvent(),
     );
-
     super.initState();
   }
 
@@ -186,13 +186,24 @@ class _SettingsPageState extends State<SettingsPage> {
                     //   isEnabled: true,
                     //   onSwitched: (bool value) {},
                     // ),
+                    SizedBox(height: AppMargin.margin_32),
                     DownloadQualityPicker(settingsPageData: settingsPageData),
+                    SizedBox(height: AppMargin.margin_32),
+                    PreferredCurrencyPicker(settingsPageData: settingsPageData),
                     SizedBox(height: AppMargin.margin_32),
                     SettingLargeButton(
                       title: AppLocalizations.of(context)!.rateApp,
                       subTitle: AppLocalizations.of(context)!.rateAppMsg,
                       onTap: () {
                         PagesUtilFunctions.rateApp();
+                      },
+                    ),
+                    SizedBox(height: AppMargin.margin_32),
+                    SettingLargeButton(
+                      title: AppLocalizations.of(context)!.shareApp,
+                      subTitle: AppLocalizations.of(context)!.shareAppMsg,
+                      onTap: () {
+                        PagesUtilFunctions.shareApp();
                       },
                     ),
                     SizedBox(

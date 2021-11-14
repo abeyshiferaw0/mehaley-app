@@ -70,7 +70,8 @@ class CartAlbumItem extends StatelessWidget {
               isDiscountAvailable: album.isDiscountAvailable,
               discountPercentage: album.discountPercentage,
               isFree: album.isFree,
-              price: album.priceEtb,
+              priceEtb: album.priceEtb,
+              priceUsd: album.priceDollar,
               isPurchased: album.isBought,
             ),
             RemoveFromCartButton(

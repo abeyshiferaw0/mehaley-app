@@ -100,7 +100,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                   LanguageSettingItem(
                     text: 'Oromiffa',
                     isSelected: false,
-                    locale: L10nUtil.amharic,
+                    locale: L10nUtil.english,
                   ),
                   LanguageSettingItem(
                     text: 'Tigrinya',

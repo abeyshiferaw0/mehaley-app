@@ -7,6 +7,7 @@ import 'package:elf_play/data/models/audio_file.dart';
 import 'package:elf_play/data/models/bg_video.dart';
 import 'package:elf_play/data/models/enums/app_payment_methods.dart';
 import 'package:elf_play/data/models/enums/playlist_created_by.dart';
+import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:elf_play/data/models/enums/user_login_type.dart';
 import 'package:elf_play/data/models/lyric.dart';
@@ -184,6 +185,14 @@ class AppHiveBoxes {
       );
     }
 
+    ///PREFERRED CURRENCY
+    if (!settingsBox.containsKey(AppValues.preferredCurrencyKey)) {
+      await settingsBox.put(
+        AppValues.preferredCurrencyKey,
+        AppCurrency.ETB,
+      );
+    }
+
     ///PREFERRED PAYMENT METHOD
     if (!settingsBox.containsKey(AppValues.preferredPaymentMethodKey)) {
       await settingsBox.put(
@@ -221,5 +230,6 @@ class AppHiveBoxes {
     Hive.registerAdapter(SongSyncAdapter());
     Hive.registerAdapter(SongSyncPlayedFromAdapter());
     Hive.registerAdapter(AppPaymentMethodsAdapter());
+    Hive.registerAdapter(AppCurrencyAdapter());
   }
 }

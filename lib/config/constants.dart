@@ -148,6 +148,7 @@ class AppValues {
   static const String preferredPaymentMethodKey =
       'PREFERRED_PAYMENT_METHOD_KEY';
   static const String isDataSaverTurnedOnKey = 'DATA_SAVER_KEY';
+  static const String preferredCurrencyKey = 'PREFERRED_CURRENCY_KEY';
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';

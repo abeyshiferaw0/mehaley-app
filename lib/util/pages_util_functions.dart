@@ -57,6 +57,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class PagesUtilFunctions {
@@ -165,32 +166,32 @@ class PagesUtilFunctions {
     if (groupType == GroupType.SONG) {
       item as Song;
       return SmallTextPriceWidget(
-        price: item.priceEtb,
+        priceEtb: item.priceEtb,
+        priceUsd: item.priceDollar,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
-        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.PLAYLIST) {
       item as Playlist;
       return SmallTextPriceWidget(
-        price: item.priceEtb,
+        priceEtb: item.priceEtb,
+        priceUsd: item.priceDollar,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
-        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.ALBUM) {
       item as Album;
       return SmallTextPriceWidget(
-        price: item.priceEtb,
+        priceEtb: item.priceEtb,
+        priceUsd: item.priceDollar,
         isDiscountAvailable: item.isDiscountAvailable,
         discountPercentage: item.discountPercentage,
         isFree: item.isFree,
         isPurchased: item.isBought,
-        appCurrency: AppCurrency.ETB,
       );
     } else if (groupType == GroupType.ARTIST) {
       return SizedBox();
@@ -200,19 +201,20 @@ class PagesUtilFunctions {
   }
 
   static Widget getItemPrice({
-    required double price,
+    required double priceEtb,
+    required double priceUsd,
     required bool isDiscountAvailable,
     required double discountPercentage,
     required bool isFree,
     required bool isPurchased,
   }) {
     return SmallTextPriceWidget(
-      price: price,
+      priceEtb: priceEtb,
+      priceUsd: priceUsd,
       isDiscountAvailable: isDiscountAvailable,
       discountPercentage: discountPercentage,
       isFree: isFree,
       isPurchased: isPurchased,
-      appCurrency: AppCurrency.ETB,
     );
   }
 
@@ -1273,5 +1275,12 @@ class PagesUtilFunctions {
     } else {
       inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
     }
+  }
+
+  static void shareApp() async {
+    await Share.share(
+      'check out my website https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      subject: 'Look what I made!',
+    );
   }
 }

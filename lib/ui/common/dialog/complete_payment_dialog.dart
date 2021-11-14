@@ -1,8 +1,8 @@
 import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/enums/app_payment_methods.dart';
+import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:elf_play/ui/common/dialog/widgets/payment_item.dart';
 import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
@@ -369,7 +369,8 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               scale: 1.3,
               child: SmallTextPriceWidget(
                 isFree: false,
-                price: 23.0,
+                priceEtb: 23.0,
+                priceUsd: 23.0,
                 isPurchased: false,
                 discountPercentage: 0.1,
                 isDiscountAvailable: true,
@@ -422,9 +423,9 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
 
   AppCurrency getSelectedAppCurrency() {
     if (getSelectedPayment() == AppPaymentMethods.METHOD_VISA) {
-      return AppCurrency.DOLLAR;
+      return AppCurrency.USD;
     } else if (getSelectedPayment() == AppPaymentMethods.METHOD_MASTERCARD) {
-      return AppCurrency.DOLLAR;
+      return AppCurrency.USD;
     } else {
       return AppCurrency.ETB;
     }

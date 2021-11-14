@@ -64,7 +64,8 @@ class LibraryPlaylistItem extends StatelessWidget {
               : PagesUtilFunctions.getItemPrice(
                   discountPercentage: playlist.discountPercentage,
                   isFree: playlist.isFree,
-                  price: playlist.priceEtb,
+            priceEtb: playlist.priceEtb,
+            priceUsd: playlist.priceDollar,
                   isDiscountAvailable: playlist.isDiscountAvailable,
                   isPurchased: playlist.isBought,
                 )

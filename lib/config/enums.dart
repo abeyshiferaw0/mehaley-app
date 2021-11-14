@@ -36,8 +36,6 @@ enum AppLikeFollowEvents { LIKE, UNLIKE, FOLLOW, UNFOLLOW }
 
 enum AppCartAddRemoveEvents { ADD, REMOVE }
 
-enum AppCurrency { ETB, DOLLAR }
-
 enum AppPurchasedPageItemTypes { ALL_SONGS, SONGS, ALBUMS, PLAYLISTS }
 
 enum AppFavoritePageItemTypes { SONGS, ALBUMS }

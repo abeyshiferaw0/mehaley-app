@@ -1,7 +1,8 @@
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/data_providers/settings_data_provider.dart';
 import 'package:elf_play/data/models/cart/cart.dart';
+import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -80,12 +81,12 @@ class CartAppBar extends StatelessWidget {
 
   Widget buildDeductedPrice(Cart cart) {
     return SmallTextPriceWidget(
-      price: getTotalPrice(cart),
+      priceEtb: getTotalPrice(cart, AppCurrency.ETB),
+      priceUsd: getTotalPrice(cart, AppCurrency.USD),
       isFree: false,
       isDiscountAvailable: true,
       discountPercentage: getDeductedPriceAsPercentage(cart),
       isPurchased: false,
-      appCurrency: AppCurrency.ETB,
     );
     // return Row(
     //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,13 +120,13 @@ class CartAppBar extends StatelessWidget {
 
   Widget buildTotalPrice(Cart cart) {
     return SmallTextPriceWidget(
-      price: getTotalPrice(cart),
+      priceEtb: getTotalPrice(cart, AppCurrency.ETB),
+      priceUsd: getTotalPrice(cart, AppCurrency.USD),
       isFree: false,
       isDiscountAvailable: false,
-      discountPercentage: getDeductedPrice(cart),
+      discountPercentage: getDeductedPriceAsPercentage(cart),
       useLargerText: true,
       isPurchased: false,
-      appCurrency: AppCurrency.ETB,
     );
     // return Text(
     //   '\$${getDeductedPrice(cart).toStringAsFixed(2)}',
@@ -143,24 +144,38 @@ class CartAppBar extends StatelessWidget {
     return cart.deductibleAmountEtb > 0 ? true : false;
   }
 
-  double getTotalPrice(Cart cart) {
-    double total = cart.songCart.totalPriceEtb;
-    total = total + cart.albumCart.totalPriceEtb;
-    total = total + cart.playlistCart.totalPriceEtb;
-    return total;
+  double getTotalPrice(Cart cart, AppCurrency appCurrency) {
+    if (appCurrency == AppCurrency.ETB) {
+      double total = cart.songCart.totalPriceEtb;
+      total = total + cart.albumCart.totalPriceEtb;
+      total = total + cart.playlistCart.totalPriceEtb;
+      return total;
+    } else {
+      double total = cart.songCart.totalPriceDollar;
+      total = total + cart.albumCart.totalPriceDollar;
+      total = total + cart.playlistCart.totalPriceDollar;
+      return total;
+    }
   }
 
-  double getDeductedPrice(Cart cart) {
-    double total = cart.songCart.totalPriceEtb;
-    total = total + cart.albumCart.totalPriceEtb;
-    total = total + cart.playlistCart.totalPriceEtb;
-    return total - cart.deductibleAmountEtb;
-  }
+  // double getDeductedPrice(Cart cart) {
+  //   double total = cart.songCart.totalPriceEtb;
+  //   total = total + cart.albumCart.totalPriceEtb;
+  //   total = total + cart.playlistCart.totalPriceEtb;
+  //   return total - cart.deductibleAmountEtb;
+  // }
 
   double getDeductedPriceAsPercentage(Cart cart) {
-    double total = cart.songCart.totalPriceEtb;
-    total = total + cart.albumCart.totalPriceEtb;
-    total = total + cart.playlistCart.totalPriceEtb;
-    return (cart.deductibleAmountEtb * 100) / total;
+    if (SettingsDataProvider().getPreferredCurrency() == AppCurrency.ETB) {
+      double total = cart.songCart.totalPriceEtb;
+      total = total + cart.albumCart.totalPriceEtb;
+      total = total + cart.playlistCart.totalPriceEtb;
+      return (cart.deductibleAmountEtb * 100) / total;
+    } else {
+      double total = cart.songCart.totalPriceDollar;
+      total = total + cart.albumCart.totalPriceDollar;
+      total = total + cart.playlistCart.totalPriceDollar;
+      return (cart.deductibleAmountDollar * 100) / total;
+    }
   }
 }

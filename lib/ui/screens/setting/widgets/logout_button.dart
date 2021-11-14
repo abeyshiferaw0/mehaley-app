@@ -1,6 +1,7 @@
 import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
+import 'package:elf_play/ui/common/dialog/dialog_log_out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,7 +17,16 @@ class LogoutButton extends StatelessWidget {
     return Center(
       child: AppBouncingButton(
         onTap: () async {
-          BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+          showDialog(
+            context: context,
+            builder: (context) {
+              return DialogLogOut(
+                onLogOut: () {
+                  BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                },
+              );
+            },
+          );
         },
         shrinkRatio: 3,
         child: Container(

@@ -1,4 +1,3 @@
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:elf_play/ui/common/small_text_price_widget.dart';
@@ -6,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class BuyItemBtnWidget extends StatelessWidget {
-  final double price;
+  final double priceEtb;
+  final double priceUsd;
   final String title;
   final bool hasLeftMargin;
   final bool isFree;
@@ -18,7 +18,8 @@ class BuyItemBtnWidget extends StatelessWidget {
 
   const BuyItemBtnWidget({
     Key? key,
-    required this.price,
+    required this.priceEtb,
+    required this.priceUsd,
     required this.title,
     required this.hasLeftMargin,
     required this.isDiscountAvailable,
@@ -33,14 +34,14 @@ class BuyItemBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isBought) {
       return SmallTextPriceWidget(
-        price: price,
+        priceEtb: priceEtb,
+        priceUsd:  priceUsd,
         isFree: isFree,
         useLargerText: true,
         showDiscount: showDiscount,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
         isPurchased: isBought,
-        appCurrency: AppCurrency.ETB,
       );
     } else {
       return AppBouncingButton(
@@ -50,14 +51,16 @@ class BuyItemBtnWidget extends StatelessWidget {
             horizontal: AppPadding.padding_20,
             vertical: AppPadding.padding_8,
           ),
-          margin: EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
+          margin:
+              EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
             color: AppColors.lightGrey,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
+            mainAxisAlignment:
+                isCentred ? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
               Text(
                 title.toUpperCase(),
@@ -70,14 +73,14 @@ class BuyItemBtnWidget extends StatelessWidget {
               ),
               SizedBox(width: AppMargin.margin_4),
               SmallTextPriceWidget(
-                price: price,
+                priceEtb: priceEtb,
+                priceUsd:  priceUsd,
                 isFree: isFree,
                 useLargerText: true,
                 showDiscount: showDiscount,
                 isDiscountAvailable: isDiscountAvailable,
                 discountPercentage: discountPercentage,
                 isPurchased: isBought,
-                appCurrency: AppCurrency.ETB,
               )
             ],
           ),

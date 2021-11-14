@@ -155,6 +155,7 @@ class _SongItemState extends State<SongItem> {
                           //////////
                           getPriceBadge(
                             song.priceEtb,
+                            song.priceDollar,
                             song.isFree,
                             song.isDiscountAvailable,
                             song.discountPercentage,
@@ -256,19 +257,19 @@ class _SongItemState extends State<SongItem> {
     }
   }
 
-  getPriceBadge(double price, bool isFree, bool isDiscountAvailable,
-      double discountPercentage, bool isBought) {
+  getPriceBadge(double priceEtb, double priceUsd, bool isFree,
+      bool isDiscountAvailable, double discountPercentage, bool isBought) {
     return Padding(
       padding: const EdgeInsets.only(
         right: AppPadding.padding_8,
       ),
       child: SmallTextPriceWidget(
-        price: price,
+        priceEtb: priceEtb,
+        priceUsd: priceUsd,
         isFree: isFree,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
         isPurchased: isBought,
-        appCurrency: AppCurrency.ETB,
       ),
     );
   }
@@ -319,6 +320,7 @@ class SongIsPlayingText extends StatelessWidget {
         return Text(
           L10nUtil.translateLocale(song.songName, context),
           overflow: TextOverflow.ellipsis,
+          maxLines: 1,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_16,
             color: isPlaying ? AppColors.green : AppColors.white,

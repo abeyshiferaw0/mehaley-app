@@ -1,29 +1,32 @@
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
+import 'package:elf_play/data/data_providers/settings_data_provider.dart';
+import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sizer/sizer.dart';
 
 class SmallTextPriceWidget extends StatelessWidget {
-  final double price;
+  final double priceEtb;
+  final double priceUsd;
   final bool isFree;
   final bool useLargerText;
   final bool isDiscountAvailable;
   final double discountPercentage;
   final bool showDiscount;
   final bool isPurchased;
-  final AppCurrency appCurrency;
+  final AppCurrency? appCurrency;
 
   const SmallTextPriceWidget({
     Key? key,
-    required this.price,
+    required this.priceEtb,
+    required this.priceUsd,
     required this.isFree,
     required this.isDiscountAvailable,
     required this.discountPercentage,
     this.useLargerText = false,
     this.showDiscount = true,
     required this.isPurchased,
-    required this.appCurrency,
+    this.appCurrency,
   }) : super(key: key);
 
   @override
@@ -75,7 +78,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      '${price.toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
+      '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -92,7 +95,7 @@ class SmallTextPriceWidget extends StatelessWidget {
     return Text.rich(
       TextSpan(
         text:
-            '${price.toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
+            '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
         style: TextStyle(
           color: AppColors.darkGreen.withOpacity(0.7),
           decoration: TextDecoration.lineThrough,
@@ -104,7 +107,7 @@ class SmallTextPriceWidget extends StatelessWidget {
         children: <InlineSpan>[
           TextSpan(
             text:
-                ' ${(price - (price * discountPercentage)).toStringAsFixed(2)} ${appCurrency == AppCurrency.ETB ? 'ETB' : 'USD'}',
+                ' ${(getPrice() - (getPrice() * discountPercentage)).toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
             style: TextStyle(
               color: AppColors.darkGreen,
               decoration: TextDecoration.none,
@@ -113,11 +116,27 @@ class SmallTextPriceWidget extends StatelessWidget {
                   ? AppFontSizes.font_size_12.sp
                   : AppFontSizes.font_size_10.sp,
             ),
-          )
+          ),
         ],
       ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
+  }
+
+  AppCurrency getPaymentMethod() {
+    if (appCurrency == null) {
+      return SettingsDataProvider().getPreferredCurrency();
+    } else {
+      return appCurrency!;
+    }
+  }
+
+  double getPrice() {
+    if (getPaymentMethod() == AppCurrency.ETB) {
+      return priceEtb;
+    } else {
+      return priceUsd;
+    }
   }
 }

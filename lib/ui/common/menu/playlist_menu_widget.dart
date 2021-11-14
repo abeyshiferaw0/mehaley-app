@@ -22,7 +22,8 @@ class PlaylistMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.imageUrl,
-    required this.price,
+    required this.priceEtb,
+    required this.priceUsd,
     required this.isFree,
     required this.isDiscountAvailable,
     required this.discountPercentage,
@@ -36,7 +37,8 @@ class PlaylistMenuWidget extends StatelessWidget {
   final bool isFollowed;
   final String title;
   final String imageUrl;
-  final double price;
+  final double priceEtb;
+  final double priceUsd;
   final bool isFree;
   final bool isDiscountAvailable;
   final double discountPercentage;
@@ -172,12 +174,12 @@ class PlaylistMenuWidget extends StatelessWidget {
           isFree
               ? SizedBox()
               : SmallTextPriceWidget(
-                  price: price,
+            priceEtb: priceEtb,
+            priceUsd: priceUsd,
                   isDiscountAvailable: isDiscountAvailable,
                   isFree: isFree,
                   discountPercentage: discountPercentage,
                   isPurchased: isPurchased,
-                  appCurrency: AppCurrency.ETB,
                 ),
           SizedBox(height: AppMargin.margin_2),
           Text(

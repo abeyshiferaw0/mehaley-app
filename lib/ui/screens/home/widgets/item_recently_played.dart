@@ -13,7 +13,8 @@ class ItemRecentlyPlayed extends StatelessWidget {
   final double height;
   final String imgUrl;
   final String title;
-  final double price;
+  final double priceEtb;
+  final double priceUsd;
   final bool isDiscountAvailable;
   final bool isBought;
   final double discountPercentage;
@@ -25,7 +26,8 @@ class ItemRecentlyPlayed extends StatelessWidget {
     required this.height,
     required this.imgUrl,
     required this.title,
-    required this.price,
+    required this.priceEtb,
+    required this.priceUsd,
     required this.isDiscountAvailable,
     required this.discountPercentage,
     required this.isFree,
@@ -62,7 +64,8 @@ class ItemRecentlyPlayed extends StatelessWidget {
                 ],
               ),
               placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) =>
+                  buildItemsImagePlaceHolder(),
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(
@@ -76,12 +79,12 @@ class ItemRecentlyPlayed extends StatelessWidget {
               ),
             ),
             SmallTextPriceWidget(
-              price: price,
+              priceEtb: priceEtb,
+              priceUsd: priceUsd,
               isDiscountAvailable: isDiscountAvailable,
               discountPercentage: discountPercentage,
               isFree: isFree,
               isPurchased: isBought,
-              appCurrency: AppCurrency.ETB,
             )
           ],
         ),

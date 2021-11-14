@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
 import 'package:elf_play/config/themes.dart';
 import 'package:elf_play/data/models/song.dart';
 import 'package:elf_play/ui/common/app_bouncing_button.dart';
@@ -77,12 +76,12 @@ class FeaturedSongsItem extends StatelessWidget {
                       height: AppMargin.margin_4,
                     ),
                     SmallTextPriceWidget(
-                      price: song.priceEtb,
+                      priceEtb: song.priceEtb,
+                      priceUsd: song.priceDollar,
                       isDiscountAvailable: song.isDiscountAvailable,
                       discountPercentage: song.discountPercentage,
                       isFree: song.isFree,
                       isPurchased: song.isBought,
-                      appCurrency: AppCurrency.ETB,
                     )
                   ],
                 ),

@@ -284,7 +284,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   pinned: false,
                   delegate: CartAppBarDelegate(
                     height:
-                        ScreenUtil(context: context).getScreenHeight() * 0.12,
+                        ScreenUtil(context: context).getScreenHeight() * 0.1,
                     cart: cart,
                   ),
                 ),

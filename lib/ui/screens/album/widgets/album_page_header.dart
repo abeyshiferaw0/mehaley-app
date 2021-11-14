@@ -72,7 +72,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader> with TickerProviderSt
                 SizedBox(height: AppMargin.margin_16),
                 (!album.isBought && !album.isFree)
                     ? BuyItemBtnWidget(
-                        price: album.priceEtb,
+                    priceEtb : album.priceEtb,
+                    priceUsd : album.priceDollar,
                         title: AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
                         hasLeftMargin: false,
                         isFree: album.isFree,

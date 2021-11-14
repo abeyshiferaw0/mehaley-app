@@ -24,3 +24,10 @@ class ChangeDataSaverStatusEvent extends SettingsPageEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ChangePreferredCurrencyEvent extends SettingsPageEvent {
+  ChangePreferredCurrencyEvent();
+
+  @override
+  List<Object?> get props => [];
+}

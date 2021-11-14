@@ -89,6 +89,8 @@ dependencies:
   app_settings: ^4.1.1
   #IN APP REVIEW
   in_app_review: ^2.0.3
+  #SAHREING PACKAGE
+  share_plus: ^3.0.4
 
 
 

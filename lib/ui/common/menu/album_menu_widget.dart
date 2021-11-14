@@ -23,7 +23,8 @@ class AlbumMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.imageUrl,
-    required this.price,
+    required this.priceEtb,
+    required this.priceUsd,
     required this.isFree,
     required this.isDiscountAvailable,
     required this.discountPercentage,
@@ -37,7 +38,8 @@ class AlbumMenuWidget extends StatelessWidget {
   final int albumId;
   final String title;
   final String imageUrl;
-  final double price;
+  final double priceEtb;
+  final double priceUsd;
   final bool isDiscountAvailable;
   final double discountPercentage;
   final bool isFree;
@@ -173,12 +175,12 @@ class AlbumMenuWidget extends StatelessWidget {
           ),
           SizedBox(height: AppMargin.margin_2),
           SmallTextPriceWidget(
-            price: price,
+            priceEtb: priceEtb,
+            priceUsd: priceUsd,
             isFree: isFree,
             discountPercentage: discountPercentage,
             isDiscountAvailable: isDiscountAvailable,
             isPurchased: isBought,
-            appCurrency: AppCurrency.ETB,
           )
         ],
       ),

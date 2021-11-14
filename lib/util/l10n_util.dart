@@ -12,10 +12,12 @@ class L10nUtil {
   static final amharic = Locale('am');
   static final english = Locale('en');
 
-  static translateLocale(TextLan textLan, BuildContext? context, {Locale? mCurrentLocale}) {
+  static translateLocale(TextLan textLan, BuildContext? context,
+      {Locale? mCurrentLocale}) {
     Locale currentLocale;
     if (context == null) {
-      if (mCurrentLocale == null) throw 'locale can not be null if context is null';
+      if (mCurrentLocale == null)
+        throw 'locale can not be null if context is null';
       currentLocale = mCurrentLocale;
     } else {
       currentLocale = Localizations.localeOf(context);
@@ -28,5 +30,9 @@ class L10nUtil {
     } else {
       throw 'L10nUtil file locale doesn\'t exist';
     }
+  }
+
+  static bool getCurrentLocale() {
+    return false;
   }
 }

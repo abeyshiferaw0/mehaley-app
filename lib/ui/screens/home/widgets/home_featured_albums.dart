@@ -82,7 +82,8 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
             ),
             (!album.isBought && !album.isFree)
                 ? BuyItemBtnWidget(
-                    price: 0.0,
+                    priceEtb: album.priceEtb,
+              priceUsd: album.priceDollar,
                     title: AppLocalizations.of(context)!.buyAlbum.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: album.isFree,

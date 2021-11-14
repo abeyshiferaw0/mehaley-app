@@ -79,7 +79,8 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
             ),
             (!playlist.isBought && !playlist.isFree)
                 ? BuyItemBtnWidget(
-                    price: 0.0,
+              priceEtb: playlist.priceEtb,
+              priceUsd: playlist.priceDollar,
                     title: AppLocalizations.of(context)!.buyPlaylist.toUpperCase(),
                     hasLeftMargin: true,
                     isFree: playlist.isFree,

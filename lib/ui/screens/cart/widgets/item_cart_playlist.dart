@@ -70,7 +70,8 @@ class CartPlaylistItem extends StatelessWidget {
                     isDiscountAvailable: playlist.isDiscountAvailable,
                     discountPercentage: playlist.discountPercentage,
                     isFree: playlist.isFree,
-                    price: playlist.priceEtb,
+              priceEtb: playlist.priceEtb,
+              priceUsd: playlist.priceDollar,
                     isPurchased: playlist.isBought,
                   ),
             RemoveFromCartButton(

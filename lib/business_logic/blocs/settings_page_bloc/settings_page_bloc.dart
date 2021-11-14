@@ -26,15 +26,20 @@ class SettingsPageBloc extends Bloc<SettingsPageEvent, SettingsPageState> {
       yield SettingPageLoadedState(settingsPageData: settingsPageData);
     } else if (event is ChangeSongDownloadQualityEvent) {
       yield SettingPageLoadingState();
-      await settingDataRepository.changeSongDownloadQuality(
-        event.downloadSongQuality,
-      );
+      settingDataRepository
+          .changeSongDownloadQuality(event.downloadSongQuality);
       SettingsPageData settingsPageData =
           await settingDataRepository.getSettingsPageData();
       yield SettingPageLoadedState(settingsPageData: settingsPageData);
     } else if (event is ChangeDataSaverStatusEvent) {
       yield SettingPageLoadingState();
       await settingDataRepository.changeDataSaverStatus();
+      SettingsPageData settingsPageData =
+          await settingDataRepository.getSettingsPageData();
+      yield SettingPageLoadedState(settingsPageData: settingsPageData);
+    } else if (event is ChangePreferredCurrencyEvent) {
+      yield SettingPageLoadingState();
+      settingDataRepository.changePreferredCurrency();
       SettingsPageData settingsPageData =
           await settingDataRepository.getSettingsPageData();
       yield SettingPageLoadedState(settingsPageData: settingsPageData);
