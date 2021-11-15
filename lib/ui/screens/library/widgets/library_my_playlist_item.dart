@@ -1,12 +1,12 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryMyPlaylistItem extends StatelessWidget {
@@ -44,7 +44,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.white,
+                      color: AppColors.black,
                     ),
                   ),
                   SizedBox(height: AppMargin.margin_2),
@@ -64,7 +64,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                 ? Icon(
                     PhosphorIcons.plus_circle_light,
                     size: AppIconSizes.icon_size_24,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                   )
                 : SizedBox(),
           ],

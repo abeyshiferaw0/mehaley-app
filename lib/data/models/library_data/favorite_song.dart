@@ -1,4 +1,4 @@
-import 'package:elf_play/data/models/song.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class FavoriteSong {
   final int logId;

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
-import 'package:elf_play/data/repositories/sync_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/sync/song_sync.dart';
+import 'package:mehaley/data/repositories/sync_repository.dart';
 
 part 'song_sync_event.dart';
 part 'song_sync_state.dart';

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/repositories/like_follow_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/repositories/like_follow_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'library_event.dart';

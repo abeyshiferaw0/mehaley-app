@@ -1,19 +1,19 @@
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/menu/user_playlist_menu_widget.dart';
-import 'package:elf_play/ui/screens/user_playlist/widget/user_playlist_info_pages.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/menu/user_playlist_menu_widget.dart';
+import 'package:mehaley/ui/screens/user_playlist/widget/user_playlist_info_pages.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class UserPlaylistPageHeader extends StatefulWidget {
@@ -38,7 +38,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
   );
 
   //DOMINANT COLOR
-  Color dominantColor = AppColors.black;
+  Color dominantColor = AppColors.white;
 
   //NOTIFIER FOR DOTED INDICATOR
   final ValueNotifier<int> pageNotifier = new ValueNotifier<int>(0);
@@ -106,7 +106,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             icon: Icon(
               PhosphorIcons.caret_left_light,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           Expanded(
@@ -120,7 +120,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -129,7 +129,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             child: Icon(
               PhosphorIcons.dots_three_vertical_bold,
               size: AppIconSizes.icon_size_28,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
             ),
             onTap: () {
               PagesUtilFunctions.showMenuDialog(
@@ -199,7 +199,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             ),
             CirclePageIndicator(
               dotColor: AppColors.grey,
-              selectedDotColor: AppColors.white,
+              selectedDotColor: AppColors.black,
               currentPageNotifier: pageNotifier,
               size: 6,
               itemCount: 2,

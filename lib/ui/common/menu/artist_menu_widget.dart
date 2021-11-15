@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/menu/menu_items/artist_follow_menu_item.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/menu/menu_items/artist_follow_menu_item.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
@@ -53,7 +53,7 @@ class ArtistMenuWidget extends StatelessWidget {
                 child: AppBouncingButton(
                   child: Icon(
                     PhosphorIcons.caret_circle_down_light,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     size: AppIconSizes.icon_size_32,
                   ),
                   onTap: () {
@@ -126,7 +126,7 @@ class ArtistMenuWidget extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.white,
+              color: AppColors.black,
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -141,7 +141,7 @@ class ArtistMenuWidget extends StatelessWidget {
                         noOfAlbums: noOfAlbum.toString(),
                       ),
                       style: TextStyle(
-                        color: AppColors.lightGrey,
+                        color: AppColors.darkGrey,
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w300,
                       ),
@@ -151,7 +151,7 @@ class ArtistMenuWidget extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                 child: Icon(
                   Icons.circle,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                   size: AppIconSizes.icon_size_4,
                 ),
               ),
@@ -161,7 +161,7 @@ class ArtistMenuWidget extends StatelessWidget {
                         noOfSong: noOfSong.toString(),
                       ),
                       style: TextStyle(
-                        color: AppColors.lightGrey,
+                        color: AppColors.darkGrey,
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w300,
                       ),

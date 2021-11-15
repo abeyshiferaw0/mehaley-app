@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/artist_page_data.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/artist_page_data.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../common/like_follow/artist_follow_button.dart';
@@ -82,7 +82,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
     return Container(
       height: 90,
       width: double.infinity,
-      color: AppColors.black.withOpacity(shrinkPercentage),
+      color: AppColors.white.withOpacity(shrinkPercentage),
       padding: EdgeInsets.only(top: AppPadding.padding_28),
       margin: EdgeInsets.only(bottom: AppMargin.margin_12),
       child: Stack(
@@ -97,7 +97,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
               icon: Icon(
                 PhosphorIcons.caret_left_light,
                 size: AppIconSizes.icon_size_28,
-                color: AppColors.lightGrey,
+                color: AppColors.black,
               ),
             ),
           ),
@@ -112,7 +112,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -134,7 +134,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   child: Icon(
                     PhosphorIcons.dots_three_vertical_bold,
                     size: AppIconSizes.icon_size_28,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                   ),
                   onTap: () {
                     PagesUtilFunctions.showMenuDialog(
@@ -185,7 +185,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 Text(
                   AppLocale.of().verifiedArtist.toUpperCase(),
                   style: TextStyle(
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w200,
                   ),
@@ -200,7 +200,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
               ),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.lightGrey,
+                color: AppColors.darkGrey,
                 fontSize: AppFontSizes.font_size_28.sp,
                 fontWeight: FontWeight.w600,
               ),
@@ -215,7 +215,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.lightGrey,
+                color: AppColors.darkGrey,
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -227,7 +227,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 Text(
                   '${artistPageData.noOfAlbum} ${AppLocale.of().albums}',
                   style: TextStyle(
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w300,
                   ),
@@ -236,7 +236,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   margin: EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                   child: Icon(
                     Icons.circle,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     size: AppIconSizes.icon_size_4,
                   ),
                 ),
@@ -244,7 +244,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   AppLocale.of()
                       .noOfSongs(noOfSong: artistPageData.noOfSong.toString()),
                   style: TextStyle(
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w300,
                   ),

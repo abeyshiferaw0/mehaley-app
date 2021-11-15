@@ -1,11 +1,11 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/remote_image.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/text_lan.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/remote_image.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/text_lan.dart';
 
 import 'artist.dart';
 

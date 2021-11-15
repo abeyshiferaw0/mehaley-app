@@ -1,8 +1,8 @@
 import 'package:country_code_picker/country_code.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 
 class CountryPickerButton extends StatelessWidget {
   const CountryPickerButton({
@@ -15,7 +15,7 @@ class CountryPickerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.darkGrey,
+      color: AppColors.lightGrey,
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +40,7 @@ class CountryPickerButton extends StatelessWidget {
             '$countryCode',
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12,
-              color: AppColors.white,
+              color: AppColors.black,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -50,7 +50,7 @@ class CountryPickerButton extends StatelessWidget {
           Icon(
             PhosphorIcons.caret_down_fill,
             size: AppFontSizes.font_size_12,
-            color: AppColors.white,
+            color: AppColors.black,
           ),
           SizedBox(
             width: AppMargin.margin_8,

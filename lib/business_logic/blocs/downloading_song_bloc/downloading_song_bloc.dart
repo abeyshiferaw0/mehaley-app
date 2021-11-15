@@ -3,12 +3,12 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/setting_data_repository.dart';
-import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/network_util.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/repositories/setting_data_repository.dart';
+import 'package:mehaley/util/download_util.dart';
+import 'package:mehaley/util/network_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 

@@ -1,9 +1,8 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class SignUpPageAuthingCovor extends StatelessWidget {
   const SignUpPageAuthingCovor({
@@ -19,7 +18,7 @@ class SignUpPageAuthingCovor extends StatelessWidget {
       width: ScreenUtil(context: context).getScreenWidth(),
       height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        color: AppColors.completelyBlack.withOpacity(0.5),
+        color: AppColors.white.withOpacity(0.5),
       ),
       child: showLoading
           ? Center(

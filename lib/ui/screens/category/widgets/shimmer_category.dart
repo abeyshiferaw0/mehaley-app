@@ -1,6 +1,6 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/shimmer_item.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/shimmer_item.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryShimmer extends StatelessWidget {
@@ -10,7 +10,7 @@ class CategoryShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Shimmer.fromColors(
-        highlightColor: AppColors.darkGrey,
+        highlightColor: AppColors.lightGrey,
         baseColor: Color(0xff262626),
         direction: ShimmerDirection.ltr,
         child: Wrap(

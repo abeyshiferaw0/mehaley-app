@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/ui/common/app_icon_widget.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class ItemPopularPlaylist extends StatelessWidget {
@@ -57,7 +57,7 @@ class ItemPopularPlaylist extends StatelessWidget {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: AppColors.txtGrey,
+                color: AppColors.darkGrey,
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),

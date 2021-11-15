@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/library_data/purchased_album.dart';
-import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
-import 'package:elf_play/data/models/library_data/purchased_song.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/library_data/purchased_album.dart';
+import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
+import 'package:mehaley/data/models/library_data/purchased_song.dart';
 
 class PurchasedItemsData extends Equatable {
   final List<PurchasedSong>? allPurchasedSong;

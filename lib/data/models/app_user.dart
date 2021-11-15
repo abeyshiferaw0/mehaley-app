@@ -1,8 +1,8 @@
-import 'package:elf_play/data/models/enums/user_login_type.dart';
-import 'package:elf_play/data/models/remote_image.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
+import 'package:mehaley/data/models/remote_image.dart';
 
 part 'app_user.g.dart';
 

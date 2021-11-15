@@ -1,7 +1,7 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistsRefreshingWidget extends StatelessWidget {
@@ -15,11 +15,11 @@ class PlaylistsRefreshingWidget extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.darkGrey,
+          color: AppColors.lightGrey,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: AppColors.completelyBlack.withOpacity(0.1),
+              color: AppColors.white.withOpacity(0.1),
               blurRadius: 6,
               spreadRadius: 6,
               offset: Offset(0, 0),
@@ -39,7 +39,7 @@ class PlaylistsRefreshingWidget extends StatelessWidget {
               width: AppIconSizes.icon_size_12,
               height: AppIconSizes.icon_size_12,
               child: CircularProgressIndicator(
-                color: AppColors.darkGreen.withOpacity(0.5),
+                color: AppColors.darkOrange.withOpacity(0.5),
                 strokeWidth: 1,
               ),
             ),

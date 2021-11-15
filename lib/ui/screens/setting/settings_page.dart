@@ -1,27 +1,27 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
-import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
-import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/settings_page_data.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/app_subscribe_card.dart';
-import 'package:elf_play/ui/common/dialog/complete_payment_dialog.dart';
-import 'package:elf_play/ui/screens/setting/widgets/download_quality_picker.dart';
-import 'package:elf_play/ui/screens/setting/widgets/drop_down_options_picker.dart';
-import 'package:elf_play/ui/screens/setting/widgets/elf_info_widget.dart';
-import 'package:elf_play/ui/screens/setting/widgets/logout_button.dart';
-import 'package:elf_play/ui/screens/setting/widgets/prefred_currency_picker.dart';
-import 'package:elf_play/ui/screens/setting/widgets/profile_button.dart';
-import 'package:elf_play/ui/screens/setting/widgets/setting_large_button.dart';
-import 'package:elf_play/ui/screens/setting/widgets/setting_radio_item.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
+import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/settings_page_data.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
+import 'package:mehaley/ui/common/dialog/complete_payment_dialog.dart';
+import 'package:mehaley/ui/screens/setting/widgets/download_quality_picker.dart';
+import 'package:mehaley/ui/screens/setting/widgets/drop_down_options_picker.dart';
+import 'package:mehaley/ui/screens/setting/widgets/elf_info_widget.dart';
+import 'package:mehaley/ui/screens/setting/widgets/logout_button.dart';
+import 'package:mehaley/ui/screens/setting/widgets/prefred_currency_picker.dart';
+import 'package:mehaley/ui/screens/setting/widgets/profile_button.dart';
+import 'package:mehaley/ui/screens/setting/widgets/setting_large_button.dart';
+import 'package:mehaley/ui/screens/setting/widgets/setting_radio_item.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -87,17 +87,18 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         appBar: AppBar(
           //brightness: Brightness.dark,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.dark,
           ),
-          backgroundColor: AppColors.darkGrey,
+          backgroundColor: AppColors.lightGrey,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
+            color: AppColors.black,
             icon: Icon(
               PhosphorIcons.caret_left_light,
               size: AppIconSizes.icon_size_24,
@@ -108,7 +109,7 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           centerTitle: true,
@@ -231,7 +232,7 @@ class _SettingsPageState extends State<SettingsPage> {
           builder: (context, state) {
             if (state is OneSignalTagAdding) {
               return Container(
-                color: AppColors.black.withOpacity(0.4),
+                color: AppColors.white.withOpacity(0.4),
                 child: AppLoading(size: AppValues.loadingWidgetSize / 2),
               );
             }

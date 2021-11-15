@@ -1,7 +1,7 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class LibrarySortButton extends StatelessWidget {
@@ -31,7 +31,7 @@ class LibrarySortButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -39,7 +39,7 @@ class LibrarySortButton extends StatelessWidget {
             isSelected
                 ? Icon(
                     PhosphorIcons.check_light,
-                    color: AppColors.darkGreen,
+                    color: AppColors.darkOrange,
                   )
                 : SizedBox()
           ],

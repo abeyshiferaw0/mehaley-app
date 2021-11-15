@@ -1,30 +1,30 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_playlist_bloc/purchased_playlist_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_songs_bloc/purchased_songs_bloc.dart';
-import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
-import 'package:elf_play/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_albums_page.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_all_songs_page.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_playlists_page.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/purchased_songs_page.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_icon_button.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_playlist_bloc/purchased_playlist_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_songs_bloc/purchased_songs_bloc.dart';
+import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/purchased_albums_page.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/purchased_all_songs_page.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/purchased_playlists_page.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/purchased_songs_page.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_icon_button.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 import '../widgets/library_sub_tab_button.dart';
 
@@ -84,9 +84,9 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                 refreshPage(context);
               }
             },
-            color: AppColors.darkGreen,
+            color: AppColors.darkOrange,
             child: Container(
-              color: AppColors.black,
+              color: AppColors.white,
               height: double.infinity,
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(
@@ -323,7 +323,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
           }
         }
       },
-      iconColor: AppColors.white,
+      iconColor: AppColors.black,
       icon: PhosphorIcons.shuffle_light,
     );
   }

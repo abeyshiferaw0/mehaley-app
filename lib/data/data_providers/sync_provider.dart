@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
-import 'package:elf_play/util/api_util.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/sync/song_sync.dart';
+import 'package:mehaley/util/api_util.dart';
 
 class SyncProvider {
   late Dio dio;

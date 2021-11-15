@@ -1,34 +1,35 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/player_queue_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/custom_track_shape.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
-import 'package:elf_play/ui/common/song_item/song_queue_item.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/shuffle_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/custom_track_shape.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
+import 'package:mehaley/ui/common/song_item/song_queue_item.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class QueueListPage extends StatefulWidget {
   const QueueListPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _QueueListPageState extends State<QueueListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: MultiBlocListener(
           listeners: [
@@ -97,7 +98,7 @@ class _QueueListPageState extends State<QueueListPage> {
             itemCount: queue.length,
             proxyDecorator: (widget, int, animation) {
               return Container(
-                color: AppColors.darkGrey,
+                color: AppColors.lightGrey,
                 child: widget,
               );
             },
@@ -120,13 +121,13 @@ class _QueueListPageState extends State<QueueListPage> {
   SliderTheme buildQueuePageSlider(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: AppColors.lightGrey,
-        inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+        activeTrackColor: AppColors.darkGrey,
+        inactiveTrackColor: AppColors.darkGrey.withOpacity(0.24),
         trackShape: CustomTrackShape(),
         trackHeight: 1.0,
-        thumbColor: AppColors.white,
+        thumbColor: AppColors.black,
         thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-        overlayColor: AppColors.white.withOpacity(0.24),
+        overlayColor: AppColors.black.withOpacity(0.24),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
       ),
       child: BlocBuilder<CurrentPlayingCubit, Song?>(
@@ -163,7 +164,7 @@ class _QueueListPageState extends State<QueueListPage> {
 
   Container buildQueuePageControls(BuildContext context) {
     return Container(
-      color: AppColors.black,
+      color: AppColors.white,
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,13 +183,13 @@ class _QueueListPageState extends State<QueueListPage> {
                     children: [
                       Icon(
                         PhosphorIcons.shuffle_light,
-                        color: state ? AppColors.green : AppColors.white,
+                        color: state ? AppColors.orange : AppColors.black,
                         size: AppIconSizes.icon_size_20,
                       ),
                       state
                           ? Icon(
                               Icons.circle,
-                              color: AppColors.darkGreen,
+                              color: AppColors.darkOrange,
                               size: AppIconSizes.icon_size_4,
                             )
                           : SizedBox(),
@@ -205,7 +206,7 @@ class _QueueListPageState extends State<QueueListPage> {
             },
             child: Icon(
               Icons.skip_previous_sharp,
-              color: AppColors.white,
+              color: AppColors.black,
               size: AppIconSizes.icon_size_48,
             ),
           ),
@@ -222,7 +223,7 @@ class _QueueListPageState extends State<QueueListPage> {
                       ? Icons.pause_circle_filled_sharp
                       : FlutterRemix.play_circle_fill,
                   size: AppIconSizes.icon_size_72,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               );
             },
@@ -234,7 +235,7 @@ class _QueueListPageState extends State<QueueListPage> {
             },
             child: Icon(
               Icons.skip_next_sharp,
-              color: AppColors.white,
+              color: AppColors.black,
               size: AppIconSizes.icon_size_48,
             ),
           ),
@@ -258,7 +259,7 @@ class _QueueListPageState extends State<QueueListPage> {
                           ? Icon(
                               Icons.circle,
                               size: AppIconSizes.icon_size_4,
-                              color: AppColors.darkGreen,
+                              color: AppColors.darkOrange,
                             )
                           : SizedBox()
                     ],
@@ -307,7 +308,7 @@ class _QueueListPageState extends State<QueueListPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
               Expanded(child: SizedBox()),
@@ -319,7 +320,7 @@ class _QueueListPageState extends State<QueueListPage> {
                       child: Icon(
                         PhosphorIcons.x_light,
                         size: AppIconSizes.icon_size_24,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     )
                   : SizedBox()
@@ -377,7 +378,7 @@ class _QueueListPageState extends State<QueueListPage> {
                 L10nUtil.translateLocale(song.songName, context),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
-                  color: AppColors.white,
+                  color: AppColors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),

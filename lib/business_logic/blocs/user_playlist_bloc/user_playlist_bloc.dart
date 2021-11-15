@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/user_playlist_repository.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/repositories/user_playlist_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'user_playlist_event.dart';

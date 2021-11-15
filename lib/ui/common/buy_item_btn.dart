@@ -1,8 +1,8 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:sizer/sizer.dart';
 
 class BuyItemBtnWidget extends StatelessWidget {
   final double priceEtb;
@@ -35,7 +35,7 @@ class BuyItemBtnWidget extends StatelessWidget {
     if (isBought) {
       return SmallTextPriceWidget(
         priceEtb: priceEtb,
-        priceUsd:  priceUsd,
+        priceUsd: priceUsd,
         isFree: isFree,
         useLargerText: true,
         showDiscount: showDiscount,
@@ -55,7 +55,7 @@ class BuyItemBtnWidget extends StatelessWidget {
               EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
-            color: AppColors.lightGrey,
+            color: AppColors.black,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -68,13 +68,13 @@ class BuyItemBtnWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.darkGrey,
+                  color: AppColors.lightGrey,
                 ),
               ),
               SizedBox(width: AppMargin.margin_4),
               SmallTextPriceWidget(
                 priceEtb: priceEtb,
-                priceUsd:  priceUsd,
+                priceUsd: priceUsd,
                 isFree: isFree,
                 useLargerText: true,
                 showDiscount: showDiscount,

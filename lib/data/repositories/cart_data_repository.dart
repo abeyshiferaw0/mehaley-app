@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/cart_data_provider.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/api_response/cart_page_data.dart';
-import 'package:elf_play/data/models/cart/cart.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/cart_data_provider.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/cart_page_data.dart';
+import 'package:mehaley/data/models/cart/cart.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class CartRepository {
   //INIT PROVIDER FOR API CALL
@@ -41,7 +41,8 @@ class CartRepository {
   }
 
   removeAlbumFromCart(Album album) async {
-    Response response = await cartDataProvider.removeAlbumFromCart(album.albumId);
+    Response response =
+        await cartDataProvider.removeAlbumFromCart(album.albumId);
 
     if (response.statusCode == 200) {
       return response;
@@ -51,7 +52,8 @@ class CartRepository {
   }
 
   removePlaylistFromCart(Playlist playlist) async {
-    Response response = await cartDataProvider.removePlaylistFromCart(playlist.playlistId);
+    Response response =
+        await cartDataProvider.removePlaylistFromCart(playlist.playlistId);
 
     if (response.statusCode == 200) {
       return response;
@@ -71,7 +73,8 @@ class CartRepository {
   }
 
   ///FOR CART SONG
-  Future<void> addRemoveSong(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
+  Future<void> addRemoveSong(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
     ///LIKE OR UNLIKE SONG
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       await cartDataProvider.addSongToCart(id);
@@ -82,7 +85,8 @@ class CartRepository {
     }
   }
 
-  void addRecentlyAddedRemovedSong(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void addRecentlyAddedRemovedSong(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedSongBox.delete(id);
       AppHiveBoxes.instance.recentlyCartAddedSongBox.put(
@@ -98,7 +102,8 @@ class CartRepository {
     }
   }
 
-  void removeAlternativeAddedRemovedSong(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeAlternativeAddedRemovedSong(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartRemovedSongBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {
@@ -106,7 +111,8 @@ class CartRepository {
     }
   }
 
-  void removeRecentlyAddedRemovedSong(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeRecentlyAddedRemovedSong(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedSongBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {
@@ -115,7 +121,8 @@ class CartRepository {
   }
 
   ///FOR CART ALBUM
-  Future<void> addRemoveAlbum(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
+  Future<void> addRemoveAlbum(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
     ///LIKE OR UNLIKE ALBUM
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       await cartDataProvider.addAlbumToCart(id);
@@ -126,7 +133,8 @@ class CartRepository {
     }
   }
 
-  void addRecentlyAddedRemovedAlbum(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void addRecentlyAddedRemovedAlbum(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedAlbumBox.delete(id);
       AppHiveBoxes.instance.recentlyCartAddedAlbumBox.put(
@@ -142,7 +150,8 @@ class CartRepository {
     }
   }
 
-  void removeAlternativeAddedRemovedAlbum(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeAlternativeAddedRemovedAlbum(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {
@@ -150,7 +159,8 @@ class CartRepository {
     }
   }
 
-  void removeRecentlyAddedRemovedAlbum(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeRecentlyAddedRemovedAlbum(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedAlbumBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {
@@ -159,7 +169,8 @@ class CartRepository {
   }
 
   ///FOR CART PLAYLIST
-  Future<void> addRemovePlaylist(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
+  Future<void> addRemovePlaylist(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) async {
     ///LIKE OR UNLIKE PLAYLIST
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       await cartDataProvider.addPlaylistToCart(id);
@@ -170,7 +181,8 @@ class CartRepository {
     }
   }
 
-  void addRecentlyAddedRemovedPlaylist(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void addRecentlyAddedRemovedPlaylist(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.delete(id);
       AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.put(
@@ -186,7 +198,8 @@ class CartRepository {
     }
   }
 
-  void removeAlternativeAddedRemovedPlaylist(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeAlternativeAddedRemovedPlaylist(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {
@@ -194,7 +207,8 @@ class CartRepository {
     }
   }
 
-  void removeRecentlyAddedRemovedPlaylist(int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
+  void removeRecentlyAddedRemovedPlaylist(
+      int id, AppCartAddRemoveEvents appCartAddRemoveEvents) {
     if (appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD) {
       AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.delete(id);
     } else if (appCartAddRemoveEvents == AppCartAddRemoveEvents.REMOVE) {

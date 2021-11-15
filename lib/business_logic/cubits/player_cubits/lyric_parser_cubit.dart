@@ -1,8 +1,8 @@
 // import 'dart:async';
 //
 // import 'package:bloc/bloc.dart';
-// import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-// import 'package:elf_play/data/models/lyric_item.dart';
+// import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+// import 'package:mehaley/data/models/lyric_item.dart';
 // import 'package:lyrics_parser/lyrics_parser.dart';
 //
 // class LyricParserCubit extends Cubit<List<LyricItem>> {

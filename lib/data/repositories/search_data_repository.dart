@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:dio/src/cancel_token.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/data_providers/search_data_provider.dart';
-import 'package:elf_play/data/models/api_response/search_page_front_data.dart';
-import 'package:elf_play/data/models/api_response/search_page_result_data.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/category.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/search_data_provider.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/search_page_front_data.dart';
+import 'package:mehaley/data/models/api_response/search_page_result_data.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/category.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class SearchDataRepository {
   //INIT PROVIDER FOR API CALL

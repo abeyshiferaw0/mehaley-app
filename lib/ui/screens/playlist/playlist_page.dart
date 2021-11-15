@@ -1,23 +1,23 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/song_item/song_item.dart';
-import 'package:elf_play/ui/screens/playlist/widget/playlist_sliver_deligates.dart';
-import 'package:elf_play/ui/screens/playlist/widget/shimmer_playlist.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/song_item/song_item.dart';
+import 'package:mehaley/ui/screens/playlist/widget/playlist_sliver_deligates.dart';
+import 'package:mehaley/ui/screens/playlist/widget/shimmer_playlist.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class PlaylistPage extends StatefulWidget {
   const PlaylistPage({Key? key, required this.playlistId}) : super(key: key);
@@ -44,7 +44,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
         builder: (context, state) {
           if (state is PlaylistPageLoadingState) {

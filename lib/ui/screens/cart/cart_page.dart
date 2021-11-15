@@ -1,31 +1,31 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/cart_page_data.dart';
-import 'package:elf_play/data/models/cart/cart.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_app_bar.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_appbar_delegate.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_clear_and_check_delegate.dart';
-import 'package:elf_play/ui/screens/cart/widgets/cart_summery.dart';
-import 'package:elf_play/ui/screens/cart/widgets/list_cart_albums.dart';
-import 'package:elf_play/ui/screens/cart/widgets/list_cart_playlist.dart';
-import 'package:elf_play/ui/screens/cart/widgets/list_cart_songs.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/cart_page_data.dart';
+import 'package:mehaley/data/models/cart/cart.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/screens/cart/widgets/cart_app_bar.dart';
+import 'package:mehaley/ui/screens/cart/widgets/cart_appbar_delegate.dart';
+import 'package:mehaley/ui/screens/cart/widgets/cart_clear_and_check_delegate.dart';
+import 'package:mehaley/ui/screens/cart/widgets/cart_summery.dart';
+import 'package:mehaley/ui/screens/cart/widgets/list_cart_albums.dart';
+import 'package:mehaley/ui/screens/cart/widgets/list_cart_playlist.dart';
+import 'package:mehaley/ui/screens/cart/widgets/list_cart_songs.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class CartPage extends StatefulWidget {
@@ -91,12 +91,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                   unabledName:
                       L10nUtil.translateLocale(state.song.songName, context)),
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
             ),
@@ -107,12 +107,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                   unabledName: L10nUtil.translateLocale(
                       state.album.albumTitle, context)),
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
             ),
@@ -123,7 +123,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                 unabledName: L10nUtil.translateLocale(
@@ -131,7 +131,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   context,
                 ),
               ),
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
             ),
@@ -140,10 +140,10 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovingErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               msg: AppLocale.of().unableToClearCart,
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               icon: PhosphorIcons.wifi_x_light,
               iconColor: AppColors.errorRed,
             ),
@@ -162,14 +162,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildDownloadMsgSnackBar(
-                  bgColor: AppColors.white,
+                  bgColor: AppColors.black,
                   isFloating: true,
                   msg: AppLocale.of().removeedFromCart(
                       removedName: L10nUtil.translateLocale(
                           state.song.songName, context)),
-                  txtColor: AppColors.black,
+                  txtColor: AppColors.white,
                   icon: PhosphorIcons.check_circle_fill,
-                  iconColor: AppColors.darkGreen),
+                  iconColor: AppColors.darkOrange),
             );
 
             ///LOAD CART WITHOUT REMOVED SONG
@@ -187,14 +187,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.white,
+                bgColor: AppColors.black,
                 isFloating: true,
                 msg: AppLocale.of().removeedFromCart(
                     removedName: L10nUtil.translateLocale(
                         state.album.albumTitle, context)),
-                txtColor: AppColors.black,
+                txtColor: AppColors.white,
                 icon: PhosphorIcons.check_circle_fill,
-                iconColor: AppColors.darkGreen),
+                iconColor: AppColors.darkOrange),
           );
 
           ///LOAD CART WITHOUT REMOVED ALBUM
@@ -211,7 +211,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.white,
+                bgColor: AppColors.black,
                 isFloating: true,
                 msg: AppLocale.of().removeedFromCart(
                   removedName: L10nUtil.translateLocale(
@@ -219,9 +219,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     context,
                   ),
                 ),
-                txtColor: AppColors.black,
+                txtColor: AppColors.white,
                 icon: PhosphorIcons.check_circle_fill,
-                iconColor: AppColors.darkGreen),
+                iconColor: AppColors.darkOrange),
           );
 
           ///LOAD CART WITHOUT REMOVED PLAYLIST
@@ -236,12 +236,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.white,
+                bgColor: AppColors.black,
                 isFloating: true,
                 msg: AppLocale.of().cartCleared,
-                txtColor: AppColors.black,
+                txtColor: AppColors.white,
                 icon: PhosphorIcons.check_circle_fill,
-                iconColor: AppColors.darkGreen),
+                iconColor: AppColors.darkOrange),
           );
 
           ///LOAD CART WITHOUT REMOVED PLAYLIST
@@ -274,9 +274,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoaded(Cart cart) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: RefreshIndicator(
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
         onRefresh: () async {
           ///LOAD CART PAGE
           BlocProvider.of<CartPageBloc>(context).add(
@@ -360,7 +360,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoading() {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           CartAppBar(
@@ -384,7 +384,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
       builder: (context, state) {
         if (state is CartUtilLoadingState) {
           return Container(
-            color: AppColors.black.withOpacity(
+            color: AppColors.white.withOpacity(
               0.5,
             ),
             child: Center(
@@ -401,7 +401,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageEmpty() {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           CartAppBar(
@@ -435,7 +435,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.white,
+                      color: AppColors.black,
                     ),
                   ),
                   SizedBox(
@@ -469,7 +469,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: AppColors.darkGreen,
+                        color: AppColors.darkOrange,
                       ),
                       child: Text(
                         AppLocale.of().goToHomeScreen,
@@ -477,7 +477,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
                       ),
                     ),
@@ -493,7 +493,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoadingError() {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           CartAppBar(

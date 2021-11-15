@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/api_response/artist_page_data.dart';
-import 'package:elf_play/data/repositories/artist_data_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/api_response/artist_page_data.dart';
+import 'package:mehaley/data/repositories/artist_data_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'artist_page_event.dart';

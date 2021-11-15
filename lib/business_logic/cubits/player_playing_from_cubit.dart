@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 
 class PlayerPagePlayingFromCubit extends Cubit<PlayingFrom> {
   PlayerPagePlayingFromCubit()

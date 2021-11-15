@@ -1,14 +1,15 @@
 import 'dart:math';
 
-import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
   final double height;
@@ -30,7 +31,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                 horizontal: AppMargin.margin_32,
                 vertical: AppPadding.padding_4,
               ),
-              color: AppColors.black,
+              color: AppColors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,8 +73,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                   ),
                   buildProfileTab(
                     number: '${(state.profilePageData.numberOfFollowedItems)}',
-                    title:
-                        AppLocale.of().following.toUpperCase(),
+                    title: AppLocale.of().following.toUpperCase(),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -114,7 +114,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           SizedBox(

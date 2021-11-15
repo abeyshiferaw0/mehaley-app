@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/fake_data.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mehaley/config/fake_data.dart';
+import 'package:mehaley/config/themes.dart';
 
 class ColorUtil {
   static Color darken(Color color, [double amount = .1]) {

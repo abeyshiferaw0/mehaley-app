@@ -1,16 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/app_language/app_locale.dart';
 
 import '../app_card.dart';
 import '../like_follow/song_is_liked_indicator.dart';
@@ -43,7 +42,7 @@ class SongQueueItem extends StatelessWidget {
               '$position',
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.white.withOpacity(0.9),
+                color: AppColors.black.withOpacity(0.9),
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -68,7 +67,7 @@ class SongQueueItem extends StatelessWidget {
                     L10nUtil.translateLocale(song.songName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
-                      color: AppColors.white.withOpacity(0.9),
+                      color: AppColors.black.withOpacity(0.9),
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -96,7 +95,7 @@ class SongQueueItem extends StatelessWidget {
             ),
             Icon(
               PhosphorIcons.list_light,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               size: AppIconSizes.icon_size_16,
             )
           ],

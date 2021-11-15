@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class CurrentPlayingCubit extends Cubit<Song?> {
   late StreamSubscription subscription;

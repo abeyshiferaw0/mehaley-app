@@ -1,6 +1,6 @@
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class SignUpPageGradient extends StatelessWidget {
   const SignUpPageGradient({

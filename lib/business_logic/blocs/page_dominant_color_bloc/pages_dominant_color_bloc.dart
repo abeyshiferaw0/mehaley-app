@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/util/color_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:meta/meta.dart';
 
 part 'pages_dominant_color_event.dart';
@@ -49,10 +49,7 @@ class PagesDominantColorBloc
       );
       yield PlaylistPageDominantColorChangedState(color: dominantColor);
     } else if (event is PlayerPageDominantColorChanged) {
-      Color dominantColor = ColorUtil.darken(
-        HexColor(event.dominantColor),
-        0.15,
-      );
+      Color dominantColor = HexColor(event.dominantColor);
       yield PlayerPageDominantColorChangedState(color: dominantColor);
     } else if (event is UserPlaylistPageDominantColorChanged) {
       Color dominantColor = ColorUtil.darken(

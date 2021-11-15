@@ -1,5 +1,5 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
 
 class LeftAndRightItemsPlaceHolder extends StatelessWidget {
   const LeftAndRightItemsPlaceHolder({

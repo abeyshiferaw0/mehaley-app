@@ -1,10 +1,10 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/artist_data_provider.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/api_response/artist_page_data.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/artist_data_provider.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/artist_page_data.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class ArtistDataRepository {
   //INIT PROVIDER FOR API CALL

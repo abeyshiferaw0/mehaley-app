@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 import '../playlist.dart';
 

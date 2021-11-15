@@ -1,9 +1,9 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class RemoveFromCartButton extends StatelessWidget {
@@ -35,12 +35,12 @@ class RemoveFromCartButton extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(AppPadding.padding_4),
               decoration: BoxDecoration(
-                color: AppColors.darkGreen.withOpacity(0.5),
+                color: AppColors.darkOrange.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Icon(
                 PhosphorIcons.x_light,
-                color: AppColors.white,
+                color: AppColors.black,
                 size: AppIconSizes.icon_size_12,
               ),
             ),
@@ -71,12 +71,12 @@ class RemoveFromCartButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(AppPadding.padding_4),
             decoration: BoxDecoration(
-              color: AppColors.darkGreen.withOpacity(0.5),
+              color: AppColors.darkOrange.withOpacity(0.5),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
               PhosphorIcons.x_light,
-              color: AppColors.white,
+              color: AppColors.black,
               size: AppIconSizes.icon_size_12,
             ),
           ),

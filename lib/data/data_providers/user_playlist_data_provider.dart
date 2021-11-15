@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/util/api_util.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/util/api_util.dart';
 
 class UserPlaylistDataProvider {
   late Dio dio;

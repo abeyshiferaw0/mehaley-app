@@ -1,9 +1,9 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/lyric_data_provider.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/data/models/text_lan.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:lyrics_parser/lyrics_parser.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/lyric_data_provider.dart';
+import 'package:mehaley/data/models/lyric_item.dart';
+import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 class LyricDataRepository {
   //INIT PROVIDER FOR API CALL

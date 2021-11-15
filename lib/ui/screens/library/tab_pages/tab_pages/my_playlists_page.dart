@@ -1,20 +1,20 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_my_playlist_item.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_my_playlist_item.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class MyPlaylistsPage extends StatefulWidget {
@@ -141,10 +141,10 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
               child: Container(
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,
-                color: AppColors.darkGrey,
+                color: AppColors.lightGrey,
                 child: Icon(
                   PhosphorIcons.plus_light,
-                  color: AppColors.white,
+                  color: AppColors.black,
                   size: AppIconSizes.icon_size_24,
                 ),
               ),
@@ -156,7 +156,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),

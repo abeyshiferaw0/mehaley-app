@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:meta/meta.dart';
 
 part 'recent_search_event.dart';

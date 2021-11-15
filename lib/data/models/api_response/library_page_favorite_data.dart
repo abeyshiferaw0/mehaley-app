@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/library_data/favorite_album.dart';
-import 'package:elf_play/data/models/library_data/favorite_song.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/library_data/favorite_album.dart';
+import 'package:mehaley/data/models/library_data/favorite_song.dart';
 
 class FavoriteItemsData extends Equatable {
   final List<FavoriteSong>? favoriteSongs;

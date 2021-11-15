@@ -1,18 +1,18 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
-import 'package:elf_play/ui/common/dialog/dialog_song_preview_mode.dart';
-import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
-import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
+import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
+import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
+import 'package:mehaley/util/download_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 class SongDownloadMenuItem extends StatefulWidget {
   SongDownloadMenuItem({
@@ -126,7 +126,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         child: MenuItem(
           isDisabled: false,
           hasTopMargin: false,
-          iconColor: AppColors.green,
+          iconColor: AppColors.orange,
           icon: PhosphorIcons.arrow_circle_down_fill,
           title: AppLocale.of().deleteMezmur,
           onTap: () {
@@ -197,7 +197,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
           width: AppIconSizes.icon_size_24,
           height: AppIconSizes.icon_size_24,
           child: CircularProgressIndicator(
-            color: AppColors.green,
+            color: AppColors.orange,
             strokeWidth: 2,
           ),
         ),

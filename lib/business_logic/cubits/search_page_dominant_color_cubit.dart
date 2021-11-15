@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class SearchPageDominantColorCubit extends Cubit<Color> {
   final SearchResultBloc searchResultBloc;

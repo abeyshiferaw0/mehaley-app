@@ -1,12 +1,12 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/screens/home/widgets/item_custom_group.dart';
-import 'package:elf_play/ui/screens/home/widgets/item_custom_group_grid.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/screens/home/widgets/item_custom_group.dart';
+import 'package:mehaley/ui/screens/home/widgets/item_custom_group_grid.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 import 'group_header_widget.dart';
@@ -52,7 +52,7 @@ class HomeGroups extends StatelessWidget {
           child: Text(
             groupTitle,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.black,
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w600,
             ),
@@ -111,7 +111,7 @@ class HomeGroups extends StatelessWidget {
           child: Text(
             groupTitle,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.black,
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w600,
             ),

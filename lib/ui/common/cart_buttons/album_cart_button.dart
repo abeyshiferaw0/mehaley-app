@@ -1,14 +1,14 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
 class AlbumCartButton extends StatefulWidget {
   const AlbumCartButton({
@@ -79,13 +79,13 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
         return Icon(
           PhosphorIcons.shopping_cart_simple_fill,
           size: AppIconSizes.icon_size_24,
-          color: AppColors.darkGreen,
+          color: AppColors.darkOrange,
         );
       } else {
         return Icon(
           PhosphorIcons.shopping_cart_simple_light,
           size: AppIconSizes.icon_size_24,
-          color: AppColors.white,
+          color: AppColors.black,
         );
       }
     }
@@ -96,7 +96,7 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_24,
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
       );
     }
 
@@ -106,7 +106,7 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_24,
-        color: AppColors.white,
+        color: AppColors.black,
       );
     }
 
@@ -115,13 +115,13 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_24,
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
       );
     } else {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_24,
-        color: AppColors.white,
+        color: AppColors.black,
       );
     }
   }

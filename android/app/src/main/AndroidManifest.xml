@@ -9,7 +9,7 @@
     <!--FOR JUST AUDIO BACKGROUND-->
 
    <application
-        android:label="elf_play"
+        android:label="Mehaley"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 

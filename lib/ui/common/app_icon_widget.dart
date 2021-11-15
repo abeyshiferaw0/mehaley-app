@@ -1,6 +1,7 @@
-import 'package:elf_play/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 
 class AppIconWidget extends StatelessWidget {
   const AppIconWidget({
@@ -14,7 +15,7 @@ class AppIconWidget extends StatelessWidget {
       child: SvgPicture.asset(
         'assets/icons/ic_app.svg',
         width: AppIconSizes.icon_size_20,
-        color: Colors.white,
+        color: AppColors.black,
       ),
     );
   }

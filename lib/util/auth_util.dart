@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/app_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/app_user.dart';
 
 class AuthUtil {
   static Future<bool> isUserLoggedIn() async {

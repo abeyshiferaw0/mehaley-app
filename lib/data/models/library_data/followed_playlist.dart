@@ -1,4 +1,4 @@
-import 'package:elf_play/data/models/playlist.dart';
+import 'package:mehaley/data/models/playlist.dart';
 
 class FollowedPlaylist {
   final int logId;

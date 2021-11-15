@@ -1,6 +1,7 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:sizer/sizer.dart';
 
 class DownloadAllPurchased extends StatelessWidget {
   DownloadAllPurchased({Key? key, required this.downloadAllSelected})
@@ -18,7 +19,7 @@ class DownloadAllPurchased extends StatelessWidget {
             AppLocale.of().downAllPurchased,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -28,8 +29,8 @@ class DownloadAllPurchased extends StatelessWidget {
               value: downloadAllSelected,
               // trackColor:
               //     MaterialStateProperty.all<Color>(AppColors.grey),
-              activeColor: AppColors.darkGreen,
-              activeTrackColor: AppColors.green.withOpacity(0.3),
+              activeColor: AppColors.darkOrange,
+              activeTrackColor: AppColors.orange.withOpacity(0.3),
               inactiveTrackColor: AppColors.grey,
               onChanged: (bool isSwitched) {},
             ),

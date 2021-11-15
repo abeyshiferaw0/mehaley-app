@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/util/audio_player_util.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/util/audio_player_util.dart';
 import 'package:meta/meta.dart';
 
 part 'audio_player_event.dart';

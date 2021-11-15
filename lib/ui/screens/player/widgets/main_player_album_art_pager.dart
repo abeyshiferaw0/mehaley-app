@@ -1,20 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/player_queue_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class MainPlayerAlbumArtPager extends StatefulWidget {
   const MainPlayerAlbumArtPager({Key? key}) : super(key: key);
 
   @override
-  _MainPlayerAlbumArtPagerState createState() => _MainPlayerAlbumArtPagerState();
+  _MainPlayerAlbumArtPagerState createState() =>
+      _MainPlayerAlbumArtPagerState();
 }
 
 class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
@@ -56,17 +57,23 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
             itemBuilder: (BuildContext context, int index) {
               return Center(
                 child: AppCard(
-                  radius: 0.0,
+                  radius: 8,
                   constraints: BoxConstraints(
-                    maxHeight: ScreenUtil(context: context).getScreenWidth() * 0.8,
-                    minHeight: ScreenUtil(context: context).getScreenWidth() * 0.7,
-                    maxWidth: ScreenUtil(context: context).getScreenWidth() * 0.95,
-                    minWidth: ScreenUtil(context: context).getScreenWidth() * 0.8,
+                    maxHeight:
+                        ScreenUtil(context: context).getScreenWidth() * 0.8,
+                    minHeight:
+                        ScreenUtil(context: context).getScreenWidth() * 0.7,
+                    maxWidth:
+                        ScreenUtil(context: context).getScreenWidth() * 0.95,
+                    minWidth:
+                        ScreenUtil(context: context).getScreenWidth() * 0.8,
                   ),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: AppApi.baseUrl + state.queue[index].albumArt.imageMediumPath,
-                    errorWidget: (context, url, error) => buildImagePlaceHolder(),
+                    imageUrl: AppApi.baseUrl +
+                        state.queue[index].albumArt.imageMediumPath,
+                    errorWidget: (context, url, error) =>
+                        buildImagePlaceHolder(),
                     placeholder: (context, url) => buildImagePlaceHolder(),
                     imageBuilder: (context, imageProvider) {
                       return Container(
@@ -108,13 +115,22 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
   }
 
   void initPageControllerPosition() {
-    if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState != null) {
+    if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState !=
+        null) {
       List<MediaItem> queue = [];
-      BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState!.effectiveSequence.forEach((mediaItem) {
+      BlocProvider.of<AudioPlayerBloc>(context)
+          .audioPlayer
+          .sequenceState!
+          .effectiveSequence
+          .forEach((mediaItem) {
         queue.add(mediaItem.tag);
       });
       //GET CURRENT PLAYING SONG INDEX FOR THE QUEUE
-      MediaItem currentSong = BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState!.currentSource!.tag;
+      MediaItem currentSong = BlocProvider.of<AudioPlayerBloc>(context)
+          .audioPlayer
+          .sequenceState!
+          .currentSource!
+          .tag;
       int currentIndex = queue.indexOf(currentSong);
       _pageController = PageController(initialPage: currentIndex);
     } else {

@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/app_firebase_user.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/data/models/enums/user_login_type.dart';
-import 'package:elf_play/data/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/app_firebase_user.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
+import 'package:mehaley/data/repositories/auth_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 

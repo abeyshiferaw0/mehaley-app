@@ -1,31 +1,31 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/custom_track_shape.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/screens/player/widgets/lyric_player_full_page_widget.dart';
-import 'package:elf_play/ui/screens/player/widgets/share_btn_widget.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:marquee/marquee.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/custom_track_shape.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/screens/player/widgets/lyric_player_full_page_widget.dart';
+import 'package:mehaley/ui/screens/player/widgets/share_btn_widget.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LyricFullPage extends StatefulWidget {
@@ -146,7 +146,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: AppFontSizes.font_size_16,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
                         maxLines: 1,
                         minFontSize: AppFontSizes.font_size_16,
@@ -157,7 +157,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_16,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.white,
+                            color: AppColors.black,
                           ),
                           scrollAxis: Axis.horizontal,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,7 +181,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -197,11 +197,11 @@ class _LyricFullPageState extends State<LyricFullPage> {
                 },
                 icon: CircleAvatar(
                   radius: AppValues.lyricPageCloseButtonSize,
-                  backgroundColor: AppColors.black.withOpacity(0.4),
+                  backgroundColor: AppColors.white.withOpacity(0.4),
                   child: Icon(
                     PhosphorIcons.x_light,
                     size: AppValues.lyricPageCloseButtonSize - 2,
-                    color: AppColors.white,
+                    color: AppColors.black,
                   ),
                 ),
               )
@@ -222,12 +222,12 @@ class _LyricFullPageState extends State<LyricFullPage> {
             children: [
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  activeTrackColor: AppColors.lightGrey,
-                  inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+                  activeTrackColor: AppColors.darkGrey,
+                  inactiveTrackColor: AppColors.darkGrey.withOpacity(0.24),
                   trackShape: CustomTrackShapeThin(),
-                  thumbColor: AppColors.white,
+                  thumbColor: AppColors.black,
                   thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4.0),
-                  overlayColor: AppColors.white.withOpacity(0.24),
+                  overlayColor: AppColors.black.withOpacity(0.24),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
                 ),
                 child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
@@ -265,7 +265,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         ),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.lightGrey.withOpacity(0.6),
+                          color: AppColors.darkGrey.withOpacity(0.6),
                         ),
                       );
                     },
@@ -276,7 +276,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                     ),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
-                      color: AppColors.lightGrey.withOpacity(0.6),
+                      color: AppColors.darkGrey.withOpacity(0.6),
                     ),
                   ),
                 ],
@@ -303,7 +303,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                                   ? Icons.pause_circle_filled_sharp
                                   : FlutterRemix.play_circle_fill,
                               size: AppIconSizes.icon_size_72,
-                              color: AppColors.white,
+                              color: AppColors.black,
                             ),
                           );
                         },

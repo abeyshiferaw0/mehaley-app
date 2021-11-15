@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/song.dart';
 
 import '../playlist.dart';
 

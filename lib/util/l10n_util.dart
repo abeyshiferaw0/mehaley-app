@@ -1,9 +1,9 @@
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/enums/app_languages.dart';
-import 'package:elf_play/data/models/text_lan.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/data/models/text_lan.dart';
 
 class L10nUtil {
   static translateLocale(TextLan textLan, BuildContext? context) {

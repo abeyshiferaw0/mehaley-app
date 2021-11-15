@@ -1,15 +1,16 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class PlaylistInfoCartButton extends StatefulWidget {
   const PlaylistInfoCartButton({
@@ -61,7 +62,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.bold,
                       // color: AppColors.darkGrey,
-                      color: AppColors.lightGrey,
+                      color: AppColors.darkGrey,
                     ),
                   ),
                 ],
@@ -105,13 +106,13 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
         return Icon(
           PhosphorIcons.shopping_cart_simple_fill,
           size: AppIconSizes.icon_size_20,
-          color: AppColors.darkGreen,
+          color: AppColors.darkOrange,
         );
       } else {
         return Icon(
           PhosphorIcons.shopping_cart_simple_light,
           size: AppIconSizes.icon_size_20,
-          color: AppColors.lightGrey,
+          color: AppColors.darkGrey,
         );
       }
     }
@@ -122,7 +123,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
       );
     }
 
@@ -132,7 +133,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
       );
     }
 
@@ -141,13 +142,13 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
       return Icon(
         PhosphorIcons.shopping_cart_simple_fill,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
       );
     } else {
       return Icon(
         PhosphorIcons.shopping_cart_simple_light,
         size: AppIconSizes.icon_size_20,
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
       );
     }
   }

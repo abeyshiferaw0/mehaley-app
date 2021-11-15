@@ -1,14 +1,14 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/dialog/dialog_unlike_unfollow.dart';
 
 class SongIsLikedIndicator extends StatelessWidget {
   const SongIsLikedIndicator({
@@ -54,7 +54,7 @@ class SongIsLikedIndicator extends StatelessWidget {
               padding: EdgeInsets.all(AppPadding.padding_8),
               child: Icon(
                 PhosphorIcons.heart_straight_fill,
-                color: AppColors.darkGreen,
+                color: AppColors.darkOrange,
                 size: AppIconSizes.icon_size_20,
               ),
             ),

@@ -1,8 +1,8 @@
-// import 'package:elf_play/config/constants.dart';
-// import 'package:elf_play/config/enums.dart';import 'package:elf_play/data/models/lyric_item.dart';
-// import 'package:elf_play/config/themes.dart';
-// import 'package:elf_play/ui/screens/home/widgets/item_custom_group.dart';
-// import 'package:elf_play/ui/screens/home/widgets/item_custom_group_grid.dart';
+// import 'package:mehaley/config/constants.dart';
+// import 'package:mehaley/config/enums.dart';import 'package:mehaley/data/models/lyric_item.dart';
+// import 'package:mehaley/config/themes.dart';
+// import 'package:mehaley/ui/screens/home/widgets/item_custom_group.dart';
+// import 'package:mehaley/ui/screens/home/widgets/item_custom_group_grid.dart';
 // import 'package:flutter/material.dart';
 //
 // class HomeCustomGroups extends StatelessWidget {
@@ -28,7 +28,7 @@
 //           child: Text(
 //             'Custom Groups From Elf',
 //             style: TextStyle(
-//               color: Colors.white,
+//               color: AppColors.black,
 //               fontSize: AppFontSizes.font_size_22,
 //               fontWeight: FontWeight.w600,
 //             ),
@@ -80,7 +80,7 @@
 //           child: Text(
 //             'Custom Groups From Elf',
 //             style: TextStyle(
-//               color: Colors.white,
+//               color: AppColors.black,
 //               fontSize: AppFontSizes.font_size_22,
 //               fontWeight: FontWeight.w600,
 //             ),

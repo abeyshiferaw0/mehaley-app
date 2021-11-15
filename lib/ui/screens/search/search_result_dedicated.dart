@@ -1,28 +1,28 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_empty_message.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_empty_message.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
@@ -53,14 +53,14 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         centerTitle: true,
         //brightness: Brightness.dark,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
         ),
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: AppColors.lightGrey,
         leading: IconButton(
           iconSize: AppIconSizes.icon_size_24,
           onPressed: () {
@@ -75,7 +75,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           ),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: AppColors.lightGrey,
+            color: AppColors.darkGrey,
           ),
         ),
       ),

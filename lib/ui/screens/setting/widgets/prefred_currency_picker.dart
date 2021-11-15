@@ -1,14 +1,14 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/settings_page_data.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/settings_page_data.dart';
+import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
 import 'package:sizer/sizer.dart';
 
 class PreferredCurrencyPicker extends StatelessWidget {
@@ -33,7 +33,7 @@ class PreferredCurrencyPicker extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
               SizedBox(
@@ -55,8 +55,8 @@ class PreferredCurrencyPicker extends StatelessWidget {
         ),
         DropdownButton(
           value: settingsPageData.preferredCurrency,
-          dropdownColor: AppColors.darkGrey,
-          focusColor: AppColors.green,
+          dropdownColor: AppColors.lightGrey,
+          focusColor: AppColors.orange,
           icon: Padding(
             padding: const EdgeInsets.only(
               left: AppPadding.padding_8,
@@ -104,7 +104,7 @@ class PreferredCurrencyPicker extends StatelessWidget {
       child: Text(
         EnumToString.convertToString(appCurrency),
         style: TextStyle(
-          color: isActive ? AppColors.darkGreen : AppColors.txtGrey,
+          color: isActive ? AppColors.darkOrange : AppColors.txtGrey,
           fontSize: AppFontSizes.font_size_10.sp,
           fontWeight: FontWeight.w600,
         ),

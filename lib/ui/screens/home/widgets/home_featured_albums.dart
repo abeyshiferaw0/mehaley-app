@@ -1,15 +1,15 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/buy_item_btn.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/buy_item_btn.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'group_header_widget.dart';

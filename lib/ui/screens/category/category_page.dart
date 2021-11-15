@@ -1,30 +1,30 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
-import 'package:elf_play/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/category.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/song_item/song_item.dart';
-import 'package:elf_play/ui/screens/category/widgets/category_sliver_header_delegate.dart';
-import 'package:elf_play/ui/screens/category/widgets/item_popular_album.dart';
-import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart';
-import 'package:elf_play/ui/screens/category/widgets/pagination_error_widget.dart';
-import 'package:elf_play/ui/screens/category/widgets/shimmer_category.dart';
-import 'package:elf_play/ui/screens/category/widgets/shimmer_category_top.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/category.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/song_item/song_item.dart';
+import 'package:mehaley/ui/screens/category/widgets/category_sliver_header_delegate.dart';
+import 'package:mehaley/ui/screens/category/widgets/item_popular_album.dart';
+import 'package:mehaley/ui/screens/category/widgets/item_popular_playlist.dart';
+import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
+import 'package:mehaley/ui/screens/category/widgets/shimmer_category.dart';
+import 'package:mehaley/ui/screens/category/widgets/shimmer_category_top.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -88,7 +88,7 @@ class _CategoryPageState extends State<CategoryPage>
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         body: Stack(
           children: [
             CustomScrollView(
@@ -246,7 +246,7 @@ class _CategoryPageState extends State<CategoryPage>
         Icon(
           PhosphorIcons.music_note_simple_light,
           size: AppIconSizes.icon_size_72,
-          color: AppColors.darkGrey.withOpacity(0.8),
+          color: AppColors.lightGrey.withOpacity(0.8),
         ),
         SizedBox(
           height: AppMargin.margin_8,
@@ -292,7 +292,7 @@ class _CategoryPageState extends State<CategoryPage>
         Text(
           AppLocale.of().playlists,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_14.sp,
             fontWeight: FontWeight.w600,
           ),
@@ -347,7 +347,7 @@ class _CategoryPageState extends State<CategoryPage>
         Text(
           AppLocale.of().albums,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_14.sp,
             fontWeight: FontWeight.w600,
           ),
@@ -400,7 +400,7 @@ class _CategoryPageState extends State<CategoryPage>
         Text(
           AppLocale.of().mezmurs,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_18,
             fontWeight: FontWeight.w600,
           ),

@@ -1,20 +1,20 @@
 import 'dart:math';
 
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/menu/profile_menu_widget.dart';
-import 'package:elf_play/ui/common/user_profile_pic.dart';
-import 'package:elf_play/util/auth_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/menu/profile_menu_widget.dart';
+import 'package:mehaley/ui/common/user_profile_pic.dart';
+import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
@@ -104,7 +104,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                         BorderRadius.circular(AppValues.profilePagePicSize),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black.withOpacity(0.1),
+                        color: AppColors.white.withOpacity(0.1),
                         spreadRadius: 6,
                         blurRadius: 12,
                         offset: Offset(0, 0),
@@ -127,7 +127,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_18.sp,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
                       );
                     },
@@ -156,7 +156,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      border: Border.all(color: AppColors.white, width: 1),
+                      border: Border.all(color: AppColors.black, width: 1),
                     ),
                     padding: EdgeInsets.symmetric(
                       vertical: AppPadding.padding_4,
@@ -167,7 +167,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     ),
                   ),
@@ -204,7 +204,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                     },
                     icon: Icon(
                       PhosphorIcons.caret_left_light,
-                      color: AppColors.white,
+                      color: AppColors.black,
                       size: AppIconSizes.icon_size_24,
                     ),
                   ),
@@ -220,7 +220,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.white,
+                            color: AppColors.black,
                           ),
                         );
                       },
@@ -257,7 +257,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       },
                       child: Icon(
                         PhosphorIcons.dots_three_vertical,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         size: AppIconSizes.icon_size_24,
                       ),
                     ),

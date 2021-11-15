@@ -1,18 +1,18 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/library_page_data_provider.dart';
-import 'package:elf_play/data/models/api_response/library_page_favorite_data.dart';
-import 'package:elf_play/data/models/api_response/library_page_following_data.dart';
-import 'package:elf_play/data/models/api_response/library_page_purchased_data.dart';
-import 'package:elf_play/data/models/library_data/favorite_album.dart';
-import 'package:elf_play/data/models/library_data/favorite_song.dart';
-import 'package:elf_play/data/models/library_data/followed_artist.dart';
-import 'package:elf_play/data/models/library_data/followed_playlist.dart';
-import 'package:elf_play/data/models/library_data/purchased_album.dart';
-import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
-import 'package:elf_play/data/models/library_data/purchased_song.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/util/api_util.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/library_page_data_provider.dart';
+import 'package:mehaley/data/models/api_response/library_page_favorite_data.dart';
+import 'package:mehaley/data/models/api_response/library_page_following_data.dart';
+import 'package:mehaley/data/models/api_response/library_page_purchased_data.dart';
+import 'package:mehaley/data/models/library_data/favorite_album.dart';
+import 'package:mehaley/data/models/library_data/favorite_song.dart';
+import 'package:mehaley/data/models/library_data/followed_artist.dart';
+import 'package:mehaley/data/models/library_data/followed_playlist.dart';
+import 'package:mehaley/data/models/library_data/purchased_album.dart';
+import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
+import 'package:mehaley/data/models/library_data/purchased_song.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/util/api_util.dart';
 
 class LibraryPageDataRepository {
   //INIT PROVIDER FOR API CALL

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/util/api_util.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/lyric_item.dart';
+import 'package:mehaley/util/api_util.dart';
 
 class AlbumDataProvider {
   late Dio dio;

@@ -1,6 +1,6 @@
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/like_follow_provider.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/like_follow_provider.dart';
 
 class LikeFollowRepository {
   ///INIT PROVIDER FOR API CALL

@@ -1,6 +1,6 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/config/themes.dart';
 
 part 'remote_image.g.dart';
 

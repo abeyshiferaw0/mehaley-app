@@ -1,7 +1,7 @@
-import 'package:elf_play/data/models/enums/app_payment_methods.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class PurchasedSong {
   final int paymentId;

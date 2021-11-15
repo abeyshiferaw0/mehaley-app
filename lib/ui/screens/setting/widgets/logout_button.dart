@@ -1,10 +1,10 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/dialog/dialog_log_out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/dialog/dialog_log_out.dart';
 import 'package:sizer/sizer.dart';
 
 class LogoutButton extends StatelessWidget {
@@ -35,7 +35,7 @@ class LogoutButton extends StatelessWidget {
             vertical: AppMargin.margin_12,
           ),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: AppColors.black,
             borderRadius: BorderRadius.circular(100),
           ),
           child: Text(
@@ -43,7 +43,7 @@ class LogoutButton extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.black,
+              color: AppColors.white,
             ),
           ),
         ),

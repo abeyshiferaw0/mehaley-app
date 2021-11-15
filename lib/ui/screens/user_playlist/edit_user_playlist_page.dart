@@ -1,24 +1,25 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/dialog/widgets/image_picker_dialog_items.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class EditUserPlaylistPage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableUpdatePlaylist,
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: PhosphorIcons.wifi_x_light,
@@ -82,16 +83,16 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         if (state is UserPlaylistUpdatedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               msg: AppLocale.of().playlistUpdated(
                 playlistName: L10nUtil.translateLocale(
                   state.myPlaylist.playlistNameText,
                   context,
                 ),
               ),
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: true,
-              iconColor: AppColors.darkGreen,
+              iconColor: AppColors.darkOrange,
               icon: PhosphorIcons.check_circle_fill,
             ),
           );
@@ -99,7 +100,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -147,7 +148,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   Container buildEditingPlaylistLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.completelyBlack.withOpacity(0.5),
+        color: AppColors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(
@@ -170,24 +171,24 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             textAlign: TextAlign.left,
             //autofocus: true,
             controller: descriptionInputController,
-            cursorColor: AppColors.darkGreen,
+            cursorColor: AppColors.darkOrange,
             onChanged: (key) {},
             style: TextStyle(
-              color: AppColors.white,
+              color: AppColors.black,
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
             ),
             maxLength: descriptionMaxLength,
             decoration: InputDecoration(
-              fillColor: AppColors.white,
-              focusColor: AppColors.white,
-              hoverColor: AppColors.white,
+              fillColor: AppColors.black,
+              focusColor: AppColors.black,
+              hoverColor: AppColors.black,
               border: InputBorder.none,
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.darkGrey),
+                borderSide: BorderSide(color: AppColors.lightGrey),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.darkGreen),
+                borderSide: BorderSide(color: AppColors.darkOrange),
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
@@ -206,7 +207,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 },
                 child: Icon(
                   PhosphorIcons.x_light,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                   size: AppFontSizes.font_size_24,
                 ),
               ),
@@ -228,7 +229,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1, color: AppColors.lightGrey),
+                border: Border.all(width: 1, color: AppColors.darkGrey),
               ),
               child: Text(
                 AppLocale.of().addDescription.toUpperCase(),
@@ -236,7 +237,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                 ),
               ),
             ),
@@ -252,10 +253,10 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
       textAlign: TextAlign.center,
       //autofocus: true,
       controller: nameInputController,
-      cursorColor: AppColors.darkGreen,
+      cursorColor: AppColors.darkOrange,
       onChanged: (key) {},
       style: TextStyle(
-        color: AppColors.white,
+        color: AppColors.black,
         fontSize: AppFontSizes.font_size_18.sp,
         fontWeight: FontWeight.w600,
       ),
@@ -268,21 +269,21 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
           Text(
         '$currentLength/$maxLength',
         style: TextStyle(
-          color: AppColors.darkGreen,
+          color: AppColors.darkOrange,
           fontSize: AppFontSizes.font_size_10,
         ),
       ),
       maxLength: nameMaxLength,
       decoration: InputDecoration(
-        fillColor: AppColors.white,
-        focusColor: AppColors.white,
-        hoverColor: AppColors.white,
+        fillColor: AppColors.black,
+        focusColor: AppColors.black,
+        hoverColor: AppColors.black,
         border: InputBorder.none,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGrey),
+          borderSide: BorderSide(color: AppColors.lightGrey),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGreen),
+          borderSide: BorderSide(color: AppColors.darkOrange),
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
@@ -435,7 +436,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ],
@@ -461,7 +462,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
               child: Icon(
                 PhosphorIcons.x_light,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.white,
+                color: AppColors.black,
               ),
             ),
           ),
@@ -476,7 +477,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -501,7 +502,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
                       msg: AppLocale.of().playlistNameCantBeEmpty,
-                      bgColor: AppColors.lightGrey,
+                      bgColor: AppColors.darkGrey,
                       isFloating: false,
                     ),
                   );
@@ -513,11 +514,11 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   horizontal: AppPadding.padding_16,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.black,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     width: 1,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                   ),
                 ),
                 child: Text(
@@ -525,7 +526,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.white,
                   ),
                 ),
               ),
@@ -550,52 +551,5 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
         .isNotEmpty) {
       showDescription = true;
     }
-  }
-}
-
-class ImagePickerDialogItems extends StatelessWidget {
-  const ImagePickerDialogItems({
-    Key? key,
-    required this.onTap,
-    required this.icon,
-    required this.text,
-  }) : super(key: key);
-
-  final VoidCallback onTap;
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_16,
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.black,
-              size: AppIconSizes.icon_size_24,
-            ),
-            SizedBox(
-              width: AppMargin.margin_16,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_12.sp,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.italic,
-                color: AppColors.black,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

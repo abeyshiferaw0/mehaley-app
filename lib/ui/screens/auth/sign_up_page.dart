@@ -1,14 +1,14 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
-import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_front.dart';
-import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_gradient.dart';
-import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/sign_up_page_authing_covor.dart';
+import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_front.dart';
+import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_gradient.dart';
+import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [

@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_icon_widget.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/util/color_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/app_language/app_locale.dart';
 
 class FeaturedSongsItem extends StatelessWidget {
   const FeaturedSongsItem(
@@ -37,7 +36,7 @@ class FeaturedSongsItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
           child: Container(
             height: double.infinity,
-            color: AppColors.darkGrey,
+            color: AppColors.lightGrey,
             child: Row(
               children: [
                 buildImageExpanded(),
@@ -68,7 +67,7 @@ class FeaturedSongsItem extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: AppColors.lightGrey,
+                        color: AppColors.black,
                         fontWeight: FontWeight.w500,
                         fontSize: (AppFontSizes.font_size_10 - 1).sp,
                       ),
@@ -97,7 +96,7 @@ class FeaturedSongsItem extends StatelessWidget {
                     child: Icon(
                       PhosphorIcons.play_circle_fill,
                       size: AppIconSizes.icon_size_48,
-                      color: AppColors.white,
+                      color: AppColors.black,
                     ),
                   ),
                 ),
@@ -137,7 +136,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: ColorUtil.lighten(AppColors.darkGrey, 0.04),
+      color: ColorUtil.lighten(AppColors.lightGrey, 0.04),
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(

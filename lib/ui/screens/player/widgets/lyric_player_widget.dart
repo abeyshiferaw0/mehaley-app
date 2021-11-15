@@ -1,19 +1,19 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/screens/player/lyric_full_page.dart';
-import 'package:elf_play/ui/screens/player/widgets/share_btn_widget.dart';
-import 'package:elf_play/ui/screens/player/widgets/shimmer_lyric.dart';
-import 'package:elf_play/util/color_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/lyric_item.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/screens/player/lyric_full_page.dart';
+import 'package:mehaley/ui/screens/player/widgets/share_btn_widget.dart';
+import 'package:mehaley/ui/screens/player/widgets/shimmer_lyric.dart';
+import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sizer/sizer.dart';
 
@@ -145,7 +145,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                     AppLocale.of().lyrics.toUpperCase(),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.white,
+                      color: AppColors.black,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.8,
                     ),
@@ -166,9 +166,9 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                             fontSize: AppFontSizes.font_size_16.sp,
                             color: currentLyricItem != null
                                 ? (currentLyricItem!.index == index
-                                    ? AppColors.white
-                                    : AppColors.black.withOpacity(0.7))
-                                : AppColors.black.withOpacity(0.7),
+                                    ? AppColors.black
+                                    : AppColors.white.withOpacity(0.7))
+                                : AppColors.white.withOpacity(0.7),
                             fontWeight: FontWeight.w600,
                           ),
                         );
@@ -207,7 +207,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
             AppLocale.of().lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.white,
+              color: AppColors.black,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.8,
             ),
@@ -220,7 +220,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                   Text(
                     AppLocale.of().cantLoadLyrics,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: AppColors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: AppFontSizes.font_size_12.sp,
                     ),
@@ -231,7 +231,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                   Text(
                     AppLocale.of().checkYourInternetConnection.toUpperCase(),
                     style: TextStyle(
-                      color: AppColors.lightGrey,
+                      color: AppColors.darkGrey,
                       fontSize: AppFontSizes.font_size_10.sp,
                     ),
                   ),
@@ -252,13 +252,13 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                         vertical: AppPadding.padding_8,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: AppColors.black,
                         borderRadius: BorderRadius.circular(120),
                       ),
                       child: Text(
                         AppLocale.of().tryAgain.toUpperCase(),
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: AppColors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: AppFontSizes.font_size_10.sp,
                         ),

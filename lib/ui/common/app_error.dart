@@ -1,7 +1,8 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:sizer/sizer.dart';
 
 class AppError extends StatefulWidget {
   const AppError(
@@ -63,7 +64,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                       vertical: AppMargin.margin_16,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.black,
                       borderRadius: BorderRadius.circular(
                         AppPadding.padding_8,
                       ),
@@ -85,7 +86,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
-                            color: AppColors.darkGrey,
+                            color: AppColors.lightGrey,
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.none,
                           ),
@@ -109,12 +110,12 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppColors.darkGreen,
+                              color: AppColors.darkOrange,
                               borderRadius: BorderRadius.circular(30),
                               boxShadow: [
                                 BoxShadow(
                                     offset: Offset(0, 0),
-                                    color: AppColors.black.withOpacity(0.2),
+                                    color: AppColors.white.withOpacity(0.2),
                                     blurRadius: 6)
                               ],
                             ),
@@ -126,7 +127,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                               AppLocale.of().tryAgain.toUpperCase(),
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
-                                color: AppColors.white,
+                                color: AppColors.black,
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.none,
                               ),

@@ -1,11 +1,11 @@
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/user_login_type.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({
@@ -55,7 +55,7 @@ class SignUpButton extends StatelessWidget {
                         height: AppIconSizes.icon_size_24,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
                       );
                     } else {
@@ -75,7 +75,7 @@ class SignUpButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),

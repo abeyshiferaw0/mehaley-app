@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/data_providers/settings_data_provider.dart';
-import 'package:elf_play/data/models/audio_file.dart';
-import 'package:elf_play/data/models/remote_image.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
-import 'package:elf_play/data/models/text_lan.dart';
-import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/data_providers/settings_data_provider.dart';
+import 'package:mehaley/data/models/audio_file.dart';
+import 'package:mehaley/data/models/remote_image.dart';
+import 'package:mehaley/data/models/sync/song_sync.dart';
+import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/util/download_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:uuid/uuid.dart';
 
 part 'song.g.dart';

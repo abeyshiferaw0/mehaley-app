@@ -1,11 +1,11 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/search_cancel_cubit.dart';
-import 'package:elf_play/business_logic/cubits/search_input_is_searching_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
+import 'package:mehaley/business_logic/cubits/search_input_is_searching_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchPageInput extends StatefulWidget {
@@ -34,10 +34,10 @@ class _SearchPageInputState extends State<SearchPageInput> {
   late double padding;
 
   //DEFAULT VALUES
-  final Color barBgColor = AppColors.white.withOpacity(0.2);
+  final Color barBgColor = AppColors.black.withOpacity(0.2);
   final double barHeight = AppValues.searchBarHeight;
   final double barAnimPadding = 8.0;
-  final Color bgDimColor = AppColors.white.withOpacity(0.1);
+  final Color bgDimColor = AppColors.black.withOpacity(0.1);
 
   @override
   void didChangeDependencies() {
@@ -98,7 +98,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
           controller: searchTextController,
           // autofocus: true,
           focusNode: widget.focusNode,
-          cursorColor: AppColors.darkGreen,
+          cursorColor: AppColors.darkOrange,
           onChanged: (key) {
             if (key.isEmpty || key == '') {
               widget.onSearchEmpty();
@@ -110,14 +110,14 @@ class _SearchPageInputState extends State<SearchPageInput> {
             prevKey = key;
           },
           style: TextStyle(
-            color: AppColors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w600,
           ),
           decoration: InputDecoration(
-            fillColor: AppColors.white,
-            focusColor: AppColors.white,
-            hoverColor: AppColors.white,
+            fillColor: AppColors.black,
+            focusColor: AppColors.black,
+            hoverColor: AppColors.black,
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
@@ -125,11 +125,11 @@ class _SearchPageInputState extends State<SearchPageInput> {
             disabledBorder: InputBorder.none,
             hintText: AppLocale.of().searchHint,
             hintStyle: TextStyle(
-              color: AppColors.lightGrey.withOpacity(0.8),
+              color: AppColors.darkGrey.withOpacity(0.8),
               fontSize: AppFontSizes.font_size_10.sp,
             ),
             prefixIcon: IconButton(
-              color: AppColors.white,
+              color: AppColors.black,
               iconSize: AppIconSizes.icon_size_20,
               icon: Icon(PhosphorIcons.arrow_left_light),
               onPressed: () {
@@ -140,7 +140,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
               },
             ),
             suffixIcon: IconButton(
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               iconSize: AppIconSizes.icon_size_20,
               icon: Icon(PhosphorIcons.x_light),
               onPressed: () {
@@ -167,7 +167,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             child: Text(
               AppLocale.of().search,
               style: TextStyle(
-                color: AppColors.white,
+                color: AppColors.black,
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w500,
               ),

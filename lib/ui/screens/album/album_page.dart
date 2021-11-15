@@ -1,27 +1,27 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/api_response/album_page_data.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/cart_buttons/album_cart_button.dart';
-import 'package:elf_play/ui/common/like_follow/album_favorite_button.dart';
-import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
-import 'package:elf_play/ui/common/song_item/song_item.dart';
-import 'package:elf_play/ui/screens/album/widgets/album_page_header.dart';
-import 'package:elf_play/ui/screens/album/widgets/shimmer_album.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/album_page_data.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/cart_buttons/album_cart_button.dart';
+import 'package:mehaley/ui/common/like_follow/album_favorite_button.dart';
+import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
+import 'package:mehaley/ui/common/song_item/song_item.dart';
+import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
+import 'package:mehaley/ui/screens/album/widgets/shimmer_album.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.albumId}) : super(key: key);
@@ -46,20 +46,20 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       builder: (context, state) {
         if (state is AlbumPageLoadingState) {
           return Scaffold(
-            backgroundColor: AppColors.black,
+            backgroundColor: AppColors.white,
             body: ShimmerAlbum(),
           );
         }
         if (state is AlbumPageLoadedState) {
           return Scaffold(
-            backgroundColor: AppColors.black,
+            backgroundColor: AppColors.white,
             appBar: buildAppBar(state.albumPageData.album),
             body: buildAlbumPageLoaded(state.albumPageData),
           );
         }
         if (state is AlbumPageLoadingErrorState) {
           return Scaffold(
-            backgroundColor: AppColors.black,
+            backgroundColor: AppColors.white,
             body: AppError(
               bgWidget: ShimmerAlbum(),
               onRetry: () {
@@ -126,7 +126,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
 
   AppBar buildAppBar(Album album) {
     return AppBar(
-      backgroundColor: AppColors.darkGrey,
+      backgroundColor: AppColors.lightGrey,
       shadowColor: AppColors.transparent,
       // brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -169,7 +169,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
             padding: EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
               PhosphorIcons.dots_three_vertical_bold,
-              color: AppColors.white,
+              color: AppColors.black,
               size: AppIconSizes.icon_size_28,
             ),
           ),

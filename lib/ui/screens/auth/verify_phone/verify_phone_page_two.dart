@@ -1,16 +1,16 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/sign_up_page_authing_covor.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class VerifyPhonePageTwo extends StatefulWidget {
@@ -55,12 +55,12 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
             Container(
-              color: AppColors.black,
+              color: AppColors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.padding_16,
                 vertical: AppPadding.padding_28,
@@ -166,7 +166,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppFontSizes.font_size_12,
-                color: AppColors.darkGreen,
+                color: AppColors.darkOrange,
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline),
           ),
@@ -198,7 +198,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_18,
-        color: AppColors.white,
+        color: AppColors.black,
         fontWeight: FontWeight.w600,
       ),
     );
@@ -206,7 +206,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       centerTitle: true,
       //brightness: Brightness.dark,
@@ -218,7 +218,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           Navigator.pop(context);
         },
         iconSize: AppIconSizes.icon_size_24,
-        color: AppColors.white,
+        color: AppColors.black,
         icon: Icon(
           PhosphorIcons.caret_left_light,
         ),
@@ -234,7 +234,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   Widget darkRoundedPinPut() {
     final BoxDecoration pinPutDecoration = BoxDecoration(
-      color: AppColors.darkGrey,
+      color: AppColors.lightGrey,
       borderRadius: BorderRadius.circular(4.0),
     );
     return Padding(
@@ -247,7 +247,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           height: 20,
           width: 2,
           decoration: BoxDecoration(
-            color: AppColors.darkGreen,
+            color: AppColors.darkOrange,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -259,7 +259,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         followingFieldDecoration: pinPutDecoration,
         autofocus: true,
         pinAnimationType: PinAnimationType.scale,
-        textStyle: const TextStyle(color: Colors.white, fontSize: 20.0),
+        textStyle: TextStyle(color: AppColors.black, fontSize: 20.0),
         onSubmit: (pin) {
           // BlocProvider.of<AuthBloc>(context).add(
           //   VerifyPhoneEvent(

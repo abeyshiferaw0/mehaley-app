@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:elf_play/config/app_verses_list.dart';
-import 'package:elf_play/data/models/enums/app_languages.dart';
-import 'package:elf_play/data/verse.dart';
-import 'package:elf_play/util/l10n_util.dart';
+import 'package:mehaley/config/app_verses_list.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/data/verse.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 class QuotesDataProvider {
   AppVersesList appVersesList = AppVersesList();

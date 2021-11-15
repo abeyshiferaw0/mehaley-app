@@ -1,13 +1,13 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/menu/menu_items/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
 
 class PlaylistFollowMenuItem extends StatefulWidget {
   const PlaylistFollowMenuItem({
@@ -151,29 +151,29 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return AppColors.darkGreen;
+        return AppColors.darkOrange;
       } else {
-        return AppColors.white.withOpacity(0.3);
+        return AppColors.black.withOpacity(0.3);
       }
     }
 
     ///IF FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.white.withOpacity(0.3);
+      return AppColors.black.withOpacity(0.3);
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     } else {
-      return AppColors.white.withOpacity(0.3);
+      return AppColors.black.withOpacity(0.3);
     }
   }
 }

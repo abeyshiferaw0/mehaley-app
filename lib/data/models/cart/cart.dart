@@ -1,9 +1,9 @@
-import 'package:elf_play/data/models/cart/album_cart.dart';
-import 'package:elf_play/data/models/cart/playlist_cart.dart';
-import 'package:elf_play/data/models/cart/song_cart.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/data/models/cart/album_cart.dart';
+import 'package:mehaley/data/models/cart/playlist_cart.dart';
+import 'package:mehaley/data/models/cart/song_cart.dart';
+import 'package:mehaley/data/models/song.dart';
 
 part 'cart.g.dart';
 
@@ -46,7 +46,8 @@ class Cart extends Equatable {
       playlistCart: PlaylistCart.fromMap(map['playlist_cart']),
       albumCart: AlbumCart.fromMap(map['album_cart']),
       songCart: SongCart.fromMap(map['song_cart']),
-      duplicatedSongs: (map['existing'] as List).map((song) => Song.fromMap(song)).toList(),
+      duplicatedSongs:
+          (map['existing'] as List).map((song) => Song.fromMap(song)).toList(),
       deductibleAmountEtb: map['deductible_amount_etb'] as double,
       deductibleAmountDollar: map['deductible_amount_dollar'] as double,
     );

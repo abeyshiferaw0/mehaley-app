@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/category.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/category.dart';
 
 import 'category_page_header.dart';
 

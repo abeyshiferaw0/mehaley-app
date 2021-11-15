@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/data/repositories/lyric_data_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/lyric_item.dart';
+import 'package:mehaley/data/repositories/lyric_data_repository.dart';
 
 part 'lyric_event.dart';
 part 'lyric_state.dart';

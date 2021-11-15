@@ -1,19 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
+import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
 
@@ -142,7 +143,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.black,
+                    color: AppColors.txtGrey,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -189,7 +190,7 @@ class DialogSongPreviewMode extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: AppColors.green,
+                color: AppColors.orange,
               ),
               child: Text(
                 AppLocale.of().buyMezmur.toUpperCase(),
@@ -236,25 +237,10 @@ class DialogSongPreviewMode extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FlutterLogo(
-                  size: AppIconSizes.icon_size_24,
-                ),
-                SizedBox(
-                  width: AppPadding.padding_8,
-                ),
-                Text(
-                  AppLocale.of().appName,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_12.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.black,
-                  ),
-                ),
-              ],
+            child: Image.asset(
+              "assets/icons/ic_app_icon.png",
+              width: AppIconSizes.icon_size_48,
+              fit: BoxFit.contain,
             ),
           ),
           Align(

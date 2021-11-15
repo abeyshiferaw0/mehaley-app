@@ -1,11 +1,11 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -66,7 +66,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                       AppLocale.of().dailyQuotesFromApp.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0.8,
                       ),
@@ -92,7 +92,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_16.sp,
-                                  color: AppColors.white,
+                                  color: AppColors.black,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -105,7 +105,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_14.sp,
-                                  color: AppColors.black.withOpacity(0.6),
+                                  color: AppColors.white.withOpacity(0.6),
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -133,8 +133,8 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
         itemCount: versesList.length,
         size: AppIconSizes.icon_size_10,
         selectedSize: AppIconSizes.icon_size_12,
-        selectedDotColor: AppColors.black.withOpacity(0.6),
-        dotColor: AppColors.lightGrey,
+        selectedDotColor: AppColors.white.withOpacity(0.6),
+        dotColor: AppColors.darkGrey,
         currentPageNotifier: _currentPageNotifier,
       ),
     );

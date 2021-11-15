@@ -1,27 +1,27 @@
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
-import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
-import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
-import 'package:elf_play/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/user_profile_pic.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/favorite_tab_view.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/following_tab_view.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/my_playlist_tab_view.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/offline_tab_view.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/purchased_tab_view.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_persistant_header.dart';
-import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
+import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
+import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/user_profile_pic.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/favorite_tab_view.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/following_tab_view.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/my_playlist_tab_view.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/offline_tab_view.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/purchased_tab_view.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_persistant_header.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -119,7 +119,7 @@ class _LibraryPageState extends State<LibraryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkGrey,
+      backgroundColor: AppColors.lightGrey,
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (context, value) {
@@ -168,7 +168,7 @@ class _LibraryPageState extends State<LibraryPage>
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarBrightness: Brightness.dark,
       ),
-      backgroundColor: AppColors.darkGrey,
+      backgroundColor: AppColors.lightGrey,
       shadowColor: AppColors.transparent,
       floating: true,
       pinned: false,
@@ -190,7 +190,7 @@ class _LibraryPageState extends State<LibraryPage>
                 child: Icon(
                   PhosphorIcons.gear_six_bold,
                   size: AppIconSizes.icon_size_12,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               )
             ],

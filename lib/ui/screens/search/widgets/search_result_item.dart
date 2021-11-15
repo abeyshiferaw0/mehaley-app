@@ -1,22 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/app_icon_widget.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultItem extends StatefulWidget {
@@ -163,7 +163,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               fontWeight: FontWeight.w600,
               fontSize: AppFontSizes.font_size_10.sp,
             ),
@@ -207,7 +207,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   title,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

@@ -1,18 +1,18 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/library_data/purchased_album.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_album_item.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/library_data/purchased_album.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/library/widgets/auto_download.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_album_item.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class PurchasedAlbumsPage extends StatefulWidget {
   const PurchasedAlbumsPage({Key? key, required this.onAlbumsLoaded})

@@ -1,29 +1,29 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/search_page_dominant_color_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/api_response/search_page_result_data.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/menu/album_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/artist_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
-import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_header_gradient.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_result_footer_button.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_result_item.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_top_artist_song_item.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/search_page_dominant_color_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/search_page_result_data.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
+import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_header_gradient.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_result_footer_button.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_top_artist_song_item.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
@@ -129,7 +129,7 @@ class _SearchResultListState extends State<SearchResultList> {
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: AppColors.black,
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w600,
                   ),

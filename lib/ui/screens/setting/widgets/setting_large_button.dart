@@ -1,9 +1,9 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class SettingLargeButton extends StatelessWidget {
   const SettingLargeButton({
@@ -34,7 +34,7 @@ class SettingLargeButton extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.white,
+                    color: AppColors.black,
                   ),
                 ),
                 SizedBox(
@@ -56,7 +56,7 @@ class SettingLargeButton extends StatelessWidget {
           ),
           Icon(
             PhosphorIcons.caret_right_light,
-            color: AppColors.lightGrey,
+            color: AppColors.darkGrey,
             size: AppIconSizes.icon_size_24,
           ),
         ],

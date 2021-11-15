@@ -1,9 +1,9 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryHeader extends StatelessWidget {
@@ -16,7 +16,7 @@ class LibraryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.darkGrey,
+      color: AppColors.lightGrey,
       height: 50,
       child: Stack(
         children: [
@@ -49,7 +49,7 @@ class LibraryHeader extends StatelessWidget {
         padding: EdgeInsets.all(AppPadding.padding_16),
         child: Icon(
           PhosphorIcons.magnifying_glass_light,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
       ),
     );
@@ -60,7 +60,7 @@ class LibraryHeader extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 3,
-        color: ColorUtil.darken(AppColors.white, 0.7),
+        color: ColorUtil.darken(AppColors.black, 0.7),
       ),
     );
   }
@@ -76,7 +76,7 @@ class LibraryHeader extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(width: 3.0, color: AppColors.darkGreen),
+        borderSide: BorderSide(width: 3.0, color: AppColors.darkOrange),
         insets: EdgeInsets.symmetric(horizontal: 0.0),
       ),
       indicatorPadding: EdgeInsets.zero,

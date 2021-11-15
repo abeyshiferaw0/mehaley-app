@@ -1,5 +1,5 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
 
 class AppCard extends StatelessWidget {
   final Widget child;
@@ -21,9 +21,9 @@ class AppCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius != null ? radius! : 0.0),
         boxShadow: [
           BoxShadow(
-            blurRadius: 4,
-            spreadRadius: 4,
-            color: AppColors.completelyBlack.withOpacity(0.1),
+            blurRadius: 8,
+            spreadRadius: 2,
+            color: AppColors.black.withOpacity(0.1),
             offset: Offset(0, 0),
           ),
         ],

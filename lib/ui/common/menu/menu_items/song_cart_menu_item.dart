@@ -1,13 +1,13 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
 
 import 'menu_item.dart';
 
@@ -121,7 +121,7 @@ class _SongCartMenuItemState extends State<SongCartMenuItem> {
       int b = AppHiveBoxes.instance.recentlyCartRemovedSongBox
           .get(widget.song.songId);
       if (a > b) {
-        return AppColors.darkGreen;
+        return AppColors.darkOrange;
       } else {
         return AppColors.grey.withOpacity(0.6);
       }
@@ -130,7 +130,7 @@ class _SongCartMenuItemState extends State<SongCartMenuItem> {
     ///IF SONG IS FOUND IN RECENTLY CART ADDED
     if (AppHiveBoxes.instance.recentlyCartAddedSongBox
         .containsKey(widget.song.songId)) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     }
 
     ///IF SONG IS FOUND IN RECENTLY CART REMOVED
@@ -141,7 +141,7 @@ class _SongCartMenuItemState extends State<SongCartMenuItem> {
 
     ///IF SONG IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.song.isInCart) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     } else {
       return AppColors.grey.withOpacity(0.6);
     }

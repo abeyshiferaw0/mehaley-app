@@ -1,28 +1,27 @@
-import 'package:elf_play/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/home_page_data.dart';
-import 'package:elf_play/data/models/group.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/app_subscribe_card.dart';
-import 'package:elf_play/ui/common/no_internet_header.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_app_header.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_categories.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_featured_albums.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_featured_playlists.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_featured_songs.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_groups.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_header_gradient.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_recently_played.dart';
-import 'package:elf_play/ui/screens/home/widgets/home_shortcuts.dart';
-import 'package:elf_play/util/l10n_util.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/home_page_data.dart';
+import 'package:mehaley/data/models/group.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
+import 'package:mehaley/ui/common/no_internet_header.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_app_header.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_categories.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_featured_albums.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_featured_playlists.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_featured_songs.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_groups.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_recently_played.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -64,7 +63,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-    super.initState();
+     super.initState();
   }
 
   @override
@@ -75,28 +74,30 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      body: BlocBuilder<HomePageBloc, HomePageState>(
-        builder: (context, state) {
-          if (state is HomePageLoaded) {
-            return buildHomePageLoaded(homePageData: state.homePageData);
-          }
-          if (state is HomePageLoading) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        body: BlocBuilder<HomePageBloc, HomePageState>(
+          builder: (context, state) {
+            if (state is HomePageLoaded) {
+              return buildHomePageLoaded(homePageData: state.homePageData);
+            }
+            if (state is HomePageLoading) {
+              return AppLoading(size: AppValues.loadingWidgetSize);
+            }
+            if (state is HomePageLoadingError) {
+              return AppError(
+                bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
+                onRetry: () {
+                  BlocProvider.of<HomePageBloc>(context).add(
+                    LoadHomePageEvent(),
+                  );
+                },
+              );
+            }
             return AppLoading(size: AppValues.loadingWidgetSize);
-          }
-          if (state is HomePageLoadingError) {
-            return AppError(
-              bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
-              onRetry: () {
-                BlocProvider.of<HomePageBloc>(context).add(
-                  LoadHomePageEvent(),
-                );
-              },
-            );
-          }
-          return AppLoading(size: AppValues.loadingWidgetSize);
-        },
+          },
+        ),
       ),
     );
   }
@@ -110,59 +111,48 @@ class _HomePageState extends State<HomePage>
 
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          HomeHeaderGradient(),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(height: AppMargin.margin_48),
+          SizedBox(height: AppMargin.margin_32),
 
-              ///NO INTERNET HEADER
-              NoInternetHeader(),
+          ///APP BAR
+          HomeAppBar(),
 
-              ///BUILD USER LIBRARY GRIDS
-              HomeShortcuts(
-                shortcutData: homePageData.shortcutData,
-              ),
-              SizedBox(height: AppMargin.margin_32),
+          SizedBox(height: AppMargin.margin_32),
 
-              ///BUILD RECENTLY PLAYED LIST
-              HomeRecentlyPlayed(recentlyPlayed: homePageData.recentlyPlayed),
+          ///NO INTERNET HEADER
+          NoInternetHeader(),
 
-              ///BUILD HOME CATEGORIES
-              HomeCategories(categories: homePageData.categories),
-              SizedBox(height: AppMargin.margin_32),
+          ///BUILD RECENTLY PLAYED LIST
+          HomeRecentlyPlayed(recentlyPlayed: homePageData.recentlyPlayed),
 
-              ///BUILD USER LIBRARY GRIDS
-              HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
-              SizedBox(height: AppMargin.margin_32),
+          ///BUILD HOME CATEGORIES
+          HomeCategories(categories: homePageData.categories),
+          SizedBox(height: AppMargin.margin_32),
 
-              Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-                child: AppSubscribeCard(),
-              ),
+          ///BUILD USER LIBRARY GRIDS
+          HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
+          SizedBox(height: AppMargin.margin_32),
 
-              ///BUILD FEATURED ALBUMS
-              HomeFeaturedAlbums(
-                featuredAlbums: homePageData.featuredAlbums,
-              ),
-
-              ///BUILD HOME PAGE GROUPS
-              buildGroupsListView(groups),
-
-              ///BUILD FEATURED PLAYLISTS
-              HomeFeaturedPlaylists(
-                featuredPlaylists: homePageData.featuredPlaylist,
-              ),
-            ],
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+            child: AppSubscribeCard(),
           ),
-          Positioned(
-            top: AppMargin.margin_48,
-            left: AppMargin.margin_16,
-            right: AppMargin.margin_16,
-            child: HomeAppBar(),
+
+          SizedBox(height: AppMargin.margin_32),
+
+          ///BUILD FEATURED ALBUMS
+          HomeFeaturedAlbums(
+            featuredAlbums: homePageData.featuredAlbums,
+          ),
+
+          ///BUILD HOME PAGE GROUPS
+          buildGroupsListView(groups),
+
+          ///BUILD FEATURED PLAYLISTS
+          HomeFeaturedPlaylists(
+            featuredPlaylists: homePageData.featuredPlaylist,
           ),
         ],
       ),

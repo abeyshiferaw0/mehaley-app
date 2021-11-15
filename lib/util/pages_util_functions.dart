@@ -2,49 +2,6 @@ import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/data_providers/settings_data_provider.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/app_permission.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/category.dart';
-import 'package:elf_play/data/models/enums/app_payment_methods.dart';
-import 'package:elf_play/data/models/enums/playlist_created_by.dart';
-import 'package:elf_play/data/models/home_shortcut/album_shortcut.dart';
-import 'package:elf_play/data/models/home_shortcut/category_shortcut.dart';
-import 'package:elf_play/data/models/home_shortcut/playlist_shortcut.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/remote_image.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/data/models/text_lan.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/dialog/dialog_permission_permanent_refused.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/ui/screens/player/player_page.dart';
-import 'package:elf_play/ui/screens/profile/edit_profile_page.dart';
-import 'package:elf_play/ui/screens/user_playlist/create_user_playlist_page.dart';
-import 'package:elf_play/ui/screens/user_playlist/edit_user_playlist_page.dart';
-import 'package:elf_play/util/auth_util.dart';
-import 'package:elf_play/util/color_util.dart';
-import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,6 +13,45 @@ import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/data_providers/settings_data_provider.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/app_permission.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/category.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/enums/playlist_created_by.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/dialog/dialog_permission_permanent_refused.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/screens/player/player_page.dart';
+import 'package:mehaley/ui/screens/profile/edit_profile_page.dart';
+import 'package:mehaley/ui/screens/user_playlist/create_user_playlist_page.dart';
+import 'package:mehaley/ui/screens/user_playlist/edit_user_playlist_page.dart';
+import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/download_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
@@ -92,7 +88,7 @@ class PagesUtilFunctions {
   static String getPlaylistBy(Playlist playlist, context) {
     if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
         playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return AppLocale.of().byAppName;
+      return AppLocale.of().byAppName.toUpperCase();
     } else {
       return '';
     }
@@ -259,7 +255,7 @@ class PagesUtilFunctions {
   static getGroupItemTextStyle(GroupType groupType, item) {
     if (groupType == GroupType.SONG) {
       return TextStyle(
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
@@ -271,19 +267,19 @@ class PagesUtilFunctions {
       );
     } else if (groupType == GroupType.ALBUM) {
       return TextStyle(
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else if (groupType == GroupType.ARTIST) {
       return TextStyle(
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else {
       return TextStyle(
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
@@ -568,13 +564,13 @@ class PagesUtilFunctions {
 
   static Color getLoopButtonColor(LoopMode loopMode) {
     if (loopMode == LoopMode.off) {
-      return AppColors.white;
+      return AppColors.white.withOpacity(0.5);
     } else if (loopMode == LoopMode.all) {
-      return AppColors.green;
-    } else if (loopMode == LoopMode.one) {
-      return AppColors.green;
-    } else {
       return AppColors.white;
+    } else if (loopMode == LoopMode.one) {
+      return AppColors.white;
+    } else {
+      return AppColors.white.withOpacity(0.5);
     }
   }
 
@@ -904,7 +900,7 @@ class PagesUtilFunctions {
   static Widget buildImagePlaceHolder(appItemsType) {
     if (appItemsType == AppItemsType.OTHER) {
       return Container(
-        color: AppColors.darkGrey,
+        color: AppColors.lightGrey,
       );
     }
     return AppItemsImagePlaceHolder(appItemsType: appItemsType);
@@ -1047,101 +1043,6 @@ class PagesUtilFunctions {
     if (groupType == GroupType.ALBUM) return SongSyncPlayedFrom.ALBUM_GROUP;
     if (groupType == GroupType.SONG) return SongSyncPlayedFrom.SONG_GROUP;
     return SongSyncPlayedFrom.UNK;
-  }
-
-  static String getShortCutText(shortcut, context) {
-    if (shortcut is CategoryShortcut) {
-      return L10nUtil.translateLocale(shortcut.categoryNameText, context);
-    }
-    if (shortcut is AlbumShortcut) {
-      return L10nUtil.translateLocale(shortcut.albumTitle, context);
-    }
-    if (shortcut is PlaylistShortcut) {
-      return L10nUtil.translateLocale(shortcut.playlistNameText, context);
-    } else {
-      throw 'shortcut type not valid';
-    }
-  }
-
-  static RemoteImage getImage(shortcut) {
-    if (shortcut is CategoryShortcut) {
-      return shortcut.categoryImage;
-    }
-    if (shortcut is AlbumShortcut) {
-      return shortcut.albumImages[0];
-    }
-    if (shortcut is PlaylistShortcut) {
-      return shortcut.playlistImage;
-    } else {
-      throw 'shortcut type not valid';
-    }
-  }
-
-  static AppItemsType getAppItemsType(shortcut) {
-    if (shortcut is CategoryShortcut) {
-      return AppItemsType.OTHER;
-    }
-    if (shortcut is AlbumShortcut) {
-      return AppItemsType.ALBUM;
-    }
-    if (shortcut is PlaylistShortcut) {
-      return AppItemsType.PLAYLIST;
-    } else {
-      throw 'shortcut type not valid';
-    }
-  }
-
-  static String getShortCutType(shortcut, context) {
-    if (shortcut is CategoryShortcut) {
-      return AppLocale.of().category;
-    }
-    if (shortcut is AlbumShortcut) {
-      return AppLocale.of().album;
-    }
-    if (shortcut is PlaylistShortcut) {
-      return AppLocale.of().playlist;
-    } else {
-      throw 'shortcut type not valid';
-    }
-  }
-
-  static getShortCutClickAction(shortcut, context) {
-    if (shortcut is CategoryShortcut) {
-      Navigator.pushNamed(
-        context,
-        AppRouterPaths.categoryRoute,
-        arguments: ScreenArguments(
-          args: {
-            'category': Category(
-              categoryId: shortcut.categoryId,
-              categoryNameText: shortcut.categoryNameText,
-              categoryDescriptionText: shortcut.categoryNameText,
-              categoryImage: shortcut.categoryImage,
-              categoryDateCreated: DateTime.now(),
-              categoryDateUpdated: DateTime.now(),
-            )
-          },
-        ),
-      );
-    }
-    if (shortcut is AlbumShortcut) {
-      Navigator.pushNamed(
-        context,
-        AppRouterPaths.albumRoute,
-        arguments: ScreenArguments(args: {'albumId': shortcut.albumId}),
-      );
-    }
-    if (shortcut is PlaylistShortcut) {
-      Navigator.pushNamed(
-        context,
-        AppRouterPaths.playlistRoute,
-        arguments: ScreenArguments(
-          args: {'playlistId': shortcut.playlistId},
-        ),
-      );
-    } else {
-      throw 'shortcut type not valid';
-    }
   }
 
   static String getPaymentMethodName(

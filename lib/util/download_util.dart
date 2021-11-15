@@ -2,10 +2,10 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
+import 'package:mehaley/data/models/song.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DownloadUtil {
@@ -55,7 +55,8 @@ class DownloadUtil {
 
   Future<List<Song>> getDownloadingSongFromString() async {
     ///GET RUNNING DOWNLOADS
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query:
           'SELECT * FROM task WHERE status=${DownloadTaskStatus.running.value} OR status=${DownloadTaskStatus.enqueued.value}',
     );
@@ -74,8 +75,10 @@ class DownloadUtil {
 
   Future<List<Song>> getFailedSongFromString() async {
     ///GET FAILED DOWNLOADS
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-      query: 'SELECT * FROM task WHERE status=${DownloadTaskStatus.failed.value}',
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query:
+          'SELECT * FROM task WHERE status=${DownloadTaskStatus.failed.value}',
     );
 
     List<Song> songs = [];
@@ -92,7 +95,8 @@ class DownloadUtil {
 
   Future<Song?> getSongFromTask(String taskId) async {
     ///GET RUNNING DOWNLOADS
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query: "SELECT * FROM task WHERE task_id='$taskId'",
     );
 
@@ -104,7 +108,8 @@ class DownloadUtil {
     return null;
   }
 
-  DownloadedTaskWithSong? isSongDownloaded(Song song, List<DownloadedTaskWithSong> allDownloads) {
+  DownloadedTaskWithSong? isSongDownloaded(
+      Song song, List<DownloadedTaskWithSong> allDownloads) {
     for (var i = 0; i < allDownloads.length; i++) {
       if (allDownloads[i].song.songId == song.songId) {
         return allDownloads[i];
@@ -116,7 +121,8 @@ class DownloadUtil {
   Future<DownloadTaskStatus> isSongDownloadedCheckWithDb(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
     final String fileName = getSongFileName(song);
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
@@ -132,7 +138,8 @@ class DownloadUtil {
   Future<DownloadTask?> isSongDownloadedForPlayback(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
     final String fileName = getSongFileName(song);
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
@@ -147,8 +154,10 @@ class DownloadUtil {
 
   Future<List<DownloadedTaskWithSong>> getAllDownloadedSongs() async {
     ///GET LIST OF COMPLETED DOWNLOADS
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-      query: 'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}',
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query:
+          'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}',
     );
 
     List<DownloadedTaskWithSong> downloadedTaskWithSongs = [];
@@ -169,14 +178,17 @@ class DownloadUtil {
   }
 
   Future<DownloadTask?> getDownloadTask(Song song) async {
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-      query: 'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}',
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query:
+          'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}',
     );
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
     return tasks.firstWhere((element) {
-      if (Song.fromBase64(element.url.split('?song=')[1]).songId == song.songId) {
+      if (Song.fromBase64(element.url.split('?song=')[1]).songId ==
+          song.songId) {
         return true;
       }
       return false;
@@ -185,7 +197,8 @@ class DownloadUtil {
 
   Future<List<DownloadTask>?> getAllDownloadTasks() async {
     final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-        query: 'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}');
+        query:
+            'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}');
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
@@ -195,7 +208,8 @@ class DownloadUtil {
   Future<bool> isAlreadyInQueue(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
     final String fileName = getSongFileName(song);
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
@@ -211,7 +225,8 @@ class DownloadUtil {
   Future<String?> getFailedTaskId(Song song) async {
     ///GET LIST OF COMPLETED DOWNLOADS
     final String fileName = getSongFileName(song);
-    final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
       query: "SELECT * FROM task WHERE file_name='$fileName'",
     );
 
@@ -226,7 +241,8 @@ class DownloadUtil {
 
   Future<int> getNumberOfDownloads() async {
     final List<DownloadTask>? tasks = await FlutterDownloader.loadTasksWithRawQuery(
-        query: 'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}');
+        query:
+            'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}');
     if (tasks == null) return 0;
     return tasks.length;
   }

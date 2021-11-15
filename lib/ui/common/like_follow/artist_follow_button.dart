@@ -1,12 +1,12 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/dialog/dialog_unlike_unfollow.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
@@ -140,13 +140,13 @@ class ArtistFollowButton extends StatelessWidget {
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,
           letterSpacing: 1,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.lightGrey.withOpacity(0.1),
+        color: AppColors.darkGrey.withOpacity(0.1),
         borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: AppColors.white, width: 1),
+        border: Border.all(color: AppColors.black, width: 1),
       ),
     );
   }
@@ -163,11 +163,11 @@ class ArtistFollowButton extends StatelessWidget {
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,
           letterSpacing: 1,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.lightGrey.withOpacity(0.2),
+        color: AppColors.darkGrey.withOpacity(0.2),
         borderRadius: BorderRadius.circular(3),
       ),
     );

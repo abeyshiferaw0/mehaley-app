@@ -1,7 +1,7 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class MenuItem extends StatelessWidget {
@@ -47,8 +47,8 @@ class MenuItem extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: !isDisabled
-                        ? AppColors.white
-                        : AppColors.white.withOpacity(0.4),
+                        ? AppColors.black
+                        : AppColors.black.withOpacity(0.4),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w400,
                   ),

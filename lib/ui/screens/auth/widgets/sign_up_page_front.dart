@@ -1,12 +1,12 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/user_login_type.dart';
-import 'package:elf_play/ui/screens/auth/widgets/sign_up_page_button.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
+import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_button.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class SignUpPageFront extends StatelessWidget {
   const SignUpPageFront({
@@ -33,7 +33,7 @@ class SignUpPageFront extends StatelessWidget {
                     ),
                     CircleAvatar(
                       radius: 30,
-                      backgroundColor: AppColors.white,
+                      backgroundColor: AppColors.black,
                       child: Text('ELF'),
                     ),
                     SizedBox(
@@ -44,7 +44,7 @@ class SignUpPageFront extends StatelessWidget {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_28,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.lightGrey,
+                        color: AppColors.darkGrey,
                       ),
                     ),
                     SizedBox(
@@ -56,7 +56,7 @@ class SignUpPageFront extends StatelessWidget {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_20,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.lightGrey,
+                        color: AppColors.darkGrey,
                       ),
                     ),
                     SizedBox(
@@ -81,7 +81,7 @@ class SignUpPageFront extends StatelessWidget {
                       title: AppLocale.of().continueWithPhone,
                       icon: 'assets/icons/ic_phone.svg',
                       userLoginType: UserLoginType.PHONE_NUMBER,
-                      color: AppColors.darkGreen,
+                      color: AppColors.darkOrange,
                       isFilled: true,
                       noBorder: false,
                       onTap: () {

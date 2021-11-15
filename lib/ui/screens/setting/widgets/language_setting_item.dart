@@ -1,8 +1,8 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class LanguageSettingItem extends StatelessWidget {
@@ -29,7 +29,7 @@ class LanguageSettingItem extends StatelessWidget {
           children: [
             Icon(
               PhosphorIcons.check_circle_fill,
-              color: isSelected ? AppColors.darkGreen : AppColors.lightGrey,
+              color: isSelected ? AppColors.darkOrange : AppColors.darkGrey,
               size: AppIconSizes.icon_size_20,
             ),
             SizedBox(
@@ -40,7 +40,7 @@ class LanguageSettingItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w400,
-                color: isSelected ? AppColors.darkGreen : AppColors.lightGrey,
+                color: isSelected ? AppColors.darkOrange : AppColors.darkGrey,
               ),
             ),
           ],

@@ -1,15 +1,15 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class NoInternetHeader extends StatelessWidget {
   const NoInternetHeader({
@@ -24,6 +24,7 @@ class NoInternetHeader extends StatelessWidget {
           return buildNoInternetHeader(context);
         } else {
           return SizedBox();
+          //return buildNoInternetHeader(context);
         }
       },
     );
@@ -42,7 +43,7 @@ class NoInternetHeader extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           SizedBox(height: AppMargin.margin_16),
@@ -73,7 +74,7 @@ class NoInternetHeader extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: AppColors.black,
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: EdgeInsets.symmetric(
@@ -86,7 +87,7 @@ class NoInternetHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.darkGrey,
+                  color: AppColors.lightGrey,
                 ),
               ),
             ),

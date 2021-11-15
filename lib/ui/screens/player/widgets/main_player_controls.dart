@@ -1,23 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/loop_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/muted_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/shuffle_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/custom_track_shape.dart';
-import 'package:elf_play/ui/common/like_follow/song_favorite_button.dart';
-import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +6,26 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:marquee/marquee.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/loop_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/muted_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/shuffle_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/custom_track_shape.dart';
+import 'package:mehaley/ui/common/like_follow/song_favorite_button.dart';
+import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 import '../queue_list_page.dart';
 
@@ -66,79 +66,44 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
         padding: EdgeInsets.symmetric(horizontal: AppMargin.margin_16),
         child: Column(
           children: [
+            ///SONG ACTIONS(MENU,FAV,SHARE)
             BlocBuilder<CurrentPlayingCubit, Song?>(
               builder: (context, state) {
                 if (state != null) {
                   return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child: AutoSizeText(
-                                L10nUtil.translateLocale(
-                                    state.songName, context),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: AppFontSizes.font_size_18,
-                                  color: AppColors.white,
-                                ),
-                                maxLines: 1,
-                                minFontSize: AppFontSizes.font_size_18,
-                                maxFontSize: AppFontSizes.font_size_18,
-                                overflowReplacement: Marquee(
-                                  text: L10nUtil.translateLocale(
-                                      state.songName, context),
-                                  style: TextStyle(
-                                    fontSize: AppFontSizes.font_size_18,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.white,
-                                  ),
-                                  scrollAxis: Axis.horizontal,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  blankSpace: AppPadding.padding_32,
-                                  velocity: 50.0,
-                                  pauseAfterRound: Duration(seconds: 2),
-                                  startPadding: AppPadding.padding_16,
-                                  accelerationDuration: Duration(seconds: 1),
-                                  accelerationCurve: Curves.easeIn,
-                                  decelerationDuration:
-                                      Duration(milliseconds: 500),
-                                  decelerationCurve: Curves.easeOut,
-                                  showFadingOnlyWhenScrolling: false,
-                                  fadingEdgeEndFraction: 0.2,
-                                  fadingEdgeStartFraction: 0.2,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: AppMargin.margin_2,
-                            ),
-                            Text(
-                              PagesUtilFunctions.getArtistsNames(
-                                state.artistsName,
-                                context,
-                              ),
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: AppFontSizes.font_size_10.sp,
-                                color: AppColors.lightGrey,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ],
+                      ///SHARE BUTTON
+                      AppBouncingButton(
+                        onTap: () {},
+                        child: Padding(
+                          padding: EdgeInsets.all(AppPadding.padding_4),
+                          child: Icon(
+                            PhosphorIcons.share_network_thin,
+                            color: AppColors.white,
+                            size: AppIconSizes.icon_size_24,
+                          ),
                         ),
                       ),
+                      SizedBox(
+                        width: AppMargin.margin_20,
+                      ),
 
-                      ///DOWNLOAD STATES IF BOUGHT
-                      SongDownloadIndicator(
-                        key: Key(state.songId.toString()),
-                        song: state,
-                        isForPlayerPage: true,
+                      ///MENU BUTTON
+                      AppBouncingButton(
+                        onTap: () {},
+                        child: Padding(
+                          padding: EdgeInsets.all(AppPadding.padding_4),
+                          child: Icon(
+                            PhosphorIcons.dots_three_circle_vertical_thin,
+                            color: AppColors.lightGrey,
+                            size: AppIconSizes.icon_size_64,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: AppMargin.margin_16,
                       ),
 
                       ///FAV BUTTON
@@ -153,23 +118,60 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 }
               },
             ),
-            SizedBox(
-              height: AppMargin.margin_4,
+
+            ///SONG DURATION TEXT
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
+                  builder: (context, state) {
+                    return Text(
+                      PagesUtilFunctions.formatSongDurationTimeTo(
+                        Duration(
+                          seconds: state.currentDuration.inSeconds.toInt(),
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_8.sp,
+                        color: AppColors.lightGrey.withOpacity(0.7),
+                      ),
+                    );
+                  },
+                ),
+                BlocBuilder<CurrentPlayingCubit, Song?>(
+                  builder: (context, currentPlayingState) {
+                    if (currentPlayingState != null) {
+                      return Text(
+                        PagesUtilFunctions.getFormatdMaxSongDuration(
+                          currentPlayingState,
+                        ),
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_8.sp,
+                          color: AppColors.lightGrey.withOpacity(0.7),
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  },
+                ),
+              ],
             ),
-            //SLIDER
+
+            ///SLIDER DURATION
             BlocBuilder<CurrentPlayingCubit, Song?>(
               builder: (context, currentPlayingState) {
                 if (currentPlayingState != null) {
                   return SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       activeTrackColor: AppColors.lightGrey,
-                      inactiveTrackColor: AppColors.lightGrey.withOpacity(0.24),
+                      inactiveTrackColor: AppColors.lightGrey.withOpacity(0.4),
                       trackShape: CustomTrackShape(),
                       trackHeight: 2.0,
                       thumbColor: AppColors.white,
                       thumbShape:
                           RoundSliderThumbShape(enabledThumbRadius: 6.0),
-                      overlayColor: AppColors.white.withOpacity(0.24),
+                      overlayColor: AppColors.lightGrey.withOpacity(0.24),
                       overlayShape:
                           RoundSliderOverlayShape(overlayRadius: 16.0),
                     ),
@@ -201,43 +203,89 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 }
               },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
-                  builder: (context, state) {
-                    return Text(
-                      PagesUtilFunctions.formatSongDurationTimeTo(
-                        Duration(
-                            seconds: state.currentDuration.inSeconds.toInt()),
-                      ),
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_8.sp,
-                        color: AppColors.lightGrey.withOpacity(0.7),
-                      ),
-                    );
-                  },
-                ),
-                BlocBuilder<CurrentPlayingCubit, Song?>(
-                  builder: (context, currentPlayingState) {
-                    if (currentPlayingState != null) {
-                      return Text(
-                        PagesUtilFunctions.getFormatdMaxSongDuration(
-                          currentPlayingState,
-                        ),
-                        style: TextStyle(
-                          fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.lightGrey.withOpacity(0.7),
-                        ),
-                      );
-                    } else {
-                      return SizedBox();
-                    }
-                  },
-                ),
-              ],
+
+            SizedBox(
+              height: AppMargin.margin_16,
             ),
-            //PLAYER PLAY PAUSE AND OTHER BUTTONS
+
+            ///SONG TITLE, ARTIST NAME
+            BlocBuilder<CurrentPlayingCubit, Song?>(
+              builder: (context, state) {
+                if (state != null) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 30,
+                        child: AutoSizeText(
+                          L10nUtil.translateLocale(
+                            state.songName,
+                            context,
+                          ),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: AppFontSizes.font_size_18,
+                            color: AppColors.white,
+                          ),
+                          maxLines: 1,
+                          minFontSize: AppFontSizes.font_size_18,
+                          maxFontSize: AppFontSizes.font_size_18,
+                          overflowReplacement: Marquee(
+                            text: L10nUtil.translateLocale(
+                              state.songName,
+                              context,
+                            ),
+                            style: TextStyle(
+                              fontSize: AppFontSizes.font_size_18,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.white,
+                            ),
+                            scrollAxis: Axis.horizontal,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            blankSpace: AppPadding.padding_32,
+                            velocity: 50.0,
+                            pauseAfterRound: Duration(seconds: 2),
+                            startPadding: AppPadding.padding_16,
+                            accelerationDuration: Duration(seconds: 1),
+                            accelerationCurve: Curves.easeIn,
+                            decelerationDuration: Duration(milliseconds: 500),
+                            decelerationCurve: Curves.easeOut,
+                            showFadingOnlyWhenScrolling: false,
+                            fadingEdgeEndFraction: 0.2,
+                            fadingEdgeStartFraction: 0.2,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppMargin.margin_2,
+                      ),
+                      Text(
+                        PagesUtilFunctions.getArtistsNames(
+                          state.artistsName,
+                          context,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          color: AppColors.lightGrey,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return SizedBox();
+                }
+              },
+            ),
+
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+
+            ///PLAYER PLAY PAUSE AND OTHER BUTTONS
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,13 +303,15 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           children: [
                             Icon(
                               PhosphorIcons.shuffle_light,
-                              color: state ? AppColors.green : AppColors.white,
-                              size: AppIconSizes.icon_size_20,
+                              color: state
+                                  ? AppColors.white
+                                  : AppColors.white.withOpacity(0.5),
+                              size: AppIconSizes.icon_size_24,
                             ),
                             state
                                 ? Icon(
                                     Icons.circle,
-                                    color: AppColors.darkGreen,
+                                    color: AppColors.white,
                                     size: AppIconSizes.icon_size_4,
                                   )
                                 : SizedBox(),
@@ -324,15 +374,16 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           children: [
                             Icon(
                               PagesUtilFunctions.getLoopIcon(state),
-                              color:
-                                  PagesUtilFunctions.getLoopButtonColor(state),
-                              size: AppIconSizes.icon_size_20,
+                              color: PagesUtilFunctions.getLoopButtonColor(
+                                state,
+                              ),
+                              size: AppIconSizes.icon_size_24,
                             ),
                             state != LoopMode.off
                                 ? Icon(
                                     Icons.circle,
                                     size: AppIconSizes.icon_size_4,
-                                    color: AppColors.darkGreen,
+                                    color: AppColors.white,
                                   )
                                 : SizedBox()
                           ],
@@ -343,10 +394,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
               ],
             ),
-            // SizedBox(
-            //   height: AppMargin.margin_8,
-            // ),
-            //player cast and playlist buttons
+
+            ///MUTE AND QUEUE BUTTONS
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -369,6 +418,21 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         ),
                       ),
                     );
+                  },
+                ),
+
+                ///SONG DOWNLOAD INDICATOR
+                BlocBuilder<CurrentPlayingCubit, Song?>(
+                  builder: (context, state) {
+                    if (state != null) {
+                      return SongDownloadIndicator(
+                        key: Key(state.songId.toString()),
+                        song: state,
+                        isForPlayerPage: true,
+                      );
+                    } else {
+                      return SizedBox();
+                    }
                   },
                 ),
                 AppBouncingButton(

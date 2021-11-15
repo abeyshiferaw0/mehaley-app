@@ -1,6 +1,6 @@
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
-import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
+import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
 
 class SettingsPageData extends Equatable {
   final DownloadSongQuality downloadSongQuality;

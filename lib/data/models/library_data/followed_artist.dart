@@ -1,4 +1,4 @@
-import 'package:elf_play/data/models/artist.dart';
+import 'package:mehaley/data/models/artist.dart';
 
 class FollowedArtist {
   final int logId;

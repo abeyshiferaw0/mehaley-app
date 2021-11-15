@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:elf_play/data/models/api_response/song_menu_left_over_data_data.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/song_menu_repository.dart';
-import 'package:elf_play/util/download_util.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/api_response/song_menu_left_over_data_data.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/repositories/song_menu_repository.dart';
+import 'package:mehaley/util/download_util.dart';
 import 'package:meta/meta.dart';
 
 part 'song_menu_event.dart';

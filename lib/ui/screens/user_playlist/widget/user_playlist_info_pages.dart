@@ -1,24 +1,24 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/user_profile_pic.dart';
-import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/user_profile_pic.dart';
+import 'package:mehaley/ui/screens/playlist/widget/icon_text.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/app_language/app_locale.dart';
 
 class UserPlaylistInfoPageOne extends StatelessWidget {
   UserPlaylistInfoPageOne({required this.myPlaylist});
 
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
-    color: AppColors.lightGrey,
+    color: AppColors.darkGrey,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
@@ -53,7 +53,7 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_16.sp,
-                color: AppColors.white,
+                color: AppColors.black,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -96,7 +96,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
             AppLocale.of().playlistBy.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               letterSpacing: 0.3,
               fontWeight: FontWeight.w400,
             ),
@@ -122,7 +122,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_16,
-        color: AppColors.white,
+        color: AppColors.black,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -139,7 +139,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
             offset: Offset(0, 0),
             spreadRadius: 2,
             blurRadius: 6,
-            color: AppColors.black.withOpacity(0.2),
+            color: AppColors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -166,7 +166,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
             offset: Offset(0, 0),
             spreadRadius: 2,
             blurRadius: 12,
-            color: AppColors.black.withOpacity(0.2),
+            color: AppColors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -176,7 +176,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
           context,
         ),
         style: TextStyle(
-          color: AppColors.white,
+          color: AppColors.black,
           fontSize: AppFontSizes.font_size_10.sp,
           fontWeight: FontWeight.w500,
         ),

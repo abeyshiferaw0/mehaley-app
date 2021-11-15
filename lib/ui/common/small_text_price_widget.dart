@@ -1,8 +1,8 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/data_providers/settings_data_provider.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/data_providers/settings_data_provider.dart';
+import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
 import 'package:sizer/sizer.dart';
 
 class SmallTextPriceWidget extends StatelessWidget {
@@ -52,7 +52,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -67,7 +67,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -82,7 +82,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -97,7 +97,7 @@ class SmallTextPriceWidget extends StatelessWidget {
         text:
             '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
         style: TextStyle(
-          color: AppColors.darkGreen.withOpacity(0.7),
+          color: AppColors.darkOrange.withOpacity(0.7),
           decoration: TextDecoration.lineThrough,
           fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
           fontSize: useLargerText
@@ -109,7 +109,7 @@ class SmallTextPriceWidget extends StatelessWidget {
             text:
                 ' ${(getPrice() - (getPrice() * discountPercentage)).toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
             style: TextStyle(
-              color: AppColors.darkGreen,
+              color: AppColors.darkOrange,
               decoration: TextDecoration.none,
               fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
               fontSize: useLargerText

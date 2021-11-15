@@ -1,6 +1,6 @@
-import 'package:elf_play/data/models/remote_image.dart';
-import 'package:elf_play/data/models/text_lan.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/remote_image.dart';
+import 'package:mehaley/data/models/text_lan.dart';
 
 class Chart extends Equatable {
   final int chartId;

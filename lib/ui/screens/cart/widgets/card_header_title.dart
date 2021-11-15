@@ -1,5 +1,5 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class CartHeaderTitle extends StatelessWidget {
@@ -21,7 +21,7 @@ class CartHeaderTitle extends StatelessWidget {
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
           fontWeight: FontWeight.w500,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
       ),
     );

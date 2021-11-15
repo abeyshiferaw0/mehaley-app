@@ -1,6 +1,6 @@
-import 'package:elf_play/data/models/playlist.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/data/models/playlist.dart';
 
 part 'playlist_cart.g.dart';
 

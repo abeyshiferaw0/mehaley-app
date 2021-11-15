@@ -1,19 +1,19 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
-import 'package:elf_play/business_logic/cubits/search_cancel_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_empty_message.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_error_message.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_page_input.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_recent_or_message.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_result_list.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
+import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_empty_message.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_error_message.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_page_input.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_recent_or_message.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_result_list.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class SearchResultPage extends StatefulWidget {
   const SearchResultPage({Key? key, required this.isVoiceTyping})
@@ -44,7 +44,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -141,12 +141,12 @@ class _SearchResultPageState extends State<SearchResultPage> {
             AppValues.searchResultMicButtonSize,
           ),
           child: Container(
-            color: AppColors.white,
+            color: AppColors.black,
             width: AppValues.searchResultMicButtonSize,
             height: AppValues.searchResultMicButtonSize,
             child: Icon(
               PhosphorIcons.microphone_light,
-              color: AppColors.darkGreen,
+              color: AppColors.darkOrange,
               size: AppIconSizes.icon_size_32,
             ),
           ),
@@ -162,7 +162,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       builder: (context) {
         return Container(
           height: ScreenUtil(context: context).getScreenHeight() * 0.5,

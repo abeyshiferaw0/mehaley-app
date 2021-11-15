@@ -1,5 +1,5 @@
-import 'package:elf_play/data/models/enums/user_login_type.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
 
 class AppFireBaseUser extends Equatable {
   final String? userName;

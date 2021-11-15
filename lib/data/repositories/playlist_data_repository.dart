@@ -1,8 +1,8 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/data_providers/playlist_data_provider.dart';
-import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/data_providers/playlist_data_provider.dart';
+import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class PlaylistDataRepository {
   //INIT PROVIDER FOR API CALL

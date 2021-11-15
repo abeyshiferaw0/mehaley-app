@@ -1,16 +1,16 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/followed_playlist_bloc/followed_playlists_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/library_data/followed_playlist.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_playlist_item.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_playlist_bloc/followed_playlists_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/library_data/followed_playlist.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_playlist_item.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class FollowedPlaylistsPage extends StatefulWidget {
   const FollowedPlaylistsPage({Key? key}) : super(key: key);

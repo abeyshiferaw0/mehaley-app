@@ -1,25 +1,6 @@
 import 'dart:isolate';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/connectivity_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/strings.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/app_languages.dart';
-import 'package:elf_play/ui/screens/auth/sign_up_page.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
-import 'package:elf_play/ui/screens/splash_main/main_screen.dart';
-import 'package:elf_play/ui/screens/splash_main/splash_page.dart';
-import 'package:elf_play/util/app_bloc_deligate.dart';
-import 'package:elf_play/util/download_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +8,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/strings.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/ui/screens/auth/sign_up_page.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
+import 'package:mehaley/ui/screens/splash_main/main_screen.dart';
+import 'package:mehaley/ui/screens/splash_main/splash_page.dart';
+import 'package:mehaley/util/app_bloc_deligate.dart';
+import 'package:mehaley/util/download_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -65,7 +65,7 @@ void main() async {
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Elf play',
     androidNotificationOngoing: true,
-    notificationColor: AppColors.darkGreen,
+    notificationColor: AppColors.darkOrange,
   );
 
   ///INIT HIVE BOXES

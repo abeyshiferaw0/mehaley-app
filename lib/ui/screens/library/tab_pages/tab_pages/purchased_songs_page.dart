@@ -1,21 +1,21 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/purchased_songs_bloc/purchased_songs_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/library_data/purchased_song.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/song_item/song_item.dart';
-import 'package:elf_play/ui/screens/library/widgets/auto_download.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_empty_page.dart';
-import 'package:elf_play/ui/screens/library/widgets/library_error_widget.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_songs_bloc/purchased_songs_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/library_data/purchased_song.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/song_item/song_item.dart';
+import 'package:mehaley/ui/screens/library/widgets/auto_download.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
+import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class PurchasedSongsPage extends StatefulWidget {
   const PurchasedSongsPage({Key? key, required this.onSongsLoaded})

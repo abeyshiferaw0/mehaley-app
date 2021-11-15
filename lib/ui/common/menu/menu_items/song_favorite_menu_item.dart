@@ -1,13 +1,14 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../app_bouncing_button.dart';
 
@@ -102,8 +103,8 @@ class _SongFavoriteMenuItemState extends State<SongFavoriteMenuItem>
                       preButtonText(),
                       style: TextStyle(
                         color: !widget.isDisabled
-                            ? AppColors.white
-                            : AppColors.white.withOpacity(0.4),
+                            ? AppColors.black
+                            : AppColors.black.withOpacity(0.4),
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,
                       ),

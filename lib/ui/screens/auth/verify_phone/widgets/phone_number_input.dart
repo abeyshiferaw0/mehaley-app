@@ -1,10 +1,10 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/themes.dart';
 
 class PhoneNumberInput extends StatelessWidget {
   PhoneNumberInput({
@@ -38,7 +38,7 @@ class PhoneNumberInput extends StatelessWidget {
                   controller: controller,
                   textAlignVertical: TextAlignVertical.center,
                   autofocus: true,
-                  cursorColor: AppColors.darkGreen,
+                  cursorColor: AppColors.darkOrange,
                   onChanged: (key) {},
                   maxLength: 11,
                   readOnly: readOnly,
@@ -57,7 +57,7 @@ class PhoneNumberInput extends StatelessWidget {
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   style: TextStyle(
-                    color: readOnly ? AppColors.txtGrey : AppColors.white,
+                    color: readOnly ? AppColors.txtGrey : AppColors.black,
                     fontSize: AppFontSizes.font_size_14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -70,7 +70,7 @@ class PhoneNumberInput extends StatelessWidget {
                       Text(
                     '$currentLength/$maxLength',
                     style: TextStyle(
-                      color: AppColors.darkGreen,
+                      color: AppColors.darkOrange,
                       fontSize: AppFontSizes.font_size_10,
                     ),
                   ),
@@ -85,9 +85,9 @@ class PhoneNumberInput extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                     filled: true,
-                    fillColor: AppColors.darkGrey,
+                    fillColor: AppColors.lightGrey,
                     border: InputBorder.none,
-                    focusColor: AppColors.green,
+                    focusColor: AppColors.orange,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,

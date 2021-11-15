@@ -1,15 +1,15 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
-import 'package:elf_play/business_logic/cubits/localization_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/app_languages.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'language_setting_item.dart';
@@ -42,7 +42,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
   Widget build(BuildContext context) {
     return ExpansionPanelList(
       animationDuration: Duration(milliseconds: 300),
-      dividerColor: AppColors.black,
+      dividerColor: AppColors.white,
       elevation: 0,
       expansionCallback: (int item, bool status) {
         setState(() {
@@ -57,7 +57,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.black,
+          backgroundColor: AppColors.white,
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -69,7 +69,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     ),
                     Expanded(child: SizedBox()),
@@ -78,7 +78,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           ? PhosphorIcons.caret_up_light
                           : PhosphorIcons.caret_down_light,
                       size: AppIconSizes.icon_size_24,
-                      color: AppColors.white,
+                      color: AppColors.black,
                     )
                   ],
                 ),
@@ -148,7 +148,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.black,
+          backgroundColor: AppColors.white,
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -160,7 +160,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     ),
                     Expanded(child: SizedBox()),
@@ -169,7 +169,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           ? PhosphorIcons.caret_up_light
                           : PhosphorIcons.caret_down_light,
                       size: AppIconSizes.icon_size_24,
-                      color: AppColors.white,
+                      color: AppColors.black,
                     )
                   ],
                 ),

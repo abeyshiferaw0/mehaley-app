@@ -1,6 +1,6 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class NoInternetIndicatorSmall extends StatefulWidget {
@@ -38,14 +38,14 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.black,
+      color: AppColors.white,
       child: SlideTransition(
         position: offset,
         child: Wrap(
           children: [
             Container(
               width: double.infinity,
-              color: AppColors.black,
+              color: AppColors.white,
               padding: EdgeInsets.symmetric(vertical: AppPadding.padding_4),
               child: Center(
                 child: Text(
@@ -53,7 +53,7 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.white,
+                    color: AppColors.black,
                   ),
                 ),
               ),

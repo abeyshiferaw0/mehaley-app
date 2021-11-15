@@ -1,7 +1,7 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/color_util.dart';
 
 class AppGradients {
   RadialGradient getHomeHeaderGradient(Color color) {
@@ -10,7 +10,7 @@ class AppGradients {
       colors: [
         ColorUtil.darken(color, 0.1),
         ColorUtil.darken(color, 0.1),
-        AppColors.black
+        AppColors.white
       ],
       center: Alignment(-0.5, -1.8),
       focal: Alignment(-2, -2),
@@ -21,7 +21,7 @@ class AppGradients {
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [color, AppColors.black],
+      colors: [color, AppColors.white],
     );
   }
 
@@ -34,13 +34,13 @@ class AppGradients {
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [color.withOpacity(1), AppColors.black],
+      colors: [color.withOpacity(1), AppColors.white],
     );
   }
 
   getCategoryFilterGradient(Color color) {
     return LinearGradient(
-      colors: [AppColors.black.withOpacity(0.5), AppColors.black],
+      colors: [AppColors.white.withOpacity(0.5), AppColors.white],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
     );
@@ -52,8 +52,9 @@ class AppGradients {
       end: Alignment.bottomCenter,
       //stops: [0.2, 0.7],
       colors: [
-        ColorUtil.darken(color, 0.0),
-        ColorUtil.darken(color, 0.9),
+        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.5), 0.05),
+        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.8), 0.15),
+        //ColorUtil.changeColorSaturation(color, 0.9),
         //Colors.black12.withOpacity(0.9),
       ],
     );
@@ -65,7 +66,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         ColorUtil.darken(color, 0.5).withOpacity(0.5),
-        AppColors.black,
+        AppColors.white,
       ],
     );
   }
@@ -76,7 +77,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.black,
+        AppColors.white,
       ],
     );
   }
@@ -87,7 +88,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.black,
+        AppColors.white,
       ],
     );
   }
@@ -97,8 +98,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.black.withOpacity(0.5),
-        AppColors.black,
+        AppColors.white.withOpacity(0.5),
+        AppColors.white,
         //Colors.black12.withOpacity(0.9),
       ],
     );
@@ -109,8 +110,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.completelyBlack.withOpacity(0.7),
-        AppColors.completelyBlack,
+        AppColors.white.withOpacity(0.7),
+        AppColors.white,
       ],
     );
   }
@@ -120,9 +121,9 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.completelyBlack.withOpacity(0.7),
-        AppColors.completelyBlack.withOpacity(0.9),
-        AppColors.completelyBlack,
+        AppColors.white.withOpacity(0.7),
+        AppColors.white.withOpacity(0.9),
+        AppColors.white,
       ],
     );
   }
@@ -132,8 +133,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.completelyBlack.withOpacity(0.7),
-        AppColors.completelyBlack.withOpacity(0.8),
+        AppColors.white.withOpacity(0.7),
+        AppColors.white.withOpacity(0.8),
       ],
     );
   }
@@ -144,7 +145,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.black,
+        AppColors.white,
       ],
     );
   }
@@ -155,31 +156,18 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         dominantColor,
-        AppColors.black,
+        AppColors.white,
       ],
     );
   }
 
-  getPurchasedLibraryGradient() {
+  static getOfflineLibraryGradient() {
     return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
       colors: [
         AppColors.orange1,
         AppColors.orange2,
-        AppColors.orange3,
-      ],
-    );
-  }
-
-  getOfflineLibraryGradient() {
-    return LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        AppColors.blue1,
-        AppColors.blue2,
-        AppColors.blue3,
       ],
     );
   }

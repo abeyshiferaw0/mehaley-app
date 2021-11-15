@@ -1,8 +1,8 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultFooterButton extends StatelessWidget {
@@ -31,7 +31,7 @@ class SearchResultFooterButton extends StatelessWidget {
               text,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: AppColors.white,
+                color: AppColors.black,
                 fontWeight: isForRecentItem ? FontWeight.w600 : FontWeight.w200,
                 fontSize: isForRecentItem
                     ? AppFontSizes.font_size_12.sp

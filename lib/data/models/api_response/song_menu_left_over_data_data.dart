@@ -1,6 +1,6 @@
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/category.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/category.dart';
 
 import '../artist.dart';
 

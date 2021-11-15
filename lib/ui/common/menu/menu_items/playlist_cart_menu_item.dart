@@ -1,13 +1,13 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/playlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/playlist.dart';
 
 import 'menu_item.dart';
 
@@ -121,7 +121,7 @@ class _PlaylistCartMenuItemState extends State<PlaylistCartMenuItem> {
       int b = AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
           .get(widget.playlist.playlistId);
       if (a > b) {
-        return AppColors.darkGreen;
+        return AppColors.darkOrange;
       } else {
         return AppColors.grey.withOpacity(0.6);
       }
@@ -130,7 +130,7 @@ class _PlaylistCartMenuItemState extends State<PlaylistCartMenuItem> {
     ///IF PLAYLIST IS FOUND IN RECENTLY CART ADDED
     if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     }
 
     ///IF PLAYLIST IS FOUND IN RECENTLY CART REMOVED
@@ -141,7 +141,7 @@ class _PlaylistCartMenuItemState extends State<PlaylistCartMenuItem> {
 
     ///IF PLAYLIST IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.playlist.isInCart) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     } else {
       return AppColors.grey.withOpacity(0.6);
     }

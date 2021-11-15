@@ -1,5 +1,5 @@
-import 'package:elf_play/data/models/enums/app_languages.dart';
-import 'package:elf_play/util/l10n_util.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 import 'app_language_strings/app_language_strings_am.dart';
 import 'app_language_strings/app_language_strings_en.dart';

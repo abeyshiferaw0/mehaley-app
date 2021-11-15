@@ -1,4 +1,4 @@
-import 'package:elf_play/data/data_providers/quotes_data_provider.dart';
+import 'package:mehaley/data/data_providers/quotes_data_provider.dart';
 
 import '../verse.dart';
 

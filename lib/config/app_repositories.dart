@@ -1,42 +1,42 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/data_providers/album_data_provider.dart';
-import 'package:elf_play/data/data_providers/artist_data_provider.dart';
-import 'package:elf_play/data/data_providers/auth_provider.dart';
-import 'package:elf_play/data/data_providers/cart_data_provider.dart';
-import 'package:elf_play/data/data_providers/category_data_provider.dart';
-import 'package:elf_play/data/data_providers/home_data_provider.dart';
-import 'package:elf_play/data/data_providers/library_page_data_provider.dart';
-import 'package:elf_play/data/data_providers/like_follow_provider.dart';
-import 'package:elf_play/data/data_providers/lyric_data_provider.dart';
-import 'package:elf_play/data/data_providers/my_playlist_data_provider.dart';
-import 'package:elf_play/data/data_providers/payment_provider.dart';
-import 'package:elf_play/data/data_providers/playlist_data_provider.dart';
-import 'package:elf_play/data/data_providers/profile_data_provider.dart';
-import 'package:elf_play/data/data_providers/quotes_data_provider.dart';
-import 'package:elf_play/data/data_providers/search_data_provider.dart';
-import 'package:elf_play/data/data_providers/settings_data_provider.dart';
-import 'package:elf_play/data/data_providers/song_menu_data_provider.dart';
-import 'package:elf_play/data/data_providers/sync_provider.dart';
-import 'package:elf_play/data/data_providers/user_playlist_data_provider.dart';
-import 'package:elf_play/data/repositories/album_data_repository.dart';
-import 'package:elf_play/data/repositories/artist_data_repository.dart';
-import 'package:elf_play/data/repositories/auth_repository.dart';
-import 'package:elf_play/data/repositories/cart_data_repository.dart';
-import 'package:elf_play/data/repositories/category_data_repository.dart';
-import 'package:elf_play/data/repositories/home_data_repository.dart';
-import 'package:elf_play/data/repositories/library_page_data_repository.dart';
-import 'package:elf_play/data/repositories/like_follow_repository.dart';
-import 'package:elf_play/data/repositories/lyric_data_repository.dart';
-import 'package:elf_play/data/repositories/my_playlist_repository.dart';
-import 'package:elf_play/data/repositories/payment_repository.dart';
-import 'package:elf_play/data/repositories/playlist_data_repository.dart';
-import 'package:elf_play/data/repositories/profile_data_repository.dart';
-import 'package:elf_play/data/repositories/quotes_data_repository.dart';
-import 'package:elf_play/data/repositories/search_data_repository.dart';
-import 'package:elf_play/data/repositories/setting_data_repository.dart';
-import 'package:elf_play/data/repositories/song_menu_repository.dart';
-import 'package:elf_play/data/repositories/sync_repository.dart';
-import 'package:elf_play/data/repositories/user_playlist_repository.dart';
+import 'package:mehaley/data/data_providers/album_data_provider.dart';
+import 'package:mehaley/data/data_providers/artist_data_provider.dart';
+import 'package:mehaley/data/data_providers/auth_provider.dart';
+import 'package:mehaley/data/data_providers/cart_data_provider.dart';
+import 'package:mehaley/data/data_providers/category_data_provider.dart';
+import 'package:mehaley/data/data_providers/home_data_provider.dart';
+import 'package:mehaley/data/data_providers/library_page_data_provider.dart';
+import 'package:mehaley/data/data_providers/like_follow_provider.dart';
+import 'package:mehaley/data/data_providers/lyric_data_provider.dart';
+import 'package:mehaley/data/data_providers/my_playlist_data_provider.dart';
+import 'package:mehaley/data/data_providers/payment_provider.dart';
+import 'package:mehaley/data/data_providers/playlist_data_provider.dart';
+import 'package:mehaley/data/data_providers/profile_data_provider.dart';
+import 'package:mehaley/data/data_providers/quotes_data_provider.dart';
+import 'package:mehaley/data/data_providers/search_data_provider.dart';
+import 'package:mehaley/data/data_providers/settings_data_provider.dart';
+import 'package:mehaley/data/data_providers/song_menu_data_provider.dart';
+import 'package:mehaley/data/data_providers/sync_provider.dart';
+import 'package:mehaley/data/data_providers/user_playlist_data_provider.dart';
+import 'package:mehaley/data/repositories/album_data_repository.dart';
+import 'package:mehaley/data/repositories/artist_data_repository.dart';
+import 'package:mehaley/data/repositories/auth_repository.dart';
+import 'package:mehaley/data/repositories/cart_data_repository.dart';
+import 'package:mehaley/data/repositories/category_data_repository.dart';
+import 'package:mehaley/data/repositories/home_data_repository.dart';
+import 'package:mehaley/data/repositories/library_page_data_repository.dart';
+import 'package:mehaley/data/repositories/like_follow_repository.dart';
+import 'package:mehaley/data/repositories/lyric_data_repository.dart';
+import 'package:mehaley/data/repositories/my_playlist_repository.dart';
+import 'package:mehaley/data/repositories/payment_repository.dart';
+import 'package:mehaley/data/repositories/playlist_data_repository.dart';
+import 'package:mehaley/data/repositories/profile_data_repository.dart';
+import 'package:mehaley/data/repositories/quotes_data_repository.dart';
+import 'package:mehaley/data/repositories/search_data_repository.dart';
+import 'package:mehaley/data/repositories/setting_data_repository.dart';
+import 'package:mehaley/data/repositories/song_menu_repository.dart';
+import 'package:mehaley/data/repositories/sync_repository.dart';
+import 'package:mehaley/data/repositories/user_playlist_repository.dart';
 
 class AppRepositories {
   //REPOSITORIES
@@ -112,5 +112,4 @@ class AppRepositories {
   static QuotesDataRepository quotesDataRepository = QuotesDataRepository(
     quotesDataProvider: QuotesDataProvider(),
   );
-
 }

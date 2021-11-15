@@ -1,7 +1,7 @@
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
 
 class AppItemsImagePlaceHolder extends StatelessWidget {
   const AppItemsImagePlaceHolder({
@@ -15,7 +15,7 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: AppColors.darkGrey,
+      color: AppColors.lightGrey,
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(

@@ -1,15 +1,15 @@
-import 'package:elf_play/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/app_payment_methods.dart';
-import 'package:elf_play/ui/common/dialog/widgets/payment_item.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/ui/common/dialog/widgets/payment_item.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
-import 'package:elf_play/app_language/app_locale.dart';
 
 import '../app_bouncing_button.dart';
 
@@ -43,7 +43,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               horizontal: AppMargin.margin_16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: AppColors.black,
               borderRadius: BorderRadius.circular(6),
             ),
             padding: EdgeInsets.all(
@@ -132,14 +132,14 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
           decoration: BoxDecoration(
             color: tempAppPaymentMethods == AppPaymentMethods.METHOD_UNK
                 ? AppColors.txtGrey
-                : AppColors.darkGreen,
+                : AppColors.darkOrange,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
             child: Text(
               AppLocale.of().selectPaymentMethod.toUpperCase(),
               style: TextStyle(
-                color: AppColors.white,
+                color: AppColors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
@@ -157,10 +157,10 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.white,
+              AppColors.black,
               Colors.transparent,
               Colors.transparent,
-              AppColors.white,
+              AppColors.black,
             ],
             stops: [0.0, 0.03, 0.98, 1.0],
           ).createShader(bounds);
@@ -285,7 +285,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             Text(
               AppLocale.of().paymentMethod,
               style: TextStyle(
-                color: AppColors.black,
+                color: AppColors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_12.sp,
               ),
@@ -299,7 +299,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               },
               child: Icon(
                 PhosphorIcons.x_light,
-                color: AppColors.black,
+                color: AppColors.white,
                 size: AppIconSizes.icon_size_24,
               ),
             ),

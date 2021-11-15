@@ -1,6 +1,6 @@
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 
 part 'song_sync.g.dart';
 

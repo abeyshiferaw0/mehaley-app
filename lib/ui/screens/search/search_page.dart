@@ -1,21 +1,21 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/category.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_front_page_groups.dart';
-import 'package:elf_play/ui/screens/search/widgets/search_page_persistant_header_deligate.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/search_page_bloc/front_page_bloc/search_front_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/category.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_front_page_groups.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_page_persistant_header_deligate.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtil(context: context).getScreenHeight() * 0.7;
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Container(
         padding: EdgeInsets.only(
           left: AppPadding.padding_16,
@@ -201,7 +201,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
         style: TextStyle(
           fontSize: AppFontSizes.font_size_28,
           fontWeight: FontWeight.w600,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
       ),
     );

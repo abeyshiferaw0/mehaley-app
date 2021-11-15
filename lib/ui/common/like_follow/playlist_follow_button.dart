@@ -1,12 +1,12 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistFollowButton extends StatefulWidget {
@@ -56,7 +56,7 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
               preButtonText(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
-                color: AppColors.white,
+                color: AppColors.black,
                 letterSpacing: 0.5,
                 fontWeight: FontWeight.w600,
               ),
@@ -169,29 +169,29 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return AppColors.darkGreen;
+        return AppColors.darkOrange;
       } else {
-        return AppColors.white;
+        return AppColors.black;
       }
     }
 
     ///IF FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.darkGreen;
+      return AppColors.darkOrange;
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.white;
+      return AppColors.black;
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppColors.green;
+      return AppColors.orange;
     } else {
-      return AppColors.white;
+      return AppColors.black;
     }
   }
 }

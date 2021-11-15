@@ -1,4 +1,4 @@
-import 'package:elf_play/data/models/album.dart';
+import 'package:mehaley/data/models/album.dart';
 
 class FavoriteAlbum {
   final int logId;

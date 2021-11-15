@@ -1,16 +1,16 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/followed_artist_bloc/followed_artists_bloc.dart';
-import 'package:elf_play/business_logic/blocs/library_page_bloc/followed_playlist_bloc/followed_playlists_bloc.dart';
-import 'package:elf_play/business_logic/cubits/library/following_tab_pages_cubit.dart';
-import 'package:elf_play/business_logic/cubits/library/library_tab_pages_cubit.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/followed_artists_page.dart';
-import 'package:elf_play/ui/screens/library/tab_pages/tab_pages/followed_playlists_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_artist_bloc/followed_artists_bloc.dart';
+import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_playlist_bloc/followed_playlists_bloc.dart';
+import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
+import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_artists_page.dart';
+import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_playlists_page.dart';
 
 import '../widgets/library_sub_tab_button.dart';
 
@@ -52,10 +52,10 @@ class _FollowingTabViewState extends State<FollowingTabView>
                 refreshPage(context);
               }
             },
-            color: AppColors.darkGreen,
+            color: AppColors.darkOrange,
             edgeOffset: AppMargin.margin_16,
             child: Container(
-              color: AppColors.black,
+              color: AppColors.white,
               height: double.infinity,
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(

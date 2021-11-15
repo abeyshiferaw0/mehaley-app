@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_icon_widget.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:sizer/sizer.dart';
 
 class ItemRecentlyPlayed extends StatelessWidget {
@@ -73,7 +73,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: AppColors.lightGrey,
+                color: AppColors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),

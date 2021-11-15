@@ -1,9 +1,9 @@
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/remote_image.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/text_lan.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/remote_image.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/text_lan.dart';
 
 part 'album.g.dart';
 

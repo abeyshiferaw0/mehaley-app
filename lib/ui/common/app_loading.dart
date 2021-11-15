@@ -1,6 +1,6 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mehaley/config/themes.dart';
 
 class AppLoading extends StatefulWidget {
   const AppLoading({required this.size, this.strokeWidth = 5});

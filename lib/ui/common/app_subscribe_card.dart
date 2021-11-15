@@ -1,9 +1,10 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_bouncing_button.dart';
+import 'app_gradients.dart';
 
 class AppSubscribeCard extends StatelessWidget {
   const AppSubscribeCard({
@@ -13,77 +14,74 @@ class AppSubscribeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          vertical: AppPadding.padding_16,
-          horizontal: AppPadding.padding_16,
-        ),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-              AppColors.completelyBlack.withOpacity(0.3),
-              BlendMode.dstATop,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        vertical: AppPadding.padding_16,
+        horizontal: AppPadding.padding_16,
+      ),
+      decoration: BoxDecoration(
+        gradient: AppGradients.getOfflineLibraryGradient(),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            AppLocale.of().subscribeDialogTitle.toUpperCase(),
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_12.sp,
+              color: AppColors.white,
+              fontWeight: FontWeight.w600,
+              decoration: TextDecoration.none,
             ),
-            image: NetworkImage(
-                'https://ichef.bbci.co.uk/news/976/cpsprodpb/68A6/production/_116609762_gettyimages-1230667435.jpg'),
-            fit: BoxFit.cover,
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              AppLocale.of().subscribeDialogTitle.toUpperCase(),
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.white,
-                fontWeight: FontWeight.w600,
-                decoration: TextDecoration.none,
+          SizedBox(
+            height: AppMargin.margin_8,
+          ),
+          Text(
+            AppLocale.of().subscribeDialogMsg,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.lightGrey,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          SizedBox(
+            height: AppMargin.margin_16,
+          ),
+          AppBouncingButton(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppPadding.padding_32,
+                vertical: AppPadding.padding_8,
               ),
-            ),
-            SizedBox(
-              height: AppMargin.margin_8,
-            ),
-            Text(
-              AppLocale.of().subscribeDialogMsg,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_10.sp,
-                color: AppColors.white.withOpacity(0.7),
-                fontWeight: FontWeight.w500,
-                decoration: TextDecoration.none,
-              ),
-            ),
-            SizedBox(
-              height: AppMargin.margin_16,
-            ),
-            AppBouncingButton(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppPadding.padding_32,
-                  vertical: AppPadding.padding_8,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.green,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Text(
-                  AppLocale.of().subscribeNow.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.none,
+              decoration: BoxDecoration(
+                color: AppColors.black,
+                borderRadius: BorderRadius.circular(100),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 0),
+                    color: AppColors.black.withOpacity(0.2),
                   ),
+                ],
+              ),
+              child: Text(
+                AppLocale.of().subscribeNow.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_10.sp,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.none,
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

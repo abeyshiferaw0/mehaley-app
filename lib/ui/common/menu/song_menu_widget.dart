@@ -1,25 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
-import 'package:elf_play/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
-import 'package:elf_play/ui/common/menu/menu_items/song_download_menu_item.dart';
-import 'package:elf_play/ui/common/menu/menu_items/song_favorite_menu_item.dart';
-import 'package:elf_play/ui/screens/user_playlist/song_add_to_user_playlist_page.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
+import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
+import 'package:mehaley/ui/common/menu/menu_items/song_download_menu_item.dart';
+import 'package:mehaley/ui/common/menu/menu_items/song_favorite_menu_item.dart';
+import 'package:mehaley/ui/screens/user_playlist/song_add_to_user_playlist_page.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_bouncing_button.dart';
@@ -126,7 +126,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           Text(
             L10nUtil.translateLocale(song.songName, context),
             style: TextStyle(
-              color: AppColors.white,
+              color: AppColors.black,
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -172,7 +172,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
               child: AppBouncingButton(
                 child: Icon(
                   PhosphorIcons.caret_circle_down_light,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                   size: AppIconSizes.icon_size_32,
                 ),
                 onTap: () {

@@ -1,19 +1,19 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/api_response/profile_page_data.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/song_item/song_item.dart';
-import 'package:elf_play/ui/screens/artist/widgets/item_similar_artists.dart';
-import 'package:elf_play/ui/screens/category/widgets/item_popular_album.dart';
-import 'package:elf_play/ui/screens/category/widgets/item_popular_playlist.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/api_response/profile_page_data.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/song_item/song_item.dart';
+import 'package:mehaley/ui/screens/artist/widgets/item_similar_artists.dart';
+import 'package:mehaley/ui/screens/category/widgets/item_popular_album.dart';
+import 'package:mehaley/ui/screens/category/widgets/item_popular_playlist.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class ProfileLists extends StatelessWidget {
   const ProfileLists(
@@ -99,8 +99,9 @@ class ProfileLists extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:
-            buildPurchasedPlaylistsHorizontal(profilePageData.boughtPlaylists),
+        children: buildPurchasedPlaylistsHorizontal(
+          profilePageData.boughtPlaylists,
+        ),
       ),
     );
   }

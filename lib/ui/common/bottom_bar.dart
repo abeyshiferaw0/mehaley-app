@@ -1,19 +1,19 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
-import 'package:elf_play/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/ui/common/user_image_sm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/ui/common/user_image_sm.dart';
 
 class BottomBar extends StatefulWidget {
   final GlobalKey<NavigatorState> navigatorKey;
@@ -32,15 +32,15 @@ class _BottomBarState extends State<BottomBar> {
         return BottomNavigationBar(
           enableFeedback: true,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.darkGrey,
+          backgroundColor: AppColors.lightGrey,
           unselectedItemColor: AppColors.grey,
-          selectedItemColor: AppColors.white,
+          selectedItemColor: AppColors.black,
           unselectedLabelStyle: TextStyle(
             color: AppColors.grey,
             fontSize: 11,
           ),
           selectedLabelStyle: TextStyle(
-            color: AppColors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_12,
           ),
           currentIndex: getBottomBarIndex(state),
@@ -124,7 +124,7 @@ class _BottomBarState extends State<BottomBar> {
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
                 icon: PhosphorIcons.house_fill,
-                color: AppColors.white,
+                color: AppColors.black,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(
@@ -141,7 +141,7 @@ class _BottomBarState extends State<BottomBar> {
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
                 icon: PhosphorIcons.magnifying_glass_fill,
-                color: AppColors.white,
+                color: AppColors.black,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(
@@ -158,7 +158,7 @@ class _BottomBarState extends State<BottomBar> {
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
                 icon: PhosphorIcons.stack_fill,
-                color: AppColors.green,
+                color: AppColors.orange,
                 isForLibrary: true,
               ),
               icon: BottomBarIcon(
@@ -175,7 +175,7 @@ class _BottomBarState extends State<BottomBar> {
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
                 icon: PhosphorIcons.shopping_cart_simple_fill,
-                color: AppColors.white,
+                color: AppColors.black,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(

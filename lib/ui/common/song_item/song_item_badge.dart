@@ -1,5 +1,5 @@
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class SongItemBadge extends StatelessWidget {
@@ -13,20 +13,20 @@ class SongItemBadge extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: AppMargin.margin_8),
       padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_4,
-        vertical: 1,
+        horizontal: AppPadding.padding_6,
+        vertical: AppPadding.padding_2,
       ),
       decoration: BoxDecoration(
-        color: AppColors.lightGrey,
+        color: AppColors.darkGrey,
         borderRadius: BorderRadius.all(
-          Radius.circular(2),
+          Radius.circular(3),
         ),
       ),
       child: Text(
         tag,
         style: TextStyle(
           fontSize: 8.sp,
-          color: color != null ? color : null,
+          color: color != null ? color : AppColors.white,
           fontWeight: FontWeight.w600,
         ),
       ),

@@ -1,17 +1,17 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/dialog/dialog_delete_song.dart';
-import 'package:elf_play/util/download_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
+import 'package:mehaley/util/download_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
 
 class SongDownloadIndicator extends StatefulWidget {
   SongDownloadIndicator({
@@ -152,7 +152,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           padding: EdgeInsets.all(AppPadding.padding_8),
           child: Icon(
             PhosphorIcons.arrow_circle_down_fill,
-            color: AppColors.green,
+            color: AppColors.orange,
             size: widget.isForPlayerPage
                 ? AppIconSizes.icon_size_28
                 : AppIconSizes.icon_size_24,
@@ -211,7 +211,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             : AppIconSizes.icon_size_16,
         margin: EdgeInsets.all(AppPadding.padding_8),
         child: CircularProgressIndicator(
-          color: AppColors.green,
+          color: AppColors.orange,
           strokeWidth: 2,
         ),
       ),
@@ -246,7 +246,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   padding: EdgeInsets.all(AppPadding.padding_8),
                   child: Icon(
                     PhosphorIcons.arrow_circle_down_light,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                     size: widget.isForPlayerPage
                         ? AppIconSizes.icon_size_28
                         : AppIconSizes.icon_size_24,

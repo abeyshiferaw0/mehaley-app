@@ -1,25 +1,26 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/business_logic/cubits/image_picker_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/auth_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/dialog/widgets/image_picker_dialog_items.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class EditUserProfilePage extends StatefulWidget {
@@ -66,7 +67,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToUpdateProfile,
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: PhosphorIcons.wifi_x_light,
@@ -76,11 +77,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         if (state is AuthUpdateSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              txtColor: AppColors.black,
+              txtColor: AppColors.white,
               msg: AppLocale.of().profileUpdated,
-              bgColor: AppColors.white,
+              bgColor: AppColors.black,
               isFloating: true,
-              iconColor: AppColors.darkGreen,
+              iconColor: AppColors.darkOrange,
               icon: PhosphorIcons.check_circle_fill,
             ),
           );
@@ -88,7 +89,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -135,7 +136,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
   Container buildEditingProfileLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.completelyBlack.withOpacity(0.5),
+        color: AppColors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(
@@ -144,56 +145,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
       ),
       child: AppLoading(
         size: AppValues.loadingWidgetSize * 0.5,
-      ),
-    );
-  }
-
-  TextFormField buildProfileName() {
-    return TextFormField(
-      textAlignVertical: TextAlignVertical.center,
-      textAlign: TextAlign.center,
-      //autofocus: true,
-      controller: nameInputController,
-      cursorColor: AppColors.darkGreen,
-      onChanged: (key) {},
-      style: TextStyle(
-        color: AppColors.white,
-        fontSize: AppFontSizes.font_size_18.sp,
-        fontWeight: FontWeight.w600,
-      ),
-      buildCounter: (
-        context, {
-        required currentLength,
-        maxLength,
-        required isFocused,
-      }) =>
-          Text(
-        '$currentLength/$maxLength',
-        style: TextStyle(
-          color: AppColors.darkGreen,
-          fontSize: AppFontSizes.font_size_10,
-        ),
-      ),
-      maxLength: nameMaxLength,
-      decoration: InputDecoration(
-        fillColor: AppColors.white,
-        focusColor: AppColors.white,
-        hoverColor: AppColors.white,
-        border: InputBorder.none,
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGrey),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkGreen),
-        ),
-        errorBorder: InputBorder.none,
-        disabledBorder: InputBorder.none,
-        hintText: AppLocale.of().profileName,
-        hintStyle: TextStyle(
-          color: AppColors.txtGrey,
-          fontSize: AppFontSizes.font_size_18.sp,
-          fontWeight: FontWeight.w600,
-        ),
       ),
     );
   }
@@ -338,13 +289,63 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  TextFormField buildProfileName() {
+    return TextFormField(
+      textAlignVertical: TextAlignVertical.center,
+      textAlign: TextAlign.center,
+      //autofocus: true,
+      controller: nameInputController,
+      cursorColor: AppColors.darkOrange,
+      onChanged: (key) {},
+      style: TextStyle(
+        color: AppColors.black,
+        fontSize: AppFontSizes.font_size_18.sp,
+        fontWeight: FontWeight.w600,
+      ),
+      buildCounter: (
+        context, {
+        required currentLength,
+        maxLength,
+        required isFocused,
+      }) =>
+          Text(
+        '$currentLength/$maxLength',
+        style: TextStyle(
+          color: AppColors.darkOrange,
+          fontSize: AppFontSizes.font_size_10,
+        ),
+      ),
+      maxLength: nameMaxLength,
+      decoration: InputDecoration(
+        fillColor: AppColors.black,
+        focusColor: AppColors.black,
+        hoverColor: AppColors.black,
+        border: InputBorder.none,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.lightGrey),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.darkOrange),
+        ),
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        hintText: AppLocale.of().profileName,
+        hintStyle: TextStyle(
+          color: AppColors.txtGrey,
+          fontSize: AppFontSizes.font_size_18.sp,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 
@@ -364,7 +365,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
               child: Icon(
                 PhosphorIcons.x_light,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.white,
+                color: AppColors.black,
               ),
             ),
           ),
@@ -379,7 +380,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -402,7 +403,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
                       msg: AppLocale.of().userNameCantBeEmpty,
-                      bgColor: AppColors.lightGrey,
+                      bgColor: AppColors.darkGrey,
                       isFloating: false,
                     ),
                   );
@@ -414,11 +415,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   horizontal: AppPadding.padding_16,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.black,
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     width: 1,
-                    color: AppColors.lightGrey,
+                    color: AppColors.darkGrey,
                   ),
                 ),
                 child: Text(
@@ -426,7 +427,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.white,
                   ),
                 ),
               ),
@@ -444,53 +445,6 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
   void initPreviousValues() {
     nameInputController.text = AuthUtil.getUserName(
       BlocProvider.of<AppUserWidgetsCubit>(context).state,
-    );
-  }
-}
-
-class ImagePickerDialogItems extends StatelessWidget {
-  const ImagePickerDialogItems({
-    Key? key,
-    required this.onTap,
-    required this.icon,
-    required this.text,
-  }) : super(key: key);
-
-  final VoidCallback onTap;
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_16,
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.black,
-              size: AppIconSizes.icon_size_24,
-            ),
-            SizedBox(
-              width: AppMargin.margin_16,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_12.sp,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.italic,
-                color: AppColors.black,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

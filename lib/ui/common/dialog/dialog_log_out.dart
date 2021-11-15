@@ -1,8 +1,8 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class DialogLogOut extends StatelessWidget {
@@ -66,7 +66,7 @@ class DialogLogOut extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: AppColors.green,
+                      color: AppColors.orange,
                     ),
                     child: Text(
                       AppLocale.of().logOut.toUpperCase(),
@@ -86,7 +86,7 @@ class DialogLogOut extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "cancel",
+                    AppLocale.of().cancel.toUpperCase(),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,

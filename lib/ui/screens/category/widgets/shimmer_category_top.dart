@@ -1,5 +1,5 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/shimmer_item.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/shimmer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

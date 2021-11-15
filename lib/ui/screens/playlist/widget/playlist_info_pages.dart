@@ -1,22 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
-import 'package:elf_play/data/models/playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_card.dart';
-import 'package:elf_play/ui/common/buy_item_btn.dart';
-import 'package:elf_play/ui/common/cart_buttons/playlist_info_cart_button.dart';
-import 'package:elf_play/ui/common/like_follow/playlist_follow_button.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/ui/screens/playlist/widget/icon_text.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
+import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/buy_item_btn.dart';
+import 'package:mehaley/ui/common/cart_buttons/playlist_info_cart_button.dart';
+import 'package:mehaley/ui/common/like_follow/playlist_follow_button.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/screens/playlist/widget/icon_text.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
@@ -27,7 +27,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
 
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
-    color: AppColors.lightGrey,
+    color: AppColors.darkGrey,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
@@ -75,7 +75,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_16.sp,
-                color: AppColors.white,
+                color: AppColors.black,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -102,7 +102,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                         child: Icon(
                           Icons.circle,
                           size: AppIconSizes.icon_size_4,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         ),
                       ),
                 playlistPageData.numberOfFollowers == 0
@@ -146,7 +146,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
             AppLocale.of().playlistBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               letterSpacing: 0.3,
               fontWeight: FontWeight.w400,
             ),
@@ -209,7 +209,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_16,
-        color: AppColors.white,
+        color: AppColors.black,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -226,7 +226,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
             offset: Offset(0, 0),
             spreadRadius: 2,
             blurRadius: 12,
-            color: AppColors.black.withOpacity(0.2),
+            color: AppColors.white.withOpacity(0.2),
           ),
         ],
       ),
@@ -262,14 +262,14 @@ class PlaylistInfoPageTwo extends StatelessWidget {
             offset: Offset(0, 0),
             spreadRadius: 2,
             blurRadius: 12,
-            color: AppColors.black.withOpacity(0.2),
+            color: AppColors.white.withOpacity(0.2),
           ),
         ],
       ),
       child: Text(
         PagesUtilFunctions.getPlaylistOwner(playlist, context),
         style: TextStyle(
-          color: AppColors.white,
+          color: AppColors.black,
           fontSize: AppFontSizes.font_size_12,
           fontWeight: FontWeight.w500,
         ),

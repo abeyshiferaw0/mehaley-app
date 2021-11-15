@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/cart/cart.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/cart/cart.dart';
 
 class CartPageData extends Equatable {
   final Cart cart;

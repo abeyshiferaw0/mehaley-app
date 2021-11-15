@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/data_providers/auth_provider.dart';
-import 'package:elf_play/data/models/api_response/save_user_data.dart';
-import 'package:elf_play/data/models/app_firebase_user.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/util/auth_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/data_providers/auth_provider.dart';
+import 'package:mehaley/data/models/api_response/save_user_data.dart';
+import 'package:mehaley/data/models/app_firebase_user.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class AuthRepository {

@@ -1,13 +1,13 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/artist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/common/play_shuffle_lg_btn_widget.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/play_shuffle_lg_btn_widget.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class ArtistPlayShuffle extends StatelessWidget {
   const ArtistPlayShuffle({
@@ -27,7 +27,7 @@ class ArtistPlayShuffle extends StatelessWidget {
         children: [
           Container(
             height: 40,
-            color: AppColors.black,
+            color: AppColors.white,
           ),
           Positioned(
             left: 0,

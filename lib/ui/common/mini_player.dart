@@ -1,29 +1,29 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/play_pause_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_duration_cubit.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/dialog/dialog_song_preview_mode.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/screens/player/player_page.dart';
-import 'package:elf_play/util/audio_player_util.dart';
-import 'package:elf_play/util/color_util.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:marquee/marquee.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/screens/player/player_page.dart';
+import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_card.dart';
@@ -75,7 +75,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       builder: (context, currentPlayingSong) {
         if (currentPlayingSong != null) {
           return Container(
-            color: AppColors.black,
+            color: AppColors.white,
             child: SlideTransition(
               position: offset,
               child: GestureDetector(
@@ -129,7 +129,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       if (state is PlayerPageDominantColorChangedState) {
                         dominantColor = ColorUtil.darken(
                           state.color,
-                          0.05,
+                          0.00,
                         );
                       }
                       animateWhenSongChange(currentPlayingSong);
@@ -200,7 +200,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_8.sp,
-                color: AppColors.txtGrey,
+                color: AppColors.lightGrey,
               ),
             ),
             SizedBox(
@@ -260,8 +260,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               child: Padding(
                 padding: EdgeInsets.all(AppPadding.padding_4),
                 child: Icon(
-                  state ? Icons.pause_sharp : Icons.play_arrow_sharp,
-                  size: AppIconSizes.icon_size_32,
+                  state ? PhosphorIcons.pause_fill : PhosphorIcons.play_fill,
+                  size: AppIconSizes.icon_size_24,
                   color: AppColors.white,
                 ),
               ),
@@ -321,8 +321,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 ? PagesUtilFunctions.getArtistsNames(song.artistsName, context)
                 : '',
             style: TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: AppFontSizes.font_size_12),
+              color: AppColors.lightGrey,
+              fontSize: AppFontSizes.font_size_8.sp,
+            ),
           )
         ],
       ),
@@ -369,8 +370,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         if (currentPlayingState != null) {
           return SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: AppColors.white,
-              inactiveTrackColor: AppColors.lightGrey.withOpacity(0.5),
+              activeTrackColor: AppColors.black,
+              inactiveTrackColor: AppColors.darkGrey.withOpacity(0.5),
               thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,
@@ -424,11 +425,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_4,
+          vertical: AppPadding.padding_8,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          color: AppColors.darkGreen,
+          color: AppColors.black,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -463,7 +464,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             Icon(
               PhosphorIcons.shopping_cart_simple_light,
               size: AppIconSizes.icon_size_16,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
             SizedBox(
               width: AppMargin.margin_4,
@@ -473,7 +474,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.bold,
-                color: AppColors.white,
+                color: AppColors.black,
               ),
             ),
           ],

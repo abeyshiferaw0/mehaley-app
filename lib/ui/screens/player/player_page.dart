@@ -1,16 +1,16 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:elf_play/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:elf_play/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
-import 'package:elf_play/config/app_repositories.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/screens/player/widgets/bg_player_gradient.dart';
-import 'package:elf_play/ui/screens/player/widgets/main_player_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/screens/player/widgets/bg_player_gradient.dart';
+import 'package:mehaley/ui/screens/player/widgets/main_player_widgets.dart';
 
 class PlayerPage extends StatefulWidget {
   const PlayerPage({Key? key}) : super(key: key);

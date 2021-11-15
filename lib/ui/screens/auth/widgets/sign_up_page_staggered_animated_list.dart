@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 
 class SignUpPageStaggeredAnimatedList extends StatefulWidget {
   const SignUpPageStaggeredAnimatedList({Key? key}) : super(key: key);
@@ -91,7 +91,7 @@ class _SignUpPageStaggeredAnimatedListState
 
   Container buildGridImagePlaceholder() {
     return Container(
-      color: AppColors.darkGrey,
+      color: AppColors.lightGrey,
       child: Center(
         child: SvgPicture.asset(
           'assets/icons/ic_app.svg',

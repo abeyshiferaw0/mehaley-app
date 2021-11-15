@@ -1,17 +1,17 @@
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/playlist_page_data.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/menu/playlist_menu_widget.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/ui/screens/playlist/widget/playlist_info_pages.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/screens/playlist/widget/playlist_info_pages.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class PlaylistPageHeader extends StatefulWidget {
@@ -34,7 +34,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
   );
 
   //DOMINANT COLOR
-  Color dominantColor = AppColors.black;
+  Color dominantColor = AppColors.white;
 
   //NOTIFIER FOR DOTED INDICATOR
   final ValueNotifier<int> pageNotifier = new ValueNotifier<int>(0);
@@ -102,7 +102,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             icon: Icon(
               PhosphorIcons.caret_left_light,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           Expanded(
@@ -120,7 +120,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     ),
                   ),
@@ -155,7 +155,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             child: Icon(
               PhosphorIcons.dots_three_vertical_bold,
               size: AppIconSizes.icon_size_28,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
             ),
             onTap: () {
               PagesUtilFunctions.showMenuDialog(
@@ -216,7 +216,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             ),
             CirclePageIndicator(
               dotColor: AppColors.grey,
-              selectedDotColor: AppColors.white,
+              selectedDotColor: AppColors.black,
               currentPageNotifier: pageNotifier,
               size: 6,
               itemCount: 2,

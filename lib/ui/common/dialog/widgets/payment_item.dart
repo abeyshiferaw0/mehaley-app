@@ -1,9 +1,9 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/enums/app_payment_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../app_bouncing_button.dart';
 
@@ -35,17 +35,17 @@ class PaymentMethodItem extends StatelessWidget {
           horizontal: AppPadding.padding_16,
         ),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: AppColors.black,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
             color: isSelected
-                ? AppColors.darkGreen
+                ? AppColors.darkOrange
                 : AppColors.grey.withOpacity(0.4),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.darkGrey.withOpacity(0.1),
+              color: AppColors.lightGrey.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 6,
               offset: Offset(0, 0),
@@ -75,7 +75,7 @@ class PaymentMethodItem extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: AppColors.white,
                       fontWeight: FontWeight.w500,
                       fontSize: AppFontSizes.font_size_12.sp,
                     ),
@@ -95,7 +95,7 @@ class PaymentMethodItem extends StatelessWidget {
             isSelected
                 ? Icon(
                     PhosphorIcons.check_circle_fill,
-                    color: AppColors.darkGreen,
+                    color: AppColors.darkOrange,
                     size: AppIconSizes.icon_size_24,
                   )
                 : SizedBox(),

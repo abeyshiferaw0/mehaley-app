@@ -1,8 +1,8 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
 class PhoneAuthLargeButton extends StatelessWidget {
   const PhoneAuthLargeButton({
@@ -31,7 +31,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
           vertical: AppPadding.padding_14,
         ),
         decoration: BoxDecoration(
-          color: AppColors.darkGreen,
+          color: AppColors.darkOrange,
           borderRadius: BorderRadius.circular(2),
         ),
         child: Center(
@@ -47,7 +47,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                       ),
                       child: CircularProgressIndicator(
                         strokeWidth: 1,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       ),
                     )
                   : SizedBox(),
@@ -55,7 +55,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14,
-                  color: AppColors.white,
+                  color: AppColors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -65,7 +65,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
               isLoading != true
                   ? Icon(
                       PhosphorIcons.caret_right_light,
-                      color: AppColors.white,
+                      color: AppColors.black,
                       size: AppIconSizes.icon_size_12,
                     )
                   : SizedBox(),

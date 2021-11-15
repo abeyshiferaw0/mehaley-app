@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/data/models/enums/setting_enums/app_currency.dart';
-import 'package:elf_play/data/models/enums/setting_enums/download_song_quality.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
+import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class SettingsDataProvider {

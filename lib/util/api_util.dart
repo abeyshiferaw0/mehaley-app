@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/library_data/purchased_playlist.dart';
-import 'package:elf_play/data/models/library_data/purchased_song.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/util/l10n_util.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
+import 'package:mehaley/data/models/library_data/purchased_song.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ApiUtil {

@@ -1,4 +1,4 @@
-name: elf_play
+name: mehaley
 description: a music player engine
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -99,7 +99,7 @@ dev_dependencies:
   logger: ^1.0.0
   hive_generator: ^1.1.0
   build_runner: ^2.1.1
-  change_app_package_name: ^1.0.0
+  rename: ^2.0.1
 
 flutter:
   assets:
@@ -118,6 +118,18 @@ flutter:
         - asset: assets/fonts/poppins/poppins_semi_bold.ttf
           weight: 600
         - asset: assets/fonts/poppins/poppins_bold.ttf
+          weight: 700
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/raleway/raleway_light.ttf
+          weight: 300
+        - asset: assets/fonts/raleway/raleway_regular.ttf
+          weight: 400
+        - asset: assets/fonts/raleway/raleway_medium.ttf
+          weight: 500
+        - asset: assets/fonts/raleway/raleway_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/raleway/raleway_bold.ttf
           weight: 700
 
   uses-material-design: true

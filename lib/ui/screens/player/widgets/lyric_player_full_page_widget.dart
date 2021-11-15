@@ -1,12 +1,12 @@
-import 'package:elf_play/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/lyric_item.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/lyric_item.dart';
+import 'package:mehaley/data/models/song.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:sizer/sizer.dart';
 
 class LyricPlayerFullPageWidget extends StatefulWidget {
   const LyricPlayerFullPageWidget(
@@ -106,9 +106,9 @@ class _LyricPlayerFullPageWidgetState extends State<LyricPlayerFullPageWidget> {
                         fontSize: AppFontSizes.font_size_16.sp,
                         color: currentLyricItem != null
                             ? (currentLyricItem!.index == index
-                                ? AppColors.white
-                                : AppColors.black.withOpacity(0.7))
-                            : AppColors.black.withOpacity(0.7),
+                                ? AppColors.black
+                                : AppColors.white.withOpacity(0.7))
+                            : AppColors.white.withOpacity(0.7),
                         fontWeight: FontWeight.w600,
                       ),
                     );

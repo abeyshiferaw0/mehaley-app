@@ -1,6 +1,6 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 
 class IconText extends StatelessWidget {
   final IconData icon;
@@ -15,14 +15,14 @@ class IconText extends StatelessWidget {
         Icon(
           icon,
           size: AppIconSizes.icon_size_16,
-          color: AppColors.white,
+          color: AppColors.black,
         ),
         SizedBox(width: AppMargin.margin_4),
         Text(
           text,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12,
-            color: AppColors.lightGrey,
+            color: AppColors.darkGrey,
           ),
         ),
       ],

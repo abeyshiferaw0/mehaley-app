@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/app_user.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/auth_util.dart';
 
 class UserImageSm extends StatelessWidget {
   const UserImageSm({
@@ -41,8 +41,11 @@ class UserImageSm extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(size / 2),
-              border: hasBorder ? Border.all(color: borderColor, width: 1) : null,
-              color: hasBorder ? AppColors.darkGrey : AuthUtil.getUserColor(state),
+              border:
+                  hasBorder ? Border.all(color: borderColor, width: 1) : null,
+              color: hasBorder
+                  ? AppColors.lightGrey
+                  : AuthUtil.getUserColor(state),
             ),
             width: size,
             height: size,
@@ -56,7 +59,7 @@ class UserImageSm extends StatelessWidget {
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.white,
+                  color: AppColors.black,
                 ),
               ),
             ),
@@ -82,10 +85,10 @@ class UserImageSm extends StatelessWidget {
           imageUrl: appUser.socialProfileImgUrl!,
           fit: BoxFit.cover,
           placeholder: (context, url) => Container(
-            color: AppColors.lightGrey,
+            color: AppColors.darkGrey,
           ),
           errorWidget: (context, url, error) => Container(
-            color: AppColors.lightGrey,
+            color: AppColors.darkGrey,
           ),
         ),
       ),

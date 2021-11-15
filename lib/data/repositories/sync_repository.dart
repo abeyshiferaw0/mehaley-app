@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/config/app_hive_boxes.dart';
-import 'package:elf_play/data/data_providers/sync_provider.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/data/data_providers/sync_provider.dart';
+import 'package:mehaley/data/models/sync/song_sync.dart';
 
 class SyncRepository {
   //INIT PROVIDER FOR API CALL

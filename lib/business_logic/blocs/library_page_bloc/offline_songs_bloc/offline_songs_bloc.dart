@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/library_page_data_repository.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/repositories/library_page_data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'offline_songs_event.dart';

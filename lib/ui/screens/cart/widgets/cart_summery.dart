@@ -1,6 +1,6 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
 class CartSummery extends StatelessWidget {
@@ -18,7 +18,7 @@ class CartSummery extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           SizedBox(height: AppMargin.margin_16),
@@ -29,7 +29,7 @@ class CartSummery extends StatelessWidget {
             ),
             child: Divider(
               height: 1,
-              color: AppColors.darkGrey,
+              color: AppColors.lightGrey,
             ),
           ),
           SizedBox(height: AppMargin.margin_16),

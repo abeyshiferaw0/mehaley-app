@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/data/models/enums/app_payment_methods.dart';
-import 'package:elf_play/data/repositories/payment_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/repositories/payment_repository.dart';
 
 part 'preferred_payment_method_event.dart';
 part 'preferred_payment_method_state.dart';

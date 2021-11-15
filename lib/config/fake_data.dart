@@ -1,5 +1,5 @@
 class AppTestValues {
-  static const String debugTxt = 'ELF_PLAY_DEBUG';
+  static const String debugTxt = 'mehaley_DEBUG';
   static const String albumArt =
       'https://stylesatlife.com/wp-content/uploads/2017/07/Butterfly-Cross-Tattoo.jpg';
   static String textBgVideo =

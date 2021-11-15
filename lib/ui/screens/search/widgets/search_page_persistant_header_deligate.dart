@@ -1,10 +1,11 @@
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchPersistentSliverHeaderDelegate
     extends SliverPersistentHeaderDelegate {
@@ -19,7 +20,7 @@ class SearchPersistentSliverHeaderDelegate
         );
       },
       child: Container(
-        color: AppColors.black,
+        color: AppColors.white,
         height: AppValues.searchPersistentSliverHeaderHeight,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +28,7 @@ class SearchPersistentSliverHeaderDelegate
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: AppColors.black,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 padding: EdgeInsets.symmetric(vertical: AppPadding.padding_12),
@@ -39,7 +40,7 @@ class SearchPersistentSliverHeaderDelegate
                     ),
                     Icon(
                       PhosphorIcons.magnifying_glass_light,
-                      color: AppColors.darkGrey,
+                      color: AppColors.lightGrey,
                       size: AppIconSizes.icon_size_24,
                     ),
                     SizedBox(
@@ -50,7 +51,7 @@ class SearchPersistentSliverHeaderDelegate
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.darkGrey,
+                        color: AppColors.lightGrey,
                       ),
                     ),
                   ],

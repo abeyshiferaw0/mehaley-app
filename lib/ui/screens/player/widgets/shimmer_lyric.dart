@@ -1,8 +1,8 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/shimmer_item.dart';
-import 'package:elf_play/util/color_util.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/shimmer_item.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
@@ -31,7 +31,7 @@ class ShimmerLyric extends StatelessWidget {
             AppLocale.of().lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.white,
+              color: AppColors.black,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.8,
             ),

@@ -1,8 +1,8 @@
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class LibraryPageSubTabButton extends StatelessWidget {
   const LibraryPageSubTabButton({
@@ -38,9 +38,9 @@ class LibraryPageSubTabButton extends StatelessWidget {
               width: 2,
               color: isSelected
                   ? AppColors.transparent
-                  : AppColors.white.withOpacity(0.2),
+                  : AppColors.black.withOpacity(0.2),
             ),
-            color: isSelected ? AppColors.darkGreen : AppColors.transparent,
+            color: isSelected ? AppColors.darkOrange : AppColors.transparent,
           ),
           child: Row(
             children: [
@@ -49,7 +49,7 @@ class LibraryPageSubTabButton extends StatelessWidget {
                       padding: EdgeInsets.only(right: AppPadding.padding_8),
                       child: Icon(
                         prefixIcon,
-                        color: AppColors.white,
+                        color: AppColors.black,
                         size: AppIconSizes.icon_size_16,
                       ),
                     )
@@ -58,7 +58,7 @@ class LibraryPageSubTabButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: (AppFontSizes.font_size_8 + 1).sp,
-                  color: AppColors.white,
+                  color: AppColors.black,
                   fontWeight: FontWeight.w700,
                 ),
               ),

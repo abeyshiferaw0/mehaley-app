@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
 
 class MyPlaylistPageData extends Equatable {
   final List<MyPlaylist> myPlaylists;

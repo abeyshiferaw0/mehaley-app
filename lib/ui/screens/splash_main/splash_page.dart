@@ -1,7 +1,7 @@
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/util/auth_util.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/auth_util.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -23,9 +23,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkGreen,
+      backgroundColor: AppColors.darkOrange,
       body: Container(
-        color: AppColors.darkGreen,
+        color: AppColors.darkOrange,
       ),
     );
   }

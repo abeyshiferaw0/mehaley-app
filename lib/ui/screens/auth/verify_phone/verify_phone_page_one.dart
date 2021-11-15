@@ -1,21 +1,21 @@
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/app_gradients.dart';
-import 'package:elf_play/ui/common/app_snack_bar.dart';
-import 'package:elf_play/ui/common/sign_up_page_authing_covor.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/widgets/country_code_picker_button.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
-import 'package:elf_play/ui/screens/auth/verify_phone/widgets/phone_number_input.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/sign_up_page_authing_covor.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/widgets/country_code_picker_button.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
+import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_number_input.dart';
+import 'package:mehaley/util/screen_util.dart';
 
 class VerifyPhonePageOne extends StatefulWidget {
   const VerifyPhonePageOne({Key? key}) : super(key: key);
@@ -72,13 +72,13 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColors.white,
         appBar: buildAppBar(context),
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(
-              color: AppColors.black,
+              color: AppColors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.padding_16,
                 vertical: AppPadding.padding_28,
@@ -118,7 +118,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_18,
-          color: AppColors.white,
+          color: AppColors.black,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -201,15 +201,15 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           showFlag: true,
           dialogSize: getCountrySearchDialogSize(context),
           backgroundColor: AppColors.transparent,
-          dialogBackgroundColor: AppColors.black,
-          barrierColor: AppColors.completelyBlack.withOpacity(0.6),
+          dialogBackgroundColor: AppColors.white,
+          barrierColor: AppColors.white.withOpacity(0.6),
           closeIcon: Icon(
             PhosphorIcons.x_light,
             size: AppIconSizes.icon_size_24,
-            color: AppColors.white,
+            color: AppColors.black,
           ),
           searchStyle: TextStyle(
-            color: AppColors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_16,
             fontWeight: FontWeight.w600,
           ),
@@ -232,7 +232,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             );
           },
           dialogTextStyle: TextStyle(
-            color: AppColors.white,
+            color: AppColors.black,
             fontSize: AppFontSizes.font_size_14,
             fontWeight: FontWeight.w500,
           ),
@@ -243,19 +243,19 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             prefixIcon: Icon(
               PhosphorIcons.magnifying_glass_light,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.darkGreen,
+              color: AppColors.darkOrange,
             ),
-            fillColor: AppColors.white,
-            focusColor: AppColors.white,
-            hoverColor: AppColors.white,
+            fillColor: AppColors.black,
+            focusColor: AppColors.black,
+            hoverColor: AppColors.black,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkGreen),
+              borderSide: BorderSide(color: AppColors.darkOrange),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkGreen),
+              borderSide: BorderSide(color: AppColors.darkOrange),
             ),
             border: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkGreen),
+              borderSide: BorderSide(color: AppColors.darkOrange),
             ),
             hintText: AppLocale.of().searchForCountryCode,
             hintStyle: TextStyle(
@@ -284,7 +284,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       centerTitle: true,
       //brightness: Brightness.dark,
@@ -296,7 +296,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           Navigator.pop(context);
         },
         iconSize: AppIconSizes.icon_size_24,
-        color: AppColors.white,
+        color: AppColors.black,
         icon: Icon(
           PhosphorIcons.caret_left_light,
         ),

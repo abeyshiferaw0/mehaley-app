@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/song_position_cubit.dart';
-import 'package:elf_play/data/models/sync/song_sync.dart';
-import 'package:elf_play/data/repositories/sync_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/data/models/sync/song_sync.dart';
+import 'package:mehaley/data/repositories/sync_repository.dart';
 
 part 'song_listen_recorder_event.dart';
 part 'song_listen_recorder_state.dart';

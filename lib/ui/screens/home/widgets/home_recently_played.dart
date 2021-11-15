@@ -1,14 +1,15 @@
-import 'package:elf_play/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/models/sync/song_sync_played_from.dart';
-import 'package:elf_play/ui/screens/home/widgets/item_recently_played.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';import 'package:elf_play/app_language/app_locale.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/screens/home/widgets/item_recently_played.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeRecentlyPlayed extends StatelessWidget {
   final List<Song> recentlyPlayed;
@@ -31,7 +32,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                   child: Text(
                     AppLocale.of().recentlyPlayed,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.black,
                       fontSize: AppFontSizes.font_size_14.sp,
                       fontWeight: FontWeight.w600,
                     ),

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/data/repositories/category_data_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/repositories/category_data_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'category_page_pagination_event.dart';

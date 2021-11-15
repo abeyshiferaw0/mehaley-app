@@ -1,7 +1,7 @@
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/ui/common/shimmer_item.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/shimmer_item.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerPlaylist extends StatelessWidget {
@@ -14,8 +14,8 @@ class ShimmerPlaylist extends StatelessWidget {
 
     return SafeArea(
       child: Shimmer.fromColors(
-        highlightColor: AppColors.darkGrey,
-        baseColor: Color(0xff262626),
+        highlightColor: AppColors.lightGrey,
+        baseColor: AppColors.txtGrey,
         direction: ShimmerDirection.ltr,
         child: Wrap(
           children: [

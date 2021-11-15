@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:elf_play/data/models/album.dart';
-import 'package:elf_play/data/models/song.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/song.dart';
 
 class AlbumPageData extends Equatable {
   final List<Song> songs;

@@ -1,25 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
-import 'package:elf_play/business_logic/cubits/player_cubits/current_playing_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/my_playlist.dart';
-import 'package:elf_play/data/models/song.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/menu/song_menu_widget.dart';
-import 'package:elf_play/ui/common/player_items_placeholder.dart';
-import 'package:elf_play/ui/common/small_text_price_widget.dart';
-import 'package:elf_play/ui/common/song_item/song_download_indicator.dart';
-import 'package:elf_play/ui/common/song_item/song_item_badge.dart';
-import 'package:elf_play/ui/screens/cart/widgets/remove_from_cart_button.dart';
-import 'package:elf_play/util/l10n_util.dart';
-import 'package:elf_play/util/pages_util_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
+import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
+import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
+import 'package:mehaley/ui/screens/cart/widgets/remove_from_cart_button.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
 
@@ -219,7 +219,7 @@ class _SongItemState extends State<SongItem> {
           position.toString(),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12,
-            color: AppColors.white,
+            color: AppColors.black,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -321,7 +321,7 @@ class SongIsPlayingText extends StatelessWidget {
           maxLines: 1,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_16,
-            color: isPlaying ? AppColors.green : AppColors.white,
+            color: isPlaying ? AppColors.orange : AppColors.black,
             fontWeight: FontWeight.w500,
           ),
         );
@@ -412,7 +412,7 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
                 padding: EdgeInsets.all(AppPadding.padding_8),
                 child: Icon(
                   PhosphorIcons.dots_three_vertical_bold,
-                  color: AppColors.lightGrey,
+                  color: AppColors.darkGrey,
                   size: AppIconSizes.icon_size_24,
                 ),
               ),

@@ -1,25 +1,25 @@
-import 'package:elf_play/app_language/app_locale.dart';
-import 'package:elf_play/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:elf_play/business_logic/blocs/profile_page/profile_page_bloc.dart';
-import 'package:elf_play/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:elf_play/config/app_router.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/config/enums.dart';
-import 'package:elf_play/config/themes.dart';
-import 'package:elf_play/data/models/api_response/profile_page_data.dart';
-import 'package:elf_play/ui/common/app_bouncing_button.dart';
-import 'package:elf_play/ui/common/app_error.dart';
-import 'package:elf_play/ui/common/app_loading.dart';
-import 'package:elf_play/ui/screens/profile/widgets/profile_lists.dart';
-import 'package:elf_play/ui/screens/profile/widgets/profile_page_header_deligate.dart';
-import 'package:elf_play/ui/screens/profile/widgets/profile_page_tabs_deligate.dart';
-import 'package:elf_play/util/auth_util.dart';
-import 'package:elf_play/util/color_util.dart';
-import 'package:elf_play/util/screen_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/api_response/profile_page_data.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/profile/widgets/profile_lists.dart';
+import 'package:mehaley/ui/screens/profile/widgets/profile_page_header_deligate.dart';
+import 'package:mehaley/ui/screens/profile/widgets/profile_page_tabs_deligate.dart';
+import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: CustomScrollView(
         slivers: [
           BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(height: AppMargin.margin_58),
         Icon(
           PhosphorIcons.cube_thin,
-          color: AppColors.white.withOpacity(0.2),
+          color: AppColors.black.withOpacity(0.2),
           size: AppIconSizes.icon_size_32,
         ),
         SizedBox(height: AppMargin.margin_8),
@@ -317,7 +317,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.lightGrey,
+                color: AppColors.darkGrey,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -326,7 +326,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Icon(
               PhosphorIcons.caret_right_light,
-              color: AppColors.lightGrey,
+              color: AppColors.darkGrey,
               size: AppIconSizes.icon_size_12,
             ),
           ],

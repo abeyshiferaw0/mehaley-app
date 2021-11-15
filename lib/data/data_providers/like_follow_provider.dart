@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:elf_play/config/constants.dart';
-import 'package:elf_play/util/api_util.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/util/api_util.dart';
 
 class LikeFollowProvider {
   late Dio dio;
