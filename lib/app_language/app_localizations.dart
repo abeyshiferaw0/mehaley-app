@@ -317,9 +317,10 @@ abstract class AppLocalizations {
 
   String get preferredCurrency;
   String get preferredCurrencySettingMsg;
-
   String get shareApp;
   String get shareAppMsg;
+  String get retryingDownloadMsg;
+  String get play;
 
   String noOfSongs({required String noOfSong});
 

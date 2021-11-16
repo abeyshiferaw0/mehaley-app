@@ -24,7 +24,9 @@ class AppColors {
 
   ///LIGHT COLORS
   static Color white = HexColor('#FFFFFF');
-  static Color lightGrey = HexColor('#e9e9e9');
+  static Color lightGrey = HexColor('#EAEAEA'); //e9e9e9
+  static Color pagesBgColor = HexColor("#F8F8F8"); //fbfbfb
+  static Color placeholderIconColor = HexColor("#BEBEC5");
 
   ///DARK COLORS
   static Color darkGrey = HexColor('#3C3C3C');
@@ -65,6 +67,7 @@ class AppPadding {
   static const double padding_8 = 8;
   static const double padding_16 = 16;
   static const double padding_20 = 20;
+  static const double padding_24 = 24;
   static const double padding_28 = 28;
   static const double padding_32 = 32;
   static const double padding_12 = 12;

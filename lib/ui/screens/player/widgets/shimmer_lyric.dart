@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/shimmer_item.dart';
-import 'package:mehaley/util/color_util.dart';
-import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,13 +16,13 @@ class ShimmerLyric extends StatelessWidget {
     return Container(
       height: AppValues.lyricPlayerHeight,
       decoration: BoxDecoration(
-        color: dominantColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
       ),
       padding: EdgeInsets.all(AppPadding.padding_14),
-      margin: EdgeInsets.all(AppMargin.margin_16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,9 +35,13 @@ class ShimmerLyric extends StatelessWidget {
               letterSpacing: 0.8,
             ),
           ),
+          SizedBox(height: AppMargin.margin_8),
+          Divider(
+            color: AppColors.lightGrey,
+          ),
           Shimmer.fromColors(
-            highlightColor: ColorUtil.darken(dominantColor, 0.1),
-            baseColor: ColorUtil.darken(dominantColor, 0.15),
+            highlightColor: AppColors.lightGrey.withOpacity(0.5),
+            baseColor: AppColors.lightGrey,
             direction: ShimmerDirection.ltr,
             child: Wrap(
               children: [

@@ -20,7 +20,7 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
         builder: (context, constraint) {
           return Icon(
             getIconData(),
-            color: AppColors.grey.withOpacity(0.5),
+            color: AppColors.placeholderIconColor,
             size: constraint.biggest.height / 2,
           );
         },
@@ -30,9 +30,9 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
 
   IconData? getIconData() {
     if (appItemsType == AppItemsType.PLAYLIST) {
-      return PhosphorIcons.playlist;
+      return PhosphorIcons.playlist_thin;
     } else if (appItemsType == AppItemsType.ALBUM) {
-      return PhosphorIcons.disc_light;
+      return PhosphorIcons.disc_thin;
     } else if (appItemsType == AppItemsType.ARTIST) {
       return PhosphorIcons.user_thin;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {

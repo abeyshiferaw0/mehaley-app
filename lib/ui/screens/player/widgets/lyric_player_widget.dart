@@ -131,11 +131,11 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
             child: Container(
               height: AppValues.lyricPlayerHeight,
               padding: EdgeInsets.all(AppPadding.padding_14),
-              margin: EdgeInsets.all(AppMargin.margin_16),
               decoration: BoxDecoration(
-                color: dominantColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
+                color: AppColors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12),
                 ),
               ),
               child: Column(
@@ -150,8 +150,12 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                       letterSpacing: 0.8,
                     ),
                   ),
+                  SizedBox(height: AppMargin.margin_8),
+                  Divider(
+                    color: AppColors.lightGrey,
+                  ),
                   SizedBox(
-                    height: AppMargin.margin_28,
+                    height: AppMargin.margin_8,
                   ),
                   Expanded(
                     child: ScrollablePositionedList.builder(
@@ -166,9 +170,12 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                             fontSize: AppFontSizes.font_size_16.sp,
                             color: currentLyricItem != null
                                 ? (currentLyricItem!.index == index
-                                    ? AppColors.black
-                                    : AppColors.white.withOpacity(0.7))
-                                : AppColors.white.withOpacity(0.7),
+                                    ? ColorUtil.changeColorSaturation(
+                                        dominantColor,
+                                        0.8,
+                                      )
+                                    : AppColors.black)
+                                : AppColors.black,
                             fontWeight: FontWeight.w600,
                           ),
                         );
@@ -193,13 +200,13 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
     return Container(
       height: AppValues.lyricPlayerHeight,
       decoration: BoxDecoration(
-        color: dominantColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
       ),
       padding: EdgeInsets.all(AppPadding.padding_14),
-      margin: EdgeInsets.all(AppMargin.margin_16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -211,6 +218,10 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               fontWeight: FontWeight.w600,
               letterSpacing: 0.8,
             ),
+          ),
+          SizedBox(height: AppMargin.margin_8),
+          Divider(
+            color: AppColors.lightGrey,
           ),
           Expanded(
             child: Center(

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -20,6 +21,7 @@ import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
 import 'package:mehaley/ui/screens/cart/widgets/remove_from_cart_button.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
 
@@ -29,7 +31,6 @@ class SongItem extends StatefulWidget {
     this.position,
     this.thumbUrl,
     this.thumbSize,
-    this.thumbRadius = 0.0,
     required this.onPressed,
     this.badges,
     required this.isForMyPlaylist,
@@ -46,7 +47,6 @@ class SongItem extends StatefulWidget {
   final Function(Song song)? onRemoveSongFromPlaylist;
   final String? thumbUrl;
   final double? thumbSize;
-  final double thumbRadius;
   final VoidCallback onPressed;
   final List<SongItemBadge>? badges;
 
@@ -56,7 +56,6 @@ class SongItem extends StatefulWidget {
         position: position,
         thumbSize: thumbSize,
         thumbUrl: thumbUrl,
-        thumbRadius: thumbRadius,
         onPressed: onPressed,
         badges: badges,
         isForMyPlaylist: isForMyPlaylist,
@@ -73,7 +72,6 @@ class _SongItemState extends State<SongItem> {
   final bool isForMyPlaylist;
   final bool? isForCart;
   final VoidCallback? onRemoveFromCart;
-  final double thumbRadius;
   final VoidCallback onPressed;
   final List<SongItemBadge>? badges;
 
@@ -85,7 +83,6 @@ class _SongItemState extends State<SongItem> {
     this.position,
     this.thumbSize,
     this.thumbUrl,
-    this.thumbRadius = 0.0,
     required this.onPressed,
     this.badges,
   });
@@ -148,17 +145,6 @@ class _SongItemState extends State<SongItem> {
                           Row(
                             children: getOtherBadges(badges),
                           ),
-                          //////////
-                          //PRICE BADGE
-                          //////////
-                          getPriceBadge(
-                            song.priceEtb,
-                            song.priceDollar,
-                            song.isFree,
-                            song.isDiscountAvailable,
-                            song.discountPercentage,
-                            song.isBought,
-                          ),
 
                           //////////
                           //ARTIST NAMES
@@ -170,7 +156,8 @@ class _SongItemState extends State<SongItem> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: AppFontSizes.font_size_14,
+                                fontStyle: FontStyle.italic,
+                                fontSize: AppFontSizes.font_size_8.sp,
                                 color: AppColors.txtGrey,
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w400,
@@ -178,7 +165,18 @@ class _SongItemState extends State<SongItem> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                      SizedBox(
+                        height: AppMargin.margin_4,
+                      ),
+                      getPriceBadge(
+                        song.priceEtb,
+                        song.priceDollar,
+                        song.isFree,
+                        song.isDiscountAvailable,
+                        song.discountPercentage,
+                        song.isBought,
+                      ),
                     ],
                   ),
                 ),
@@ -192,6 +190,9 @@ class _SongItemState extends State<SongItem> {
           SongDownloadIndicator(
             song: song,
             isForPlayerPage: false,
+            downloadingFailedColor: AppColors.black,
+            downloadingColor: AppColors.darkOrange,
+            downloadedColor: AppColors.darkOrange,
           ),
           showDotsMenuOrRemoveFromCart(isForCart),
         ],
@@ -234,7 +235,7 @@ class _SongItemState extends State<SongItem> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.all(
-              Radius.circular(thumbRadius),
+              Radius.circular(4.0),
             ),
             child: Container(
               width: thumbSize,
@@ -320,7 +321,7 @@ class SongIsPlayingText extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: TextStyle(
-            fontSize: AppFontSizes.font_size_16,
+            fontSize: AppFontSizes.font_size_10.sp,
             color: isPlaying ? AppColors.orange : AppColors.black,
             fontWeight: FontWeight.w500,
           ),
@@ -431,7 +432,7 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
 }
 
 void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
-  PagesUtilFunctions.showMenuDialog(
+  PagesUtilFunctions.showMenuSheet(
     context: context,
     child: SongMenuWidget(
       song: song,

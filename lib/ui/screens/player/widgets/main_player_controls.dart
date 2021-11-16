@@ -17,10 +17,12 @@ import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/custom_track_shape.dart';
 import 'package:mehaley/ui/common/like_follow/song_favorite_button.dart';
+import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -92,14 +94,22 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
 
                       ///MENU BUTTON
                       AppBouncingButton(
-                        onTap: () {},
-                        child: Padding(
-                          padding: EdgeInsets.all(AppPadding.padding_4),
-                          child: Icon(
-                            PhosphorIcons.dots_three_circle_vertical_thin,
-                            color: AppColors.lightGrey,
-                            size: AppIconSizes.icon_size_64,
-                          ),
+                        onTap: () {
+                          //SHOW MENU DIALOG
+                          PagesUtilFunctions.showMenuSheet(
+                            context: context,
+                            child: SongMenuWidget(
+                              song: state,
+                              isForMyPlaylist: false,
+                              onCreateWithSongSuccess:
+                                  (MyPlaylist myPlaylist) {},
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          PhosphorIcons.dots_three_circle_vertical_thin,
+                          color: AppColors.lightGrey,
+                          size: AppIconSizes.icon_size_64,
                         ),
                       ),
                       SizedBox(
@@ -374,7 +384,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           children: [
                             Icon(
                               PagesUtilFunctions.getLoopIcon(state),
-                              color: PagesUtilFunctions.getLoopButtonColor(
+                              color: PagesUtilFunctions.getLoopDarkButtonColor(
                                 state,
                               ),
                               size: AppIconSizes.icon_size_24,
@@ -393,6 +403,10 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   },
                 ),
               ],
+            ),
+
+            SizedBox(
+              height: AppMargin.margin_8,
             ),
 
             ///MUTE AND QUEUE BUTTONS
@@ -429,6 +443,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         key: Key(state.songId.toString()),
                         song: state,
                         isForPlayerPage: true,
+                        downloadingFailedColor: AppColors.black,
+                        downloadingColor: AppColors.lightGrey,
+                        downloadedColor: AppColors.white,
                       );
                     } else {
                       return SizedBox();

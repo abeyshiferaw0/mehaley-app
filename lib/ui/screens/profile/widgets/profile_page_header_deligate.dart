@@ -233,7 +233,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                     padding: const EdgeInsets.all(AppPadding.padding_4),
                     child: AppBouncingButton(
                       onTap: () {
-                        PagesUtilFunctions.showMenuDialog(
+                        PagesUtilFunctions.showMenuSheet(
                           context: mContext,
                           child: ProfileMenuWidget(
                             onUpdateSuccess: (AppUser appUser) {

@@ -13,15 +13,23 @@ import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 
+import '../app_snack_bar.dart';
+
 class SongDownloadIndicator extends StatefulWidget {
   SongDownloadIndicator({
     Key? key,
     required this.song,
     required this.isForPlayerPage,
+    required this.downloadingColor,
+    required this.downloadedColor,
+    required this.downloadingFailedColor,
   }) : super(key: key);
 
   final Song song;
   final bool isForPlayerPage;
+  final Color downloadingColor;
+  final Color downloadedColor;
+  final Color downloadingFailedColor;
 
   @override
   _SongDownloadIndicatorState createState() => _SongDownloadIndicatorState();
@@ -112,7 +120,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           buildDownloadingIndicator(),
           buildSongDownloadedButton(context),
           buildSongDownloadFailedButton(context),
-          buildSizedBox(),
+          buildDownloadButton(),
           widget.isForPlayerPage
               ? SizedBox(
                   width: AppMargin.margin_8,
@@ -152,7 +160,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           padding: EdgeInsets.all(AppPadding.padding_8),
           child: Icon(
             PhosphorIcons.arrow_circle_down_fill,
-            color: AppColors.orange,
+            color: widget.downloadedColor,
             size: widget.isForPlayerPage
                 ? AppIconSizes.icon_size_28
                 : AppIconSizes.icon_size_24,
@@ -171,6 +179,16 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             'DOWNLOAD_BUTTON',
             Duration(milliseconds: 300),
             () {
+              ///SHOW RETRYING MESSAGE
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg: AppLocale.of().retryingDownloadMsg,
+                  txtColor: AppColors.white,
+                ),
+              );
+
               BlocProvider.of<DownloadingSongBloc>(context).add(
                 RetryDownloadSongEvent(
                   song: widget.song,
@@ -189,7 +207,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           ),
           child: Icon(
             PhosphorIcons.warning_fill,
-            color: AppColors.yellow,
+            color: widget.downloadingFailedColor,
             size: widget.isForPlayerPage
                 ? AppIconSizes.icon_size_24
                 : AppIconSizes.icon_size_20,
@@ -211,14 +229,14 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             : AppIconSizes.icon_size_16,
         margin: EdgeInsets.all(AppPadding.padding_8),
         child: CircularProgressIndicator(
-          color: AppColors.orange,
+          color: widget.downloadingColor,
           strokeWidth: 2,
         ),
       ),
     );
   }
 
-  Visibility buildSizedBox() {
+  Visibility buildDownloadButton() {
     return Visibility(
         visible: showEmpty,
         child: widget.song.isBought
@@ -246,7 +264,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   padding: EdgeInsets.all(AppPadding.padding_8),
                   child: Icon(
                     PhosphorIcons.arrow_circle_down_light,
-                    color: AppColors.darkGrey,
+                    color: widget.downloadingColor,
                     size: widget.isForPlayerPage
                         ? AppIconSizes.icon_size_28
                         : AppIconSizes.icon_size_24,

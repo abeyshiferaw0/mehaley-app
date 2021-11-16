@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -20,14 +21,16 @@ class PlaylistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     return PlaylistPageHeader(
       shrinkPercentage: shrinkPercentage,
       playlistPageData: playlistPageData,
+      height: AppValues.playlistHeaderSliverSize,
+      appBarHeight: AppValues.playlistHeaderAppBarSliverSize,
     );
   }
 
   @override
-  double get maxExtent => 500;
+  double get maxExtent => AppValues.playlistHeaderSliverSize;
 
   @override
-  double get minExtent => 100;
+  double get minExtent => AppValues.playlistHeaderAppBarSliverSize;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

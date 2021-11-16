@@ -13,11 +13,15 @@ class SongItemBadge extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: AppMargin.margin_8),
       padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_6,
-        vertical: AppPadding.padding_2,
+        horizontal: AppPadding.padding_4,
+        vertical: 1.5,
       ),
       decoration: BoxDecoration(
-        color: AppColors.darkGrey,
+        color: AppColors.transparent,
+        border: Border.all(
+          color: AppColors.txtGrey.withOpacity(0.7),
+          width: 0.5,
+        ),
         borderRadius: BorderRadius.all(
           Radius.circular(3),
         ),
@@ -25,9 +29,9 @@ class SongItemBadge extends StatelessWidget {
       child: Text(
         tag,
         style: TextStyle(
-          fontSize: 8.sp,
-          color: color != null ? color : AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontSize: 6.sp,
+          color: color != null ? color : AppColors.txtGrey,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );

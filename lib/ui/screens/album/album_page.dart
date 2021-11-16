@@ -75,15 +75,15 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
     );
   }
 
-  SingleChildScrollView buildAlbumPageLoaded(AlbumPageData albumPageData) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          AlbumPageHeader(
-              album: albumPageData.album, songs: albumPageData.songs),
-          Padding(
-            padding: const EdgeInsets.only(left: AppPadding.padding_16),
-            child: ListView.builder(
+  Container buildAlbumPageLoaded(AlbumPageData albumPageData) {
+    return Container(
+      padding: const EdgeInsets.only(left: AppPadding.padding_16),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            AlbumPageHeader(
+                album: albumPageData.album, songs: albumPageData.songs),
+            ListView.builder(
               itemCount: albumPageData.songs.length,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
@@ -117,9 +117,9 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                   ],
                 );
               },
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -174,7 +174,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
             ),
           ),
           onTap: () {
-            PagesUtilFunctions.showMenuDialog(
+            PagesUtilFunctions.showMenuSheet(
               context: context,
               child: AlbumMenuWidget(
                 albumId: album.albumId,

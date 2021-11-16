@@ -379,6 +379,9 @@ class AppLocale {
   String get shareApp => appLocalizations.shareApp;
   String get shareAppMsg => appLocalizations.shareAppMsg;
 
+  String get retryingDownloadMsg => appLocalizations.retryingDownloadMsg;
+  String get play => appLocalizations.play;
+
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>
       appLocalizations.noOfSongs(noOfSong: noOfSong);

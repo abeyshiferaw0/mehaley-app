@@ -44,34 +44,39 @@ class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
-        builder: (context, state) {
-          if (state is PlaylistPageLoadingState) {
-            return ShimmerPlaylist();
-          }
-          if (state is PlaylistPageLoadedState) {
-            ///CHANGE PLAYLIST DOMINANT COLOR
-            BlocProvider.of<PagesDominantColorBloc>(context).add(
-              PlaylistPageDominantColorChanged(
-                dominantColor: state
-                    .playlistPageData.playlist.playlistImage.primaryColorHex,
-              ),
-            );
-            return buildPlaylistPageLoaded(state.playlistPageData);
-          }
-          if (state is PlaylistPageLoadingErrorState) {
-            return AppError(
-              bgWidget: ShimmerPlaylist(),
-              onRetry: () {
-                BlocProvider.of<PlaylistPageBloc>(context).add(
-                  LoadPlaylistPageEvent(playlistId: widget.playlistId),
+      backgroundColor: AppColors.pagesBgColor,
+      body: SafeArea(
+        child: Container(
+          color: AppColors.pagesBgColor,
+          child: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
+            builder: (context, state) {
+              if (state is PlaylistPageLoadingState) {
+                return ShimmerPlaylist();
+              }
+              if (state is PlaylistPageLoadedState) {
+                ///CHANGE PLAYLIST DOMINANT COLOR
+                BlocProvider.of<PagesDominantColorBloc>(context).add(
+                  PlaylistPageDominantColorChanged(
+                    dominantColor: state.playlistPageData.playlist.playlistImage
+                        .primaryColorHex,
+                  ),
                 );
-              },
-            );
-          }
-          return AppLoading(size: AppValues.loadingWidgetSize);
-        },
+                return buildPlaylistPageLoaded(state.playlistPageData);
+              }
+              if (state is PlaylistPageLoadingErrorState) {
+                return AppError(
+                  bgWidget: ShimmerPlaylist(),
+                  onRetry: () {
+                    BlocProvider.of<PlaylistPageBloc>(context).add(
+                      LoadPlaylistPageEvent(playlistId: widget.playlistId),
+                    );
+                  },
+                );
+              }
+              return AppLoading(size: AppValues.loadingWidgetSize);
+            },
+          ),
+        ),
       ),
     );
   }
@@ -111,8 +116,8 @@ class _PlaylistPageState extends State<PlaylistPage> {
     );
   }
 
-  Padding buildPlaylistSongList(List<Song> songs, Playlist playlist) {
-    return Padding(
+  Container buildPlaylistSongList(List<Song> songs, Playlist playlist) {
+    return Container(
       padding: const EdgeInsets.only(left: AppPadding.padding_16),
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -121,41 +126,44 @@ class _PlaylistPageState extends State<PlaylistPage> {
             SizedBox(height: AppMargin.margin_16),
             //DownloadAllPurchased(downloadAllSelected: downloadAllSelected),
             SizedBox(height: AppMargin.margin_16),
-            ListView.builder(
+            ListView.separated(
               itemCount: songs.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
+              separatorBuilder: (BuildContext context, int position) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppPadding.padding_4,
+                  ),
+                  child: Divider(
+                    color: AppColors.grey.withOpacity(0.2),
+                  ),
+                );
+              },
               itemBuilder: (BuildContext context, int position) {
-                return Column(
-                  children: [
-                    SizedBox(height: AppMargin.margin_8),
-                    SongItem(
-                      song: songs[position],
-                      isForMyPlaylist: false,
-                      thumbUrl: AppApi.baseUrl +
-                          songs[position].albumArt.imageSmallPath,
-                      thumbSize: AppValues.playlistSongItemSize,
-                      onPressed: () {
-                        //OPEN SONG
-                        PagesUtilFunctions.openSong(
-                          context: context,
-                          songs: songs,
-                          startPlaying: true,
-                          playingFrom: PlayingFrom(
-                            from: AppLocale.of().playingFromPlaylist,
-                            title: L10nUtil.translateLocale(
-                                playlist.playlistNameText, context),
-                            songSyncPlayedFrom:
-                                SongSyncPlayedFrom.PLAYLIST_DETAIL,
-                            songSyncPlayedFromId: playlist.playlistId,
-                          ),
-                          index: position,
-                        );
-                      },
-                    ),
-                    SizedBox(height: AppMargin.margin_8),
-                  ],
+                return SongItem(
+                  song: songs[position],
+                  isForMyPlaylist: false,
+                  thumbUrl:
+                      AppApi.baseUrl + songs[position].albumArt.imageSmallPath,
+                  thumbSize: AppValues.playlistSongItemSize,
+                  onPressed: () {
+                    //OPEN SONG
+                    PagesUtilFunctions.openSong(
+                      context: context,
+                      songs: songs,
+                      startPlaying: true,
+                      playingFrom: PlayingFrom(
+                        from: AppLocale.of().playingFromPlaylist,
+                        title: L10nUtil.translateLocale(
+                            playlist.playlistNameText, context),
+                        songSyncPlayedFrom: SongSyncPlayedFrom.PLAYLIST_DETAIL,
+                        songSyncPlayedFromId: playlist.playlistId,
+                      ),
+                      index: position,
+                    );
+                  },
                 );
               },
             ),

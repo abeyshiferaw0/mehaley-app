@@ -136,7 +136,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: ColorUtil.lighten(AppColors.lightGrey, 0.04),
+      color: ColorUtil.darken(AppColors.lightGrey, 0.04),
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(

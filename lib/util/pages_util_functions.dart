@@ -562,7 +562,7 @@ class PagesUtilFunctions {
     );
   }
 
-  static Color getLoopButtonColor(LoopMode loopMode) {
+  static Color getLoopDarkButtonColor(LoopMode loopMode) {
     if (loopMode == LoopMode.off) {
       return AppColors.white.withOpacity(0.5);
     } else if (loopMode == LoopMode.all) {
@@ -571,6 +571,18 @@ class PagesUtilFunctions {
       return AppColors.white;
     } else {
       return AppColors.white.withOpacity(0.5);
+    }
+  }
+
+  static Color getLoopLightButtonColor(LoopMode loopMode) {
+    if (loopMode == LoopMode.off) {
+      return AppColors.black;
+    } else if (loopMode == LoopMode.all) {
+      return AppColors.darkOrange;
+    } else if (loopMode == LoopMode.one) {
+      return AppColors.darkOrange;
+    } else {
+      return AppColors.black;
     }
   }
 
@@ -656,37 +668,10 @@ class PagesUtilFunctions {
     return AppColors.appGradientDefaultColor;
   }
 
-  static void showMenuDialog({
+  static void showMenuSheet({
     required BuildContext context,
     required Widget child,
   }) {
-    // showGeneralDialog(
-    //   context: context,
-    //   barrierColor: Colors.black.withOpacity(0.6), // Background color
-    //   barrierDismissible: false,
-    //   barrierLabel: AppValues.menuBarrierLabel,
-    //   transitionDuration: Duration(milliseconds: 400),
-    //   transitionBuilder: (context, a1, a2, widget) {
-    //     final curvedValue = 1.0 -
-    //         Curves.elasticInOut.transform(
-    //           a1.value,
-    //         );
-    //     return Transform(
-    //       transform: Matrix4.translationValues(
-    //         0.0,
-    //         curvedValue * 200,
-    //         0.0,
-    //       ),
-    //       child: Opacity(
-    //         opacity: a1.value,
-    //         child: widget,
-    //       ),
-    //     );
-    //   },
-    //   pageBuilder: (context, animation, secondaryAnimation) {
-    //     return child;
-    //   },
-    // );
     showModalBottomSheet(
       backgroundColor: AppColors.transparent,
       context: context,
@@ -694,9 +679,7 @@ class PagesUtilFunctions {
       isScrollControlled: true,
       isDismissible: true,
       builder: (context) {
-        return SizedBox.expand(
-          child: child,
-        );
+        return child;
       },
     );
   }

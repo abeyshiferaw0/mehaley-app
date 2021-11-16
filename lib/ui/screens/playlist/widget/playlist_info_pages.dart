@@ -45,6 +45,8 @@ class PlaylistInfoPageOne extends StatelessWidget {
               height: AppMargin.margin_8,
             ),
             AppCard(
+              radius: 2,
+              withShadow: false,
               child: CachedNetworkImage(
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
@@ -69,30 +71,29 @@ class PlaylistInfoPageOne extends StatelessWidget {
             //PLAYLIST TITLE
             Text(
               L10nUtil.translateLocale(
-                  playlistPageData.playlist.playlistNameText, context),
+                playlistPageData.playlist.playlistNameText,
+                context,
+              ),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: AppFontSizes.font_size_16.sp,
+                fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.black,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: AppMargin.margin_16),
 
-            ///FOLLOW UNFOLLOW PLAYLIST BTN
-            PlaylistFollowButton(
-              playlistId: playlistPageData.playlist.playlistId,
-              isFollowing: playlistPageData.playlist.isFollowed!,
-            ),
-            SizedBox(height: AppMargin.margin_16),
+            SizedBox(height: AppMargin.margin_8),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   PagesUtilFunctions.getPlaylistBy(
-                      playlistPageData.playlist, context),
+                    playlistPageData.playlist,
+                    context,
+                  ),
                   style: followersTextStyle,
                 ),
                 playlistPageData.numberOfFollowers == 0
@@ -140,59 +141,45 @@ class PlaylistInfoPageTwo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          buildPlaylistDescription(context),
-          SizedBox(height: AppMargin.margin_32),
-          Text(
-            AppLocale.of().playlistBy,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_10,
-              color: AppColors.darkGrey,
-              letterSpacing: 0.3,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(height: AppMargin.margin_8),
-          buildPlaylistOwnerProfilePic(),
-          SizedBox(height: AppMargin.margin_8),
-          buildProfileOwnerNameTag(context),
+          buildPlaylistTitleAndDescription(context),
           Expanded(
-            child: playlist.isBought
-                ? Center(
-                    child: SmallTextPriceWidget(
-                      priceEtb: playlist.priceEtb,
-                      priceUsd: playlist.priceDollar,
-                      isFree: playlist.isFree,
-                      useLargerText: true,
-                      isDiscountAvailable: playlist.isDiscountAvailable,
-                      discountPercentage: playlist.discountPercentage,
-                      isPurchased: playlist.isBought,
-                    ),
-                  )
-                : playlist.isFree || playlist.isBought
-                    ? SizedBox()
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          BuyItemBtnWidget(
-                            priceEtb: playlist.priceEtb,
-                            priceUsd: playlist.priceDollar,
-                            title: AppLocale.of().buyPlaylist.toUpperCase(),
-                            hasLeftMargin: false,
-                            showDiscount: false,
-                            isCentred: true,
-                            isFree: playlist.isFree,
-                            discountPercentage: playlist.discountPercentage,
-                            isDiscountAvailable: playlist.isDiscountAvailable,
-                            isBought: playlist.isBought,
-                          ),
-                          SizedBox(
-                            height: AppMargin.margin_8,
-                          ),
-                          PlaylistInfoCartButton(
-                            playlist: playlist,
-                          ),
-                        ],
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildPlaylistOwnerProfilePic(),
+                  SizedBox(
+                    width: AppMargin.margin_12,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocale.of().playlistBy,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_8.sp,
+                          color: AppColors.darkGrey,
+                          letterSpacing: 0.3,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
+                      SizedBox(
+                        height: AppMargin.margin_4,
+                      ),
+                      Text(
+                        PagesUtilFunctions.getPlaylistOwner(playlist, context),
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: AppFontSizes.font_size_12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
           buildPlaylistDateAndTime(),
           SizedBox(height: AppMargin.margin_20),
@@ -201,17 +188,37 @@ class PlaylistInfoPageTwo extends StatelessWidget {
     );
   }
 
-  Text buildPlaylistDescription(context) {
-    return Text(
-      PagesUtilFunctions.getPlaylistDescription(playlist, context),
-      textAlign: TextAlign.center,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontSize: AppFontSizes.font_size_16,
-        color: AppColors.black,
-        fontWeight: FontWeight.w500,
-      ),
+  Column buildPlaylistTitleAndDescription(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          L10nUtil.translateLocale(
+            playlist.playlistNameText,
+            context,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_12.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: AppMargin.margin_8),
+        Text(
+          PagesUtilFunctions.getPlaylistDescription(playlist, context),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_10.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 
@@ -225,8 +232,8 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           BoxShadow(
             offset: Offset(0, 0),
             spreadRadius: 2,
-            blurRadius: 12,
-            color: AppColors.white.withOpacity(0.2),
+            blurRadius: 4,
+            color: AppColors.black.withOpacity(0.2),
           ),
         ],
       ),
@@ -241,37 +248,6 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           imageUrl: PagesUtilFunctions.getPlaylistOwnerProfilePic(playlist),
           placeholder: (context, url) => buildItemsImagePlaceHolder(),
           errorWidget: (context, url, e) => buildItemsImagePlaceHolder(),
-        ),
-      ),
-    );
-  }
-
-  Container buildProfileOwnerNameTag(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_16,
-        vertical: AppPadding.padding_2,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.grey.withOpacity(0.5),
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.playlistPageTwoImageSize / 2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 0),
-            spreadRadius: 2,
-            blurRadius: 12,
-            color: AppColors.white.withOpacity(0.2),
-          ),
-        ],
-      ),
-      child: Text(
-        PagesUtilFunctions.getPlaylistOwner(playlist, context),
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: AppFontSizes.font_size_12,
-          fontWeight: FontWeight.w500,
         ),
       ),
     );
@@ -298,6 +274,118 @@ class PlaylistInfoPageTwo extends StatelessWidget {
   }
 }
 
+class PlaylistInfoPageThree extends StatelessWidget {
+  final Playlist playlist;
+  final List<Song> songs;
+
+  PlaylistInfoPageThree({Key? key, required this.playlist, required this.songs})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          buildPlaylistTitleAndDescription(context),
+
+          ///FOLLOW UNFOLLOW PLAYLIST BTN
+          Expanded(
+            child: Center(
+              child: PlaylistFollowButton(
+                playlistId: playlist.playlistId,
+                isFollowing: playlist.isFollowed!,
+              ),
+            ),
+          ),
+
+          buildBuyAndAddToCart(),
+
+          SizedBox(height: AppMargin.margin_20),
+        ],
+      ),
+    );
+  }
+
+  Container buildBuyAndAddToCart() {
+    return Container(
+      child: playlist.isBought
+          ? Center(
+              child: SmallTextPriceWidget(
+                priceEtb: playlist.priceEtb,
+                priceUsd: playlist.priceDollar,
+                isFree: playlist.isFree,
+                useLargerText: true,
+                isDiscountAvailable: playlist.isDiscountAvailable,
+                discountPercentage: playlist.discountPercentage,
+                isPurchased: playlist.isBought,
+              ),
+            )
+          : playlist.isFree || playlist.isBought
+              ? SizedBox()
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BuyItemBtnWidget(
+                      priceEtb: playlist.priceEtb,
+                      priceUsd: playlist.priceDollar,
+                      title: AppLocale.of().buyPlaylist.toUpperCase(),
+                      hasLeftMargin: false,
+                      showDiscount: false,
+                      isCentred: true,
+                      isFree: playlist.isFree,
+                      discountPercentage: playlist.discountPercentage,
+                      isDiscountAvailable: playlist.isDiscountAvailable,
+                      isBought: playlist.isBought,
+                    ),
+                    SizedBox(
+                      height: AppMargin.margin_8,
+                    ),
+                    PlaylistInfoCartButton(
+                      playlist: playlist,
+                    ),
+                  ],
+                ),
+    );
+  }
+
+  Column buildPlaylistTitleAndDescription(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          L10nUtil.translateLocale(
+            playlist.playlistNameText,
+            context,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_12.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: AppMargin.margin_8),
+        Text(
+          PagesUtilFunctions.getPlaylistDescription(playlist, context),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_10.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 AppItemsImagePlaceHolder buildItemsImagePlaceHolder() {
-  return AppItemsImagePlaceHolder(appItemsType: AppItemsType.OTHER);
+  return AppItemsImagePlaceHolder(appItemsType: AppItemsType.PLAYLIST);
 }

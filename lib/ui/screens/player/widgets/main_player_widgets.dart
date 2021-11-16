@@ -35,7 +35,7 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
       children: [
         Container(
           height: ScreenUtil(context: context).getScreenHeight() -
-              AppMargin.margin_62,
+              AppMargin.margin_52,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

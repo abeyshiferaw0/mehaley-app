@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_s
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
 import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
@@ -18,9 +19,15 @@ class SongDownloadMenuItem extends StatefulWidget {
   SongDownloadMenuItem({
     Key? key,
     required this.song,
+    required this.downloadingColor,
+    required this.downloadedColor,
+    required this.downloadingFailedColor,
   }) : super(key: key);
 
   final Song song;
+  final Color downloadingColor;
+  final Color downloadedColor;
+  final Color downloadingFailedColor;
 
   @override
   _SongDownloadMenuItemState createState() => _SongDownloadMenuItemState();
@@ -126,7 +133,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         child: MenuItem(
           isDisabled: false,
           hasTopMargin: false,
-          iconColor: AppColors.orange,
+          iconColor: widget.downloadedColor,
           icon: PhosphorIcons.arrow_circle_down_fill,
           title: AppLocale.of().deleteMezmur,
           onTap: () {
@@ -163,12 +170,22 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       child: MenuItem(
         isDisabled: false,
         hasTopMargin: false,
-        iconColor: AppColors.yellow,
+        iconColor: widget.downloadingFailedColor,
         icon: PhosphorIcons.warning_fill,
         title: AppLocale.of().retryDownload,
         onTap: () {
           EasyDebounce.debounce('DOWNLOAD_BUTTON', Duration(milliseconds: 300),
               () {
+            ///SHOW RETRYING MESSAGE
+            ScaffoldMessenger.of(context).showSnackBar(
+              buildAppSnackBar(
+                bgColor: AppColors.blue,
+                isFloating: true,
+                msg: AppLocale.of().retryingDownloadMsg,
+                txtColor: AppColors.white,
+              ),
+            );
+
             BlocProvider.of<DownloadingSongBloc>(context).add(
               RetryDownloadSongEvent(
                 song: widget.song,
@@ -197,7 +214,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
           width: AppIconSizes.icon_size_24,
           height: AppIconSizes.icon_size_24,
           child: CircularProgressIndicator(
-            color: AppColors.orange,
+            color: widget.downloadingColor,
             strokeWidth: 2,
           ),
         ),

@@ -6,7 +6,6 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_info_pages.dart';
@@ -18,10 +17,14 @@ class PlaylistPageHeader extends StatefulWidget {
   const PlaylistPageHeader({
     required this.shrinkPercentage,
     required this.playlistPageData,
+    required this.height,
+    required this.appBarHeight,
   });
 
   final double shrinkPercentage;
   final PlaylistPageData playlistPageData;
+  final double height;
+  final double appBarHeight;
 
   @override
   _PlaylistPageHeaderState createState() => _PlaylistPageHeaderState();
@@ -48,34 +51,25 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
         }
         return Stack(
           children: [
-            AnimatedSwitcher(
-              switchInCurve: Curves.easeIn,
-              switchOutCurve: Curves.easeOut,
-              duration: Duration(
-                milliseconds: AppValues.colorChangeAnimationDuration,
-              ),
-              child: Container(
-                height: 500,
-                decoration: BoxDecoration(
-                  gradient:
-                      AppGradients().getPlaylistHeaderGradient(dominantColor),
-                ),
-                child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
-                  child: Column(
-                    children: [
-                      buildAppBar(
-                        widget.shrinkPercentage,
+            Container(
+              height: widget.height,
+              color: AppColors.white,
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    buildAppBar(
+                      widget.shrinkPercentage,
+                      widget.playlistPageData,
+                    ),
+                    SizedBox(height: AppMargin.margin_12),
+                    Opacity(
+                      opacity: 1 - widget.shrinkPercentage,
+                      child: buildPlaylistInfo(
                         widget.playlistPageData,
                       ),
-                      Opacity(
-                        opacity: 1 - widget.shrinkPercentage,
-                        child: buildPlaylistInfo(
-                          widget.playlistPageData,
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -87,13 +81,14 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
   }
 
   Container buildAppBar(
-      double shrinkPercentage, PlaylistPageData playlistPageData) {
+    double shrinkPercentage,
+    PlaylistPageData playlistPageData,
+  ) {
     return Container(
-      height: 100,
-      //color: AppColors.black.withOpacity(shrinkPercentage),
-      padding: EdgeInsets.only(top: AppPadding.padding_28),
+      height: widget.appBarHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
             onPressed: () {
@@ -158,7 +153,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
               color: AppColors.darkGrey,
             ),
             onTap: () {
-              PagesUtilFunctions.showMenuDialog(
+              PagesUtilFunctions.showMenuSheet(
                 context: context,
                 child: PlaylistMenuWidget(
                   playlist: playlistPageData.playlist,
@@ -189,9 +184,10 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
     return Transform.translate(
       //scale: (1 - widget.shrinkPercentage),
       //angle: (1 - widget.shrinkPercentage),
-      offset: Offset(0, (widget.shrinkPercentage) * 30),
+      offset: Offset(0, (widget.shrinkPercentage) * -60),
       child: Container(
-        height: 400,
+        height: AppValues.playlistHeaderSliverSize -
+            AppValues.playlistHeaderAppBarSliverSize,
         //color: Colors.green,
         child: Column(
           children: [
@@ -211,17 +207,21 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                     songs: widget.playlistPageData.songs,
                     playlist: widget.playlistPageData.playlist,
                   ),
+                  PlaylistInfoPageThree(
+                    songs: widget.playlistPageData.songs,
+                    playlist: widget.playlistPageData.playlist,
+                  ),
                 ],
               ),
             ),
             CirclePageIndicator(
-              dotColor: AppColors.grey,
+              dotColor: AppColors.darkGrey,
               selectedDotColor: AppColors.black,
               currentPageNotifier: pageNotifier,
-              size: 6,
-              itemCount: 2,
+              size: AppIconSizes.icon_size_6,
+              itemCount: 3,
             ),
-            SizedBox(height: AppMargin.margin_12),
+            SizedBox(height: AppMargin.margin_16),
           ],
         ),
       ),

@@ -167,15 +167,17 @@ class _QueueListPageState extends State<QueueListPage> {
       color: AppColors.white,
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          ///SHUFFLE BUTTON
           BlocBuilder<ShuffleCubit, bool>(
             builder: (context, state) {
               return AppBouncingButton(
                 onTap: () {
-                  BlocProvider.of<AudioPlayerBloc>(context)
-                      .add(ShufflePlayerQueueEvent());
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    ShufflePlayerQueueEvent(),
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -183,8 +185,8 @@ class _QueueListPageState extends State<QueueListPage> {
                     children: [
                       Icon(
                         PhosphorIcons.shuffle_light,
-                        color: state ? AppColors.orange : AppColors.black,
-                        size: AppIconSizes.icon_size_20,
+                        color: state ? AppColors.darkOrange : AppColors.black,
+                        size: AppIconSizes.icon_size_24,
                       ),
                       state
                           ? Icon(
@@ -199,6 +201,8 @@ class _QueueListPageState extends State<QueueListPage> {
               );
             },
           ),
+
+          ///PREVIOUS BUTTON
           AppBouncingButton(
             onTap: () {
               BlocProvider.of<AudioPlayerBloc>(context)
@@ -210,6 +214,8 @@ class _QueueListPageState extends State<QueueListPage> {
               size: AppIconSizes.icon_size_48,
             ),
           ),
+
+          ///PLAY PAUSE BUTTON
           BlocBuilder<PlayPauseCubit, bool>(
             builder: (context, state) {
               return AppBouncingButton(
@@ -228,6 +234,8 @@ class _QueueListPageState extends State<QueueListPage> {
               );
             },
           ),
+
+          ///NEXT BUTTON
           AppBouncingButton(
             onTap: () {
               BlocProvider.of<AudioPlayerBloc>(context)
@@ -239,12 +247,15 @@ class _QueueListPageState extends State<QueueListPage> {
               size: AppIconSizes.icon_size_48,
             ),
           ),
+
+          ///LOOP BUTTON
           BlocBuilder<LoopCubit, LoopMode>(
             builder: (context, state) {
               return AppBouncingButton(
                 onTap: () {
-                  BlocProvider.of<AudioPlayerBloc>(context)
-                      .add(LoopPlayerQueueEvent());
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    LoopPlayerQueueEvent(),
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.padding_16),
@@ -252,8 +263,9 @@ class _QueueListPageState extends State<QueueListPage> {
                     children: [
                       Icon(
                         PagesUtilFunctions.getLoopIcon(state),
-                        color: PagesUtilFunctions.getLoopButtonColor(state),
-                        size: AppIconSizes.icon_size_20,
+                        color:
+                            PagesUtilFunctions.getLoopLightButtonColor(state),
+                        size: AppIconSizes.icon_size_24,
                       ),
                       state != LoopMode.off
                           ? Icon(
@@ -357,11 +369,11 @@ class _QueueListPageState extends State<QueueListPage> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.all(
-            Radius.circular(2),
+            Radius.circular(4),
           ),
           child: CachedNetworkImage(
-            width: AppValues.artistSongItemSize,
-            height: AppValues.artistSongItemSize,
+            width: AppValues.queueSongItemSize + 10,
+            height: AppValues.queueSongItemSize + 10,
             fit: BoxFit.cover,
             imageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
             placeholder: (context, url) => buildImagePlaceHolder(),
@@ -393,8 +405,11 @@ class _QueueListPageState extends State<QueueListPage> {
                       : SizedBox(),
                   Text(
                     PagesUtilFunctions.getArtistsNames(
-                        song.artistsName, context),
+                      song.artistsName,
+                      context,
+                    ),
                     style: TextStyle(
+                      fontStyle: FontStyle.italic,
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.txtGrey,
                       letterSpacing: 0.0,

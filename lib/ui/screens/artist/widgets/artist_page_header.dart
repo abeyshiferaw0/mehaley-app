@@ -137,7 +137,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                     color: AppColors.darkGrey,
                   ),
                   onTap: () {
-                    PagesUtilFunctions.showMenuDialog(
+                    PagesUtilFunctions.showMenuSheet(
                       context: context,
                       child: ArtistMenuWidget(
                         title: L10nUtil.translateLocale(

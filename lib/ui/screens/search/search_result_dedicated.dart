@@ -189,7 +189,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: SongMenuWidget(
               song: resultItem,
@@ -214,7 +214,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
         isPlaylistDedicatedResultPage: true,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
@@ -250,7 +250,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: AlbumMenuWidget(
               albumId: resultItem.albumId,
@@ -285,7 +285,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),

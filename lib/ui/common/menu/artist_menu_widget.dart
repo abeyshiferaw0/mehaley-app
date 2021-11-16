@@ -5,7 +5,6 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/menu_items/artist_follow_menu_item.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
@@ -35,12 +34,14 @@ class ArtistMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        gradient: AppGradients().getMenuGradient(),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
+          topRight: Radius.circular(AppValues.menuBottomSheetRadius),
+        ),
       ),
       child: SingleChildScrollView(
-        reverse: true,
         child: Container(
           child: Column(
             mainAxisSize: MainAxisSize.max,

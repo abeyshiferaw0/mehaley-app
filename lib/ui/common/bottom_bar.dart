@@ -32,7 +32,7 @@ class _BottomBarState extends State<BottomBar> {
         return BottomNavigationBar(
           enableFeedback: true,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.lightGrey,
+          backgroundColor: AppColors.white,
           unselectedItemColor: AppColors.grey,
           selectedItemColor: AppColors.black,
           unselectedLabelStyle: TextStyle(

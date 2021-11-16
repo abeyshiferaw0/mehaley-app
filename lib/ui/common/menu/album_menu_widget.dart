@@ -12,7 +12,6 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_gradients.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
 import 'menu_items/album_cart_menu_item.dart';
@@ -51,90 +50,90 @@ class AlbumMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        gradient: AppGradients().getMenuGradient(),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
+          topRight: Radius.circular(AppValues.menuBottomSheetRadius),
+        ),
       ),
       child: SingleChildScrollView(
-        reverse: true,
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: AppMargin.margin_48,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                top: AppMargin.margin_48,
+              ),
+              child: AppBouncingButton(
+                child: Icon(
+                  PhosphorIcons.caret_circle_down_light,
+                  color: AppColors.darkGrey,
+                  size: AppIconSizes.icon_size_32,
                 ),
-                child: AppBouncingButton(
-                  child: Icon(
-                    PhosphorIcons.caret_circle_down_light,
-                    color: AppColors.darkGrey,
-                    size: AppIconSizes.icon_size_32,
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            SizedBox(
+              height: ScreenUtil(context: context).getScreenHeight() * 0.2,
+            ),
+            buildMenuHeader(),
+            SizedBox(
+              height: AppMargin.margin_32,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppMargin.margin_16,
+              ),
+              child: Column(
+                children: [
+                  (!album.isBought && !album.isFree)
+                      ? MenuItem(
+                          isDisabled: false,
+                          hasTopMargin: false,
+                          iconColor: AppColors.grey.withOpacity(0.6),
+                          icon: PhosphorIcons.currency_circle_dollar_thin,
+                          title: AppLocale.of().buyAlbum,
+                          onTap: () {},
+                        )
+                      : SizedBox(),
+                  AlbumCartMenuItem(album: album),
+                  AlbumFavoriteMenuItem(
+                    hasTopMargin: true,
+                    isDisabled: false,
+                    isLiked: isLiked,
+                    albumId: albumId,
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                  MenuItem(
+                    isDisabled: false,
+                    hasTopMargin: true,
+                    iconColor: AppColors.grey.withOpacity(0.6),
+                    icon: PhosphorIcons.user_light,
+                    title: AppLocale.of().viewArtist,
+                    onTap: () {
+                      Navigator.pop(context);
+                      PagesUtilFunctions.artistItemOnClick(
+                        album.artist,
+                        rootContext,
+                      );
+                    },
+                  ),
+                  MenuItem(
+                    isDisabled: false,
+                    hasTopMargin: true,
+                    iconColor: AppColors.grey.withOpacity(0.6),
+                    icon: PhosphorIcons.share_network_light,
+                    title: AppLocale.of().shareAlbum,
+                    onTap: () {},
+                  ),
+                  SizedBox(height: AppMargin.margin_20),
+                ],
               ),
-              SizedBox(
-                height: ScreenUtil(context: context).getScreenHeight() * 0.2,
-              ),
-              buildMenuHeader(),
-              SizedBox(
-                height: AppMargin.margin_32,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppMargin.margin_16,
-                ),
-                child: Column(
-                  children: [
-                    (!album.isBought && !album.isFree)
-                        ? MenuItem(
-                            isDisabled: false,
-                            hasTopMargin: false,
-                            iconColor: AppColors.grey.withOpacity(0.6),
-                            icon: PhosphorIcons.currency_circle_dollar_thin,
-                            title: AppLocale.of().buyAlbum,
-                            onTap: () {},
-                          )
-                        : SizedBox(),
-                    AlbumCartMenuItem(album: album),
-                    AlbumFavoriteMenuItem(
-                      hasTopMargin: true,
-                      isDisabled: false,
-                      isLiked: isLiked,
-                      albumId: albumId,
-                    ),
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: true,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.user_light,
-                      title: AppLocale.of().viewArtist,
-                      onTap: () {
-                        Navigator.pop(context);
-                        PagesUtilFunctions.artistItemOnClick(
-                          album.artist,
-                          rootContext,
-                        );
-                      },
-                    ),
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: true,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.share_network_light,
-                      title: AppLocale.of().shareAlbum,
-                      onTap: () {},
-                    ),
-                    SizedBox(height: AppMargin.margin_20),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

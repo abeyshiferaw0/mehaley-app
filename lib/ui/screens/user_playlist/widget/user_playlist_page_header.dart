@@ -132,7 +132,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
               color: AppColors.darkGrey,
             ),
             onTap: () {
-              PagesUtilFunctions.showMenuDialog(
+              PagesUtilFunctions.showMenuSheet(
                 context: context,
                 child: UserPlaylistMenuWidget(
                   myPlaylist: myPlaylist,

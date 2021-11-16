@@ -117,7 +117,7 @@ class LibraryAlbumItem extends StatelessWidget {
             Expanded(child: SizedBox()),
             AppBouncingButton(
               onTap: () {
-                PagesUtilFunctions.showMenuDialog(
+                PagesUtilFunctions.showMenuSheet(
                   context: context,
                   child: AlbumMenuWidget(
                     albumId: album.albumId,

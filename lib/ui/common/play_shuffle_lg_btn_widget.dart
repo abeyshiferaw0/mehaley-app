@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class PlayShuffleLgBtnWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -13,42 +15,52 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBouncingButton(
       onTap: onTap,
-      child: Stack(
-        children: [
-          CircleAvatar(
-            radius: AppIconSizes.icon_size_30,
-            backgroundColor: AppColors.darkOrange,
-            child: Icon(
-              Icons.play_arrow_sharp,
-              color: AppColors.black,
-              size: AppIconSizes.icon_size_36,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.darkOrange,
+          borderRadius: BorderRadius.circular(100.0),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 0),
+              color: AppColors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 2,
             ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_24,
+            vertical: AppPadding.padding_12,
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColors.black,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 0),
-                    color: AppColors.white.withOpacity(0.2),
-                    spreadRadius: AppCardElevations.elevation_6,
-                    blurRadius: 12,
-                  ),
-                ],
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                PhosphorIcons.shuffle_light,
+                color: AppColors.lightGrey,
+                size: AppIconSizes.icon_size_16,
               ),
-              child: Icon(
-                PhosphorIcons.shuffle,
-                color: AppColors.darkOrange,
-                size: 14,
+              SizedBox(
+                width: AppMargin.margin_32,
               ),
-            ),
-          )
-        ],
+              Text(
+                AppLocale.of().play.toUpperCase(),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_8.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.lightGrey,
+                ),
+              ),
+              SizedBox(
+                width: AppMargin.margin_24,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

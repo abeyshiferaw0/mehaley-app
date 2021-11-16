@@ -52,11 +52,11 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
               return Container(
                 height: AppValues.lyricPlayerHeight,
                 padding: EdgeInsets.all(AppPadding.padding_14),
-                margin: EdgeInsets.all(AppMargin.margin_16),
                 decoration: BoxDecoration(
-                  color: dominantColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
                   ),
                 ),
                 child: Column(
@@ -72,7 +72,13 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                       ),
                     ),
                     SizedBox(
-                      height: AppMargin.margin_28,
+                      height: AppMargin.margin_8,
+                    ),
+                    Divider(
+                      color: AppColors.lightGrey,
+                    ),
+                    SizedBox(
+                      height: AppMargin.margin_8,
                     ),
                     Expanded(
                       child: PageView.builder(
@@ -105,7 +111,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_14.sp,
-                                  color: AppColors.white.withOpacity(0.6),
+                                  color: dominantColor,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -133,8 +139,8 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
         itemCount: versesList.length,
         size: AppIconSizes.icon_size_10,
         selectedSize: AppIconSizes.icon_size_12,
-        selectedDotColor: AppColors.white.withOpacity(0.6),
-        dotColor: AppColors.darkGrey,
+        selectedDotColor: AppColors.darkGrey,
+        dotColor: AppColors.lightGrey,
         currentPageNotifier: _currentPageNotifier,
       ),
     );

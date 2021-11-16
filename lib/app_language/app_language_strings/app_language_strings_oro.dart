@@ -327,6 +327,8 @@ class AppLanguageStringsOro extends AppLocalizations {
       "Your Preferred currency will be used to display prices";
   final String shareApp = "Share Elf play";
   final String shareAppMsg = "Share elf play with friends and family";
+  final String retryingDownloadMsg = "Retrying Download";
+  final String play = "Play";
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";

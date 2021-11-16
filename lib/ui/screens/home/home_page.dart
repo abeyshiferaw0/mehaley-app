@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
@@ -63,7 +62,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-     super.initState();
+    super.initState();
   }
 
   @override
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         body: BlocBuilder<HomePageBloc, HomePageState>(
           builder: (context, state) {
             if (state is HomePageLoaded) {

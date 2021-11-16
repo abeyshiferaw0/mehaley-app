@@ -60,20 +60,23 @@ class AppValues {
 
   //PLAYER PAGE
   static const double lyricPlayerHeight = 380;
-  static const double queueSongItemSize = 50;
+  static const double queueSongItemSize = 60;
   static const int playerPreviewStartSecond = 5;
+  static const double menuBottomSheetRadius = 16.0;
+  static const double playlistHeaderSliverSize = 340;
+  static const double playlistHeaderAppBarSliverSize = 60;
 
   //ALBUM PAGE
   static const double albumPageImageSize = 170;
 
   //PLAYLIST PAGE
-  static const double playlistPageOneImageSize = 200;
+  static const double playlistPageOneImageSize = 160;
   static const double playlistPageTwoImageSize = 40;
-  static const double playlistSongItemSize = 50;
-  static const double userPlaylistImageSize = 70;
+  static const double playlistSongItemSize = 60;
+  static const double userPlaylistImageSize = 50;
 
   //ARTIST PAGE
-  static const double artistSongItemSize = 50;
+  static const double artistSongItemSize = 60;
   static const double artistAlbumItemSize = 70;
   static const double featuringArtistItemImageSize = 130;
   static const double similarItemImageSize = 130;
@@ -90,7 +93,7 @@ class AppValues {
   //CATEGORY PAGE
   static const double categoryHeaderHeight = 250;
   static const double categoryPopularItemsSize = 120;
-  static const double categorySongItemSize = 50;
+  static const double categorySongItemSize = 60;
 
   //SEARCH PAGE
   static const double searchPersistentSliverHeaderHeight = 60;
@@ -169,7 +172,7 @@ class AppValues {
   static const double lyricPageCloseButtonSize = 16;
   static const double buttonBouncingScaleFactor4 = 0.2;
   static const String menuBarrierLabel = 'MENU_DIALOG';
-  static const double menuHeaderImageSize = 150;
+  static const double menuHeaderImageSize = 100;
   static const String searchPageDebouncer = 'SEARCH_PAGE_DEBOUNCER';
   static const String bouncingButtonDebouncer = 'BOUNCING_BUTTON_DEBOUNCER';
   static const double createPlaylistImageSize = 180;
@@ -197,6 +200,7 @@ class AppIconSizes {
   static const double icon_size_4 = 4;
   static const double icon_size_30 = 30;
   static const double icon_size_10 = 10;
+  static const double icon_size_6 = 6;
   static const double icon_size_8 = 8;
 }
 

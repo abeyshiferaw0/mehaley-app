@@ -8,7 +8,6 @@ import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_user_playlist.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -50,12 +49,14 @@ class UserPlaylistMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        gradient: AppGradients().getMenuGradient(),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
+          topRight: Radius.circular(AppValues.menuBottomSheetRadius),
+        ),
       ),
       child: SingleChildScrollView(
-        reverse: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,

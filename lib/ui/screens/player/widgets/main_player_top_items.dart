@@ -85,7 +85,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                   ),
                   onTap: () {
                     //SHOW MENU DIALOG
-                    PagesUtilFunctions.showMenuDialog(
+                    PagesUtilFunctions.showMenuSheet(
                       context: context,
                       child: SongMenuWidget(
                         song: state,

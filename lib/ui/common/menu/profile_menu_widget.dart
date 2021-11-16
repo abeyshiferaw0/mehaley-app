@@ -13,7 +13,6 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_gradients.dart';
 import '../player_items_placeholder.dart';
 import '../user_profile_pic.dart';
 import 'menu_items/menu_item.dart';
@@ -29,72 +28,72 @@ class ProfileMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        gradient: AppGradients().getMenuGradient(),
+        color: AppColors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
+          topRight: Radius.circular(AppValues.menuBottomSheetRadius),
+        ),
       ),
       child: SingleChildScrollView(
-        reverse: true,
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                child: AppBouncingButton(
-                  child: Icon(
-                    PhosphorIcons.caret_circle_down_light,
-                    color: AppColors.darkGrey,
-                    size: AppIconSizes.icon_size_32,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              child: AppBouncingButton(
+                child: Icon(
+                  PhosphorIcons.caret_circle_down_light,
+                  color: AppColors.darkGrey,
+                  size: AppIconSizes.icon_size_32,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            SizedBox(
+              height: ScreenUtil(context: context).getScreenHeight() * 0.4,
+            ),
+            buildMenuHeader(context),
+            SizedBox(
+              height: AppMargin.margin_32,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppMargin.margin_16,
+              ),
+              child: Column(
+                children: [
+                  MenuItem(
+                    isDisabled: false,
+                    hasTopMargin: false,
+                    iconColor: AppColors.grey.withOpacity(0.6),
+                    icon: PhosphorIcons.pencil_simple_light,
+                    title: AppLocale.of().editProfile,
+                    onTap: () {
+                      Navigator.pop(context);
+                      PagesUtilFunctions.openEditProfilePage(
+                        context,
+                        (AppUser appUser) {
+                          onUpdateSuccess(appUser);
+                        },
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                  MenuItem(
+                    isDisabled: false,
+                    hasTopMargin: true,
+                    iconColor: AppColors.grey.withOpacity(0.6),
+                    icon: PhosphorIcons.share_network_light,
+                    title: AppLocale.of().share,
+                    onTap: () {},
+                  ),
+                  SizedBox(height: AppMargin.margin_20),
+                ],
               ),
-              SizedBox(
-                height: ScreenUtil(context: context).getScreenHeight() * 0.4,
-              ),
-              buildMenuHeader(context),
-              SizedBox(
-                height: AppMargin.margin_32,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppMargin.margin_16,
-                ),
-                child: Column(
-                  children: [
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: false,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.pencil_simple_light,
-                      title: AppLocale.of().editProfile,
-                      onTap: () {
-                        Navigator.pop(context);
-                        PagesUtilFunctions.openEditProfilePage(
-                          context,
-                          (AppUser appUser) {
-                            onUpdateSuccess(appUser);
-                          },
-                        );
-                      },
-                    ),
-                    MenuItem(
-                      isDisabled: false,
-                      hasTopMargin: true,
-                      iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.share_network_light,
-                      title: AppLocale.of().share,
-                      onTap: () {},
-                    ),
-                    SizedBox(height: AppMargin.margin_20),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

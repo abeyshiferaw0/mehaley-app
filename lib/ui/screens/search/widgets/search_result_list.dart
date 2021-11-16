@@ -182,7 +182,7 @@ class _SearchResultListState extends State<SearchResultList> {
         focusNode: widget.focusNode,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: SongMenuWidget(
               song: resultItem,
@@ -207,7 +207,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
@@ -243,7 +243,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: AlbumMenuWidget(
               albumId: resultItem.albumId,
@@ -278,7 +278,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
           //SHOW MENU DIALOG
-          PagesUtilFunctions.showMenuDialog(
+          PagesUtilFunctions.showMenuSheet(
             context: context,
             child: ArtistMenuWidget(
               title: L10nUtil.translateLocale(resultItem.artistName, context),

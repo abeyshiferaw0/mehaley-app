@@ -11,7 +11,6 @@ import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_card.dart';
 import '../like_follow/song_is_liked_indicator.dart';
 
 class SongQueueItem extends StatelessWidget {
@@ -47,8 +46,8 @@ class SongQueueItem extends StatelessWidget {
               ),
             ),
             SizedBox(width: AppMargin.margin_16),
-            AppCard(
-              radius: 0.0,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4.0),
               child: CachedNetworkImage(
                 width: AppValues.queueSongItemSize,
                 height: AppValues.queueSongItemSize,
@@ -76,8 +75,11 @@ class SongQueueItem extends StatelessWidget {
                   ),
                   Text(
                     PagesUtilFunctions.getArtistsNames(
-                        song.artistsName, context),
+                      song.artistsName,
+                      context,
+                    ),
                     style: TextStyle(
+                      fontStyle: FontStyle.italic,
                       fontSize: AppFontSizes.font_size_10.sp,
                       color: AppColors.txtGrey,
                       fontWeight: FontWeight.w300,
