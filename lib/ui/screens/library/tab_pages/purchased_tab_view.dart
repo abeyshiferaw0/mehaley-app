@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
@@ -324,7 +324,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
         }
       },
       iconColor: AppColors.black,
-      icon: PhosphorIcons.shuffle_light,
+      icon: FlutterRemix.shuffle_line,
     );
   }
 

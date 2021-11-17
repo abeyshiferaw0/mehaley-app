@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
@@ -65,7 +65,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                 ),
               ),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.check_circle_fill,
+              icon: FlutterRemix.checkbox_circle_fill,
               iconColor: AppColors.darkOrange,
             ),
           );
@@ -89,7 +89,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                 ),
               ),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.check_circle_fill,
+              icon: FlutterRemix.checkbox_circle_fill,
               iconColor: AppColors.darkOrange,
             ),
           );
@@ -105,7 +105,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
             ),
           );
         }
@@ -118,13 +118,13 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
             ),
           );
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         body: BlocBuilder<UserPlaylistPageBloc, UserPlaylistPageState>(
           builder: (context, state) {
             if (state is UserPlaylistPageLoadingState) {

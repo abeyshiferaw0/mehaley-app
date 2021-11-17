@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -95,7 +95,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 Navigator.pop(context);
               },
               icon: Icon(
-                PhosphorIcons.caret_left_light,
+                FlutterRemix.arrow_left_line,
                 size: AppIconSizes.icon_size_28,
                 color: AppColors.black,
               ),
@@ -132,7 +132,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                 ),
                 AppBouncingButton(
                   child: Icon(
-                    PhosphorIcons.dots_three_vertical_bold,
+                    FlutterRemix.more_2_fill,
                     size: AppIconSizes.icon_size_28,
                     color: AppColors.darkGrey,
                   ),

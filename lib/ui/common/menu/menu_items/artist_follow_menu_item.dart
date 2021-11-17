@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
@@ -40,7 +40,7 @@ class _ArtistFollowMenuItemState extends State<ArtistFollowMenuItem> {
           isDisabled: false,
           hasTopMargin: true,
           iconColor: preIconColor(),
-          icon: PhosphorIcons.hand_pointing_light,
+          icon: FlutterRemix.record_circle_line,
           title: preButtonText(),
           onTap: onTap,
         );
@@ -52,7 +52,7 @@ class _ArtistFollowMenuItemState extends State<ArtistFollowMenuItem> {
     ///FOLLOW UNFOLLOW ARTIST
     EasyDebounce.debounce(
       'ARTIST_FOLLOW',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<LibraryBloc>(context).add(
           FollowUnFollowArtistEvent(

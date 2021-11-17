@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
@@ -76,6 +76,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         if (currentPlayingSong != null) {
           return Container(
             color: AppColors.white,
+            margin: EdgeInsets.all(AppMargin.margin_16),
             child: SlideTransition(
               position: offset,
               child: GestureDetector(
@@ -248,6 +249,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         SongFavoriteButton(
           songId: id,
           isLiked: isLiked,
+          likedColor: AppColors.white,
+          unlikedColor: AppColors.white,
+        ),
+        SizedBox(
+          width: AppMargin.margin_12,
         ),
         BlocBuilder<PlayPauseCubit, bool>(
           builder: (context, state) {
@@ -260,8 +266,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               child: Padding(
                 padding: EdgeInsets.all(AppPadding.padding_4),
                 child: Icon(
-                  state ? PhosphorIcons.pause_fill : PhosphorIcons.play_fill,
-                  size: AppIconSizes.icon_size_24,
+                  state ? FlutterRemix.pause_mini_fill : FlutterRemix.play_fill,
+                  size: AppIconSizes.icon_size_28,
                   color: AppColors.white,
                 ),
               ),
@@ -462,7 +468,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              PhosphorIcons.shopping_cart_simple_light,
+              FlutterRemix.shopping_cart_2_line,
               size: AppIconSizes.icon_size_16,
               color: AppColors.black,
             ),

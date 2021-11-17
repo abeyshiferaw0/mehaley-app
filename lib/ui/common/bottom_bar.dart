@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
@@ -34,13 +34,13 @@ class _BottomBarState extends State<BottomBar> {
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.white,
           unselectedItemColor: AppColors.grey,
-          selectedItemColor: AppColors.black,
+          selectedItemColor: AppColors.darkOrange,
           unselectedLabelStyle: TextStyle(
             color: AppColors.grey,
             fontSize: 11,
           ),
           selectedLabelStyle: TextStyle(
-            color: AppColors.black,
+            color: AppColors.darkOrange,
             fontSize: AppFontSizes.font_size_12,
           ),
           currentIndex: getBottomBarIndex(state),
@@ -123,65 +123,69 @@ class _BottomBarState extends State<BottomBar> {
               activeIcon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
-                icon: PhosphorIcons.house_fill,
-                color: AppColors.black,
+                icon: FlutterRemix.home_line,
+                color: AppColors.orange,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarIconSize,
-                icon: PhosphorIcons.house_light,
+                icon: FlutterRemix.home_line,
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
               label: AppLocale.of().home,
+              tooltip: AppLocale.of().home,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
-                icon: PhosphorIcons.magnifying_glass_fill,
-                color: AppColors.black,
+                icon: FlutterRemix.search_line,
+                color: AppColors.orange,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarIconSize,
-                icon: PhosphorIcons.magnifying_glass_light,
+                icon: FlutterRemix.search_line,
                 color: AppColors.grey,
                 isForLibrary: false,
               ),
               label: AppLocale.of().search,
+              tooltip: AppLocale.of().search,
             ),
             BottomNavigationBarItem(
               activeIcon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarActiveIconSize,
-                icon: PhosphorIcons.stack_fill,
+                icon: FlutterRemix.stack_line,
                 color: AppColors.orange,
-                isForLibrary: true,
-              ),
-              icon: BottomBarIcon(
-                bottomSpace: 2,
-                size: AppValues.bottomBarIconSize,
-                icon: PhosphorIcons.stack_light,
-                color: AppColors.grey,
-                isForLibrary: true,
-              ),
-              label: AppLocale.of().myLibrary,
-            ),
-            BottomNavigationBarItem(
-              activeIcon: BottomBarIcon(
-                bottomSpace: 2,
-                size: AppValues.bottomBarActiveIconSize,
-                icon: PhosphorIcons.shopping_cart_simple_fill,
-                color: AppColors.black,
                 isForLibrary: false,
               ),
               icon: BottomBarIcon(
                 bottomSpace: 2,
                 size: AppValues.bottomBarIconSize,
-                icon: PhosphorIcons.shopping_cart_simple_light,
+                icon: FlutterRemix.stack_line,
+                color: AppColors.grey,
+                isForLibrary: false,
+              ),
+              label: AppLocale.of().myLibrary,
+              tooltip: AppLocale.of().myLibrary,
+            ),
+            BottomNavigationBarItem(
+              tooltip: AppLocale.of().cart,
+              activeIcon: BottomBarIcon(
+                bottomSpace: 2,
+                size: AppValues.bottomBarActiveIconSize,
+                icon: FlutterRemix.shopping_cart_2_line,
+                color: AppColors.orange,
+                isForLibrary: false,
+              ),
+              icon: BottomBarIcon(
+                bottomSpace: 2,
+                size: AppValues.bottomBarIconSize,
+                icon: FlutterRemix.shopping_cart_2_line,
                 color: AppColors.grey,
                 isForLibrary: false,
               ),

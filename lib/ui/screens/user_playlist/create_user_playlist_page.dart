@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
@@ -78,7 +78,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
             ),
           );
         }
@@ -96,7 +96,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               bgColor: AppColors.black,
               isFloating: true,
               iconColor: AppColors.darkOrange,
-              icon: PhosphorIcons.check_circle_fill,
+              icon: FlutterRemix.checkbox_circle_fill,
             ),
           );
           if (widget.createWithSong) {
@@ -113,7 +113,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -223,7 +223,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   });
                 },
                 child: Icon(
-                  PhosphorIcons.x_light,
+                  FlutterRemix.close_line,
                   color: AppColors.darkGrey,
                   size: AppFontSizes.font_size_24,
                 ),
@@ -378,7 +378,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                               );
                             },
                             text: AppLocale.of().takeAPhoto,
-                            icon: PhosphorIcons.camera_light,
+                            icon: FlutterRemix.camera_line,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
@@ -388,7 +388,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                               );
                             },
                             text: AppLocale.of().pickFromGallery,
-                            icon: PhosphorIcons.image_light,
+                            icon: FlutterRemix.image_line,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
@@ -397,7 +397,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                               Navigator.pop(context);
                             },
                             text: AppLocale.of().removeIImage,
-                            icon: PhosphorIcons.minus_circle_light,
+                            icon: FlutterRemix.indeterminate_circle_line,
                           ),
                         ],
                       ),
@@ -463,7 +463,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 Navigator.pop(context);
               },
               child: Icon(
-                PhosphorIcons.x_light,
+                FlutterRemix.close_line,
                 size: AppIconSizes.icon_size_24,
                 color: AppColors.black,
               ),

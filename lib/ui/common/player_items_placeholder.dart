@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -30,13 +30,13 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
 
   IconData? getIconData() {
     if (appItemsType == AppItemsType.PLAYLIST) {
-      return PhosphorIcons.playlist_thin;
+      return FlutterRemix.play_list_line;
     } else if (appItemsType == AppItemsType.ALBUM) {
-      return PhosphorIcons.disc_thin;
+      return FlutterRemix.disc_line;
     } else if (appItemsType == AppItemsType.ARTIST) {
-      return PhosphorIcons.user_thin;
+      return FlutterRemix.user_line;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
-      return PhosphorIcons.music_notes_simple_light;
+      return FlutterRemix.music_2_line;
     } else if (appItemsType == AppItemsType.OTHER) {
       return null;
     } else {

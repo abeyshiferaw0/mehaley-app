@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
@@ -137,7 +137,7 @@ class LibraryAlbumItem extends StatelessWidget {
                 );
               },
               child: Icon(
-                PhosphorIcons.dots_three_vertical_bold,
+                FlutterRemix.more_2_fill,
                 color: AppColors.darkGrey,
                 size: AppIconSizes.icon_size_24,
               ),

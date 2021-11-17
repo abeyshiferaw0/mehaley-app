@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: CustomScrollView(
         slivers: [
           BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         SizedBox(height: AppMargin.margin_58),
         Icon(
-          PhosphorIcons.cube_thin,
+          FlutterRemix.archive_line,
           color: AppColors.black.withOpacity(0.2),
           size: AppIconSizes.icon_size_32,
         ),
@@ -325,7 +325,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: AppMargin.margin_8,
             ),
             Icon(
-              PhosphorIcons.caret_right_light,
+              FlutterRemix.arrow_right_line,
               color: AppColors.darkGrey,
               size: AppIconSizes.icon_size_12,
             ),

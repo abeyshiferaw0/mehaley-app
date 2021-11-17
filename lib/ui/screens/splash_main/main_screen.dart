@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
@@ -256,7 +256,7 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                     ),
                     txtColor: AppColors.white,
-                    icon: PhosphorIcons.check_circle_fill,
+                    icon: FlutterRemix.checkbox_circle_fill,
                     iconColor: AppColors.darkOrange),
               );
             }
@@ -267,7 +267,7 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: false,
                   msg: AppLocale.of().yourNotConnected,
                   txtColor: AppColors.white,
-                  icon: PhosphorIcons.wifi_x_light,
+                  icon: FlutterRemix.wifi_off_line,
                   iconColor: AppColors.errorRed,
                 ),
               );
@@ -324,6 +324,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ],
       child: Scaffold(
+        backgroundColor: AppColors.pagesBgColor,
         // body: Stack(
         //   children: [
         //     //MAIN ROUTEING PART OF APP
@@ -337,8 +338,7 @@ class _MainScreenState extends State<MainScreen> {
         //       child: BlocBuilder<PlayerStateCubit, PlayerState>(
         //         builder: (context, state) {
         //           if (state.processingState == ProcessingState.ready ||
-        //               state.processingState ==
-        //                   ProcessingState.buffering ||
+        //               state.processingState == ProcessingState.buffering ||
         //               state.processingState == ProcessingState.loading) {
         //             return MiniPlayer();
         //           } else {
@@ -367,7 +367,13 @@ class _MainScreenState extends State<MainScreen> {
             ///MINI PLAYER SHOWN IF MUSIC IS PLAYING
             BlocBuilder<PlayerStateCubit, PlayerState>(
               builder: (context, state) {
-                return MiniPlayer();
+                if (state.processingState == ProcessingState.ready ||
+                    state.processingState == ProcessingState.buffering ||
+                    state.processingState == ProcessingState.loading) {
+                  return MiniPlayer();
+                } else {
+                  return SizedBox();
+                }
               },
             ),
           ],

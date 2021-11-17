@@ -71,7 +71,7 @@ class _PlaylistFollowButtonState extends State<PlaylistFollowButton> {
     ///FOLLOW UNFOLLOW PLAYLIST
     EasyDebounce.debounce(
       'PLAYLIST_FOLLOW',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<LibraryBloc>(context).add(
           FollowUnFollowPlaylistEvent(

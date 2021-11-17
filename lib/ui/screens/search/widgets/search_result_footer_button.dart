@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -40,7 +40,7 @@ class SearchResultFooterButton extends StatelessWidget {
             ),
             SizedBox(width: AppMargin.margin_8),
             Icon(
-              PhosphorIcons.caret_right,
+              FlutterRemix.arrow_right_line,
               color: AppColors.grey,
               size: AppIconSizes.icon_size_12,
             )

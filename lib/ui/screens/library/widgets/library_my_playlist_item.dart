@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -62,7 +62,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
             ),
             isForSongAddToPlaylistPage
                 ? Icon(
-                    PhosphorIcons.plus_circle_light,
+                    FlutterRemix.add_circle_line,
                     size: AppIconSizes.icon_size_24,
                     color: AppColors.darkGrey,
                   )

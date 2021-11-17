@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -70,7 +71,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                           isDisabled: false,
                           hasTopMargin: false,
                           iconColor: AppColors.grey.withOpacity(0.6),
-                          icon: PhosphorIcons.currency_circle_dollar_thin,
+                          icon: FlutterRemix.money_dollar_circle_line,
                           title: AppLocale.of().buyPlaylist,
                           onTap: () {},
                         )
@@ -86,7 +87,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.magnifying_glass_light,
+                    icon: FlutterRemix.search_line,
                     title: AppLocale.of().findInPlaylist,
                     onTap: () {},
                   ),
@@ -94,7 +95,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.sort_ascending_light,
+                  //   icon: FlutterRemix.sort_asc,
                   //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
                   // ),
@@ -102,7 +103,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.share_network_light,
+                    icon: FlutterRemix.share_line,
                     title: AppLocale.of().sharePlaylist,
                     onTap: () {},
                   ),

@@ -2,80 +2,70 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
-import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:sizer/sizer.dart';
+import 'package:mehaley/util/color_util.dart';
 
-import '../../app_bouncing_button.dart';
+import '../app_bouncing_button.dart';
 
-class AlbumFavoriteMenuItem extends StatefulWidget {
-  const AlbumFavoriteMenuItem({
+class AlbumHeaderFavoriteButton extends StatefulWidget {
+  const AlbumHeaderFavoriteButton({
     Key? key,
     required this.albumId,
     required this.isLiked,
-    required this.hasTopMargin,
-    required this.isDisabled,
     required this.likedColor,
     required this.unlikedColor,
+    required this.iconSize,
   }) : super(key: key);
 
   final int albumId;
   final bool isLiked;
-  final bool hasTopMargin;
-  final bool isDisabled;
+  final double iconSize;
   final Color likedColor;
   final Color unlikedColor;
 
   @override
-  _AlbumFavoriteMenuItemState createState() => _AlbumFavoriteMenuItemState();
+  _AlbumHeaderFavoriteButtonState createState() =>
+      _AlbumHeaderFavoriteButtonState();
 }
 
-class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem> {
+class _AlbumHeaderFavoriteButtonState extends State<AlbumHeaderFavoriteButton> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryBloc, LibraryState>(
+      buildWhen: (previousState, currentState) {
+        if (currentState is AlbumLikeUnlikeLoadingState ||
+            currentState is AlbumLikeUnlikeErrorState ||
+            currentState is AlbumLikeUnlikeSuccessState) {
+          return true;
+        }
+        return false;
+      },
       builder: (context, state) {
-        return Column(
-          children: [
-            ///ADD TOP MARGIN IF WANTED
-            widget.hasTopMargin
-                ? SizedBox(height: AppMargin.margin_12)
-                : SizedBox(),
-            AppBouncingButton(
-              onTap: !widget.isDisabled ? onTap : () {},
-              disableBouncing: widget.isDisabled,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: AppPadding.padding_4,
+        return AppBouncingButton(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(AppPadding.padding_12),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(100.0),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 0),
+                  color: ColorUtil.darken(AppColors.white, 0.1),
+                  spreadRadius: 2,
+                  blurRadius: 4,
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      preIcon(),
-                      size: AppIconSizes.icon_size_24,
-                      color: preIconColor(),
-                    ),
-                    SizedBox(width: AppMargin.margin_12),
-                    Text(
-                      preButtonText(),
-                      style: TextStyle(
-                        color: !widget.isDisabled
-                            ? AppColors.black
-                            : AppColors.black.withOpacity(0.4),
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
-          ],
+            child: Icon(
+              preIcon(),
+              color: preIconColor(),
+              size: widget.iconSize,
+            ),
+          ),
         );
       },
     );
@@ -83,7 +73,6 @@ class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem> {
 
   void onTap() {
     ///LIKE UNLIKE ALBUM
-
     EasyDebounce.debounce(
       'ALBUM_LIKE',
       Duration(milliseconds: 0),
@@ -100,49 +89,91 @@ class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem> {
     );
   }
 
-  Color preIconColor() {
+  IconData preIcon() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedAlbumBox
+            .containsKey(widget.albumId) &&
+        AppHiveBoxes.instance.recentlyUnLikedAlbumBox
+            .containsKey(widget.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
+      if (a > b) {
+        return FlutterRemix.heart_fill;
+      } else {
+        return FlutterRemix.heart_line;
+      }
+    }
+
     ///IF ALBUM IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedAlbumBox
         .containsKey(widget.albumId)) {
-      return widget.likedColor;
+      return FlutterRemix.heart_fill;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY UNLIKED
     if (AppHiveBoxes.instance.recentlyUnLikedAlbumBox
         .containsKey(widget.albumId)) {
-      return widget.unlikedColor;
+      return FlutterRemix.heart_line;
     }
 
     ///IF ALBUM IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
     if (widget.isLiked) {
-      return widget.likedColor;
+      return FlutterRemix.heart_fill;
     } else {
-      return widget.unlikedColor;
+      return FlutterRemix.heart_line;
     }
   }
 
-  IconData preIcon() {
+  Color preIconColor() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedAlbumBox
+            .containsKey(widget.albumId) &&
+        AppHiveBoxes.instance.recentlyUnLikedAlbumBox
+            .containsKey(widget.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
+      if (a > b) {
+        return AppColors.darkOrange;
+      } else {
+        return AppColors.darkOrange;
+      }
+    }
+
     ///IF ALBUM IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedAlbumBox
         .containsKey(widget.albumId)) {
-      return FlutterRemix.heart_fill;
+      return widget.likedColor;
     }
 
     ///IF ALBUM IS FOUND IN RECENTLY UNLIKED
     if (AppHiveBoxes.instance.recentlyUnLikedAlbumBox
         .containsKey(widget.albumId)) {
-      return FlutterRemix.heart_line;
+      return widget.unlikedColor;
     }
 
     ///IF ALBUM IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
     if (widget.isLiked) {
-      return FlutterRemix.heart_fill;
+      return widget.likedColor;
     } else {
-      return FlutterRemix.heart_line;
+      return widget.unlikedColor;
     }
   }
 
   bool preButtonOnTap() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedAlbumBox
+            .containsKey(widget.albumId) &&
+        AppHiveBoxes.instance.recentlyUnLikedAlbumBox
+            .containsKey(widget.albumId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
+      if (a > b) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     ///IF ALBUM IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedAlbumBox
         .containsKey(widget.albumId)) {
@@ -157,40 +188,5 @@ class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem> {
 
     ///IF ALBUM IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
     return widget.isLiked;
-  }
-
-  String preButtonText() {
-    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
-    if (AppHiveBoxes.instance.recentlyLikedAlbumBox
-            .containsKey(widget.albumId) &&
-        AppHiveBoxes.instance.recentlyUnLikedAlbumBox
-            .containsKey(widget.albumId)) {
-      int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
-      int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
-      if (a > b) {
-        return AppLocale.of().removeFromFavorite;
-      } else {
-        return AppLocale.of().addToFavorite;
-      }
-    }
-
-    ///IF ALBUM IS FOUND IN RECENTLY LIKED
-    if (AppHiveBoxes.instance.recentlyLikedAlbumBox
-        .containsKey(widget.albumId)) {
-      return AppLocale.of().removeFromFavorite;
-    }
-
-    ///IF ALBUM IS FOUND IN RECENTLY UNLIKED
-    if (AppHiveBoxes.instance.recentlyUnLikedAlbumBox
-        .containsKey(widget.albumId)) {
-      return AppLocale.of().addToFavorite;
-    }
-
-    ///IF ALBUM IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
-    if (widget.isLiked) {
-      return AppLocale.of().removeFromFavorite;
-    } else {
-      return AppLocale.of().addToFavorite;
-    }
   }
 }

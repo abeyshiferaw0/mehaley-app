@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
@@ -79,7 +79,7 @@ class _MiniPlayerPreviewCartButtonState
     ///LIKE UNLIKE SONG
     EasyDebounce.debounce(
       'SONG_LIKE',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemovedSongCartEvent(
@@ -105,13 +105,13 @@ class _MiniPlayerPreviewCartButtonState
           .get(widget.song.songId);
       if (a > b) {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_fill,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_16,
           color: AppColors.white,
         );
       } else {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_light,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_16,
           color: AppColors.white,
         );
@@ -122,7 +122,7 @@ class _MiniPlayerPreviewCartButtonState
     if (AppHiveBoxes.instance.recentlyCartAddedSongBox
         .containsKey(widget.song.songId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_16,
         color: AppColors.white,
       );
@@ -132,7 +132,7 @@ class _MiniPlayerPreviewCartButtonState
     if (AppHiveBoxes.instance.recentlyCartRemovedSongBox
         .containsKey(widget.song.songId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_16,
         color: AppColors.white,
       );
@@ -141,13 +141,13 @@ class _MiniPlayerPreviewCartButtonState
     ///IF SONG IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.song.isInCart) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_16,
         color: AppColors.white,
       );
     } else {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_16,
         color: AppColors.white,
       );

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -258,13 +258,13 @@ class PlaylistInfoPageTwo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconText(
-          icon: PhosphorIcons.calendar_blank_light,
+          icon: FlutterRemix.calendar_line,
           text: PagesUtilFunctions.getPlaylistDateCreated(
             playlist,
           ),
         ),
         IconText(
-          icon: PhosphorIcons.clock_light,
+          icon: FlutterRemix.time_line,
           text: PagesUtilFunctions.getPlaylistTotalDuration(
             songs,
           ),

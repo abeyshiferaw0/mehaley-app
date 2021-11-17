@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:marquee/marquee.dart';
@@ -82,14 +81,14 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         child: Padding(
                           padding: EdgeInsets.all(AppPadding.padding_4),
                           child: Icon(
-                            PhosphorIcons.share_network_thin,
+                            FlutterRemix.share_line,
                             color: AppColors.white,
                             size: AppIconSizes.icon_size_24,
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: AppMargin.margin_20,
+                        width: AppMargin.margin_32,
                       ),
 
                       ///MENU BUTTON
@@ -106,20 +105,49 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             ),
                           );
                         },
-                        child: Icon(
-                          PhosphorIcons.dots_three_circle_vertical_thin,
-                          color: AppColors.lightGrey,
-                          size: AppIconSizes.icon_size_64,
+                        child: Container(
+                          width: AppIconSizes.icon_size_52,
+                          height: AppIconSizes.icon_size_52,
+                          child: Stack(
+                            children: [
+                              // Icon(
+                              //   FlutterRemix.checkbox_blank_circle_line,
+                              //   color: AppColors.lightGrey,
+                              //   size: AppIconSizes.icon_size_64,
+                              // ),
+                              Container(
+                                width: AppIconSizes.icon_size_64,
+                                height: AppIconSizes.icon_size_64,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100.0),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  FlutterRemix.more_2_line,
+                                  color: AppColors.lightGrey,
+                                  size: AppIconSizes.icon_size_32,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
-                        width: AppMargin.margin_16,
+                        width: AppMargin.margin_28,
                       ),
 
                       ///FAV BUTTON
                       SongFavoriteButton(
                         songId: state.songId,
                         isLiked: state.isLiked,
+                        likedColor: AppColors.white,
+                        unlikedColor: AppColors.white,
                       ),
                     ],
                   );
@@ -312,7 +340,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         child: Column(
                           children: [
                             Icon(
-                              PhosphorIcons.shuffle_light,
+                              FlutterRemix.shuffle_line,
                               color: state
                                   ? AppColors.white
                                   : AppColors.white.withOpacity(0.5),
@@ -425,8 +453,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         padding: EdgeInsets.all(AppPadding.padding_16),
                         child: Icon(
                           state
-                              ? PhosphorIcons.speaker_slash_light
-                              : PhosphorIcons.speaker_high_thin,
+                              ? FlutterRemix.volume_mute_line
+                              : FlutterRemix.volume_up_line,
                           color: AppColors.lightGrey,
                           size: AppIconSizes.icon_size_20,
                         ),
@@ -443,7 +471,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         key: Key(state.songId.toString()),
                         song: state,
                         isForPlayerPage: true,
-                        downloadingFailedColor: AppColors.black,
+                        downloadingFailedColor:
+                            AppColors.lightGrey.withOpacity(0.5),
                         downloadingColor: AppColors.lightGrey,
                         downloadedColor: AppColors.white,
                       );
@@ -464,7 +493,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.padding_16),
                     child: Icon(
-                      PhosphorIcons.playlist_thin,
+                      FlutterRemix.play_list_line,
                       color: AppColors.lightGrey,
                       size: AppIconSizes.icon_size_20,
                     ),

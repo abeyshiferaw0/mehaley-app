@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
@@ -50,7 +49,7 @@ class _QueueListPageState extends State<QueueListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: SafeArea(
         child: MultiBlocListener(
           listeners: [
@@ -184,7 +183,7 @@ class _QueueListPageState extends State<QueueListPage> {
                   child: Column(
                     children: [
                       Icon(
-                        PhosphorIcons.shuffle_light,
+                        FlutterRemix.shuffle_line,
                         color: state ? AppColors.darkOrange : AppColors.black,
                         size: AppIconSizes.icon_size_24,
                       ),
@@ -330,7 +329,7 @@ class _QueueListPageState extends State<QueueListPage> {
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        PhosphorIcons.x_light,
+                        FlutterRemix.close_line,
                         size: AppIconSizes.icon_size_24,
                         color: AppColors.black,
                       ),

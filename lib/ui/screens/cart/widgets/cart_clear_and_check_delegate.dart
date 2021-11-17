@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -104,7 +104,7 @@ class CheckOutButton extends StatelessWidget {
             width: AppMargin.margin_2,
           ),
           Icon(
-            PhosphorIcons.caret_right_light,
+            FlutterRemix.arrow_right_line,
             color: ColorUtil.darken(
               AppColors.darkOrange,
               1 - opacityPercentage,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/offline_songs_bloc/offline_songs_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -56,7 +56,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 emptyOffline: true,
-                icon: PhosphorIcons.caret_circle_down_fill,
+                icon: FlutterRemix.arrow_down_circle_fill,
                 msg: AppLocale.of().uDontHaveDownloads,
               ),
             );

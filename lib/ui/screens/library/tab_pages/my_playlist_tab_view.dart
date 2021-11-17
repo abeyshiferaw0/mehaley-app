@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
@@ -105,7 +105,7 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
             PagesUtilFunctions.openCreatePlaylistPage(context);
           },
           iconColor: AppColors.black,
-          icon: PhosphorIcons.plus_light,
+          icon: FlutterRemix.add_line,
         )
       ],
     );

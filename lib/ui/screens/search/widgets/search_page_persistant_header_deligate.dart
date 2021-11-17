@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
@@ -39,7 +39,7 @@ class SearchPersistentSliverHeaderDelegate
                       width: AppMargin.margin_12,
                     ),
                     Icon(
-                      PhosphorIcons.magnifying_glass_light,
+                      FlutterRemix.search_line,
                       color: AppColors.lightGrey,
                       size: AppIconSizes.icon_size_24,
                     ),
@@ -67,7 +67,7 @@ class SearchPersistentSliverHeaderDelegate
             //     );
             //   },
             //   icon: Icon(
-            //     PhosphorIcons.microphone_thin,
+            //     FlutterRemix.mic_line,
             //     color: AppColors.lightGrey,
             //     size: AppIconSizes.icon_size_28,
             //   ),

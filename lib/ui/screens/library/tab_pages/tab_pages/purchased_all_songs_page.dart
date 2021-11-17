@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -56,7 +56,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.folder_fill,
+                icon: FlutterRemix.folder_fill,
                 msg: AppLocale.of().uDontHavePurchase,
               ),
             );

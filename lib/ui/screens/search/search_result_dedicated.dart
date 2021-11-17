@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -53,12 +53,12 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       appBar: AppBar(
         centerTitle: true,
         //brightness: Brightness.dark,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
         ),
         backgroundColor: AppColors.lightGrey,
         leading: IconButton(
@@ -66,7 +66,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(PhosphorIcons.caret_left),
+          icon: Icon(FlutterRemix.arrow_left_line),
         ),
         title: Text(
           AppLocale.of().searchDedicatedTitle(

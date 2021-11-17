@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
@@ -87,11 +87,11 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         appBar: AppBar(
           //brightness: Brightness.dark,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
           ),
           backgroundColor: AppColors.lightGrey,
           leading: IconButton(
@@ -100,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             color: AppColors.black,
             icon: Icon(
-              PhosphorIcons.caret_left_light,
+              FlutterRemix.arrow_left_line,
               size: AppIconSizes.icon_size_24,
             ),
           ),

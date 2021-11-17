@@ -61,7 +61,7 @@ class ArtistFollowButton extends StatelessWidget {
                 ///FOLLOW UNFOLLOW ARTIST
                 EasyDebounce.debounce(
                   'ARTIST_FOLLOW',
-                  Duration(milliseconds: 800),
+                  Duration(milliseconds: 0),
                   () {
                     print('artistId $artistId');
                     BlocProvider.of<LibraryBloc>(context).add(
@@ -83,7 +83,7 @@ class ArtistFollowButton extends StatelessWidget {
       ///FOLLOW UNFOLLOW ARTIST
       EasyDebounce.debounce(
         'ARTIST_FOLLOW',
-        Duration(milliseconds: 800),
+        Duration(milliseconds: 0),
         () {
           BlocProvider.of<LibraryBloc>(context).add(
             FollowUnFollowArtistEvent(

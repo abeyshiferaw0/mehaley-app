@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
@@ -16,7 +17,6 @@ import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
-import 'package:mehaley/ui/screens/category/widgets/category_sliver_header_delegate.dart';
 import 'package:mehaley/ui/screens/category/widgets/item_popular_album.dart';
 import 'package:mehaley/ui/screens/category/widgets/item_popular_playlist.dart';
 import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
@@ -88,12 +88,12 @@ class _CategoryPageState extends State<CategoryPage>
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
+        appBar: buildAppBar(context),
         body: Stack(
           children: [
             CustomScrollView(
               slivers: [
-                buildSliverHeader(widget.category),
                 SliverToBoxAdapter(
                   child: SizedBox(height: AppMargin.margin_16),
                 ),
@@ -109,6 +109,39 @@ class _CategoryPageState extends State<CategoryPage>
             ),
             buildCategoryErrorBlocBuilder(),
           ],
+        ),
+      ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      //brightness: Brightness.dark,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+      ),
+      backgroundColor: AppColors.white,
+      shadowColor: AppColors.transparent,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          FlutterRemix.arrow_left_line,
+          size: AppIconSizes.icon_size_24,
+          color: AppColors.black,
+        ),
+      ),
+      title: Text(
+        L10nUtil.translateLocale(
+          widget.category.categoryNameText,
+          context,
+        ),
+        textAlign: TextAlign.start,
+        style: TextStyle(
+          fontSize: AppFontSizes.font_size_12.sp,
+          fontWeight: FontWeight.w600,
+          color: AppColors.black,
         ),
       ),
     );
@@ -150,7 +183,7 @@ class _CategoryPageState extends State<CategoryPage>
           if (state is CategoryPageTopLoadingError) {
             return CategoryTopShimmer();
           }
-          return CategoryTopShimmer();
+          return SizedBox();
         },
       ),
     );
@@ -244,7 +277,7 @@ class _CategoryPageState extends State<CategoryPage>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
-          PhosphorIcons.music_note_simple_light,
+          FlutterRemix.music_line,
           size: AppIconSizes.icon_size_72,
           color: AppColors.lightGrey.withOpacity(0.8),
         ),
@@ -287,14 +320,17 @@ class _CategoryPageState extends State<CategoryPage>
 
   Column buildCategoryPlaylist(List<Playlist> topPlaylist) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          AppLocale.of().playlists,
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: AppFontSizes.font_size_14.sp,
-            fontWeight: FontWeight.w600,
+        Padding(
+          padding: const EdgeInsets.only(left: AppPadding.padding_16),
+          child: Text(
+            AppLocale.of().playlists,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: AppFontSizes.font_size_14.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         SizedBox(
@@ -342,14 +378,17 @@ class _CategoryPageState extends State<CategoryPage>
 
   Column buildCategoryAlbums(List<Album> topAlbum) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          AppLocale.of().albums,
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: AppFontSizes.font_size_14.sp,
-            fontWeight: FontWeight.w600,
+        Padding(
+          padding: const EdgeInsets.only(left: AppPadding.padding_16),
+          child: Text(
+            AppLocale.of().albums,
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: AppFontSizes.font_size_14.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         SizedBox(height: AppMargin.margin_16),
@@ -409,14 +448,6 @@ class _CategoryPageState extends State<CategoryPage>
           height: AppMargin.margin_16,
         ),
       ],
-    );
-  }
-
-  SliverPersistentHeader buildSliverHeader(Category category) {
-    return SliverPersistentHeader(
-      delegate: CategorySliverHeaderDelegate(category: category),
-      floating: true,
-      pinned: true,
     );
   }
 }

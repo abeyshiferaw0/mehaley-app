@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
@@ -20,7 +20,6 @@ import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_bouncing_button.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
 import 'menu_items/menu_item.dart';
@@ -163,21 +162,6 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Container(
-            margin: EdgeInsets.only(
-              top: AppMargin.margin_16,
-            ),
-            child: AppBouncingButton(
-              child: Icon(
-                PhosphorIcons.caret_circle_down_light,
-                color: AppColors.darkGrey,
-                size: AppIconSizes.icon_size_32,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
           SizedBox(
             height: AppMargin.margin_16,
           ),
@@ -203,7 +187,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                         isDisabled: false,
                         hasTopMargin: true,
                         iconColor: AppColors.grey.withOpacity(0.6),
-                        icon: PhosphorIcons.minus_circle_light,
+                        icon: FlutterRemix.indeterminate_circle_line,
                         title: AppLocale.of().removeFromPlaylistMsg,
                         onTap: () {
                           showDialog(
@@ -247,7 +231,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                         isDisabled: false,
                         hasTopMargin: true,
                         iconColor: AppColors.grey.withOpacity(0.6),
-                        icon: PhosphorIcons.currency_circle_dollar_light,
+                        icon: FlutterRemix.money_dollar_circle_line,
                         title: AppLocale.of().buyMezmur,
                         onTap: () {},
                       )
@@ -260,12 +244,14 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   isDisabled: false,
                   isLiked: song.isLiked,
                   songId: song.songId,
+                  unlikedColor: AppColors.grey.withOpacity(0.6),
+                  likedColor: AppColors.darkOrange,
                 ),
                 MenuItem(
                   isDisabled: false,
                   hasTopMargin: true,
                   iconColor: AppColors.grey.withOpacity(0.6),
-                  icon: PhosphorIcons.playlist_light,
+                  icon: FlutterRemix.play_list_line,
                   title: AppLocale.of().addToPlaylist,
                   onTap: () {
                     Navigator.pop(context);
@@ -290,7 +276,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 //   isDisabled:false,
                 //   hasTopMargin: true,
                 //   iconColor: AppColors.grey.withOpacity(0.6),
-                //   icon: PhosphorIcons.list_plus_light,
+                //   icon: FlutterRemix.playlist_add_line,
                 //   title: AppLocale.of().addToQueue,
                 //   onTap: () async {
                 //
@@ -300,7 +286,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
                 //   iconColor: AppColors.grey.withOpacity(0.6),
-                //   icon: PhosphorIcons.disc_light,
+                //   icon: FlutterRemix.disc_line,
                 //   title: AppLocale.of().viewAlbum,
                 //   onTap: () {},
                 // ),
@@ -308,7 +294,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
                 //   iconColor: AppColors.grey.withOpacity(0.6),
-                //   icon: PhosphorIcons.user_thin,
+                //   icon: FlutterRemix.user_line,
                 //   title: AppLocale.of().viewArtist,
                 //   onTap: () {},
                 // ),
@@ -316,7 +302,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
                 //   iconColor: AppColors.grey.withOpacity(0.6),
-                //   icon: PhosphorIcons.rows_light,
+                //   icon: FlutterRemix.layout_row_line,
                 //   title: AppLocale.of().viewMezmursCategory,
                 //   onTap: () {},
                 // ),
@@ -324,7 +310,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   isDisabled: false,
                   hasTopMargin: true,
                   iconColor: AppColors.grey.withOpacity(0.6),
-                  icon: PhosphorIcons.share_network_light,
+                  icon: FlutterRemix.share_line,
                   title: AppLocale.of().shareMezmur,
                   onTap: () {},
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
 import 'package:mehaley/business_logic/cubits/search_input_is_searching_cubit.dart';
@@ -131,7 +131,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             prefixIcon: IconButton(
               color: AppColors.black,
               iconSize: AppIconSizes.icon_size_20,
-              icon: Icon(PhosphorIcons.arrow_left_light),
+              icon: Icon(FlutterRemix.arrow_left_line),
               onPressed: () {
                 setSearching(mIsSearching: false);
                 searchTextController.clear();
@@ -142,7 +142,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             suffixIcon: IconButton(
               color: AppColors.darkGrey,
               iconSize: AppIconSizes.icon_size_20,
-              icon: Icon(PhosphorIcons.x_light),
+              icon: Icon(FlutterRemix.close_line),
               onPressed: () {
                 searchTextController.clear();
               },

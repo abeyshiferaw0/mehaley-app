@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -15,7 +15,6 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/cart_buttons/album_cart_button.dart';
-import 'package:mehaley/ui/common/like_follow/album_favorite_button.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
@@ -46,20 +45,20 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       builder: (context, state) {
         if (state is AlbumPageLoadingState) {
           return Scaffold(
-            backgroundColor: AppColors.white,
+            backgroundColor: AppColors.pagesBgColor,
             body: ShimmerAlbum(),
           );
         }
         if (state is AlbumPageLoadedState) {
           return Scaffold(
-            backgroundColor: AppColors.white,
+            backgroundColor: AppColors.pagesBgColor,
             appBar: buildAppBar(state.albumPageData.album),
             body: buildAlbumPageLoaded(state.albumPageData),
           );
         }
         if (state is AlbumPageLoadingErrorState) {
           return Scaffold(
-            backgroundColor: AppColors.white,
+            backgroundColor: AppColors.pagesBgColor,
             body: AppError(
               bgWidget: ShimmerAlbum(),
               onRetry: () {
@@ -75,15 +74,17 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
     );
   }
 
-  Container buildAlbumPageLoaded(AlbumPageData albumPageData) {
-    return Container(
-      padding: const EdgeInsets.only(left: AppPadding.padding_16),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            AlbumPageHeader(
-                album: albumPageData.album, songs: albumPageData.songs),
-            ListView.builder(
+  SingleChildScrollView buildAlbumPageLoaded(AlbumPageData albumPageData) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AlbumPageHeader(
+            album: albumPageData.album,
+            songs: albumPageData.songs,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: AppPadding.padding_16),
+            child: ListView.builder(
               itemCount: albumPageData.songs.length,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
@@ -91,10 +92,13 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
               itemBuilder: (context, position) {
                 return Column(
                   children: [
-                    SizedBox(height: AppMargin.margin_4),
+                    SizedBox(height: AppMargin.margin_8),
                     SongItem(
                       position: position + 1,
                       isForMyPlaylist: false,
+                      thumbUrl: AppApi.baseUrl +
+                          albumPageData.album.albumImages[0].imageSmallPath,
+                      thumbSize: AppIconSizes.icon_size_52,
                       song: albumPageData.songs[position],
                       onPressed: () {
                         //OPEN SONG
@@ -113,27 +117,28 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                         );
                       },
                     ),
-                    SizedBox(height: AppMargin.margin_4),
+                    SizedBox(height: AppMargin.margin_8),
                   ],
                 );
               },
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
 
   AppBar buildAppBar(Album album) {
     return AppBar(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       // brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
       leading: IconButton(
-        icon: Icon(PhosphorIcons.caret_left_light),
+        icon: Icon(FlutterRemix.arrow_left_line),
+        color: AppColors.black,
         onPressed: () {
           Navigator.pop(context);
         },
@@ -145,6 +150,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
               L10nUtil.translateLocale(
                   state.albumPageData.album.albumTitle, context),
               style: TextStyle(
+                color: AppColors.black,
                 fontSize: AppFontSizes.font_size_16,
                 fontWeight: FontWeight.w500,
               ),
@@ -154,21 +160,15 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
           }
         },
       ),
-      centerTitle: false,
       actions: [
         AlbumCartButton(
           album: album,
-        ),
-        AlbumFavoriteButton(
-          padding: EdgeInsets.all(AppPadding.padding_8),
-          isLiked: album.isLiked,
-          albumId: album.albumId,
         ),
         AppBouncingButton(
           child: Padding(
             padding: EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
-              PhosphorIcons.dots_three_vertical_bold,
+              FlutterRemix.more_2_fill,
               color: AppColors.black,
               size: AppIconSizes.icon_size_28,
             ),

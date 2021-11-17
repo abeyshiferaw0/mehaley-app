@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
@@ -40,7 +40,10 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
         builder: (context, state) {
           return AppBouncingButton(
             onTap: onTap,
-            child: preCartIcon(),
+            child: Padding(
+              padding: EdgeInsets.all(AppPadding.padding_8),
+              child: preCartIcon(),
+            ),
           );
         },
       );
@@ -51,7 +54,7 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     ///LIKE UNLIKE ALBUM
     EasyDebounce.debounce(
       'ALBUM_LIKE',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemoveAlbumCartEvent(
@@ -77,13 +80,13 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
           .get(widget.album.albumId);
       if (a > b) {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_fill,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_24,
           color: AppColors.darkOrange,
         );
       } else {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_light,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_24,
           color: AppColors.black,
         );
@@ -94,7 +97,7 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     if (AppHiveBoxes.instance.recentlyCartAddedAlbumBox
         .containsKey(widget.album.albumId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_24,
         color: AppColors.darkOrange,
       );
@@ -104,7 +107,7 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     if (AppHiveBoxes.instance.recentlyCartRemovedAlbumBox
         .containsKey(widget.album.albumId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_24,
         color: AppColors.black,
       );
@@ -113,13 +116,13 @@ class _AlbumCartButtonState extends State<AlbumCartButton> {
     ///IF ALBUM IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.album.isInCart) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_24,
         color: AppColors.darkOrange,
       );
     } else {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_24,
         color: AppColors.black,
       );

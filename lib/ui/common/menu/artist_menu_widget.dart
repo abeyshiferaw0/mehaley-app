@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -9,7 +9,7 @@ import 'package:mehaley/ui/common/menu/menu_items/artist_follow_menu_item.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_bouncing_button.dart';
+import '../app_card.dart';
 import '../player_items_placeholder.dart';
 import 'menu_items/menu_item.dart';
 
@@ -47,21 +47,6 @@ class ArtistMenuWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                margin: EdgeInsets.only(
-                  top: AppMargin.margin_48,
-                ),
-                child: AppBouncingButton(
-                  child: Icon(
-                    PhosphorIcons.caret_circle_down_light,
-                    color: AppColors.darkGrey,
-                    size: AppIconSizes.icon_size_32,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
               SizedBox(
                 height: ScreenUtil(context: context).getScreenHeight() * 0.2,
               ),
@@ -81,7 +66,7 @@ class ArtistMenuWidget extends StatelessWidget {
                       isDisabled: false,
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
-                      icon: PhosphorIcons.share_network_light,
+                      icon: FlutterRemix.share_line,
                       title: AppLocale.of().shareArtist,
                       onTap: () {},
                     ),
@@ -103,8 +88,9 @@ class ArtistMenuWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(100),
+          AppCard(
+            withShadow: false,
+            radius: 100,
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,

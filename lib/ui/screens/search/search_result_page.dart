@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
 import 'package:mehaley/config/constants.dart';
@@ -44,7 +44,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -145,7 +145,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
             width: AppValues.searchResultMicButtonSize,
             height: AppValues.searchResultMicButtonSize,
             child: Icon(
-              PhosphorIcons.microphone_light,
+              FlutterRemix.mic_line,
               color: AppColors.darkOrange,
               size: AppIconSizes.icon_size_32,
             ),

@@ -1,7 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
@@ -75,8 +75,8 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                     Expanded(child: SizedBox()),
                     Icon(
                       isExpanded
-                          ? PhosphorIcons.caret_up_light
-                          : PhosphorIcons.caret_down_light,
+                          ? FlutterRemix.arrow_up_line
+                          : FlutterRemix.arrow_down_line,
                       size: AppIconSizes.icon_size_24,
                       color: AppColors.black,
                     )
@@ -166,8 +166,8 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                     Expanded(child: SizedBox()),
                     Icon(
                       isExpanded
-                          ? PhosphorIcons.caret_up_light
-                          : PhosphorIcons.caret_down_light,
+                          ? FlutterRemix.arrow_up_line
+                          : FlutterRemix.arrow_down_line,
                       size: AppIconSizes.icon_size_24,
                       color: AppColors.black,
                     )

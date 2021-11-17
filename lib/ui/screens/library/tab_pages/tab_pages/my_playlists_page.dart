@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -52,7 +52,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
                 emptyMyPlaylist: true,
-                icon: PhosphorIcons.plus_circle_fill,
+                icon: FlutterRemix.add_circle_fill,
                 msg: AppLocale.of().uHaventCreatedPlaylist,
               ),
             );
@@ -143,7 +143,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
                 height: AppValues.libraryMusicItemSize,
                 color: AppColors.lightGrey,
                 child: Icon(
-                  PhosphorIcons.plus_light,
+                  FlutterRemix.add_line,
                   color: AppColors.black,
                   size: AppIconSizes.icon_size_24,
                 ),

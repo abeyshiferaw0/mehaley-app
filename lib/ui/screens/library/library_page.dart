@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
@@ -119,7 +119,7 @@ class _LibraryPageState extends State<LibraryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: AppColors.pagesBgColor,
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (context, value) {
@@ -166,7 +166,7 @@ class _LibraryPageState extends State<LibraryPage>
     return SliverAppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
       backgroundColor: AppColors.lightGrey,
       shadowColor: AppColors.transparent,
@@ -188,7 +188,7 @@ class _LibraryPageState extends State<LibraryPage>
                 right: 0,
                 bottom: 0,
                 child: Icon(
-                  PhosphorIcons.gear_six_bold,
+                  FlutterRemix.settings_3_line,
                   size: AppIconSizes.icon_size_12,
                   color: AppColors.black,
                 ),
@@ -212,7 +212,7 @@ class _LibraryPageState extends State<LibraryPage>
         // IconButton(
         //   onPressed: () {},
         //   icon: Icon(
-        //     PhosphorIcons.bell_simple_light,
+        //     FlutterRemix.notifications_2_line,
         //     color: AppColors.white,
         //     size: AppIconSizes.icon_size_24,
         //   ),

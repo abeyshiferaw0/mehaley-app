@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -70,7 +70,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
               bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
             ),
           );
         }
@@ -82,14 +82,14 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
               bgColor: AppColors.black,
               isFloating: true,
               iconColor: AppColors.darkOrange,
-              icon: PhosphorIcons.check_circle_fill,
+              icon: FlutterRemix.checkbox_circle_fill,
             ),
           );
           Navigator.pop(context, state.appUser);
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -198,7 +198,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                               );
                             },
                             text: AppLocale.of().trackAPhoto,
-                            icon: PhosphorIcons.camera_light,
+                            icon: FlutterRemix.camera_line,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
@@ -210,7 +210,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                               );
                             },
                             text: AppLocale.of().pickFromGallery,
-                            icon: PhosphorIcons.image_light,
+                            icon: FlutterRemix.image_line,
                           ),
                           ImagePickerDialogItems(
                             onTap: () {
@@ -220,7 +220,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                               Navigator.pop(context);
                             },
                             text: AppLocale.of().removeImage,
-                            icon: PhosphorIcons.minus_circle_light,
+                            icon: FlutterRemix.indeterminate_circle_line,
                           ),
                         ],
                       ),
@@ -363,7 +363,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 Navigator.pop(context);
               },
               child: Icon(
-                PhosphorIcons.x_light,
+                FlutterRemix.close_line,
                 size: AppIconSizes.icon_size_24,
                 color: AppColors.black,
               ),

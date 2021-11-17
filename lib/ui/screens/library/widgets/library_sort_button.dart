@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -38,7 +38,7 @@ class LibrarySortButton extends StatelessWidget {
             ),
             isSelected
                 ? Icon(
-                    PhosphorIcons.check_light,
+                    FlutterRemix.check_line,
                     color: AppColors.darkOrange,
                   )
                 : SizedBox()

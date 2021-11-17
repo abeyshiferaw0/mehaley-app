@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -55,7 +55,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
@@ -211,7 +211,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       centerTitle: true,
       //brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
       leading: IconButton(
         onPressed: () {
@@ -220,7 +220,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         iconSize: AppIconSizes.icon_size_24,
         color: AppColors.black,
         icon: Icon(
-          PhosphorIcons.caret_left_light,
+          FlutterRemix.arrow_left_line,
         ),
       ),
       title: Text(

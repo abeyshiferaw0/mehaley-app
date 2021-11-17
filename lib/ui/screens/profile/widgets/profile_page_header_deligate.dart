@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -203,7 +203,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       widget.onBackPress();
                     },
                     icon: Icon(
-                      PhosphorIcons.caret_left_light,
+                      FlutterRemix.arrow_left_line,
                       color: AppColors.black,
                       size: AppIconSizes.icon_size_24,
                     ),
@@ -256,7 +256,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                         );
                       },
                       child: Icon(
-                        PhosphorIcons.dots_three_vertical,
+                        FlutterRemix.more_2_line,
                         color: AppColors.black,
                         size: AppIconSizes.icon_size_24,
                       ),

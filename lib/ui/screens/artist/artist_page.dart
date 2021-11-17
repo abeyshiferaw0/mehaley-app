@@ -45,7 +45,7 @@ class _ArtistPageState extends State<ArtistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: BlocBuilder<ArtistPageBloc, ArtistPageState>(
         builder: (context, state) {
           if (state is ArtistPageLoadingState) {
@@ -53,7 +53,7 @@ class _ArtistPageState extends State<ArtistPage> {
           }
           if (state is ArtistPageLoadedState) {
             return Scaffold(
-              backgroundColor: AppColors.white,
+              backgroundColor: AppColors.pagesBgColor,
               body: buildArtistPageLoaded(state.artistPageData),
             );
           }

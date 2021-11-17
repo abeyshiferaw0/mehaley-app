@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -72,7 +72,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         appBar: buildAppBar(context),
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -204,7 +204,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           dialogBackgroundColor: AppColors.white,
           barrierColor: AppColors.white.withOpacity(0.6),
           closeIcon: Icon(
-            PhosphorIcons.x_light,
+            FlutterRemix.close_line,
             size: AppIconSizes.icon_size_24,
             color: AppColors.black,
           ),
@@ -241,7 +241,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           ),
           searchDecoration: InputDecoration(
             prefixIcon: Icon(
-              PhosphorIcons.magnifying_glass_light,
+              FlutterRemix.search_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.darkOrange,
             ),
@@ -289,7 +289,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       centerTitle: true,
       //brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
       leading: IconButton(
         onPressed: () {
@@ -298,7 +298,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         iconSize: AppIconSizes.icon_size_24,
         color: AppColors.black,
         icon: Icon(
-          PhosphorIcons.caret_left_light,
+          FlutterRemix.arrow_left_line,
         ),
       ),
       title: Text(

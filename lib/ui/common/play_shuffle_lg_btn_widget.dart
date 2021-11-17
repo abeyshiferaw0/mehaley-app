@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -37,7 +37,7 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                PhosphorIcons.shuffle_light,
+                FlutterRemix.shuffle_line,
                 color: AppColors.lightGrey,
                 size: AppIconSizes.icon_size_16,
               ),

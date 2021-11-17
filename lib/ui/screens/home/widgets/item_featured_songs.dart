@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -94,7 +94,7 @@ class FeaturedSongsItem extends StatelessWidget {
                 child: Center(
                   child: Container(
                     child: Icon(
-                      PhosphorIcons.play_circle_fill,
+                      FlutterRemix.play_circle_fill,
                       size: AppIconSizes.icon_size_48,
                       color: AppColors.black,
                     ),
@@ -140,7 +140,7 @@ class FeaturedSongsItem extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(
-            PhosphorIcons.music_notes_simple_light,
+            FlutterRemix.music_2_line,
             color: AppColors.grey.withOpacity(0.5),
             size: constraint.biggest.height / 2,
           );

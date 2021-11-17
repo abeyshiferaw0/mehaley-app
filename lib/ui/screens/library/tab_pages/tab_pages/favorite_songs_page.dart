@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/favorite_songs_bloc/favorite_songs_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -54,7 +54,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.heart_straight_fill,
+                icon: FlutterRemix.heart_line,
                 msg: AppLocale.of().uDontHaveFavMezmurs,
               ),
             );

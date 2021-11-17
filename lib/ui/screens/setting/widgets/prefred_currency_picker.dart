@@ -2,7 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -62,7 +62,7 @@ class PreferredCurrencyPicker extends StatelessWidget {
               left: AppPadding.padding_8,
             ),
             child: Icon(
-              PhosphorIcons.caret_down_fill,
+              FlutterRemix.arrow_down_fill,
               size: AppIconSizes.icon_size_16,
               color: AppColors.txtGrey,
             ),

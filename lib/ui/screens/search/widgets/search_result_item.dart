@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -248,7 +248,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   child: Padding(
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
-                      PhosphorIcons.x_light,
+                      FlutterRemix.close_line,
                       color: AppColors.grey,
                       size: AppIconSizes.icon_size_24,
                     ),
@@ -259,7 +259,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   child: Padding(
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
-                      PhosphorIcons.dots_three_vertical_light,
+                      FlutterRemix.more_2_line,
                       color: AppColors.grey,
                       size: AppIconSizes.icon_size_24,
                     ),

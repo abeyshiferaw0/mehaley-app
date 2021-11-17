@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
@@ -65,7 +65,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                 ),
               ),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.check_circle_fill,
+              icon: FlutterRemix.checkbox_circle_fill,
               iconColor: AppColors.darkOrange,
             ),
           );
@@ -88,13 +88,13 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
               bgColor: AppColors.black,
               isFloating: false,
               iconColor: AppColors.errorRed,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
             ),
           );
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.pagesBgColor,
         appBar: buildAppBar(context),
         body: Stack(
           children: [
@@ -187,7 +187,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
               );
             } else {
               return LibraryEmptyPage(
-                icon: PhosphorIcons.playlist_light,
+                icon: FlutterRemix.play_list_line,
                 msg: AppLocale.of().youHaventCreatedAnyPlaylistMsg,
               );
             }
@@ -222,7 +222,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
     return AppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
       backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
@@ -230,7 +230,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(PhosphorIcons.caret_left_light),
+        icon: Icon(FlutterRemix.arrow_left_line),
         color: AppColors.black,
         iconSize: AppIconSizes.icon_size_24,
       ),

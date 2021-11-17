@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -134,7 +134,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
           isDisabled: false,
           hasTopMargin: false,
           iconColor: widget.downloadedColor,
-          icon: PhosphorIcons.arrow_circle_down_fill,
+          icon: FlutterRemix.arrow_down_circle_fill,
           title: AppLocale.of().deleteMezmur,
           onTap: () {
             showDialog(
@@ -171,10 +171,10 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         isDisabled: false,
         hasTopMargin: false,
         iconColor: widget.downloadingFailedColor,
-        icon: PhosphorIcons.warning_fill,
+        icon: FlutterRemix.error_warning_fill,
         title: AppLocale.of().retryDownload,
         onTap: () {
-          EasyDebounce.debounce('DOWNLOAD_BUTTON', Duration(milliseconds: 300),
+          EasyDebounce.debounce('DOWNLOAD_BUTTON', Duration(milliseconds: 0),
               () {
             ///SHOW RETRYING MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
@@ -208,7 +208,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         isDisabled: false,
         hasTopMargin: false,
         iconColor: AppColors.errorRed,
-        icon: PhosphorIcons.warning_fill,
+        icon: FlutterRemix.error_warning_fill,
         hasLeadingWidget: true,
         leadingWidget: Container(
           width: AppIconSizes.icon_size_24,
@@ -231,13 +231,13 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         isDisabled: false,
         hasTopMargin: false,
         iconColor: AppColors.grey.withOpacity(0.6),
-        icon: PhosphorIcons.arrow_circle_down,
+        icon: FlutterRemix.arrow_down_circle_line,
         title: AppLocale.of().downloadMezmur,
         onTap: () {
           if (widget.song.isBought || widget.song.isFree) {
             EasyDebounce.debounce(
               'DOWNLOAD_BUTTON',
-              Duration(milliseconds: 300),
+              Duration(milliseconds: 0),
               () {
                 BlocProvider.of<DownloadingSongBloc>(context).add(
                   DownloadSongEvent(

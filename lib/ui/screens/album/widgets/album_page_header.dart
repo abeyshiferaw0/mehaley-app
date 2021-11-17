@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/song.dart';
-import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_card.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
-import 'package:mehaley/ui/common/play_shuffle_lg_btn_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+
+import 'album_play_shuffle_header.dart';
 
 class AlbumPageHeader extends StatefulWidget {
   const AlbumPageHeader({Key? key, required this.album, required this.songs})
@@ -56,62 +54,40 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
         if (state is HomePageDominantColorChangedState) {
           dominantColor = state.color;
         }
-        return AnimatedSwitcher(
-          switchInCurve: Curves.easeIn,
-          switchOutCurve: Curves.easeOut,
-          duration:
-              Duration(milliseconds: AppValues.colorChangeAnimationDuration),
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: AppGradients().getAlbumPageBgGradient(dominantColor),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              color: AppColors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: AppMargin.margin_32),
+                  buildAlbumArt(album),
+                  SizedBox(height: AppMargin.margin_16),
+                  buildTitleAndSubTitle(album),
+                  SizedBox(height: AppMargin.margin_20),
+                  (!album.isBought && !album.isFree)
+                      ? BuyItemBtnWidget(
+                          priceEtb: album.priceEtb,
+                          priceUsd: album.priceDollar,
+                          title: AppLocale.of().buyAlbum.toUpperCase(),
+                          hasLeftMargin: false,
+                          isFree: album.isFree,
+                          discountPercentage: album.discountPercentage,
+                          isDiscountAvailable: album.isDiscountAvailable,
+                          isBought: album.isBought,
+                        )
+                      : SizedBox(),
+                  SizedBox(height: AppMargin.margin_16),
+                ],
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: AppValues.albumPageImageSize / 2.5),
-                buildAlbumArt(album),
-                SizedBox(height: AppMargin.margin_16),
-                buildTitleAndSubTitle(album),
-                SizedBox(height: AppMargin.margin_16),
-                (!album.isBought && !album.isFree)
-                    ? BuyItemBtnWidget(
-                        priceEtb: album.priceEtb,
-                        priceUsd: album.priceDollar,
-                        title: AppLocale.of().buyAlbum.toUpperCase(),
-                        hasLeftMargin: false,
-                        isFree: album.isFree,
-                        discountPercentage: album.discountPercentage,
-                        isDiscountAvailable: album.isDiscountAvailable,
-                        isBought: album.isBought,
-                      )
-                    : SizedBox(),
-                SizedBox(height: AppMargin.margin_16),
-                PlayShuffleLgBtnWidget(
-                  onTap: () {
-                    //OPEN SHUFFLE SONGS
-                    PagesUtilFunctions.openSongShuffled(
-                      context: context,
-                      startPlaying: true,
-                      songs: songs,
-                      playingFrom: PlayingFrom(
-                        from: AppLocale.of().playingFromAlbum,
-                        title:
-                            L10nUtil.translateLocale(album.albumTitle, context),
-                        songSyncPlayedFrom: SongSyncPlayedFrom.ALBUM_DETAIL,
-                        songSyncPlayedFromId: album.albumId,
-                      ),
-                      index: PagesUtilFunctions.getRandomIndex(
-                        min: 0,
-                        max: songs.length,
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: AppMargin.margin_16),
-              ],
+            AlbumPlayShuffleHeader(
+              album: album,
+              songs: songs,
             ),
-          ),
+          ],
         );
       },
     );
@@ -119,6 +95,8 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
 
   AppCard buildAlbumArt(Album album) {
     return AppCard(
+      withShadow: false,
+      radius: 4.0,
       child: CachedNetworkImage(
         width: AppValues.albumPageImageSize,
         height: AppValues.albumPageImageSize,

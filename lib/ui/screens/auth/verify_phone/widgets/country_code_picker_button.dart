@@ -1,6 +1,6 @@
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -48,7 +48,7 @@ class CountryPickerButton extends StatelessWidget {
             width: AppMargin.margin_4,
           ),
           Icon(
-            PhosphorIcons.caret_down_fill,
+            FlutterRemix.arrow_down_fill,
             size: AppFontSizes.font_size_12,
             color: AppColors.black,
           ),

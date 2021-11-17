@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
@@ -91,12 +91,14 @@ class SongQueueItem extends StatelessWidget {
             SongIsLikedIndicator(
               songId: song.songId,
               isLiked: song.isLiked,
+              likedColor: AppColors.darkOrange,
+              unlikedColor: AppColors.darkOrange,
             ),
             SizedBox(
               width: AppMargin.margin_16,
             ),
             Icon(
-              PhosphorIcons.list_light,
+              FlutterRemix.order_play_line,
               color: AppColors.darkGrey,
               size: AppIconSizes.icon_size_16,
             )

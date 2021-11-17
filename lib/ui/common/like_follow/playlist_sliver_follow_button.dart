@@ -7,23 +7,30 @@ import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
-class PlaylistFollowMenuItem extends StatefulWidget {
-  const PlaylistFollowMenuItem({
+class PlaylistSliverFollowButton extends StatefulWidget {
+  const PlaylistSliverFollowButton({
     Key? key,
     required this.isFollowing,
     required this.playlistId,
+    required this.iconSize,
+    required this.iconColor,
   }) : super(key: key);
 
   final bool isFollowing;
   final int playlistId;
+  final double iconSize;
+  final Color iconColor;
 
   @override
-  _PlaylistFollowMenuItemState createState() => _PlaylistFollowMenuItemState();
+  _PlaylistSliverFollowButtonState createState() =>
+      _PlaylistSliverFollowButtonState();
 }
 
-class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
+class _PlaylistSliverFollowButtonState
+    extends State<PlaylistSliverFollowButton> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryBloc, LibraryState>(
@@ -36,13 +43,45 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
         return false;
       },
       builder: (context, state) {
-        return MenuItem(
-          isDisabled: false,
-          hasTopMargin: true,
-          iconColor: preIconColor(),
-          icon: FlutterRemix.record_circle_line,
-          title: preButtonText(),
+        return AppBouncingButton(
           onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(100.0),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 0),
+                  color: AppColors.lightGrey,
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                SizedBox(width: AppMargin.margin_16),
+                Icon(
+                  FlutterRemix.record_circle_line,
+                  color: widget.iconColor,
+                  size: widget.iconSize,
+                ),
+                SizedBox(width: AppMargin.margin_8),
+                Text(
+                  preButtonText(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: AppFontSizes.font_size_8.sp - 1,
+                  ),
+                ),
+                SizedBox(width: AppMargin.margin_16),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -50,7 +89,6 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
 
   void onTap() {
     ///FOLLOW UNFOLLOW PLAYLIST
-
     EasyDebounce.debounce(
       'PLAYLIST_FOLLOW',
       Duration(milliseconds: 0),
@@ -113,67 +151,29 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return AppLocale.of().removeFromFollowedPlaylist;
+        return AppLocale.of().following.toUpperCase();
       } else {
-        return AppLocale.of().followPlaylist;
+        return AppLocale.of().follow.toUpperCase();
       }
     }
 
     ///IF  FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppLocale.of().removeFromFollowedPlaylist;
+      return AppLocale.of().following.toUpperCase();
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppLocale.of().followPlaylist;
+      return AppLocale.of().follow.toUpperCase();
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppLocale.of().removeFromFollowedPlaylist;
+      return AppLocale.of().following.toUpperCase();
     } else {
-      return AppLocale.of().followPlaylist;
-    }
-  }
-
-  Color preIconColor() {
-    ///IF FOUND IN BOTH RECENTLY FOLLOWED AND UNFOLLOWED
-    if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
-            .containsKey(widget.playlistId) &&
-        AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
-            .containsKey(widget.playlistId)) {
-      int a = AppHiveBoxes.instance.recentlyFollowedPlaylistBox
-          .get(widget.playlistId);
-
-      int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
-          .get(widget.playlistId);
-      if (a > b) {
-        return AppColors.darkOrange;
-      } else {
-        return AppColors.black.withOpacity(0.3);
-      }
-    }
-
-    ///IF FOUND IN RECENTLY FOLLOWED
-    if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
-        .containsKey(widget.playlistId)) {
-      return AppColors.darkOrange;
-    }
-
-    ///IF FOUND IN RECENTLY UNFOLLOWED
-    if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
-        .containsKey(widget.playlistId)) {
-      return AppColors.black.withOpacity(0.3);
-    }
-
-    ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
-    if (widget.isFollowing) {
-      return AppColors.darkOrange;
-    } else {
-      return AppColors.black.withOpacity(0.3);
+      return AppLocale.of().follow.toUpperCase();
     }
   }
 }

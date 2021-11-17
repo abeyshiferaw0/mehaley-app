@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtil(context: context).getScreenHeight() * 0.7;
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: Container(
         padding: EdgeInsets.only(
           left: AppPadding.padding_16,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -39,7 +39,7 @@ class RemoveFromCartButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Icon(
-                PhosphorIcons.x_light,
+                FlutterRemix.close_line,
                 color: AppColors.black,
                 size: AppIconSizes.icon_size_12,
               ),
@@ -75,7 +75,7 @@ class RemoveFromCartButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
-              PhosphorIcons.x_light,
+              FlutterRemix.close_line,
               color: AppColors.black,
               size: AppIconSizes.icon_size_12,
             ),

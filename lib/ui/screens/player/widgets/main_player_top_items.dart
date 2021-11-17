@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
@@ -38,7 +38,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
               Navigator.pop(context);
             },
             icon: Icon(
-              PhosphorIcons.caret_down_light,
+              FlutterRemix.arrow_down_s_line,
               color: AppColors.white,
               size: AppIconSizes.icon_size_24,
             ),
@@ -78,7 +78,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                   child: Padding(
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
-                      PhosphorIcons.dots_three_vertical_bold,
+                      FlutterRemix.more_2_fill,
                       color: AppColors.white,
                       size: AppIconSizes.icon_size_24,
                     ),

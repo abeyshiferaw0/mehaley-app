@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/offline_songs_bloc/offline_songs_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
@@ -111,7 +111,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
           builder: (context) {
             return LibraryPageSubTabButton(
               text: AppLocale.of().sort.toUpperCase(),
-              prefixIcon: PhosphorIcons.sort_ascending,
+              prefixIcon: FlutterRemix.sort_asc,
               isSelected: true,
               onTap: () {
                 showModalBottomSheet(
@@ -159,7 +159,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             }
           },
           iconColor: AppColors.black,
-          icon: PhosphorIcons.shuffle_light,
+          icon: FlutterRemix.shuffle_line,
         )
       ],
     );

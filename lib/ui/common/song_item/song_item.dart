@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
@@ -185,7 +185,7 @@ class _SongItemState extends State<SongItem> {
           ),
           SongIsLikedIndicator(
             songId: song.songId,
-            isLiked: song.isLiked,
+            isLiked: song.isLiked, likedColor: AppColors.darkOrange, unlikedColor: AppColors.darkOrange,
           ),
           SongDownloadIndicator(
             song: song,
@@ -412,7 +412,7 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
               child: Padding(
                 padding: EdgeInsets.all(AppPadding.padding_8),
                 child: Icon(
-                  PhosphorIcons.dots_three_vertical_bold,
+                  FlutterRemix.more_2_fill,
                   color: AppColors.darkGrey,
                   size: AppIconSizes.icon_size_24,
                 ),

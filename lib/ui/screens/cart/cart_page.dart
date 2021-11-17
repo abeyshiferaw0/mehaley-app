@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_page_bloc.dart';
@@ -97,7 +97,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   unabledName:
                       L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
           );
@@ -113,7 +113,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   unabledName: L10nUtil.translateLocale(
                       state.album.albumTitle, context)),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
           );
@@ -132,7 +132,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                 ),
               ),
               txtColor: AppColors.white,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
           );
@@ -144,7 +144,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
               isFloating: false,
               msg: AppLocale.of().unableToClearCart,
               txtColor: AppColors.white,
-              icon: PhosphorIcons.wifi_x_light,
+              icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
           );
@@ -168,7 +168,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                       removedName: L10nUtil.translateLocale(
                           state.song.songName, context)),
                   txtColor: AppColors.white,
-                  icon: PhosphorIcons.check_circle_fill,
+                  icon: FlutterRemix.checkbox_circle_fill,
                   iconColor: AppColors.darkOrange),
             );
 
@@ -193,7 +193,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     removedName: L10nUtil.translateLocale(
                         state.album.albumTitle, context)),
                 txtColor: AppColors.white,
-                icon: PhosphorIcons.check_circle_fill,
+                icon: FlutterRemix.checkbox_circle_fill,
                 iconColor: AppColors.darkOrange),
           );
 
@@ -220,7 +220,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   ),
                 ),
                 txtColor: AppColors.white,
-                icon: PhosphorIcons.check_circle_fill,
+                icon: FlutterRemix.checkbox_circle_fill,
                 iconColor: AppColors.darkOrange),
           );
 
@@ -240,7 +240,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                 isFloating: true,
                 msg: AppLocale.of().cartCleared,
                 txtColor: AppColors.white,
-                icon: PhosphorIcons.check_circle_fill,
+                icon: FlutterRemix.checkbox_circle_fill,
                 iconColor: AppColors.darkOrange),
           );
 
@@ -274,7 +274,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoaded(Cart cart) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: RefreshIndicator(
         color: AppColors.darkOrange,
         onRefresh: () async {
@@ -360,7 +360,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoading() {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: Column(
         children: [
           CartAppBar(
@@ -401,7 +401,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageEmpty() {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: Column(
         children: [
           CartAppBar(
@@ -493,7 +493,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   Scaffold buildPageLoadingError() {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.pagesBgColor,
       body: Column(
         children: [
           CartAppBar(

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_playlist_bloc/purchased_playlist_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -10,9 +13,6 @@ import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_playlist_item.dart';
 import 'package:mehaley/util/screen_util.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class PurchasedPlaylistsPage extends StatefulWidget {
   const PurchasedPlaylistsPage({Key? key, required this.onPlaylistsLoaded})
@@ -51,7 +51,7 @@ class _PurchasedPlaylistsPageState extends State<PurchasedPlaylistsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.playlist_fill,
+                icon: FlutterRemix.play_list_fill,
                 msg: AppLocale.of().uDontHavePurchasedPlaylists,
               ),
             );

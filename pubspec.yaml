@@ -19,9 +19,8 @@ dependencies:
   #FOR UI
   hexcolor: ^2.0.4
   flutter_svg: ^0.22.0
-  flutter_remix: ^0.0.1
+  flutter_remix: ^0.0.3
   cupertino_icons: ^1.0.2
-  flutter_phosphor_icons: ^0.0.1+5
   auto_size_text: ^3.0.0-nullsafety.0
   flutter_masked_text2: ^0.9.1
   #PAGE VIEW INDICATORS

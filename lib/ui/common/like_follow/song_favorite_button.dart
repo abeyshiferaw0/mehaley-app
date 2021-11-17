@@ -1,11 +1,12 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
 class SongFavoriteButton extends StatefulWidget {
@@ -13,35 +14,23 @@ class SongFavoriteButton extends StatefulWidget {
     Key? key,
     required this.songId,
     required this.isLiked,
+    required this.likedColor,
+    required this.unlikedColor,
   }) : super(key: key);
 
   final int songId;
   final bool isLiked;
+  final Color likedColor;
+  final Color unlikedColor;
 
   @override
   _SongFavoriteButtonState createState() => _SongFavoriteButtonState();
 }
 
-class _SongFavoriteButtonState extends State<SongFavoriteButton>
-    with TickerProviderStateMixin {
-  late AnimationController controller;
+class _SongFavoriteButtonState extends State<SongFavoriteButton> {
   @override
   void initState() {
-    ///INIT ANIMATION CONTROLLER
-    controller = AnimationController(
-      duration: Duration(milliseconds: 1000),
-      vsync: this,
-    );
-
-    ///PRE ANIMATE
-    preAnimate();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -56,20 +45,16 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton>
         return false;
       },
       builder: (context, state) {
-        preAnimate();
-
         return AppBouncingButton(
           onTap: onTap,
-          child: Container(
-            width: AppIconSizes.icon_size_36,
-            height: AppIconSizes.icon_size_36,
-            child: LottieBuilder.asset(
-              'assets/lottie/heart.json',
-              controller: controller,
-              fit: BoxFit.cover,
-              onLoaded: (composition) {
-                controller.duration = composition.duration;
-              },
+          child: Padding(
+            padding: EdgeInsets.all(
+              AppPadding.padding_4,
+            ),
+            child: Icon(
+              preIcon(),
+              size: AppIconSizes.icon_size_24,
+              color: preIconColor(),
             ),
           ),
         );
@@ -81,7 +66,7 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton>
     ///LIKE UNLIKE SONG
     EasyDebounce.debounce(
       'SONG_LIKE',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<LibraryBloc>(context).add(
           LikeUnlikeSongEvent(
@@ -95,44 +80,71 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton>
     );
   }
 
-  void preAnimate() {
-    ///FLAG FOR SONG FOUND IN RECENTLY LIKED OR UNLIKED
-    bool songRecentlyLikedUnliked = false;
-
+  IconData preIcon() {
     ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId) &&
         AppHiveBoxes.instance.recentlyUnLikedSongBox
             .containsKey(widget.songId)) {
       int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(widget.songId);
       int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(widget.songId);
+
       if (a > b) {
-        controller.forward();
+        return FlutterRemix.heart_fill;
       } else {
-        controller.reset();
+        return FlutterRemix.heart_line;
       }
-      songRecentlyLikedUnliked = true;
     }
 
     ///IF SONG IS FOUND IN RECENTLY LIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId)) {
-      controller.forward();
-      songRecentlyLikedUnliked = true;
+      return FlutterRemix.heart_fill;
     }
 
     ///IF SONG IS FOUND IN RECENTLY UNLIKED
     if (AppHiveBoxes.instance.recentlyUnLikedSongBox
         .containsKey(widget.songId)) {
-      controller.reset();
-      songRecentlyLikedUnliked = true;
+      return FlutterRemix.heart_line;
     }
 
     ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
-    if (songRecentlyLikedUnliked == false) {
-      if (widget.isLiked) {
-        controller.forward();
+    if (widget.isLiked) {
+      return FlutterRemix.heart_fill;
+    } else {
+      return FlutterRemix.heart_line;
+    }
+  }
+
+  Color preIconColor() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId) &&
+        AppHiveBoxes.instance.recentlyUnLikedSongBox
+            .containsKey(widget.songId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(widget.songId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(widget.songId);
+
+      if (a > b) {
+        return widget.likedColor;
       } else {
-        controller.reset();
+        return widget.unlikedColor;
       }
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY LIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(widget.songId)) {
+      return widget.likedColor;
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY UNLIKED
+    if (AppHiveBoxes.instance.recentlyUnLikedSongBox
+        .containsKey(widget.songId)) {
+      return widget.unlikedColor;
+    }
+
+    ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
+    if (widget.isLiked) {
+      return widget.likedColor;
+    } else {
+      return widget.unlikedColor;
     }
   }
 

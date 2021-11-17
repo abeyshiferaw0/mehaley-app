@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -29,7 +29,7 @@ class HomeAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
-              PhosphorIcons.user_circle_gear_light,
+              FlutterRemix.user_settings_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.black,
             ),
@@ -45,7 +45,7 @@ class HomeAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
-              PhosphorIcons.gear_light,
+              FlutterRemix.settings_4_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.black,
             ),

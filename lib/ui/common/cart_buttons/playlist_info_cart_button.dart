@@ -1,7 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
@@ -78,7 +78,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     ///LIKE UNLIKE PLAYLIST
     EasyDebounce.debounce(
       'PLAYLIST_LIKE',
-      Duration(milliseconds: 800),
+      Duration(milliseconds: 0),
       () {
         BlocProvider.of<CartUtilBloc>(context).add(
           AddRemovePlaylistCartEvent(
@@ -104,13 +104,13 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
           .get(widget.playlist.playlistId);
       if (a > b) {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_fill,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_20,
           color: AppColors.darkOrange,
         );
       } else {
         return Icon(
-          PhosphorIcons.shopping_cart_simple_light,
+          FlutterRemix.shopping_cart_2_line,
           size: AppIconSizes.icon_size_20,
           color: AppColors.darkGrey,
         );
@@ -121,7 +121,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     if (AppHiveBoxes.instance.recentlyCartAddedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_20,
         color: AppColors.darkOrange,
       );
@@ -131,7 +131,7 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     if (AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox
         .containsKey(widget.playlist.playlistId)) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_20,
         color: AppColors.darkGrey,
       );
@@ -140,13 +140,13 @@ class _PlaylistInfoCartButtonState extends State<PlaylistInfoCartButton> {
     ///IF PLAYLIST IS NOT FOUND IN RECENTLY CART REMOVED USE ORIGINAL STATE
     if (widget.playlist.isInCart) {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_fill,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_20,
         color: AppColors.darkOrange,
       );
     } else {
       return Icon(
-        PhosphorIcons.shopping_cart_simple_light,
+        FlutterRemix.shopping_cart_2_line,
         size: AppIconSizes.icon_size_20,
         color: AppColors.darkGrey,
       );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -28,7 +28,7 @@ class LanguageSettingItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              PhosphorIcons.check_circle_fill,
+              FlutterRemix.checkbox_circle_fill,
               color: isSelected ? AppColors.darkOrange : AppColors.darkGrey,
               size: AppIconSizes.icon_size_20,
             ),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
-import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -40,18 +39,6 @@ class ProfileMenuWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              child: AppBouncingButton(
-                child: Icon(
-                  PhosphorIcons.caret_circle_down_light,
-                  color: AppColors.darkGrey,
-                  size: AppIconSizes.icon_size_32,
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
             SizedBox(
               height: ScreenUtil(context: context).getScreenHeight() * 0.4,
             ),
@@ -69,7 +56,7 @@ class ProfileMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: false,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.pencil_simple_light,
+                    icon: FlutterRemix.pencil_line,
                     title: AppLocale.of().editProfile,
                     onTap: () {
                       Navigator.pop(context);
@@ -85,7 +72,7 @@ class ProfileMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.share_network_light,
+                    icon: FlutterRemix.share_line,
                     title: AppLocale.of().share,
                     onTap: () {},
                   ),

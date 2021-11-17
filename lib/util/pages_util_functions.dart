@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -588,13 +588,13 @@ class PagesUtilFunctions {
 
   static IconData? getLoopIcon(LoopMode loopMode) {
     if (loopMode == LoopMode.off) {
-      return PhosphorIcons.repeat;
+      return FlutterRemix.repeat_line;
     } else if (loopMode == LoopMode.all) {
-      return PhosphorIcons.repeat;
+      return FlutterRemix.repeat_line;
     } else if (loopMode == LoopMode.one) {
-      return PhosphorIcons.repeat_once_light;
+      return FlutterRemix.repeat_one_line;
     } else {
-      return PhosphorIcons.repeat_once_light;
+      return FlutterRemix.repeat_one_line;
     }
   }
 
@@ -1081,7 +1081,7 @@ class PagesUtilFunctions {
       permissionList.add(
         AppPermission(
           AppLocale.of().cameraAccess,
-          PhosphorIcons.camera_light,
+          FlutterRemix.camera_line,
         ),
       );
     }
@@ -1091,7 +1091,7 @@ class PagesUtilFunctions {
       permissionList.add(
         AppPermission(
           AppLocale.of().photoAccess,
-          PhosphorIcons.image_light,
+          FlutterRemix.image_line,
         ),
       );
     }
@@ -1129,7 +1129,7 @@ class PagesUtilFunctions {
       permissionList.add(
         AppPermission(
           AppLocale.of().photoAccess,
-          PhosphorIcons.image_light,
+          FlutterRemix.image_line,
         ),
       );
     }

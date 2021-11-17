@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -48,7 +48,7 @@ class LibraryHeader extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(AppPadding.padding_16),
         child: Icon(
-          PhosphorIcons.magnifying_glass_light,
+          FlutterRemix.search_line,
           color: AppColors.black,
         ),
       ),

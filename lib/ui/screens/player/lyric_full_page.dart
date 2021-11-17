@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:marquee/marquee.dart';
@@ -23,6 +22,7 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/screens/player/widgets/lyric_player_full_page_widget.dart';
 import 'package:mehaley/ui/screens/player/widgets/share_btn_widget.dart';
 import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -180,6 +180,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                           state.artistsName, context),
                       maxLines: 1,
                       style: TextStyle(
+                        fontStyle: FontStyle.italic,
                         fontSize: AppFontSizes.font_size_10.sp,
                         color: AppColors.black,
                         fontWeight: FontWeight.w300,
@@ -199,7 +200,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                   radius: AppValues.lyricPageCloseButtonSize,
                   backgroundColor: AppColors.white.withOpacity(0.4),
                   child: Icon(
-                    PhosphorIcons.x_light,
+                    FlutterRemix.close_line,
                     size: AppValues.lyricPageCloseButtonSize - 2,
                     color: AppColors.black,
                   ),
@@ -222,12 +223,17 @@ class _LyricFullPageState extends State<LyricFullPage> {
             children: [
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  activeTrackColor: AppColors.darkGrey,
-                  inactiveTrackColor: AppColors.darkGrey.withOpacity(0.24),
+                  activeTrackColor: ColorUtil.darken(AppColors.white, 0.12),
+                  inactiveTrackColor: ColorUtil.lighten(
+                    widget.dominantColor,
+                    0.1,
+                  ),
                   trackShape: CustomTrackShapeThin(),
-                  thumbColor: AppColors.black,
-                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4.0),
-                  overlayColor: AppColors.black.withOpacity(0.24),
+                  thumbColor: AppColors.lightGrey,
+                  thumbShape: RoundSliderThumbShape(
+                    enabledThumbRadius: AppIconSizes.icon_size_6,
+                  ),
+                  overlayColor: AppColors.lightGrey.withOpacity(0.24),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 16.0),
                 ),
                 child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
@@ -265,7 +271,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         ),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.darkGrey.withOpacity(0.6),
+                          color: AppColors.lightGrey,
                         ),
                       );
                     },
@@ -276,7 +282,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                     ),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
-                      color: AppColors.darkGrey.withOpacity(0.6),
+                      color: AppColors.lightGrey,
                     ),
                   ),
                 ],
@@ -303,7 +309,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                                   ? Icons.pause_circle_filled_sharp
                                   : FlutterRemix.play_circle_fill,
                               size: AppIconSizes.icon_size_72,
-                              color: AppColors.black,
+                              color: AppColors.white,
                             ),
                           );
                         },

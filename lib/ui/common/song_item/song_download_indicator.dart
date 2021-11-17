@@ -2,7 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -159,7 +159,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
         child: Padding(
           padding: EdgeInsets.all(AppPadding.padding_8),
           child: Icon(
-            PhosphorIcons.arrow_circle_down_fill,
+            FlutterRemix.arrow_down_circle_fill,
             color: widget.downloadedColor,
             size: widget.isForPlayerPage
                 ? AppIconSizes.icon_size_28
@@ -177,7 +177,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
         onTap: () {
           EasyDebounce.debounce(
             'DOWNLOAD_BUTTON',
-            Duration(milliseconds: 300),
+            Duration(milliseconds: 0),
             () {
               ///SHOW RETRYING MESSAGE
               ScaffoldMessenger.of(context).showSnackBar(
@@ -206,7 +206,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
             AppPadding.padding_8,
           ),
           child: Icon(
-            PhosphorIcons.warning_fill,
+            FlutterRemix.error_warning_fill,
             color: widget.downloadingFailedColor,
             size: widget.isForPlayerPage
                 ? AppIconSizes.icon_size_24
@@ -244,7 +244,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                 onTap: () {
                   EasyDebounce.debounce(
                     'DOWNLOAD_BUTTON',
-                    Duration(milliseconds: 300),
+                    Duration(milliseconds: 0),
                     () {
                       BlocProvider.of<DownloadingSongBloc>(context).add(
                         DownloadSongEvent(
@@ -263,7 +263,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                 child: Padding(
                   padding: EdgeInsets.all(AppPadding.padding_8),
                   child: Icon(
-                    PhosphorIcons.arrow_circle_down_light,
+                    FlutterRemix.arrow_down_circle_line,
                     color: widget.downloadingColor,
                     size: widget.isForPlayerPage
                         ? AppIconSizes.icon_size_28

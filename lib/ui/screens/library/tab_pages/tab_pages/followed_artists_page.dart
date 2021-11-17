@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_artist_bloc/followed_artists_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -43,7 +43,7 @@ class _FollowedArtistsPageState extends State<FollowedArtistsPage> {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
-                icon: PhosphorIcons.hand_pointing_fill,
+                icon: FlutterRemix.add_box_fill,
                 msg: AppLocale.of().uAreNotFollowingArtist,
               ),
             );

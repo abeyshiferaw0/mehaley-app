@@ -6,7 +6,7 @@ import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_page_header.dart';
-import 'package:mehaley/ui/screens/playlist/widget/playlist_play_shuffle.dart';
+import 'package:mehaley/ui/screens/playlist/widget/playlist_play_shuffle_sliver.dart';
 
 class PlaylistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final PlaylistPageData playlistPageData;
@@ -44,7 +44,7 @@ class PlaylistPlayShuffleDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(context, double shrinkOffset, bool overlapsContent) {
-    return PlaylistPlayShuffle(
+    return PlaylistPlayShuffleSliver(
       songs: songs,
       playlist: playlist,
     );

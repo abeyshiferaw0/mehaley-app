@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
@@ -252,7 +252,7 @@ class DialogSongPreviewMode extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(AppPadding.padding_4),
                 child: Icon(
-                  PhosphorIcons.x_light,
+                  FlutterRemix.close_line,
                   color: AppColors.black,
                   size: AppIconSizes.icon_size_24,
                 ),

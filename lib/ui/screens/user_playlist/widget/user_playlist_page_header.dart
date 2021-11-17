@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
@@ -104,7 +104,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
               Navigator.pop(context);
             },
             icon: Icon(
-              PhosphorIcons.caret_left_light,
+              FlutterRemix.arrow_left_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.black,
             ),
@@ -127,7 +127,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
           ),
           AppBouncingButton(
             child: Icon(
-              PhosphorIcons.dots_three_vertical_bold,
+              FlutterRemix.more_2_fill,
               size: AppIconSizes.icon_size_28,
               color: AppColors.darkGrey,
             ),

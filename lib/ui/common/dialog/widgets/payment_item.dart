@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
@@ -94,7 +94,7 @@ class PaymentMethodItem extends StatelessWidget {
             SizedBox(width: AppMargin.margin_8),
             isSelected
                 ? Icon(
-                    PhosphorIcons.check_circle_fill,
+                    FlutterRemix.checkbox_circle_fill,
                     color: AppColors.darkOrange,
                     size: AppIconSizes.icon_size_24,
                   )

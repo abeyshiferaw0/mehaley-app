@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/constants.dart';
@@ -14,7 +14,6 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../app_bouncing_button.dart';
 import '../player_items_placeholder.dart';
 import 'menu_items/menu_item.dart';
 
@@ -61,21 +60,6 @@ class UserPlaylistMenuWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                top: AppMargin.margin_48,
-              ),
-              child: AppBouncingButton(
-                child: Icon(
-                  PhosphorIcons.caret_circle_down_light,
-                  color: AppColors.darkGrey,
-                  size: AppIconSizes.icon_size_32,
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
             SizedBox(
               height: ScreenUtil(context: context).getScreenHeight() * 0.2,
             ),
@@ -93,7 +77,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: false,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.plus_circle_light,
+                  //   icon: FlutterRemix.plus_circle_light,
                   //   title: AppLocale.of().addMezmurs,
                   //   onTap: () {},
                   // ),
@@ -101,7 +85,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.pencil_simple_light,
+                    icon: FlutterRemix.pencil_line,
                     title: AppLocale.of().editPlaylist,
                     onTap: () {
                       PagesUtilFunctions.openEditPlaylistPage(
@@ -115,7 +99,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     hasTopMargin: true,
                     iconColor: AppColors.grey.withOpacity(0.6),
-                    icon: PhosphorIcons.x_light,
+                    icon: FlutterRemix.close_line,
                     title: AppLocale.of().deletePlaylist,
                     onTap: () {
                       showDialog(
@@ -143,7 +127,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.magnifying_glass_light,
+                  //   icon: FlutterRemix.search_line,
                   //   title: AppLocale.of().findInPlaylist,
                   //   onTap: () {},
                   // ),
@@ -151,7 +135,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.sort_ascending_light,
+                  //   icon: FlutterRemix.sort_asc_line,
                   //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
                   // ),
@@ -159,7 +143,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.share_network_light,
+                  //   icon: FlutterRemix.share_line,
                   //   title: AppLocale.of().sharePlaylist,
                   //   onTap: () {},
                   // ),
@@ -167,7 +151,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   //   isDisabled: false,
                   //   hasTopMargin: true,
                   //   iconColor: AppColors.grey.withOpacity(0.6),
-                  //   icon: PhosphorIcons.device_mobile_camera_light,
+                  //   icon: c.smartphone_line,
                   //   title: AppLocale.of().addToHomeScreen,
                   //   onTap: () {},
                   // ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
@@ -14,17 +14,19 @@ class SongIsLikedIndicator extends StatelessWidget {
   const SongIsLikedIndicator({
     Key? key,
     required this.isLiked,
-    required this.songId,
+    required this.songId, required this.likedColor, required this.unlikedColor,
   }) : super(key: key);
 
   final bool isLiked;
   final int songId;
+  final Color likedColor;
+  final Color unlikedColor;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryBloc, LibraryState>(
       builder: (context, state) {
-        if (preAnimate()) {
+        if (preIsSongLiked()) {
           return AppBouncingButton(
             onTap: () {
               showDialog(
@@ -39,7 +41,7 @@ class SongIsLikedIndicator extends StatelessWidget {
                         BlocProvider.of<LibraryBloc>(context).add(
                           LikeUnlikeSongEvent(
                             id: songId,
-                            appLikeFollowEvents: preAnimate()
+                            appLikeFollowEvents: preIsSongLiked()
                                 ? AppLikeFollowEvents.UNLIKE
                                 : AppLikeFollowEvents.LIKE,
                           ),
@@ -53,8 +55,8 @@ class SongIsLikedIndicator extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(AppPadding.padding_8),
               child: Icon(
-                PhosphorIcons.heart_straight_fill,
-                color: AppColors.darkOrange,
+                preIcon(),
+                color: preIconColor(),
                 size: AppIconSizes.icon_size_20,
               ),
             ),
@@ -66,7 +68,7 @@ class SongIsLikedIndicator extends StatelessWidget {
     );
   }
 
-  bool preAnimate() {
+  bool preIsSongLiked() {
     ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId) &&
         AppHiveBoxes.instance.recentlyUnLikedSongBox.containsKey(songId)) {
@@ -91,5 +93,73 @@ class SongIsLikedIndicator extends StatelessWidget {
 
     ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
     return isLiked;
+  }
+
+  IconData preIcon() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId) &&
+        AppHiveBoxes.instance.recentlyUnLikedSongBox
+            .containsKey(songId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(songId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(songId);
+
+      if (a > b) {
+        return FlutterRemix.heart_fill;
+      } else {
+        return FlutterRemix.heart_line;
+      }
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY LIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId)) {
+      return FlutterRemix.heart_fill;
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY UNLIKED
+    if (AppHiveBoxes.instance.recentlyUnLikedSongBox
+        .containsKey(songId)) {
+      return FlutterRemix.heart_line;
+    }
+
+    ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
+    if (isLiked) {
+      return FlutterRemix.heart_fill;
+    } else {
+      return FlutterRemix.heart_line;
+    }
+  }
+
+  Color preIconColor() {
+    ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId) &&
+        AppHiveBoxes.instance.recentlyUnLikedSongBox
+            .containsKey(songId)) {
+      int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(songId);
+      int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(songId);
+
+      if (a > b) {
+        return likedColor;
+      } else {
+        return unlikedColor;
+      }
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY LIKED
+    if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId)) {
+      return likedColor;
+    }
+
+    ///IF SONG IS FOUND IN RECENTLY UNLIKED
+    if (AppHiveBoxes.instance.recentlyUnLikedSongBox
+        .containsKey(songId)) {
+      return unlikedColor;
+    }
+
+    ///IF SONG IS NOT FOUND IN RECENTLY UNLIKED USE ORIGINAL STATE
+    if (isLiked) {
+      return likedColor;
+    } else {
+      return unlikedColor;
+    }
   }
 }

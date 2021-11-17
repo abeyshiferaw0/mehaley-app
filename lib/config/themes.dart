@@ -14,7 +14,9 @@ class App {
 }
 
 class AppColors {
-  ///
+  ///FOR GRADIENT PURPOSES
+  static Color orange1 = HexColor('#EC8E20');
+  static Color orange2 = HexColor('#E9591C');
   static Color appGradientDefaultColorBlack = HexColor('#95999d');
   static Color appGradientDefaultColor = HexColor('#1E96ED');
 
@@ -32,18 +34,15 @@ class AppColors {
   static Color darkGrey = HexColor('#3C3C3C');
   static Color txtGrey = HexColor('#8b8b8b');
   static Color grey = HexColor('#88898D');
-  static Color black = HexColor('#121212');
+  static Color black = HexColor('#292929'); //1F1F1F
 
   ///SECONDARY COLORS
   static Color blue = HexColor('#1E96ED');
   static Color errorRed = Colors.redAccent;
   static Color yellow = HexColor('#f7c631');
 
+  ///OTHER COLORS
   static Color transparent = Colors.transparent;
-
-  ///FOR GRADIENT PURPOSES
-  static Color orange1 = HexColor('#EC8E20');
-  static Color orange2 = HexColor('#E9591C');
 }
 
 class AppFontSizes {
