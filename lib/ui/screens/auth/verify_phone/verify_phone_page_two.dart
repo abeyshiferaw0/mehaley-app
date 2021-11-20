@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -11,7 +10,9 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/sign_up_page_authing_covor.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:sizer/sizer.dart';
 
 class VerifyPhonePageTwo extends StatefulWidget {
   const VerifyPhonePageTwo({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         if (state is LastSmsStillActiveState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildAppSnackBar(
-              bgColor: AppColors.blue,
+              bgColor: AppColors.black.withOpacity(0.9),
               txtColor: AppColors.white,
               msg: AppLocale.of().pinAlreadySent,
               isFloating: false,
@@ -60,13 +61,13 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         body: Stack(
           children: [
             Container(
-              color: AppColors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.padding_16,
                 vertical: AppPadding.padding_28,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   buildEnterYourCodeText(),
                   buildHintText(args),
@@ -100,7 +101,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               buildAppSnackBar(
-                                bgColor: AppColors.blue,
+                                bgColor: AppColors.black.withOpacity(0.9),
                                 txtColor: AppColors.white,
                                 msg: AppLocale.of().pinNotFilled,
                                 isFloating: false,
@@ -143,7 +144,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           AppLocale.of().didntReciveSms,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: AppFontSizes.font_size_12,
+            fontSize: AppFontSizes.font_size_8.sp,
             color: AppColors.txtGrey,
           ),
         ),
@@ -165,7 +166,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             AppLocale.of().resendCode,
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: AppFontSizes.font_size_12,
+                fontSize: AppFontSizes.font_size_8.sp,
                 color: AppColors.darkOrange,
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline),
@@ -179,13 +180,12 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: AppPadding.padding_20 * 2,
-        horizontal: AppPadding.padding_16,
       ),
       child: Text(
-        '${AppLocale.of().enterSixDigitMenu}${args.args['countryCode']}-${args.args['phoneNumber']}',
+        '${AppLocale.of().enterSixDigitMenu} ${args.args['countryCode']}-${args.args['phoneNumber']}',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: AppFontSizes.font_size_12,
+          fontSize: AppFontSizes.font_size_8.sp,
           color: AppColors.txtGrey,
         ),
       ),
@@ -197,7 +197,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       '${AppLocale.of().enterYourCode}'.toUpperCase(),
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: AppFontSizes.font_size_18,
+        fontSize: AppFontSizes.font_size_14.sp,
         color: AppColors.black,
         fontWeight: FontWeight.w600,
       ),
@@ -208,11 +208,9 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
     return AppBar(
       backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
-      centerTitle: true,
+      centerTitle: false,
       //brightness: Brightness.dark,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-      ),
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
@@ -226,7 +224,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       title: Text(
         AppLocale.of().verifyYourPhone,
         style: TextStyle(
-          fontSize: AppFontSizes.font_size_14,
+          fontSize: AppFontSizes.font_size_10.sp,
+          color: AppColors.black,
         ),
       ),
     );

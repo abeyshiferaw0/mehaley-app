@@ -121,9 +121,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.white.withOpacity(0.7),
-        AppColors.white.withOpacity(0.9),
-        AppColors.white,
+        AppColors.completelyBlack.withOpacity(0.2),
+        AppColors.completelyBlack.withOpacity(0.9),
       ],
     );
   }

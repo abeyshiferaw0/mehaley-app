@@ -27,11 +27,11 @@ class ProfileButton extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: AppIconSizes.icon_size_64,
-            width: AppIconSizes.icon_size_64,
+            height: AppValues.userProfileButtonImageSize,
+            width: AppValues.userProfileButtonImageSize,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                AppIconSizes.icon_size_64 / 2,
+                AppIconSizes.icon_size_64,
               ),
               boxShadow: [
                 BoxShadow(
@@ -44,7 +44,7 @@ class ProfileButton extends StatelessWidget {
             ),
             child: UserProfilePic(
               fontSize: AppFontSizes.font_size_12.sp,
-              size: AppValues.userPlaylistImageSize,
+              size: AppValues.userProfileButtonImageSize,
             ),
           ),
           SizedBox(
@@ -80,7 +80,7 @@ class ProfileButton extends StatelessWidget {
           ),
           Expanded(child: SizedBox()),
           Icon(
-            FlutterRemix.arrow_right_line,
+            FlutterRemix.arrow_right_s_line,
             color: AppColors.darkGrey,
             size: AppIconSizes.icon_size_24,
           ),

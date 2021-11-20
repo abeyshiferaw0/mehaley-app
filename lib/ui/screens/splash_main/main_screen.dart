@@ -14,7 +14,6 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_listen_recorder_bloc
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
-import 'package:mehaley/business_logic/cubits/search_input_is_searching_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
@@ -57,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().songAddedToFavorites
@@ -71,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -83,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().albumAddedToFavorites
@@ -97,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -109,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().playlistAddedToFavorites
@@ -123,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -135,7 +134,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().artistsAddedToFavorites
@@ -149,7 +148,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -164,7 +163,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilAlbumAddedSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
@@ -179,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilAlbumAddingErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -191,7 +190,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilSongAddedSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
@@ -206,7 +205,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilSongAddingErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -218,7 +217,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilPlaylistAddedSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg:
                       state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
@@ -233,7 +232,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is CartUtilPlaylistAddingErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: AppColors.white,
@@ -247,7 +246,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is DownloadingSongsCompletedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                    bgColor: AppColors.black,
+                    bgColor: AppColors.darkGrey,
                     isFloating: true,
                     msg: AppLocale.of().downloadComplete(
                       songName: L10nUtil.translateLocale(
@@ -263,7 +262,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongDownloadedNetworkNotAvailableState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                  bgColor: AppColors.black,
+                  bgColor: AppColors.darkGrey,
                   isFloating: false,
                   msg: AppLocale.of().yourNotConnected,
                   txtColor: AppColors.white,
@@ -313,7 +312,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AudioPlayerErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   txtColor: AppColors.white,
                   msg: state.msg,
                   isFloating: false,
@@ -390,12 +389,6 @@ class _MainScreenState extends State<MainScreen> {
       builder: (context) {
         return WillPopScope(
           onWillPop: () async {
-            //SEARCH PAGE IF SEARCHING INPUT REMOVE TEXT FIELD BEFORE POPPING
-            if (BlocProvider.of<SearchInputIsSearchingCubit>(context).state) {
-              BlocProvider.of<SearchInputIsSearchingCubit>(context)
-                  .changeIsSearching(false);
-              return Future<bool>.value(false);
-            }
             //DEFAULT BEHAVIOUR
             if (_navigatorKey.currentState!.canPop()) {
               // if (BlocProvider.of<BottomBarCubit>(context).state.length > 1) {

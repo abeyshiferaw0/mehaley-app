@@ -11,9 +11,9 @@ import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_user_playlist.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
+import '../app_card.dart';
 import '../player_items_placeholder.dart';
 import 'menu_items/menu_item.dart';
 
@@ -61,11 +61,11 @@ class UserPlaylistMenuWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(
-              height: ScreenUtil(context: context).getScreenHeight() * 0.2,
+              height: AppMargin.margin_16,
             ),
             buildMenuHeader(),
             SizedBox(
-              height: AppMargin.margin_32,
+              height: AppMargin.margin_8,
             ),
             Container(
               padding: EdgeInsets.symmetric(
@@ -168,42 +168,49 @@ class UserPlaylistMenuWidget extends StatelessWidget {
   Container buildMenuHeader() {
     return Container(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Row(
         children: [
-          Container(
-            color: AppColors.txtGrey,
-            width: AppValues.menuHeaderImageSize,
-            height: AppValues.menuHeaderImageSize,
-            child: PagesUtilFunctions.getSongGridImage(myPlaylist),
-          ),
-          SizedBox(height: AppMargin.margin_16),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: AppFontSizes.font_size_12.sp,
-              fontWeight: FontWeight.w500,
+          SizedBox(width: AppMargin.margin_16),
+          AppCard(
+            withShadow: false,
+            radius: 6.0,
+            child: Container(
+              color: AppColors.txtGrey,
+              width: AppValues.menuHeaderImageSize,
+              height: AppValues.menuHeaderImageSize,
+              child: PagesUtilFunctions.getSongGridImage(myPlaylist),
             ),
           ),
-          SizedBox(height: AppMargin.margin_2),
-          BlocBuilder<AppUserWidgetsCubit, AppUser>(
-            builder: (context, state) {
-              return Text(
-                AppLocale.of()
-                    .byUserName(userName: AuthUtil.getUserName(state))
-                    .toUpperCase(),
+          SizedBox(width: AppMargin.margin_16),
+          Column(
+            children: [
+              Text(
+                title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.txtGrey,
-                  fontSize: AppFontSizes.font_size_8.sp,
-                  fontWeight: FontWeight.w400,
+                  color: AppColors.black,
+                  fontSize: AppFontSizes.font_size_12.sp,
+                  fontWeight: FontWeight.w500,
                 ),
-              );
-            },
-          )
+              ),
+              SizedBox(height: AppMargin.margin_2),
+              BlocBuilder<AppUserWidgetsCubit, AppUser>(
+                builder: (context, state) {
+                  return Text(
+                    AppLocale.of()
+                        .byUserName(userName: AuthUtil.getUserName(state))
+                        .toUpperCase(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.txtGrey,
+                      fontSize: AppFontSizes.font_size_8.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );

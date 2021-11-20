@@ -62,7 +62,6 @@ class _OfflineTabViewState extends State<OfflineTabView>
             color: AppColors.darkOrange,
             edgeOffset: AppMargin.margin_16,
             child: Container(
-              color: AppColors.white,
               height: ScreenUtil(context: context).getScreenHeight(),
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(
@@ -150,7 +149,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().noMezmursToPlay,
                   txtColor: AppColors.white,
@@ -172,7 +171,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         horizontal: AppPadding.padding_16,
         vertical: AppPadding.padding_16,
       ),
-      color: AppColors.lightGrey,
+      color: AppColors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

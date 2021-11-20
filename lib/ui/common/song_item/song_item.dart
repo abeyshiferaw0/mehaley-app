@@ -142,6 +142,11 @@ class _SongItemState extends State<SongItem> {
                                   tag: AppLocale.of().lyrics.toUpperCase(),
                                 )
                               : SizedBox(),
+                          song.isOnlyOnElf
+                              ? SongItemBadge(
+                                  tag: AppLocale.of().onlyOnElf.toUpperCase(),
+                                )
+                              : SizedBox(),
                           Row(
                             children: getOtherBadges(badges),
                           ),
@@ -185,7 +190,9 @@ class _SongItemState extends State<SongItem> {
           ),
           SongIsLikedIndicator(
             songId: song.songId,
-            isLiked: song.isLiked, likedColor: AppColors.darkOrange, unlikedColor: AppColors.darkOrange,
+            isLiked: song.isLiked,
+            likedColor: AppColors.darkOrange,
+            unlikedColor: AppColors.darkOrange,
           ),
           SongDownloadIndicator(
             song: song,

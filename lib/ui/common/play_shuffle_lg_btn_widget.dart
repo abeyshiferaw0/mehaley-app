@@ -16,6 +16,7 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
     return AppBouncingButton(
       onTap: onTap,
       child: Container(
+        height: AppIconSizes.icon_size_40,
         decoration: BoxDecoration(
           color: AppColors.darkOrange,
           borderRadius: BorderRadius.circular(100.0),
@@ -31,15 +32,15 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppPadding.padding_24,
-            vertical: AppPadding.padding_12,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 FlutterRemix.shuffle_line,
                 color: AppColors.lightGrey,
-                size: AppIconSizes.icon_size_16,
+                size: AppIconSizes.icon_size_12,
               ),
               SizedBox(
                 width: AppMargin.margin_32,

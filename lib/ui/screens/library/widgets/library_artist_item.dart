@@ -64,29 +64,10 @@ class LibraryArtistsItem extends StatelessWidget {
           SizedBox(
             width: AppMargin.margin_16,
           ),
-          Container(
-            width: AppIconSizes.icon_size_24,
-            height: AppIconSizes.icon_size_24,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.circle,
-                    color: AppColors.black,
-                    size: AppIconSizes.icon_size_12,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    FlutterRemix.checkbox_circle_fill,
-                    color: AppColors.orange,
-                    size: AppIconSizes.icon_size_24,
-                  ),
-                ),
-              ],
-            ),
+          Icon(
+            FlutterRemix.checkbox_circle_fill,
+            color: AppColors.orange,
+            size: AppIconSizes.icon_size_24,
           ),
           SizedBox(
             width: AppMargin.margin_16,

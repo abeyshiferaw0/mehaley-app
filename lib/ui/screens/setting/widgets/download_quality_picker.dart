@@ -62,7 +62,7 @@ class DownloadQualityPicker extends StatelessWidget {
               left: AppPadding.padding_8,
             ),
             child: Icon(
-              FlutterRemix.arrow_down_fill,
+              FlutterRemix.arrow_down_s_fill,
               size: AppIconSizes.icon_size_16,
               color: AppColors.txtGrey,
             ),

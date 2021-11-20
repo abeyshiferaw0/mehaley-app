@@ -390,8 +390,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ),
                 AppBouncingButton(
                   onTap: () {
-                    BlocProvider.of<AudioPlayerBloc>(context)
-                        .add(PlayNextSongEvent());
+                    BlocProvider.of<AudioPlayerBloc>(context).add(
+                      PlayNextSongEvent(),
+                    );
                   },
                   child: Icon(
                     Icons.skip_next_sharp,

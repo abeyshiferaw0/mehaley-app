@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -13,6 +14,9 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/like_follow/artist_sliver_follow_button.dart';
+import 'package:mehaley/ui/common/play_shuffle_lg_btn_widget.dart';
+import 'package:mehaley/ui/common/sliver_small_text_button.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/artist/widgets/item_artist_album.dart';
 import 'package:mehaley/ui/screens/artist/widgets/item_artist_featured_playlist.dart';
@@ -33,13 +37,23 @@ class ArtistPage extends StatefulWidget {
 }
 
 class _ArtistPageState extends State<ArtistPage> {
+  late ScrollController _scrollController;
+
   @override
   void initState() {
     //FETCH ARTIST PAGE DATA
     BlocProvider.of<ArtistPageBloc>(context).add(
       LoadArtistPageEvent(artistId: widget.artistId),
     );
+    _scrollController = ScrollController();
+    _scrollController.addListener(() => setState(() {}));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,63 +87,119 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  NestedScrollView buildArtistPageLoaded(ArtistPageData artistPageData) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, value) {
-        return [
-          buildSliverHeader(artistPageData),
-          buildSliverPlayShuffleButton(
-            artistPageData.popularSongs,
-            artistPageData.artist,
+  Stack buildArtistPageLoaded(ArtistPageData artistPageData) {
+    return Stack(
+      clipBehavior: Clip.antiAlias,
+      children: [
+        NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, value) {
+            return [
+              buildSliverHeader(artistPageData),
+            ];
+          },
+          body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: AppMargin.margin_48,
+                ),
+                buildArtistPopularSongList(
+                  artistPageData.popularSongs,
+                  artistPageData.artist,
+                ),
+                buildArtistLatestSongList(
+                  artistPageData.newSongs,
+                  artistPageData.artist,
+                ),
+                buildArtistAlbumsList(artistPageData.topAlbums),
+                buildArtistFeaturingPlaylistList(
+                  artistPageData.playlistsFeaturingArtists,
+                  artistPageData.artist,
+                ),
+                buildSimilarArtistList(artistPageData.similarArtists),
+                SizedBox(height: AppMargin.margin_16),
+              ],
+            ),
           ),
-        ];
-      },
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              height: AppMargin.margin_32,
-            ),
-            buildArtistPopularSongList(
-              artistPageData.popularSongs,
-              artistPageData.artist,
-            ),
-            SizedBox(height: AppMargin.margin_16),
-            buildArtistLatestSongList(
-              artistPageData.newSongs,
-              artistPageData.artist,
-            ),
-            SizedBox(height: AppMargin.margin_38),
-            buildArtistAlbumsList(artistPageData.topAlbums),
-            SizedBox(height: AppMargin.margin_38),
-            buildArtistFeaturingPlaylistList(
-              artistPageData.playlistsFeaturingArtists,
-              artistPageData.artist,
-            ),
-            SizedBox(height: AppMargin.margin_38),
-            buildSimilarArtistList(artistPageData.similarArtists),
-            SizedBox(height: AppMargin.margin_16),
-          ],
         ),
-      ),
+        buildArtistPlayShareFavButtons(artistPageData),
+      ],
     );
   }
 
   SliverPersistentHeader buildSliverHeader(ArtistPageData artistPageData) {
     return SliverPersistentHeader(
       delegate: ArtistPageSliverHeaderDelegate(artistPageData: artistPageData),
-      floating: true,
+      floating: false,
       pinned: true,
     );
   }
 
-  SliverPersistentHeader buildSliverPlayShuffleButton(
-      List<Song> popularSongs, Artist artist) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate:
-          ArtistPlayShuffleDelegate(popularSongs: popularSongs, artist: artist),
+  Positioned buildArtistPlayShareFavButtons(ArtistPageData artistPageData) {
+    double top =
+        AppValues.artistSliverHeaderHeight - (AppIconSizes.icon_size_40 / 2);
+    double diff = AppValues.artistSliverHeaderHeight -
+        AppValues.artistSliverHeaderMinHeight;
+    if (_scrollController.hasClients) {
+      if (_scrollController.offset < diff) {
+        top -= _scrollController.offset;
+      } else {
+        top -= diff;
+      }
+    }
+    return Positioned(
+      top: top,
+      right: AppMargin.margin_16,
+      left: AppMargin.margin_16,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ///SHARE BUTTON
+          SliverSmallTextButton(
+            onTap: () {},
+            text: AppLocale.of().share.toUpperCase(),
+            textColor: AppColors.black,
+            icon: FlutterRemix.share_line,
+            iconSize: AppIconSizes.icon_size_20,
+            iconColor: AppColors.darkOrange,
+          ),
+
+          Expanded(child: SizedBox()),
+          PlayShuffleLgBtnWidget(
+            onTap: () {
+              //OPEN SHUFFLE SONGS
+              PagesUtilFunctions.openSongShuffled(
+                context: context,
+                startPlaying: true,
+                songs: artistPageData.popularSongs,
+                playingFrom: PlayingFrom(
+                  from: AppLocale.of().playingFromArtist,
+                  title: L10nUtil.translateLocale(
+                      artistPageData.artist.artistName, context),
+                  songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
+                  songSyncPlayedFromId: artistPageData.artist.artistId,
+                ),
+                index: PagesUtilFunctions.getRandomIndex(
+                  min: 0,
+                  max: artistPageData.popularSongs.length,
+                ),
+              );
+            },
+          ),
+          Expanded(child: SizedBox()),
+
+          ///FAV BUTTON
+          ArtistSliverFollowButton(
+            iconSize: AppIconSizes.icon_size_16,
+            artistId: artistPageData.artist.artistId,
+            isFollowing: artistPageData.artist.isFollowed!,
+            iconColor: AppColors.darkOrange,
+            askDialog: false,
+          ),
+        ],
+      ),
     );
   }
 
@@ -142,7 +212,7 @@ class _ArtistPageState extends State<ArtistPage> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
@@ -177,7 +247,7 @@ class _ArtistPageState extends State<ArtistPage> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
@@ -250,7 +320,8 @@ class _ArtistPageState extends State<ArtistPage> {
 
   Padding buildArtistLatestSongList(List<Song> newSongs, Artist artist) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppPadding.padding_16),
+      padding: const EdgeInsets.only(
+          left: AppPadding.padding_16, top: AppPadding.padding_16),
       child: ListView.builder(
         itemCount: newSongs.length,
         padding: EdgeInsets.zero,
@@ -296,10 +367,14 @@ class _ArtistPageState extends State<ArtistPage> {
   Column buildAlbumsHeader() {
     return Column(
       children: [
+        SizedBox(height: AppMargin.margin_20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              width: AppMargin.margin_16,
+            ),
             Text(
               AppLocale.of().topAlbums,
               style: TextStyle(
@@ -344,17 +419,29 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  Text buildFeaturingArtistPlaylistHeader(Artist artist) {
-    return Text(
-      '${AppLocale.of().featuring} ${L10nUtil.translateLocale(artist.artistName, context)}',
-      textAlign: TextAlign.center,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontSize: AppFontSizes.font_size_14.sp,
-        color: AppColors.black,
-        letterSpacing: 0.4,
-        fontWeight: FontWeight.w500,
+  Padding buildFeaturingArtistPlaylistHeader(Artist artist) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: AppPadding.padding_32,
+        bottom: AppPadding.padding_6,
+        left: AppPadding.padding_16,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            '${AppLocale.of().featuring} ${L10nUtil.translateLocale(artist.artistName, context)}',
+            textAlign: TextAlign.start,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_14.sp,
+              color: AppColors.black,
+              letterSpacing: 0.4,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -374,8 +461,9 @@ class _ArtistPageState extends State<ArtistPage> {
             physics: BouncingScrollPhysics(),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:
-                  buildPlaylistsFeaturingArtist(playlistsFeaturingArtists),
+              children: buildPlaylistsFeaturingArtist(
+                playlistsFeaturingArtists,
+              ),
             ),
           ),
         ],
@@ -400,16 +488,26 @@ class _ArtistPageState extends State<ArtistPage> {
     return items;
   }
 
-  Center buildOtherArtistsHeader() {
-    return Center(
-      child: Text(
-        AppLocale.of().similarArtist,
-        style: TextStyle(
-          fontSize: AppFontSizes.font_size_14.sp,
-          color: AppColors.black,
-          letterSpacing: 0.4,
-          fontWeight: FontWeight.w500,
-        ),
+  Padding buildOtherArtistsHeader() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: AppPadding.padding_20 * 2,
+        bottom: AppPadding.padding_8,
+        left: AppPadding.padding_16,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            AppLocale.of().similarArtist,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_14.sp,
+              color: AppColors.black,
+              letterSpacing: 0.4,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }

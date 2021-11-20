@@ -1,12 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
-import 'package:mehaley/data/models/artist.dart';
-import 'package:mehaley/data/models/song.dart';
 
 import 'artist_page_header.dart';
-import 'artist_play_shuffle.dart';
 
 class ArtistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final ArtistPageData artistPageData;
@@ -25,31 +23,10 @@ class ArtistPageSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 360;
+  double get maxExtent => AppValues.artistSliverHeaderHeight;
 
   @override
-  double get minExtent => 80;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
-}
-
-class ArtistPlayShuffleDelegate extends SliverPersistentHeaderDelegate {
-  ArtistPlayShuffleDelegate({required this.artist, required this.popularSongs});
-
-  final List<Song> popularSongs;
-  final Artist artist;
-
-  @override
-  Widget build(context, double shrinkOffset, bool overlapsContent) {
-    return ArtistPlayShuffle(popularSongs: popularSongs, artist: artist);
-  }
-
-  @override
-  double get maxExtent => 80;
-
-  @override
-  double get minExtent => 80;
+  double get minExtent => AppValues.artistSliverHeaderMinHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

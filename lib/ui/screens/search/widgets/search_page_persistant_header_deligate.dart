@@ -20,16 +20,27 @@ class SearchPersistentSliverHeaderDelegate
         );
       },
       child: Container(
-        color: AppColors.white,
         height: AppValues.searchPersistentSliverHeaderHeight,
+        color: AppColors.pagesBgColor,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: AppMargin.margin_16,
+                ),
                 decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.circular(4),
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(100.0),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 0),
+                      color: AppColors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                    )
+                  ],
                 ),
                 padding: EdgeInsets.symmetric(vertical: AppPadding.padding_12),
                 child: Row(
@@ -40,7 +51,7 @@ class SearchPersistentSliverHeaderDelegate
                     ),
                     Icon(
                       FlutterRemix.search_line,
-                      color: AppColors.lightGrey,
+                      color: AppColors.txtGrey,
                       size: AppIconSizes.icon_size_24,
                     ),
                     SizedBox(
@@ -51,7 +62,7 @@ class SearchPersistentSliverHeaderDelegate
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.lightGrey,
+                        color: AppColors.txtGrey,
                       ),
                     ),
                   ],

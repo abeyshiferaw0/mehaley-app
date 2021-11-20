@@ -26,7 +26,7 @@ class AppLoadingState extends State<AppLoading> {
         width: size,
         height: size,
         child: Lottie.asset(
-          'assets/lottie/loading.json',
+          AppAssets.loadingLottie,
           fit: BoxFit.cover,
         ),
         // child: CircularProgressIndicator(

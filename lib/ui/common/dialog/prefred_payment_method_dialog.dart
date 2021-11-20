@@ -43,7 +43,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               horizontal: AppMargin.margin_16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.black,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(6),
             ),
             padding: EdgeInsets.all(
@@ -139,7 +139,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             child: Text(
               AppLocale.of().selectPaymentMethod.toUpperCase(),
               style: TextStyle(
-                color: AppColors.black,
+                color: AppColors.white,
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
@@ -175,7 +175,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().amole,
-                imagePath: 'assets/images/ic_amole.png',
+                imagePath: AppAssets.icAmole,
                 scale: 1.0,
                 isSelected:
                     tempAppPaymentMethods == AppPaymentMethods.METHOD_AMOLE,
@@ -191,7 +191,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().cbeBirr,
-                imagePath: 'assets/images/ic_cbe_birr.png',
+                imagePath: AppAssets.icCbeBirr,
                 scale: 1.0,
                 isSelected:
                     tempAppPaymentMethods == AppPaymentMethods.METHOD_CBE_BIRR,
@@ -207,7 +207,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().cbeBirr,
-                imagePath: 'assets/images/ic_hello_cash.png',
+                imagePath: AppAssets.icHelloCash,
                 scale: 0.8,
                 isSelected: tempAppPaymentMethods ==
                     AppPaymentMethods.METHOD_HELLO_CASH,
@@ -223,7 +223,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().mbirr,
-                imagePath: 'assets/images/ic_mbirr.png',
+                imagePath: AppAssets.icMbirr,
                 scale: 1.3,
                 isSelected:
                     tempAppPaymentMethods == AppPaymentMethods.METHOD_MBIRR,
@@ -239,7 +239,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().visa,
-                imagePath: 'assets/images/ic_visa.png',
+                imagePath: AppAssets.icVisa,
                 scale: 1.0,
                 isSelected:
                     tempAppPaymentMethods == AppPaymentMethods.METHOD_VISA,
@@ -255,7 +255,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().mastercard,
-                imagePath: 'assets/images/ic_mastercard.png',
+                imagePath: AppAssets.icMasterCard,
                 scale: 1.0,
                 isSelected: tempAppPaymentMethods ==
                     AppPaymentMethods.METHOD_MASTERCARD,
@@ -285,7 +285,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             Text(
               AppLocale.of().paymentMethod,
               style: TextStyle(
-                color: AppColors.white,
+                color: AppColors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_12.sp,
               ),
@@ -299,7 +299,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               },
               child: Icon(
                 FlutterRemix.close_line,
-                color: AppColors.white,
+                color: AppColors.black,
                 size: AppIconSizes.icon_size_24,
               ),
             ),

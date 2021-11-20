@@ -2,7 +2,6 @@ import '../app_localizations.dart';
 
 class AppLanguageStringsOro extends AppLocalizations {
   final String appName = "Elf play";
-  final String appVersion = "version 1.0.0";
   final String byAppName = "By Elf play";
   final String appTermsAndCondition =
       "Some text about elf and terms and conditions and privacy policy, Some text about elf and terms and conditions and privacy policy ;Some text about elf and terms and conditions and privacy policy";
@@ -111,7 +110,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String pinNotFilled = "Pin not filled";
   final String didntReciveSms = "Didn't receive SMS?";
   final String resendCode = "Resend Code";
-  final String enterSixDigitMenu = "Enter the  6 digit pin sent to\n";
+  final String enterSixDigitMenu = "Enter the  6 digit pin sent to";
   final String enterYourCode = "Enter your code";
   final String verifyYourPhone = "Verify your phone";
   final String continueWithApple = "Continue with apple";
@@ -129,7 +128,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String cartCleared = "Cart cleared";
   final String cartIsEmpty = "Your cart is currently empty";
   final String empityCartCheckOutMsg =
-      "Before proceeding to check out you, must add some items to yor cart";
+      "Before proceeding to check out, you must add some items to yor cart";
   final String goToHomeScreen = "Go to home screen";
   final String cartTitle = "Elf Cart";
   final String total = "Total";
@@ -219,7 +218,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String seeAllAlbums = "see all albums";
   final String seeAllArtists = "see all artists";
   final String seeAllMezmurs = "see all mezmurs";
-  final String settings = "Settings english";
+  final String settings = "Settings or";
   final String dataSaver = "Data Saver";
   final String dataSaverMsg =
       "Lowers the quality of your mezmurs streams, for lower data usage";
@@ -265,9 +264,9 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String selectYourPrefrredPayment =
       "Select your preferred payment method for all purchases, you can change it at any time";
   final String unFollow = "UnFollow";
-  final String removeFromFollowedArtist = "Remove From Followed Artists ?";
-  final String removeFromFavoriteMezmurs = "Remove From Favorite Mezmurs?";
-  final String deletePlaylistPermanently = "Delete playlist permanently?";
+  final String removeFromFollowedArtist = "Remove From Followed Artists";
+  final String removeFromFavoriteMezmurs = "Remove From Favorite Mezmurs";
+  final String deletePlaylistPermanently = "Delete playlist permanently";
   final String clearAll = "Clear All";
   final String areYouSureUWantToClearCart =
       "Are you sure you want to clear your cart?";
@@ -329,6 +328,11 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String shareAppMsg = "Share elf play with friends and family";
   final String retryingDownloadMsg = "Retrying Download";
   final String play = "Play";
+  final String onlyOnElf = "Only On Elf";
+  final String welcome = "Welcome";
+  final String google = "Google";
+  final String facebook = "Facebook";
+  final String apple = "Apple";
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";
@@ -418,10 +422,18 @@ class AppLanguageStringsOro extends AppLocalizations {
   }
 
   String numberOfMezmurs({required String numberOf}) {
-    return "$numberOf numberOfMezmurs";
+    return "$numberOf Mezmurs";
   }
 
-  String removeedFromCart({required String removedName}) {
+  String removedFromCart({required String removedName}) {
     return "$removedName removed from cart";
+  }
+
+  String appNameAndVersion({required String versionCode}) {
+    return "$appName $versionCode";
+  }
+
+  String appVersion({required String versionCode}) {
+    return "Version $versionCode";
   }
 }

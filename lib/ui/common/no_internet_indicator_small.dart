@@ -38,14 +38,14 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: AppColors.black,
       child: SlideTransition(
         position: offset,
         child: Wrap(
           children: [
             Container(
               width: double.infinity,
-              color: AppColors.white,
+              color: AppColors.black,
               padding: EdgeInsets.symmetric(vertical: AppPadding.padding_4),
               child: Center(
                 child: Text(
@@ -53,7 +53,7 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: AppColors.white,
                   ),
                 ),
               ),

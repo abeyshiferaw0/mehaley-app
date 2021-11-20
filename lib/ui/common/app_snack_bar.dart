@@ -19,7 +19,7 @@ SnackBar buildAppSnackBar({
           textAlign: TextAlign.center,
           style: TextStyle(
             color: txtColor,
-            letterSpacing: 0.5,
+            fontStyle: FontStyle.italic,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -36,7 +36,7 @@ SnackBar buildAppSnackBar({
     elevation: 12,
     behavior: isFloating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(isFloating ? 8 : 0),
+      borderRadius: BorderRadius.circular(isFloating ? 25 : 0),
     ),
     backgroundColor: bgColor,
   );
@@ -69,7 +69,7 @@ SnackBar buildDownloadMsgSnackBar({
             textAlign: TextAlign.center,
             style: TextStyle(
               color: txtColor,
-              letterSpacing: 0.5,
+              fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -87,7 +87,7 @@ SnackBar buildDownloadMsgSnackBar({
     elevation: 12,
     behavior: isFloating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(isFloating ? 4 : 0),
+      borderRadius: BorderRadius.circular(isFloating ? 25 : 0),
     ),
     backgroundColor: bgColor,
   );

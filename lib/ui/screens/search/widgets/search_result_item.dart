@@ -184,6 +184,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
       child: Row(
         children: [
           AppCard(
+            withShadow: false,
             radius: appSearchItemTypes == AppSearchItemTypes.ARTIST
                 ? AppValues.queueSongItemSize
                 : 0.0,

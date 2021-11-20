@@ -3,7 +3,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/util/color_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryHeader extends StatelessWidget {
@@ -16,7 +15,7 @@ class LibraryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.lightGrey,
+      color: AppColors.white,
       height: 50,
       child: Stack(
         children: [
@@ -60,7 +59,7 @@ class LibraryHeader extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 3,
-        color: ColorUtil.darken(AppColors.black, 0.7),
+        color: AppColors.lightGrey,
       ),
     );
   }
@@ -72,7 +71,7 @@ class LibraryHeader extends StatelessWidget {
       labelPadding: EdgeInsets.all(0.0),
       unselectedLabelColor: AppColors.grey,
       labelStyle: TextStyle(
-        fontSize: AppFontSizes.font_size_14.sp,
+        fontSize: AppFontSizes.font_size_12.sp,
         fontWeight: FontWeight.bold,
       ),
       indicator: UnderlineTabIndicator(

@@ -14,6 +14,7 @@ class SmallTextPriceWidget extends StatelessWidget {
   final double discountPercentage;
   final bool showDiscount;
   final bool isPurchased;
+  final bool? useDimColor;
   final AppCurrency? appCurrency;
 
   const SmallTextPriceWidget({
@@ -27,6 +28,7 @@ class SmallTextPriceWidget extends StatelessWidget {
     this.showDiscount = true,
     required this.isPurchased,
     this.appCurrency,
+    this.useDimColor,
   }) : super(key: key);
 
   @override
@@ -67,7 +69,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkOrange,
+        color: shouldUseDimmedColor() ? AppColors.orange : AppColors.darkOrange,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -82,7 +84,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkOrange,
+        color: shouldUseDimmedColor() ? AppColors.orange : AppColors.darkOrange,
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -97,7 +99,9 @@ class SmallTextPriceWidget extends StatelessWidget {
         text:
             '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
         style: TextStyle(
-          color: AppColors.darkOrange.withOpacity(0.7),
+          color: shouldUseDimmedColor()
+              ? AppColors.orange.withOpacity(0.7)
+              : AppColors.darkOrange.withOpacity(0.7),
           decoration: TextDecoration.lineThrough,
           fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
           fontSize: useLargerText
@@ -109,7 +113,9 @@ class SmallTextPriceWidget extends StatelessWidget {
             text:
                 ' ${(getPrice() - (getPrice() * discountPercentage)).toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
             style: TextStyle(
-              color: AppColors.darkOrange,
+              color: shouldUseDimmedColor()
+                  ? AppColors.orange
+                  : AppColors.darkOrange,
               decoration: TextDecoration.none,
               fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
               fontSize: useLargerText
@@ -130,6 +136,16 @@ class SmallTextPriceWidget extends StatelessWidget {
     } else {
       return appCurrency!;
     }
+  }
+
+  bool shouldUseDimmedColor() {
+    if (useDimColor == null) {
+      return false;
+    }
+    if (useDimColor!) {
+      return true;
+    }
+    return false;
   }
 
   double getPrice() {

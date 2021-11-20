@@ -13,7 +13,7 @@ import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_subscribe_card.dart';
 import 'package:mehaley/ui/common/no_internet_header.dart';
-import 'package:mehaley/ui/screens/home/widgets/home_app_header.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_app_bar.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_categories.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_albums.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_playlists.dart';
@@ -159,13 +159,11 @@ class _HomePageState extends State<HomePage>
   }
 
   ListView buildGroupsListView(List<Group> groups) {
-    return ListView.separated(
+    return ListView.builder(
       itemCount: groups.length,
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
-      separatorBuilder: (context, index) {
-        return SizedBox(height: AppMargin.margin_32);
-      },
       itemBuilder: (context, index) {
         if (groups[index].groupItems.length > 0 && groups[index].isVisible) {
           return HomeGroups(

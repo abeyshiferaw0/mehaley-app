@@ -425,7 +425,7 @@ class _QueueListPageState extends State<QueueListPage> {
           width: AppIconSizes.icon_size_24,
           height: AppIconSizes.icon_size_24,
           child: Lottie.asset(
-            'assets/lottie/playing.json',
+            AppAssets.playingLottie,
             fit: BoxFit.cover,
           ),
         )

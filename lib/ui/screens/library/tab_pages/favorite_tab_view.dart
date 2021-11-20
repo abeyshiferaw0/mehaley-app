@@ -71,7 +71,6 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
             color: AppColors.darkOrange,
             edgeOffset: AppMargin.margin_16,
             child: Container(
-              color: AppColors.white,
               height: double.infinity,
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(
@@ -186,7 +185,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noMezmursToPlay,
                 txtColor: AppColors.white,
@@ -210,7 +209,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noAlbumsToSelect,
                 txtColor: AppColors.white,

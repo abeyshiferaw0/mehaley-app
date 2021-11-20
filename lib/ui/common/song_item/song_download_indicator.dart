@@ -182,7 +182,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
               ///SHOW RETRYING MESSAGE
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().retryingDownloadMsg,
                   txtColor: AppColors.white,

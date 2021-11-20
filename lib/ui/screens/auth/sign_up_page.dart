@@ -8,7 +8,6 @@ import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/sign_up_page_authing_covor.dart';
 import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_front.dart';
 import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_gradient.dart';
-import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_staggered_animated_list.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -38,22 +37,18 @@ class _SignUpPageState extends State<SignUpPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: AppColors.black,
+        extendBody: true,
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            SignUpPageStaggeredAnimatedList(),
-            // Center(
-            //   child: Container(
-            //     height: ScreenUtil(context: context).getScreenHeight(),
-            //     child: LottieBuilder.network(
-            //       'https://assets7.lottiefiles.com/private_files/lf30_k9aqcmp8.json',
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
-            SignUpPageGradient(),
+            ///BACKGROUND IMAGE
+            SignUpPageBg(),
+
+            ///FRONT PAGE UI
             SignUpPageFront(),
+
+            ///LOADING SHADE
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoadingState) {

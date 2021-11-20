@@ -10,8 +10,8 @@ class CategoryShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Shimmer.fromColors(
-        highlightColor: AppColors.lightGrey,
-        baseColor: Color(0xff262626),
+        highlightColor: AppColors.placeholderIconColor,
+        baseColor: AppColors.lightGrey,
         direction: ShimmerDirection.ltr,
         child: Wrap(
           children: [
@@ -23,7 +23,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -61,7 +61,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -99,7 +99,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -137,7 +137,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -175,7 +175,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -213,7 +213,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -251,7 +251,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(
@@ -289,7 +289,7 @@ class CategoryShimmer extends StatelessWidget {
                     ShimmerItem(
                       width: 50,
                       height: 50,
-                      radius: 0.0,
+                      radius: 5.0,
                     ),
                     SizedBox(width: AppMargin.margin_16),
                     Column(

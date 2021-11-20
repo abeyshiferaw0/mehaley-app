@@ -238,7 +238,7 @@ class DialogSongPreviewMode extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Image.asset(
-              "assets/icons/ic_app_icon.png",
+              AppAssets.icAppFullIcon,
               width: AppIconSizes.icon_size_48,
               fit: BoxFit.contain,
             ),

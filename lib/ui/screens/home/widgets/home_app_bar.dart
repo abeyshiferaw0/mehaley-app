@@ -6,6 +6,10 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
 class HomeAppBar extends StatelessWidget {
+  final Widget? leading;
+
+  const HomeAppBar({Key? key, this.leading}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,11 +18,13 @@ class HomeAppBar extends StatelessWidget {
         SizedBox(
           width: AppMargin.margin_16,
         ),
-        Image.asset(
-          "assets/icons/ic_app_icon.png",
-          width: AppIconSizes.icon_size_64,
-          fit: BoxFit.contain,
-        ),
+        leading != null
+            ? leading!
+            : Image.asset(
+                AppAssets.icAppFullIcon,
+                width: AppIconSizes.icon_size_64,
+                fit: BoxFit.contain,
+              ),
         Expanded(
           child: SizedBox(),
         ),

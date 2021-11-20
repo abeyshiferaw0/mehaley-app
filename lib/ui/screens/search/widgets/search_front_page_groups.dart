@@ -99,7 +99,7 @@ class SearchFrontPageGroups extends StatelessWidget {
             );
           },
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: (1 / 0.56),
+            childAspectRatio: (1 / 0.5),
             crossAxisSpacing: AppMargin.margin_16,
             mainAxisSpacing: AppMargin.margin_16,
             crossAxisCount: 2,

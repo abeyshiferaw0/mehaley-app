@@ -15,7 +15,6 @@ import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_sliver_deligates.dart';
-import 'package:mehaley/ui/screens/playlist/widget/shimmer_playlist.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
@@ -51,7 +50,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
           child: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
             builder: (context, state) {
               if (state is PlaylistPageLoadingState) {
-                return ShimmerPlaylist();
+                return AppLoading(size: AppValues.loadingWidgetSize * 0.8);
               }
               if (state is PlaylistPageLoadedState) {
                 ///CHANGE PLAYLIST DOMINANT COLOR
@@ -65,7 +64,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
               }
               if (state is PlaylistPageLoadingErrorState) {
                 return AppError(
-                  bgWidget: ShimmerPlaylist(),
+                  bgWidget: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
                   onRetry: () {
                     BlocProvider.of<PlaylistPageBloc>(context).add(
                       LoadPlaylistPageEvent(playlistId: widget.playlistId),

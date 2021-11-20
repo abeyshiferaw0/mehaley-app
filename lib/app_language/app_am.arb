@@ -176,7 +176,7 @@
   "unableToClearCart":"Unable to clear cart\ncheck your internet connection",
 "cartCleared":"Cart cleared",
 "cartIsEmpty":"Your cart is currently empty",
-"empityCartCheckOutMsg":"Before proceeding to check out you, must add some items to yor cart",
+"empityCartCheckOutMsg":"Before proceeding to check out, you must add some items to yor cart",
 "goToHomeScreen":"Go to home screen",
 "cartTitle":"Elf Cart",
 "total":"Total",

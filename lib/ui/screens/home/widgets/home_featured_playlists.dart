@@ -37,15 +37,12 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
     if (featuredPlaylists.length > 0) {
       return Container(
         margin: EdgeInsets.only(bottom: AppPadding.padding_32),
-        child: ListView.separated(
+        child: ListView.builder(
           shrinkWrap: true,
           itemCount: featuredPlaylists.length,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return buildFeaturedPlaylists(featuredPlaylists.elementAt(index));
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: AppMargin.margin_32);
           },
         ),
       );
@@ -57,6 +54,7 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
   Column buildFeaturedPlaylists(Playlist playlist) {
     return Column(
       children: [
+        SizedBox(height: AppMargin.margin_32),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

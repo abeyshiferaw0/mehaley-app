@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/screens/user_playlist/widget/user_palaylist_add_songs_button.dart';
@@ -28,10 +29,10 @@ class UserPlaylistPageSliverHeaderDelegate
   }
 
   @override
-  double get maxExtent => 450;
+  double get maxExtent => AppValues.userPlaylistHeaderSliverHeight;
 
   @override
-  double get minExtent => 100;
+  double get minExtent => AppValues.userPlaylistHeaderAppBarSliverHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

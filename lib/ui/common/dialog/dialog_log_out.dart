@@ -66,7 +66,7 @@ class DialogLogOut extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: AppColors.orange,
+                      color: AppColors.black,
                     ),
                     child: Text(
                       AppLocale.of().logOut.toUpperCase(),

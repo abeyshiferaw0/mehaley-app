@@ -15,7 +15,6 @@ import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
-import 'package:mehaley/ui/screens/playlist/widget/shimmer_playlist.dart';
 import 'package:mehaley/ui/screens/user_playlist/widget/user_playlist_sliver_deligates.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -52,7 +51,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         if (state is SongRemovedFromPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: true,
               msg: AppLocale.of().songRemovedPlaylist(
                 songName: L10nUtil.translateLocale(
@@ -80,7 +79,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         if (state is UserPlaylistDeletedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: true,
               msg: AppLocale.of().playlistDeleted(
                 playlistName: L10nUtil.translateLocale(
@@ -102,7 +101,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToRemoveFromPlaylist,
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -115,7 +114,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToDeletePlaylist,
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -128,7 +127,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         body: BlocBuilder<UserPlaylistPageBloc, UserPlaylistPageState>(
           builder: (context, state) {
             if (state is UserPlaylistPageLoadingState) {
-              return ShimmerPlaylist();
+              return AppLoading(size: AppValues.loadingWidgetSize * 0.8);
             }
             if (state is UserPlaylistPageLoadedState) {
               ///CHANGE DOMINANT COLOR OF USER PLAYLIST PAGE
@@ -143,7 +142,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             }
             if (state is UserPlaylistPageLoadingErrorState) {
               return AppError(
-                bgWidget: ShimmerPlaylist(),
+                bgWidget: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
                 onRetry: () {
                   BlocProvider.of<UserPlaylistPageBloc>(context).add(
                     LoadUserPlaylistPageEvent(playlistId: widget.playlistId),
@@ -244,19 +243,29 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                       // UserPlaylistAddMezmursBtn(
                       //   makeSolid: false,
                       // ),
-                      SizedBox(height: AppMargin.margin_16),
+                      //SizedBox(height: AppMargin.margin_16),
                       // DownloadAllPurchased(
                       //   downloadAllSelected: downloadAllSelected,
                       // ),
-                      SizedBox(height: AppMargin.margin_16),
+                      //SizedBox(height: AppMargin.margin_16),
                     ],
                   )
                 : SizedBox(),
-            ListView.builder(
+            ListView.separated(
               itemCount: songs.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
+              separatorBuilder: (BuildContext context, int position) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppPadding.padding_4,
+                  ),
+                  child: Divider(
+                    color: AppColors.grey.withOpacity(0.2),
+                  ),
+                );
+              },
               itemBuilder: (BuildContext context, int position) {
                 return Column(
                   children: [

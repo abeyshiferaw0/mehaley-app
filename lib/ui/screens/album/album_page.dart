@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -18,7 +17,6 @@ import 'package:mehaley/ui/common/cart_buttons/album_cart_button.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
-import 'package:mehaley/ui/screens/album/widgets/shimmer_album.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
@@ -46,7 +44,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
         if (state is AlbumPageLoadingState) {
           return Scaffold(
             backgroundColor: AppColors.pagesBgColor,
-            body: ShimmerAlbum(),
+            body: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
           );
         }
         if (state is AlbumPageLoadedState) {
@@ -60,7 +58,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
           return Scaffold(
             backgroundColor: AppColors.pagesBgColor,
             body: AppError(
-              bgWidget: ShimmerAlbum(),
+              bgWidget: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
               onRetry: () {
                 BlocProvider.of<AlbumPageBloc>(context).add(
                   LoadAlbumPageEvent(albumId: widget.albumId),
@@ -133,9 +131,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       // brightness: Brightness.dark,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-      ),
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
       leading: IconButton(
         icon: Icon(FlutterRemix.arrow_left_line),
         color: AppColors.black,

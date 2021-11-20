@@ -138,15 +138,18 @@ class ArtistFollowButton extends StatelessWidget {
         AppLocale.of().following.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
-          fontWeight: FontWeight.w200,
+          fontWeight: FontWeight.w400,
           letterSpacing: 1,
           color: AppColors.black,
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.darkGrey.withOpacity(0.1),
+        color: AppColors.txtGrey.withOpacity(0.1),
         borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: AppColors.black, width: 1),
+        border: Border.all(
+          color: AppColors.darkOrange,
+          width: 1,
+        ),
       ),
     );
   }

@@ -26,6 +26,7 @@ class PurchasedAllSongsBloc
     if (event is LoadAllPurchasedSongsEvent) {
       // REFRESH AFTER CACHE YIELD
       // LOAD CACHE AND REFRESH
+
       yield PurchasedAllSongsLoadingState();
       try {
         //YIELD CACHE DATA

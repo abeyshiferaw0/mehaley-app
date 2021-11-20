@@ -91,7 +91,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                   unabledName:
@@ -107,7 +107,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                   unabledName: L10nUtil.translateLocale(
@@ -123,7 +123,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                 unabledName: L10nUtil.translateLocale(
@@ -140,7 +140,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovingErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               msg: AppLocale.of().unableToClearCart,
               txtColor: AppColors.white,
@@ -162,7 +162,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildDownloadMsgSnackBar(
-                  bgColor: AppColors.black,
+                  bgColor: AppColors.darkGrey,
                   isFloating: true,
                   msg: AppLocale.of().removeedFromCart(
                       removedName: L10nUtil.translateLocale(
@@ -187,7 +187,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.black,
+                bgColor: AppColors.darkGrey,
                 isFloating: true,
                 msg: AppLocale.of().removeedFromCart(
                     removedName: L10nUtil.translateLocale(
@@ -211,7 +211,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.black,
+                bgColor: AppColors.darkGrey,
                 isFloating: true,
                 msg: AppLocale.of().removeedFromCart(
                   removedName: L10nUtil.translateLocale(
@@ -236,7 +236,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.black,
+                bgColor: AppColors.darkGrey,
                 isFloating: true,
                 msg: AppLocale.of().cartCleared,
                 txtColor: AppColors.white,
@@ -252,22 +252,24 @@ class _CartPageState extends State<CartPage> with RouteAware {
           );
         }
       },
-      child: BlocBuilder<CartPageBloc, CartPageState>(
-        builder: (context, state) {
-          if (state is CartPageLoadingState) {
-            return buildPageLoading();
-          }
-          if (state is CartPageLoadedState) {
-            if (cartIsEmpty(state.cartPageData)) {
-              return buildPageEmpty();
+      child: SafeArea(
+        child: BlocBuilder<CartPageBloc, CartPageState>(
+          builder: (context, state) {
+            if (state is CartPageLoadingState) {
+              return buildPageLoading();
             }
-            return buildPageLoaded(state.cartPageData.cart);
-          }
-          if (state is CartPageLoadingErrorState) {
-            return buildPageLoadingError();
-          }
-          return buildPageLoading();
-        },
+            if (state is CartPageLoadedState) {
+              if (cartIsEmpty(state.cartPageData)) {
+                return buildPageEmpty();
+              }
+              return buildPageLoaded(state.cartPageData.cart);
+            }
+            if (state is CartPageLoadingErrorState) {
+              return buildPageLoadingError();
+            }
+            return buildPageLoading();
+          },
+        ),
       ),
     );
   }
@@ -306,6 +308,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   delegate: ClearAndCheckDelegate(),
                 ),
 
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: AppMargin.margin_16,
+                  ),
+                ),
+
                 ///CART PAGE SUMMERY HEADER
                 SliverToBoxAdapter(
                   child: CartSummery(),
@@ -314,6 +322,19 @@ class _CartPageState extends State<CartPage> with RouteAware {
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: AppMargin.margin_12,
+                  ),
+                ),
+
+                ///CART SONGS LIST
+                SliverToBoxAdapter(
+                  child: CartSongsList(
+                    songCart: cart.songCart,
+                  ),
+                ),
+
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: AppMargin.margin_16,
                   ),
                 ),
 
@@ -326,7 +347,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
                 SliverToBoxAdapter(
                   child: SizedBox(
-                    height: AppMargin.margin_12,
+                    height: AppMargin.margin_16,
                   ),
                 ),
 
@@ -336,19 +357,6 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     playlistCart: cart.playlistCart,
                   ),
                 ),
-
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: AppMargin.margin_16,
-                  ),
-                ),
-
-                ///CART SONGS LIST
-                SliverToBoxAdapter(
-                  child: CartSongsList(
-                    songCart: cart.songCart,
-                  ),
-                )
               ],
             ),
             buildCartUtilLoading(),
@@ -365,7 +373,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
-            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.1,
           ),
           Expanded(
             child: Center(
@@ -406,7 +414,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
-            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.1,
           ),
           Expanded(
             child: Padding(
@@ -421,13 +429,10 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     width: AppIconSizes.icon_size_64 * 3,
                     child: Center(
                       child: LottieBuilder.asset(
-                        'assets/lottie/cart_empty.json',
+                        AppAssets.cartEmptyLottie,
                         fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: AppMargin.margin_32,
                   ),
                   Text(
                     AppLocale.of().cartIsEmpty,
@@ -439,7 +444,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     ),
                   ),
                   SizedBox(
-                    height: AppMargin.margin_4,
+                    height: AppMargin.margin_8,
                   ),
                   Text(
                     AppLocale.of().empityCartCheckOutMsg,
@@ -451,7 +456,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                     ),
                   ),
                   SizedBox(
-                    height: AppMargin.margin_16,
+                    height: AppMargin.margin_32,
                   ),
                   AppBouncingButton(
                     onTap: () {
@@ -477,7 +482,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.black,
+                          color: AppColors.white,
                         ),
                       ),
                     ),
@@ -498,7 +503,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
         children: [
           CartAppBar(
             hasPrice: false,
-            height: ScreenUtil(context: context).getScreenHeight() * 0.12,
+            height: ScreenUtil(context: context).getScreenHeight() * 0.1,
           ),
           Expanded(
             child: AppError(

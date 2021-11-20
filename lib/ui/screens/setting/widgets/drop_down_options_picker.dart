@@ -42,7 +42,8 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
   Widget build(BuildContext context) {
     return ExpansionPanelList(
       animationDuration: Duration(milliseconds: 300),
-      dividerColor: AppColors.white,
+      dividerColor: AppColors.pagesBgColor,
+      expandedHeaderPadding: EdgeInsets.zero,
       elevation: 0,
       expansionCallback: (int item, bool status) {
         setState(() {
@@ -57,7 +58,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.pagesBgColor,
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -75,14 +76,13 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                     Expanded(child: SizedBox()),
                     Icon(
                       isExpanded
-                          ? FlutterRemix.arrow_up_line
-                          : FlutterRemix.arrow_down_line,
+                          ? FlutterRemix.arrow_up_s_line
+                          : FlutterRemix.arrow_down_s_line,
                       size: AppIconSizes.icon_size_24,
                       color: AppColors.black,
                     )
                   ],
                 ),
-                SizedBox(height: AppMargin.margin_16),
               ],
             );
           },
@@ -127,18 +127,18 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       }
                     },
                   ),
-                  LanguageSettingItem(
-                    text: 'Tigrinya',
-                    isSelected: false,
-                    onTap: () {
-                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
-                        appLanguage: AppLanguage.AMHARIC,
-                      );
-                      if (widget.onLanguageChanged != null) {
-                        widget.onLanguageChanged!();
-                      }
-                    },
-                  ),
+                  // LanguageSettingItem(
+                  //   text: 'Tigrinya',
+                  //   isSelected: false,
+                  //   onTap: () {
+                  //     BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                  //       appLanguage: AppLanguage.AMHARIC,
+                  //     );
+                  //     if (widget.onLanguageChanged != null) {
+                  //       widget.onLanguageChanged!();
+                  //     }
+                  //   },
+                  // ),
                 ],
               ),
             ),
@@ -148,7 +148,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.pagesBgColor,
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -166,14 +166,13 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                     Expanded(child: SizedBox()),
                     Icon(
                       isExpanded
-                          ? FlutterRemix.arrow_up_line
-                          : FlutterRemix.arrow_down_line,
+                          ? FlutterRemix.arrow_up_s_line
+                          : FlutterRemix.arrow_down_s_line,
                       size: AppIconSizes.icon_size_24,
                       color: AppColors.black,
                     )
                   ],
                 ),
-                SizedBox(height: AppMargin.margin_16),
               ],
             );
           },

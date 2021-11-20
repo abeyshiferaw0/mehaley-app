@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/repositories/cart_data_repository.dart';
-import 'package:equatable/equatable.dart';
 
 part 'cart_util_event.dart';
 part 'cart_util_state.dart';
@@ -22,6 +22,7 @@ class CartUtilBloc extends Bloc<CartUtilEvent, CartUtilState> {
   ) async* {
     if (event is ClearAllCartEvent) {
       yield CartUtilLoadingState();
+
       try {
         await cartRepository.clearAllCart();
         yield CartAllRemovedState();

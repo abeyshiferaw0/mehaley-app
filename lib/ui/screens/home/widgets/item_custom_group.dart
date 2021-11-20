@@ -75,7 +75,8 @@ class ItemCustomGroup extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: PagesUtilFunctions.getGroupItemTextStyle(groupType, item),
             ),
-            PagesUtilFunctions.getGroupItemPrice(groupType, item)
+            PagesUtilFunctions.getGroupItemPrice(groupType, item),
+            PagesUtilFunctions.getIsExplicitTag(groupType, item)
           ],
         ),
       ),

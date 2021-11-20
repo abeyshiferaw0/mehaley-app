@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -22,6 +21,7 @@ import 'package:mehaley/ui/screens/library/tab_pages/offline_tab_view.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/purchased_tab_view.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_persistant_header.dart';
 import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -165,10 +165,8 @@ class _LibraryPageState extends State<LibraryPage>
   SliverAppBar buildAppBar() {
     return SliverAppBar(
       //brightness: Brightness.dark,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-      ),
-      backgroundColor: AppColors.lightGrey,
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+      backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       floating: true,
       pinned: false,
@@ -178,22 +176,9 @@ class _LibraryPageState extends State<LibraryPage>
           onTap: () {
             Navigator.pushNamed(context, AppRouterPaths.profileRoute);
           },
-          child: Stack(
-            children: [
-              UserProfilePic(
-                size: AppIconSizes.icon_size_20 * 2,
-                fontSize: AppFontSizes.font_size_12.sp,
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Icon(
-                  FlutterRemix.settings_3_line,
-                  size: AppIconSizes.icon_size_12,
-                  color: AppColors.black,
-                ),
-              )
-            ],
+          child: UserProfilePic(
+            size: AppIconSizes.icon_size_20 * 2,
+            fontSize: AppFontSizes.font_size_12.sp,
           ),
         ),
       ),
@@ -202,13 +187,30 @@ class _LibraryPageState extends State<LibraryPage>
           return Text(
             AuthUtil.getUserName(state),
             style: TextStyle(
-              fontSize: AppFontSizes.font_size_16,
+              fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
+              color: AppColors.black,
             ),
           );
         },
       ),
       actions: [
+        AppBouncingButton(
+          onTap: () {
+            Navigator.pushNamed(context, AppRouterPaths.settingRoute);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_8),
+            child: Icon(
+              FlutterRemix.settings_4_line,
+              size: AppIconSizes.icon_size_24,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: AppMargin.margin_16,
+        ),
         // IconButton(
         //   onPressed: () {},
         //   icon: Icon(

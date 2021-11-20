@@ -24,10 +24,9 @@ class CartAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      color: AppColors.white,
+      color: AppColors.pagesBgColor,
       child: SafeArea(
         child: Container(
-          color: AppColors.lightGrey,
           padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,8 +37,8 @@ class CartAppBar extends StatelessWidget {
                     AppLocale.of().cartTitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: AppFontSizes.font_size_16.sp,
-                      fontWeight: FontWeight.w500,
+                      fontSize: AppFontSizes.font_size_18.sp,
+                      fontWeight: FontWeight.w600,
                       color: AppColors.black,
                     ),
                   ),
@@ -84,6 +83,7 @@ class CartAppBar extends StatelessWidget {
       priceEtb: getTotalPrice(cart, AppCurrency.ETB),
       priceUsd: getTotalPrice(cart, AppCurrency.USD),
       isFree: false,
+      useLargerText: true,
       isDiscountAvailable: true,
       discountPercentage: getDeductedPriceAsPercentage(cart),
       isPurchased: false,
@@ -167,15 +167,11 @@ class CartAppBar extends StatelessWidget {
 
   double getDeductedPriceAsPercentage(Cart cart) {
     if (SettingsDataProvider().getPreferredCurrency() == AppCurrency.ETB) {
-      double total = cart.songCart.totalPriceEtb;
-      total = total + cart.albumCart.totalPriceEtb;
-      total = total + cart.playlistCart.totalPriceEtb;
-      return (cart.deductibleAmountEtb * 100) / total;
+      double total = getTotalPrice(cart, AppCurrency.ETB);
+      return (cart.deductibleAmountEtb / total);
     } else {
-      double total = cart.songCart.totalPriceDollar;
-      total = total + cart.albumCart.totalPriceDollar;
-      total = total + cart.playlistCart.totalPriceDollar;
-      return (cart.deductibleAmountDollar * 100) / total;
+      double total = getTotalPrice(cart, AppCurrency.USD);
+      return (cart.deductibleAmountDollar / total);
     }
   }
 }

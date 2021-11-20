@@ -164,6 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Column buildPageLoaded(ProfilePageData profilePageData) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: AppMargin.margin_32,
@@ -311,7 +312,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               title.toUpperCase(),
@@ -322,12 +323,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             SizedBox(
-              width: AppMargin.margin_8,
+              width: AppMargin.margin_4,
             ),
             Icon(
-              FlutterRemix.arrow_right_line,
+              FlutterRemix.arrow_right_s_line,
               color: AppColors.darkGrey,
-              size: AppIconSizes.icon_size_12,
+              size: AppIconSizes.icon_size_20,
             ),
           ],
         ),

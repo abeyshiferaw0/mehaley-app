@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -10,7 +11,6 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:flutter/material.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
@@ -39,15 +39,12 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
     if (featuredAlbums.length > 0) {
       return Container(
         margin: EdgeInsets.only(bottom: AppPadding.padding_8),
-        child: ListView.separated(
+        child: ListView.builder(
           shrinkWrap: true,
           itemCount: featuredAlbums.length,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return buildFeaturedAlbum(featuredAlbums.elementAt(index));
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: AppMargin.margin_32);
           },
         ),
       );
@@ -59,6 +56,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
   Column buildFeaturedAlbum(Album album) {
     return Column(
       children: [
+        SizedBox(height: AppMargin.margin_32),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

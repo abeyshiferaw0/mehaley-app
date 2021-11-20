@@ -9,7 +9,6 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../player_items_placeholder.dart';
@@ -40,11 +39,11 @@ class ProfileMenuWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(
-              height: ScreenUtil(context: context).getScreenHeight() * 0.4,
+              height: AppMargin.margin_32,
             ),
             buildMenuHeader(context),
             SizedBox(
-              height: AppMargin.margin_32,
+              height: AppMargin.margin_16,
             ),
             Container(
               padding: EdgeInsets.symmetric(

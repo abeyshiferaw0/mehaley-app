@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -21,7 +20,6 @@ import 'package:mehaley/ui/screens/category/widgets/item_popular_album.dart';
 import 'package:mehaley/ui/screens/category/widgets/item_popular_playlist.dart';
 import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:mehaley/ui/screens/category/widgets/shimmer_category.dart';
-import 'package:mehaley/ui/screens/category/widgets/shimmer_category_top.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -98,12 +96,6 @@ class _CategoryPageState extends State<CategoryPage>
                   child: SizedBox(height: AppMargin.margin_16),
                 ),
                 buildCategoryTopAlbumPlaylist(),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: AppMargin.margin_48),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: AppMargin.margin_16),
-                ),
                 buildCategorySongsList(),
               ],
             ),
@@ -117,9 +109,7 @@ class _CategoryPageState extends State<CategoryPage>
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       //brightness: Brightness.dark,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-      ),
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
       backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       leading: IconButton(
@@ -178,12 +168,21 @@ class _CategoryPageState extends State<CategoryPage>
             return buildCategoryTopAlbumPlaylistItems(state);
           }
           if (state is CategoryPageTopLoading) {
-            return CategoryTopShimmer();
+            return Container(
+              height: ScreenUtil(context: context).getScreenHeight() * 0.3,
+              child: AppLoading(size: AppValues.loadingWidgetSize / 2),
+            );
           }
           if (state is CategoryPageTopLoadingError) {
-            return CategoryTopShimmer();
+            return Container(
+              height: ScreenUtil(context: context).getScreenHeight() * 0.3,
+              child: AppLoading(size: AppValues.loadingWidgetSize / 2),
+            );
           }
-          return SizedBox();
+          return Container(
+            height: ScreenUtil(context: context).getScreenHeight() * 0.3,
+            child: AppLoading(size: AppValues.loadingWidgetSize / 2),
+          );
         },
       ),
     );
@@ -314,6 +313,7 @@ class _CategoryPageState extends State<CategoryPage>
         state.categoryPageTopData.topAlbum.length > 0
             ? buildCategoryAlbums(state.categoryPageTopData.topAlbum)
             : SizedBox(),
+        SizedBox(height: AppMargin.margin_48),
       ],
     );
   }

@@ -53,7 +53,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
     nameMaxLength = 35;
     descriptionInputController = TextEditingController();
     nameInputController = TextEditingController();
-    WidgetsBinding.instance!.addPostFrameCallback((_) => initPreviousValues());
+    initPreviousValues();
     super.initState();
   }
 
@@ -73,7 +73,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableUpdatePlaylist,
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -90,7 +90,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   context,
                 ),
               ),
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: true,
               iconColor: AppColors.darkOrange,
               icon: FlutterRemix.checkbox_circle_fill,
@@ -148,7 +148,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
   Container buildEditingPlaylistLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.5),
+        color: AppColors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(

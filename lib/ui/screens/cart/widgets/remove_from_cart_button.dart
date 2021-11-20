@@ -35,12 +35,12 @@ class RemoveFromCartButton extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(AppPadding.padding_4),
               decoration: BoxDecoration(
-                color: AppColors.darkOrange.withOpacity(0.5),
+                color: AppColors.orange,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Icon(
                 FlutterRemix.close_line,
-                color: AppColors.black,
+                color: AppColors.white,
                 size: AppIconSizes.icon_size_12,
               ),
             ),
@@ -71,12 +71,12 @@ class RemoveFromCartButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(AppPadding.padding_4),
             decoration: BoxDecoration(
-              color: AppColors.darkOrange.withOpacity(0.5),
+              color: AppColors.orange,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
               FlutterRemix.close_line,
-              color: AppColors.black,
+              color: AppColors.white,
               size: AppIconSizes.icon_size_12,
             ),
           ),

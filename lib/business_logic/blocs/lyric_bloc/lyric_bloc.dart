@@ -24,6 +24,7 @@ class LyricBloc extends Bloc<LyricEvent, LyricState> {
   ) async* {
     if (event is LoadSongLyricEvent) {
       //LOAD CACHE AND REFRESH
+      lyricDataRepository.cancelDio();
       yield LyricDataLoading();
       try {
         //YIELD CACHE DATA

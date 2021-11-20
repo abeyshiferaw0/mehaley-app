@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class ElfInfoWidget extends StatelessWidget {
@@ -23,13 +24,27 @@ class ElfInfoWidget extends StatelessWidget {
           SizedBox(
             height: AppMargin.margin_4,
           ),
-          Text(
-            AppLocale.of().appVersion,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_10.sp,
-              fontWeight: FontWeight.w400,
-              color: AppColors.txtGrey,
-            ),
+          FutureBuilder(
+            future: PagesUtilFunctions.getAppVersionNumber(),
+            initialData: 'loading',
+            builder: (context, snapShot) {
+              if (snapShot.data != null) {
+                if (snapShot.data is String) {
+                  return Text(
+                    AppLocale.of().appVersion(
+                      versionCode: snapShot.data as String,
+                    ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_8.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.txtGrey,
+                    ),
+                  );
+                }
+              }
+              return SizedBox();
+            },
           ),
           SizedBox(
             height: AppMargin.margin_16,

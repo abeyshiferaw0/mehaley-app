@@ -15,43 +15,37 @@ class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(context, double shrinkOffset, bool overlapsContent) {
-    var opacityPercentage = shrinkOffset / 120;
+    var opacityPercentage =
+        shrinkOffset / AppValues.cartClearAndCheckoutHeaderHeight;
 
     return Container(
+      height: AppValues.cartClearAndCheckoutHeaderHeight,
       padding: EdgeInsets.symmetric(
         horizontal: AppPadding.padding_16,
       ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            ColorUtil.darken(AppColors.darkOrange, 0.3).withOpacity(
-              opacityPercentage < 0.2 ? 0.2 : opacityPercentage,
-            ),
-            AppColors.white,
-          ],
-        ),
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            color: AppColors.black.withOpacity(0.1),
+            blurRadius: 8,
+            spreadRadius: 1,
+          )
+        ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: AppMargin.margin_20,
+          Expanded(
+            child: ClearAllButton(),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: ClearAllButton(),
-              ),
-              SizedBox(
-                width: AppMargin.margin_32,
-              ),
-              Expanded(
-                child: CheckOutButton(opacityPercentage: opacityPercentage),
-              ),
-            ],
+          SizedBox(
+            width: AppMargin.margin_32,
+          ),
+          Expanded(
+            child: CheckOutButton(opacityPercentage: opacityPercentage),
           ),
         ],
       ),
@@ -59,10 +53,10 @@ class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 120;
+  double get maxExtent => AppValues.cartClearAndCheckoutHeaderHeight;
 
   @override
-  double get minExtent => 120;
+  double get minExtent => AppValues.cartClearAndCheckoutHeaderHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
@@ -80,10 +74,13 @@ class CheckOutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_8,
+        vertical: AppPadding.padding_12,
       ),
       decoration: BoxDecoration(
-        color: AppColors.black,
+        color: ColorUtil.darken(
+          AppColors.darkOrange,
+          opacityPercentage,
+        ),
         borderRadius: BorderRadius.circular(40),
       ),
       child: Row(
@@ -93,7 +90,7 @@ class CheckOutButton extends StatelessWidget {
             AppLocale.of().checkOut.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
-              color: ColorUtil.darken(
+              color: ColorUtil.lighten(
                 AppColors.darkOrange,
                 1 - opacityPercentage,
               ),
@@ -104,12 +101,12 @@ class CheckOutButton extends StatelessWidget {
             width: AppMargin.margin_2,
           ),
           Icon(
-            FlutterRemix.arrow_right_line,
-            color: ColorUtil.darken(
+            FlutterRemix.arrow_right_s_line,
+            color: ColorUtil.lighten(
               AppColors.darkOrange,
               1 - opacityPercentage,
             ),
-            size: AppIconSizes.icon_size_16,
+            size: AppIconSizes.icon_size_20,
           ),
         ],
       ),
@@ -124,45 +121,51 @@ class ClearAllButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBouncingButton(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return Center(
-              child: DialogClearCart(
-                mainButtonText: AppLocale.of().clearAll.toUpperCase(),
-                cancelButtonText: AppLocale.of().cancel.toUpperCase(),
-                titleText: AppLocale.of().areYouSureUWantToClearCart,
-                onClear: () {
-                  BlocProvider.of<CartUtilBloc>(context).add(
-                    ClearAllCartEvent(),
-                  );
-                },
-              ),
-            );
-          },
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: AppPadding.padding_8,
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 1,
-            color: AppColors.black,
+    return Container(
+      child: AppBouncingButton(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return Center(
+                child: DialogClearCart(
+                  mainButtonText: AppLocale.of().clearAll.toUpperCase(),
+                  cancelButtonText: AppLocale.of().cancel.toUpperCase(),
+                  titleText: AppLocale.of().areYouSureUWantToClearCart,
+                  onClear: () {
+                    BlocProvider.of<CartUtilBloc>(context).add(
+                      ClearAllCartEvent(),
+                    );
+                  },
+                ),
+              );
+            },
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: AppPadding.padding_12,
           ),
-          borderRadius: BorderRadius.circular(40),
-        ),
-        child: Center(
-          child: Text(
-            AppLocale.of().clearAll.toUpperCase(),
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_10.sp,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
               color: AppColors.black,
-              fontWeight: FontWeight.w500,
             ),
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocale.of().clearAll.toUpperCase(),
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_10.sp,
+                  color: AppColors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
       ),

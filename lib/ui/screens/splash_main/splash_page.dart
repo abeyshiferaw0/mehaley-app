@@ -25,7 +25,12 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: AppColors.pagesBgColor,
       body: Container(
-        color: AppColors.darkOrange,
+        color: AppColors.pagesBgColor,
+        child: Center(
+          child: Image.asset(
+            AppAssets.icAppFullIcon,
+          ),
+        ),
       ),
     );
   }

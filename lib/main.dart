@@ -54,7 +54,6 @@ import 'business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'business_logic/cubits/player_playing_from_cubit.dart';
-import 'business_logic/cubits/search_input_is_searching_cubit.dart';
 import 'config/app_hive_boxes.dart';
 
 void main() async {
@@ -64,7 +63,7 @@ void main() async {
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Elf play',
-    androidNotificationOngoing: true,
+    androidNotificationOngoing: false,
     notificationColor: AppColors.darkOrange,
   );
 
@@ -81,7 +80,7 @@ void main() async {
       );
 
   ///INIT ONE SIGNAl
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
   OneSignal.shared.setAppId(AppStrings.oneSignalId);
 
   ///RUN APP
@@ -232,9 +231,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider<BottomBarSearchCubit>(
               create: (context) => BottomBarSearchCubit(),
             ),
-            BlocProvider(
-              create: (context) => SearchInputIsSearchingCubit(),
-            ),
+
             BlocProvider(
               create: (context) => SongMenuBloc(
                 songMenuRepository: AppRepositories.songMenuRepository,

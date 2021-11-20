@@ -174,7 +174,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
             color: AppColors.lightGrey,
           ),
           SizedBox(
-            height: AppMargin.margin_32,
+            height: AppMargin.margin_16,
           ),
           Container(
             padding: EdgeInsets.symmetric(

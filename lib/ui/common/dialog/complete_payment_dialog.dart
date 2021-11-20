@@ -48,7 +48,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               horizontal: AppMargin.margin_16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.black,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(6),
             ),
             padding: EdgeInsets.all(
@@ -102,13 +102,14 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Material(
+          color: AppColors.white,
           child: Checkbox(
             value: alwaysUseSelected,
-            activeColor: AppColors.darkOrange,
+            //activeColor: AppColors.darkOrange,
             fillColor: MaterialStateProperty.all(
               AppColors.darkOrange,
             ),
-            checkColor: AppColors.black,
+            checkColor: AppColors.white,
             onChanged: (bool? value) {
               setState(() {
                 alwaysUseSelected = value == null ? false : value;
@@ -156,7 +157,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               Text(
                 AppLocale.of().buy.toUpperCase(),
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: AppColors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: AppFontSizes.font_size_10.sp,
                 ),
@@ -166,7 +167,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               Icon(
                 FlutterRemix.arrow_right_line,
-                color: AppColors.black,
+                color: AppColors.white,
                 size: AppIconSizes.icon_size_20,
               ),
             ],
@@ -183,10 +184,10 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.black,
+              AppColors.white,
               Colors.transparent,
               Colors.transparent,
-              AppColors.black,
+              AppColors.white,
             ],
             stops: [0.0, 0.03, 0.98, 1.0],
           ).createShader(bounds);
@@ -201,7 +202,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().amole,
-                imagePath: 'assets/images/ic_amole.png',
+                imagePath: AppAssets.icAmole,
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_AMOLE,
@@ -218,7 +219,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().cbeBirr,
-                imagePath: 'assets/images/ic_cbe_birr.png',
+                imagePath: AppAssets.icCbeBirr,
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_CBE_BIRR,
@@ -236,7 +237,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().helloCash,
-                imagePath: 'assets/images/ic_hello_cash.png',
+                imagePath: AppAssets.icHelloCash,
                 scale: 0.8,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_HELLO_CASH,
@@ -254,7 +255,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().mbirr,
-                imagePath: 'assets/images/ic_mbirr.png',
+                imagePath: AppAssets.icMbirr,
                 scale: 1.3,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_MBIRR,
@@ -271,7 +272,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().visa,
-                imagePath: 'assets/images/ic_visa.png',
+                imagePath: AppAssets.icVisa,
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_VISA,
@@ -288,7 +289,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               ),
               PaymentMethodItem(
                 title: AppLocale.of().mastercard,
-                imagePath: 'assets/images/ic_mastercard.png',
+                imagePath: AppAssets.icMasterCard,
                 scale: 1.0,
                 isSelected: isPaymentSelected(
                   AppPaymentMethods.METHOD_MASTERCARD,
@@ -323,7 +324,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               child: Text(
                 AppLocale.of().chooseYourPaymentMethod,
                 style: TextStyle(
-                  color: AppColors.white,
+                  color: AppColors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: AppFontSizes.font_size_12.sp,
                 ),
@@ -337,7 +338,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
                 },
                 child: Icon(
                   FlutterRemix.close_line,
-                  color: AppColors.white,
+                  color: AppColors.black,
                   size: AppIconSizes.icon_size_24,
                 ),
               ),
@@ -352,6 +353,7 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
               const EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
           child: Text(
             AppLocale.of().chooseYourPaymentMethodMsg,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.txtGrey,
               fontWeight: FontWeight.w400,

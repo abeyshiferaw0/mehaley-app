@@ -132,7 +132,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         visible: showDownloaded,
         child: MenuItem(
           isDisabled: false,
-          hasTopMargin: false,
+          hasTopMargin: true,
           iconColor: widget.downloadedColor,
           icon: FlutterRemix.arrow_down_circle_fill,
           title: AppLocale.of().deleteMezmur,
@@ -169,7 +169,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       visible: showDownloadFailed,
       child: MenuItem(
         isDisabled: false,
-        hasTopMargin: false,
+        hasTopMargin: true,
         iconColor: widget.downloadingFailedColor,
         icon: FlutterRemix.error_warning_fill,
         title: AppLocale.of().retryDownload,
@@ -179,7 +179,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
             ///SHOW RETRYING MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().retryingDownloadMsg,
                 txtColor: AppColors.white,
@@ -206,7 +206,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       visible: showDownloading,
       child: MenuItem(
         isDisabled: false,
-        hasTopMargin: false,
+        hasTopMargin: true,
         iconColor: AppColors.errorRed,
         icon: FlutterRemix.error_warning_fill,
         hasLeadingWidget: true,
@@ -229,7 +229,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       visible: showEmpty,
       child: MenuItem(
         isDisabled: false,
-        hasTopMargin: false,
+        hasTopMargin: true,
         iconColor: AppColors.grey.withOpacity(0.6),
         icon: FlutterRemix.arrow_down_circle_line,
         title: AppLocale.of().downloadMezmur,

@@ -6,6 +6,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -44,6 +45,7 @@ import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/dialog/dialog_permission_permanent_refused.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
 import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/ui/screens/profile/edit_profile_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/create_user_playlist_page.dart';
@@ -52,6 +54,7 @@ import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
@@ -161,33 +164,48 @@ class PagesUtilFunctions {
   static Widget getGroupItemPrice(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
       item as Song;
-      return SmallTextPriceWidget(
-        priceEtb: item.priceEtb,
-        priceUsd: item.priceDollar,
-        isDiscountAvailable: item.isDiscountAvailable,
-        discountPercentage: item.discountPercentage,
-        isFree: item.isFree,
-        isPurchased: item.isBought,
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: AppPadding.padding_2,
+        ),
+        child: SmallTextPriceWidget(
+          priceEtb: item.priceEtb,
+          priceUsd: item.priceDollar,
+          isDiscountAvailable: item.isDiscountAvailable,
+          discountPercentage: item.discountPercentage,
+          isFree: item.isFree,
+          isPurchased: item.isBought,
+        ),
       );
     } else if (groupType == GroupType.PLAYLIST) {
       item as Playlist;
-      return SmallTextPriceWidget(
-        priceEtb: item.priceEtb,
-        priceUsd: item.priceDollar,
-        isDiscountAvailable: item.isDiscountAvailable,
-        discountPercentage: item.discountPercentage,
-        isFree: item.isFree,
-        isPurchased: item.isBought,
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: AppPadding.padding_2,
+        ),
+        child: SmallTextPriceWidget(
+          priceEtb: item.priceEtb,
+          priceUsd: item.priceDollar,
+          isDiscountAvailable: item.isDiscountAvailable,
+          discountPercentage: item.discountPercentage,
+          isFree: item.isFree,
+          isPurchased: item.isBought,
+        ),
       );
     } else if (groupType == GroupType.ALBUM) {
       item as Album;
-      return SmallTextPriceWidget(
-        priceEtb: item.priceEtb,
-        priceUsd: item.priceDollar,
-        isDiscountAvailable: item.isDiscountAvailable,
-        discountPercentage: item.discountPercentage,
-        isFree: item.isFree,
-        isPurchased: item.isBought,
+      return Padding(
+        padding: const EdgeInsets.only(
+          top: AppPadding.padding_2,
+        ),
+        child: SmallTextPriceWidget(
+          priceEtb: item.priceEtb,
+          priceUsd: item.priceDollar,
+          isDiscountAvailable: item.isDiscountAvailable,
+          discountPercentage: item.discountPercentage,
+          isFree: item.isFree,
+          isPurchased: item.isBought,
+        ),
       );
     } else if (groupType == GroupType.ARTIST) {
       return SizedBox();
@@ -261,7 +279,7 @@ class PagesUtilFunctions {
       );
     } else if (groupType == GroupType.PLAYLIST) {
       return TextStyle(
-        color: AppColors.txtGrey,
+        color: AppColors.darkGrey,
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
@@ -639,31 +657,34 @@ class PagesUtilFunctions {
     if (appItemsType == AppItemsType.CATEGORY) {
       item as Category;
 
-      return ColorUtil.darken(
-        ColorUtil.changeColorSaturation(
-          HexColor(item.categoryImage.primaryColorHex),
-          1,
-        ),
-        0.05,
-      );
+      // return ColorUtil.darken(
+      //   ColorUtil.changeColorSaturation(
+      //     HexColor(item.categoryImage.primaryColorHex),
+      //     0.8,
+      //   ),
+      //   0.05,
+      // );
+      return HexColor(item.categoryImage.primaryColorHex);
     } else if (appItemsType == AppItemsType.ARTIST) {
       item as Artist;
-      return ColorUtil.darken(
-        ColorUtil.changeColorSaturation(
-          HexColor(item.artistImages[0].primaryColorHex),
-          1,
-        ),
-        0.05,
-      );
+      // return ColorUtil.darken(
+      //   ColorUtil.changeColorSaturation(
+      //     HexColor(item.artistImages[0].primaryColorHex),
+      //     0.8,
+      //   ),
+      //   0.05,
+      // );
+      return HexColor(item.artistImages[0].primaryColorHex);
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
       item as Song;
-      return ColorUtil.darken(
-        ColorUtil.changeColorSaturation(
-          HexColor(item.albumArt.primaryColorHex),
-          1,
-        ),
-        0.05,
-      );
+      // return ColorUtil.darken(
+      //   ColorUtil.changeColorSaturation(
+      //     HexColor(item.albumArt.primaryColorHex),
+      //     0.8,
+      //   ),
+      //   0.05,
+      // );
+      return HexColor(item.albumArt.primaryColorHex);
     }
     return AppColors.appGradientDefaultColor;
   }
@@ -813,6 +834,8 @@ class PagesUtilFunctions {
   static Widget getSongGridImage(MyPlaylist myPlaylist) {
     if (myPlaylist.playlistImage != null) {
       return AppCard(
+        withShadow: false,
+        radius: 2.0,
         child: CachedNetworkImage(
           width: AppValues.libraryMusicItemSize,
           height: AppValues.libraryMusicItemSize,
@@ -828,6 +851,8 @@ class PagesUtilFunctions {
     if (myPlaylist.gridSongImages.length > 0) {
       if (myPlaylist.gridSongImages.length <= 3) {
         return AppCard(
+          withShadow: false,
+          radius: 2.0,
           child: CachedNetworkImage(
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
@@ -842,31 +867,37 @@ class PagesUtilFunctions {
         );
       }
       if (myPlaylist.gridSongImages.length >= 4) {
-        return GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 1,
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          children: List.generate(
-            4,
-            (index) {
-              return CachedNetworkImage(
-                width: AppValues.libraryMusicItemSize,
-                height: AppValues.libraryMusicItemSize,
-                fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl +
-                    myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
-                placeholder: (context, url) =>
-                    buildImagePlaceHolder(AppItemsType.OTHER),
-                errorWidget: (context, url, e) =>
-                    buildImagePlaceHolder(AppItemsType.OTHER),
-              );
-            },
+        return AppCard(
+          withShadow: false,
+          radius: 2.0,
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 1,
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            children: List.generate(
+              4,
+              (index) {
+                return CachedNetworkImage(
+                  width: AppValues.libraryMusicItemSize,
+                  height: AppValues.libraryMusicItemSize,
+                  fit: BoxFit.cover,
+                  imageUrl: AppApi.baseUrl +
+                      myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
+                  placeholder: (context, url) =>
+                      buildImagePlaceHolder(AppItemsType.OTHER),
+                  errorWidget: (context, url, e) =>
+                      buildImagePlaceHolder(AppItemsType.OTHER),
+                );
+              },
+            ),
           ),
         );
       }
     }
     return AppCard(
+      withShadow: false,
+      radius: 2.0,
       child: CachedNetworkImage(
         width: AppValues.libraryMusicItemSize,
         height: AppValues.libraryMusicItemSize,
@@ -894,13 +925,10 @@ class PagesUtilFunctions {
   }
 
   static String getUserPlaylistDescription(MyPlaylist myPlaylist, context) {
-    if (L10nUtil.translateLocale(myPlaylist.playlistDescriptionText, context)
-        .isNotEmpty) {
-      return L10nUtil.translateLocale(
-          myPlaylist.playlistDescriptionText, context);
-    } else {
-      return L10nUtil.translateLocale(myPlaylist.playlistNameText, context);
-    }
+    return L10nUtil.translateLocale(
+      myPlaylist.playlistDescriptionText,
+      context,
+    );
   }
 
   static String getUserPlaylistOwner(MyPlaylist myPlaylist, context) {
@@ -1049,17 +1077,17 @@ class PagesUtilFunctions {
 
   static String getPaymentMethodIcon(AppPaymentMethods appPaymentMethod) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return 'assets/images/ic_hello_cash.png';
+      return 'assets/icons/payment_icons/ic_hello_cash.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return 'assets/images/ic_mbirr.png';
+      return 'assets/icons/payment_icons/ic_mbirr.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return 'assets/images/ic_cbe_birr.png';
+      return 'assets/icons/payment_icons/ic_cbe_birr.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return 'assets/images/ic_amole.png';
+      return 'assets/icons/payment_icons/ic_amole.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return 'assets/images/ic_visa.png';
+      return 'assets/icons/payment_icons/ic_visa.png';
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return 'assets/images/ic_mastercard.png';
+      return 'assets/icons/payment_icons/ic_mastercard.png';
     } else {
       return '';
     }
@@ -1169,5 +1197,39 @@ class PagesUtilFunctions {
       'check out my website https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
       subject: 'Look what I made!',
     );
+  }
+
+  static SystemUiOverlayStyle getStatusBarStyle() {
+    return SystemUiOverlayStyle.light;
+  }
+
+  static getIsExplicitTag(GroupType groupType, item) {
+    if (groupType == GroupType.SONG) {
+      item as Song;
+      if (item.isOnlyOnElf) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: AppPadding.padding_4,
+          ),
+          child: SongItemBadge(
+            tag: AppLocale.of().onlyOnElf.toUpperCase(),
+          ),
+        );
+      }
+    }
+    return SizedBox();
+  }
+
+  static Future<String> getAppVersionNumber() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    print("packageInfo=> ${packageInfo.packageName}");
+
+    return version;
   }
 }

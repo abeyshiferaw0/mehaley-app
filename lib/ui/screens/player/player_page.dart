@@ -40,7 +40,7 @@ class _PlayerPageState extends State<PlayerPage> {
         quotesDataRepository: AppRepositories.quotesDataRepository,
       ),
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: AppColors.black,
         body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
           listener: playerPageListeners,
           child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(

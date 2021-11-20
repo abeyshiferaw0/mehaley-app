@@ -39,6 +39,7 @@ class BuyItemBtnWidget extends StatelessWidget {
         isFree: isFree,
         useLargerText: true,
         showDiscount: showDiscount,
+        useDimColor: true,
         isDiscountAvailable: isDiscountAvailable,
         discountPercentage: discountPercentage,
         isPurchased: isBought,
@@ -68,7 +69,7 @@ class BuyItemBtnWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.lightGrey,
+                  color: AppColors.white,
                 ),
               ),
               SizedBox(width: AppMargin.margin_4),

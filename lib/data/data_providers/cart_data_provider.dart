@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/util/api_util.dart';
@@ -178,6 +179,15 @@ class CartDataProvider {
     }
 
     return response;
+  }
+
+  Future<void> clearRecentlyCartCache() async {
+    await AppHiveBoxes.instance.recentlyCartAddedAlbumBox.clear();
+    await AppHiveBoxes.instance.recentlyCartAddedPlaylistBox.clear();
+    await AppHiveBoxes.instance.recentlyCartAddedSongBox.clear();
+    await AppHiveBoxes.instance.recentlyCartRemovedAlbumBox.clear();
+    await AppHiveBoxes.instance.recentlyCartRemovedPlaylistBox.clear();
+    await AppHiveBoxes.instance.recentlyCartRemovedSongBox.clear();
   }
 
   cancel() {

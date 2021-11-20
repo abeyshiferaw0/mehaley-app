@@ -55,7 +55,7 @@ class SignUpButton extends StatelessWidget {
                         height: AppIconSizes.icon_size_24,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          color: AppColors.black,
+                          color: AppColors.white,
                         ),
                       );
                     } else {
@@ -75,7 +75,7 @@ class SignUpButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
+                  color: AppColors.white,
                 ),
               ),
             ),

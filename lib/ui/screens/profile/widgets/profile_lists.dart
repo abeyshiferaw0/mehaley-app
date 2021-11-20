@@ -87,6 +87,7 @@ class ProfileLists extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: buildPurchasedAlbumsHorizontal(profilePageData.boughtAlbums),
       ),
     );

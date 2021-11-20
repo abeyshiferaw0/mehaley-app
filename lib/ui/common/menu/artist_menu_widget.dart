@@ -6,7 +6,6 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/menu/menu_items/artist_follow_menu_item.dart';
-import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
@@ -48,11 +47,11 @@ class ArtistMenuWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(
-                height: ScreenUtil(context: context).getScreenHeight() * 0.2,
+                height: AppMargin.margin_16,
               ),
               buildMenuHeader(context),
               SizedBox(
-                height: AppMargin.margin_32,
+                height: AppMargin.margin_8,
               ),
               Container(
                 padding: EdgeInsets.symmetric(
@@ -84,10 +83,11 @@ class ArtistMenuWidget extends StatelessWidget {
   Container buildMenuHeader(context) {
     return Container(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(width: AppMargin.margin_16),
           AppCard(
             withShadow: false,
             radius: 100,
@@ -108,52 +108,59 @@ class ArtistMenuWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: AppMargin.margin_16),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: AppFontSizes.font_size_12.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: AppMargin.margin_2),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          SizedBox(width: AppMargin.margin_16),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              noOfAlbum != null
-                  ? Text(
-                      AppLocale.of().noOfAlbum(
-                        noOfAlbums: noOfAlbum.toString(),
-                      ),
-                      style: TextStyle(
-                        color: AppColors.darkGrey,
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    )
-                  : SizedBox(),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
-                child: Icon(
-                  Icons.circle,
-                  color: AppColors.darkGrey,
-                  size: AppIconSizes.icon_size_4,
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: AppFontSizes.font_size_12.sp,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              noOfSong != null
-                  ? Text(
-                      AppLocale.of().noOfSongs(
-                        noOfSong: noOfSong.toString(),
-                      ),
-                      style: TextStyle(
-                        color: AppColors.darkGrey,
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    )
-                  : SizedBox(),
+              SizedBox(height: AppMargin.margin_4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  noOfAlbum != null
+                      ? Text(
+                          AppLocale.of().noOfAlbum(
+                            noOfAlbums: noOfAlbum.toString(),
+                          ),
+                          style: TextStyle(
+                            color: AppColors.darkGrey,
+                            fontSize: AppFontSizes.font_size_10.sp,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        )
+                      : SizedBox(),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
+                    child: Icon(
+                      Icons.circle,
+                      color: AppColors.darkGrey,
+                      size: AppIconSizes.icon_size_4,
+                    ),
+                  ),
+                  noOfSong != null
+                      ? Text(
+                          AppLocale.of().noOfSongs(
+                            noOfSong: noOfSong.toString(),
+                          ),
+                          style: TextStyle(
+                            color: AppColors.darkGrey,
+                            fontSize: AppFontSizes.font_size_10.sp,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        )
+                      : SizedBox(),
+                ],
+              ),
             ],
           ),
         ],

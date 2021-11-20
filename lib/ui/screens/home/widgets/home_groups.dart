@@ -48,7 +48,10 @@ class HomeGroups extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: AppMargin.margin_16),
+          padding: EdgeInsets.only(
+            left: AppMargin.margin_16,
+            top: AppMargin.margin_32,
+          ),
           child: Text(
             groupTitle,
             style: TextStyle(
@@ -66,6 +69,7 @@ class HomeGroups extends StatelessWidget {
             scrollDirection: Axis.vertical,
             physics: NeverScrollableScrollPhysics(),
             itemCount: groupItems.length,
+            padding: EdgeInsets.zero,
             itemBuilder: (BuildContext context, int index) {
               return ItemCustomGroupGrid(
                 onTap: () {
@@ -91,7 +95,7 @@ class HomeGroups extends StatelessWidget {
               );
             },
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: (1 / 1.3),
+              childAspectRatio: (1 / 1.2),
               crossAxisSpacing: AppMargin.margin_16,
               mainAxisSpacing: AppMargin.margin_16,
               crossAxisCount: 2,
@@ -107,7 +111,10 @@ class HomeGroups extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: AppMargin.margin_16),
+          padding: EdgeInsets.only(
+            left: AppMargin.margin_16,
+            top: AppMargin.margin_32,
+          ),
           child: Text(
             groupTitle,
             style: TextStyle(
@@ -135,19 +142,18 @@ class HomeGroups extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: AppMargin.margin_32),
         GroupHeaderWidget(
           groupHeaderImageUrl: groupHeaderImageUrl,
           groupSubTitle: groupSubTitle,
           groupTitle: groupTitle,
         ),
-        Container(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: buildGroupItems(groupItems, context),
-            ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: buildGroupItems(groupItems, context),
           ),
         )
       ],

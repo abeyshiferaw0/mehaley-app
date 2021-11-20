@@ -1,6 +1,5 @@
 abstract class AppLocalizations {
   String get appName;
-  String get appVersion;
   String get byAppName;
   String get appTermsAndCondition;
 
@@ -321,6 +320,11 @@ abstract class AppLocalizations {
   String get shareAppMsg;
   String get retryingDownloadMsg;
   String get play;
+  String get onlyOnElf;
+  String get welcome;
+  String get google;
+  String get facebook;
+  String get apple;
 
   String noOfSongs({required String noOfSong});
 
@@ -369,5 +373,9 @@ abstract class AppLocalizations {
 
   String numberOfMezmurs({required String numberOf});
 
-  String removeedFromCart({required String removedName});
+  String removedFromCart({required String removedName});
+
+  String appNameAndVersion({required String versionCode});
+
+  String appVersion({required String versionCode});
 }

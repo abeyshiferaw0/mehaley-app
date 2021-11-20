@@ -9,7 +9,6 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/user_playlist_menu_widget.dart';
 import 'package:mehaley/ui/screens/user_playlist/widget/user_playlist_info_pages.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -50,42 +49,27 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
         if (state is UserPlaylistPageDominantColorChangedState) {
           dominantColor = state.color;
         }
-        return Stack(
-          children: [
-            AnimatedSwitcher(
-              switchInCurve: Curves.easeIn,
-              switchOutCurve: Curves.easeOut,
-              duration: Duration(
-                milliseconds: AppValues.colorChangeAnimationDuration,
-              ),
-              child: Container(
-                height: 450,
-                decoration: BoxDecoration(
-                  gradient: AppGradients()
-                      .getUserPlaylistHeaderGradient(dominantColor),
+        return Container(
+          height: AppValues.userPlaylistHeaderSliverHeight,
+          color: AppColors.white,
+          child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                buildAppBar(
+                  widget.shrinkPercentage,
+                  widget.myPlaylist,
                 ),
-                child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
-                  child: Column(
-                    children: [
-                      buildAppBar(
-                        widget.shrinkPercentage,
-                        widget.myPlaylist,
-                      ),
-                      Opacity(
-                        opacity: 1 - widget.shrinkPercentage,
-                        child: buildUserPlaylistInfo(
-                          widget.myPlaylist,
-                          widget.songs,
-                        ),
-                      )
-                    ],
+                Opacity(
+                  opacity: 1 - widget.shrinkPercentage,
+                  child: buildUserPlaylistInfo(
+                    widget.myPlaylist,
+                    widget.songs,
                   ),
-                ),
-              ),
+                )
+              ],
             ),
-            //buildPlayShuffleButton()
-          ],
+          ),
         );
       },
     );
@@ -93,7 +77,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
 
   Container buildAppBar(double shrinkPercentage, MyPlaylist myPlaylist) {
     return Container(
-      height: 100,
+      height: AppValues.userPlaylistHeaderAppBarSliverHeight,
       //color: AppColors.black.withOpacity(shrinkPercentage),
       padding: EdgeInsets.only(top: AppPadding.padding_28),
       child: Row(
@@ -173,9 +157,10 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
     return Transform.translate(
       //scale: (1 - widget.shrinkPercentage),
       //angle: (1 - widget.shrinkPercentage),
-      offset: Offset(0, (widget.shrinkPercentage) * 30),
+      offset: Offset(0, (widget.shrinkPercentage) * -50),
       child: Container(
-        height: 350,
+        height: AppValues.userPlaylistHeaderSliverHeight -
+            AppValues.userPlaylistHeaderAppBarSliverHeight,
         child: Column(
           children: [
             Expanded(
@@ -198,13 +183,15 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
               ),
             ),
             CirclePageIndicator(
-              dotColor: AppColors.grey,
+              dotColor: AppColors.darkGrey,
               selectedDotColor: AppColors.black,
               currentPageNotifier: pageNotifier,
-              size: 6,
+              size: AppIconSizes.icon_size_6,
               itemCount: 2,
             ),
-            SizedBox(height: AppMargin.margin_12),
+            SizedBox(
+              height: AppMargin.margin_12,
+            ),
           ],
         ),
       ),

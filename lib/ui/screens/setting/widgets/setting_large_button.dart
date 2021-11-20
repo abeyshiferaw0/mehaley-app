@@ -55,7 +55,7 @@ class SettingLargeButton extends StatelessWidget {
             width: AppMargin.margin_16,
           ),
           Icon(
-            FlutterRemix.arrow_right_line,
+            FlutterRemix.arrow_right_s_line,
             color: AppColors.darkGrey,
             size: AppIconSizes.icon_size_24,
           ),

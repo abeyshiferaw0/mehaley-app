@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/business_logic/cubits/search_page_dominant_color_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -16,14 +14,12 @@ import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
 import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
-import 'package:mehaley/ui/screens/search/widgets/search_header_gradient.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_result_footer_button.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_top_artist_song_item.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
@@ -65,37 +61,16 @@ class _SearchResultListState extends State<SearchResultList> {
 
   @override
   Widget build(BuildContext context) {
-    //GET SCREEN HEIGHT
-    double screenHeight = ScreenUtil(context: context).getScreenHeight();
-
-    return Stack(
-      children: [
-        BlocBuilder<SearchPageDominantColorCubit, Color>(
-          builder: (context, state) {
-            return SearchHeaderGradient(
-              height: screenHeight - (screenHeight * 0.3),
-              color: state,
-            );
-          },
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: buildSearchResultColumnList(
+          resultItems,
+          searchPageResultData.topArtistData,
+          searchKey,
         ),
-        SafeArea(
-          child: Container(
-            margin: const EdgeInsets.only(
-                top: AppValues.searchBarHeight + AppMargin.margin_8),
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: buildSearchResultColumnList(
-                  resultItems,
-                  searchPageResultData.topArtistData,
-                  searchKey,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 

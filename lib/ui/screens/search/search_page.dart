@@ -13,9 +13,11 @@ import 'package:mehaley/data/models/category.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_app_bar.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_front_page_groups.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_page_persistant_header_deligate.dart';
 import 'package:mehaley/util/screen_util.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -32,8 +34,9 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     AppRouterPaths.routeObserver.subscribe(this, ModalRoute.of(context)!);
 
     ///CANCEL PAGE REQUEST
-    BlocProvider.of<SearchFrontPageBloc>(context)
-        .add(CancelSearchFrontPageEvent());
+    BlocProvider.of<SearchFrontPageBloc>(context).add(
+      CancelSearchFrontPageEvent(),
+    );
   }
 
   @override
@@ -56,12 +59,6 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   }
 
   @override
-  void didPush() {
-    // TODO: implement didPush
-    super.didPush();
-  }
-
-  @override
   void dispose() {
     AppRouterPaths.routeObserver.unsubscribe(this);
     super.dispose();
@@ -79,48 +76,70 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     double screenHeight = ScreenUtil(context: context).getScreenHeight() * 0.7;
     return Scaffold(
       backgroundColor: AppColors.pagesBgColor,
-      body: Container(
-        padding: EdgeInsets.only(
-          left: AppPadding.padding_16,
-          right: AppPadding.padding_16,
-          top: AppPadding.padding_32,
-        ),
+      body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            //SEARCH PAGE HEADER
-            SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_32)),
-            buildSearchElf(),
-            SliverToBoxAdapter(child: SizedBox(height: AppMargin.margin_16)),
+            //APP BAR
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: AppMargin.margin_32,
+              ),
+            ),
+
+            ///SEARCH PAGE HEADER
+            SliverToBoxAdapter(
+              child: HomeAppBar(
+                leading: buildSearchElf(),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: AppMargin.margin_16,
+              ),
+            ),
+
             buildSearchHeader(),
 
-            ///SEARCH PAGE REST SECTIONS
             SliverToBoxAdapter(
-              child: BlocBuilder<SearchFrontPageBloc, SearchFrontPageState>(
-                builder: (context, state) {
-                  if (state is SearchFrontPageLoadingState) {
-                    return Container(
-                      height: screenHeight,
-                      child: AppLoading(size: AppValues.loadingWidgetSize),
-                    );
-                  }
-                  if (state is SearchFrontPageLoadingErrorState) {
-                    return AppError(
-                      bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
-                      height: screenHeight,
-                      onRetry: () {
-                        BlocProvider.of<SearchFrontPageBloc>(context).add(
-                          LoadSearchFrontPageEvent(),
-                        );
-                      },
-                    );
-                  }
-                  if (state is SearchFrontPageLoadedState) {
-                    return buildSearchPageLoaded(state);
-                  }
-                  return AppLoading(size: AppValues.loadingWidgetSize);
-                },
+              child: SizedBox(
+                height: AppMargin.margin_16,
               ),
-            )
+            ),
+
+            ///SEARCH PAGE REST SECTIONS
+            SliverPadding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppPadding.padding_16,
+              ),
+              sliver: SliverToBoxAdapter(
+                child: BlocBuilder<SearchFrontPageBloc, SearchFrontPageState>(
+                  builder: (context, state) {
+                    if (state is SearchFrontPageLoadingState) {
+                      return Container(
+                        height: screenHeight,
+                        child: AppLoading(size: AppValues.loadingWidgetSize),
+                      );
+                    }
+                    if (state is SearchFrontPageLoadingErrorState) {
+                      return AppError(
+                        bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
+                        height: screenHeight,
+                        onRetry: () {
+                          BlocProvider.of<SearchFrontPageBloc>(context).add(
+                            LoadSearchFrontPageEvent(),
+                          );
+                        },
+                      );
+                    }
+                    if (state is SearchFrontPageLoadedState) {
+                      return buildSearchPageLoaded(state);
+                    }
+                    return AppLoading(size: AppValues.loadingWidgetSize);
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -157,7 +176,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildAllCategoriesSection({required List<Category> allCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocale.of().allCategories,
+      mainTitle: AppLocale.of().allCategories.toUpperCase(),
       appItemsType: AppItemsType.CATEGORY,
       items: allCategories,
     );
@@ -165,7 +184,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopCategoriesSection({required List<Category> topCategories}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocale.of().topCategories,
+      mainTitle: AppLocale.of().topCategories.toUpperCase(),
       appItemsType: AppItemsType.CATEGORY,
       items: topCategories,
     );
@@ -173,7 +192,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
   Widget buildTopMusicSection({required List<Song> topSongs}) {
     return SearchFrontPageGroups(
-      mainTitle: AppLocale.of().topMezmurs,
+      mainTitle: AppLocale.of().topMezmurs.toUpperCase(),
       appItemsType: AppItemsType.SINGLE_TRACK,
       items: topSongs,
     );
@@ -194,15 +213,13 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
     );
   }
 
-  SliverToBoxAdapter buildSearchElf() {
-    return SliverToBoxAdapter(
-      child: Text(
-        AppLocale.of().searchTitle,
-        style: TextStyle(
-          fontSize: AppFontSizes.font_size_28,
-          fontWeight: FontWeight.w600,
-          color: AppColors.black,
-        ),
+  Text buildSearchElf() {
+    return Text(
+      AppLocale.of().searchTitle,
+      style: TextStyle(
+        fontSize: AppFontSizes.font_size_18.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.black,
       ),
     );
   }

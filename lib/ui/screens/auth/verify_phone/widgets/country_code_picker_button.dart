@@ -48,7 +48,7 @@ class CountryPickerButton extends StatelessWidget {
             width: AppMargin.margin_4,
           ),
           Icon(
-            FlutterRemix.arrow_down_fill,
+            FlutterRemix.arrow_down_s_fill,
             size: AppFontSizes.font_size_12,
             color: AppColors.black,
           ),

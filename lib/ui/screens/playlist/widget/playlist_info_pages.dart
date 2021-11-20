@@ -222,34 +222,12 @@ class PlaylistInfoPageTwo extends StatelessWidget {
     );
   }
 
-  Container buildPlaylistOwnerProfilePic() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.userPlaylistImageSize / 2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 0),
-            spreadRadius: 2,
-            blurRadius: 4,
-            color: AppColors.black.withOpacity(0.2),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.userPlaylistImageSize / 2),
-        ),
-        child: CachedNetworkImage(
-          width: AppValues.userPlaylistImageSize,
-          height: AppValues.userPlaylistImageSize,
-          fit: BoxFit.cover,
-          imageUrl: PagesUtilFunctions.getPlaylistOwnerProfilePic(playlist),
-          placeholder: (context, url) => buildItemsImagePlaceHolder(),
-          errorWidget: (context, url, e) => buildItemsImagePlaceHolder(),
-        ),
-      ),
+  Image buildPlaylistOwnerProfilePic() {
+    return Image.asset(
+      AppAssets.icAppIconOnly,
+      fit: BoxFit.contain,
+      width: AppValues.userPlaylistImageSize * 0.5,
+      height: AppValues.userPlaylistImageSize * 0.5,
     );
   }
 

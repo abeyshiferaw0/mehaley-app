@@ -35,7 +35,7 @@ class PaymentMethodItem extends StatelessWidget {
           horizontal: AppPadding.padding_16,
         ),
         decoration: BoxDecoration(
-          color: AppColors.black,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(6),
           border: Border.all(
             color: isSelected
@@ -75,7 +75,7 @@ class PaymentMethodItem extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: AppColors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: AppFontSizes.font_size_12.sp,
                     ),

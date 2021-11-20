@@ -6,7 +6,8 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String baseUrl = 'http://13.58.31.136:8000';
+  //static const String baseUrl = 'http://13.58.31.136:8000';
+  static const String baseUrl = 'http://192.168.6.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
 
@@ -37,6 +38,9 @@ class AppApi {
 }
 
 class AppValues {
+  //AUTH PAGES
+  static const double signUpAppIconSize = 130;
+
   //HOM PAGE ITEMS
   static const double recentlyPlayedItemSize = 120;
   static const double customGroupItemSize = 170;
@@ -66,6 +70,10 @@ class AppValues {
   static const double playlistHeaderSliverSize = 340;
   static const double playlistHeaderAppBarSliverSize = 60;
 
+  //USER PLAYLIST PAGE
+  static const double userPlaylistHeaderSliverHeight = 350;
+  static const double userPlaylistHeaderAppBarSliverHeight = 100;
+
   //ALBUM PAGE
   static const double albumPageImageSize = 170;
 
@@ -80,6 +88,8 @@ class AppValues {
   static const double artistAlbumItemSize = 70;
   static const double featuringArtistItemImageSize = 130;
   static const double similarItemImageSize = 130;
+  static const double artistSliverHeaderHeight = 360;
+  static const double artistSliverHeaderMinHeight = 120;
 
   //LIBRARY PAGE
   static const double librarySmallTabsHeight = 35;
@@ -96,7 +106,8 @@ class AppValues {
   static const double categorySongItemSize = 60;
 
   //SEARCH PAGE
-  static const double searchPersistentSliverHeaderHeight = 60;
+  static const double searchPersistentSliverHeaderHeight = 80;
+  static const double searchPersistentSliverInputHeaderHeight = 90;
   static const double searchFrontPageItemsImageSize = 80;
   static const double searchResultMicButtonSize = 60;
   static const double searchBarHeight = 58.0;
@@ -105,9 +116,13 @@ class AppValues {
   //PROFILE PAGE
   static const double profilePagePicSize = 90;
   static const double editProfileImageSize = 160;
+  static const double profilePageSliverHeaderHeight = 320;
+  static const double profilePageSliverHeaderAppBarHeight = 80;
+  static const double userProfileButtonImageSize = 65;
 
   //CART PAGE
   static const double cartItemsSize = 120;
+  static const double cartClearAndCheckoutHeaderHeight = 100;
 
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';
@@ -160,7 +175,7 @@ class AppValues {
 
   //OTHER
   static const double previewModeDialogAppIconSize = 40;
-  static const double loadingWidgetSize = 160;
+  static const double loadingWidgetSize = 100;
   static const int pageSize = 25;
   static const int colorChangeAnimationDuration = 500;
   static const int buttonBouncingDurationInMili = 200;
@@ -182,6 +197,8 @@ class AppValues {
   static const double previewDialogSongItemSize = 60;
   static const int songSyncTimerGapInSeconds = 120;
 
+  static const double appSplashIconSize = 150;
+
   //static const String languageRadioGroupValue = 'LANGUAGE_RADIO';
 }
 
@@ -198,6 +215,7 @@ class AppIconSizes {
   static const double icon_size_36 = 36;
   static const double icon_size_16 = 16;
   static const double icon_size_4 = 4;
+  static const double icon_size_40 = 40;
   static const double icon_size_30 = 30;
   static const double icon_size_10 = 10;
   static const double icon_size_6 = 6;

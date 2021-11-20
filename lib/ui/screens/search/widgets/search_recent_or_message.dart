@@ -39,18 +39,14 @@ class SearchRecentOrMessage extends StatelessWidget {
     );
   }
 
-  Container buildRecentItems(List<dynamic> recentItems, BuildContext context) {
+  SingleChildScrollView buildRecentItems(
+      List<dynamic> recentItems, BuildContext context) {
     //ADD CLEAR ALL RECENT BUTTON
-    return Container(
-      margin: EdgeInsets.only(
-        top: AppValues.searchBarHeight * 2,
-      ),
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: getRecentItems(recentItems, context),
-        ),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: getRecentItems(recentItems, context),
       ),
     );
   }

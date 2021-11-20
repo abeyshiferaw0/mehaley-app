@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -12,7 +11,7 @@ import 'package:mehaley/data/models/api_response/settings_page_data.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/app_subscribe_card.dart';
-import 'package:mehaley/ui/common/dialog/complete_payment_dialog.dart';
+import 'package:mehaley/ui/common/dialog/prefred_payment_method_dialog.dart';
 import 'package:mehaley/ui/screens/setting/widgets/download_quality_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/drop_down_options_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/elf_info_widget.dart';
@@ -57,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
             if (state is OneSignalTagAddingError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnectMsg,
                   txtColor: AppColors.white,
@@ -71,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
             if (state is PreferredPaymentMethodChangedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.blue,
+                  bgColor: AppColors.black.withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().preferredPaymentChangedTo(
                     paymentName: PagesUtilFunctions.getPaymentMethodName(
@@ -90,10 +89,8 @@ class _SettingsPageState extends State<SettingsPage> {
         backgroundColor: AppColors.pagesBgColor,
         appBar: AppBar(
           //brightness: Brightness.dark,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.light,
-          ),
-          backgroundColor: AppColors.lightGrey,
+          systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+          backgroundColor: AppColors.white,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -164,14 +161,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         );
                       },
                     ),
-                    SizedBox(height: AppMargin.margin_16),
+                    SizedBox(height: AppMargin.margin_20),
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
                       onLanguageChanged: () {
                         setState(() {});
                       },
                     ),
-                    SizedBox(height: AppMargin.margin_16),
+                    SizedBox(height: AppMargin.margin_20),
                     SettingLargeButton(
                       title: AppLocale.of().preferredPaymentMethod,
                       subTitle: AppLocale.of().chooseYourPreferredMethod,
@@ -179,8 +176,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return CompletePaymentDialog();
-                            //return PreferredPaymentDialog();
+                            //return CompletePaymentDialog();
+                            return PreferredPaymentDialog();
                           },
                         );
                       },
@@ -232,7 +229,7 @@ class _SettingsPageState extends State<SettingsPage> {
           builder: (context, state) {
             if (state is OneSignalTagAdding) {
               return Container(
-                color: AppColors.white.withOpacity(0.4),
+                color: AppColors.black.withOpacity(0.4),
                 child: AppLoading(size: AppValues.loadingWidgetSize / 2),
               );
             }

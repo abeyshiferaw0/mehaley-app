@@ -138,6 +138,8 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppCard(
+              withShadow: false,
+              radius: 6.0,
               child: Container(
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,

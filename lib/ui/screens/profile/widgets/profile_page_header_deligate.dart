@@ -10,10 +10,10 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/profile_menu_widget.dart';
 import 'package:mehaley/ui/common/user_profile_pic.dart';
 import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -39,10 +39,10 @@ class ProfilePageHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 380;
+  double get maxExtent => AppValues.profilePageSliverHeaderHeight;
 
   @override
-  double get minExtent => 80;
+  double get minExtent => AppValues.profilePageSliverHeaderAppBarHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
@@ -68,10 +68,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 380,
-      decoration: BoxDecoration(
-        gradient: AppGradients().getProfilePageGradient(widget.dominantColor),
-      ),
+      height: AppValues.profilePageSliverHeaderHeight,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +89,8 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         child: Opacity(
           opacity: 1 - shrinkPercentage,
           child: Container(
-            height: 320,
+            height: AppValues.profilePageSliverHeaderHeight -
+                AppValues.profilePageSliverHeaderAppBarHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -180,90 +178,72 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
     );
   }
 
-  Stack buildAppBar(double shrinkPercentage, mContext) {
-    return Stack(
-      children: [
-        Opacity(
-          opacity: shrinkPercentage,
-          child: Container(
-            height: 80,
-            color: widget.dominantColor,
+  AppBar buildAppBar(double shrinkPercentage, mContext) {
+    return AppBar(
+      backgroundColor: widget.dominantColor.withOpacity(shrinkPercentage),
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+      shadowColor: AppColors.transparent,
+      leading: IconButton(
+        onPressed: () {
+          widget.onBackPress();
+        },
+        icon: Icon(
+          FlutterRemix.arrow_left_line,
+          color: ColorUtil.darken(
+            AppColors.white,
+            1 - shrinkPercentage,
           ),
+          size: AppIconSizes.icon_size_24,
         ),
-        Container(
-          height: 80,
-          child: SafeArea(
-            child: Stack(
-              //  crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    onPressed: () {
-                      widget.onBackPress();
-                    },
-                    icon: Icon(
-                      FlutterRemix.arrow_left_line,
-                      color: AppColors.black,
-                      size: AppIconSizes.icon_size_24,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Opacity(
-                    opacity: shrinkPercentage,
-                    child: BlocBuilder<AppUserWidgetsCubit, AppUser>(
-                      builder: (context, state) {
-                        return Text(
-                          AuthUtil.getUserName(state),
-                          style: TextStyle(
-                            fontSize: AppFontSizes.font_size_12.sp,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.black,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppPadding.padding_4),
-                    child: AppBouncingButton(
-                      onTap: () {
-                        PagesUtilFunctions.showMenuSheet(
-                          context: mContext,
-                          child: ProfileMenuWidget(
-                            onUpdateSuccess: (AppUser appUser) {
-                              ///UPDATE USER LOCALLY
-                              BlocProvider.of<AppUserWidgetsCubit>(context)
-                                  .updateAppUser(appUser);
+      ),
+      title: Opacity(
+        opacity: shrinkPercentage,
+        child: BlocBuilder<AppUserWidgetsCubit, AppUser>(
+          builder: (context, state) {
+            return Text(
+              AuthUtil.getUserName(state),
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_12.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.white,
+              ),
+            );
+          },
+        ),
+      ),
+      centerTitle: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.padding_4),
+          child: AppBouncingButton(
+            onTap: () {
+              PagesUtilFunctions.showMenuSheet(
+                context: mContext,
+                child: ProfileMenuWidget(
+                  onUpdateSuccess: (AppUser appUser) {
+                    ///UPDATE USER LOCALLY
+                    BlocProvider.of<AppUserWidgetsCubit>(context)
+                        .updateAppUser(appUser);
 
-                              ///CHANGE DOMINANT COLOR
-                              BlocProvider.of<PagesDominantColorBloc>(context)
-                                  .add(
-                                UserProfilePageDominantColorChanged(
-                                  dominantColor: AuthUtil.getDominantColor(
-                                      BlocProvider.of<AppUserWidgetsCubit>(
-                                              context)
-                                          .state),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        FlutterRemix.more_2_line,
-                        color: AppColors.black,
-                        size: AppIconSizes.icon_size_24,
+                    ///CHANGE DOMINANT COLOR
+                    BlocProvider.of<PagesDominantColorBloc>(context).add(
+                      UserProfilePageDominantColorChanged(
+                        dominantColor: AuthUtil.getDominantColor(
+                            BlocProvider.of<AppUserWidgetsCubit>(context)
+                                .state),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              ],
+              );
+            },
+            child: Icon(
+              FlutterRemix.more_2_line,
+              color: ColorUtil.darken(
+                AppColors.white,
+                1 - shrinkPercentage,
+              ),
+              size: AppIconSizes.icon_size_24,
             ),
           ),
         )

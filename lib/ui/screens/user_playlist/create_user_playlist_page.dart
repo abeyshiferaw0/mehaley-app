@@ -75,7 +75,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToCreatePlaylist,
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -93,7 +93,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   context,
                 ),
               ),
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: true,
               iconColor: AppColors.darkOrange,
               icon: FlutterRemix.checkbox_circle_fill,
@@ -165,7 +165,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
   Container buildPostingPlaylistLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.5),
+        color: AppColors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(

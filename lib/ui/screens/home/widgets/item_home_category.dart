@@ -38,14 +38,20 @@ class ItemHomeCategory extends StatelessWidget {
                 fit: BoxFit.cover,
                 height: AppValues.homeCategoriesItemHeight,
                 width: AppValues.homeCategoriesItemWidth,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
                 errorWidget: (context, url, error) =>
                     buildItemsImagePlaceHolder(),
               ),
               Container(
-                height: AppValues.homeCategoriesItemHeight,
-                width: AppValues.homeCategoriesItemWidth,
-                color: AppColors.lightGrey,
+                color: AppColors.black.withOpacity(0.35),
               ),
               Padding(
                 padding: const EdgeInsets.all(AppPadding.padding_8),
@@ -59,7 +65,7 @@ class ItemHomeCategory extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: AppColors.white,
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w600,
                     ),

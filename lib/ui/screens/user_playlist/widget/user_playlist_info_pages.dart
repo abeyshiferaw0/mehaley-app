@@ -33,18 +33,18 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //ALBUM ART
-            SizedBox(
-              height: AppMargin.margin_8,
-            ),
-            Container(
-              color: AppColors.txtGrey,
-              width: AppValues.playlistPageOneImageSize,
-              height: AppValues.playlistPageOneImageSize,
-              child: PagesUtilFunctions.getSongGridImage(
-                myPlaylist,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: Container(
+                color: AppColors.txtGrey,
+                width: AppValues.playlistPageOneImageSize,
+                height: AppValues.playlistPageOneImageSize,
+                child: PagesUtilFunctions.getSongGridImage(
+                  myPlaylist,
+                ),
               ),
             ),
-            SizedBox(height: AppMargin.margin_20),
+            SizedBox(height: AppMargin.margin_16),
             //PLAYLIST TITLE
             Text(
               L10nUtil.translateLocale(myPlaylist.playlistNameText, context),
@@ -52,12 +52,12 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: AppFontSizes.font_size_16.sp,
+                fontSize: AppFontSizes.font_size_12.sp,
                 color: AppColors.black,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: AppMargin.margin_8),
+            SizedBox(height: AppMargin.margin_4),
             Text(
               PagesUtilFunctions.getUserPlaylistByText(
                 myPlaylist,
@@ -89,23 +89,49 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: AppMargin.margin_32),
-          buildUserPlaylistDescription(context),
-          SizedBox(height: AppMargin.margin_32),
-          Text(
-            AppLocale.of().playlistBy.toUpperCase(),
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_10,
-              color: AppColors.darkGrey,
-              letterSpacing: 0.3,
-              fontWeight: FontWeight.w400,
+          buildUserPlaylistNameAndDescription(context),
+          Expanded(
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  buildUserPlaylistOwnerProfilePic(context),
+                  SizedBox(
+                    width: AppMargin.margin_12,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocale.of().playlistBy,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_8.sp,
+                          color: AppColors.darkGrey,
+                          letterSpacing: 0.3,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppMargin.margin_4,
+                      ),
+                      Text(
+                        PagesUtilFunctions.getUserPlaylistOwner(
+                          myPlaylist,
+                          context,
+                        ),
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontSize: AppFontSizes.font_size_12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(height: AppMargin.margin_12),
-          buildUserPlaylistOwnerProfilePic(context),
-          SizedBox(height: AppMargin.margin_16),
-          buildProfileOwnerNameTag(context),
-          Expanded(child: SizedBox()),
           buildUserPlaylistDateAndTime(),
           SizedBox(height: AppMargin.margin_20),
         ],
@@ -113,18 +139,36 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
     );
   }
 
-  Text buildUserPlaylistDescription(context) {
-    return Text(
-      PagesUtilFunctions.getUserPlaylistDescription(
-        myPlaylist,
-        context,
-      ),
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: AppFontSizes.font_size_16,
-        color: AppColors.black,
-        fontWeight: FontWeight.w500,
-      ),
+  Column buildUserPlaylistNameAndDescription(context) {
+    return Column(
+      children: [
+        Text(
+          L10nUtil.translateLocale(
+            myPlaylist.playlistNameText,
+            context,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_12.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: AppMargin.margin_8),
+        Text(
+          PagesUtilFunctions.getUserPlaylistDescription(myPlaylist, context),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_10.sp,
+            color: AppColors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 
@@ -146,40 +190,6 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
       child: UserProfilePic(
         fontSize: AppFontSizes.font_size_12.sp,
         size: AppValues.userPlaylistImageSize,
-      ),
-    );
-  }
-
-  Container buildProfileOwnerNameTag(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_32,
-        vertical: AppPadding.padding_2,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.grey.withOpacity(0.5),
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppValues.playlistPageTwoImageSize / 2),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 0),
-            spreadRadius: 2,
-            blurRadius: 12,
-            color: AppColors.white.withOpacity(0.2),
-          ),
-        ],
-      ),
-      child: Text(
-        PagesUtilFunctions.getUserPlaylistOwner(
-          myPlaylist,
-          context,
-        ),
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: AppFontSizes.font_size_10.sp,
-          fontWeight: FontWeight.w500,
-        ),
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -11,11 +10,16 @@ class AppIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 5, top: 5),
-      child: SvgPicture.asset(
-        'assets/icons/ic_app.svg',
+      margin: EdgeInsets.only(
+        left: AppMargin.margin_6,
+        top: AppMargin.margin_6,
+      ),
+      child: Image.asset(
+        AppAssets.icAppLetterIcon,
+        height: AppIconSizes.icon_size_20,
         width: AppIconSizes.icon_size_20,
-        color: AppColors.black,
+        fit: BoxFit.contain,
+        color: AppColors.white.withOpacity(0.5),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/util/color_util.dart';
 
 import 'app_bouncing_button.dart';
 
@@ -30,7 +29,7 @@ class SliverSmallCircleButton extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               offset: Offset(0, 0),
-              color: ColorUtil.darken(AppColors.white, 0.1),
+              color: AppColors.black.withOpacity(0.1),
               spreadRadius: 2,
               blurRadius: 4,
             ),

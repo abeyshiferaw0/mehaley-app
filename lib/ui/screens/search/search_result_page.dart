@@ -1,4 +1,3 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_empty_message.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_error_message.dart';
-import 'package:mehaley/ui/screens/search/widgets/search_page_input.dart';
+import 'package:mehaley/ui/screens/search/widgets/search_input_page_persistant_header_deligate.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_recent_or_message.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_result_list.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -43,15 +42,38 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          buildResultBlocBuilder(),
-          buildSearchInputHeader(context),
-          //buildVoiceSearchButton()
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.pagesBgColor,
+        resizeToAvoidBottomInset: false,
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: AppMargin.margin_16,
+              ),
+            ),
+            buildSearchInputHeader(),
+
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: AppMargin.margin_16,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: buildResultBlocBuilder(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverPersistentHeader buildSearchInputHeader() {
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: SearchInputPersistentSliverHeaderDelegate(
+        focusNode: focusNode,
       ),
     );
   }
@@ -93,38 +115,6 @@ class _SearchResultPageState extends State<SearchResultPage> {
           );
         }
       },
-    );
-  }
-
-  SafeArea buildSearchInputHeader(BuildContext context) {
-    return SafeArea(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: SearchPageInput(
-          key: GlobalKey(debugLabel: 'SEARCH_INPUT_KEY'),
-          focusNode: focusNode,
-          onSearchEmpty: () {
-            //REMOVE SEARCH
-            BlocProvider.of<SearchCancelCubit>(context).changeSearchingState(
-              cancelSearchingView: true,
-            );
-          },
-          onSearchQueryChange: (key) {
-            //FETCH SEARCH REQUEST
-            if (key != '') {
-              EasyDebounce.debounce(
-                  AppValues.searchPageDebouncer, Duration(seconds: 1), () {
-                BlocProvider.of<SearchResultBloc>(context).add(
-                  LoadSearchResultEvent(key: key),
-                );
-              });
-              BlocProvider.of<SearchCancelCubit>(context).changeSearchingState(
-                cancelSearchingView: false,
-              );
-            }
-          },
-        ),
-      ),
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -52,7 +51,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         if (state is SongAddedToPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: true,
               msg: AppLocale.of().songAddedToPlaylist(
                 songName: L10nUtil.translateLocale(
@@ -85,7 +84,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToAddMezmur,
-              bgColor: AppColors.black,
+              bgColor: AppColors.darkGrey,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -221,9 +220,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       //brightness: Brightness.dark,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-      ),
+      systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
       backgroundColor: AppColors.white,
       shadowColor: AppColors.transparent,
       leading: IconButton(
@@ -294,7 +291,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
-                    color: AppColors.black,
+                    color: AppColors.white,
                   ),
                 ),
               ),

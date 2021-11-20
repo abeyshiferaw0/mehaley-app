@@ -25,8 +25,8 @@ class AppCard extends StatelessWidget {
         boxShadow: withShadow == null
             ? [
                 BoxShadow(
-                  blurRadius: 2,
-                  spreadRadius: 1,
+                  blurRadius: 4,
+                  spreadRadius: 2,
                   color: AppColors.black.withOpacity(0.1),
                   offset: Offset(0, 0),
                 ),

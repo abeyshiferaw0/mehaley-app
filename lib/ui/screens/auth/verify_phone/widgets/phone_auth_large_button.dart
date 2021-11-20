@@ -47,7 +47,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                       ),
                       child: CircularProgressIndicator(
                         strokeWidth: 1,
-                        color: AppColors.black,
+                        color: AppColors.white,
                       ),
                     )
                   : SizedBox(),
@@ -55,7 +55,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14,
-                  color: AppColors.black,
+                  color: AppColors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -64,8 +64,8 @@ class PhoneAuthLargeButton extends StatelessWidget {
               ),
               isLoading != true
                   ? Icon(
-                      FlutterRemix.arrow_right_line,
-                      color: AppColors.black,
+                      FlutterRemix.arrow_right_s_line,
+                      color: AppColors.white,
                       size: AppIconSizes.icon_size_12,
                     )
                   : SizedBox(),

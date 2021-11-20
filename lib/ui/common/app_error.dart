@@ -64,7 +64,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                       vertical: AppMargin.margin_16,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.black,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(
                         AppPadding.padding_8,
                       ),
@@ -86,7 +86,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
-                            color: AppColors.lightGrey,
+                            color: AppColors.black,
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.none,
                           ),
@@ -127,7 +127,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                               AppLocale.of().tryAgain.toUpperCase(),
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
-                                color: AppColors.black,
+                                color: AppColors.white,
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.none,
                               ),

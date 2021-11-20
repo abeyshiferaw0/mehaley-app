@@ -55,7 +55,6 @@ class _FollowingTabViewState extends State<FollowingTabView>
             color: AppColors.darkOrange,
             edgeOffset: AppMargin.margin_16,
             child: Container(
-              color: AppColors.white,
               height: double.infinity,
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(

@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
+import 'package:mehaley/ui/screens/auth/widgets/app_info_carousel.dart';
 import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_button.dart';
-import 'package:mehaley/util/screen_util.dart';
+import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_circle_button.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUpPageFront extends StatelessWidget {
   const SignUpPageFront({
@@ -15,139 +19,126 @@ class SignUpPageFront extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ///HEAR LOGO
+        buildAppLogo(),
+        SizedBox(height: AppMargin.margin_16),
+
+        ///APP INFO CAROUSEL
+        AppInfoCarousel(),
+
+        SizedBox(height: AppMargin.margin_32),
+
+        ///SIGN UP TEXTS
+        buildSignUpButtons(context),
+        SizedBox(height: AppMargin.margin_48),
+
+        ///APP NAME AND VERSION
+        buildAppVersion(),
+        SizedBox(height: AppMargin.margin_16),
+      ],
+    );
+  }
+
+  FutureBuilder buildAppVersion() {
+    return FutureBuilder(
+      future: PagesUtilFunctions.getAppVersionNumber(),
+      initialData: 'loading',
+      builder: (context, snapShot) {
+        if (snapShot.data != null) {
+          if (snapShot.data is String) {
+            return Text(
+              AppLocale.of().appNameAndVersion(
+                versionCode: snapShot.data,
+              ),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_8.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.txtGrey,
+              ),
+            );
+          }
+        }
+        return SizedBox();
+      },
+    );
+  }
+
+  Container buildSignUpButtons(BuildContext context) {
     return Container(
-      //padding: EdgeInsets.all(AppPadding.padding_28),
-      child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: ScreenUtil(context: context).getScreenHeight(),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppPadding.padding_24,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SignUpButton(
+            title: AppLocale.of().continueWithPhone,
+            icon: AppAssets.icPhone,
+            userLoginType: UserLoginType.PHONE_NUMBER,
+            color: AppColors.darkOrange,
+            isFilled: true,
+            noBorder: false,
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRouterPaths.verifyPhonePageOne,
+              );
+            },
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          SizedBox(height: AppMargin.margin_32),
+
+          ///SOCIAL LOGIN BUTTONS ROW
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SafeArea(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: AppMargin.margin_28,
-                    ),
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColors.black,
-                      child: Text('ELF'),
-                    ),
-                    SizedBox(
-                      height: AppMargin.margin_16,
-                    ),
-                    Text(
-                      AppLocale.of().appName,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_28,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.darkGrey,
-                      ),
-                    ),
-                    SizedBox(
-                      height: AppMargin.margin_16,
-                    ),
-                    Text(
-                      AppLocale.of().appWelcomeTxt,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_20,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.darkGrey,
-                      ),
-                    ),
-                    SizedBox(
-                      height: AppMargin.margin_52,
-                    ),
-                  ],
-                ),
+              SignUpCircleButton(
+                title: AppLocale.of().google,
+                icon: AppAssets.icGoogle,
+                userLoginType: UserLoginType.GOOGLE,
+                onTap: () {
+                  //LOGIN WITH GOOGLE
+                  BlocProvider.of<AuthBloc>(context).add(
+                    ContinueWithGoogleEvent(),
+                  );
+                },
               ),
-              //Expanded(child: SizedBox()),
-              SizedBox(
-                height: AppMargin.margin_48,
+              SizedBox(width: AppMargin.margin_24),
+              SignUpCircleButton(
+                title: AppLocale.of().facebook,
+                icon: AppAssets.icFacebook,
+                userLoginType: UserLoginType.FACEBOOK,
+                onTap: () {
+                  //LOGIN WITH FACEBOOK
+                  BlocProvider.of<AuthBloc>(context).add(
+                    ContinueWithFacebookEvent(),
+                  );
+                },
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppPadding.padding_20,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: AppMargin.margin_16),
-                    SignUpButton(
-                      title: AppLocale.of().continueWithPhone,
-                      icon: 'assets/icons/ic_phone.svg',
-                      userLoginType: UserLoginType.PHONE_NUMBER,
-                      color: AppColors.darkOrange,
-                      isFilled: true,
-                      noBorder: false,
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRouterPaths.verifyPhonePageOne,
-                        );
-                      },
-                    ),
-                    SizedBox(height: AppMargin.margin_12),
-                    SignUpButton(
-                      title: AppLocale.of().continueWithGoogle,
-                      icon: 'assets/icons/ic_google.svg',
-                      userLoginType: UserLoginType.GOOGLE,
-                      color: AppColors.grey,
-                      isFilled: false,
-                      noBorder: false,
-                      onTap: () {
-                        //LOGIN WITH GOOGLE
-                        BlocProvider.of<AuthBloc>(context).add(
-                          ContinueWithGoogleEvent(),
-                        );
-                      },
-                    ),
-                    SizedBox(height: AppMargin.margin_12),
-                    SignUpButton(
-                      title: AppLocale.of().continueWithFacebook,
-                      icon: 'assets/icons/ic_facebook.svg',
-                      userLoginType: UserLoginType.FACEBOOK,
-                      color: AppColors.grey,
-                      isFilled: false,
-                      noBorder: false,
-                      onTap: () {
-                        //LOGIN WITH FACEBOOK
-                        BlocProvider.of<AuthBloc>(context).add(
-                          ContinueWithFacebookEvent(),
-                        );
-                      },
-                    ),
-                    SizedBox(height: AppMargin.margin_12),
-                    SignUpButton(
-                      title: AppLocale.of().continueWithApple,
-                      icon: 'assets/icons/ic_apple.svg',
-                      userLoginType: UserLoginType.APPLE,
-                      color: AppColors.grey,
-                      isFilled: false,
-                      noBorder: false,
-                      onTap: () {},
-                    ),
-                    SizedBox(height: AppMargin.margin_12),
-                    // SignUpButton(
-                    //   title: 'login',
-                    //   userLoginType: UserLoginType.NONE,
-                    //   color: AppColors.grey,
-                    //   isFilled: false,
-                    //   noBorder: true,
-                    //   onTap: () {},
-                    // ),
-                    SizedBox(height: AppMargin.margin_16),
-                  ],
-                ),
+              SizedBox(width: AppMargin.margin_24),
+              SignUpCircleButton(
+                title: AppLocale.of().apple,
+                icon: AppAssets.icApple,
+                userLoginType: UserLoginType.APPLE,
+                onTap: () {},
               ),
             ],
           ),
-        ),
+        ],
       ),
+    );
+  }
+
+  Image buildAppLogo() {
+    return Image.asset(
+      AppAssets.icAppFullIcon,
+      width: AppValues.signUpAppIconSize,
+      fit: BoxFit.contain,
     );
   }
 }

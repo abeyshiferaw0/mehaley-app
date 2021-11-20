@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -57,12 +56,12 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
       appBar: AppBar(
         centerTitle: true,
         //brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-        ),
-        backgroundColor: AppColors.lightGrey,
+        systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+        backgroundColor: AppColors.white,
+        shadowColor: AppColors.transparent,
         leading: IconButton(
           iconSize: AppIconSizes.icon_size_24,
+          color: AppColors.black,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -120,14 +119,14 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
         padding: const EdgeInsets.only(
           left: AppMargin.margin_16,
           right: AppMargin.margin_16,
-          top: AppMargin.margin_32,
+          top: AppMargin.margin_16,
         ),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: AppMargin.margin_28,
+            mainAxisSpacing: AppMargin.margin_16,
             crossAxisSpacing: AppMargin.margin_16,
             crossAxisCount: 2,
-            childAspectRatio: (1 / 1.1),
+            childAspectRatio: (1 / 1.2),
           ),
           physics: BouncingScrollPhysics(),
           itemCount: state.searchPageResultData.result.length,

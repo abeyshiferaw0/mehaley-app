@@ -27,7 +27,6 @@ class AppLocale {
   }
 
   String get appName => appLocalizations.appName;
-  String get appVersion => appLocalizations.appVersion;
   String get byAppName => appLocalizations.byAppName;
   String get appTermsAndCondition => appLocalizations.appTermsAndCondition;
   String get logOut => appLocalizations.logOut;
@@ -381,6 +380,11 @@ class AppLocale {
 
   String get retryingDownloadMsg => appLocalizations.retryingDownloadMsg;
   String get play => appLocalizations.play;
+  String get onlyOnElf => appLocalizations.onlyOnElf;
+  String get welcome => appLocalizations.welcome;
+  String get google => appLocalizations.google;
+  String get facebook => appLocalizations.facebook;
+  String get apple => appLocalizations.apple;
 
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>
@@ -393,7 +397,7 @@ class AppLocale {
           {required String searchKey, required String appItemType}) =>
       appLocalizations.searchDedicatedTitle(
         appItemType: appItemType,
-        searchKey: appItemType,
+        searchKey: searchKey,
       );
 
   String cantFind({required String searchKey}) =>
@@ -458,5 +462,11 @@ class AppLocale {
       appLocalizations.numberOfMezmurs(numberOf: numberOf);
 
   String removeedFromCart({required String removedName}) =>
-      appLocalizations.removeedFromCart(removedName: removedName);
+      appLocalizations.removedFromCart(removedName: removedName);
+
+  String appNameAndVersion({required String versionCode}) =>
+      appLocalizations.appNameAndVersion(versionCode: versionCode);
+
+  String appVersion({required String versionCode}) =>
+      appLocalizations.appNameAndVersion(versionCode: versionCode);
 }

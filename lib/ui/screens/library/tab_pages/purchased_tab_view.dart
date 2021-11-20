@@ -86,7 +86,6 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
             },
             color: AppColors.darkOrange,
             child: Container(
-              color: AppColors.white,
               height: double.infinity,
               padding: EdgeInsets.only(left: AppPadding.padding_16),
               child: SingleChildScrollView(
@@ -236,7 +235,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noMezmursToPlay,
                 txtColor: AppColors.white,
@@ -264,7 +263,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noMezmursToPlay,
                 txtColor: AppColors.white,
@@ -288,7 +287,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noAlbumsToSelect,
                 txtColor: AppColors.white,
@@ -314,7 +313,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.blue,
+                bgColor: AppColors.black.withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noPlaylistToSelect,
                 txtColor: AppColors.white,

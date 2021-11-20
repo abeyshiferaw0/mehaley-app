@@ -3,9 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
@@ -42,7 +42,6 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   late Animation<Offset> offset;
 
   //DOMINANT COLOR INIT
-  Color dominantColor = AppColors.appGradientDefaultColorBlack;
   ImageProvider? currentImageProvider;
   int? currentMediaItemId;
 
@@ -74,9 +73,10 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
     return BlocBuilder<CurrentPlayingCubit, Song?>(
       builder: (context, currentPlayingSong) {
         if (currentPlayingSong != null) {
+          ///SHOW SONG CHANGE WITH SLIDING ANIMATION
+          animateWhenSongChange(currentPlayingSong);
           return Container(
-            color: AppColors.white,
-            margin: EdgeInsets.all(AppMargin.margin_16),
+            color: AppColors.pagesBgColor,
             child: SlideTransition(
               position: offset,
               child: GestureDetector(
@@ -124,44 +124,36 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                       },
                     ),
                   ],
-                  child: BlocBuilder<PagesDominantColorBloc,
-                      PagesDominantColorState>(
-                    builder: (context, state) {
-                      if (state is PlayerPageDominantColorChangedState) {
-                        dominantColor = ColorUtil.darken(
-                          state.color,
-                          0.00,
-                        );
-                      }
-                      animateWhenSongChange(currentPlayingSong);
-                      return AnimatedSwitcher(
-                        switchInCurve: Curves.easeIn,
-                        switchOutCurve: Curves.easeOut,
-                        duration: Duration(
-                            milliseconds:
-                                AppValues.colorChangeAnimationDuration),
-                        child: Container(
-                          key: ValueKey<int>(state.hashCode),
-                          color: dominantColor,
-                          child: Wrap(
+                  child: AnimatedSwitcher(
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    duration: Duration(
+                      milliseconds: AppValues.colorChangeAnimationDuration,
+                    ),
+                    child: Container(
+                      key: ValueKey<int>(currentPlayingSong.songId),
+                      // color:
+                      //     HexColor(currentPlayingSong.albumArt.primaryColorHex),
+                      color: ColorUtil.changeColorSaturation(
+                        HexColor(currentPlayingSong.albumArt.primaryColorHex),
+                        0.8,
+                      ),
+                      child: Wrap(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  !currentPlayingSong.isBought &&
-                                          !currentPlayingSong.isFree
-                                      ? buildBuyContainer(currentPlayingSong)
-                                      : SizedBox(),
-                                  buildPlayerControls(currentPlayingSong),
-                                  buildMiniPlayerSlider(context),
-                                ],
-                              ),
+                              !currentPlayingSong.isBought &&
+                                      !currentPlayingSong.isFree
+                                  ? buildBuyContainer(currentPlayingSong)
+                                  : SizedBox(),
+                              buildPlayerControls(currentPlayingSong),
+                              buildMiniPlayerSlider(context),
                             ],
                           ),
-                        ),
-                      );
-                    },
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -177,8 +169,12 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   Container buildBuyContainer(Song song) => Container(
         width: double.infinity,
         padding: EdgeInsets.all(AppPadding.padding_8),
-        //color: AppColors.darkGrey,
-        color: ColorUtil.darken(dominantColor, 0.05),
+        //color: ColorUtil.darken(HexColor(song.albumArt.primaryColorHex), 0.05),
+        color: ColorUtil.darken(
+          ColorUtil.changeColorSaturation(
+              HexColor(song.albumArt.primaryColorHex), 0.8),
+          0.05,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

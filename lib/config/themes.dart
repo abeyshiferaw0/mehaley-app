@@ -13,6 +13,38 @@ class App {
   );
 }
 
+class AppAssets {
+  ///APP ICONS
+  static String icAppIconOnly = 'assets/icons/app_icons/ic_app_icon_only.png';
+  static String icAppFullIcon = 'assets/icons/app_icons/ic_app_full_icon.png';
+  static String icAppLetterIcon =
+      'assets/icons/app_icons/ic_app_letter_icon.png';
+  static String icAppSmallIcon = 'assets/icons/app_icons/ic_app_small_icon.png';
+
+  ///AUTH ICONS
+  static String icApple = 'assets/icons/auth_icons/ic_apple.svg';
+  static String icFacebook = 'assets/icons/auth_icons/ic_facebook.svg';
+  static String icGoogle = 'assets/icons/auth_icons/ic_google.svg';
+  static String icPhone = 'assets/icons/auth_icons/ic_phone.svg';
+
+  ///PAYMENT ICONS
+  static String icAmole = 'assets/icons/payment_icons/ic_amole.png';
+  static String icCbeBirr = 'assets/icons/payment_icons/ic_cbe_birr.png';
+  static String icHelloCash = 'assets/icons/payment_icons/ic_hello_cash.png';
+  static String icMasterCard = 'assets/icons/payment_icons/ic_mastercard.png';
+  static String icMbirr = 'assets/icons/payment_icons/ic_mbirr.png';
+  static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
+
+  ///IMAGES
+  static String imageSignUpBg = 'assets/images/image_sign_up_bg.png';
+
+  ///LOTTIE FILES
+  static String cartEmptyLottie = 'assets/lottie/cart_empty.json';
+  static String loadingLottie = 'assets/lottie/loading.json';
+  static String playingLottie = 'assets/lottie/playing.json';
+  static String noInternetLottie = 'assets/lottie/no_internet.json';
+}
+
 class AppColors {
   ///FOR GRADIENT PURPOSES
   static Color orange1 = HexColor('#EC8E20');
@@ -21,20 +53,21 @@ class AppColors {
   static Color appGradientDefaultColor = HexColor('#1E96ED');
 
   ///PRIMARY COLORS
-  static Color orange = HexColor('#E9571C');
-  static Color darkOrange = HexColor('#E7481B');
+  static Color orange = HexColor('#ff6500'); //E9571C
+  static Color darkOrange = HexColor('#e65100'); //E7481B
 
   ///LIGHT COLORS
   static Color white = HexColor('#FFFFFF');
   static Color lightGrey = HexColor('#EAEAEA'); //e9e9e9
-  static Color pagesBgColor = HexColor("#F8F8F8"); //fbfbfb
-  static Color placeholderIconColor = HexColor("#BEBEC5");
+  static Color pagesBgColor = HexColor('#F8F8F8'); //fbfbfb
+  static Color placeholderIconColor = HexColor('#BEBEC5');
 
   ///DARK COLORS
   static Color darkGrey = HexColor('#3C3C3C');
   static Color txtGrey = HexColor('#8b8b8b');
   static Color grey = HexColor('#88898D');
   static Color black = HexColor('#292929'); //1F1F1F
+  static Color completelyBlack = HexColor('#000');
 
   ///SECONDARY COLORS
   static Color blue = HexColor('#1E96ED');

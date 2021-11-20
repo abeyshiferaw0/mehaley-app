@@ -66,6 +66,8 @@ class CartRepository {
     Response response = await cartDataProvider.clearAllCart();
 
     if (response.statusCode == 200) {
+      ///CLEAR RECENTLY ADDED AND REMOVED CART ITEMS FROM DEVICE CACHE
+      cartDataProvider.clearRecentlyCartCache();
       return response;
     }
 

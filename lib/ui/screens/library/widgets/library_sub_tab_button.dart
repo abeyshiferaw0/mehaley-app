@@ -40,7 +40,7 @@ class LibraryPageSubTabButton extends StatelessWidget {
                   ? AppColors.transparent
                   : AppColors.black.withOpacity(0.2),
             ),
-            color: isSelected ? AppColors.darkOrange : AppColors.transparent,
+            color: isSelected ? AppColors.darkOrange : AppColors.white,
           ),
           child: Row(
             children: [
@@ -49,7 +49,7 @@ class LibraryPageSubTabButton extends StatelessWidget {
                       padding: EdgeInsets.only(right: AppPadding.padding_8),
                       child: Icon(
                         prefixIcon,
-                        color: AppColors.black,
+                        color: AppColors.white,
                         size: AppIconSizes.icon_size_16,
                       ),
                     )
@@ -57,8 +57,8 @@ class LibraryPageSubTabButton extends StatelessWidget {
               Text(
                 text,
                 style: TextStyle(
-                  fontSize: (AppFontSizes.font_size_8 + 1).sp,
-                  color: AppColors.black,
+                  fontSize: AppFontSizes.font_size_8.sp,
+                  color: isSelected ? AppColors.white : AppColors.black,
                   fontWeight: FontWeight.w700,
                 ),
               ),

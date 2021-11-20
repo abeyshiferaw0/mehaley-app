@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
-import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -17,11 +18,9 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sizer/sizer.dart';
 
+import 'daily_quotes_widget.dart';
+
 class LyricPlayerWidget extends StatefulWidget {
-  const LyricPlayerWidget({required this.song});
-
-  final Song song;
-
   @override
   _LyricPlayerWidgetState createState() => _LyricPlayerWidgetState();
 }
@@ -34,58 +33,70 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
 
   _LyricPlayerWidgetState();
 
-  //DOMINANT COLOR INIT
-  Color dominantColor = AppColors.appGradientDefaultColor;
-
   //CURRENT LYRIC ITEM
   LyricItem? currentLyricItem;
 
   @override
-  void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      BlocProvider.of<LyricBloc>(context).add(
-        LoadSongLyricEvent(
-          songId: widget.song.songId,
-        ),
-      );
-    });
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocConsumer<CurrentPlayingCubit, Song?>(
+      listener: (context, state) {
+        if (state != null) {
+          BlocProvider.of<LyricBloc>(context).add(
+            LoadSongLyricEvent(
+              songId: state.songId,
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state != null) {
+          if (state.lyricIncluded) {
+            return buildLyricPlayer(state);
+          }
+
+          ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
+          return DailyQuotesWidget(
+            dominantColor: HexColor(
+              state.albumArt.primaryColorHex,
+            ),
+          );
+        } else {
+          ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
+          return DailyQuotesWidget(
+            dominantColor: AppColors.appGradientDefaultColorBlack,
+          );
+        }
+      },
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
+  Widget buildLyricPlayer(Song song) {
+    return BlocBuilder<LyricBloc, LyricState>(
       builder: (context, state) {
-        if (state is PlayerPageDominantColorChangedState) {
-          dominantColor = ColorUtil.changeColorSaturation(state.color, 0.9);
-        }
-        return BlocBuilder<LyricBloc, LyricState>(
-          builder: (context, state) {
-            if (state is LyricDataLoaded) {
-              if (state.lyricList.length > 0 &&
-                  state.songId == widget.song.songId) {
-                return buildLyricLoaded(context, state);
-              } else {
-                return SizedBox();
-              }
-            }
-            if (state is LyricDataLoadingError) {
-              return buildLyricLoadingError();
-            }
-            if (state is LyricDataLoading) {
-              return ShimmerLyric(
-                dominantColor: dominantColor,
-              );
-            }
+        if (state is LyricDataLoaded) {
+          if (state.lyricList.length > 0 && state.songId == song.songId) {
+            return buildLyricLoaded(context, state, song);
+          } else {
             return SizedBox();
-          },
-        );
+          }
+        }
+        if (state is LyricDataLoadingError) {
+          return buildLyricLoadingError(song);
+        }
+        if (state is LyricDataLoading) {
+          return ShimmerLyric(
+            dominantColor: HexColor(
+              song.albumArt.primaryColorHex,
+            ),
+          );
+        }
+        return SizedBox();
       },
     );
   }
 
   GestureDetector buildLyricLoaded(
-      BuildContext context, LyricDataLoaded lyricData) {
+      BuildContext context, LyricDataLoaded lyricData, Song song) {
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -94,8 +105,10 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               page: BlocProvider.value(
                 value: BlocProvider.of<LyricBloc>(context),
                 child: LyricFullPage(
-                  song: widget.song,
-                  dominantColor: dominantColor,
+                  song: song,
+                  dominantColor: HexColor(
+                    song.albumArt.primaryColorHex,
+                  ),
                 ),
               ),
             ),
@@ -171,7 +184,9 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                             color: currentLyricItem != null
                                 ? (currentLyricItem!.index == index
                                     ? ColorUtil.changeColorSaturation(
-                                        dominantColor,
+                                        HexColor(
+                                          song.albumArt.primaryColorHex,
+                                        ),
                                         0.8,
                                       )
                                     : AppColors.black)
@@ -196,7 +211,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
             )));
   }
 
-  Container buildLyricLoadingError() {
+  Container buildLyricLoadingError(Song song) {
     return Container(
       height: AppValues.lyricPlayerHeight,
       decoration: BoxDecoration(
@@ -253,7 +268,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                     onTap: () {
                       BlocProvider.of<LyricBloc>(context).add(
                         LoadSongLyricEvent(
-                          songId: widget.song.songId,
+                          songId: song.songId,
                         ),
                       );
                     },

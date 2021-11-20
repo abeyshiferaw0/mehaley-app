@@ -51,7 +51,6 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
           color: AppColors.darkOrange,
           edgeOffset: AppMargin.margin_16,
           child: Container(
-            color: AppColors.white,
             height: ScreenUtil(context: context).getScreenHeight(),
             padding: EdgeInsets.only(left: AppPadding.padding_16),
             child: SingleChildScrollView(
