@@ -13,7 +13,7 @@ abstract class AppLocalizations {
   String get buy;
   String get buyPlaylist;
   String get buyMezmurToListenOffline;
-
+  String get done;
   String get follow;
   String get following;
   String get addToFavorite;
@@ -325,6 +325,11 @@ abstract class AppLocalizations {
   String get google;
   String get facebook;
   String get apple;
+  String get downloadStartedMsg;
+  String get welcomeToMehaley;
+  String get firstTimeDialogMsg;
+  String get chooseYourPreferredCurrency;
+  String get notificationAccess;
 
   String noOfSongs({required String noOfSong});
 

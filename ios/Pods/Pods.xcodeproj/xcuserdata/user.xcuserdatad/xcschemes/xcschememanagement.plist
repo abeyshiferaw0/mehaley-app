@@ -189,12 +189,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>package_info.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>path_provider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>permission_handler.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>share_plus.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>sign_in_with_apple.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

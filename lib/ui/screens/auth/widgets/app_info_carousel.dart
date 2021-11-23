@@ -80,6 +80,9 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
               ],
             ),
           ),
+          SizedBox(
+            height: AppMargin.margin_4,
+          ),
           CirclePageIndicator(
             dotColor: AppColors.white.withOpacity(0.5),
             selectedDotColor: AppColors.white,

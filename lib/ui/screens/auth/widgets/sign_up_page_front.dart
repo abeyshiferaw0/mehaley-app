@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -10,6 +12,7 @@ import 'package:mehaley/ui/screens/auth/widgets/app_info_carousel.dart';
 import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_button.dart';
 import 'package:mehaley/ui/screens/auth/widgets/sign_up_page_circle_button.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpPageFront extends StatelessWidget {
@@ -120,13 +123,31 @@ class SignUpPageFront extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(width: AppMargin.margin_24),
-              SignUpCircleButton(
-                title: AppLocale.of().apple,
-                icon: AppAssets.icApple,
-                userLoginType: UserLoginType.APPLE,
-                onTap: () {},
-              ),
+              Platform.isIOS
+                  ? FutureBuilder<bool>(
+                      future: SignInWithApple.isAvailable(),
+                      builder: (context, snapShot) {
+                        if (snapShot.data == null) return SizedBox();
+                        if (snapShot.data == false) return SizedBox();
+                        return Row(
+                          children: [
+                            SizedBox(width: AppMargin.margin_24),
+                            SignUpCircleButton(
+                              title: AppLocale.of().apple,
+                              icon: AppAssets.icApple,
+                              userLoginType: UserLoginType.APPLE,
+                              onTap: () {
+                                //LOGIN WITH APPLE
+                                BlocProvider.of<AuthBloc>(context).add(
+                                  ContinueWithAppleEvent(),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                  : SizedBox(),
             ],
           ),
         ],

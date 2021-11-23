@@ -8,6 +8,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_controls.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_top_items.dart';
 import 'package:mehaley/util/screen_util.dart';
+import 'package:sizer/sizer.dart';
 
 import 'lyric_player_widget.dart';
 import 'main_player_album_art_pager.dart';
@@ -32,7 +33,7 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
       children: [
         Container(
           height: ScreenUtil(context: context).getScreenHeight() -
-              AppMargin.margin_52,
+              AppMargin.margin_52.h,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

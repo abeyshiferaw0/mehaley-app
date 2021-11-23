@@ -1100,9 +1100,6 @@ class PagesUtilFunctions {
     var camStatus = await Permission.camera.status;
     var photoStatus = await Permission.photos.status;
 
-    print("takeAPhoto00 ${camStatus}");
-    print("takeAPhoto00 ${photoStatus}");
-
     ///ASK FOR CAMERA PERMISSION
     List<AppPermission> permissionList = [];
     if (camStatus.isPermanentlyDenied) {
@@ -1182,6 +1179,42 @@ class PagesUtilFunctions {
     }
   }
 
+  static void checkNotificationPermission({
+    required BuildContext context,
+    required VoidCallback onSwitched,
+  }) async {
+    var notificationStatus = await Permission.notification.status;
+
+    List<AppPermission> permissionList = [];
+
+    ///ASK FOR CAMERA PERMISSION
+    if (notificationStatus.isPermanentlyDenied || notificationStatus.isDenied) {
+      permissionList.add(
+        AppPermission(
+          AppLocale.of().notificationAccess,
+          FlutterRemix.notification_4_line,
+        ),
+      );
+    }
+
+    if (permissionList.length > 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return DialogPermissionPermanentlyRefused(
+            onGoToSetting: () {
+              ///GO TO APP SETTINGS TO ALLOW PERMISSIONS
+              AppSettings.openAppSettings();
+            },
+            permissionList: permissionList,
+          );
+        },
+      );
+    } else {
+      onSwitched();
+    }
+  }
+
   static void rateApp() async {
     final InAppReview inAppReview = InAppReview.instance;
     bool isAvailable = await inAppReview.isAvailable();
@@ -1200,7 +1233,11 @@ class PagesUtilFunctions {
   }
 
   static SystemUiOverlayStyle getStatusBarStyle() {
-    return SystemUiOverlayStyle.light;
+    return SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarColor: AppColors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    );
   }
 
   static getIsExplicitTag(GroupType groupType, item) {

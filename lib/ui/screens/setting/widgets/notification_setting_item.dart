@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class NotificationSettingItem extends StatelessWidget {
@@ -19,7 +20,8 @@ class NotificationSettingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBouncingButton(
       onTap: () {
-        onSwitched();
+        PagesUtilFunctions.checkNotificationPermission(
+            context: context, onSwitched: onSwitched);
       },
       shrinkRatio: 2,
       child: Container(

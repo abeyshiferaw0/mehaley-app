@@ -21,12 +21,17 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb286540773374810</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1057243143883-i9klaoq27s3hm0on3pipklof3ooenml4</string>
-				<string>fb366488778401927</string>
+				<string>com.googleusercontent.apps.139005177481-i7cisatvrkioijhqgav27litr65r3pnj</string>
 			</array>
 		</dict>
 	</array>
@@ -35,11 +40,11 @@
 	<key>FDAllFilesDownloadedMessage</key>
 	<string>All Downloads Completed</string>
 	<key>FacebookAppID</key>
-	<string>366488778401927</string>
+	<string>286540773374810</string>
 	<key>FacebookClientToken</key>
-	<string>36e2edd72d9ddc0919ad7c9a35663b7c</string>
+	<string>ca9a9ba882c072819bf341316f79227a</string>
 	<key>FacebookDisplayName</key>
-	<string>Elf play</string>
+	<string>Maheleye</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

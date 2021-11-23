@@ -27,8 +27,12 @@ class PhoneAuthLoadingState extends AuthState {
 }
 
 class AuthSuccessState extends AuthState {
+  final AppUser appUser;
+
+  AuthSuccessState({required this.appUser});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [appUser];
 }
 
 class AuthErrorState extends AuthState {

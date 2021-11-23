@@ -3,6 +3,11 @@ part of 'auth_bloc.dart';
 @immutable
 abstract class AuthEvent extends Equatable {}
 
+class ContinueWithAppleEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class ContinueWithGoogleEvent extends AuthEvent {
   @override
   List<Object?> get props => [];

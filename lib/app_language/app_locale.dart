@@ -385,6 +385,14 @@ class AppLocale {
   String get google => appLocalizations.google;
   String get facebook => appLocalizations.facebook;
   String get apple => appLocalizations.apple;
+  String get downloadStartedMsg => appLocalizations.downloadStartedMsg;
+
+  String get welcomeToMehaley => appLocalizations.welcomeToMehaley;
+  String get firstTimeDialogMsg => appLocalizations.firstTimeDialogMsg;
+  String get done => appLocalizations.done;
+  String get chooseYourPreferredCurrency =>
+      appLocalizations.chooseYourPreferredCurrency;
+  String get notificationAccess => appLocalizations.notificationAccess;
 
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>

@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/auth_provider.dart';
 import 'package:mehaley/data/models/api_response/save_user_data.dart';
 import 'package:mehaley/data/models/app_firebase_user.dart';
@@ -39,6 +41,8 @@ class AuthRepository {
     //PARSE USER
     appUser = AppUser.fromMap(response.data['user']);
 
+    print("appUser=> ${appUser.toMap()}");
+
     //PARSE ACCESS TOKEN
     accessToken = response.data['access_token'];
 
@@ -47,6 +51,8 @@ class AuthRepository {
       AppValues.loggedInUserKey,
       appUser,
     );
+    print(
+        "appUser=> 2 ${AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey).toMap()}");
     AppHiveBoxes.instance.userBox.put(
       AppValues.userAccessTokenKey,
       accessToken,
@@ -104,5 +110,25 @@ class AuthRepository {
     FacebookAuth.instance.logOut();
     OneSignal.shared.removeExternalUserId();
     OneSignal.shared.disablePush(true);
+  }
+
+  Future<void> turnAllNotificationOn() async {
+    ///TURN ALL NOTIFICATION ON
+    await OneSignal.shared.sendTags(
+      {
+        EnumToString.convertToString(
+            AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS): "1",
+        EnumToString.convertToString(
+            AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS): "1",
+        EnumToString.convertToString(
+            AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS): "1",
+        EnumToString.convertToString(AppUserNotificationTypes
+            .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS): "1",
+      },
+    ).catchError(
+      (error) {
+        throw '${error.toString()}';
+      },
+    );
   }
 }

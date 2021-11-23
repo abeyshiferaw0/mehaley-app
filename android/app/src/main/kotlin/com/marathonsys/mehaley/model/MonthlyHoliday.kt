@@ -1,4 +1,4 @@
-package com.marathonsys.mehaley
+package com.marathonsystems.mehaleye
 
 class MonthlyHoliday {
 

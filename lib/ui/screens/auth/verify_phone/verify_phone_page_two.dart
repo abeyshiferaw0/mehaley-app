@@ -58,6 +58,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       child: Scaffold(
         backgroundColor: AppColors.pagesBgColor,
         appBar: buildAppBar(context),
+        //resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(

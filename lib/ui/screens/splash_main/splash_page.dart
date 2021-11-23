@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/auth_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -24,6 +25,12 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.pagesBgColor,
+      appBar: AppBar(
+        leading: SizedBox(),
+        systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+        backgroundColor: AppColors.transparent,
+        shadowColor: AppColors.transparent,
+      ),
       body: Container(
         color: AppColors.pagesBgColor,
         child: Center(

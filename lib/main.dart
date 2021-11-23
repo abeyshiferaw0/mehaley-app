@@ -30,6 +30,7 @@ import 'package:mehaley/util/download_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import 'business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
@@ -42,6 +43,7 @@ import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
+import 'business_logic/cubits/currency_cubit.dart';
 import 'business_logic/cubits/localization_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
@@ -62,7 +64,7 @@ void main() async {
   //JUST AUDIO BACKGROUND INIT
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Elf play',
+    androidNotificationChannelName: 'Mehaleye',
     androidNotificationOngoing: false,
     notificationColor: AppColors.darkOrange,
   );
@@ -82,6 +84,10 @@ void main() async {
   ///INIT ONE SIGNAl
   OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
   OneSignal.shared.setAppId(AppStrings.oneSignalId);
+  // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
 
   ///RUN APP
   // runApp(
@@ -107,6 +113,9 @@ class _MyAppState extends State<MyApp> {
         return MultiBlocProvider(
           providers: [
             //ALL BLOC AND CUBIT PROVIDER
+            BlocProvider<AppStartBloc>(
+              create: (context) => AppStartBloc(),
+            ),
             BlocProvider<AppUserWidgetsCubit>(
               create: (context) => AppUserWidgetsCubit(),
             ),
@@ -257,6 +266,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => LocalizationCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CurrencyCubit(),
             ),
           ],
           child: Builder(

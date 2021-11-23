@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:139005177481:android:9b7701d96b4a02a44b2058",
         "android_client_info": {
-          "package_name": "com.marathonsys.mehaley"
+          "package_name": "com.marathonsystems.mehaleye"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "139005177481-1c0i993gpqt70bhdccdjcthiosurnqli.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.marathonsys.mehaley",
+            "package_name": "com.marathonsystems.mehaleye",
             "certificate_hash": "0e49b55d5bf69e536aec2a05ac55f3fdcb4384fb"
           }
         },
@@ -37,6 +37,57 @@
             {
               "client_id": "139005177481-n2cdg63j7q5r1eu45loqo8ua4gl3t7gg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "139005177481-hlub4p34op8ol9vhakg8hj1jr7m6dtq6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.marathonsystems.mehaleye"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139005177481:android:5b8522d2b1efb1584b2058",
+        "android_client_info": {
+          "package_name": "com.marathonsystems.mehaleye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139005177481-i3ru8vrsrkssg8vrjctcl8m2u9ojsdnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marathonsystems.mehaleye",
+            "certificate_hash": "0e49b55d5bf69e536aec2a05ac55f3fdcb4384fb"
+          }
+        },
+        {
+          "client_id": "139005177481-n2cdg63j7q5r1eu45loqo8ua4gl3t7gg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeusoqb2wkYuT_brFSB5LUc2oRV9CeIbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139005177481-n2cdg63j7q5r1eu45loqo8ua4gl3t7gg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "139005177481-hlub4p34op8ol9vhakg8hj1jr7m6dtq6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.marathonsystems.mehaleye"
+              }
             }
           ]
         }

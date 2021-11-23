@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,12 +12,14 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/api_response/save_user_data.dart';
 import 'package:mehaley/data/models/app_firebase_user.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -34,14 +39,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    if (event is ContinueWithGoogleEvent) {
+    if (event is ContinueWithAppleEvent) {
+      yield AuthLoadingState(userLoginType: UserLoginType.APPLE);
+      try {
+        AppFireBaseUser? appFireBaseUser = await signInWithApple();
+        if (appFireBaseUser != null) {
+          this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
+        } else {
+          yield AuthErrorState(error: 'appFireBaseUser apple is null');
+        }
+      } catch (e) {
+        yield AuthErrorState(error: e.toString());
+      }
+    } else if (event is ContinueWithGoogleEvent) {
       yield AuthLoadingState(userLoginType: UserLoginType.GOOGLE);
       try {
         AppFireBaseUser? appFireBaseUser = await signInWithGoogle();
         if (appFireBaseUser != null) {
           this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
         } else {
-          yield AuthErrorState(error: 'appFireBaseUser is null');
+          yield AuthErrorState(error: 'appFireBaseUser google is null');
         }
       } catch (e) {
         yield AuthErrorState(error: e.toString());
@@ -53,7 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (appFireBaseUser != null) {
           this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
         } else {
-          yield AuthErrorState(error: 'appFireBaseUser is null');
+          yield AuthErrorState(error: 'appFireBaseUser facebook is null');
         }
       } catch (e) {
         yield AuthErrorState(error: e.toString());
@@ -111,9 +128,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event is SaveUserEvent) {
       try {
         await authRepository.setOneSignalExternalId(event.appFireBaseUser);
+        await authRepository.turnAllNotificationOn();
         OneSignal.shared.disablePush(false);
-        await authRepository.saveUser(event.appFireBaseUser);
-        yield AuthSuccessState();
+        SaveUserData saveUserData =
+            await authRepository.saveUser(event.appFireBaseUser);
+        yield AuthSuccessState(
+          appUser: saveUserData.appUser,
+        );
       } catch (error) {
         yield AuthErrorState(error: error.toString());
       }
@@ -132,6 +153,41 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event is LogOutEvent) {
       authRepository.logOut();
       yield AuthLoggedOutState();
+    }
+  }
+
+  Future<AppFireBaseUser?> signInWithApple() async {
+    // To prevent replay attacks with the credential returned from Apple, we
+    // include a nonce in the credential request. When signing in with
+    // Firebase, the nonce in the id token returned by Apple, is expected to
+    // match the sha256 hash of `rawNonce`.
+    final rawNonce = generateNonce();
+    final nonce = sha256ofString(rawNonce);
+
+    // Request credential for the currently signed in Apple account.
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: nonce,
+    );
+
+    // Create an `OAuthCredential` from the credential returned by Apple.
+    final credential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      rawNonce: rawNonce,
+    );
+
+    // Sign in the user with Firebase. If the nonce we generated earlier does
+    // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+    UserCredential firebaseUser =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (firebaseUser.user != null) {
+      return getAppFirebaseUser(firebaseUser: firebaseUser);
+    } else {
+      throw 'Auth bloc googleAuth user is null';
     }
   }
 
@@ -273,6 +329,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     return fireBaseUser;
+  }
+
+  /// Generates a cryptographically secure random nonce, to be included in a
+  /// credential request.
+  String generateNonce([int length = 32]) {
+    final charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
+  }
+
+  /// Returns the sha256 hash of [input] in hex notation.
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
   }
 }
 

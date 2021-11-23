@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.marathonsys.mehaley">
+    package="com.marathonsystems.mehaleye">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -64,6 +64,7 @@
                <data android:scheme="@string/fb_login_protocol_scheme" />
            </intent-filter>
        </activity>
+
        <!--   FACEBOOK AUTH    -->
 
        <!--ACTIVITY NAME CHANGED FOR JUST AUDIO BACKGROUND-->

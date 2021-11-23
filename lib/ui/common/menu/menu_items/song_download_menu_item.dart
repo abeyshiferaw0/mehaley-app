@@ -235,6 +235,16 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         title: AppLocale.of().downloadMezmur,
         onTap: () {
           if (widget.song.isBought || widget.song.isFree) {
+            ///SHOW DOWNLOAD STARTED MESSAGE
+            ScaffoldMessenger.of(context).showSnackBar(
+              buildAppSnackBar(
+                bgColor: AppColors.black.withOpacity(0.9),
+                isFloating: true,
+                msg: AppLocale.of().downloadStartedMsg,
+                txtColor: AppColors.white,
+              ),
+            );
+
             EasyDebounce.debounce(
               'DOWNLOAD_BUTTON',
               Duration(milliseconds: 0),

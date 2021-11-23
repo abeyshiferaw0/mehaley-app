@@ -1,12 +1,12 @@
 import '../app_localizations.dart';
 
 class AppLanguageStringsOro extends AppLocalizations {
-  final String appName = "Elf play";
-  final String byAppName = "By Elf play";
+  final String appName = "Mehaleye";
+  final String byAppName = "By Mehaleye";
   final String appTermsAndCondition =
-      "Some text about elf and terms and conditions and privacy policy, Some text about elf and terms and conditions and privacy policy ;Some text about elf and terms and conditions and privacy policy";
+      "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "Log out";
-  final String byElfPlay = "by elf play";
+  final String byElfPlay = "by Mehaleye";
   final String removeFromCart = "Remove from cart";
   final String addToCart = "Add to cart";
   final String previewMode = "Preview mode";
@@ -54,9 +54,9 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String noInternetMsgDetail =
       "You don't have a working internet connection, Check your internet connection";
   final String tryAgain = "Try Again";
-  final String subscribeDialogTitle = "Subscribe To Elf Play";
+  final String subscribeDialogTitle = "Subscribe To Mehaleye";
   final String subscribeDialogMsg =
-      "Subscribe to elf play and get unlimited access to all streams.";
+      "Subscribe to Mehaleye and get unlimited access to all streams.";
   final String subscribeNow = "Subscribe Now";
   final String home = "Home";
   final String search = "Search";
@@ -130,7 +130,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String empityCartCheckOutMsg =
       "Before proceeding to check out, you must add some items to yor cart";
   final String goToHomeScreen = "Go to home screen";
-  final String cartTitle = "Elf Cart";
+  final String cartTitle = "Mehaleye Cart";
   final String total = "Total";
   final String checkOut = "Check Out";
   final String cartSummery = "Cart Summery";
@@ -207,11 +207,11 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String topCategories = "Top Categories";
   final String topMezmurs = "Top Mezmurs";
   final String topArtists = "Top Artists";
-  final String searchTitle = "Search Elf";
+  final String searchTitle = "Search Mehaleye";
   final String changeYourSearchKey = "Try changing your search key";
-  final String searchHint = "Search elf for mezmurs, albums, playlists";
+  final String searchHint = "Search mehaleye for mezmurs, albums, playlists";
   final String searchHint2 = "Albums , artists , playlist's ...";
-  final String searchElfFor = "Search Elf For";
+  final String searchElfFor = "Search Mehaleye For";
   final String recentSearches = "Recent Searches";
   final String clearRecentSearches = "Clear Recent Searches";
   final String seeAllPlaylists = "see all playlists";
@@ -286,7 +286,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String createPlaylist = "Create Playlist";
   final String addDescripption = "Add Description";
   final String createPlaylistMsg =
-      "Create and manage your own customized playlists with elf play";
+      "Create and manage your own customized playlists with Mehaleye";
   final String playlistName = "Playlist Name";
   final String takeAPhoto = "Take a Photo";
   final String removeIImage = "Remove Image";
@@ -314,25 +314,32 @@ class AppLanguageStringsOro extends AppLocalizations {
       "Following Permissions are Required To Continue, please go to system setting and allow permissions";
   final String goToSystemSettings = "Go To Settings";
   final String cameraAccess = "Camera Access";
+  final String notificationAccess = "Notification Access";
   final String photoAccess = "Photos Access";
-  final String rateApp = "Rate Elf play";
+  final String rateApp = "Rate Mehaleye";
   final String rateAppMsg =
       "Take a minute to rate our app and help support to improve more new features";
   final String areUSureWantToLogOut = "Are you sure?";
   final String areUSureWantToLogOutMsg =
-      "Are you sure you want to log out from elf play";
+      "Are you sure you want to log out from Mehaleye";
   final String preferredCurrency = "Preferred Currency";
   final String preferredCurrencySettingMsg =
       "Your Preferred currency will be used to display prices";
-  final String shareApp = "Share Elf play";
-  final String shareAppMsg = "Share elf play with friends and family";
+  final String shareApp = "Share Mehaleye";
+  final String shareAppMsg = "Share Mehaleye with friends and family";
   final String retryingDownloadMsg = "Retrying Download";
   final String play = "Play";
-  final String onlyOnElf = "Only On Elf";
+  final String onlyOnElf = "Only On Mehaleye";
   final String welcome = "Welcome";
-  final String google = "Google";
+  final String google = "Google oro";
   final String facebook = "Facebook";
   final String apple = "Apple";
+  final String downloadStartedMsg = "Download started";
+  final String firstTimeDialogMsg =
+      "Pick your default language and currency, you can change it latter in settings";
+  final String welcomeToMehaley = "Welcome to mehaley oro";
+  final String chooseYourPreferredCurrency = "Choose your preferred currency";
+  final String done = "Done";
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";

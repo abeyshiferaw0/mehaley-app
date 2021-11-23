@@ -6,8 +6,8 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  //static const String baseUrl = 'http://13.58.31.136:8000';
-  static const String baseUrl = 'http://192.168.6.202:8181';
+  static const String baseUrl = 'http://3.16.157.74:8000/';
+  //static const String baseUrl = 'http://192.168.223.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
 
@@ -168,6 +168,7 @@ class AppValues {
   static const String isDataSaverTurnedOnKey = 'DATA_SAVER_KEY';
   static const String preferredCurrencyKey = 'PREFERRED_CURRENCY_KEY';
   static const String appLanguageKey = 'APP_LANGUAGE_KEY';
+  static const String isFirstTimeKey = "IS_FIRST_TIME_KEY";
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';

@@ -47,33 +47,15 @@ class _PlayerPageState extends State<PlayerPage> {
             builder: (context, state) {
               return SingleChildScrollView(
                 controller: _singleChildScrollViewController,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    // if (BlocProvider.of<PlayerVideoModeCubit>(context).state) {
-                    //   BlocProvider.of<PlayerVideoModeRemoveControlsCubit>(context)
-                    //       .changeControls();
-                    // }
-                  },
-                  child: Container(
-                    child: Stack(
-                      children: [
-                        BgPlayerGradient(),
-                        // BlocBuilder<PlayerVideoModeCubit, bool>(
-                        //   builder: (context, state) {
-                        //     if (state) return BgShortVideo();
-                        //     return SizedBox();
-                        //   },
-                        // ),
-                        // BlocBuilder<PlayerVideoModeCubit, bool>(
-                        //   builder: (context, state) {
-                        //     if (state) return BgPlayerVideoGradient();
-                        //     return SizedBox();
-                        //   },
-                        // ),
-                        MainPlayerWidgets(),
-                      ],
-                    ),
+                child: Container(
+                  child: Stack(
+                    children: [
+                      ///PLAYER PAGE BG GRADIENT
+                      BgPlayerGradient(),
+
+                      ///PLAYER PAGE FRONT WIDGETS
+                      MainPlayerWidgets(),
+                    ],
                   ),
                 ),
               );

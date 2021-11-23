@@ -59,4 +59,16 @@ class SettingsDataProvider {
           : AppCurrency.ETB,
     );
   }
+
+  AppCurrency changePreferredCurrencyByValue(AppCurrency appCurrency) {
+    AppHiveBoxes.instance.settingsBox.put(
+      AppValues.preferredCurrencyKey,
+      appCurrency,
+    );
+    AppCurrency preferredCurrency = AppHiveBoxes.instance.settingsBox.get(
+      AppValues.preferredCurrencyKey,
+    );
+
+    return preferredCurrency;
+  }
 }

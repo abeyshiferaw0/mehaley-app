@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
@@ -154,14 +155,66 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    AppLocale.of().lyrics.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.8,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppLocale.of().lyrics.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                      AppBouncingButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PagesUtilFunctions.createBottomToUpAnimatedRoute(
+                              page: BlocProvider.value(
+                                value: BlocProvider.of<LyricBloc>(context),
+                                child: LyricFullPage(
+                                  song: song,
+                                  dominantColor: HexColor(
+                                    song.albumArt.primaryColorHex,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppPadding.padding_16,
+                            vertical: AppPadding.padding_8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Zoom".toUpperCase(),
+                                style: TextStyle(
+                                  fontSize: AppFontSizes.font_size_8.sp,
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.8,
+                                ),
+                              ),
+                              SizedBox(width: AppMargin.margin_8),
+                              Icon(
+                                FlutterRemix.zoom_out_line,
+                                size: AppIconSizes.icon_size_16 - 2,
+                                color: AppColors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: AppMargin.margin_8),
                   Divider(

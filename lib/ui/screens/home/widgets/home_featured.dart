@@ -26,7 +26,7 @@
 //         Padding(
 //           padding: EdgeInsets.only(left: AppMargin.margin_16),
 //           child: Text(
-//             'Custom Groups From Elf',
+//             'Custom Groups From Mehaleye',
 //             style: TextStyle(
 //               color: AppColors.black,
 //               fontSize: AppFontSizes.font_size_22,
@@ -78,7 +78,7 @@
 //         Padding(
 //           padding: EdgeInsets.only(left: AppMargin.margin_16),
 //           child: Text(
-//             'Custom Groups From Elf',
+//             'Custom Groups From Mehaleye',
 //             style: TextStyle(
 //               color: AppColors.black,
 //               fontSize: AppFontSizes.font_size_22,

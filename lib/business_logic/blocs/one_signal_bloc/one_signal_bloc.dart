@@ -13,11 +13,7 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
   OneSignalBloc() : super(OneSignalInitial()) {
     OneSignal.shared.setNotificationOpenedHandler(
       (OSNotificationOpenedResult result) async {
-        print(
-            "result.notification.rawPayload ${result.notification.additionalData}");
         if (result.notification.additionalData != null) {
-          print(
-              "result.notification.rawPayload ${result.notification.additionalData}");
           if (result.notification.additionalData!.isNotEmpty) {
             if (result.notification.additionalData!.containsKey('item_id') &&
                 result.notification.additionalData!.containsKey('item_type')) {

@@ -9,6 +9,11 @@ class LoadSettingsDataEvent extends SettingsPageEvent {
   List<Object?> get props => [];
 }
 
+class LoadSettingsDataForFirstTimeDialogEvent extends SettingsPageEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class ChangeSongDownloadQualityEvent extends SettingsPageEvent {
   final DownloadSongQuality downloadSongQuality;
 

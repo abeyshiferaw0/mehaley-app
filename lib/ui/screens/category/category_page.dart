@@ -303,6 +303,7 @@ class _CategoryPageState extends State<CategoryPage>
 
   Column buildCategoryTopAlbumPlaylistItems(CategoryPageTopLoaded state) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //CHECK IF NO PLAYLIST IS NOT EMPTY TO SHOW LIST VIEW
         state.categoryPageTopData.topPlaylist.length > 0

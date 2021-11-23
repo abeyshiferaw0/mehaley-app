@@ -242,6 +242,16 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
         child: widget.song.isBought
             ? AppBouncingButton(
                 onTap: () {
+                  ///SHOW DOWNLOAD STARTED MESSAGE
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    buildAppSnackBar(
+                      bgColor: AppColors.black.withOpacity(0.9),
+                      isFloating: true,
+                      msg: AppLocale.of().downloadStartedMsg,
+                      txtColor: AppColors.white,
+                    ),
+                  );
+
                   EasyDebounce.debounce(
                     'DOWNLOAD_BUTTON',
                     Duration(milliseconds: 0),

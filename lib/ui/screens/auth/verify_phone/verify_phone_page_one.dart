@@ -74,37 +74,39 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       child: Scaffold(
         backgroundColor: AppColors.pagesBgColor,
         appBar: buildAppBar(context),
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppPadding.padding_16,
-                vertical: AppPadding.padding_28,
+        //resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.padding_16,
+                  vertical: AppPadding.padding_28,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildWhatsYourNumberText(),
+                    buildPhoneAndCountryCodeInput(context),
+                    buildWeTextYouText(),
+                    buildSendButton(),
+                  ],
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildWhatsYourNumberText(),
-                  buildPhoneAndCountryCodeInput(context),
-                  buildWeTextYouText(),
-                  buildSendButton(),
-                ],
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is PhoneAuthLoadingState) {
+                    return SignUpPageAuthingCovor(
+                      showLoading: false,
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                },
               ),
-            ),
-            BlocBuilder<AuthBloc, AuthState>(
-              builder: (context, state) {
-                if (state is PhoneAuthLoadingState) {
-                  return SignUpPageAuthingCovor(
-                    showLoading: false,
-                  );
-                } else {
-                  return SizedBox();
-                }
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

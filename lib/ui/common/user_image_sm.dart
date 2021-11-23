@@ -6,6 +6,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/auth_util.dart';
 
@@ -59,7 +60,7 @@ class UserImageSm extends StatelessWidget {
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.black,
+                  color: AppColors.white,
                 ),
               ),
             ),
@@ -82,7 +83,8 @@ class UserImageSm extends StatelessWidget {
         child: CachedNetworkImage(
           height: size,
           width: size,
-          imageUrl: appUser.socialProfileImgUrl!,
+          imageUrl:
+              "${appUser.socialProfileImgUrl!}${getSocialImageSize(appUser)}",
           fit: BoxFit.cover,
           placeholder: (context, url) => Container(
             color: AppColors.darkGrey,
@@ -119,5 +121,15 @@ class UserImageSm extends StatelessWidget {
 
   AppItemsImagePlaceHolder buildItemsImagePlaceHolder() {
     return AppItemsImagePlaceHolder(appItemsType: AppItemsType.ARTIST);
+  }
+
+  String getSocialImageSize(AppUser appUser) {
+    if (appUser.loginType == UserLoginType.GOOGLE) {
+      return "?sz=120";
+    } else if (appUser.loginType == UserLoginType.FACEBOOK) {
+      return "?width=120";
+    } else {
+      return "";
+    }
   }
 }
