@@ -14,7 +14,9 @@ class SongIsLikedIndicator extends StatelessWidget {
   const SongIsLikedIndicator({
     Key? key,
     required this.isLiked,
-    required this.songId, required this.likedColor, required this.unlikedColor,
+    required this.songId,
+    required this.likedColor,
+    required this.unlikedColor,
   }) : super(key: key);
 
   final bool isLiked;
@@ -98,8 +100,7 @@ class SongIsLikedIndicator extends StatelessWidget {
   IconData preIcon() {
     ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId) &&
-        AppHiveBoxes.instance.recentlyUnLikedSongBox
-            .containsKey(songId)) {
+        AppHiveBoxes.instance.recentlyUnLikedSongBox.containsKey(songId)) {
       int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(songId);
       int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(songId);
 
@@ -116,8 +117,7 @@ class SongIsLikedIndicator extends StatelessWidget {
     }
 
     ///IF SONG IS FOUND IN RECENTLY UNLIKED
-    if (AppHiveBoxes.instance.recentlyUnLikedSongBox
-        .containsKey(songId)) {
+    if (AppHiveBoxes.instance.recentlyUnLikedSongBox.containsKey(songId)) {
       return FlutterRemix.heart_line;
     }
 
@@ -132,8 +132,7 @@ class SongIsLikedIndicator extends StatelessWidget {
   Color preIconColor() {
     ///IF FOUND IN BOTH RECENTLY LIKED AND UNLIKED
     if (AppHiveBoxes.instance.recentlyLikedSongBox.containsKey(songId) &&
-        AppHiveBoxes.instance.recentlyUnLikedSongBox
-            .containsKey(songId)) {
+        AppHiveBoxes.instance.recentlyUnLikedSongBox.containsKey(songId)) {
       int a = AppHiveBoxes.instance.recentlyLikedSongBox.get(songId);
       int b = AppHiveBoxes.instance.recentlyUnLikedSongBox.get(songId);
 
@@ -150,8 +149,7 @@ class SongIsLikedIndicator extends StatelessWidget {
     }
 
     ///IF SONG IS FOUND IN RECENTLY UNLIKED
-    if (AppHiveBoxes.instance.recentlyUnLikedSongBox
-        .containsKey(songId)) {
+    if (AppHiveBoxes.instance.recentlyUnLikedSongBox.containsKey(songId)) {
       return unlikedColor;
     }
 

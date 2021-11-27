@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'package:mehaley/config/fake_data.dart';
 
 class AppBlocDelegate extends BlocObserver {
   var logger = Logger();

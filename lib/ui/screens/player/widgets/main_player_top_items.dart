@@ -25,7 +25,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: AppMargin.margin_32,
+        top: AppMargin.margin_2.h,
         //left: AppMargin.margin_16,
         //right: AppMargin.margin_16,
       ),

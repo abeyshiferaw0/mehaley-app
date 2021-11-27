@@ -116,13 +116,13 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               //   size: AppIconSizes.icon_size_64,
                               // ),
                               Container(
-                                width: AppIconSizes.icon_size_64,
-                                height: AppIconSizes.icon_size_64,
+                                width: AppIconSizes.icon_size_52,
+                                height: AppIconSizes.icon_size_52,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100.0),
                                   border: Border.all(
-                                    width: 2,
-                                    color: AppColors.white,
+                                    width: 1,
+                                    color: AppColors.lightGrey,
                                   ),
                                 ),
                               ),
@@ -243,7 +243,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
             ),
 
             SizedBox(
-              height: AppMargin.margin_16,
+              height: 0.6.h,
             ),
 
             ///SONG TITLE, ARTIST NAME
@@ -254,7 +254,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 30,
+                        height: 2.5.h,
                         child: AutoSizeText(
                           L10nUtil.translateLocale(
                             state.songName,
@@ -262,21 +262,21 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           ),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: AppFontSizes.font_size_18,
+                            fontWeight: FontWeight.w600,
+                            fontSize: AppFontSizes.font_size_16,
                             color: AppColors.white,
                           ),
                           maxLines: 1,
-                          minFontSize: AppFontSizes.font_size_18,
-                          maxFontSize: AppFontSizes.font_size_18,
+                          minFontSize: AppFontSizes.font_size_14,
+                          maxFontSize: AppFontSizes.font_size_16,
                           overflowReplacement: Marquee(
                             text: L10nUtil.translateLocale(
                               state.songName,
                               context,
                             ),
                             style: TextStyle(
-                              fontSize: AppFontSizes.font_size_18,
-                              fontWeight: FontWeight.w500,
+                              fontSize: AppFontSizes.font_size_16,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.white,
                             ),
                             scrollAxis: Axis.horizontal,
@@ -320,7 +320,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
             ),
 
             SizedBox(
-              height: AppMargin.margin_16,
+              height: 1.2.h,
             ),
 
             ///PLAYER PLAY PAUSE AND OTHER BUTTONS
@@ -432,10 +432,6 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   },
                 ),
               ],
-            ),
-
-            SizedBox(
-              height: AppMargin.margin_8,
             ),
 
             ///MUTE AND QUEUE BUTTONS

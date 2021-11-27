@@ -18,7 +18,7 @@ class SignUpPageAuthingCovor extends StatelessWidget {
       width: ScreenUtil(context: context).getScreenWidth(),
       height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        color: AppColors.black.withOpacity(0.5),
+        color: AppColors.completelyBlack.withOpacity(0.5),
       ),
       child: showLoading
           ? Center(

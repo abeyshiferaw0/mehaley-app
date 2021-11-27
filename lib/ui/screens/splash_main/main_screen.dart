@@ -1,9 +1,11 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
@@ -19,6 +21,7 @@ import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
+import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -43,6 +46,9 @@ class _MainScreenState extends State<MainScreen> {
     ///START LISTING SYNC RECORDING
     BlocProvider.of<SongListenRecorderBloc>(context).add(StartRecordEvent());
     BlocProvider.of<SongSyncBloc>(context).add(StartSongSyncEvent());
+    BlocProvider.of<AppStartBloc>(context).add(
+      ShouldShowNotificationPermissionEvent(),
+    );
     super.initState();
   }
 
@@ -318,6 +324,25 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: false,
                 ),
               );
+            }
+          },
+        ),
+        BlocListener<AppStartBloc, AppStartState>(
+          listener: (BuildContext context, state) {
+            if (state is ShowNotificationPermissionState) {
+              if (state.shouldShow) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DialogAskNotificationPermission(
+                      onGoToSetting: () {
+                        ///GO TO APP SETTINGS TO ALLOW PERMISSIONS
+                        AppSettings.openAppSettings();
+                      },
+                    );
+                  },
+                );
+              }
             }
           },
         ),

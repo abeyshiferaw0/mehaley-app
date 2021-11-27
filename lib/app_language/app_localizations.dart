@@ -330,6 +330,10 @@ abstract class AppLocalizations {
   String get firstTimeDialogMsg;
   String get chooseYourPreferredCurrency;
   String get notificationAccess;
+  String get expand;
+  String get notNow;
+  String get enableNotifications;
+  String get enableNotificationsMsg;
 
   String noOfSongs({required String noOfSong});
 

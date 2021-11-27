@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/data/models/remote_image.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 
 class Chart extends Equatable {

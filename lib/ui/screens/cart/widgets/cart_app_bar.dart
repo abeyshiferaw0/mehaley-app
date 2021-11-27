@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/cart/cart.dart';
@@ -28,49 +27,39 @@ class CartAppBar extends StatelessWidget {
       child: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Text(
-                    AppLocale.of().cartTitle,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_18.sp,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  Expanded(child: SizedBox()),
-                  hasPrice && cart != null
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              AppLocale.of().total,
-                              style: TextStyle(
-                                fontSize: AppFontSizes.font_size_12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.black,
-                              ),
-                            ),
-                            SizedBox(width: AppMargin.margin_4),
-                            Icon(
-                              Icons.circle,
-                              color: AppColors.black,
-                              size: AppIconSizes.icon_size_4,
-                            ),
-                            SizedBox(width: AppMargin.margin_4),
-                            isDiscountAve(cart!)
-                                ? buildDeductedPrice(cart!)
-                                : buildTotalPrice(cart!),
-                          ],
-                        )
-                      : SizedBox(),
-                ],
+              Text(
+                AppLocale.of().cartTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.black,
+                ),
               ),
+              Expanded(child: SizedBox()),
+              hasPrice && cart != null
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocale.of().total.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: AppFontSizes.font_size_12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        SizedBox(width: AppMargin.margin_4),
+                        isDiscountAve(cart!)
+                            ? buildDeductedPrice(cart!)
+                            : buildTotalPrice(cart!),
+                      ],
+                    )
+                  : SizedBox(),
             ],
           ),
         ),

@@ -3,14 +3,14 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/repositories/setting_data_repository.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/network_util.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 
 part 'downloading_song_event.dart';
 part 'downloading_song_state.dart';

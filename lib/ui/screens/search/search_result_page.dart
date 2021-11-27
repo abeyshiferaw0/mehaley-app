@@ -54,7 +54,6 @@ class _SearchResultPageState extends State<SearchResultPage> {
               ),
             ),
             buildSearchInputHeader(),
-
             SliverToBoxAdapter(
               child: SizedBox(
                 height: AppMargin.margin_16,

@@ -16,3 +16,19 @@ class SetAppFirstLaunchEvent extends AppStartEvent {
   @override
   List<Object?> get props => [isFirstTime];
 }
+
+class ShouldShowNotificationPermissionEvent extends AppStartEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class SetNotificationPermissionShownDateEvent extends AppStartEvent {
+
+  final DateTime date;
+
+  SetNotificationPermissionShownDateEvent({required this.date});
+
+  @override
+  List<Object?> get props => [date];
+}
+

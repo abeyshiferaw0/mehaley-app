@@ -12,4 +12,9 @@ class ScreenUtil {
   double getScreenWidth() {
     return MediaQuery.of(context).size.width;
   }
+
+  double getPixelRatio() {
+    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    return pixelRatio;
+  }
 }

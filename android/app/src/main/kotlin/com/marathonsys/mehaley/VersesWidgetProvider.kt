@@ -26,7 +26,7 @@ open class VersesWidgetProvider : AppWidgetProvider() {
     private val OPEN_APP_EN = "OPEN APP"
     private val SELECTED_LAN_EN = "English"
     private val SELECTED_LAN_AM = "አማርኛ"
-    private val VERSES_FROM_MEHALEY_EN = "Verses From Mehaley"
+    private val VERSES_FROM_MEHALEY_EN = "Verses From Mehaleye"
     private val VERSES_FROM_MEHALEY_AM = "ጥቅሶች ከመሃልዬ"
 
 

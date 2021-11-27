@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 import 'package:mehaley/data/models/library_data/followed_artist.dart';
 import 'package:mehaley/data/models/library_data/followed_playlist.dart';
-import 'package:equatable/equatable.dart';
 
 class FollowingItemsData extends Equatable {
   final List<FollowedPlaylist>? followedPlaylists;

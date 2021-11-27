@@ -393,6 +393,10 @@ class AppLocale {
   String get chooseYourPreferredCurrency =>
       appLocalizations.chooseYourPreferredCurrency;
   String get notificationAccess => appLocalizations.notificationAccess;
+  String get expand => appLocalizations.expand;
+  String get notNow => appLocalizations.notNow;
+  String get enableNotifications => appLocalizations.enableNotifications;
+  String get enableNotificationsMsg => appLocalizations.enableNotificationsMsg;
 
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>

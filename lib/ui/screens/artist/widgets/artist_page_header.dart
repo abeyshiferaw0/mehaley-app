@@ -8,6 +8,7 @@ import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/color_util.dart';
@@ -67,8 +68,11 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             errorWidget: (context, url, e) => buildImagePlaceHolder(),
           ),
           Container(
+            width: double.infinity,
             height: AppValues.artistSliverHeaderHeight,
-            color: AppColors.black.withOpacity(0.1),
+            decoration: BoxDecoration(
+              gradient: AppGradients.getArtistHeaderCovorGradient(),
+            ),
           ),
           Align(
             alignment: Alignment.center,

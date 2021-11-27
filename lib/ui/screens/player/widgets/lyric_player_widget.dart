@@ -135,7 +135,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                   }
                   lyricScrollController.scrollTo(
                     index: lyricItem.index,
-                    duration: Duration(milliseconds: 500),
+                    duration: Duration(milliseconds: 0),
                     curve: Curves.easeIn,
                   );
                 }
@@ -144,7 +144,12 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
             },
             child: Container(
               height: AppValues.lyricPlayerHeight,
-              padding: EdgeInsets.all(AppPadding.padding_14),
+              padding: EdgeInsets.only(
+                left: AppPadding.padding_14,
+                right: AppPadding.padding_14,
+                bottom: AppPadding.padding_14,
+                top: AppPadding.padding_8,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.only(
@@ -186,19 +191,20 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppPadding.padding_16,
-                            vertical: AppPadding.padding_8,
+                            horizontal: AppPadding.padding_14,
+                            vertical: AppPadding.padding_4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.black.withOpacity(0.5),
+                            color: AppColors.black.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "Zoom".toUpperCase(),
+                                AppLocale.of().expand.toUpperCase(),
                                 style: TextStyle(
-                                  fontSize: AppFontSizes.font_size_8.sp,
+                                  fontSize: AppFontSizes.font_size_6.sp,
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 0.8,
@@ -207,7 +213,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                               SizedBox(width: AppMargin.margin_8),
                               Icon(
                                 FlutterRemix.zoom_out_line,
-                                size: AppIconSizes.icon_size_16 - 2,
+                                size: AppIconSizes.icon_size_16 - 3,
                                 color: AppColors.white,
                               ),
                             ],
@@ -257,7 +263,9 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: ShareBtnWidget(),
+                    child: ShareBtnWidget(
+                      onTap: () {},
+                    ),
                   )
                 ],
               ),

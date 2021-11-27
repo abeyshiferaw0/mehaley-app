@@ -11106,6 +11106,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/just_audio/just_audio-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11152,6 +11153,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11187,6 +11189,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11216,6 +11219,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/AppAuth/AppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11249,6 +11253,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11271,6 +11276,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11299,6 +11305,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCore/FirebaseCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11332,6 +11339,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11371,6 +11379,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_auth/firebase_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11426,6 +11435,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/share_plus/share_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11462,6 +11472,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IBSC_MODULE = flutter_downloader;
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/ResourceBundle-FlutterDownloaderDatabase-flutter_downloader-Info.plist";
@@ -11500,6 +11511,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/connectivity_plus/connectivity_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11544,6 +11556,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11594,6 +11607,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/permission_handler/permission_handler-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11633,6 +11647,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11671,6 +11686,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_core/firebase_core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11727,6 +11743,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/in_app_review/in_app_review-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11782,6 +11799,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_facebook_auth/flutter_facebook_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11821,6 +11839,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11859,6 +11878,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sign_in_with_apple/sign_in_with_apple-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11914,6 +11934,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/share_plus/share_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11959,6 +11980,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMSessionFetcher/GTMSessionFetcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -11992,6 +12014,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12014,6 +12037,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12043,6 +12067,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMSessionFetcher/GTMSessionFetcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12091,6 +12116,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/connectivity_plus/connectivity_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12145,6 +12171,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/package_info/package_info-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12183,6 +12210,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12220,6 +12248,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_session/audio_session-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12275,6 +12304,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/flutter_downloader-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12330,6 +12360,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/permission_handler/permission_handler-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12386,6 +12417,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12443,6 +12475,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/app_settings/app_settings-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12488,6 +12521,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/AppAuth/AppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12537,6 +12571,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/onesignal_flutter/onesignal_flutter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12593,6 +12628,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_facebook_auth/flutter_facebook_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12648,6 +12684,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/app_settings/app_settings-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12701,6 +12738,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/in_app_review/in_app_review-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12755,6 +12793,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/package_info/package_info-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12798,6 +12837,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12831,6 +12871,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12853,6 +12894,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12890,6 +12932,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/connectivity_plus/connectivity_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12943,6 +12986,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/path_provider/path_provider-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -12988,6 +13032,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/nanopb/nanopb-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13028,6 +13073,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/nanopb/nanopb-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13068,6 +13114,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/AppAuth/AppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13108,6 +13155,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13148,6 +13196,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMSessionFetcher/GTMSessionFetcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13197,6 +13246,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sign_in_with_apple/sign_in_with_apple-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13252,6 +13302,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/url_launcher/url_launcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13308,6 +13359,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/flutter_downloader-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13347,6 +13399,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13376,6 +13429,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/nanopb/nanopb-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13408,6 +13462,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13446,6 +13501,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/just_audio/just_audio-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13501,6 +13557,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_auth/firebase_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13558,6 +13615,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/onesignal_flutter/onesignal_flutter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13605,6 +13663,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseAuth/FirebaseAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13654,6 +13713,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/google_sign_in/google_sign_in-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13710,6 +13770,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/image_picker/image_picker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13755,6 +13816,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMAppAuth/GTMAppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13793,6 +13855,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMAppAuth/GTMAppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13842,6 +13905,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/image_picker/image_picker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13887,6 +13951,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCore/FirebaseCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -13935,6 +14000,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/image_picker/image_picker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14035,6 +14101,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14073,6 +14140,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_service/audio_service-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14128,6 +14196,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_service/audio_service-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14166,6 +14235,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14204,6 +14274,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_facebook_auth/flutter_facebook_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14249,6 +14320,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GTMAppAuth/GTMAppAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14298,6 +14370,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/hexcolor/hexcolor-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14335,6 +14408,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14373,6 +14447,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_core/firebase_core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14412,6 +14487,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14441,6 +14517,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Reachability/Reachability-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14480,6 +14557,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14513,6 +14591,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14551,6 +14630,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sqflite/sqflite-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14589,6 +14669,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IBSC_MODULE = flutter_downloader;
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/ResourceBundle-FlutterDownloaderDatabase-flutter_downloader-Info.plist";
@@ -14617,6 +14698,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/PromisesObjC/PromisesObjC-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14657,6 +14739,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Reachability/Reachability-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14690,6 +14773,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14729,6 +14813,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14784,6 +14869,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_core/firebase_core-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14832,6 +14918,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14883,6 +14970,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/google_sign_in/google_sign_in-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14940,6 +15028,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-Runner/Pods-Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14980,6 +15069,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -15008,6 +15098,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleDataTransport/GoogleDataTransport-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15056,6 +15147,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/url_launcher/url_launcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15100,6 +15192,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleDataTransport/GoogleDataTransport-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15149,6 +15242,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sign_in_with_apple/sign_in_with_apple-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15203,6 +15297,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/just_audio/just_audio-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15256,6 +15351,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/in_app_review/in_app_review-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15293,6 +15389,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IBSC_MODULE = flutter_downloader;
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/ResourceBundle-FlutterDownloaderDatabase-flutter_downloader-Info.plist";
@@ -15332,6 +15429,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/hexcolor/hexcolor-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15386,6 +15484,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/path_provider/path_provider-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15441,6 +15540,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_session/audio_session-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15495,6 +15595,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/share_plus/share_plus-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15533,6 +15634,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -15570,6 +15672,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/url_launcher/url_launcher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15615,6 +15718,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleDataTransport/GoogleDataTransport-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15665,6 +15769,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/firebase_auth/firebase_auth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15711,6 +15816,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15818,6 +15924,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15852,6 +15959,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -15880,6 +15988,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15928,6 +16037,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sqflite/sqflite-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15982,6 +16092,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/sqflite/sqflite-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16028,6 +16139,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseAuth/FirebaseAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16077,6 +16189,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_service/audio_service-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16131,6 +16244,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/path_provider/path_provider-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16176,6 +16290,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/PromisesObjC/PromisesObjC-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16215,6 +16330,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16247,6 +16363,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -16286,6 +16403,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/app_settings/app_settings-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16340,6 +16458,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/google_sign_in/google_sign_in-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16397,6 +16516,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/permission_handler/permission_handler-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16442,6 +16562,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseCore/FirebaseCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16492,6 +16613,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/onesignal_flutter/onesignal_flutter-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16532,6 +16654,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -16570,6 +16693,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/flutter_downloader/flutter_downloader-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16623,6 +16747,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/audio_session/audio_session-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16667,6 +16792,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/Reachability/Reachability-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16706,6 +16832,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FirebaseAuth/FirebaseAuth-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16755,6 +16882,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/hexcolor/hexcolor-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16800,6 +16928,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16849,6 +16978,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/package_info/package_info-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16893,6 +17023,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/PromisesObjC/PromisesObjC-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -16993,6 +17124,7 @@
 					"$(inherited)",
 					"PERMISSION_CAMERA=1",
 					"PERMISSION_PHOTOS=1",
+					"PERMISSION_NOTIFICATIONS=1",
 				);
 				INFOPLIST_FILE = "Target Support Files/GoogleUtilities/GoogleUtilities-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

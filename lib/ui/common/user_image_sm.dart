@@ -84,7 +84,7 @@ class UserImageSm extends StatelessWidget {
           height: size,
           width: size,
           imageUrl:
-              "${appUser.socialProfileImgUrl!}${getSocialImageSize(appUser)}",
+              '${appUser.socialProfileImgUrl!}${getSocialImageSize(appUser)}',
           fit: BoxFit.cover,
           placeholder: (context, url) => Container(
             color: AppColors.darkGrey,
@@ -125,11 +125,11 @@ class UserImageSm extends StatelessWidget {
 
   String getSocialImageSize(AppUser appUser) {
     if (appUser.loginType == UserLoginType.GOOGLE) {
-      return "?sz=120";
+      return '?sz=120';
     } else if (appUser.loginType == UserLoginType.FACEBOOK) {
-      return "?width=120";
+      return '?width=120';
     } else {
-      return "";
+      return '';
     }
   }
 }

@@ -308,7 +308,7 @@ class AppLanguageStringsAm extends AppLocalizations {
       "Unable to delete playlist\ncheck your internet connection";
   final String addSongs = "Add Mezmurs";
   final String addSongsToPlaylist = "Add Mezmurs to your playlist";
-  final String dailyQuotesFromApp = "Daily Quotes From Mehaley";
+  final String dailyQuotesFromApp = "Daily Quotes From Mehaleye";
   final String enablePermissions = "Enable Permissions";
   final String enablePermissionsMsg =
       "Following Permissions are Required To Continue, please go to system setting and allow permissions";
@@ -337,8 +337,13 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String downloadStartedMsg = "Download started";
   final String firstTimeDialogMsg =
       "Pick your default language and currency, you can change it latter in settings";
-  final String welcomeToMehaley = "Welcome to mehaley am";
+  final String welcomeToMehaley = "Welcome to mehaleye am";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
+  final String expand = "Expand";
+  final String enableNotifications = "Enable Notifications";
+  final String enableNotificationsMsg =
+      "Enable notifications, so you don't miss the latest mezmurs and updates from mehaleye";
+  final String notNow = "Not now";
 
   final String done = "Done";
 

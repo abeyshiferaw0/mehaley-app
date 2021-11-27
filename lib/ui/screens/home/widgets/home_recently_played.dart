@@ -19,7 +19,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (recentlyPlayed.length > 0) {
+    if (recentlyPlayed.length > 2) {
       return Column(
         children: [
           Container(

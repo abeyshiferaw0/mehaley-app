@@ -30,6 +30,10 @@ class AuthRepository {
       (error) {
         throw error.toString();
       },
+    ).onError(
+      (error, stackTrace) {
+        throw error.toString();
+      },
     );
   }
 
@@ -41,8 +45,6 @@ class AuthRepository {
     //PARSE USER
     appUser = AppUser.fromMap(response.data['user']);
 
-    print("appUser=> ${appUser.toMap()}");
-
     //PARSE ACCESS TOKEN
     accessToken = response.data['access_token'];
 
@@ -51,8 +53,7 @@ class AuthRepository {
       AppValues.loggedInUserKey,
       appUser,
     );
-    print(
-        "appUser=> 2 ${AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey).toMap()}");
+
     AppHiveBoxes.instance.userBox.put(
       AppValues.userAccessTokenKey,
       accessToken,
@@ -128,6 +129,10 @@ class AuthRepository {
     ).catchError(
       (error) {
         throw '${error.toString()}';
+      },
+    ).onError(
+      (error, stackTrace) {
+        throw error.toString();
       },
     );
   }

@@ -170,4 +170,15 @@ class AppGradients {
       ],
     );
   }
+
+  static getArtistHeaderCovorGradient() {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        AppColors.completelyBlack.withOpacity(0.1),
+        AppColors.completelyBlack.withOpacity(0.3),
+      ],
+    );
+  }
 }

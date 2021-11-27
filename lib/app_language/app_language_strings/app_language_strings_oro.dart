@@ -308,7 +308,7 @@ class AppLanguageStringsOro extends AppLocalizations {
       "Unable to delete playlist\ncheck your internet connection";
   final String addSongs = "Add Mezmurs";
   final String addSongsToPlaylist = "Add Mezmurs to your playlist";
-  final String dailyQuotesFromApp = "Daily Quotes From Mehaley";
+  final String dailyQuotesFromApp = "Daily Quotes From Mehaleye";
   final String enablePermissions = "Enable Permissions";
   final String enablePermissionsMsg =
       "Following Permissions are Required To Continue, please go to system setting and allow permissions";
@@ -337,9 +337,14 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String downloadStartedMsg = "Download started";
   final String firstTimeDialogMsg =
       "Pick your default language and currency, you can change it latter in settings";
-  final String welcomeToMehaley = "Welcome to mehaley oro";
+  final String welcomeToMehaley = "Welcome to mehaleye oro";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
   final String done = "Done";
+  final String expand = "Expand";
+  final String enableNotifications = "Enable Notifications";
+  final String enableNotificationsMsg =
+      "Enable notifications, so you don't miss the latest mezmurs and updates from mehaleye";
+  final String notNow = "Not now";
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";

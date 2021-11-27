@@ -26,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: AppColors.pagesBgColor,
       appBar: AppBar(
+        toolbarHeight: 0.0,
         leading: SizedBox(),
         systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
         backgroundColor: AppColors.transparent,

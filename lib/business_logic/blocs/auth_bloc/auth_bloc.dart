@@ -248,10 +248,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '$countryCode$phoneNumber',
       forceResendingToken: resendToken,
+      timeout: Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) async {
         UserCredential firebaseUser =
             await firebaseAuth.signInWithCredential(credential);
-
         AppFireBaseUser appFireBaseUser = getAppFirebaseUser(
           firebaseUser: firebaseUser,
           countryCode: countryCode,
@@ -283,7 +283,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       },
-      codeAutoRetrievalTimeout: (String verificationId) {},
+      codeAutoRetrievalTimeout: (String verificationId) {
+        this.add(
+          PhoneAuthErrorEvent(
+            error: 'Sms timed out, please try again',
+          ),
+        );
+      },
     );
   }
 

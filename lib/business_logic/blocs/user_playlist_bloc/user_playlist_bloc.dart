@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/repositories/user_playlist_repository.dart';
-import 'package:equatable/equatable.dart';
 
 part 'user_playlist_event.dart';
 part 'user_playlist_state.dart';

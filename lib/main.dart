@@ -37,6 +37,7 @@ import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'business_logic/blocs/share_bloc/share_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
@@ -269,6 +270,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => CurrencyCubit(),
+            ),
+            BlocProvider(
+              create: (context) => ShareBloc(),
             ),
           ],
           child: Builder(

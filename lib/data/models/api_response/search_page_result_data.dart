@@ -1,6 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/data/models/album.dart';
-import 'package:mehaley/data/models/category.dart';
 import 'package:mehaley/data/models/song.dart';
 
 import '../artist.dart';

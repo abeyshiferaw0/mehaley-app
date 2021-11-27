@@ -48,7 +48,7 @@
             android:id="@+id/txt_verses_form_mehaley"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Verses From Mehaley"
+            android:text="Verses From Mehaleye"
             android:textAllCaps="true"
             android:textColor="#fff"
             android:textFontWeight="600"

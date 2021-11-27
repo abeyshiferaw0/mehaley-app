@@ -33,7 +33,7 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
       children: [
         Container(
           height: ScreenUtil(context: context).getScreenHeight() -
-              AppMargin.margin_52.h,
+              AppMargin.margin_6.h,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,7 +48,8 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
             ],
           ),
         ),
-        SizedBox(height: AppMargin.margin_8),
+
+        SizedBox(height: 1.h),
 
         ///LYRIC PLAYER
         BlocProvider<LyricBloc>(

@@ -16,3 +16,11 @@ class IsAppFirstLaunchState extends AppStartState {
   @override
   List<Object?> get props => [isFirstTime];
 }
+
+class ShowNotificationPermissionState extends AppStartState {
+  final bool shouldShow;
+
+  ShowNotificationPermissionState({required this.shouldShow});
+  @override
+  List<Object?> get props => [shouldShow];
+}

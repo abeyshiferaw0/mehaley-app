@@ -70,15 +70,6 @@ class PagesUtilFunctions {
     }
   }
 
-  static String getPlaylistOwnerProfilePic(Playlist playlist) {
-    if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
-        playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
-      return 'https://www.thoughtco.com/thmb/VfrRj6idAT6dCdaR8kEyLQD6P50=/2120x1414/filters:no_upscale():max_bytes(150000):strip_icc()/LatinCross-631151317-5a22dd90beba330037d3cecb.jpg';
-    } else {
-      return 'https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg';
-    }
-  }
-
   static String getPlaylistOwner(Playlist playlist, context) {
     if (playlist.createdBy == PlaylistCreatedBy.ADMIN ||
         playlist.createdBy == PlaylistCreatedBy.AUTO_GENERATED) {
@@ -121,7 +112,7 @@ class PagesUtilFunctions {
       tokens.add('$days days');
     }
     if (tokens.isNotEmpty || hours != 0) {
-      tokens.add('${hours}h');
+      tokens.add('$hours h');
     }
     if (tokens.isNotEmpty || minutes != 0) {
       tokens.add('$minutes min');
@@ -1176,42 +1167,6 @@ class PagesUtilFunctions {
       onImageChanged();
       BlocProvider.of<ImagePickerCubit>(context).getFromGallery();
       Navigator.pop(context);
-    }
-  }
-
-  static void checkNotificationPermission({
-    required BuildContext context,
-    required VoidCallback onSwitched,
-  }) async {
-    var notificationStatus = await Permission.notification.status;
-
-    List<AppPermission> permissionList = [];
-
-    ///ASK FOR CAMERA PERMISSION
-    if (notificationStatus.isPermanentlyDenied || notificationStatus.isDenied) {
-      permissionList.add(
-        AppPermission(
-          AppLocale.of().notificationAccess,
-          FlutterRemix.notification_4_line,
-        ),
-      );
-    }
-
-    if (permissionList.length > 0) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return DialogPermissionPermanentlyRefused(
-            onGoToSetting: () {
-              ///GO TO APP SETTINGS TO ALLOW PERMISSIONS
-              AppSettings.openAppSettings();
-            },
-            permissionList: permissionList,
-          );
-        },
-      );
-    } else {
-      onSwitched();
     }
   }
 

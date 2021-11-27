@@ -247,22 +247,21 @@ class Song extends Equatable {
           Uri.parse(
             AppApi.baseUrl +
                 (settingsDataProvider.isDataSaverTurnedOn()
-                    ? song.audioFile.audio96KpsStreamPath
-                    : song.audioFile.audio128KpsStreamPath),
+                    ? song.audioFile.audio64KpsStreamPath
+                    : song.audioFile.audio96KpsStreamPath),
           ),
           tag: tag,
         );
-        print(
-            "settingsDataProvider.isDataSaverTurnedOn() => ${settingsDataProvider.isDataSaverTurnedOn()}  => ${hlsAudioSource.uri}");
+
         if (!song.isBought && !song.isFree) {
           ///CLIP IF NOT BOUGHT
           clippingAudioSource = ClippingAudioSource(
             child: hlsAudioSource,
             tag: tag,
-            start: Duration(seconds: AppValues.playerPreviewStartSecond),
+            start: song.audioFile.audioPreviewStartTime,
             end: Duration(
               seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
-                  AppValues.playerPreviewStartSecond,
+                  song.audioFile.audioPreviewStartTime.inSeconds,
             ),
           );
           audioSources.add(clippingAudioSource);
@@ -354,8 +353,8 @@ class Song extends Equatable {
         Uri.parse(
           AppApi.baseUrl +
               (settingsDataProvider.isDataSaverTurnedOn()
-                  ? song.audioFile.audio96KpsStreamPath
-                  : song.audioFile.audio128KpsStreamPath),
+                  ? song.audioFile.audio64KpsStreamPath
+                  : song.audioFile.audio96KpsStreamPath),
         ),
         tag: tag,
       );
@@ -366,10 +365,10 @@ class Song extends Equatable {
         clippingAudioSource = ClippingAudioSource(
           child: hlsAudioSource,
           tag: tag,
-          start: Duration(seconds: AppValues.playerPreviewStartSecond),
+          start: song.audioFile.audioPreviewStartTime,
           end: Duration(
             seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
-                AppValues.playerPreviewStartSecond,
+                song.audioFile.audioPreviewStartTime.inSeconds,
           ),
         );
         return clippingAudioSource;

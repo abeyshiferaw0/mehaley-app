@@ -87,7 +87,7 @@ class LibraryEmptyPage extends StatelessWidget {
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.5,
-                color: AppColors.black,
+                color: AppColors.white,
               ),
             ),
           ),

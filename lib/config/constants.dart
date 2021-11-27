@@ -65,7 +65,6 @@ class AppValues {
   //PLAYER PAGE
   static const double lyricPlayerHeight = 380;
   static const double queueSongItemSize = 60;
-  static const int playerPreviewStartSecond = 5;
   static const double menuBottomSheetRadius = 16.0;
   static const double playlistHeaderSliverSize = 340;
   static const double playlistHeaderAppBarSliverSize = 60;
@@ -169,6 +168,8 @@ class AppValues {
   static const String preferredCurrencyKey = 'PREFERRED_CURRENCY_KEY';
   static const String appLanguageKey = 'APP_LANGUAGE_KEY';
   static const String isFirstTimeKey = "IS_FIRST_TIME_KEY";
+  static const String notificationPermissionShownDateKey =
+      "NOTIFICATION_PERMISSION_SHOWN_KEY";
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';
@@ -178,7 +179,7 @@ class AppValues {
   static const double previewModeDialogAppIconSize = 40;
   static const double loadingWidgetSize = 100;
   static const int pageSize = 25;
-  static const int colorChangeAnimationDuration = 500;
+  static const int colorChangeAnimationDuration = 600;
   static const int buttonBouncingDurationInMili = 200;
   static const int buttonBouncingDurationInMili2 = 50;
   static const double buttonBouncingScaleFactor = 1.5;

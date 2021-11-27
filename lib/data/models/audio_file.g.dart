@@ -25,10 +25,10 @@ class AudioFileAdapter extends TypeAdapter<AudioFile> {
       audioSmallSize: fields[5] as double,
       audioMediumSize: fields[6] as double,
       audioLargeSize: fields[7] as double,
-      audio96KpsStreamPath: fields[8] as String,
-      audio128KpsStreamPath: fields[9] as String,
-      audio160KpsStreamPath: fields[10] as String,
+      audio64KpsStreamPath: fields[8] as String,
+      audio96KpsStreamPath: fields[9] as String,
       audioPreviewDurationSeconds: fields[11] as double,
+      audioPreviewStartTime: fields[14] as Duration,
     );
   }
 
@@ -53,13 +53,13 @@ class AudioFileAdapter extends TypeAdapter<AudioFile> {
       ..writeByte(7)
       ..write(obj.audioLargeSize)
       ..writeByte(8)
-      ..write(obj.audio96KpsStreamPath)
+      ..write(obj.audio64KpsStreamPath)
       ..writeByte(9)
-      ..write(obj.audio128KpsStreamPath)
-      ..writeByte(10)
-      ..write(obj.audio160KpsStreamPath)
+      ..write(obj.audio96KpsStreamPath)
       ..writeByte(11)
-      ..write(obj.audioPreviewDurationSeconds);
+      ..write(obj.audioPreviewDurationSeconds)
+      ..writeByte(14)
+      ..write(obj.audioPreviewStartTime);
   }
 
   @override

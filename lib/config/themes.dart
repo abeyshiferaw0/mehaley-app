@@ -43,6 +43,7 @@ class AppAssets {
   static String loadingLottie = 'assets/lottie/loading.json';
   static String playingLottie = 'assets/lottie/playing.json';
   static String noInternetLottie = 'assets/lottie/no_internet.json';
+  static String notificationGirlLottie = 'assets/lottie/notification_girl.json';
 }
 
 class AppColors {

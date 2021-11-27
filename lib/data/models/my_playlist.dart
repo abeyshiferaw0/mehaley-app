@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/remote_image.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/text_lan.dart';

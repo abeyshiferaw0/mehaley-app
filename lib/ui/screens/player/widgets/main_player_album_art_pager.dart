@@ -58,15 +58,16 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
               return Center(
                 child: AppCard(
                   radius: 8,
+                  withShadow: true,
                   constraints: BoxConstraints(
                     maxHeight:
-                        ScreenUtil(context: context).getScreenWidth() * 0.8,
+                        ScreenUtil(context: context).getScreenHeight() * 0.4,
                     minHeight:
-                        ScreenUtil(context: context).getScreenWidth() * 0.7,
+                        ScreenUtil(context: context).getScreenHeight() * 0.3,
                     maxWidth:
-                        ScreenUtil(context: context).getScreenWidth() * 0.95,
-                    minWidth:
                         ScreenUtil(context: context).getScreenWidth() * 0.8,
+                    minWidth:
+                        ScreenUtil(context: context).getScreenWidth() * 0.5,
                   ),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,

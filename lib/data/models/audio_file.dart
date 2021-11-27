@@ -22,13 +22,13 @@ class AudioFile extends Equatable {
   @HiveField(7)
   final double audioLargeSize;
   @HiveField(8)
-  final String audio96KpsStreamPath;
+  final String audio64KpsStreamPath;
   @HiveField(9)
-  final String audio128KpsStreamPath;
-  @HiveField(10)
-  final String audio160KpsStreamPath;
+  final String audio96KpsStreamPath;
   @HiveField(11)
   final double audioPreviewDurationSeconds;
+  @HiveField(14)
+  final Duration audioPreviewStartTime;
 
   AudioFile({
     required this.audioId,
@@ -39,10 +39,10 @@ class AudioFile extends Equatable {
     required this.audioSmallSize,
     required this.audioMediumSize,
     required this.audioLargeSize,
+    required this.audio64KpsStreamPath,
     required this.audio96KpsStreamPath,
-    required this.audio128KpsStreamPath,
-    required this.audio160KpsStreamPath,
     required this.audioPreviewDurationSeconds,
+    required this.audioPreviewStartTime,
   });
 
   @override
@@ -56,12 +56,20 @@ class AudioFile extends Equatable {
         audioMediumSize,
         audioLargeSize,
         audio96KpsStreamPath,
-        audio128KpsStreamPath,
-        audio160KpsStreamPath,
+        audio64KpsStreamPath,
+        audioPreviewStartTime,
         audioPreviewDurationSeconds,
       ];
 
   factory AudioFile.fromMap(Map<String, dynamic> map) {
+    ///PARSE STRING TO DURATION
+    Duration durationParse(String time) {
+      int h = int.parse(time.split(':')[0]);
+      int m = int.parse(time.split(':')[1]);
+      int s = int.parse(time.split(':')[2]);
+      return Duration(hours: h, minutes: m, seconds: s);
+    }
+
     return new AudioFile(
       audioId: map['audio_id'] as int,
       audioDurationSeconds: map['audio_duration_seconds'] as double,
@@ -71,15 +79,24 @@ class AudioFile extends Equatable {
       audioSmallSize: map['audio_small_size'],
       audioMediumSize: map['audio_medium_size'],
       audioLargeSize: map['audio_large_size'],
+      audio64KpsStreamPath: map['audio_64kps_stream_path'],
       audio96KpsStreamPath: map['audio_96kps_stream_path'],
-      audio128KpsStreamPath: map['audio_128kps_stream_path'],
-      audio160KpsStreamPath: map['audio_160kps_stream_path'] as String,
+      audioPreviewStartTime:
+          durationParse(map['audio_preview_start_time'] as String),
       audioPreviewDurationSeconds:
           map['audio_preview_duration_seconds'] as double,
     );
   }
 
   Map<String, dynamic> toMap() {
+    ///PARSE DURATION TO STRING
+    String durationToStringParse(Duration duration) {
+      String h = duration.inHours.toString();
+      String m = duration.inMinutes.toString();
+      String s = duration.inSeconds.toString();
+      return '$h:$m:$s';
+    }
+
     // ignore: unnecessary_cast
     return {
       'audio_id': this.audioId,
@@ -90,9 +107,10 @@ class AudioFile extends Equatable {
       'audio_small_size': this.audioSmallSize,
       'audio_medium_size': this.audioMediumSize,
       'audio_large_size': this.audioLargeSize,
+      'audio_64kps_stream_path': this.audio64KpsStreamPath,
       'audio_96kps_stream_path': this.audio96KpsStreamPath,
-      'audio_128kps_stream_path': this.audio128KpsStreamPath,
-      'audio_160kps_stream_path': this.audio160KpsStreamPath,
+      'audio_preview_start_time':
+          durationToStringParse(this.audioPreviewStartTime),
       'audio_preview_duration_seconds': this.audioPreviewDurationSeconds,
     } as Map<String, dynamic>;
   }
