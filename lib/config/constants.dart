@@ -10,6 +10,7 @@ class AppApi {
   //static const String baseUrl = 'http://192.168.223.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
+  static const String paymentBaseUrl = '$baseUrl/payment';
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -29,6 +30,34 @@ class AppApi {
       cipher: null,
       // Default. Key builder to retrieve requests.
       keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+      // Default. Allows to cache POST requests.
+      // Overriding [keyBuilder] is strongly recommended.
+      allowPostMethod: false,
+    );
+    return options;
+  }
+
+  static Future<CacheOptions> getDioWalletRequestsCacheOptions() async {
+    ///USE SAME CACHE KEY FOR ALL WALLET RELATED API REQUESTS
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    final options = CacheOptions(
+      // A default store is required for interceptor.
+      store: HiveCacheStore(appDocPath),
+      // Default.
+      policy: CachePolicy.refresh,
+      // Optional. Returns a cached response on error but for statuses 401 & 403.
+      // hitCacheOnErrorExcept: [401, 403],
+      // Optional. Overrides any HTTP directive to delete entry past this duration.
+      maxStale: const Duration(days: 7),
+      // Default. Allows 3 cache sets and ease cleanup.
+      priority: CachePriority.high,
+      // Default. Body and headers encryption with your own algorithm.
+      cipher: null,
+      // Default. Key builder to retrieve requests.
+      keyBuilder: (requestOptions) {
+        return 'WALLET_PAGES_API_CACHE_KEY';
+      },
       // Default. Allows to cache POST requests.
       // Overriding [keyBuilder] is strongly recommended.
       allowPostMethod: false,
@@ -123,6 +152,9 @@ class AppValues {
   static const double cartItemsSize = 120;
   static const double cartClearAndCheckoutHeaderHeight = 100;
 
+  //WALLET PAGE
+  static const double walletFixedTopUpSize = 100.0;
+
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';
   static const String recentSearchesBox = 'RECENT_SEARCHES';
@@ -151,7 +183,6 @@ class AppValues {
       'RECENTLY_CART_ADDED_PLAYLIST_BOX';
   static const String recentlyCartRemovedPlaylistBox =
       'RECENTLY_CART_REMOVED_PLAYLIST_BOX';
-
   static const String settingsBox = 'SETTINGS_BOX';
 
   //HIVE BOX KEYS
@@ -198,7 +229,6 @@ class AppValues {
   static const String songSyncExtraStr = 'SONG_SYNC_EXTRA';
   static const double previewDialogSongItemSize = 60;
   static const int songSyncTimerGapInSeconds = 120;
-
   static const double appSplashIconSize = 150;
 
   //static const String languageRadioGroupValue = 'LANGUAGE_RADIO';

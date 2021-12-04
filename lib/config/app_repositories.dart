@@ -18,6 +18,7 @@ import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/data_providers/song_menu_data_provider.dart';
 import 'package:mehaley/data/data_providers/sync_provider.dart';
 import 'package:mehaley/data/data_providers/user_playlist_data_provider.dart';
+import 'package:mehaley/data/data_providers/wallet_data_provider.dart';
 import 'package:mehaley/data/repositories/album_data_repository.dart';
 import 'package:mehaley/data/repositories/artist_data_repository.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
@@ -37,6 +38,7 @@ import 'package:mehaley/data/repositories/setting_data_repository.dart';
 import 'package:mehaley/data/repositories/song_menu_repository.dart';
 import 'package:mehaley/data/repositories/sync_repository.dart';
 import 'package:mehaley/data/repositories/user_playlist_repository.dart';
+import 'package:mehaley/data/repositories/wallet_data_repository.dart';
 
 class AppRepositories {
   //REPOSITORIES
@@ -112,4 +114,9 @@ class AppRepositories {
   static QuotesDataRepository quotesDataRepository = QuotesDataRepository(
     quotesDataProvider: QuotesDataProvider(),
   );
+
+  static WalletDataRepository walletDataRepository = WalletDataRepository(
+    walletDataProvider: WalletDataProvider(),
+  );
+
 }

@@ -4,11 +4,12 @@ import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
-class HomeAppBar extends StatelessWidget {
+class MainAppBar extends StatelessWidget {
   final Widget? leading;
 
-  const HomeAppBar({Key? key, this.leading}) : super(key: key);
+  const MainAppBar({Key? key, this.leading}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,22 @@ class HomeAppBar extends StatelessWidget {
               ),
         Expanded(
           child: SizedBox(),
+        ),
+        AppBouncingButton(
+          onTap: () {
+            PagesUtilFunctions.goToWalletPage(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_8),
+            child: Icon(
+              FlutterRemix.settings_4_line,
+              size: AppIconSizes.icon_size_24,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: AppPadding.padding_16,
         ),
         AppBouncingButton(
           onTap: () {

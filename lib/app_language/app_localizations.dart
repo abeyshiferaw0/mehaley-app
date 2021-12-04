@@ -251,19 +251,16 @@ abstract class AppLocalizations {
   String get alwaysUsePayment;
   String get chooseYourPaymentMethod;
   String get chooseYourPaymentMethodMsg;
-
   String get currentlySeletced;
   String get selectPaymentMethod;
   String get paymentMethod;
   String get selectYourPrefrredPayment;
-
   String get unFollow;
   String get removeFromFollowedArtist;
   String get removeFromFavoriteMezmurs;
   String get deletePlaylistPermanently;
   String get clearAll;
   String get areYouSureUWantToClearCart;
-
   String get goodMorning;
   String get goodAfterNoon;
   String get goodEvening;
@@ -275,45 +272,34 @@ abstract class AppLocalizations {
   String get latestUpdates;
   String get dailyCerlabrations;
   String get unableToCreatePlaylist;
-
   String get createPlaylist;
   String get addDescripption;
   String get createPlaylistMsg;
-
   String get playlistName;
   String get takeAPhoto;
   String get removeIImage;
   String get playlistNameCantBeEmpty;
   String get unableUpdatePlaylist;
-
   String get addSomeDescription;
   String get addDescription;
-
   String get addToExistingPlaylist;
   String get youHaventCreatedAnyPlaylistMsg;
-
   String get addToNewPlaylist;
   String get unableToAddMezmur;
-
   String get unableToRemoveFromPlaylist;
-
   String get unableToDeletePlaylist;
-
   String get addSongs;
   String get addSongsToPlaylist;
   String get dailyQuotesFromApp;
   String get enablePermissions;
   String get enablePermissionsMsg;
-
   String get goToSystemSettings;
   String get cameraAccess;
   String get photoAccess;
   String get rateApp;
   String get rateAppMsg;
-
   String get areUSureWantToLogOut;
   String get areUSureWantToLogOutMsg;
-
   String get preferredCurrency;
   String get preferredCurrencySettingMsg;
   String get shareApp;
@@ -334,6 +320,46 @@ abstract class AppLocalizations {
   String get notNow;
   String get enableNotifications;
   String get enableNotificationsMsg;
+  String get lyricBy;
+  String get copyCode;
+  String get payBill;
+  String get billInfoMsg;
+  String get amount;
+  String get billCode;
+  String get birr;
+  String get cancelBillAndContinue;
+  String get previousUnPaidBill;
+  String get unPaidBillMsg;
+  String get unpaidBillCode;
+  String get proceedToPayment;
+  String get enterOtherAmount;
+  String get or;
+  String get rechargeYourWallet;
+  String get selectAmountToTopUp;
+  String get appWallet;
+  String get myWalletBalance;
+  String get refreshWalletMsg;
+  String get refreshWallet;
+  String get copiedToClipboard;
+  String get cancelBill;
+  String get howToPay;
+  String get walletRechargedSuccessfully;
+  String get walletRechargedSuccessfullyMsg;
+  String get totalAmountPaid;
+  String get paidUsing;
+  String get transactionDate;
+  String get close;
+  String get checkBillStatus;
+  String get billStatusFailedMsg;
+  String get billCancelFailedMsg;
+  String get refreshingWallet;
+  String get checkingBillStatus;
+  String get billNotPaidYetMsg;
+  String get areYouSureUWantToCancelBill;
+  String get billAlreadyPaidMsg;
+  String get walletRechargeInitialErrorMsg;
+  String get selectedAmount;
+  String get invalidWalletRechargeAmountSelected;
 
   String noOfSongs({required String noOfSong});
 
@@ -387,4 +413,9 @@ abstract class AppLocalizations {
   String appNameAndVersion({required String versionCode});
 
   String appVersion({required String versionCode});
+
+  String activeBillMsg({required String date});
+
+  String walletRechargedSuccessTransactionNumber(
+      {required String transactionNumber});
 }

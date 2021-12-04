@@ -181,4 +181,15 @@ class AppGradients {
       ],
     );
   }
+
+  static getWalletHeaderGradient() {
+    return LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [
+        AppColors.orange1,
+        AppColors.orange2,
+      ],
+    );
+  }
 }

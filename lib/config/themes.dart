@@ -28,6 +28,7 @@ class AppAssets {
   static String icPhone = 'assets/icons/auth_icons/ic_phone.svg';
 
   ///PAYMENT ICONS
+  static String icWeBirr = 'assets/icons/payment_icons/we_birr.png';
   static String icAmole = 'assets/icons/payment_icons/ic_amole.png';
   static String icCbeBirr = 'assets/icons/payment_icons/ic_cbe_birr.png';
   static String icHelloCash = 'assets/icons/payment_icons/ic_hello_cash.png';
@@ -44,12 +45,14 @@ class AppAssets {
   static String playingLottie = 'assets/lottie/playing.json';
   static String noInternetLottie = 'assets/lottie/no_internet.json';
   static String notificationGirlLottie = 'assets/lottie/notification_girl.json';
+  static String successLottie = 'assets/lottie/success.json';
+  static String cancelledLottie = 'assets/lottie/cancelled.json';
 }
 
 class AppColors {
   ///FOR GRADIENT PURPOSES
-  static Color orange1 = HexColor('#EC8E20');
-  static Color orange2 = HexColor('#E9591C');
+  static Color orange1 = HexColor('#EBA027');
+  static Color orange2 = HexColor('#E7491B');
   static Color appGradientDefaultColorBlack = HexColor('#95999d');
   static Color appGradientDefaultColor = HexColor('#1E96ED');
 
@@ -74,6 +77,7 @@ class AppColors {
   static Color blue = HexColor('#1E96ED');
   static Color errorRed = Colors.redAccent;
   static Color yellow = HexColor('#f7c631');
+  static Color green = HexColor('#1ED761');
 
   ///OTHER COLORS
   static Color transparent = Colors.transparent;

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/verse.dart';
 import 'package:mehaley/data/repositories/quotes_data_repository.dart';
-import 'package:mehaley/data/verse.dart';
 
 part 'quotes_event.dart';
 part 'quotes_state.dart';

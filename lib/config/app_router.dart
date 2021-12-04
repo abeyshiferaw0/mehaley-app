@@ -16,6 +16,7 @@ import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc
 import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
@@ -36,6 +37,7 @@ import 'package:mehaley/ui/screens/search/search_result_dedicated.dart';
 import 'package:mehaley/ui/screens/search/search_result_page.dart';
 import 'package:mehaley/ui/screens/setting/settings_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
+import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 
 import 'constants.dart';
 
@@ -54,7 +56,8 @@ class AppRouterPaths {
   static const String homeRoute = 'home';
   static const String settingRoute = '/setting';
   static const String profileRoute = '/profile';
-  static const String editProfileRoute = '/edit_rofile';
+  static const String walletPage = '/wallet_page';
+  static const String editProfileRoute = '/edit_profile';
   static const String albumRoute = '/album';
   static const String playlistRoute = '/playlist';
   static const String userPlaylistRoute = '/user_playlist';
@@ -293,6 +296,14 @@ class AppRouter {
                 ),
               ],
               child: CartPage(),
+            );
+        break;
+      case AppRouterPaths.walletPage:
+        builder = (_) => BlocProvider(
+              create: (context) => WalletPageBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+              child: WalletPage(),
             );
         break;
       default:

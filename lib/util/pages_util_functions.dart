@@ -20,9 +20,13 @@ import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_cancel_bloc/wallet_bill_cancel_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_status_bloc/wallet_bill_status_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
@@ -50,6 +54,7 @@ import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/ui/screens/profile/edit_profile_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/create_user_playlist_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/edit_user_playlist_page.dart';
+import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/download_util.dart';
@@ -1223,5 +1228,46 @@ class PagesUtilFunctions {
     print("packageInfo=> ${packageInfo.packageName}");
 
     return version;
+  }
+
+  static void goToWalletPage(context) {
+    Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+        page: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => WalletPageBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+            ),
+            BlocProvider(
+              create: (context) => WalletBillStatusBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+            ),
+            BlocProvider(
+              create: (context) => FreshWalletBillCubit(),
+            ),
+            BlocProvider(
+              create: (context) => WalletBillCancelBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+            ),
+          ],
+          child: WalletPage(),
+        ),
+      ),
+    );
+  }
+
+  static getUserGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return AppLocale.of().goodMorning;
+    }
+    if (hour < 17) {
+      return AppLocale.of().goodAfterNoon;
+    }
+    return AppLocale.of().goodEvening;
   }
 }

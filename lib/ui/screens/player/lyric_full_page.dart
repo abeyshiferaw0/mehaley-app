@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:marquee/marquee.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_bloc.dart';
@@ -283,7 +284,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "LYRIC BY".toUpperCase(),
+                          AppLocale.of().lyricBy.toUpperCase(),
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_8.sp,
                             color: AppColors.white,
@@ -291,7 +292,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                           ),
                         ),
                         Text(
-                          "Mehaley".toUpperCase(),
+                          AppLocale.of().appName.toUpperCase(),
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
                             color: AppColors.white,

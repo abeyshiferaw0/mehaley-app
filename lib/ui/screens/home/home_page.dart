@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/enums.dart';
@@ -64,7 +65,8 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-
+    print(
+        "TOKKENNN => ${AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey)}");
     super.initState();
   }
 
@@ -126,6 +128,22 @@ class _HomePageState extends State<HomePage>
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       actions: [
+        AppBouncingButton(
+          onTap: () {
+            PagesUtilFunctions.goToWalletPage(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_8),
+            child: Icon(
+              FlutterRemix.settings_4_line,
+              size: AppIconSizes.icon_size_24,
+              color: AppColors.black,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: AppPadding.padding_16,
+        ),
         AppBouncingButton(
           onTap: () {
             Navigator.pushNamed(context, AppRouterPaths.profileRoute);

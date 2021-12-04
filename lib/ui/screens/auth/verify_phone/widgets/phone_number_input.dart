@@ -6,7 +6,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/themes.dart';
 
-class PhoneNumberInput extends StatelessWidget {
+class PhoneNumberInput extends StatefulWidget {
   PhoneNumberInput({
     Key? key,
     required this.controller,
@@ -16,6 +16,11 @@ class PhoneNumberInput extends StatelessWidget {
   final MaskedTextController controller;
   final bool hasError;
 
+  @override
+  State<PhoneNumberInput> createState() => _PhoneNumberInputState();
+}
+
+class _PhoneNumberInputState extends State<PhoneNumberInput> {
   ///
   bool readOnly = false;
 
@@ -35,7 +40,7 @@ class PhoneNumberInput extends StatelessWidget {
             children: [
               Center(
                 child: TextFormField(
-                  controller: controller,
+                  controller: widget.controller,
                   textAlignVertical: TextAlignVertical.center,
                   autofocus: true,
                   cursorColor: AppColors.darkOrange,
@@ -84,6 +89,7 @@ class PhoneNumberInput extends StatelessWidget {
                       color: AppColors.errorRed,
                       fontWeight: FontWeight.w400,
                     ),
+                    errorText: '',
                     filled: true,
                     fillColor: AppColors.lightGrey,
                     border: InputBorder.none,
@@ -104,7 +110,7 @@ class PhoneNumberInput extends StatelessWidget {
                 height: AppMargin.margin_16,
               ),
               Visibility(
-                visible: hasError,
+                visible: widget.hasError,
                 child: Text(
                   AppLocale.of().invalidPhoneNumber,
                   maxLines: 1,

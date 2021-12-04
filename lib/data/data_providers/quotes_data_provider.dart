@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:mehaley/config/app_verses_list.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
-import 'package:mehaley/data/verse.dart';
+import 'package:mehaley/data/models/verse.dart';
 import 'package:mehaley/util/l10n_util.dart';
 
 class QuotesDataProvider {

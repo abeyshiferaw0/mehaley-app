@@ -129,7 +129,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         await authRepository.setOneSignalExternalId(event.appFireBaseUser);
         await authRepository.turnAllNotificationOn();
-        OneSignal.shared.disablePush(false);
+        await OneSignal.shared.disablePush(false);
         SaveUserData saveUserData =
             await authRepository.saveUser(event.appFireBaseUser);
         yield AuthSuccessState(

@@ -1,6 +1,6 @@
 import 'package:mehaley/data/data_providers/quotes_data_provider.dart';
 
-import '../verse.dart';
+import '../models/verse.dart';
 
 class QuotesDataRepository {
   final QuotesDataProvider quotesDataProvider;

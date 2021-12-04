@@ -39,20 +39,20 @@ class LibraryPageDataProvider {
     //SEND REQUEST
     String url = "";
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
-      url = "/purchased_songs_all";
+      url = "/purchased/song/all/";
     } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.SONGS) {
-      url = "/purchased_songs";
+      url = "/purchased/song/";
     } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALBUMS) {
-      url = "/purchased_albums";
+      url = "/purchased/album/";
     } else if (appPurchasedPageItemTypes ==
         AppPurchasedPageItemTypes.PLAYLISTS) {
-      url = "/purchased_playlists";
+      url = "/purchased/playlist/";
     } else {
       throw "AppPurchasedPageItemTypes IS INCORRECT";
     }
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.userBaseUrl + url,
+      url: AppApi.paymentBaseUrl + url,
     );
 
     return response;
