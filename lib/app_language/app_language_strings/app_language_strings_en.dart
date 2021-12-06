@@ -1,3 +1,5 @@
+import 'package:mehaley/data/models/enums/enums.dart';
+
 import '../app_localizations.dart';
 
 class AppLanguageStringsEn extends AppLocalizations {
@@ -24,7 +26,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String followPlaylist = "Follow playlist";
   final String removeFromFollowedPlaylist = "Remove from followed playlist";
   final String uAreListingToPreviewDesc =
-      "You are listing to a preview version, buy the mezmur to listen the full version";
+      "You are listening to a preview version, buy the mezmur to listen the full version";
   final String downloadMezmur = "Download mezmur";
   final String downloadProgressing = "Downloading...";
   final String retryDownload = "Retry download";
@@ -342,6 +344,11 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String welcomeToMehaley = "Welcome to mehaleye en";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
   final String done = "Done";
+  final String yourCurrentBalance = "Your Current Balance";
+  final String today = "Today";
+  final String yesterday = "Yesarday";
+  final String walletHistory = "Wallet History";
+  final String help = "Help";
   final String areYouSureUWantToCancelBill =
       "Are You Sure You Want To Cancel Your Bill";
   final String invalidWalletRechargeAmountSelected =
@@ -355,6 +362,10 @@ class AppLanguageStringsEn extends AppLocalizations {
       "Checking bill status failed, check your internet connection";
   final String walletRechargeInitialErrorMsg =
       "Something went wrong\nUnable to initiate wallet recharge";
+
+  final String walletRechargeFinalErrorMsg =
+      "Something went wrong\nUnable to recharge your wallet";
+
   final String billCancelFailedMsg =
       "Canceling bill status failed, check your internet connection";
   final String checkBillStatus = "Check Bill Status";
@@ -368,7 +379,9 @@ class AppLanguageStringsEn extends AppLocalizations {
       " Your payment has been processed!\ndetails of transaction are included below";
 
   final String cancelBill = "Cancel bill";
-  final String howToPay = "How To Pay?";
+  final String howToPay = "How To Pay Bill?";
+  final String howToPayMsg =
+      "Get instruction on how to pay bill when recharging your wallet";
   final String refreshWalletMsg =
       "If you have recently recharged your wallet and didn't’t see any updates try refreshing your wallet";
   final String refreshWallet = "Refresh Wallet";
@@ -380,8 +393,10 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String enterOtherAmount = "Enter Other Amount";
   final String proceedToPayment = "Proceed to payment";
   final String billInfoMsg =
-      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr(CBE Birr, CBE mobile banking, Boa mobile banking…)";
-  final String payBill = "Pay Bill";
+      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
+  final String payBillMsg =
+      "Hi, copy the bill code and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
+  final String payBill = "Pay Bill To Recharge Your Wallet";
   final String unpaidBillCode = "Unpaid Bill Code";
   final String unPaidBillMsg =
       "You have an unpaid previous bill, you can recharge your wallet by paying this bill or you can cancel and create a new bill.";
@@ -396,6 +411,16 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String notNow = "Not now";
   final String billCode = "Bill Code";
   final String copiedToClipboard = "Copied To Clipboard";
+  final String songPurchased = "Mezmur Purchased";
+  final String albumPurchased = "Album Purchased";
+  final String playlistPurchased = "Playlist Purchased";
+  final String cartCheckedOut = "Cart Checked Out";
+  final String walletRecharged = "Wallet Recharged";
+  final String goToPurchased = "Go to purchased";
+  final String rechargeWallet = "Recharge Wallet";
+  final String walletInsufficient = "Wallet Balance Insufficient";
+  final String walletInsufficientMsg =
+      "Your Wallet Balance Is Insufficient To Make This Purchase, Please Recharge Your Wallet And Try Again";
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";
@@ -507,5 +532,47 @@ class AppLanguageStringsEn extends AppLocalizations {
   String walletRechargedSuccessTransactionNumber(
       {required String transactionNumber}) {
     return "Transaction Number : $transactionNumber";
+  }
+
+  String howToPayWith({required String paymentMethod}) {
+    return "How to pay bill with\n$paymentMethod ?";
+  }
+
+  String alreadyPurchased({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur ";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album ";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist ";
+    return "${item}Already Purchased";
+  }
+
+  String alreadyPurchasedMsg({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = " Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = " Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = " Playlist";
+    return "You Have Already Purchased This$item";
+  }
+
+  String itemIsForFree({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Mezmur Is ";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
+      item = "Album Is ";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist Is ";
+    return "${item}Available For Free";
+  }
+
+  String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) {
+    String item = 'Item';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist";
+    return "The $item you're trying to buy is now free, enjoy listening on Mehaleye";
   }
 }

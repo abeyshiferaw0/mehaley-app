@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/repositories/wallet_data_repository.dart';
 
 part 'wallet_page_event.dart';
@@ -73,6 +73,8 @@ class WalletPageBloc extends Bloc<WalletPageEvent, WalletPageState> {
         yield WalletPageLoadingErrorState(error: error.toString());
       }
     } else if (event is UpdateWalletPageEvent) {
+      print(
+          "WalletPageBloc => UpdateWalletPageEvent ${event.walletPageData.activeBill == null ? 'null' : event.walletPageData.activeBill!.wbcCode}");
       yield WalletPageLoadingState();
       yield WalletPageLoadedState(
         walletPageData: event.walletPageData,

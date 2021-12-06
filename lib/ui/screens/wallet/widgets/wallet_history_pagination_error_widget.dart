@@ -4,12 +4,10 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
-class WidgetDialogErrorWidget extends StatelessWidget {
-  const WidgetDialogErrorWidget({required this.onRetry, required this.title,  required this.subTitle});
+class WalletHistoryPaginationErrorWidget extends StatelessWidget {
+  const WalletHistoryPaginationErrorWidget({required this.onRetry});
 
   final VoidCallback onRetry;
-  final String title;
-  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +16,11 @@ class WidgetDialogErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: AppFontSizes.font_size_10.sp,
-              ),
-            ),
             SizedBox(
-              height: AppMargin.margin_8,
+              height: AppMargin.margin_16,
             ),
             Text(
-             subTitle,
-              textAlign: TextAlign.center,
+              AppLocale.of().checkYourInternetConnection,
               style: TextStyle(
                 color: AppColors.darkGrey,
                 fontSize: AppFontSizes.font_size_8.sp,
@@ -63,7 +51,10 @@ class WidgetDialogErrorWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: AppMargin.margin_20,
+            ),
           ],
         ),
       ),

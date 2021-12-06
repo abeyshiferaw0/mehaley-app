@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/wallet_data_provider.dart';
 import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
+import 'package:mehaley/data/models/payment/wallet_history.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 
 class WalletDataRepository {
@@ -37,6 +38,30 @@ class WalletDataRepository {
     return walletPageData;
   }
 
+  Future<List<WalletHistory>> getWalletHistory(int page, int pageSize) async {
+    final List<WalletHistory> walletHistoryList;
+
+    Response response =
+        await walletDataProvider.getWalletHistory(page, pageSize);
+
+    //PARSE LIST OF WALLET HISTORIES
+    walletHistoryList = (response.data as List)
+        .map((walletHistory) => WalletHistory.fromMap(walletHistory))
+        .toList();
+
+    return walletHistoryList;
+  }
+
+  Future<WalletPageData> createBill(
+      double selectedAmount, bool shouldCancelPreviousBill) async {
+    Response response = await walletDataProvider.createBill(
+        selectedAmount, shouldCancelPreviousBill);
+
+    WalletPageData walletPageData = parseWalletPageData(response);
+
+    return walletPageData;
+  }
+
   WalletPageData parseWalletPageData(response) {
     final WebirrBill? freshBill;
     final WebirrBill? activeBill;
@@ -61,7 +86,9 @@ class WalletDataRepository {
     walletBalance = response.data['balance'];
 
     //PARSE PAYMENT METHODS
-    paymentMethods = response.data['payment_methods'];
+    paymentMethods = (response.data['payment_methods'] as List)
+        .map((paymentMethod) => PaymentMethod.fromMap(paymentMethod))
+        .toList();
 
     WalletPageData walletPageData = WalletPageData(
       freshBill: freshBill,

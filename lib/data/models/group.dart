@@ -1,7 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/remote_image.dart';
 import 'package:mehaley/data/models/song.dart';

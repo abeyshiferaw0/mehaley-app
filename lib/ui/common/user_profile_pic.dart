@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/user_image_sm.dart';
 import 'package:mehaley/util/auth_util.dart';
 

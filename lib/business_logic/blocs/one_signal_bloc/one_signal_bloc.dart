@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 part 'one_signal_event.dart';

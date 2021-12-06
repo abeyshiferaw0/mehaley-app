@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/cart/album_cart.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/dialog/dialog_remove_from_cart.dart';
 import 'package:mehaley/ui/screens/cart/widgets/item_cart_album.dart';
 

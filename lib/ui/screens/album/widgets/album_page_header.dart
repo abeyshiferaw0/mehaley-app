@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
@@ -67,18 +67,16 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                   SizedBox(height: AppMargin.margin_16),
                   buildTitleAndSubTitle(album),
                   SizedBox(height: AppMargin.margin_20),
-                  (!album.isBought && !album.isFree)
-                      ? BuyItemBtnWidget(
-                          priceEtb: album.priceEtb,
-                          priceUsd: album.priceDollar,
-                          title: AppLocale.of().buyAlbum.toUpperCase(),
-                          hasLeftMargin: false,
-                          isFree: album.isFree,
-                          discountPercentage: album.discountPercentage,
-                          isDiscountAvailable: album.isDiscountAvailable,
-                          isBought: album.isBought,
-                        )
-                      : SizedBox(),
+                  BuyItemBtnWidget(
+                    priceEtb: album.priceEtb,
+                    priceUsd: album.priceDollar,
+                    title: AppLocale.of().buyAlbum.toUpperCase(),
+                    hasLeftMargin: false,
+                    isFree: album.isFree,
+                    discountPercentage: album.discountPercentage,
+                    isDiscountAvailable: album.isDiscountAvailable,
+                    isBought: album.isBought,
+                  ),
                   SizedBox(height: AppMargin.margin_16),
                 ],
               ),

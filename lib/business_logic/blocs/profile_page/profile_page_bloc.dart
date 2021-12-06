@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/api_response/profile_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/repositories/profile_data_repository.dart';
 
 part 'profile_page_event.dart';

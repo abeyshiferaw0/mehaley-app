@@ -4,7 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -187,6 +187,8 @@ class UserPlaylistMenuWidget extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: AppFontSizes.font_size_12.sp,

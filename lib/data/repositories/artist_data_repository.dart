@@ -1,8 +1,8 @@
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/artist_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
 import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 

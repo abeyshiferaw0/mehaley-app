@@ -12,7 +12,7 @@ import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/playlist.dart';

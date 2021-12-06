@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_status_bloc/wallet_bill_status_bloc.dart';
-import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
-import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_initial_bloc/wallet_recharge_initial_bloc.dart';
-import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
-import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_initial.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class WalletFooter extends StatelessWidget {
@@ -42,29 +39,8 @@ class WalletFooter extends StatelessWidget {
                   disableBouncing: (state is WalletBillStatusLoadingState),
                   onTap: () {
                     if (!(state is WalletBillStatusLoadingState)) {
-                      ///GET PROVIDERS BEFORE PASSING BY VALUE
-                      WalletPageBloc walletPageBloc =
-                          BlocProvider.of<WalletPageBloc>(context);
-                      FreshWalletBillCubit freshWalletBillCubit =
-                          BlocProvider.of<FreshWalletBillCubit>(context);
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return MultiBlocProvider(
-                            providers: [
-                              BlocProvider(
-                                create: (context) => WalletRechargeInitialBloc(
-                                  walletDataRepository:
-                                      AppRepositories.walletDataRepository,
-                                ),
-                              ),
-                              BlocProvider.value(value: walletPageBloc),
-                              BlocProvider.value(value: freshWalletBillCubit),
-                            ],
-                            child: DialogWalletRechargeInitial(),
-                          );
-                        },
-                      );
+                      PagesUtilFunctions.openWalletRechargeInitialDialog(
+                          context);
                     }
                   },
                   child: Container(
@@ -89,7 +65,7 @@ class WalletFooter extends StatelessWidget {
                         ),
                         SizedBox(width: AppMargin.margin_12),
                         Text(
-                          "Recharge Wallet".toUpperCase(),
+                          AppLocale.of().rechargeYourWallet.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
@@ -106,7 +82,12 @@ class WalletFooter extends StatelessWidget {
           ),
           SizedBox(width: AppMargin.margin_12),
           AppBouncingButton(
-            onTap: () {},
+            onTap: () {
+              PagesUtilFunctions.goToHowToPayPage(
+                context,
+                AppValues.howToPayHelpGeneralUrl,
+              );
+            },
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.padding_24,
@@ -127,7 +108,7 @@ class WalletFooter extends StatelessWidget {
                   ),
                   SizedBox(width: AppMargin.margin_12),
                   Text(
-                    "Help".toUpperCase(),
+                    AppLocale.of().help.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,

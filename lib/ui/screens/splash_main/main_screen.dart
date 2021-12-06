@@ -17,8 +17,8 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';

@@ -36,23 +36,7 @@ class MainAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
-              FlutterRemix.settings_4_line,
-              size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: AppPadding.padding_16,
-        ),
-        AppBouncingButton(
-          onTap: () {
-            Navigator.pushNamed(context, AppRouterPaths.profileRoute);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_8),
-            child: Icon(
-              FlutterRemix.user_settings_line,
+              FlutterRemix.wallet_3_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.black,
             ),

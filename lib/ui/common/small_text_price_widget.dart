@@ -51,7 +51,7 @@ class SmallTextPriceWidget extends StatelessWidget {
   Text buildPurchased(context) {
     return Text(
       AppLocale.of().purchased.toUpperCase(),
-      maxLines: 2,
+      maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: AppColors.darkOrange,

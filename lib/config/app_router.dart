@@ -37,6 +37,7 @@ import 'package:mehaley/ui/screens/search/search_result_dedicated.dart';
 import 'package:mehaley/ui/screens/search/search_result_page.dart';
 import 'package:mehaley/ui/screens/setting/settings_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
+import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 
 import 'constants.dart';
@@ -71,6 +72,7 @@ class AppRouterPaths {
   static const String searchResultDedicatedRoute = '/search_result_dedicated';
   static const String cartRoute = '/cart';
   static const String songAddToPlaylist = '/song_add_to_playlist';
+  static const String howToPayPageRoute = 'how_to_pay_page';
 
   //ROUTE OBSERVER
   static final RouteObserver<ModalRoute<void>> routeObserver =
@@ -303,9 +305,16 @@ class AppRouter {
               create: (context) => WalletPageBloc(
                 walletDataRepository: AppRepositories.walletDataRepository,
               ),
-              child: WalletPage(),
+              child: WalletPage(
+                startRechargeProcess: false,
+              ),
             );
         break;
+      case AppRouterPaths.howToPayPageRoute:
+        final args = settings.arguments as ScreenArguments;
+        builder = (_) => HowToPayPage(initialUrl: args.args['initialUrl']);
+        break;
+
       default:
         throw Exception('Invalid route: ${settings.name}');
     }

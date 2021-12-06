@@ -1,8 +1,10 @@
+import 'package:mehaley/data/models/enums/enums.dart';
+
 abstract class AppLocalizations {
   String get appName;
   String get byAppName;
   String get appTermsAndCondition;
-
+  String get yourCurrentBalance;
   String get logOut;
   String get byElfPlay;
   String get removeFromCart;
@@ -22,7 +24,7 @@ abstract class AppLocalizations {
   String get followPlaylist;
   String get removeFromFollowedPlaylist;
   String get uAreListingToPreviewDesc;
-
+  String get help;
   String get downloadMezmur;
   String get downloadProgressing;
   String get retryDownload;
@@ -32,7 +34,7 @@ abstract class AppLocalizations {
   String get sharePlaylist;
   String get share;
   String get shareMezmur;
-
+  String get howToPayMsg;
   String get sortPlaylist;
   String get findInPlaylist;
   String get viewMezmursCategory;
@@ -50,11 +52,12 @@ abstract class AppLocalizations {
   String get downloadingStr;
   String get noInternetMsg;
   String get noInternetMsgDetail;
-
+  String get today;
+  String get yesterday;
   String get tryAgain;
   String get subscribeDialogTitle;
   String get subscribeDialogMsg;
-
+  String get walletHistory;
   String get subscribeNow;
   String get home;
   String get search;
@@ -215,7 +218,7 @@ abstract class AppLocalizations {
   String get settings;
   String get dataSaver;
   String get dataSaverMsg;
-
+  String get goToPurchased;
   String get preferredPaymentMethod;
   String get chooseYourPreferredMethod;
 
@@ -322,6 +325,7 @@ abstract class AppLocalizations {
   String get enableNotificationsMsg;
   String get lyricBy;
   String get copyCode;
+  String get payBillMsg;
   String get payBill;
   String get billInfoMsg;
   String get amount;
@@ -360,6 +364,16 @@ abstract class AppLocalizations {
   String get walletRechargeInitialErrorMsg;
   String get selectedAmount;
   String get invalidWalletRechargeAmountSelected;
+  String get walletRechargeFinalErrorMsg;
+  String get songPurchased;
+  String get albumPurchased;
+  String get playlistPurchased;
+  String get cartCheckedOut;
+  String get walletRecharged;
+
+  String get rechargeWallet;
+  String get walletInsufficient;
+  String get walletInsufficientMsg;
 
   String noOfSongs({required String noOfSong});
 
@@ -418,4 +432,14 @@ abstract class AppLocalizations {
 
   String walletRechargedSuccessTransactionNumber(
       {required String transactionNumber});
+
+  String howToPayWith({required String paymentMethod});
+
+  String alreadyPurchased({required PurchasedItemType purchasedItemType});
+
+  String alreadyPurchasedMsg({required PurchasedItemType purchasedItemType});
+
+  String itemIsForFree({required PurchasedItemType purchasedItemType});
+
+  String itemIsForFreeMsg({required PurchasedItemType purchasedItemType});
 }

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
 import 'package:mehaley/data/models/library_data/purchased_song.dart';
 import 'package:mehaley/data/models/song.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/data_providers/user_playlist_data_provider.dart';
 import 'package:mehaley/data/models/api_response/user_playlist_page_data.dart';
 import 'package:mehaley/data/models/my_playlist.dart';

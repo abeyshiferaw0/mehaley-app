@@ -6,9 +6,9 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 

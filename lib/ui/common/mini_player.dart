@@ -13,8 +13,8 @@ import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_positi
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
@@ -205,7 +205,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             ),
             Row(
               children: [
-                buildBuyButton(),
+                buildBuyButton(song),
                 Expanded(
                   child: SizedBox(),
                 ),
@@ -421,9 +421,21 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
     }
   }
 
-  buildBuyButton() {
+  buildBuyButton(Song song) {
     return AppBouncingButton(
-      onTap: () {},
+      onTap: () {
+        PagesUtilFunctions.openPurchaseStatusDialog(
+          context: context,
+          purchasedItemType: PurchasedItemType.SONG_PAYMENT,
+          itemId: song.songId,
+          itemTitle: L10nUtil.translateLocale(song.songName, context),
+          itemImageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
+          itemSubTitle: PagesUtilFunctions.getArtistsNames(
+            song.artistsName,
+            context,
+          ),
+        );
+      },
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: AppPadding.padding_16,

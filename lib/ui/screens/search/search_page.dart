@@ -6,7 +6,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/category.dart';

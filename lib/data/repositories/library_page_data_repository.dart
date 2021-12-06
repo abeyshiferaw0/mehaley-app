@@ -1,9 +1,9 @@
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/library_page_data_provider.dart';
 import 'package:mehaley/data/models/api_response/library_page_favorite_data.dart';
 import 'package:mehaley/data/models/api_response/library_page_following_data.dart';
 import 'package:mehaley/data/models/api_response/library_page_purchased_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/library_data/favorite_album.dart';
 import 'package:mehaley/data/models/library_data/favorite_song.dart';
 import 'package:mehaley/data/models/library_data/followed_artist.dart';

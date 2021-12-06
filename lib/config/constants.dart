@@ -154,6 +154,7 @@ class AppValues {
 
   //WALLET PAGE
   static const double walletFixedTopUpSize = 100.0;
+  static const String howToPayHelpGeneralUrl = 'www.kirayplc.com';
 
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';

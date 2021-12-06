@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/api_response/library_page_following_data.dart';
 import 'package:mehaley/data/models/library_data/followed_playlist.dart';
 import 'package:mehaley/data/repositories/library_page_data_repository.dart';

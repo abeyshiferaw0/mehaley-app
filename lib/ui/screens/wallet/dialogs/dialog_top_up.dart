@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_bloc/wallet_recharge_bloc.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_final.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -86,7 +92,7 @@ class _DialogTopUpState extends State<DialogTopUp> {
                   SizedBox(
                     height: AppMargin.margin_24,
                   ),
-                  buildPayButton(context),
+                  buildPayButton(),
                   SizedBox(
                     height: AppMargin.margin_8,
                   ),
@@ -99,13 +105,43 @@ class _DialogTopUpState extends State<DialogTopUp> {
     );
   }
 
-  AppBouncingButton buildPayButton(BuildContext context) {
+  AppBouncingButton buildPayButton() {
     return AppBouncingButton(
       disableBouncing: hasError,
       onTap: () {
         if (isSelectedAmountValid()) {
-          ///todo
-          ///API REQUEST WITH CANCILL BILL OPTION IF ACTIVE BILL NULL OR NOT
+          ///POP THIS DIALOG FIRST
+          ///THEN GO TO RECHARGING DIALOG
+          Navigator.pop(context);
+
+          ///GET PROVIDERS BEFORE PASSING BY VALUE
+          WalletPageBloc walletPageBloc =
+              BlocProvider.of<WalletPageBloc>(context);
+          FreshWalletBillCubit freshWalletBillCubit =
+              BlocProvider.of<FreshWalletBillCubit>(context);
+
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => WalletRechargeBloc(
+                      walletDataRepository:
+                          AppRepositories.walletDataRepository,
+                    ),
+                  ),
+                  BlocProvider.value(value: walletPageBloc),
+                  BlocProvider.value(value: freshWalletBillCubit),
+                ],
+                child: DialogWalletRechargeFinal(
+                  activeBill: widget.activeBill,
+                  selectedAmount: selectedAmount,
+                ),
+              );
+            },
+          );
         } else {
           ///SHOW INVALID AMOUNT MESSAGE
           ScaffoldMessenger.of(context).showSnackBar(
@@ -583,7 +619,6 @@ class _DialogTopUpState extends State<DialogTopUp> {
   }
 
   bool isSelectedAmountValid() {
-    print("selectedAmount ${selectedAmount}");
     if (selectedAmount < 1.0) {
       setTextAmountError();
       return false;

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 
 class BottomBarCubit extends Cubit<BottomBarPages> {
   BottomBarCubit() : super(BottomBarPages.HOME);

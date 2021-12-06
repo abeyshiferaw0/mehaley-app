@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/models/api_response/my_playlist_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/repositories/my_playlist_repository.dart';
 

@@ -12,5 +12,5 @@ class LoadCategoryPagePaginatedEvent extends CategoryPagePaginationEvent {
       {required this.page, required this.categoryId, required this.pageSize});
 
   @override
-  List<Object?> get props => [categoryId, pageSize];
+  List<Object?> get props => [page, categoryId, pageSize];
 }

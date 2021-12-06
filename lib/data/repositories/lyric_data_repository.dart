@@ -1,6 +1,6 @@
 import 'package:lyrics_parser/lyrics_parser.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/lyric_data_provider.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/lyric_item.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 import 'package:mehaley/util/l10n_util.dart';

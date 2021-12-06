@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/data/data_providers/my_playlist_data_provider.dart';
 import 'package:mehaley/data/models/api_response/my_playlist_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 
 class MyPLayListRepository {

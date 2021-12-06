@@ -14,6 +14,7 @@ import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_cancel_bill.dart';
 import 'package:mehaley/util/network_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class WalletActiveBill extends StatefulWidget {
@@ -28,8 +29,6 @@ class WalletActiveBill extends StatefulWidget {
 
 class _WalletActiveBillState extends State<WalletActiveBill>
     with TickerProviderStateMixin {
-  late MaskedTextController maskedTextController;
-
   late AnimationController _controller;
 
   @override
@@ -39,8 +38,6 @@ class _WalletActiveBillState extends State<WalletActiveBill>
       vsync: this,
       duration: Duration(milliseconds: 1500),
     );
-    maskedTextController = new MaskedTextController(
-        text: widget.activeBill.wbcCode, mask: '000 000 000');
     super.initState();
   }
 
@@ -289,7 +286,10 @@ class _WalletActiveBillState extends State<WalletActiveBill>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  maskedTextController.text,
+                  MaskedTextController(
+                    text: widget.activeBill.wbcCode,
+                    mask: '000 000 000',
+                  ).text,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
@@ -344,7 +344,12 @@ class _WalletActiveBillState extends State<WalletActiveBill>
         ),
         SizedBox(width: AppMargin.margin_16),
         AppBouncingButton(
-          onTap: () {},
+          onTap: () {
+            PagesUtilFunctions.goToHowToPayPage(
+              context,
+              AppValues.howToPayHelpGeneralUrl,
+            );
+          },
           child: Text(
             AppLocale.of().howToPay,
             textAlign: TextAlign.start,

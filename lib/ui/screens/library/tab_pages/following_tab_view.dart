@@ -7,7 +7,7 @@ import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_playlist
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_artists_page.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_playlists_page.dart';

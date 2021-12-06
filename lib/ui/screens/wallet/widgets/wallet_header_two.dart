@@ -15,11 +15,17 @@ import 'package:sizer/sizer.dart';
 
 class WalletHeaderTwo extends StatefulWidget {
   const WalletHeaderTwo(
-      {Key? key, required this.height, required this.walletPageData})
+      {Key? key,
+      required this.onWalletPageRefresh,
+      required this.height,
+      required this.walletPageData,
+      required this.shrinkPercentage})
       : super(key: key);
 
   final double height;
   final WalletPageData walletPageData;
+  final double shrinkPercentage;
+  final VoidCallback onWalletPageRefresh;
 
   @override
   State<WalletHeaderTwo> createState() => _WalletHeaderTwoState();
@@ -140,6 +146,9 @@ class _WalletHeaderTwoState extends State<WalletHeaderTwo>
           BlocProvider.of<WalletPageBloc>(context).add(
             RefreshWalletPageEvent(),
           );
+
+          ///SEND CALL BACK OF REFRESH BUTTON
+          widget.onWalletPageRefresh();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(

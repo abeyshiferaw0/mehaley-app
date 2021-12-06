@@ -9,7 +9,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';

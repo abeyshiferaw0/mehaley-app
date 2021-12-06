@@ -1,4 +1,5 @@
 import 'package:mehaley/data/models/enums/app_languages.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/l10n_util.dart';
 
 import 'app_language_strings/app_language_strings_am.dart';
@@ -35,7 +36,7 @@ class AppLocale {
   String get addToCart => appLocalizations.addToCart;
   String get previewMode => appLocalizations.previewMode;
   String get buyMezmur => appLocalizations.buyMezmur;
-
+  String get yourCurrentBalance => appLocalizations.yourCurrentBalance;
   String get buyAlbum => appLocalizations.buyAlbum;
   String get buy => appLocalizations.buy;
   String get buyPlaylist => appLocalizations.buyPlaylist;
@@ -45,7 +46,7 @@ class AppLocale {
   String get following => appLocalizations.following;
   String get addToFavorite => appLocalizations.addToFavorite;
   String get removeFromFavorite => appLocalizations.removeFromFavorite;
-
+  String get help => appLocalizations.help;
   String get followArtist => appLocalizations.followArtist;
   String get followPlaylist => appLocalizations.followPlaylist;
   String get removeFromFollowedPlaylist =>
@@ -58,7 +59,7 @@ class AppLocale {
   String get deleteMezmur => appLocalizations.deleteMezmur;
   String get shareAlbum => appLocalizations.shareAlbum;
   String get shareArtist => appLocalizations.shareArtist;
-
+  String get walletHistory => appLocalizations.walletHistory;
   String get sharePlaylist => appLocalizations.sharePlaylist;
   String get share => appLocalizations.share;
   String get shareMezmur => appLocalizations.shareMezmur;
@@ -69,7 +70,7 @@ class AppLocale {
   String get viewAlbum => appLocalizations.viewAlbum;
   String get addToQueue => appLocalizations.addToQueue;
   String get addToPlaylist => appLocalizations.addToPlaylist;
-
+  String get howToPayMsg => appLocalizations.howToPayMsg;
   String get removeFromPlaylistMsg => appLocalizations.removeFromPlaylistMsg;
   String get addMezmurs => appLocalizations.addMezmurs;
   String get addToHomeScreen => appLocalizations.addToHomeScreen;
@@ -92,7 +93,8 @@ class AppLocale {
   String get libraryShort => appLocalizations.libraryShort;
   String get downAllPurchased => appLocalizations.downAllPurchased;
   String get yourOffline => appLocalizations.yourOffline;
-
+  String get today => appLocalizations.today;
+  String get yesterday => appLocalizations.yesterday;
   String get goToDownloadsMsg => appLocalizations.goToDownloadsMsg;
   String get free => appLocalizations.free;
   String get purchased => appLocalizations.purchased;
@@ -342,7 +344,7 @@ class AppLocale {
   String get addDescripption => appLocalizations.addDescripption;
   String get createPlaylistMsg => appLocalizations.createPlaylistMsg;
   String get playlistName => appLocalizations.playlistName;
-
+  String get goToPurchased => appLocalizations.goToPurchased;
   String get takeAPhoto => appLocalizations.takeAPhoto;
   String get removeIImage => appLocalizations.removeIImage;
   String get playlistNameCantBeEmpty =>
@@ -400,6 +402,7 @@ class AppLocale {
   String get enableNotificationsMsg => appLocalizations.enableNotificationsMsg;
 
   String get copyCode => appLocalizations.copyCode;
+  String get payBillMsg => appLocalizations.payBillMsg;
   String get payBill => appLocalizations.payBill;
   String get billInfoMsg => appLocalizations.billInfoMsg;
   String get amount => appLocalizations.amount;
@@ -444,6 +447,18 @@ class AppLocale {
   String get selectedAmount => appLocalizations.selectedAmount;
   String get invalidWalletRechargeAmountSelected =>
       appLocalizations.invalidWalletRechargeAmountSelected;
+  String get walletRechargeFinalErrorMsg =>
+      appLocalizations.walletRechargeFinalErrorMsg;
+
+  String get songPurchased => appLocalizations.songPurchased;
+  String get albumPurchased => appLocalizations.albumPurchased;
+  String get playlistPurchased => appLocalizations.playlistPurchased;
+  String get cartCheckedOut => appLocalizations.cartCheckedOut;
+  String get walletRecharged => appLocalizations.walletRecharged;
+
+  String get rechargeWallet => appLocalizations.rechargeWallet;
+  String get walletInsufficient => appLocalizations.walletInsufficient;
+  String get walletInsufficientMsg => appLocalizations.walletInsufficientMsg;
 
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>
@@ -536,4 +551,25 @@ class AppLocale {
           {required String transactionNumber}) =>
       appLocalizations.walletRechargedSuccessTransactionNumber(
           transactionNumber: transactionNumber);
+
+  String howToPayWith({required String paymentMethod}) =>
+      appLocalizations.howToPayWith(paymentMethod: paymentMethod);
+
+  String alreadyPurchased({required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.alreadyPurchased(purchasedItemType: purchasedItemType);
+
+  String alreadyPurchasedMsg({required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.alreadyPurchasedMsg(
+        purchasedItemType: purchasedItemType,
+      );
+
+  String itemIsForFree({required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.itemIsForFree(
+        purchasedItemType: purchasedItemType,
+      );
+
+  String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.itemIsForFreeMsg(
+        purchasedItemType: purchasedItemType,
+      );
 }

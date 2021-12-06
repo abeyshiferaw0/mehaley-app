@@ -45,10 +45,6 @@ class SyncProvider {
       );
     }
 
-    formData.fields.forEach((element) {
-      print("MAPENTERY=>>> ${element}");
-    });
-
     Response response = await ApiUtil.post(
       dio: dio,
       url: AppApi.userBaseUrl + "/add_bulk_listen_history/",

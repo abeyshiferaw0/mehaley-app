@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio/src/cancel_token.dart';
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/data_providers/search_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/api_response/search_page_front_data.dart';

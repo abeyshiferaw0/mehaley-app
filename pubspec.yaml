@@ -95,6 +95,8 @@ dependencies:
   screenshot: ^1.2.3
   #INAPP PURCHASE
   purchases_flutter: ^3.7.0
+  #WEBVIEW
+  webview_flutter: ^2.3.1
 
 
 

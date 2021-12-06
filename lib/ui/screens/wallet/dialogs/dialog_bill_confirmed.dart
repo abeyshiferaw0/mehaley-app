@@ -7,6 +7,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -45,7 +46,7 @@ class DialogBillConfirmed extends StatelessWidget {
                   SizedBox(
                     height: AppMargin.margin_32,
                   ),
-                  buildPaymentDetails(),
+                  buildPaymentDetails(context),
                   SizedBox(
                     height: AppMargin.margin_32,
                   ),
@@ -92,7 +93,7 @@ class DialogBillConfirmed extends StatelessWidget {
     );
   }
 
-  Widget buildPaymentDetails() {
+  Widget buildPaymentDetails(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -150,7 +151,9 @@ class DialogBillConfirmed extends StatelessWidget {
               ),
             ),
             Text(
-              freshBill.webirrPayment!.paymentMethod.paymentMethodName
+              L10nUtil.translateLocale(
+                      freshBill.webirrPayment!.paymentMethod.paymentMethodName,
+                      context)
                   .replaceAll('_', ' ')
                   .toUpperCase(),
               textAlign: TextAlign.center,

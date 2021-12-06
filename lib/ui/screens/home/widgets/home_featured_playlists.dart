@@ -3,8 +3,8 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -79,19 +79,17 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 ),
               ),
             ),
-            (!playlist.isBought && !playlist.isFree)
-                ? BuyItemBtnWidget(
-                    priceEtb: playlist.priceEtb,
-                    priceUsd: playlist.priceDollar,
-                    title: AppLocale.of().buyPlaylist.toUpperCase(),
-                    hasLeftMargin: true,
-                    isFree: playlist.isFree,
-                    showDiscount: false,
-                    discountPercentage: playlist.discountPercentage,
-                    isDiscountAvailable: playlist.isDiscountAvailable,
-                    isBought: playlist.isBought,
-                  )
-                : SizedBox(),
+            BuyItemBtnWidget(
+              priceEtb: playlist.priceEtb,
+              priceUsd: playlist.priceDollar,
+              title: AppLocale.of().buyPlaylist.toUpperCase(),
+              hasLeftMargin: true,
+              isFree: playlist.isFree,
+              showDiscount: false,
+              discountPercentage: playlist.discountPercentage,
+              isDiscountAvailable: playlist.isDiscountAvailable,
+              isBought: playlist.isBought,
+            ),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),

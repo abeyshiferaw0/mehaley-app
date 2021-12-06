@@ -6,7 +6,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -32,7 +32,9 @@ class NoInternetHeader extends StatelessWidget {
 
   Container buildNoInternetHeader(context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_32 * 2),
+      padding: EdgeInsets.only(
+        bottom: AppPadding.padding_24 * 2,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

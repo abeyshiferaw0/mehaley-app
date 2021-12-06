@@ -161,6 +161,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         );
                       },
                     ),
+                    SizedBox(height: AppMargin.margin_32),
+                    SettingLargeButton(
+                      title: AppLocale.of().appWallet,
+                      subTitle: AppLocale.of().rechargeYourWallet,
+                      onTap: () {
+                        PagesUtilFunctions.goToWalletPage(context);
+                      },
+                    ),
                     SizedBox(height: AppMargin.margin_20),
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
@@ -206,6 +214,17 @@ class _SettingsPageState extends State<SettingsPage> {
                       subTitle: AppLocale.of().shareAppMsg,
                       onTap: () {
                         PagesUtilFunctions.shareApp();
+                      },
+                    ),
+                    SizedBox(height: AppMargin.margin_32),
+                    SettingLargeButton(
+                      title: AppLocale.of().howToPay,
+                      subTitle: AppLocale.of().howToPayMsg,
+                      onTap: () {
+                        PagesUtilFunctions.goToHowToPayPage(
+                          context,
+                          AppValues.howToPayHelpGeneralUrl,
+                        );
                       },
                     ),
                     SizedBox(

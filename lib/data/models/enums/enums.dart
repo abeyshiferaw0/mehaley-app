@@ -72,3 +72,16 @@ enum PaymentStatus {
   PAID_CONFIRMED,
   CANCELED,
 }
+
+enum PurchasedItemType {
+  SONG_PAYMENT,
+  ALBUM_PAYMENT,
+  PLAYLIST_PAYMENT,
+  CART_PAYMENT,
+  WALLET_RECHARGE,
+}
+
+enum PaymentType {
+  WALLET,
+  IN_APP,
+}

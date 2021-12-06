@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 
+import '../remote_image.dart';
+import '../text_lan.dart';
+
 class PaymentMethod extends Equatable {
-  final int paymentMethodId;
-  final String paymentMethodName;
-  final String imageUrl;
+  final TextLan paymentMethodName;
+  final RemoteImage imageUrl;
   final String helpUrl;
 
   PaymentMethod({
-    required this.paymentMethodId,
     required this.paymentMethodName,
     required this.imageUrl,
     required this.helpUrl,
@@ -15,7 +16,6 @@ class PaymentMethod extends Equatable {
 
   @override
   List<Object?> get props => [
-        paymentMethodId,
         paymentMethodName,
         imageUrl,
         helpUrl,
@@ -23,16 +23,14 @@ class PaymentMethod extends Equatable {
 
   factory PaymentMethod.fromMap(Map<String, dynamic> json) {
     return PaymentMethod(
-      paymentMethodId: json["payment_method_id"],
-      paymentMethodName: json["payment_method_name"],
-      imageUrl: json["image_url"],
+      paymentMethodName: TextLan.fromMap(json["payment_method_name"]),
+      imageUrl: RemoteImage.fromMap(json["image_url"]),
       helpUrl: json["help_url"],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "payment_method_id": this.paymentMethodId,
       "payment_method_name": this.paymentMethodName,
       "image_url": this.imageUrl,
       "help_url": this.helpUrl,

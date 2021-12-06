@@ -9,9 +9,9 @@ import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.da
 import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/user_profile_pic.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/favorite_tab_view.dart';

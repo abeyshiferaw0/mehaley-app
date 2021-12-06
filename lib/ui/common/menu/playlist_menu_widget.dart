@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/menu/menu_items/playlist_cart_menu_item.dart';
@@ -152,6 +152,8 @@ class PlaylistMenuWidget extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: AppFontSizes.font_size_12.sp,

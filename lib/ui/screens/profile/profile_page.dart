@@ -8,7 +8,7 @@ import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/profile_page_data.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';

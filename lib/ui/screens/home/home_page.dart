@@ -4,12 +4,11 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
-import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/home_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/group.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
@@ -65,8 +64,6 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-    print(
-        "TOKKENNN => ${AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey)}");
     super.initState();
   }
 
@@ -135,23 +132,7 @@ class _HomePageState extends State<HomePage>
           child: Padding(
             padding: const EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
-              FlutterRemix.settings_4_line,
-              size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: AppPadding.padding_16,
-        ),
-        AppBouncingButton(
-          onTap: () {
-            Navigator.pushNamed(context, AppRouterPaths.profileRoute);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_8),
-            child: Icon(
-              FlutterRemix.user_settings_line,
+              FlutterRemix.wallet_3_line,
               size: AppIconSizes.icon_size_24,
               color: AppColors.black,
             ),

@@ -18,11 +18,15 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/purcahsed_item_status_bloc/purchase_item_status_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/purchase_item_bloc/purchase_item_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_cancel_bloc/wallet_bill_cancel_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_status_bloc/wallet_bill_status_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_history_bloc/wallet_history_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_initial_bloc/wallet_recharge_initial_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -30,7 +34,6 @@ import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dar
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -39,14 +42,18 @@ import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/category.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/payment/wallet_history.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/dialog/dialog_permission_permanent_refused.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase_status.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
@@ -54,6 +61,8 @@ import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/ui/screens/profile/edit_profile_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/create_user_playlist_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/edit_user_playlist_page.dart';
+import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_initial.dart';
+import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
@@ -1230,7 +1239,7 @@ class PagesUtilFunctions {
     return version;
   }
 
-  static void goToWalletPage(context) {
+  static void goToWalletPage(context, {bool startRechargeProcess = false}) {
     Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
@@ -1253,8 +1262,47 @@ class PagesUtilFunctions {
                 walletDataRepository: AppRepositories.walletDataRepository,
               ),
             ),
+            BlocProvider(
+              create: (context) => WalletHistoryBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+            ),
           ],
-          child: WalletPage(),
+          child: WalletPage(startRechargeProcess: startRechargeProcess),
+        ),
+      ),
+    );
+  }
+
+  static openWalletRechargeInitialDialog(context) {
+    ///GET PROVIDERS BEFORE PASSING BY VALUE
+    WalletPageBloc walletPageBloc = BlocProvider.of<WalletPageBloc>(context);
+    FreshWalletBillCubit freshWalletBillCubit =
+        BlocProvider.of<FreshWalletBillCubit>(context);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => WalletRechargeInitialBloc(
+                walletDataRepository: AppRepositories.walletDataRepository,
+              ),
+            ),
+            BlocProvider.value(value: walletPageBloc),
+            BlocProvider.value(value: freshWalletBillCubit),
+          ],
+          child: DialogWalletRechargeInitial(),
+        );
+      },
+    );
+  }
+
+  static void goToHowToPayPage(context, String initialUrl) {
+    Navigator.of(context, rootNavigator: true).push(
+      PagesUtilFunctions.createBottomToUpAnimatedRoute(
+        page: HowToPayPage(
+          initialUrl: initialUrl,
         ),
       ),
     );
@@ -1269,5 +1317,121 @@ class PagesUtilFunctions {
       return AppLocale.of().goodAfterNoon;
     }
     return AppLocale.of().goodEvening;
+  }
+
+  static String getWalletHistoryAction(WalletHistory walletHistory) {
+    if (walletHistory.walletHistoryItemType == PurchasedItemType.SONG_PAYMENT) {
+      return AppLocale.of().songPurchased;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.ALBUM_PAYMENT) {
+      return AppLocale.of().albumPurchased;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.PLAYLIST_PAYMENT) {
+      return AppLocale.of().playlistPurchased;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.CART_PAYMENT) {
+      return AppLocale.of().cartCheckedOut;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_RECHARGE) {
+      return AppLocale.of().walletRecharged;
+    }
+    return '';
+  }
+
+  static String getWalletHistoryPrice(WalletHistory walletHistory) {
+    if (walletHistory.walletHistoryItemType == PurchasedItemType.SONG_PAYMENT) {
+      return '-${walletHistory.amount.toStringAsFixed(2)}';
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.ALBUM_PAYMENT) {
+      return '-${walletHistory.amount.toStringAsFixed(2)}';
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.PLAYLIST_PAYMENT) {
+      return '-${walletHistory.amount.toStringAsFixed(2)}';
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.CART_PAYMENT) {
+      return '-${walletHistory.amount.toStringAsFixed(2)}';
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_RECHARGE) {
+      return '+${walletHistory.amount.toStringAsFixed(2)}';
+    }
+    return '${walletHistory.amount.toStringAsFixed(2)}';
+  }
+
+  static Color getWalletHistoryPriceColor(WalletHistory walletHistory) {
+    if (walletHistory.walletHistoryItemType == PurchasedItemType.SONG_PAYMENT) {
+      return AppColors.errorRed;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.ALBUM_PAYMENT) {
+      return AppColors.errorRed;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.PLAYLIST_PAYMENT) {
+      return AppColors.errorRed;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.CART_PAYMENT) {
+      return AppColors.errorRed;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_RECHARGE) {
+      return AppColors.green;
+    }
+    return AppColors.black;
+  }
+
+  static void openPurchaseStatusDialog({
+    required context,
+    required purchasedItemType,
+    required itemId,
+    required String itemImageUrl,
+    required String itemTitle,
+    required String itemSubTitle,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return BlocProvider(
+          create: (context) => PurchaseItemStatusBloc(
+            paymentRepository: AppRepositories.paymentRepository,
+          ),
+          child: DialogWalletPurchaseStatus(
+            purchasedItemType: purchasedItemType,
+            itemImageUrl: itemImageUrl,
+            itemTitle: itemTitle,
+            itemSubTitle: itemSubTitle,
+            itemId: itemId,
+          ),
+        );
+      },
+    );
+  }
+
+  static void openPurchaseItemDialog({
+    required context,
+    required itemId,
+    required purchasedItemType,
+    required itemImageUrl,
+    required itemTitle,
+    required itemSubTitle,
+    required priceEtb,
+    required balance,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return BlocProvider(
+          create: (context) => PurchaseItemBloc(
+            paymentRepository: AppRepositories.paymentRepository,
+          ),
+          child: DialogWalletPurchase(
+            itemId: itemId,
+            purchasedItemType: purchasedItemType,
+            itemImageUrl: itemImageUrl,
+            itemTitle: itemTitle,
+            itemSubTitle: itemSubTitle,
+            itemPrice: priceEtb,
+            balance: balance,
+          ),
+        );
+      },
+    );
   }
 }

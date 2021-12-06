@@ -8,12 +8,13 @@ import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_initial
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/payment/payment_method.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_top_up.dart';
-import 'package:mehaley/ui/screens/wallet/widgets/wallet_dialog_error_widget.dart';
+import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_pay_with_carousel.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
@@ -56,19 +57,7 @@ class _DialogWalletRechargeInitialState
           }
 
           if (state.walletPageData.activeBill == null) {
-            ///GO TO RECHARGE MAIN DIALOG
-            ///ACTIVE IS NULL
-            ///POP THIS DIALOG FIRST
-            Navigator.pop(context);
-            showDialog(
-              useSafeArea: false,
-              context: context,
-              builder: (context) {
-                return DialogTopUp(
-                  activeBill: null,
-                );
-              },
-            );
+            goToTopUpDialog(null);
           }
         }
       },
@@ -94,7 +83,9 @@ class _DialogWalletRechargeInitialState
                     if (state is WalletRechargeInitialLoadedState) {
                       if (state.walletPageData.activeBill != null) {
                         return buildPreviousBillInfo(
-                            state.walletPageData.activeBill!);
+                          state.walletPageData.activeBill!,
+                          state.walletPageData.paymentMethods,
+                        );
                       }
                     }
                     return buildLoading();
@@ -108,7 +99,8 @@ class _DialogWalletRechargeInitialState
     );
   }
 
-  Widget buildPreviousBillInfo(WebirrBill activeBill) {
+  Widget buildPreviousBillInfo(
+      WebirrBill activeBill, List<PaymentMethod> paymentMethods) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,7 +112,7 @@ class _DialogWalletRechargeInitialState
         SizedBox(
           height: AppMargin.margin_32,
         ),
-        WalletPayWithCarousel(),
+        WalletPayWithCarousel(paymentMethods: paymentMethods),
         SizedBox(
           height: AppMargin.margin_32,
         ),
@@ -147,7 +139,7 @@ class _DialogWalletRechargeInitialState
   Widget buildError() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_32),
-      child: WidgetDialogErrorWidget(
+      child: WidgetErrorWidget(
         title: AppLocale.of().walletRechargeInitialErrorMsg,
         subTitle: AppLocale.of().checkYourInternetConnection,
         onRetry: () {
@@ -162,18 +154,7 @@ class _DialogWalletRechargeInitialState
   AppBouncingButton buildNewBillButton(BuildContext context, activeBill) {
     return AppBouncingButton(
       onTap: () {
-        ///GO TO RECHARGE MAIN DIALOG
-        ///SEND ACTIVE BILL
-        ///POP THIS DIALOG FIRST
-        Navigator.pop(context);
-        showDialog(
-          context: context,
-          builder: (context) {
-            return DialogTopUp(
-              activeBill: activeBill,
-            );
-          },
-        );
+        goToTopUpDialog(activeBill);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -338,6 +319,34 @@ class _DialogWalletRechargeInitialState
           ),
         ],
       ),
+    );
+  }
+
+  void goToTopUpDialog(WebirrBill? activeBill) {
+    ///GO TO RECHARGE MAIN DIALOG
+    ///ACTIVE IS NULL
+    ///POP THIS DIALOG FIRST
+    Navigator.pop(context);
+
+    ///GET PROVIDERS BEFORE PASSING BY VALUE
+    WalletPageBloc walletPageBloc = BlocProvider.of<WalletPageBloc>(context);
+    FreshWalletBillCubit freshWalletBillCubit =
+        BlocProvider.of<FreshWalletBillCubit>(context);
+
+    showDialog(
+      useSafeArea: false,
+      context: context,
+      builder: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: walletPageBloc),
+            BlocProvider.value(value: freshWalletBillCubit),
+          ],
+          child: DialogTopUp(
+            activeBill: activeBill,
+          ),
+        );
+      },
     );
   }
 }
