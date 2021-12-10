@@ -51,6 +51,16 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       } catch (error) {
         yield HomePageLoadingError(error: error.toString());
       }
+    } else if (event is ReLoadHomePageEvent) {
+      try {
+        //REFRESH
+        final HomePageData refreshedHomePageData =
+            await homeDataRepository.getHomeData(AppCacheStrategy.CACHE_LATER);
+        yield HomePageLoading();
+        yield HomePageLoaded(homePageData: refreshedHomePageData);
+      } catch (error) {
+        yield HomePageLoadingError(error: error.toString());
+      }
     } else if (event is CancelHomePageRequestEvent) {
       homeDataRepository.cancelDio();
     }

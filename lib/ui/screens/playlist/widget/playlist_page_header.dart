@@ -11,6 +11,7 @@ import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_info_pages.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class PlaylistPageHeader extends StatefulWidget {
@@ -157,20 +158,13 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                 context: context,
                 child: PlaylistMenuWidget(
                   playlist: playlistPageData.playlist,
-                  title: L10nUtil.translateLocale(
-                      playlistPageData.playlist.playlistNameText, context),
-                  imageUrl: AppApi.baseUrl +
-                      playlistPageData.playlist.playlistImage.imageMediumPath,
-                  isFree: playlistPageData.playlist.isFree,
-                  priceEtb: playlistPageData.playlist.priceEtb,
-                  priceUsd: playlistPageData.playlist.priceDollar,
-                  isDiscountAvailable:
-                      playlistPageData.playlist.isDiscountAvailable,
-                  discountPercentage:
-                      playlistPageData.playlist.discountPercentage,
-                  playlistId: playlistPageData.playlist.playlistId,
-                  isFollowed: playlistPageData.playlist.isFollowed!,
-                  isPurchased: playlistPageData.playlist.isBought,
+                  onBuyButtonClicked: () {
+                    PurchaseUtil.playlistMenuBuyButtonOnClick(
+                      context,
+                      playlistPageData.playlist,
+                      true,
+                    );
+                  },
                 ),
               );
             },

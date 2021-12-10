@@ -7,6 +7,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
@@ -125,7 +126,7 @@ class DialogBillConfirmed extends StatelessWidget {
               ),
             ),
             Text(
-              '${freshBill.amount.toStringAsFixed(2)} ${AppLocale.of().birr}'
+              '${freshBill.amount.parsePriceAmount()} ${AppLocale.of().birr}'
                   .toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(

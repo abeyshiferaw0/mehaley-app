@@ -9,8 +9,10 @@ import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
@@ -81,17 +83,35 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
                 ),
               ),
             ),
-            BuyItemBtnWidget(
-              priceEtb: album.priceEtb,
-              priceUsd: album.priceDollar,
-              title: AppLocale.of().buyAlbum.toUpperCase(),
-              hasLeftMargin: true,
-              isFree: album.isFree,
-              showDiscount: false,
-              discountPercentage: album.discountPercentage,
-              isDiscountAvailable: album.isDiscountAvailable,
-              isBought: album.isBought,
-            ),
+            album.isBought
+                ? SmallTextPriceWidget(
+                    priceEtb: album.priceEtb,
+                    priceUsd: album.priceDollar,
+                    isFree: album.isFree,
+                    useLargerText: true,
+                    showDiscount: true,
+                    useDimColor: true,
+                    isDiscountAvailable: album.isDiscountAvailable,
+                    discountPercentage: album.discountPercentage,
+                    isPurchased: album.isBought,
+                  )
+                : BuyItemBtnWidget(
+                    priceEtb: album.priceEtb,
+                    priceUsd: album.priceDollar,
+                    title: AppLocale.of().buyAlbum.toUpperCase(),
+                    hasLeftMargin: true,
+                    isFree: album.isFree,
+                    showDiscount: false,
+                    discountPercentage: album.discountPercentage,
+                    isDiscountAvailable: album.isDiscountAvailable,
+                    isBought: album.isBought,
+                    onBuyClicked: () {
+                      PurchaseUtil.albumHomePageBuyButtonOnClick(
+                        context,
+                        album,
+                      );
+                    },
+                  ),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),

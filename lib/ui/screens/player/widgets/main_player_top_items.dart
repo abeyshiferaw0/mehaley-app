@@ -11,6 +11,7 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class MainPlayerTopItems extends StatefulWidget {
@@ -25,7 +26,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: AppMargin.margin_2.h,
+        top: 0.6.h,
         //left: AppMargin.margin_16,
         //right: AppMargin.margin_16,
       ),
@@ -91,6 +92,9 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                         song: state,
                         isForMyPlaylist: false,
                         onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+                        onSongBuyClicked: () {
+                          PurchaseUtil.songMenuBuyButtonOnClick(context, state);
+                        },
                       ),
                     );
                   },

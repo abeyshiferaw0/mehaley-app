@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/api_response/search_page_result_data.dart';
 import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -20,6 +20,7 @@ import 'package:mehaley/ui/screens/search/widgets/search_top_artist_song_item.da
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
@@ -156,13 +157,16 @@ class _SearchResultListState extends State<SearchResultList> {
         isPlaylistDedicatedResultPage: false,
         focusNode: widget.focusNode,
         onMenuTap: () {
-          //SHOW MENU DIALOG
+          ///SHOW MENU DIALOG
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: SongMenuWidget(
               song: resultItem,
               isForMyPlaylist: false,
               onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+              onSongBuyClicked: () {
+                PurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
+              },
             ),
           );
         },
@@ -186,18 +190,13 @@ class _SearchResultListState extends State<SearchResultList> {
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
-              title: L10nUtil.translateLocale(
-                  resultItem.playlistNameText, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
-              isFree: resultItem.isFree,
-              priceEtb: resultItem.priceEtb,
-              priceUsd: resultItem.priceDollar,
-              isDiscountAvailable: resultItem.isDiscountAvailable,
-              discountPercentage: resultItem.discountPercentage,
-              playlistId: resultItem.playlistId,
-              isFollowed: resultItem.isFollowed!,
-              isPurchased: resultItem.isBought,
+              onBuyButtonClicked: () {
+                PurchaseUtil.playlistMenuBuyButtonOnClick(
+                  context,
+                  resultItem,
+                  false,
+                );
+              },
             ),
           );
         },
@@ -221,19 +220,20 @@ class _SearchResultListState extends State<SearchResultList> {
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: AlbumMenuWidget(
-              albumId: resultItem.albumId,
               album: resultItem,
-              rootContext: context,
-              isLiked: resultItem.isLiked,
-              title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
-              priceEtb: resultItem.priceEtb,
-              priceUsd: resultItem.priceDollar,
-              isFree: resultItem.isFree,
-              isDiscountAvailable: resultItem.isDiscountAvailable,
-              discountPercentage: resultItem.discountPercentage,
-              isBought: resultItem.isBought,
+              onViewArtistClicked: () {
+                PagesUtilFunctions.artistItemOnClick(
+                  resultItem.artist,
+                  context,
+                );
+              },
+              onBuyAlbumClicked: () {
+                PurchaseUtil.albumMenuBuyButtonOnClick(
+                  context,
+                  resultItem,
+                  false,
+                );
+              },
             ),
           );
         },

@@ -7,7 +7,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/menu/menu_items/album_favorite_menu_item.dart';
-import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
@@ -19,32 +19,14 @@ import 'menu_items/menu_item.dart';
 class AlbumMenuWidget extends StatelessWidget {
   AlbumMenuWidget({
     Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.priceEtb,
-    required this.priceUsd,
-    required this.isFree,
-    required this.isDiscountAvailable,
-    required this.discountPercentage,
-    required this.albumId,
-    required this.isLiked,
-    required this.isBought,
     required this.album,
-    required this.rootContext,
+    required this.onViewArtistClicked,
+    required this.onBuyAlbumClicked,
   }) : super(key: key);
 
-  final int albumId;
-  final String title;
-  final String imageUrl;
-  final double priceEtb;
-  final double priceUsd;
-  final bool isDiscountAvailable;
-  final double discountPercentage;
-  final bool isFree;
-  final bool isLiked;
-  final bool isBought;
   final Album album;
-  final BuildContext rootContext;
+  final VoidCallback onViewArtistClicked;
+  final VoidCallback onBuyAlbumClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +43,7 @@ class AlbumMenuWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            buildMenuHeader(),
+            buildMenuHeader(context),
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: AppMargin.margin_16,
@@ -75,15 +57,18 @@ class AlbumMenuWidget extends StatelessWidget {
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: FlutterRemix.money_dollar_circle_line,
                           title: AppLocale.of().buyAlbum,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pop(context);
+                            onBuyAlbumClicked();
+                          },
                         )
                       : SizedBox(),
                   AlbumCartMenuItem(album: album),
                   AlbumFavoriteMenuItem(
                     hasTopMargin: true,
                     isDisabled: false,
-                    isLiked: isLiked,
-                    albumId: albumId,
+                    isLiked: album.isLiked,
+                    albumId: album.albumId,
                     unlikedColor: AppColors.grey.withOpacity(0.6),
                     likedColor: AppColors.darkOrange,
                   ),
@@ -95,10 +80,7 @@ class AlbumMenuWidget extends StatelessWidget {
                     title: AppLocale.of().viewArtist,
                     onTap: () {
                       Navigator.pop(context);
-                      PagesUtilFunctions.artistItemOnClick(
-                        album.artist,
-                        rootContext,
-                      );
+                      onViewArtistClicked();
                     },
                   ),
                   MenuItem(
@@ -119,7 +101,7 @@ class AlbumMenuWidget extends StatelessWidget {
     );
   }
 
-  Container buildMenuHeader() {
+  Container buildMenuHeader(context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(AppPadding.padding_20),
@@ -133,7 +115,7 @@ class AlbumMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: imageUrl,
+              imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
@@ -153,7 +135,7 @@ class AlbumMenuWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                L10nUtil.translateLocale(album.albumTitle, context),
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
@@ -165,12 +147,12 @@ class AlbumMenuWidget extends StatelessWidget {
               ),
               SizedBox(height: AppMargin.margin_2),
               SmallTextPriceWidget(
-                priceEtb: priceEtb,
-                priceUsd: priceUsd,
-                isFree: isFree,
-                discountPercentage: discountPercentage,
-                isDiscountAvailable: isDiscountAvailable,
-                isPurchased: isBought,
+                priceEtb: album.priceEtb,
+                priceUsd: album.priceDollar,
+                isFree: album.isFree,
+                discountPercentage: album.discountPercentage,
+                isDiscountAvailable: album.isDiscountAvailable,
+                isPurchased: album.isBought,
               ),
             ],
           ),

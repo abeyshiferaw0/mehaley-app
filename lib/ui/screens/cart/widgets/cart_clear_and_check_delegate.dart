@@ -8,6 +8,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/dialog/dialog_clear_cart.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class ClearAndCheckDelegate extends SliverPersistentHeaderDelegate {
@@ -72,43 +73,48 @@ class CheckOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_12,
-      ),
-      decoration: BoxDecoration(
-        color: ColorUtil.darken(
-          AppColors.darkOrange,
-          opacityPercentage,
+    return AppBouncingButton(
+      onTap: () {
+        PurchaseUtil.cartCheckoutButtonOnClick(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: AppPadding.padding_12,
         ),
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            AppLocale.of().checkOut.toUpperCase(),
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_12.sp,
+        decoration: BoxDecoration(
+          color: ColorUtil.darken(
+            AppColors.darkOrange,
+            opacityPercentage,
+          ),
+          borderRadius: BorderRadius.circular(40),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppLocale.of().checkOut.toUpperCase(),
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_12.sp,
+                color: ColorUtil.lighten(
+                  AppColors.darkOrange,
+                  1 - opacityPercentage,
+                ),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              width: AppMargin.margin_2,
+            ),
+            Icon(
+              FlutterRemix.arrow_right_s_line,
               color: ColorUtil.lighten(
                 AppColors.darkOrange,
                 1 - opacityPercentage,
               ),
-              fontWeight: FontWeight.w600,
+              size: AppIconSizes.icon_size_20,
             ),
-          ),
-          SizedBox(
-            width: AppMargin.margin_2,
-          ),
-          Icon(
-            FlutterRemix.arrow_right_s_line,
-            color: ColorUtil.lighten(
-              AppColors.darkOrange,
-              1 - opacityPercentage,
-            ),
-            size: AppIconSizes.icon_size_20,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

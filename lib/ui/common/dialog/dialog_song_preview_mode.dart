@@ -11,6 +11,7 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -22,12 +23,14 @@ class DialogSongPreviewMode extends StatelessWidget {
   final Song song;
   final bool isForDownload;
   final bool isForPlaying;
+  final VoidCallback onBuyButtonClicked;
 
   const DialogSongPreviewMode({
     Key? key,
     required this.song,
     required this.isForDownload,
     required this.isForPlaying,
+    required this.onBuyButtonClicked,
   }) : super(key: key);
 
   @override
@@ -147,6 +150,19 @@ class DialogSongPreviewMode extends StatelessWidget {
                     fontWeight: FontWeight.w300,
                   ),
                 ),
+                SizedBox(
+                  height: AppMargin.margin_4,
+                ),
+                Text(
+                  '${song.priceEtb.parsePriceAmount()} ${AppLocale().birr}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    color: AppColors.darkOrange,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ],
             ),
           ],
@@ -182,7 +198,10 @@ class DialogSongPreviewMode extends StatelessWidget {
             height: AppMargin.margin_32,
           ),
           AppBouncingButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              onBuyButtonClicked();
+            },
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: AppPadding.padding_32,

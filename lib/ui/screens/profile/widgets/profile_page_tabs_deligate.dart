@@ -46,9 +46,9 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                         arguments: ScreenArguments(
                           args: {
                             AppValues.isLibraryForOffline: false,
-                            AppValues.isLibraryForProfile: true,
-                            AppValues.profileListTypes:
-                                ProfileListTypes.PURCHASED_SONGS,
+                            AppValues.isLibraryForOtherPage: true,
+                            AppValues.libraryFromOtherPageTypes:
+                                LibraryFromOtherPageTypes.PURCHASED_SONGS,
                           },
                         ),
                       );
@@ -64,8 +64,9 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                         arguments: ScreenArguments(
                           args: {
                             AppValues.isLibraryForOffline: false,
-                            AppValues.isLibraryForProfile: true,
-                            AppValues.profileListTypes: ProfileListTypes.OTHER,
+                            AppValues.isLibraryForOtherPage: true,
+                            AppValues.libraryFromOtherPageTypes:
+                                LibraryFromOtherPageTypes.USER_PLAYLIST,
                           },
                         ),
                       );
@@ -81,9 +82,9 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                         arguments: ScreenArguments(
                           args: {
                             AppValues.isLibraryForOffline: false,
-                            AppValues.isLibraryForProfile: true,
-                            AppValues.profileListTypes:
-                                ProfileListTypes.FOLLOWED_ARTISTS,
+                            AppValues.isLibraryForOtherPage: true,
+                            AppValues.libraryFromOtherPageTypes:
+                                LibraryFromOtherPageTypes.FOLLOWED_ARTISTS,
                           },
                         ),
                       );

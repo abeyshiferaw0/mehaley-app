@@ -63,6 +63,11 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     if (event is SetPlayerQueueEvent) {
       //SETTING AUDIO PLAYER QUEUE
       setAudioPlayerQueue(event);
+    } else if (event is ReloadAndPausePlayerEvent) {
+      await audioPlayer.pause();
+      await audioPlayer.seek(Duration(seconds: 1));
+    } else if (event is StopPlayerEvent) {
+      await audioPlayer.stop();
     } else if (event is SetMutedEvent) {
       //SET PLAYER VOLUME
       setMuted();

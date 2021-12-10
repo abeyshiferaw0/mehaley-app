@@ -9,7 +9,7 @@ class PurchaseItemInitial extends PurchaseItemState {
   List<Object> get props => [];
 }
 
-
+///FOR ITEM PAYMENT
 class PurchaseItemLoadingState extends PurchaseItemState {
   @override
   List<Object?> get props => [];
@@ -24,17 +24,36 @@ class PurchaseItemLoadingErrorState extends PurchaseItemState {
 }
 
 class PurchaseItemLoadedState extends PurchaseItemState {
-  final PurchaseItemStatusData purchaseItemStatusData;
+  final int itemId;
   final PurchasedItemType purchasedItemType;
 
   PurchaseItemLoadedState({
-    required this.purchaseItemStatusData,
+    required this.itemId,
     required this.purchasedItemType,
   });
 
   @override
   List<Object?> get props => [
-    purchaseItemStatusData,
-    purchasedItemType,
-  ];
+        itemId,
+        purchasedItemType,
+      ];
+}
+
+///FOR CART CHECKOUT
+class CheckOutLoadingState extends PurchaseItemState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CheckOutLoadingErrorState extends PurchaseItemState {
+  final String error;
+
+  CheckOutLoadingErrorState({required this.error});
+  @override
+  List<Object?> get props => [error];
+}
+
+class CheckOutLoadedState extends PurchaseItemState {
+  @override
+  List<Object?> get props => [];
 }

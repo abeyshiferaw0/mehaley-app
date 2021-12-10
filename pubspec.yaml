@@ -97,6 +97,8 @@ dependencies:
   purchases_flutter: ^3.7.0
   #WEBVIEW
   webview_flutter: ^2.3.1
+  #BOT_TOAST
+  overlay_support: ^1.2.1
 
 
 

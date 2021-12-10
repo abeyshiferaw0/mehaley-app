@@ -11,8 +11,10 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 
 import 'album_play_shuffle_header.dart';
 
@@ -67,16 +69,36 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                   SizedBox(height: AppMargin.margin_16),
                   buildTitleAndSubTitle(album),
                   SizedBox(height: AppMargin.margin_20),
-                  BuyItemBtnWidget(
-                    priceEtb: album.priceEtb,
-                    priceUsd: album.priceDollar,
-                    title: AppLocale.of().buyAlbum.toUpperCase(),
-                    hasLeftMargin: false,
-                    isFree: album.isFree,
-                    discountPercentage: album.discountPercentage,
-                    isDiscountAvailable: album.isDiscountAvailable,
-                    isBought: album.isBought,
-                  ),
+                  album.isBought
+                      ? SmallTextPriceWidget(
+                          priceEtb: album.priceEtb,
+                          priceUsd: album.priceDollar,
+                          isFree: album.isFree,
+                          useLargerText: true,
+                          showDiscount: true,
+                          useDimColor: true,
+                          isDiscountAvailable: album.isDiscountAvailable,
+                          discountPercentage: album.discountPercentage,
+                          isPurchased: album.isBought,
+                        )
+                      : album.isFree || album.isBought
+                          ? SizedBox()
+                          : BuyItemBtnWidget(
+                              priceEtb: album.priceEtb,
+                              priceUsd: album.priceDollar,
+                              title: AppLocale.of().buyAlbum.toUpperCase(),
+                              hasLeftMargin: false,
+                              isFree: album.isFree,
+                              discountPercentage: album.discountPercentage,
+                              isDiscountAvailable: album.isDiscountAvailable,
+                              isBought: album.isBought,
+                              onBuyClicked: () {
+                                PurchaseUtil.albumPageHeaderBuyButtonOnClick(
+                                  context,
+                                  album,
+                                );
+                              },
+                            ),
                   SizedBox(height: AppMargin.margin_16),
                 ],
               ),

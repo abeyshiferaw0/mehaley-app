@@ -20,7 +20,6 @@ class SetPlayerQueueEvent extends AudioPlayerEvent {
   List<Object?> get props => [queue];
 }
 
-
 class PlayerStateChangedEvent extends AudioPlayerEvent {
   final PlayerState playerState;
 
@@ -203,4 +202,15 @@ class PlayerVolumeChangedEvent extends AudioPlayerEvent {
 
   @override
   List<Object?> get props => [volume];
+}
+
+class ReloadAndPausePlayerEvent extends AudioPlayerEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+
+class StopPlayerEvent extends AudioPlayerEvent {
+  @override
+  List<Object?> get props => [];
 }

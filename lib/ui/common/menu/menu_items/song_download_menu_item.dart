@@ -22,12 +22,14 @@ class SongDownloadMenuItem extends StatefulWidget {
     required this.downloadingColor,
     required this.downloadedColor,
     required this.downloadingFailedColor,
+    required this.onBuyButtonClicked,
   }) : super(key: key);
 
   final Song song;
   final Color downloadingColor;
   final Color downloadedColor;
   final Color downloadingFailedColor;
+  final VoidCallback onBuyButtonClicked;
 
   @override
   _SongDownloadMenuItemState createState() => _SongDownloadMenuItemState();
@@ -270,6 +272,9 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
                     isForDownload: true,
                     isForPlaying: false,
                     song: widget.song,
+                    onBuyButtonClicked: () {
+                      widget.onBuyButtonClicked();
+                    },
                   ),
                 );
               },

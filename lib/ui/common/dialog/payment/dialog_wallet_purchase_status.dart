@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/purcahsed_item_status_bloc/purchase_item_status_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/purchase_item_bloc/purchase_item_bloc.dart';
-import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/purchase_item_status_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/current_balance_widget.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/payment_button_filled.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/payment_button_text.dart';
@@ -30,6 +29,7 @@ class DialogWalletPurchaseStatus extends StatefulWidget {
     required this.itemImageUrl,
     required this.itemTitle,
     required this.itemSubTitle,
+    required this.onPurchasesSuccess,
   }) : super(key: key);
 
   final int itemId;
@@ -37,6 +37,7 @@ class DialogWalletPurchaseStatus extends StatefulWidget {
   final String itemImageUrl;
   final String itemTitle;
   final String itemSubTitle;
+  final VoidCallback onPurchasesSuccess;
 
   @override
   State<DialogWalletPurchaseStatus> createState() =>
@@ -92,12 +93,27 @@ class _DialogWalletPurchaseStatusState
                         PagesUtilFunctions.openPurchaseItemDialog(
                           context: context,
                           itemId: widget.itemId,
-                          purchasedItemType: widget. purchasedItemType,
-                          itemImageUrl: widget. itemImageUrl,
-                          itemTitle: widget. itemTitle,
-                          itemSubTitle:  widget.itemSubTitle,
-                          priceEtb:  state.purchaseItemStatusData.priceEtb,
-                          balance:  state.purchaseItemStatusData.balance,
+                          purchasedItemType: widget.purchasedItemType,
+                          itemImageUrl: widget.itemImageUrl,
+                          itemTitle: widget.itemTitle,
+                          itemSubTitle: widget.itemSubTitle,
+                          priceEtb: state.purchaseItemStatusData.priceEtb,
+                          balance: state.purchaseItemStatusData.balance,
+                          onPurchasesSuccess: widget.onPurchasesSuccess,
+                        );
+                      }
+
+                      ///SHOW FRESH GIFT NOTIFICATION
+                      BlocProvider.of<FreshWalletGiftCubit>(context)
+                          .showGiftReceived(
+                        state.purchaseItemStatusData.freshWalletGifts,
+                      );
+
+                      ///SHOW FRESH BILL DIALOG
+                      if (state.purchaseItemStatusData.freshBill != null) {
+                        BlocProvider.of<FreshWalletBillCubit>(context)
+                            .showPaymentConfirmed(
+                          state.purchaseItemStatusData.freshBill!,
                         );
                       }
                     }
@@ -454,13 +470,13 @@ class _DialogWalletPurchaseStatusState
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppPadding.padding_16,
+            horizontal: AppPadding.padding_4,
           ),
           child: Text(
             AppLocale.of().walletInsufficientMsg,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: AppFontSizes.font_size_10.sp,
+              fontSize: AppFontSizes.font_size_8.sp,
               fontWeight: FontWeight.w400,
               color: AppColors.txtGrey,
             ),

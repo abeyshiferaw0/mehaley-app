@@ -11,6 +11,7 @@ class AppApi {
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
+  static const String cartBaseUrl = '$baseUrl/cart';
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -95,7 +96,7 @@ class AppValues {
   static const double lyricPlayerHeight = 380;
   static const double queueSongItemSize = 60;
   static const double menuBottomSheetRadius = 16.0;
-  static const double playlistHeaderSliverSize = 340;
+  static const double playlistHeaderSliverSize = 370;
   static const double playlistHeaderAppBarSliverSize = 60;
 
   //USER PLAYLIST PAGE
@@ -125,8 +126,9 @@ class AppValues {
   static const double followedArtistImageSize = 80;
   static const double offlineSongsSize = 65;
   static const String isLibraryForOffline = 'IS_LIBRARY_FOR_OFFLINE';
-  static const String isLibraryForProfile = 'IS_LIBRARY_FOR_PROFILE';
-  static const String profileListTypes = 'PROFILE_LIST_TYPES';
+  static const String isLibraryForOtherPage = 'IS_LIBRARY_FOR_OTHER_PAGE';
+  static const String libraryFromOtherPageTypes =
+      'LIBRARY_FROM_OTHER_PAGE_TYPES';
 
   //CATEGORY PAGE
   static const double categoryHeaderHeight = 250;

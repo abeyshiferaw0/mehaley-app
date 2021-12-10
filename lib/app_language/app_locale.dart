@@ -85,7 +85,7 @@ class AppLocale {
   String get subscribeDialogTitle => appLocalizations.subscribeDialogTitle;
   String get subscribeDialogMsg => appLocalizations.subscribeDialogMsg;
   String get subscribeNow => appLocalizations.subscribeNow;
-
+  String get giftReceived => appLocalizations.giftReceived;
   String get home => appLocalizations.home;
   String get search => appLocalizations.search;
   String get myLibrary => appLocalizations.myLibrary;
@@ -106,7 +106,6 @@ class AppLocale {
   String get playingFromCategory => appLocalizations.playingFromCategory;
   String get playingFromFeaturedAlbum =>
       appLocalizations.playingFromFeaturedAlbum;
-
   String get playingFromFeaturedPlaylist =>
       appLocalizations.playingFromFeaturedPlaylist;
   String get playingFromFeaturedMezmurs =>
@@ -198,7 +197,7 @@ class AppLocale {
   String get newest => appLocalizations.newest;
   String get oldest => appLocalizations.oldest;
   String get all => appLocalizations.all;
-
+  String get giftFrom => appLocalizations.giftFrom;
   String get noPlaylistToSelect => appLocalizations.noPlaylistToSelect;
   String get uDontHaveFavAlbums => appLocalizations.uDontHaveFavAlbums;
   String get uDontHaveFavMezmurs => appLocalizations.uDontHaveFavMezmurs;
@@ -454,11 +453,22 @@ class AppLocale {
   String get albumPurchased => appLocalizations.albumPurchased;
   String get playlistPurchased => appLocalizations.playlistPurchased;
   String get cartCheckedOut => appLocalizations.cartCheckedOut;
+  String get cartCheckedOutMsg => appLocalizations.cartCheckedOutMsg;
   String get walletRecharged => appLocalizations.walletRecharged;
+
+  String get cartAlreadyCheckedOut => appLocalizations.cartAlreadyCheckedOut;
+  String get cartAlreadyCheckedOutMsg =>
+      appLocalizations.cartAlreadyCheckedOutMsg;
+  String get billCanceled => appLocalizations.billCanceled;
+  String get billCanceledMsg => appLocalizations.billCanceledMsg;
+  String get noHistory => appLocalizations.noHistory;
 
   String get rechargeWallet => appLocalizations.rechargeWallet;
   String get walletInsufficient => appLocalizations.walletInsufficient;
   String get walletInsufficientMsg => appLocalizations.walletInsufficientMsg;
+
+  String get purchaseNetworkError => appLocalizations.purchaseNetworkError;
+  String get completingPurchase => appLocalizations.completingPurchase;
 
   ///FUNCTIONS
   String noOfSongs({required String noOfSong}) =>
@@ -571,5 +581,18 @@ class AppLocale {
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) =>
       appLocalizations.itemIsForFreeMsg(
         purchasedItemType: purchasedItemType,
+      );
+
+  String purchaseItemMsg(
+          {required double amount,
+          required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.purchaseItemMsg(
+        amount: amount,
+        purchasedItemType: purchasedItemType,
+      );
+
+  String cartCheckOutMsg({required double cartTotalPrice}) =>
+      appLocalizations.cartCheckOutMsg(
+        cartTotalPrice: cartTotalPrice,
       );
 }

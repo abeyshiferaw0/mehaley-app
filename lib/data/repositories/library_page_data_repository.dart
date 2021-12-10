@@ -157,10 +157,6 @@ class LibraryPageDataRepository {
     return [];
   }
 
-  Future<void> deleteCache(url) async {
-    await libraryPageDataProvider.deleteCache(url);
-  }
-
   cancelDio() {
     libraryPageDataProvider.cancel();
   }

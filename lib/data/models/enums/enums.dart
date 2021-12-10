@@ -50,13 +50,14 @@ enum AppLibrarySortTypes {
   LATEST_DOWNLOAD,
 }
 
-enum ProfileListTypes {
+enum LibraryFromOtherPageTypes {
   PURCHASED_SONGS,
+  PURCHASED_ALL_SONGS,
   PURCHASED_ALBUMS,
   PURCHASED_PLAYLISTS,
   FOLLOWED_ARTISTS,
   FOLLOWED_PLAYLISTS,
-  OTHER,
+  USER_PLAYLIST,
 }
 
 enum AppUserNotificationTypes {
@@ -79,6 +80,7 @@ enum PurchasedItemType {
   PLAYLIST_PAYMENT,
   CART_PAYMENT,
   WALLET_RECHARGE,
+  WALLET_GIFT,
 }
 
 enum PaymentType {

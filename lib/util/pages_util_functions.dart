@@ -52,6 +52,8 @@ import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/dialog/dialog_permission_permanent_refused.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_cart_checkout.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_cart_checkout_status.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase_status.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -66,6 +68,7 @@ import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:package_info/package_info.dart';
@@ -531,7 +534,10 @@ class PagesUtilFunctions {
     //SET PLAYER QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(
       SetPlayerQueueEvent(
-          queue: audioSourceItems, startPlaying: startPlaying, index: index),
+        queue: audioSourceItems,
+        startPlaying: startPlaying,
+        index: index,
+      ),
     );
     //SHUFFLE QUEUE
     BlocProvider.of<AudioPlayerBloc>(context).add(ShufflePlayerOnQueueEvent());
@@ -1255,9 +1261,6 @@ class PagesUtilFunctions {
               ),
             ),
             BlocProvider(
-              create: (context) => FreshWalletBillCubit(),
-            ),
-            BlocProvider(
               create: (context) => WalletBillCancelBloc(
                 walletDataRepository: AppRepositories.walletDataRepository,
               ),
@@ -1334,27 +1337,33 @@ class PagesUtilFunctions {
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
       return AppLocale.of().walletRecharged;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_GIFT) {
+      return AppLocale.of().giftReceived;
     }
     return '';
   }
 
   static String getWalletHistoryPrice(WalletHistory walletHistory) {
     if (walletHistory.walletHistoryItemType == PurchasedItemType.SONG_PAYMENT) {
-      return '-${walletHistory.amount.toStringAsFixed(2)}';
+      return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.ALBUM_PAYMENT) {
-      return '-${walletHistory.amount.toStringAsFixed(2)}';
+      return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.PLAYLIST_PAYMENT) {
-      return '-${walletHistory.amount.toStringAsFixed(2)}';
+      return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.CART_PAYMENT) {
-      return '-${walletHistory.amount.toStringAsFixed(2)}';
+      return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
-      return '+${walletHistory.amount.toStringAsFixed(2)}';
+      return '+${walletHistory.amount.parsePriceAmount()}';
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_GIFT) {
+      return '+${walletHistory.amount.parsePriceAmount()}';
     }
-    return '${walletHistory.amount.toStringAsFixed(2)}';
+    return '${walletHistory.amount.parsePriceAmount()}';
   }
 
   static Color getWalletHistoryPriceColor(WalletHistory walletHistory) {
@@ -1372,6 +1381,9 @@ class PagesUtilFunctions {
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
       return AppColors.green;
+    } else if (walletHistory.walletHistoryItemType ==
+        PurchasedItemType.WALLET_GIFT) {
+      return AppColors.green;
     }
     return AppColors.black;
   }
@@ -1383,6 +1395,7 @@ class PagesUtilFunctions {
     required String itemImageUrl,
     required String itemTitle,
     required String itemSubTitle,
+    required VoidCallback onPurchasesSuccess,
   }) {
     showDialog(
       context: context,
@@ -1397,6 +1410,26 @@ class PagesUtilFunctions {
             itemTitle: itemTitle,
             itemSubTitle: itemSubTitle,
             itemId: itemId,
+            onPurchasesSuccess: onPurchasesSuccess,
+          ),
+        );
+      },
+    );
+  }
+
+  static void openCartCheckOutStatusDialog({
+    required context,
+    required VoidCallback onPurchasesSuccess,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return BlocProvider(
+          create: (context) => PurchaseItemStatusBloc(
+            paymentRepository: AppRepositories.paymentRepository,
+          ),
+          child: DialogCartCheckOutStatus(
+            onPurchasesSuccess: onPurchasesSuccess,
           ),
         );
       },
@@ -1412,6 +1445,7 @@ class PagesUtilFunctions {
     required itemSubTitle,
     required priceEtb,
     required balance,
+    required onPurchasesSuccess,
   }) {
     showDialog(
       context: context,
@@ -1429,6 +1463,31 @@ class PagesUtilFunctions {
             itemSubTitle: itemSubTitle,
             itemPrice: priceEtb,
             balance: balance,
+            onPurchasesSuccess: onPurchasesSuccess,
+          ),
+        );
+      },
+    );
+  }
+
+  static void openCartCheckOutDialog({
+    required context,
+    required cartTotalPrice,
+    required balance,
+    required onPurchasesSuccess,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return BlocProvider(
+          create: (context) => PurchaseItemBloc(
+            paymentRepository: AppRepositories.paymentRepository,
+          ),
+          child: DialogWalletCartCheckOut(
+            cartTotalPrice: cartTotalPrice,
+            balance: balance,
+            onPurchasesSuccess: onPurchasesSuccess,
           ),
         );
       },

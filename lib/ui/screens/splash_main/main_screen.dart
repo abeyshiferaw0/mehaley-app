@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +18,22 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_listen_recorder_bloc
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/data/models/payment/wallet_gift.dart';
+import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
+import 'package:mehaley/ui/common/notifications/fresh_gift_notification_widget.dart';
+import 'package:mehaley/ui/screens/wallet/dialogs/dialog_bill_confirmed.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
 final AppRouter _appRouter = AppRouter();
@@ -56,6 +65,45 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<FreshWalletBillCubit, WebirrBill?>(
+          listener: (context, state) {
+            if (state != null) {
+              ///SHOW FRESH BILL DIALOG
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DialogBillConfirmed(
+                    freshBill: state,
+                  );
+                },
+              );
+            }
+          },
+        ),
+        BlocListener<FreshWalletGiftCubit, List<WalletGift>?>(
+          listener: (context, state) async {
+            if (state != null) {
+              ///SHOW FRESH GIFT NOTIFICATIONS
+              if (state.length > 0) {
+                final random = Random();
+                for (var i = 0; i < state.length; i++) {
+                  await Future.delayed(
+                    Duration(milliseconds: 300 + random.nextInt(300)),
+                  );
+                  showSimpleNotification(
+                    FreshGiftNotificationWidget(
+                      freshWalletGift: state[i],
+                    ),
+                    background: AppColors.pagesBgColor,
+                    duration: Duration(
+                      seconds: 4 * (state.length - i),
+                    ),
+                  );
+                }
+              }
+            }
+          },
+        ),
         BlocListener<LibraryBloc, LibraryState>(
           listener: (context, state) {
             ///SONG LIKE UNLIKE SUCCESS
@@ -394,7 +442,9 @@ class _MainScreenState extends State<MainScreen> {
                 if (state.processingState == ProcessingState.ready ||
                     state.processingState == ProcessingState.buffering ||
                     state.processingState == ProcessingState.loading) {
-                  return MiniPlayer();
+                  return MiniPlayer(
+                    navigatorKey: _navigatorKey,
+                  );
                 } else {
                   return SizedBox();
                 }

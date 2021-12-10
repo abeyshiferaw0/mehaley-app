@@ -17,6 +17,7 @@ import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/screens/playlist/widget/icon_text.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
@@ -41,9 +42,6 @@ class PlaylistInfoPageOne extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //ALBUM ART
-            SizedBox(
-              height: AppMargin.margin_8,
-            ),
             AppCard(
               radius: 2,
               withShadow: false,
@@ -118,7 +116,46 @@ class PlaylistInfoPageOne extends StatelessWidget {
                         style: followersTextStyle,
                       ),
               ],
-            )
+            ),
+            SizedBox(height: AppMargin.margin_8),
+            playlistPageData.playlist.isBought
+                ? Center(
+                    child: SmallTextPriceWidget(
+                      priceEtb: playlistPageData.playlist.priceEtb,
+                      priceUsd: playlistPageData.playlist.priceDollar,
+                      isFree: playlistPageData.playlist.isFree,
+                      useLargerText: true,
+                      isDiscountAvailable:
+                          playlistPageData.playlist.isDiscountAvailable,
+                      discountPercentage:
+                          playlistPageData.playlist.discountPercentage,
+                      isPurchased: playlistPageData.playlist.isBought,
+                    ),
+                  )
+                : playlistPageData.playlist.isFree ||
+                        playlistPageData.playlist.isBought
+                    ? SizedBox()
+                    : BuyItemBtnWidget(
+                        priceEtb: playlistPageData.playlist.priceEtb,
+                        priceUsd: playlistPageData.playlist.priceDollar,
+                        title: AppLocale.of().buyPlaylist.toUpperCase(),
+                        hasLeftMargin: false,
+                        showDiscount: false,
+                        isCentred: true,
+                        isFree: playlistPageData.playlist.isFree,
+                        discountPercentage:
+                            playlistPageData.playlist.discountPercentage,
+                        isDiscountAvailable:
+                            playlistPageData.playlist.isDiscountAvailable,
+                        isBought: playlistPageData.playlist.isBought,
+                        onBuyClicked: () {
+                          PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                            context,
+                            playlistPageData.playlist,
+                          );
+                        },
+                      ),
+            SizedBox(height: AppMargin.margin_4),
           ],
         ),
       ),
@@ -279,7 +316,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
             ),
           ),
 
-          buildBuyAndAddToCart(),
+          buildBuyAndAddToCart(context),
 
           SizedBox(height: AppMargin.margin_20),
         ],
@@ -287,7 +324,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
     );
   }
 
-  Container buildBuyAndAddToCart() {
+  Container buildBuyAndAddToCart(context) {
     return Container(
       child: playlist.isBought
           ? Center(
@@ -317,6 +354,12 @@ class PlaylistInfoPageThree extends StatelessWidget {
                       discountPercentage: playlist.discountPercentage,
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       isBought: playlist.isBought,
+                      onBuyClicked: () {
+                        PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                          context,
+                          playlist,
+                        );
+                      },
                     ),
                     SizedBox(
                       height: AppMargin.margin_8,

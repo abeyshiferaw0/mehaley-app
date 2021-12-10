@@ -1,4 +1,5 @@
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 
 import '../app_localizations.dart';
 
@@ -343,6 +344,19 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String welcomeToMehaley = "Welcome to mehaleye oro";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
   final String done = "Done";
+  final String cartAlreadyCheckedOut = "Cart already checked out";
+  final String cartAlreadyCheckedOutMsg =
+      "Your cart is already checked out, try refreshing cart page!!";
+  final String billCanceled = "Bill Canceled";
+  final String billCanceledMsg =
+      "You bill was cancelled, use another bill to recharge your wallet";
+  final String noHistory = "No History";
+  final String giftFrom = "Gift From";
+  final String giftReceived = "Gift Received";
+
+  final String purchaseNetworkError =
+      "Unable to complete purchase\nCheck your internet connection!!";
+  final String completingPurchase = "Completing purchase";
   final String yourCurrentBalance = "Your Current Balance";
   final String today = "Today";
   final String yesterday = "Yesarday";
@@ -417,6 +431,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String albumPurchased = "Album Purchased";
   final String playlistPurchased = "Playlist Purchased";
   final String cartCheckedOut = "Cart Checked Out";
+  final String cartCheckedOutMsg = "Purchase Multiple Items At once";
   final String walletRecharged = "Wallet Recharged";
 
   final String rechargeWallet = "Recharge Wallet";
@@ -576,5 +591,20 @@ class AppLanguageStringsOro extends AppLocalizations {
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
       item = "Playlist";
     return "The $item you're trying to buy is now free, enjoy listening on Mehaleye";
+  }
+
+  String purchaseItemMsg(
+      {required double amount, required PurchasedItemType purchasedItemType}) {
+    String item = 'Item';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist";
+
+    return "By Purchasing This $purchasedItemType ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+  }
+
+  String cartCheckOutMsg({required double cartTotalPrice}) {
+    return "By Checking Out Your Cart ${cartTotalPrice.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
   }
 }

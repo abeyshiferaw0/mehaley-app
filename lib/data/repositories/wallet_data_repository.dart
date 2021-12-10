@@ -3,6 +3,7 @@ import 'package:mehaley/data/data_providers/wallet_data_provider.dart';
 import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
+import 'package:mehaley/data/models/payment/wallet_gift.dart';
 import 'package:mehaley/data/models/payment/wallet_history.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
 
@@ -67,6 +68,7 @@ class WalletDataRepository {
     final WebirrBill? activeBill;
     final double walletBalance;
     final DateTime today;
+    final List<WalletGift> freshWalletGifts;
     final List<PaymentMethod> paymentMethods;
 
     //PARSE FRESH BILL
@@ -78,6 +80,10 @@ class WalletDataRepository {
     activeBill = response.data['active_bill'] != null
         ? WebirrBill.fromMap(response.data['active_bill'])
         : null;
+
+    freshWalletGifts = (response.data['fresh_gift'] as List)
+        .map((walletGift) => WalletGift.fromMap(walletGift))
+        .toList();
 
     //PARSE SERVER TODAY DATE
     today = DateTime.parse(response.data['today']);
@@ -95,6 +101,7 @@ class WalletDataRepository {
       activeBill: activeBill,
       walletBalance: walletBalance,
       today: today,
+      freshWalletGifts: freshWalletGifts,
       paymentMethods: paymentMethods,
       response: response,
     );

@@ -14,6 +14,7 @@ import 'package:mehaley/data/models/payment/webirr_bill.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_final.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -547,7 +548,7 @@ class _DialogTopUpState extends State<DialogTopUp> {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            text: '${selectedAmount.toStringAsFixed(2)}',
+            text: '${selectedAmount.parsePriceAmount()}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: hasError ? AppColors.errorRed : AppColors.darkOrange,

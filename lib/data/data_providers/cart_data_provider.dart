@@ -24,7 +24,7 @@ class CartDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/cart/",
+        url: AppApi.cartBaseUrl + "/summary/",
       );
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
@@ -38,7 +38,7 @@ class CartDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/cart/",
+        url: AppApi.cartBaseUrl + "/summary/",
       );
       return response;
     }
@@ -57,7 +57,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/remove_song_cart/",
+      url: AppApi.cartBaseUrl + "/song/remove/",
       useToken: true,
       data: formData,
     );
@@ -77,7 +77,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/remove_album_cart/",
+      url: AppApi.cartBaseUrl + "/album/remove/",
       useToken: true,
       data: formData,
     );
@@ -97,7 +97,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/remove_playlist_cart/",
+      url: AppApi.cartBaseUrl + "/playlist/remove/",
       useToken: true,
       data: formData,
     );
@@ -117,7 +117,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/add_album_cart/",
+      url: AppApi.cartBaseUrl + "/album/add/",
       useToken: true,
       data: formData,
     );
@@ -137,7 +137,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/add_song_cart/",
+      url: AppApi.cartBaseUrl + "/song/add/",
       useToken: true,
       data: formData,
     );
@@ -157,7 +157,7 @@ class CartDataProvider {
 
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/add_playlist_cart/",
+      url: AppApi.cartBaseUrl + "/playlist/add/",
       useToken: true,
       data: formData,
     );
@@ -170,12 +170,12 @@ class CartDataProvider {
     ///SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.userBaseUrl + "/cart_clear/",
+      url: AppApi.cartBaseUrl + "/clear/",
       useToken: true,
     );
 
     if (response.statusCode == 200) {
-      await ApiUtil.deleteFromCache(AppApi.userBaseUrl + "/cart/");
+      await ApiUtil.deleteFromCache(AppApi.cartBaseUrl + "/summary/", true);
     }
 
     return response;

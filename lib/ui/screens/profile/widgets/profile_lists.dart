@@ -20,20 +20,22 @@ class ProfileLists extends StatelessWidget {
       {Key? key, required this.profileListTypes, required this.profilePageData})
       : super(key: key);
 
-  final ProfileListTypes profileListTypes;
+  final LibraryFromOtherPageTypes profileListTypes;
   final ProfilePageData profilePageData;
 
   @override
   Widget build(BuildContext context) {
-    if (profileListTypes == ProfileListTypes.PURCHASED_SONGS) {
+    if (profileListTypes == LibraryFromOtherPageTypes.PURCHASED_SONGS) {
       return buildPurchasedSongsList(profilePageData);
-    } else if (profileListTypes == ProfileListTypes.PURCHASED_ALBUMS) {
+    } else if (profileListTypes == LibraryFromOtherPageTypes.PURCHASED_ALBUMS) {
       return buildPurchasedAlbumsList(profilePageData);
-    } else if (profileListTypes == ProfileListTypes.PURCHASED_PLAYLISTS) {
+    } else if (profileListTypes ==
+        LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS) {
       return buildPurchasedPlaylistsList(profilePageData);
-    } else if (profileListTypes == ProfileListTypes.FOLLOWED_ARTISTS) {
+    } else if (profileListTypes == LibraryFromOtherPageTypes.FOLLOWED_ARTISTS) {
       return buildFollowedArtistList(profilePageData);
-    } else if (profileListTypes == ProfileListTypes.FOLLOWED_PLAYLISTS) {
+    } else if (profileListTypes ==
+        LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS) {
       return buildFollowedPlaylistsList(profilePageData);
     } else {
       return SizedBox();

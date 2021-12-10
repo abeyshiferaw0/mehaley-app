@@ -15,6 +15,8 @@ import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart'
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/strings.dart';
@@ -28,6 +30,7 @@ import 'package:mehaley/ui/screens/splash_main/splash_page.dart';
 import 'package:mehaley/util/app_bloc_deligate.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sizer/sizer.dart';
 
 import 'business_logic/blocs/app_start_bloc/app_start_bloc.dart';
@@ -274,34 +277,41 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => ShareBloc(),
             ),
+            BlocProvider(
+              create: (context) => FreshWalletBillCubit(),
+            ),
+            BlocProvider(
+              create: (context) => FreshWalletGiftCubit(),
+            ),
           ],
           child: Builder(
             builder: (context) {
               return BlocBuilder<LocalizationCubit, AppLanguage>(
                 builder: (context, state) {
-                  print("LocalizationCubit=> ${state}");
-                  return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    builder: (BuildContext context, Widget? child) {
-                      final MediaQueryData data = MediaQuery.of(context);
-                      return MediaQuery(
-                        data: data.copyWith(textScaleFactor: 1.0),
-                        child: child!,
-                      );
-                    },
-                    theme: App.theme,
-                    initialRoute: AppRouterPaths.splashRoute,
-                    routes: {
-                      AppRouterPaths.splashRoute: (context) =>
-                          const SplashPage(),
-                      AppRouterPaths.signUp: (context) => const SignUpPage(),
-                      AppRouterPaths.mainScreen: (context) =>
-                          const MainScreen(),
-                      AppRouterPaths.verifyPhonePageOne: (context) =>
-                          const VerifyPhonePageOne(),
-                      AppRouterPaths.verifyPhonePageTwo: (context) =>
-                          const VerifyPhonePageTwo(),
-                    },
+                  return OverlaySupport.global(
+                    child: MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      builder: (BuildContext context, Widget? child) {
+                        final MediaQueryData data = MediaQuery.of(context);
+                        return MediaQuery(
+                          data: data.copyWith(textScaleFactor: 1.0),
+                          child: child!,
+                        );
+                      },
+                      theme: App.theme,
+                      initialRoute: AppRouterPaths.splashRoute,
+                      routes: {
+                        AppRouterPaths.splashRoute: (context) =>
+                            const SplashPage(),
+                        AppRouterPaths.signUp: (context) => const SignUpPage(),
+                        AppRouterPaths.mainScreen: (context) =>
+                            const MainScreen(),
+                        AppRouterPaths.verifyPhonePageOne: (context) =>
+                            const VerifyPhonePageOne(),
+                        AppRouterPaths.verifyPhonePageTwo: (context) =>
+                            const VerifyPhonePageTwo(),
+                      },
+                    ),
                   );
                 },
               );

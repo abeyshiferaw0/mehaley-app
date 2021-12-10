@@ -28,3 +28,11 @@ class CheckItemPurchaseStatusEvent extends PurchaseItemStatusEvent {
         itemSubTitle,
       ];
 }
+
+
+class CheckCartCheckOutStatusEvent extends PurchaseItemStatusEvent {
+
+  @override
+  List<Object?> get props => [
+  ];
+}

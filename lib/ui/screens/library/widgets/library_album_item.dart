@@ -12,6 +12,7 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryAlbumItem extends StatelessWidget {
@@ -125,20 +126,20 @@ class LibraryAlbumItem extends StatelessWidget {
                   PagesUtilFunctions.showMenuSheet(
                     context: context,
                     child: AlbumMenuWidget(
-                      albumId: album.albumId,
                       album: album,
-                      isLiked: album.isLiked,
-                      rootContext: context,
-                      title:
-                          L10nUtil.translateLocale(album.albumTitle, context),
-                      imageUrl:
-                          AppApi.baseUrl + album.albumImages[0].imageMediumPath,
-                      priceEtb: album.priceEtb,
-                      priceUsd: album.priceDollar,
-                      isFree: album.isFree,
-                      isDiscountAvailable: album.isDiscountAvailable,
-                      discountPercentage: album.discountPercentage,
-                      isBought: album.isBought,
+                      onViewArtistClicked: () {
+                        PagesUtilFunctions.artistItemOnClick(
+                          album.artist,
+                          context,
+                        );
+                      },
+                      onBuyAlbumClicked: () {
+                        PurchaseUtil.albumMenuBuyButtonOnClick(
+                          context,
+                          album,
+                          false,
+                        );
+                      },
                     ),
                   );
                 },

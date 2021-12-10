@@ -8,9 +8,9 @@ import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/profile_page_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
@@ -180,9 +180,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     arguments: ScreenArguments(
                       args: {
                         AppValues.isLibraryForOffline: false,
-                        AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes:
-                            ProfileListTypes.PURCHASED_SONGS,
+                        AppValues.isLibraryForOtherPage: true,
+                        AppValues.libraryFromOtherPageTypes:
+                            LibraryFromOtherPageTypes.PURCHASED_SONGS,
                       },
                     ),
                   );
@@ -190,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             : SizedBox(),
         ProfileLists(
-          profileListTypes: ProfileListTypes.PURCHASED_SONGS,
+          profileListTypes: LibraryFromOtherPageTypes.PURCHASED_SONGS,
           profilePageData: profilePageData,
         ),
         profilePageData.boughtAlbums.length > 0
@@ -204,9 +204,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     arguments: ScreenArguments(
                       args: {
                         AppValues.isLibraryForOffline: false,
-                        AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes:
-                            ProfileListTypes.PURCHASED_ALBUMS,
+                        AppValues.isLibraryForOtherPage: true,
+                        AppValues.libraryFromOtherPageTypes:
+                            LibraryFromOtherPageTypes.PURCHASED_ALBUMS,
                       },
                     ),
                   );
@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             : SizedBox(),
         ProfileLists(
-          profileListTypes: ProfileListTypes.PURCHASED_ALBUMS,
+          profileListTypes: LibraryFromOtherPageTypes.PURCHASED_ALBUMS,
           profilePageData: profilePageData,
         ),
         profilePageData.boughtPlaylists.length > 0
@@ -228,9 +228,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     arguments: ScreenArguments(
                       args: {
                         AppValues.isLibraryForOffline: false,
-                        AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes:
-                            ProfileListTypes.PURCHASED_PLAYLISTS,
+                        AppValues.isLibraryForOtherPage: true,
+                        AppValues.libraryFromOtherPageTypes:
+                            LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS,
                       },
                     ),
                   );
@@ -238,7 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             : SizedBox(),
         ProfileLists(
-          profileListTypes: ProfileListTypes.PURCHASED_PLAYLISTS,
+          profileListTypes: LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS,
           profilePageData: profilePageData,
         ),
         profilePageData.followedArtists.length > 0
@@ -252,9 +252,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     arguments: ScreenArguments(
                       args: {
                         AppValues.isLibraryForOffline: false,
-                        AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes:
-                            ProfileListTypes.FOLLOWED_ARTISTS,
+                        AppValues.isLibraryForOtherPage: true,
+                        AppValues.libraryFromOtherPageTypes:
+                            LibraryFromOtherPageTypes.FOLLOWED_ARTISTS,
                       },
                     ),
                   );
@@ -262,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             : SizedBox(),
         ProfileLists(
-          profileListTypes: ProfileListTypes.FOLLOWED_ARTISTS,
+          profileListTypes: LibraryFromOtherPageTypes.FOLLOWED_ARTISTS,
           profilePageData: profilePageData,
         ),
         profilePageData.followedPlaylists.length > 0
@@ -276,9 +276,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     arguments: ScreenArguments(
                       args: {
                         AppValues.isLibraryForOffline: false,
-                        AppValues.isLibraryForProfile: true,
-                        AppValues.profileListTypes:
-                            ProfileListTypes.FOLLOWED_PLAYLISTS,
+                        AppValues.isLibraryForOtherPage: true,
+                        AppValues.libraryFromOtherPageTypes:
+                            LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS,
                       },
                     ),
                   );
@@ -286,7 +286,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             : SizedBox(),
         ProfileLists(
-          profileListTypes: ProfileListTypes.FOLLOWED_PLAYLISTS,
+          profileListTypes: LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS,
           profilePageData: profilePageData,
         ),
         SizedBox(

@@ -18,3 +18,12 @@ extension DateUtils on DateTime {
         yesterday.year == year;
   }
 }
+
+extension PriceAmountParser on double {
+  String parsePriceAmount() {
+    return this.toStringAsFixed(2).replaceAllMapped(
+          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+          (Match m) => '${m[1]},',
+        );
+  }
+}

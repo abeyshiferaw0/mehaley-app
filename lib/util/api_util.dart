@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
@@ -68,11 +69,18 @@ class ApiUtil {
     return response;
   }
 
-  static Future<void> deleteFromCache(String key) async {
+  static Future<void> deleteFromCache(String urlKey, isUrl) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
     HiveCacheStore hiveCacheStore = HiveCacheStore(appDocPath);
-    await hiveCacheStore.delete(key);
+    if (isUrl) {
+      final key = CacheOptions.defaultCacheKeyBuilder(
+        RequestOptions(path: urlKey),
+      );
+      await hiveCacheStore.delete(key);
+    } else {
+      await hiveCacheStore.delete(urlKey);
+    }
     return;
   }
 

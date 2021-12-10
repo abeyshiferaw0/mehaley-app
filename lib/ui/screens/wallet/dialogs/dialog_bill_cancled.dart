@@ -35,7 +35,7 @@ class DialogBillCancelled extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Text(
-                "Bill Canceled",
+                AppLocale.of().billCanceled,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
@@ -50,7 +50,7 @@ class DialogBillCancelled extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppPadding.padding_16),
                 child: Text(
-                  "You bill was cancelled, use another bill to recharge your wallet",
+                  AppLocale.of().billCanceledMsg,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,

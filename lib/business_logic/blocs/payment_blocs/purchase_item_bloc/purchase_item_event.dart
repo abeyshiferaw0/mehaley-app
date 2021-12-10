@@ -4,8 +4,8 @@ abstract class PurchaseItemEvent extends Equatable {
   const PurchaseItemEvent();
 }
 
-class PurchaseItemStatusEvent extends PurchaseItemEvent {
-  PurchaseItemStatusEvent({
+class PurchaseItem extends PurchaseItemEvent {
+  PurchaseItem({
     required this.itemId,
     required this.purchasedItemType,
   });
@@ -18,4 +18,9 @@ class PurchaseItemStatusEvent extends PurchaseItemEvent {
         itemId,
         purchasedItemType,
       ];
+}
+
+class CheckOutCartEvent extends PurchaseItemEvent {
+  @override
+  List<Object?> get props => [];
 }

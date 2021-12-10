@@ -8,6 +8,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:sizer/sizer.dart';
 
 class PurchasedItemWidget extends StatelessWidget {
@@ -104,7 +105,7 @@ class PurchasedItemWidget extends StatelessWidget {
                     height: AppMargin.margin_4,
                   ),
                   Text(
-                    "${itemPrice.toStringAsFixed(2)} ${AppLocale().birr}",
+                    '${itemPrice.parsePriceAmount()} ${AppLocale().birr}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

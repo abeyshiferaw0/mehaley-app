@@ -121,10 +121,12 @@ class _PlaylistPageState extends State<PlaylistPage> {
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: AppMargin.margin_16),
             //DownloadAllPurchased(downloadAllSelected: downloadAllSelected),
-            SizedBox(height: AppMargin.margin_16),
+
+            SizedBox(height: AppMargin.margin_32),
             ListView.separated(
               itemCount: songs.length,
               physics: NeverScrollableScrollPhysics(),

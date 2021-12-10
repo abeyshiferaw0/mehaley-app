@@ -49,7 +49,7 @@ class _SongFavoriteButtonState extends State<SongFavoriteButton> {
           onTap: onTap,
           child: Padding(
             padding: EdgeInsets.all(
-              AppPadding.padding_4,
+              AppPadding.padding_8,
             ),
             child: Icon(
               preIcon(),

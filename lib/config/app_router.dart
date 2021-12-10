@@ -210,8 +210,10 @@ class AppRouter {
               ],
               child: LibraryPage(
                 isFromOffline: args.args[AppValues.isLibraryForOffline],
-                isLibraryForProfile: args.args[AppValues.isLibraryForProfile],
-                profileListTypes: args.args[AppValues.profileListTypes],
+                isLibraryForOtherPage:
+                    args.args[AppValues.isLibraryForOtherPage],
+                libraryFromOtherPageTypes:
+                    args.args[AppValues.libraryFromOtherPageTypes],
               ),
             );
         break;

@@ -28,13 +28,13 @@ class LibraryPage extends StatefulWidget {
   const LibraryPage({
     Key? key,
     required this.isFromOffline,
-    this.isLibraryForProfile,
-    this.profileListTypes,
+    this.isLibraryForOtherPage,
+    this.libraryFromOtherPageTypes,
   }) : super(key: key);
 
   final bool isFromOffline;
-  final bool? isLibraryForProfile;
-  final ProfileListTypes? profileListTypes;
+  final bool? isLibraryForOtherPage;
+  final LibraryFromOtherPageTypes? libraryFromOtherPageTypes;
 
   @override
   _LibraryPageState createState() => _LibraryPageState();
@@ -72,6 +72,10 @@ class _LibraryPageState extends State<LibraryPage>
 
   @override
   void initState() {
+    BlocProvider.of<BottomBarCubit>(context)
+        .changeScreen(BottomBarPages.LIBRARY);
+    BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
+
     ///INIT TAB CONTROLLER
     _tabController = new TabController(length: 5, vsync: this);
     _tabController.addListener(() {
@@ -80,8 +84,8 @@ class _LibraryPageState extends State<LibraryPage>
       );
     });
 
-    ///CHECK IF FROM PROFILE PAGE AND NAVIGATE
-    checkFromProfilePage();
+    ///CHECK IF FROM OTHER PAGE AND NAVIGATE
+    checkFromOtherPage();
 
     super.initState();
   }
@@ -94,19 +98,31 @@ class _LibraryPageState extends State<LibraryPage>
       _tabController.animateTo(1, duration: Duration(milliseconds: 300));
     }
 
-    ///NAVIGATE TO APPROPRIATE TABS IF COMING FROM PROFILE PAGE
-    if (widget.isLibraryForProfile != null && widget.profileListTypes != null) {
-      if (widget.isLibraryForProfile!) {
-        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_SONGS ||
-            widget.profileListTypes! == ProfileListTypes.PURCHASED_PLAYLISTS ||
-            widget.profileListTypes! == ProfileListTypes.PURCHASED_ALBUMS) {
+    ///NAVIGATE TO APPROPRIATE TABS IF COMING FROM OTHER PAGE
+    if (widget.isLibraryForOtherPage != null &&
+        widget.libraryFromOtherPageTypes != null) {
+      if (widget.isLibraryForOtherPage!) {
+        ///MAKE BOTTOM BAR LIBRARY ICON ACTIVE
+        BlocProvider.of<BottomBarCubit>(context)
+            .changeScreen(BottomBarPages.LIBRARY);
+        if (widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.PURCHASED_SONGS ||
+            widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.PURCHASED_ALL_SONGS ||
+            widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS ||
+            widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.PURCHASED_ALBUMS) {
           _tabController.animateTo(0, duration: Duration(milliseconds: 300));
         }
-        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_PLAYLISTS ||
-            widget.profileListTypes! == ProfileListTypes.FOLLOWED_ARTISTS) {
+        if (widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS ||
+            widget.libraryFromOtherPageTypes! ==
+                LibraryFromOtherPageTypes.FOLLOWED_ARTISTS) {
           _tabController.animateTo(4, duration: Duration(milliseconds: 300));
         }
-        if (widget.profileListTypes! == ProfileListTypes.OTHER) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.USER_PLAYLIST) {
           _tabController.animateTo(2, duration: Duration(milliseconds: 300));
         }
       }
@@ -231,34 +247,47 @@ class _LibraryPageState extends State<LibraryPage>
     );
   }
 
-  void checkFromProfilePage() {
-    if (widget.isLibraryForProfile != null && widget.profileListTypes != null) {
-      if (widget.isLibraryForProfile!) {
-        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_SONGS) {
+  void checkFromOtherPage() {
+    if (widget.isLibraryForOtherPage != null &&
+        widget.libraryFromOtherPageTypes != null) {
+      if (widget.isLibraryForOtherPage!) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.PURCHASED_SONGS) {
           ///OPEN PURCHASED SONGS PAGE
           BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
             AppPurchasedPageItemTypes.SONGS,
           );
         }
-        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_PLAYLISTS) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.PURCHASED_ALL_SONGS) {
+          ///OPEN PURCHASED ALL SONGS PAGE
+          BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
+            AppPurchasedPageItemTypes.ALL_SONGS,
+          );
+        }
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS) {
           ///OPEN PURCHASED PLAYLISTS PAGE
           BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
             AppPurchasedPageItemTypes.PLAYLISTS,
           );
         }
-        if (widget.profileListTypes! == ProfileListTypes.PURCHASED_ALBUMS) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.PURCHASED_ALBUMS) {
           ///OPEN PURCHASED ALBUMS PAGE
           BlocProvider.of<PurchasedTabPagesCubit>(context).changePage(
             AppPurchasedPageItemTypes.ALBUMS,
           );
         }
-        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_PLAYLISTS) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS) {
           ///OPEN PURCHASED PLAYLISTS PAGE
           BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
             AppFollowedPageItemTypes.PLAYLISTS,
           );
         }
-        if (widget.profileListTypes! == ProfileListTypes.FOLLOWED_ARTISTS) {
+        if (widget.libraryFromOtherPageTypes! ==
+            LibraryFromOtherPageTypes.FOLLOWED_ARTISTS) {
           ///OPEN PURCHASED ALBUMS PAGE
           BlocProvider.of<FollowingTabPagesCubit>(context).changePage(
             AppFollowedPageItemTypes.ARTIST,

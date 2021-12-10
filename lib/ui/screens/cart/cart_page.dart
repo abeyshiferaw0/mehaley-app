@@ -68,6 +68,9 @@ class _CartPageState extends State<CartPage> with RouteAware {
 
   @override
   void initState() {
+    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.CART);
+    BlocProvider.of<BottomBarCartCubit>(context).setPageShowing(true);
+
     ///CHANGE BOTTOM BAR TO CART PAGE
     BlocProvider.of<BottomBarCubit>(context).changeScreen(
       BottomBarPages.CART,

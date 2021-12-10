@@ -10,6 +10,7 @@ import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/network_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -80,7 +81,7 @@ class _WalletHeaderTwoState extends State<WalletHeaderTwo>
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: widget.walletPageData.walletBalance.toStringAsFixed(2),
+                  text: widget.walletPageData.walletBalance.parsePriceAmount(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_20.sp,
                     fontWeight: FontWeight.bold,

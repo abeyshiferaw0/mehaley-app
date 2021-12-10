@@ -6,6 +6,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_initial_bloc/wallet_recharge_initial_bloc.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
@@ -16,6 +17,7 @@ import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_top_up.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_pay_with_carousel.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,11 +52,16 @@ class _DialogWalletRechargeInitialState
             UpdateWalletPageEvent(walletPageData: state.walletPageData),
           );
 
+          ///SHOW FRESH BILL DIALOG
           if (state.showFreshBillDialog) {
-            ///SHOW FRESH BILL DIALOG
             BlocProvider.of<FreshWalletBillCubit>(context)
                 .showPaymentConfirmed(state.walletPageData.freshBill!);
           }
+
+          ///SHOW FRESH GIFT NOTIFICATION
+          BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
+            state.walletPageData.freshWalletGifts,
+          );
 
           if (state.walletPageData.activeBill == null) {
             goToTopUpDialog(null);
@@ -265,7 +272,7 @@ class _DialogWalletRechargeInitialState
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              text: '${activeBill.amount.toStringAsFixed(2)}',
+              text: '${activeBill.amount.parsePriceAmount()}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: AppColors.black,

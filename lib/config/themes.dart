@@ -45,8 +45,12 @@ class AppAssets {
   static String playingLottie = 'assets/lottie/playing.json';
   static String noInternetLottie = 'assets/lottie/no_internet.json';
   static String notificationGirlLottie = 'assets/lottie/notification_girl.json';
+  static String notificationGiftLottie = 'assets/lottie/notification_gift.json';
   static String successLottie = 'assets/lottie/success.json';
+  static String successLottieTwo = 'assets/lottie/success_two.json';
   static String cancelledLottie = 'assets/lottie/cancelled.json';
+  static String cartStatusLottie = 'assets/lottie/cart_status.json';
+  static String cartSuccessLottie = 'assets/lottie/cart_success.json';
 }
 
 class AppColors {

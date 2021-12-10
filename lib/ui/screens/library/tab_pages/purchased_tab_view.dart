@@ -12,9 +12,9 @@ import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -334,25 +334,25 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
       BlocProvider.of<PurchasedSongsBloc>(builderContext).add(
         RefreshPurchasedSongsEvent(),
       );
-      await BlocProvider.of<PurchasedSongsBloc>(context).stream.first;
+      await BlocProvider.of<PurchasedSongsBloc>(builderContext).stream.first;
     }
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALBUMS) {
       BlocProvider.of<PurchasedAlbumsBloc>(builderContext).add(
         RefreshPurchasedAlbumsEvent(),
       );
-      await BlocProvider.of<PurchasedAlbumsBloc>(context).stream.first;
+      await BlocProvider.of<PurchasedAlbumsBloc>(builderContext).stream.first;
     }
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
       BlocProvider.of<PurchasedAllSongsBloc>(builderContext).add(
         RefreshAllPurchasedSongsEvent(),
       );
-      await BlocProvider.of<PurchasedAllSongsBloc>(context).stream.first;
+      await BlocProvider.of<PurchasedAllSongsBloc>(builderContext).stream.first;
     }
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.PLAYLISTS) {
       BlocProvider.of<PurchasedPlaylistBloc>(builderContext).add(
         RefreshPurchasedPlaylistsEvent(),
       );
-      await BlocProvider.of<PurchasedPlaylistBloc>(context).stream.first;
+      await BlocProvider.of<PurchasedPlaylistBloc>(builderContext).stream.first;
     }
     return;
   }

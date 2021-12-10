@@ -9,8 +9,10 @@ import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
+import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 
 import 'group_header_widget.dart';
 import 'item_custom_group.dart';
@@ -79,17 +81,35 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
                 ),
               ),
             ),
-            BuyItemBtnWidget(
-              priceEtb: playlist.priceEtb,
-              priceUsd: playlist.priceDollar,
-              title: AppLocale.of().buyPlaylist.toUpperCase(),
-              hasLeftMargin: true,
-              isFree: playlist.isFree,
-              showDiscount: false,
-              discountPercentage: playlist.discountPercentage,
-              isDiscountAvailable: playlist.isDiscountAvailable,
-              isBought: playlist.isBought,
-            ),
+            playlist.isBought
+                ? SmallTextPriceWidget(
+                    priceEtb: playlist.priceEtb,
+                    priceUsd: playlist.priceDollar,
+                    isFree: playlist.isFree,
+                    useLargerText: true,
+                    showDiscount: true,
+                    useDimColor: true,
+                    isDiscountAvailable: playlist.isDiscountAvailable,
+                    discountPercentage: playlist.discountPercentage,
+                    isPurchased: playlist.isBought,
+                  )
+                : BuyItemBtnWidget(
+                    priceEtb: playlist.priceEtb,
+                    priceUsd: playlist.priceDollar,
+                    title: AppLocale.of().buyPlaylist.toUpperCase(),
+                    hasLeftMargin: true,
+                    isFree: playlist.isFree,
+                    showDiscount: false,
+                    discountPercentage: playlist.discountPercentage,
+                    isDiscountAvailable: playlist.isDiscountAvailable,
+                    isBought: playlist.isBought,
+                    onBuyClicked: () {
+                      PurchaseUtil.playlistHomePageBuyButtonOnClick(
+                        context,
+                        playlist,
+                      );
+                    },
+                  ),
             SizedBox(width: AppMargin.margin_16),
           ],
         ),

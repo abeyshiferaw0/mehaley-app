@@ -32,10 +32,12 @@ class SongMenuWidget extends StatefulWidget {
     required this.isForMyPlaylist,
     this.onRemoveSongFromPlaylist,
     required this.onCreateWithSongSuccess,
+    required this.onSongBuyClicked,
   }) : super(key: key);
 
   final Song song;
   final bool isForMyPlaylist;
+  final VoidCallback onSongBuyClicked;
   final Function(Song song)? onRemoveSongFromPlaylist;
   final Function(MyPlaylist myPlaylist) onCreateWithSongSuccess;
 
@@ -227,6 +229,10 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   downloadingFailedColor: AppColors.black,
                   downloadingColor: AppColors.darkOrange,
                   downloadedColor: AppColors.darkOrange,
+                  onBuyButtonClicked: () {
+                    Navigator.pop(context);
+                    widget.onSongBuyClicked();
+                  },
                 ),
                 (!song.isBought && !song.isFree)
                     ? MenuItem(
@@ -235,7 +241,10 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                         iconColor: AppColors.grey.withOpacity(0.6),
                         icon: FlutterRemix.money_dollar_circle_line,
                         title: AppLocale.of().buyMezmur,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                          widget.onSongBuyClicked();
+                        },
                       )
                     : SizedBox(),
                 SongCartMenuItem(

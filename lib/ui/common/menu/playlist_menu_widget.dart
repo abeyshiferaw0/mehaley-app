@@ -9,6 +9,7 @@ import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/menu/menu_items/playlist_cart_menu_item.dart';
 import 'package:mehaley/ui/common/menu/menu_items/playlist_follow_menu_item.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../player_items_placeholder.dart';
@@ -18,30 +19,12 @@ import 'menu_items/menu_item.dart';
 class PlaylistMenuWidget extends StatelessWidget {
   PlaylistMenuWidget({
     Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.priceEtb,
-    required this.priceUsd,
-    required this.isFree,
-    required this.isDiscountAvailable,
-    required this.discountPercentage,
-    required this.playlistId,
-    required this.isFollowed,
-    required this.isPurchased,
     required this.playlist,
+    required this.onBuyButtonClicked,
   }) : super(key: key);
 
-  final int playlistId;
-  final bool isFollowed;
-  final String title;
-  final String imageUrl;
-  final double priceEtb;
-  final double priceUsd;
-  final bool isFree;
-  final bool isDiscountAvailable;
-  final double discountPercentage;
-  final bool isPurchased;
   final Playlist playlist;
+  final VoidCallback onBuyButtonClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +55,18 @@ class PlaylistMenuWidget extends StatelessWidget {
                           iconColor: AppColors.grey.withOpacity(0.6),
                           icon: FlutterRemix.money_dollar_circle_line,
                           title: AppLocale.of().buyPlaylist,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pop(context);
+                            onBuyButtonClicked();
+                          },
                         )
                       : SizedBox(),
                   PlaylistCartMenuItem(
                     playlist: playlist,
                   ),
                   PlaylistFollowMenuItem(
-                    playlistId: playlistId,
-                    isFollowing: isFollowed,
+                    playlistId: playlist.playlistId,
+                    isFollowing: playlist.isFollowed!,
                   ),
                   MenuItem(
                     isDisabled: false,
@@ -130,7 +116,7 @@ class PlaylistMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: imageUrl,
+              imageUrl: AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
@@ -150,7 +136,7 @@ class PlaylistMenuWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                L10nUtil.translateLocale(playlist.playlistNameText, context),
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
@@ -161,15 +147,15 @@ class PlaylistMenuWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppMargin.margin_4),
-              isFree
+              playlist.isFree
                   ? SizedBox()
                   : SmallTextPriceWidget(
-                      priceEtb: priceEtb,
-                      priceUsd: priceUsd,
-                      isDiscountAvailable: isDiscountAvailable,
-                      isFree: isFree,
-                      discountPercentage: discountPercentage,
-                      isPurchased: isPurchased,
+                      priceEtb: playlist.priceEtb,
+                      priceUsd: playlist.priceDollar,
+                      isDiscountAvailable: playlist.isDiscountAvailable,
+                      isFree: playlist.isFree,
+                      discountPercentage: playlist.discountPercentage,
+                      isPurchased: playlist.isBought,
                     ),
               SizedBox(height: AppMargin.margin_4),
               Text(

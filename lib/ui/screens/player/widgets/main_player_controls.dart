@@ -26,6 +26,7 @@ import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../queue_list_page.dart';
@@ -102,6 +103,10 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               isForMyPlaylist: false,
                               onCreateWithSongSuccess:
                                   (MyPlaylist myPlaylist) {},
+                              onSongBuyClicked: () {
+                                PurchaseUtil.songMenuBuyButtonOnClick(
+                                    context, state);
+                              },
                             ),
                           );
                         },
@@ -359,6 +364,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
+
+                ///PREVIOUS BUTTON
                 AppBouncingButton(
                   onTap: () {
                     BlocProvider.of<AudioPlayerBloc>(context)
@@ -370,6 +377,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     size: AppIconSizes.icon_size_48,
                   ),
                 ),
+
+                ///PLAY PAUSE BUTTON
                 BlocBuilder<PlayPauseCubit, bool>(
                   builder: (context, state) {
                     return AppBouncingButton(
@@ -388,6 +397,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     );
                   },
                 ),
+
+                ///NEXT BUTTON
                 AppBouncingButton(
                   onTap: () {
                     BlocProvider.of<AudioPlayerBloc>(context).add(

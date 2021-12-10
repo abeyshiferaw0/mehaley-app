@@ -22,6 +22,7 @@ import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
@@ -194,6 +195,9 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               song: resultItem,
               isForMyPlaylist: false,
               onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+              onSongBuyClicked: () {
+                PurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
+              },
             ),
           );
         },
@@ -217,18 +221,13 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             context: context,
             child: PlaylistMenuWidget(
               playlist: resultItem,
-              title: L10nUtil.translateLocale(
-                  resultItem.playlistNameText, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.playlistImage.imageMediumPath,
-              isFree: resultItem.isFree,
-              priceEtb: resultItem.priceEtb,
-              priceUsd: resultItem.priceDollar,
-              isDiscountAvailable: resultItem.isDiscountAvailable,
-              discountPercentage: resultItem.discountPercentage,
-              playlistId: resultItem.playlistId,
-              isFollowed: resultItem.isFollowed!,
-              isPurchased: resultItem.isBought,
+              onBuyButtonClicked: () {
+                PurchaseUtil.playlistMenuBuyButtonOnClick(
+                  context,
+                  resultItem,
+                  false,
+                );
+              },
             ),
           );
         },
@@ -252,19 +251,20 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: AlbumMenuWidget(
-              albumId: resultItem.albumId,
               album: resultItem,
-              rootContext: context,
-              isLiked: resultItem.isLiked,
-              title: L10nUtil.translateLocale(resultItem.albumTitle, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.albumImages[0].imageMediumPath,
-              priceEtb: resultItem.priceEtb,
-              priceUsd: resultItem.priceDollar,
-              isFree: resultItem.isFree,
-              isDiscountAvailable: resultItem.isDiscountAvailable,
-              discountPercentage: resultItem.discountPercentage,
-              isBought: resultItem.isBought,
+              onViewArtistClicked: () {
+                PagesUtilFunctions.artistItemOnClick(
+                  resultItem.artist,
+                  context,
+                );
+              },
+              onBuyAlbumClicked: () {
+                PurchaseUtil.albumMenuBuyButtonOnClick(
+                  context,
+                  resultItem,
+                  false,
+                );
+              },
             ),
           );
         },

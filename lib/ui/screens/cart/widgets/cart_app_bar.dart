@@ -82,7 +82,7 @@ class CartAppBar extends StatelessWidget {
     //   mainAxisSize: MainAxisSize.min,
     //   children: [
     //     Text(
-    //       '\$${getTotalPrice(cart).toStringAsFixed(2)}',
+    //       '\$${getTotalPrice(cart).parsePriceAmount()}',
     //       maxLines: 2,
     //       overflow: TextOverflow.ellipsis,
     //       style: TextStyle(
@@ -94,7 +94,7 @@ class CartAppBar extends StatelessWidget {
     //     ),
     //     SizedBox(width: AppMargin.margin_4),
     //     Text(
-    //       '\$${getDeductedPrice(cart).toStringAsFixed(2)}',
+    //       '\$${getDeductedPrice(cart).parsePriceAmount()}',
     //       maxLines: 2,
     //       overflow: TextOverflow.ellipsis,
     //       style: TextStyle(
@@ -118,7 +118,7 @@ class CartAppBar extends StatelessWidget {
       isPurchased: false,
     );
     // return Text(
-    //   '\$${getDeductedPrice(cart).toStringAsFixed(2)}',
+    //   '\$${getDeductedPrice(cart).parsePriceAmount()}',
     //   maxLines: 2,
     //   overflow: TextOverflow.ellipsis,
     //   style: TextStyle(

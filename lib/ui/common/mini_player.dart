@@ -9,6 +9,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
@@ -24,6 +25,7 @@ import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_card.dart';
@@ -31,7 +33,9 @@ import 'cart_buttons/mini_player_preview_cart_button.dart';
 import 'like_follow/song_favorite_button.dart';
 
 class MiniPlayer extends StatefulWidget {
-  const MiniPlayer({Key? key}) : super(key: key);
+  const MiniPlayer({Key? key, required this.navigatorKey}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   _MiniPlayerState createState() => _MiniPlayerState();
@@ -44,6 +48,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   //DOMINANT COLOR INIT
   ImageProvider? currentImageProvider;
   int? currentMediaItemId;
+
+  //
+  bool isPreviewHeaderExpanded = true;
 
   //AUDIO PLAYER PLAYBACK STATE CHANGES
   double progress = 0.0;
@@ -100,6 +107,14 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                             song: currentPlayingSong,
                             isForDownload: false,
                             isForPlaying: true,
+                            onBuyButtonClicked: () {
+                              PurchaseUtil
+                                  .songPreviewModeDialogBuyButtonOnClick(
+                                context,
+                                widget.navigatorKey,
+                                currentPlayingSong,
+                              );
+                            },
                           ),
                         );
                       },
@@ -132,12 +147,17 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                     ),
                     child: Container(
                       key: ValueKey<int>(currentPlayingSong.songId),
-                      // color:
-                      //     HexColor(currentPlayingSong.albumArt.primaryColorHex),
-                      color: ColorUtil.changeColorSaturation(
-                        HexColor(currentPlayingSong.albumArt.primaryColorHex),
-                        0.8,
+                      color: ColorUtil.darken(
+                        ColorUtil.changeColorSaturation(
+                            HexColor(
+                                currentPlayingSong.albumArt.primaryColorHex),
+                            0.5),
+                        0.15,
                       ),
+                      // color: ColorUtil.changeColorSaturation(
+                      //   HexColor(currentPlayingSong.albumArt.primaryColorHex),
+                      //   0.8,
+                      //),
                       child: Wrap(
                         children: [
                           Column(
@@ -145,7 +165,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                             children: [
                               !currentPlayingSong.isBought &&
                                       !currentPlayingSong.isFree
-                                  ? buildBuyContainer(currentPlayingSong)
+                                  ? buildPreviewModeBuyContainer(
+                                      currentPlayingSong,
+                                    )
                                   : SizedBox(),
                               buildPlayerControls(currentPlayingSong),
                               buildMiniPlayerSlider(context),
@@ -166,60 +188,120 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
     );
   }
 
-  Container buildBuyContainer(Song song) => Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(AppPadding.padding_8),
-        //color: ColorUtil.darken(HexColor(song.albumArt.primaryColorHex), 0.05),
-        color: ColorUtil.darken(
-          ColorUtil.changeColorSaturation(
-              HexColor(song.albumArt.primaryColorHex), 0.8),
-          0.05,
+  Widget buildPreviewModeBuyContainer(Song song) {
+    return ExpansionPanelList(
+      animationDuration: Duration(milliseconds: 300),
+      dividerColor: AppColors.transparent,
+      expandedHeaderPadding: EdgeInsets.zero,
+      elevation: 0,
+      expansionCallback: (int item, bool status) {
+        setState(() {
+          isPreviewHeaderExpanded = !status;
+        });
+      },
+      children: [
+        ExpansionPanel(
+          canTapOnHeader: true,
+          hasIcon: false,
+          backgroundColor: ColorUtil.darken(
+            ColorUtil.changeColorSaturation(
+                HexColor(song.albumArt.primaryColorHex), 0.8),
+            0.05,
+          ),
+          headerBuilder: (context, isExpanded) {
+            return buildPreviewModeExpansionHeader(song, isExpanded);
+          },
+          body: buildPreviewModeExpansionBody(song),
+          isExpanded: isPreviewHeaderExpanded,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: AppMargin.margin_4,
-            ),
-            Text(
-              AppLocale.of().previewMode.toUpperCase(),
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: AppFontSizes.font_size_10.sp,
-                color: AppColors.white,
+      ],
+    );
+  }
+
+  Container buildPreviewModeExpansionBody(Song song) {
+    return Container(
+      color: ColorUtil.darken(
+        ColorUtil.changeColorSaturation(
+            HexColor(song.albumArt.primaryColorHex), 0.8),
+        0.05,
+      ),
+      padding: EdgeInsets.only(
+        top: AppPadding.padding_8,
+        left: AppPadding.padding_8,
+        bottom: AppPadding.padding_16,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              buildBuyButton(song),
+              Expanded(
+                child: SizedBox(),
               ),
-            ),
-            SizedBox(
-              height: AppMargin.margin_4,
-            ),
-            Text(
-              AppLocale.of().uAreListingToPreviewDesc,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: AppFontSizes.font_size_8.sp,
-                color: AppColors.lightGrey,
+              MiniPlayerPreviewCartButton(
+                song: song,
               ),
-            ),
-            SizedBox(
-              height: AppMargin.margin_12,
-            ),
-            Row(
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container buildPreviewModeExpansionHeader(Song song, bool isExpanded) {
+    return Container(
+      color: ColorUtil.darken(
+        ColorUtil.changeColorSaturation(
+            HexColor(song.albumArt.primaryColorHex), 0.8),
+        0.05,
+      ),
+      padding: EdgeInsets.only(
+        top: AppPadding.padding_16,
+        left: AppPadding.padding_8,
+        right: AppPadding.padding_8,
+        bottom: AppPadding.padding_8,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildBuyButton(song),
-                Expanded(
-                  child: SizedBox(),
+                Text(
+                  AppLocale.of().previewMode.toUpperCase(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    color: AppColors.white,
+                  ),
                 ),
-                MiniPlayerPreviewCartButton(
-                  song: song,
+                SizedBox(
+                  height: AppMargin.margin_4,
+                ),
+                Text(
+                  AppLocale.of().uAreListingToPreviewDesc,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: AppFontSizes.font_size_8.sp,
+                    color: AppColors.lightGrey,
+                  ),
                 ),
               ],
             ),
-            SizedBox(
-              height: AppMargin.margin_8,
-            ),
-          ],
-        ),
-      );
+          ),
+          Icon(
+            isExpanded
+                ? FlutterRemix.arrow_down_s_line
+                : FlutterRemix.arrow_up_s_line,
+            size: AppIconSizes.icon_size_24,
+            color: AppColors.white,
+          ),
+        ],
+      ),
+    );
+  }
 
   Container buildPlayerControls(Song currentPlayingSong) {
     return Container(
@@ -242,15 +324,30 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   Row buildMiniPlayerIcons(int id, bool isLiked) {
     return Row(
       children: [
-        SongFavoriteButton(
-          songId: id,
-          isLiked: isLiked,
-          likedColor: AppColors.white,
-          unlikedColor: AppColors.white,
+        ///PREVIOUS BUTTON
+        BlocBuilder<PlayerQueueCubit, QueueAndIndex>(
+          builder: (context, state) {
+            if (state.queue.length > 0 && state.currentIndex > 0) {
+              return AppBouncingButton(
+                onTap: () {
+                  BlocProvider.of<AudioPlayerBloc>(context)
+                      .add(PlayPreviousSongEvent());
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(AppPadding.padding_8),
+                  child: Icon(
+                    FlutterRemix.skip_back_mini_fill,
+                    size: AppIconSizes.icon_size_28,
+                    color: AppColors.white,
+                  ),
+                ),
+              );
+            }
+            return SizedBox();
+          },
         ),
-        SizedBox(
-          width: AppMargin.margin_12,
-        ),
+
+        ///PLAY PAUSE BUTTON
         BlocBuilder<PlayPauseCubit, bool>(
           builder: (context, state) {
             return AppBouncingButton(
@@ -260,7 +357,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 );
               },
               child: Padding(
-                padding: EdgeInsets.all(AppPadding.padding_4),
+                padding: EdgeInsets.all(AppPadding.padding_8),
                 child: Icon(
                   state ? FlutterRemix.pause_mini_fill : FlutterRemix.play_fill,
                   size: AppIconSizes.icon_size_28,
@@ -269,6 +366,39 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               ),
             );
           },
+        ),
+
+        ///NEXT BUTTON
+        BlocBuilder<PlayerQueueCubit, QueueAndIndex>(
+          builder: (context, state) {
+            if (state.queue.length > 0 &&
+                (state.queue.length - 1) > state.currentIndex) {
+              return AppBouncingButton(
+                onTap: () {
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    PlayNextSongEvent(),
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(AppPadding.padding_8),
+                  child: Icon(
+                    FlutterRemix.skip_forward_mini_fill,
+                    size: AppIconSizes.icon_size_28,
+                    color: AppColors.white,
+                  ),
+                ),
+              );
+            }
+            return SizedBox();
+          },
+        ),
+
+        ///FAVORITE BUTTON
+        SongFavoriteButton(
+          songId: id,
+          isLiked: isLiked,
+          likedColor: AppColors.white,
+          unlikedColor: AppColors.white,
         ),
       ],
     );
@@ -378,7 +508,22 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,
             ),
-            child: BlocBuilder<SongPositionCubit, CurrentPlayingPosition>(
+            child: BlocConsumer<SongPositionCubit, CurrentPlayingPosition>(
+              listener: (context, state) {
+                ///PAUSE AND RELOAD PLAYER IF CURRENT PLAYING IS PREVIEW MODE
+                if (!currentPlayingState.isFree &&
+                    !currentPlayingState.isBought) {
+                  double songDuration =
+                      currentPlayingState.audioFile.audioPreviewDurationSeconds;
+                  int currentDuration = state.currentDuration.inSeconds;
+                  if ((currentDuration < songDuration) &&
+                      (currentDuration > (songDuration - 2))) {
+                    BlocProvider.of<AudioPlayerBloc>(context).add(
+                      ReloadAndPausePlayerEvent(),
+                    );
+                  }
+                }
+              },
               builder: (context, state) {
                 return Slider(
                   value: AudioPlayerUtil.getCorrectProgress(
@@ -422,44 +567,44 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   }
 
   buildBuyButton(Song song) {
-    return AppBouncingButton(
-      onTap: () {
-        PagesUtilFunctions.openPurchaseStatusDialog(
-          context: context,
-          purchasedItemType: PurchasedItemType.SONG_PAYMENT,
-          itemId: song.songId,
-          itemTitle: L10nUtil.translateLocale(song.songName, context),
-          itemImageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
-          itemSubTitle: PagesUtilFunctions.getArtistsNames(
-            song.artistsName,
-            context,
+    return Builder(
+      builder: (BuildContext builderContext) {
+        return AppBouncingButton(
+          onTap: () async {
+            PurchaseUtil.miniPlayerBuyButtonOnClick(
+              context,
+              widget.navigatorKey,
+              song,
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppPadding.padding_16,
+              vertical: AppPadding.padding_8,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(100),
+              ),
+              color: AppColors.black,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppLocale.of().buyMezmur.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_8,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-          color: AppColors.black,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocale.of().buyMezmur.toUpperCase(),
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_10.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

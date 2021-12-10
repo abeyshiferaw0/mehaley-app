@@ -37,9 +37,6 @@ class _HomePageState extends State<HomePage>
   void didChangeDependencies() {
     ///SUBSCRIBE TO ROUTH OBSERVER
     AppRouterPaths.routeObserver.subscribe(this, ModalRoute.of(context)!);
-
-    ///CANCEL PAGE REQUEST
-    BlocProvider.of<HomePageBloc>(context).add(CancelHomePageRequestEvent());
     super.didChangeDependencies();
   }
 
@@ -47,22 +44,35 @@ class _HomePageState extends State<HomePage>
   void didPopNext() {
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
+    BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+
+    ///CANCEL PAGE REQUEST
+    BlocProvider.of<HomePageBloc>(context).add(CancelHomePageRequestEvent());
   }
 
   @override
   void didPushNext() {
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(false);
+
+    ///CANCEL PAGE REQUEST
+    BlocProvider.of<HomePageBloc>(context).add(CancelHomePageRequestEvent());
     super.didPushNext();
   }
 
   @override
   void didPop() {
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(false);
+
+    ///CANCEL PAGE REQUEST
+    BlocProvider.of<HomePageBloc>(context).add(CancelHomePageRequestEvent());
     super.didPop();
   }
 
   @override
   void initState() {
+    BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
+    BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
+
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
     super.initState();
   }

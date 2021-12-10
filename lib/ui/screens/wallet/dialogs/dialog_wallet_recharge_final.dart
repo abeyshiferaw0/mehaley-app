@@ -7,6 +7,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_recharge_bloc/wallet_recharge_bloc.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
@@ -55,11 +56,16 @@ class _DialogWalletRechargeFinalState extends State<DialogWalletRechargeFinal> {
             UpdateWalletPageEvent(walletPageData: state.walletPageData),
           );
 
+          ///SHOW FRESH BILL DIALOG
           if (state.showFreshBillDialog) {
-            ///SHOW FRESH BILL DIALOG
             BlocProvider.of<FreshWalletBillCubit>(context)
                 .showPaymentConfirmed(state.walletPageData.freshBill!);
           }
+
+          ///SHOW FRESH GIFT NOTIFICATION
+          BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
+            state.walletPageData.freshWalletGifts,
+          );
         }
       },
       child: Center(

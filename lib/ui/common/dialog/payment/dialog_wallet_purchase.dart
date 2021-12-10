@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/purchase_item_bloc/purchase_item_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/current_balance_widget.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/payment_button_filled.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/payment_button_text.dart';
@@ -24,6 +27,7 @@ class DialogWalletPurchase extends StatefulWidget {
     required this.itemSubTitle,
     required this.itemPrice,
     required this.balance,
+    required this.onPurchasesSuccess,
   }) : super(key: key);
 
   final int itemId;
@@ -33,6 +37,7 @@ class DialogWalletPurchase extends StatefulWidget {
   final String itemSubTitle;
   final double itemPrice;
   final double balance;
+  final VoidCallback onPurchasesSuccess;
 
   @override
   State<DialogWalletPurchase> createState() => _DialogWalletPurchaseState();
@@ -55,43 +60,35 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
               children: [
                 ///TOP HEADER
                 buildTopCard(context),
-
-                SizedBox(
-                  height: AppMargin.margin_32,
-                ),
-
-                ///ITEM TO BE PURCHASED
-                PurchasedItemWidget(
-                  itemPrice: widget.itemPrice,
-                  itemImageUrl: widget.itemImageUrl,
-                  itemTitle: widget.itemTitle,
-                  itemSubTitle: widget.itemSubTitle,
-                ),
-
-                SizedBox(
-                  height: AppMargin.margin_32,
-                ),
-
-                ///CURRENT BALANCE
-                CurrentBallanceWidget(
-                  balance: widget.balance,
-                ),
-
-                SizedBox(
-                  height: AppMargin.margin_16,
-                ),
-
-                ///ITEM PURCHASE INFO
-                buildItemPurchaseInfo(),
-
-                SizedBox(
-                  height: AppMargin.margin_32,
-                ),
-
-                ///ACTION BUTTONS
-                buildItemPurchaseButtons(context),
-                SizedBox(
-                  height: AppMargin.margin_8,
+                BlocConsumer<PurchaseItemBloc, PurchaseItemState>(
+                  listener: (context, state) {
+                    if (state is PurchaseItemLoadedState) {
+                      Navigator.pop(context);
+                      widget.onPurchasesSuccess();
+                    }
+                    if (state is PurchaseItemLoadingErrorState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        buildAppSnackBar(
+                          bgColor: AppColors.errorRed,
+                          isFloating: true,
+                          msg: AppLocale.of().purchaseNetworkError,
+                          txtColor: AppColors.white,
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is PurchaseItemLoadingState) {
+                      return buildBuyingLoading();
+                    }
+                    if (state is PurchaseItemLoadingErrorState) {
+                      return buildBuyingUi(context, true);
+                    }
+                    if (state is PurchaseItemLoadedState) {
+                      return buildBuyingLoading();
+                    }
+                    return buildBuyingUi(context, false);
+                  },
                 ),
               ],
             ),
@@ -101,11 +98,59 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
     );
   }
 
-  Container buildItemPurchaseInfo() {
+  Column buildBuyingUi(BuildContext context, bool forError) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: AppMargin.margin_32,
+        ),
+
+        ///ITEM TO BE PURCHASED
+        PurchasedItemWidget(
+          itemPrice: widget.itemPrice,
+          itemImageUrl: widget.itemImageUrl,
+          itemTitle: widget.itemTitle,
+          itemSubTitle: widget.itemSubTitle,
+        ),
+
+        SizedBox(
+          height: AppMargin.margin_32,
+        ),
+
+        ///CURRENT BALANCE
+        CurrentBallanceWidget(
+          balance: widget.balance,
+        ),
+
+        SizedBox(
+          height: AppMargin.margin_16,
+        ),
+
+        ///ITEM PURCHASE INFO
+        buildItemPurchaseInfo(widget.itemPrice, widget.purchasedItemType),
+
+        SizedBox(
+          height: AppMargin.margin_32,
+        ),
+
+        ///ACTION BUTTONS
+        buildItemPurchaseButtons(context, forError),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+      ],
+    );
+  }
+
+  Container buildItemPurchaseInfo(amount, purchasedItemType) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_24),
       child: Text(
-        "By Purchasing This Mezmur 200.00 Birr Will Be Deducted From Your Wallet",
+        AppLocale.of().purchaseItemMsg(
+          amount: amount,
+          purchasedItemType: purchasedItemType,
+        ),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
@@ -116,11 +161,34 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
     );
   }
 
-  Widget buildLoading() {
+  Widget buildBuyingLoading() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_32),
-      child: AppLoading(
-        size: AppValues.loadingWidgetSize * 0.8,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: AppMargin.margin_32,
+          ),
+          AppLoading(
+            size: AppValues.loadingWidgetSize * 0.8,
+          ),
+          SizedBox(
+            height: AppMargin.margin_32,
+          ),
+          Text(
+            AppLocale.of().completingPurchase.toUpperCase(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.black,
+            ),
+          ),
+          SizedBox(
+            height: AppMargin.margin_32,
+          ),
+        ],
       ),
     );
   }
@@ -170,12 +238,33 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
     );
   }
 
-  Widget buildItemPurchaseButtons(context) {
+  Widget buildItemPurchaseButtons(context, bool forError) {
     return Column(
       children: [
+        forError
+            ? Container(
+                margin: EdgeInsets.only(bottom: AppMargin.margin_16),
+                child: Text(
+                  '${AppLocale.of().couldntConnect.toUpperCase()}\n${AppLocale.of().tryAgain.toUpperCase()}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_8.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.errorRed,
+                  ),
+                ),
+              )
+            : SizedBox(),
         PaymentButtonFilled(
           title: AppLocale.of().buy,
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<PurchaseItemBloc>(context).add(
+              PurchaseItem(
+                itemId: widget.itemId,
+                purchasedItemType: widget.purchasedItemType,
+              ),
+            );
+          },
         ),
         SizedBox(
           height: AppMargin.margin_8,

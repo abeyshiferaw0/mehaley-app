@@ -19,6 +19,7 @@ import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.albumId}) : super(key: key);
@@ -173,18 +174,20 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
             PagesUtilFunctions.showMenuSheet(
               context: context,
               child: AlbumMenuWidget(
-                albumId: album.albumId,
                 album: album,
-                isLiked: album.isLiked,
-                title: L10nUtil.translateLocale(album.albumTitle, context),
-                imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
-                priceEtb: album.priceEtb,
-                priceUsd: album.priceDollar,
-                isFree: album.isFree,
-                isDiscountAvailable: album.isDiscountAvailable,
-                discountPercentage: album.discountPercentage,
-                isBought: album.isBought,
-                rootContext: context,
+                onViewArtistClicked: () {
+                  PagesUtilFunctions.artistItemOnClick(
+                    album.artist,
+                    context,
+                  );
+                },
+                onBuyAlbumClicked: () {
+                  PurchaseUtil.albumMenuBuyButtonOnClick(
+                    context,
+                    album,
+                    true,
+                  );
+                },
               ),
             );
           },

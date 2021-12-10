@@ -8,6 +8,11 @@ class LoadHomePageEvent extends HomePageEvent {
   List<Object?> get props => [];
 }
 
+class ReLoadHomePageEvent extends HomePageEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class CancelHomePageRequestEvent extends HomePageEvent {
   @override
   List<Object?> get props => [];

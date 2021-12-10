@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   String get enterYourPhoneNumber;
   String get whatIsYourPhoneNumber;
   String get phoneVerificationMsg;
-
+  String get giftFrom;
   String get sendSms;
   String get sendingSms;
   String get continueWithPhoneNumber;
@@ -119,16 +119,13 @@ abstract class AppLocalizations {
   String get continueWithPhone;
   String get appWelcomeTxt;
   String get authenticationFailedMsg;
-
+  String get giftReceived;
   String get couldntConnectMsg;
-
   String get queue;
   String get unableToClearCart;
-
   String get cartCleared;
   String get cartIsEmpty;
   String get empityCartCheckOutMsg;
-
   String get goToHomeScreen;
   String get cartTitle;
   String get total;
@@ -172,7 +169,8 @@ abstract class AppLocalizations {
   String get uDontHavePurchasedAlbums;
   String get uDontHavePurchase;
   String get uDontHavePurchasedPlaylists;
-
+  String get purchaseNetworkError;
+  String get completingPurchase;
   String get uDontHavePurchasedMezmurs;
   String get autoDownload;
   String get autoDownloadMsg;
@@ -221,7 +219,6 @@ abstract class AppLocalizations {
   String get goToPurchased;
   String get preferredPaymentMethod;
   String get chooseYourPreferredMethod;
-
   String get preferredDownlaodQuality;
   String get preferredDownlaodQualityMsg;
 
@@ -369,7 +366,14 @@ abstract class AppLocalizations {
   String get albumPurchased;
   String get playlistPurchased;
   String get cartCheckedOut;
+  String get cartCheckedOutMsg;
   String get walletRecharged;
+
+  String get cartAlreadyCheckedOut;
+  String get cartAlreadyCheckedOutMsg;
+  String get billCanceled;
+  String get billCanceledMsg;
+  String get noHistory;
 
   String get rechargeWallet;
   String get walletInsufficient;
@@ -442,4 +446,9 @@ abstract class AppLocalizations {
   String itemIsForFree({required PurchasedItemType purchasedItemType});
 
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType});
+
+  String purchaseItemMsg(
+      {required double amount, required PurchasedItemType purchasedItemType});
+
+  String cartCheckOutMsg({required double cartTotalPrice});
 }

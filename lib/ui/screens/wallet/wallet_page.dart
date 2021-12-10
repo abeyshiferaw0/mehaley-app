@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_status_bloc
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_history_bloc/wallet_history_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
+import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/wallet_data_provider.dart';
@@ -28,7 +29,6 @@ import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'dialogs/dialog_bill_cancled.dart';
-import 'dialogs/dialog_bill_confirmed.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key, required this.startRechargeProcess})
@@ -65,7 +65,6 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
 
     ///ADD OBSERVER IF APP IS RESUMED
     WidgetsBinding.instance!.addObserver(this);
-    BlocProvider.of<FreshWalletBillCubit>(context).showPaymentConfirmed(null);
 
     ///IF startRechargeProcess IS NOT NULL AND IF TRUE SHOW RECHARGE DIALOG
     WidgetsBinding.instance!.addPostFrameCallback(
@@ -135,16 +134,6 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
           BlocListener<FreshWalletBillCubit, WebirrBill?>(
             listener: (context, state) {
               if (state != null) {
-                ///SHOW FRESH BILL DIALOG
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return DialogBillConfirmed(
-                      freshBill: state,
-                    );
-                  },
-                );
-
                 ///WHEN NEW FRESH PAYMENT ALSO REFRESH WALLET HISTORY
                 _pagingController.refresh();
               }
@@ -182,13 +171,18 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
                   );
                 }
 
+                ///SHOW FRESH BILL DIALOG
                 if (state.walletPageData.freshBill != null) {
-                  ///SHOW FRESH BILL DIALOG
                   BlocProvider.of<FreshWalletBillCubit>(context)
                       .showPaymentConfirmed(
                     state.walletPageData.freshBill!,
                   );
                 }
+
+                ///SHOW FRESH GIFT NOTIFICATION
+                BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
+                  state.walletPageData.freshWalletGifts,
+                );
               }
             },
           ),
@@ -211,6 +205,11 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
                 ///UPDATE WALLET PAGE FROM CHECK BILL STATUS REQUEST
                 BlocProvider.of<WalletPageBloc>(context).add(
                   UpdateWalletPageEvent(walletPageData: state.walletPageData),
+                );
+
+                ///SHOW FRESH GIFT NOTIFICATION
+                BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
+                  state.walletPageData.freshWalletGifts,
                 );
 
                 if (state.walletPageData.freshBill != null) {
@@ -253,13 +252,18 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
           BlocListener<WalletPageBloc, WalletPageState>(
             listener: (context, state) {
               if (state is WalletPageLoadedState) {
+                ///SHOW FRESH BILL DIALOG
                 if (state.showFreshBillDialog) {
-                  ///SHOW FRESH BILL DIALOG
                   BlocProvider.of<FreshWalletBillCubit>(context)
                       .showPaymentConfirmed(
                     state.walletPageData.freshBill!,
                   );
                 }
+
+                ///SHOW FRESH GIFT NOTIFICATION
+                BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
+                  state.walletPageData.freshWalletGifts,
+                );
               }
             },
           ),
@@ -279,6 +283,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
                     if (state is WalletPageLoadedState) {
                       return buildPageLoaded(state.walletPageData);
                     }
+
                     return buildPageLoading();
                   },
                 ),
@@ -527,7 +532,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
             horizontal: AppPadding.padding_32 * 2,
           ),
           child: Text(
-            "No History",
+            AppLocale.of().noHistory,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,

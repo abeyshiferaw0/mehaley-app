@@ -15,6 +15,7 @@ class BuyItemBtnWidget extends StatelessWidget {
   final double discountPercentage;
   final bool isCentred;
   final bool isBought;
+  final VoidCallback onBuyClicked;
 
   const BuyItemBtnWidget({
     Key? key,
@@ -28,6 +29,7 @@ class BuyItemBtnWidget extends StatelessWidget {
     this.isCentred = false,
     this.showDiscount = true,
     required this.isBought,
+    required this.onBuyClicked,
   }) : super(key: key);
 
   @override
@@ -46,14 +48,15 @@ class BuyItemBtnWidget extends StatelessWidget {
       );
     } else {
       return AppBouncingButton(
-        onTap: () {},
+        onTap: onBuyClicked,
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: AppPadding.padding_20,
             vertical: AppPadding.padding_8,
           ),
-          margin:
-              EdgeInsets.only(left: hasLeftMargin ? AppMargin.margin_16 : 0.0),
+          margin: EdgeInsets.only(
+            left: hasLeftMargin ? AppMargin.margin_16 : 0.0,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
             color: AppColors.black,

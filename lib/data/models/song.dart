@@ -260,11 +260,14 @@ class Song extends Equatable {
             tag: tag,
             start: song.audioFile.audioPreviewStartTime,
             end: Duration(
-              seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
-                  song.audioFile.audioPreviewStartTime.inSeconds,
+              seconds: (song.audioFile.audioPreviewDurationSeconds.toInt() +
+                      song.audioFile.audioPreviewStartTime.inSeconds) +
+                  2,
             ),
           );
-          audioSources.add(clippingAudioSource);
+          audioSources.add(
+            clippingAudioSource,
+          );
         } else {
           audioSources.add(hlsAudioSource);
         }
@@ -367,8 +370,9 @@ class Song extends Equatable {
           tag: tag,
           start: song.audioFile.audioPreviewStartTime,
           end: Duration(
-            seconds: song.audioFile.audioPreviewDurationSeconds.toInt() +
-                song.audioFile.audioPreviewStartTime.inSeconds,
+            seconds: (song.audioFile.audioPreviewDurationSeconds.toInt() +
+                    song.audioFile.audioPreviewStartTime.inSeconds) +
+                2,
           ),
         );
         return clippingAudioSource;

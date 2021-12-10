@@ -3,6 +3,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
+import 'package:mehaley/util/date_util_extention.dart';
 import 'package:sizer/sizer.dart';
 
 class SmallTextPriceWidget extends StatelessWidget {
@@ -80,7 +81,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   Text buildPrice() {
     return Text(
-      '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
+      '${getPrice().parsePriceAmount()} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
@@ -97,7 +98,7 @@ class SmallTextPriceWidget extends StatelessWidget {
     return Text.rich(
       TextSpan(
         text:
-            '${getPrice().toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
+            '${getPrice().parsePriceAmount()} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
         style: TextStyle(
           color: shouldUseDimmedColor()
               ? AppColors.orange.withOpacity(0.7)
@@ -111,7 +112,7 @@ class SmallTextPriceWidget extends StatelessWidget {
         children: <InlineSpan>[
           TextSpan(
             text:
-                ' ${(getPrice() - (getPrice() * discountPercentage)).toStringAsFixed(2)} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
+                ' ${(getPrice() - (getPrice() * discountPercentage)).parsePriceAmount()} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
             style: TextStyle(
               color: shouldUseDimmedColor()
                   ? AppColors.orange

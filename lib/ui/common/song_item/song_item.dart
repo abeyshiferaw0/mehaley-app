@@ -8,8 +8,8 @@ import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_s
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -21,6 +21,7 @@ import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
 import 'package:mehaley/ui/screens/cart/widgets/remove_from_cart_button.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
@@ -455,6 +456,9 @@ void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
         );
       },
       isForMyPlaylist: isForMyPlaylist,
+      onSongBuyClicked: () {
+        PurchaseUtil.songMenuBuyButtonOnClick(context, song);
+      },
     ),
   );
 }
