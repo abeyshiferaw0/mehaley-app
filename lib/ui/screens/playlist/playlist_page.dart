@@ -15,6 +15,7 @@ import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_sliver_deligates.dart';
+import 'package:mehaley/ui/screens/playlist/widget/shimmer_playlist.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
@@ -50,7 +51,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
           child: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
             builder: (context, state) {
               if (state is PlaylistPageLoadingState) {
-                return AppLoading(size: AppValues.loadingWidgetSize * 0.8);
+                return buildPlaylistPageLoading();
               }
               if (state is PlaylistPageLoadedState) {
                 ///CHANGE PLAYLIST DOMINANT COLOR
@@ -64,7 +65,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
               }
               if (state is PlaylistPageLoadingErrorState) {
                 return AppError(
-                  bgWidget: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
+                  bgWidget: buildPlaylistPageLoading(),
                   onRetry: () {
                     BlocProvider.of<PlaylistPageBloc>(context).add(
                       LoadPlaylistPageEvent(playlistId: widget.playlistId),
@@ -72,10 +73,44 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   },
                 );
               }
-              return AppLoading(size: AppValues.loadingWidgetSize);
+              return buildPlaylistPageLoading();
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildPlaylistPageLoading() {
+    return Container(
+      child: Column(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Container(
+              color: AppColors.white,
+              child: AppLoading(size: AppValues.loadingWidgetSize),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.pagesBgColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.completelyBlack.withOpacity(0.1),
+                    offset: Offset(0, 0),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.all(AppPadding.padding_16),
+              child: PlaylistShimmer(),
+            ),
+          ),
+        ],
       ),
     );
   }

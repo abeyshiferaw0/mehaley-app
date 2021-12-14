@@ -208,7 +208,9 @@ class _CategoryPageState extends State<CategoryPage>
                     //OPEN SONG
                     PagesUtilFunctions.openSong(
                       context: context,
-                      songs: [item],
+                      songs: _pagingController.itemList != null
+                          ? _pagingController.itemList!
+                          : [item],
                       playingFrom: PlayingFrom(
                         from: AppLocale.of().playingFromCategory,
                         title: L10nUtil.translateLocale(
@@ -219,7 +221,7 @@ class _CategoryPageState extends State<CategoryPage>
                         songSyncPlayedFromId: widget.category.categoryId,
                       ),
                       startPlaying: true,
-                      index: 0,
+                      index: _pagingController.itemList != null ? index : 0,
                     );
                   },
                 ),

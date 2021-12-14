@@ -151,8 +151,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                         ColorUtil.changeColorSaturation(
                             HexColor(
                                 currentPlayingSong.albumArt.primaryColorHex),
-                            0.5),
-                        0.15,
+                            0.7),
+                        0.1,
                       ),
                       // color: ColorUtil.changeColorSaturation(
                       //   HexColor(currentPlayingSong.albumArt.primaryColorHex),
@@ -205,8 +205,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           hasIcon: false,
           backgroundColor: ColorUtil.darken(
             ColorUtil.changeColorSaturation(
-                HexColor(song.albumArt.primaryColorHex), 0.8),
-            0.05,
+                HexColor(song.albumArt.primaryColorHex), 0.7),
+            0.15,
           ),
           headerBuilder: (context, isExpanded) {
             return buildPreviewModeExpansionHeader(song, isExpanded);
@@ -220,11 +220,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
 
   Container buildPreviewModeExpansionBody(Song song) {
     return Container(
-      color: ColorUtil.darken(
-        ColorUtil.changeColorSaturation(
-            HexColor(song.albumArt.primaryColorHex), 0.8),
-        0.05,
-      ),
+      // color: ColorUtil.darken(
+      //   ColorUtil.changeColorSaturation(
+      //       HexColor(song.albumArt.primaryColorHex), 0.8),
+      //   0.05,
+      // ),
       padding: EdgeInsets.only(
         top: AppPadding.padding_8,
         left: AppPadding.padding_8,
@@ -253,8 +253,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
     return Container(
       color: ColorUtil.darken(
         ColorUtil.changeColorSaturation(
-            HexColor(song.albumArt.primaryColorHex), 0.8),
-        0.05,
+            HexColor(song.albumArt.primaryColorHex), 0.7),
+        0.15,
       ),
       padding: EdgeInsets.only(
         top: AppPadding.padding_16,

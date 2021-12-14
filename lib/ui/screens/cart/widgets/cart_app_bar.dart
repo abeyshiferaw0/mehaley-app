@@ -70,7 +70,7 @@ class CartAppBar extends StatelessWidget {
   Widget buildDeductedPrice(Cart cart) {
     return SmallTextPriceWidget(
       priceEtb: getTotalPrice(cart, AppCurrency.ETB),
-      priceUsd: getTotalPrice(cart, AppCurrency.USD),
+      priceUsd: getTotalPrice(cart, AppCurrency.ETB),
       isFree: false,
       useLargerText: true,
       isDiscountAvailable: true,
@@ -110,7 +110,7 @@ class CartAppBar extends StatelessWidget {
   Widget buildTotalPrice(Cart cart) {
     return SmallTextPriceWidget(
       priceEtb: getTotalPrice(cart, AppCurrency.ETB),
-      priceUsd: getTotalPrice(cart, AppCurrency.USD),
+      priceUsd: getTotalPrice(cart, AppCurrency.ETB),
       isFree: false,
       isDiscountAvailable: false,
       discountPercentage: getDeductedPriceAsPercentage(cart),
@@ -159,7 +159,7 @@ class CartAppBar extends StatelessWidget {
       double total = getTotalPrice(cart, AppCurrency.ETB);
       return (cart.deductibleAmountEtb / total);
     } else {
-      double total = getTotalPrice(cart, AppCurrency.USD);
+      double total = getTotalPrice(cart, AppCurrency.ETB);
       return (cart.deductibleAmountDollar / total);
     }
   }

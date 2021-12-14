@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -12,6 +13,7 @@ class AppApi {
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
   static const String cartBaseUrl = '$baseUrl/cart';
+  static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -65,9 +67,24 @@ class AppApi {
     );
     return options;
   }
+
+  static String toBase64Str(String str) {
+    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    String encoded = stringToBase64.encode(str);
+    return encoded;
+  }
+
+  static String fromBase64(String str) {
+    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    String decode = stringToBase64.decode(str);
+    return decode;
+  }
 }
 
 class AppValues {
+  ///
+  static const String appStoreId = "1600274398";
+
   //AUTH PAGES
   static const double signUpAppIconSize = 130;
 
@@ -160,8 +177,10 @@ class AppValues {
 
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';
+  static const String systemUpdateBox = 'SYSTEM_UPDATE_BOX';
   static const String recentSearchesBox = 'RECENT_SEARCHES';
   static const String userBox = 'USER_BOX_KEY';
+  static const String minAppVersionKey = 'MIN_APP_VERSION_KEY';
   static const String likedSongsBox = 'LIKED_SONGS_BOX_KEY';
   static const String recentlyUnLikedSongBox = 'RECENTLY_LIKED_SONG_BOX';
   static const String recentlyLikedSongBox = 'RECENTLY_UNLIKED_SONG_BOX';

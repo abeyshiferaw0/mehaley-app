@@ -31,7 +31,6 @@ class AppLocale {
   String get byAppName => appLocalizations.byAppName;
   String get appTermsAndCondition => appLocalizations.appTermsAndCondition;
   String get logOut => appLocalizations.logOut;
-  String get byElfPlay => appLocalizations.byElfPlay;
   String get removeFromCart => appLocalizations.removeFromCart;
   String get addToCart => appLocalizations.addToCart;
   String get previewMode => appLocalizations.previewMode;
@@ -118,15 +117,14 @@ class AppLocale {
   String get albums => appLocalizations.albums;
   String get playlists => appLocalizations.playlists;
   String get playlist => appLocalizations.playlist;
-
+  String get sharedMezmur => appLocalizations.sharedMezmur;
   String get mezmurs => appLocalizations.mezmurs;
   String get album => appLocalizations.album;
   String get category => appLocalizations.category;
   String get artists => appLocalizations.artists;
   String get popular => appLocalizations.popular;
   String get latestReleases => appLocalizations.latestReleases;
-  String get topAlbums => appLocalizations.topAlbums;
-  String get featuring => appLocalizations.featuring;
+  String get popularAlbums => appLocalizations.popularAlbums;
   String get similarArtist => appLocalizations.similarArtist;
   String get enterYourPhoneNumber => appLocalizations.enterYourPhoneNumber;
   String get whatIsYourPhoneNumber => appLocalizations.whatIsYourPhoneNumber;
@@ -154,7 +152,6 @@ class AppLocale {
   String get continueWithGoogle => appLocalizations.continueWithGoogle;
 
   String get continueWithPhone => appLocalizations.continueWithPhone;
-  String get appWelcomeTxt => appLocalizations.appWelcomeTxt;
   String get authenticationFailedMsg =>
       appLocalizations.authenticationFailedMsg;
   String get couldntConnectMsg => appLocalizations.couldntConnectMsg;
@@ -231,7 +228,7 @@ class AppLocale {
   String get lyricBy => appLocalizations.lyricBy;
   String get playlistBy => appLocalizations.playlistBy;
   String get unableToUpdateProfile => appLocalizations.unableToUpdateProfile;
-
+  String get openingSong => appLocalizations.openingSong;
   String get profileUpdated => appLocalizations.profileUpdated;
   String get profileName => appLocalizations.profileName;
   String get chooseImage => appLocalizations.chooseImage;
@@ -470,7 +467,17 @@ class AppLocale {
   String get purchaseNetworkError => appLocalizations.purchaseNetworkError;
   String get completingPurchase => appLocalizations.completingPurchase;
 
+  String get updateRequired => appLocalizations.updateRequired;
+  String get updateRequiredMsg => appLocalizations.updateRequiredMsg;
+  String get newerVersion => appLocalizations.newerVersion;
+  String get currentVersion => appLocalizations.currentVersion;
+  String get updateApp => appLocalizations.updateApp;
+
   ///FUNCTIONS
+
+  String featuring({required String artistName}) =>
+      appLocalizations.featuring(artistName: artistName);
+
   String noOfSongs({required String noOfSong}) =>
       appLocalizations.noOfSongs(noOfSong: noOfSong);
 

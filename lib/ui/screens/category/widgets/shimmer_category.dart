@@ -16,318 +16,72 @@ class CategoryShimmer extends StatelessWidget {
         child: Wrap(
           children: [
             Column(
-              children: [
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-                Row(
-                  children: [
-                    ShimmerItem(
-                      width: 50,
-                      height: 50,
-                      radius: 5.0,
-                    ),
-                    SizedBox(width: AppMargin.margin_16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShimmerItem(
-                          width: 300,
-                          height: 10,
-                          radius: 10,
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ShimmerItem(
-                              width: 68,
-                              height: 10,
-                              radius: 10,
-                            ),
-                            SizedBox(width: AppMargin.margin_16),
-                            ShimmerItem(
-                              width: 200,
-                              height: 10,
-                              radius: 10,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: AppMargin.margin_16),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: AppMargin.margin_16),
-              ],
-            )
+              children: getShimmers(30),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> getShimmers(int size) {
+    List<Widget> shimmers = [];
+
+    for (var i = 0; i < size; i++) {
+      shimmers.add(
+        Column(
+          children: [
+            Row(
+              children: [
+                ShimmerItem(
+                  width: 50,
+                  height: 50,
+                  radius: 5.0,
+                ),
+                SizedBox(width: AppMargin.margin_16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ShimmerItem(
+                        height: 10,
+                        radius: 10,
+                        width: double.infinity,
+                      ),
+                      SizedBox(height: AppMargin.margin_16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: ShimmerItem(
+                              width: double.infinity,
+                              height: 10,
+                              radius: 10,
+                            ),
+                          ),
+                          SizedBox(width: AppMargin.margin_16),
+                          Expanded(
+                            flex: 7,
+                            child: ShimmerItem(
+                              width: double.infinity,
+                              height: 10,
+                              radius: 10,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppMargin.margin_16),
+          ],
+        ),
+      );
+    }
+
+    return shimmers;
   }
 }

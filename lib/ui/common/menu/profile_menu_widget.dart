@@ -73,7 +73,9 @@ class ProfileMenuWidget extends StatelessWidget {
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().share,
-                    onTap: () {},
+                    onTap: () {
+                      PagesUtilFunctions.shareApp();
+                    },
                   ),
                   SizedBox(height: AppMargin.margin_20),
                 ],

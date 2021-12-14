@@ -95,6 +95,22 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
+           <!-- APP AND DEEP LINK -->
+           <intent-filter android:autoVerify="true">
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+
+               <data
+                   android:scheme="https"
+                   android:host="kirayplc.com" />
+
+               <data
+                   android:scheme="mehaleye"
+                   android:host="open" />
+
+           </intent-filter>
+
         </activity>
 
         <!-- Don't delete the meta-data below.

@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/menu/menu_items/artist_follow_menu_item.dart';
+import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
@@ -15,18 +19,12 @@ import 'menu_items/menu_item.dart';
 class ArtistMenuWidget extends StatelessWidget {
   ArtistMenuWidget({
     Key? key,
-    required this.title,
-    required this.imageUrl,
     this.noOfAlbum,
     this.noOfSong,
-    required this.isFollowing,
-    required this.artistId,
+    required this.artist,
   }) : super(key: key);
 
-  final bool isFollowing;
-  final int artistId;
-  final String title;
-  final String imageUrl;
+  final Artist artist;
   final int? noOfAlbum;
   final int? noOfSong;
 
@@ -60,14 +58,20 @@ class ArtistMenuWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     ArtistFollowMenuItem(
-                        isFollowing: isFollowing, artistId: artistId),
+                      isFollowing: artist.isFollowed!,
+                      artistId: artist.artistId,
+                    ),
                     MenuItem(
                       isDisabled: false,
                       hasTopMargin: true,
                       iconColor: AppColors.grey.withOpacity(0.6),
                       icon: FlutterRemix.share_line,
                       title: AppLocale.of().shareArtist,
-                      onTap: () {},
+                      onTap: () {
+                        BlocProvider.of<ShareButtonsBloc>(context).add(
+                          ShareArtistEvent(artist: artist),
+                        );
+                      },
                     ),
                     SizedBox(height: AppMargin.margin_20),
                   ],
@@ -94,7 +98,7 @@ class ArtistMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: imageUrl,
+              imageUrl: AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
@@ -114,7 +118,10 @@ class ArtistMenuWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                title,
+                L10nUtil.translateLocale(
+                  artist.artistName,
+                  context,
+                ),
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

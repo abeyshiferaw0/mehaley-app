@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -89,7 +91,11 @@ class AlbumMenuWidget extends StatelessWidget {
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().shareAlbum,
-                    onTap: () {},
+                    onTap: () {
+                      BlocProvider.of<ShareButtonsBloc>(context).add(
+                        ShareAlbumEvent(album: album),
+                      );
+                    },
                   ),
                   SizedBox(height: AppMargin.margin_20),
                 ],

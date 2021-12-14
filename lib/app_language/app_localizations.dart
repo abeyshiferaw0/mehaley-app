@@ -6,7 +6,6 @@ abstract class AppLocalizations {
   String get appTermsAndCondition;
   String get yourCurrentBalance;
   String get logOut;
-  String get byElfPlay;
   String get removeFromCart;
   String get addToCart;
   String get previewMode;
@@ -91,8 +90,7 @@ abstract class AppLocalizations {
   String get artists;
   String get popular;
   String get latestReleases;
-  String get topAlbums;
-  String get featuring;
+  String get popularAlbums;
   String get similarArtist;
   String get enterYourPhoneNumber;
   String get whatIsYourPhoneNumber;
@@ -117,7 +115,6 @@ abstract class AppLocalizations {
   String get continueWithFacebook;
   String get continueWithGoogle;
   String get continueWithPhone;
-  String get appWelcomeTxt;
   String get authenticationFailedMsg;
   String get giftReceived;
   String get couldntConnectMsg;
@@ -184,7 +181,7 @@ abstract class AppLocalizations {
   String get cantLoadLyrics;
   String get playlistBy;
   String get unableToUpdateProfile;
-
+  String get openingSong;
   String get profileUpdated;
   String get profileName;
   String get chooseImage;
@@ -221,7 +218,7 @@ abstract class AppLocalizations {
   String get chooseYourPreferredMethod;
   String get preferredDownlaodQuality;
   String get preferredDownlaodQualityMsg;
-
+  String get sharedMezmur;
   String get chooseYourLanguge;
   String get reciveNotifications;
   String get viewProfile;
@@ -378,6 +375,14 @@ abstract class AppLocalizations {
   String get rechargeWallet;
   String get walletInsufficient;
   String get walletInsufficientMsg;
+
+  String get updateRequired;
+  String get updateRequiredMsg;
+  String get newerVersion;
+  String get currentVersion;
+  String get updateApp;
+
+  String featuring({required String artistName});
 
   String noOfSongs({required String noOfSong});
 

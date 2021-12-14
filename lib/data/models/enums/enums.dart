@@ -26,6 +26,8 @@ enum SearchResultOtherItems {
 
 enum AppSearchItemTypes { ALBUM, ARTIST, SONG, PLAYLIST }
 
+enum AppShareTypes { ALBUM, ARTIST, SONG, PLAYLIST, OTHER }
+
 enum AppCacheStrategy { NO_CACHE, LOAD_CACHE_FIRST, CACHE_LATER }
 
 enum BottomBarPages { HOME, SEARCH, LIBRARY, CART }

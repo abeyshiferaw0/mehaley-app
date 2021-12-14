@@ -17,6 +17,8 @@ class AppAssets {
   ///APP ICONS
   static String icAppIconOnly = 'assets/icons/app_icons/ic_app_icon_only.png';
   static String icAppFullIcon = 'assets/icons/app_icons/ic_app_full_icon.png';
+  static String icAppFullIconWhite =
+      'assets/icons/app_icons/ic_app_full_icon_white.png';
   static String icAppLetterIcon =
       'assets/icons/app_icons/ic_app_letter_icon.png';
   static String icAppSmallIcon = 'assets/icons/app_icons/ic_app_small_icon.png';

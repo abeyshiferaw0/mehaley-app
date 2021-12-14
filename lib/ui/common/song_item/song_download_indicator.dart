@@ -12,6 +12,7 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:sizer/sizer.dart';
 
 import '../app_snack_bar.dart';
 
@@ -158,12 +159,30 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
         },
         child: Padding(
           padding: EdgeInsets.all(AppPadding.padding_8),
-          child: Icon(
-            FlutterRemix.arrow_down_circle_fill,
-            color: widget.downloadedColor,
-            size: widget.isForPlayerPage
-                ? AppIconSizes.icon_size_28
-                : AppIconSizes.icon_size_24,
+          child: Row(
+            children: [
+              Icon(
+                FlutterRemix.arrow_down_circle_fill,
+                color: widget.downloadedColor,
+                size: widget.isForPlayerPage
+                    ? AppIconSizes.icon_size_20
+                    : AppIconSizes.icon_size_24,
+              ),
+              widget.isForPlayerPage
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                        left: AppPadding.padding_8,
+                      ),
+                      child: Text(
+                        AppLocale.of().deleteMezmur,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_8.sp,
+                          color: AppColors.white.withOpacity(0.7),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
           ),
         ),
       ),
@@ -193,8 +212,10 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                 RetryDownloadSongEvent(
                   song: widget.song,
                   notificationTitle: AppLocale.of().downloading(
-                    songName:
-                        L10nUtil.translateLocale(widget.song.songName, context),
+                    songName: L10nUtil.translateLocale(
+                      widget.song.songName,
+                      context,
+                    ),
                   ),
                 ),
               );
@@ -205,12 +226,30 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           padding: EdgeInsets.all(
             AppPadding.padding_8,
           ),
-          child: Icon(
-            FlutterRemix.error_warning_fill,
-            color: widget.downloadingFailedColor,
-            size: widget.isForPlayerPage
-                ? AppIconSizes.icon_size_24
-                : AppIconSizes.icon_size_20,
+          child: Row(
+            children: [
+              Icon(
+                FlutterRemix.error_warning_fill,
+                color: widget.downloadingFailedColor,
+                size: widget.isForPlayerPage
+                    ? AppIconSizes.icon_size_20
+                    : AppIconSizes.icon_size_20,
+              ),
+              widget.isForPlayerPage
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                        left: AppPadding.padding_8,
+                      ),
+                      child: Text(
+                        AppLocale.of().retryDownload,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_8.sp,
+                          color: AppColors.white.withOpacity(0.7),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
           ),
         ),
       ),
@@ -221,16 +260,36 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
     return Visibility(
       visible: showDownloading,
       child: Container(
-        width: widget.isForPlayerPage
-            ? AppIconSizes.icon_size_24
-            : AppIconSizes.icon_size_16,
-        height: widget.isForPlayerPage
-            ? AppIconSizes.icon_size_24
-            : AppIconSizes.icon_size_16,
         margin: EdgeInsets.all(AppPadding.padding_8),
-        child: CircularProgressIndicator(
-          color: widget.downloadingColor,
-          strokeWidth: 2,
+        child: Row(
+          children: [
+            Container(
+              width: widget.isForPlayerPage
+                  ? AppIconSizes.icon_size_20
+                  : AppIconSizes.icon_size_16,
+              height: widget.isForPlayerPage
+                  ? AppIconSizes.icon_size_20
+                  : AppIconSizes.icon_size_16,
+              child: CircularProgressIndicator(
+                color: widget.downloadingColor,
+                strokeWidth: 2,
+              ),
+            ),
+            widget.isForPlayerPage
+                ? Padding(
+                    padding: const EdgeInsets.only(
+                      left: AppPadding.padding_8,
+                    ),
+                    child: Text(
+                      AppLocale.of().downloadingStr,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_8.sp,
+                        color: AppColors.white.withOpacity(0.7),
+                      ),
+                    ),
+                  )
+                : SizedBox(),
+          ],
         ),
       ),
     );

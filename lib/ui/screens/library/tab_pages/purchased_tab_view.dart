@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_albums_bloc/purchased_albums_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
@@ -45,6 +46,7 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
   late List<Song> purchasedSongs = [];
   late List<Album> purchaseAlbums = [];
   late List<Playlist> purchasePlaylists = [];
+  late PagingController<int, Song>? allSongsPagingController;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +104,10 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
                             onSongsLoaded: (songs) {
                               allPurchasedSongs.clear();
                               allPurchasedSongs.addAll(songs);
+                            },
+                            onPagingController:
+                                (PagingController<int, Song> controller) {
+                              allSongsPagingController = controller;
                             },
                           );
                         } else if (state == AppPurchasedPageItemTypes.SONGS) {
@@ -343,10 +349,9 @@ class _PurchasedTabViewState extends State<PurchasedTabView>
       await BlocProvider.of<PurchasedAlbumsBloc>(builderContext).stream.first;
     }
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
-      BlocProvider.of<PurchasedAllSongsBloc>(builderContext).add(
-        RefreshAllPurchasedSongsEvent(),
-      );
-      await BlocProvider.of<PurchasedAllSongsBloc>(builderContext).stream.first;
+      if (allSongsPagingController != null) {
+        allSongsPagingController!.refresh();
+      }
     }
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.PLAYLISTS) {
       BlocProvider.of<PurchasedPlaylistBloc>(builderContext).add(

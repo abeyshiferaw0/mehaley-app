@@ -66,6 +66,25 @@ class PurchasedAllSongsBloc
     } else if (event is RefreshAllPurchasedSongsEvent) {
       libraryPageDataRepository.cancelDio();
       this.add(LoadAllPurchasedSongsEvent());
+    } else if (event is LoadAllPaginatedPurchasedSongsEvent) {
+      yield PurchasedAllPaginatedSongsLoadingState();
+      try {
+        final List<PurchasedSong> purchasedSongs =
+            await libraryPageDataRepository.getPurchasedPaginatedAllSongs(
+          event.page,
+          event.pageSize,
+        );
+
+        ///YIELD BASED ON PAGE
+        yield AllPurchasedPaginatedSongsLoadedState(
+          allPurchasedSong: purchasedSongs,
+          page: event.page,
+        );
+      } catch (error) {
+        yield PurchasedAllPaginatedSongsLoadingErrorState(
+          error: error.toString(),
+        );
+      }
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/muted_cubit.dart';
@@ -78,7 +79,11 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     children: [
                       ///SHARE BUTTON
                       AppBouncingButton(
-                        onTap: () {},
+                        onTap: () {
+                          BlocProvider.of<ShareButtonsBloc>(context).add(
+                            ShareSongEvent(song: state),
+                          );
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(AppPadding.padding_4),
                           child: Icon(
@@ -111,8 +116,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           );
                         },
                         child: Container(
-                          width: AppIconSizes.icon_size_52,
-                          height: AppIconSizes.icon_size_52,
+                          width: AppIconSizes.icon_size_48,
+                          height: AppIconSizes.icon_size_48,
                           child: Stack(
                             children: [
                               // Icon(
@@ -121,8 +126,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               //   size: AppIconSizes.icon_size_64,
                               // ),
                               Container(
-                                width: AppIconSizes.icon_size_52,
-                                height: AppIconSizes.icon_size_52,
+                                width: AppIconSizes.icon_size_48,
+                                height: AppIconSizes.icon_size_48,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100.0),
                                   border: Border.all(
@@ -247,9 +252,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
               },
             ),
 
-            SizedBox(
-              height: 0.6.h,
-            ),
+            // SizedBox(
+            //   height: 1.h,
+            // ),
 
             ///SONG TITLE, ARTIST NAME
             BlocBuilder<CurrentPlayingCubit, Song?>(
@@ -325,7 +330,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
             ),
 
             SizedBox(
-              height: 1.2.h,
+              height: 1.h,
             ),
 
             ///PLAYER PLAY PAUSE AND OTHER BUTTONS
@@ -349,7 +354,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               color: state
                                   ? AppColors.white
                                   : AppColors.white.withOpacity(0.5),
-                              size: AppIconSizes.icon_size_24,
+                              size: AppIconSizes.icon_size_20,
                             ),
                             state
                                 ? Icon(
@@ -374,7 +379,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   child: Icon(
                     Icons.skip_previous_sharp,
                     color: AppColors.white,
-                    size: AppIconSizes.icon_size_48,
+                    size: AppIconSizes.icon_size_32,
                   ),
                 ),
 
@@ -391,7 +396,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         state
                             ? Icons.pause_circle_filled_sharp
                             : FlutterRemix.play_circle_fill,
-                        size: AppIconSizes.icon_size_72,
+                        size: AppIconSizes.icon_size_64,
                         color: AppColors.white,
                       ),
                     );
@@ -408,7 +413,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   child: Icon(
                     Icons.skip_next_sharp,
                     color: AppColors.white,
-                    size: AppIconSizes.icon_size_48,
+                    size: AppIconSizes.icon_size_32,
                   ),
                 ),
                 BlocBuilder<LoopCubit, LoopMode>(
@@ -427,7 +432,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               color: PagesUtilFunctions.getLoopDarkButtonColor(
                                 state,
                               ),
-                              size: AppIconSizes.icon_size_24,
+                              size: AppIconSizes.icon_size_20,
                             ),
                             state != LoopMode.off
                                 ? Icon(
@@ -443,6 +448,10 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   },
                 ),
               ],
+            ),
+
+            SizedBox(
+              height: 1.h,
             ),
 
             ///MUTE AND QUEUE BUTTONS
@@ -508,7 +517,11 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   ),
                 )
               ],
-            )
+            ),
+
+            SizedBox(
+              height: 1.h,
+            ),
           ],
         ),
       ),

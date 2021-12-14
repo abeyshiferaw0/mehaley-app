@@ -133,14 +133,9 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             PagesUtilFunctions.showMenuSheet(
               context: context,
               child: ArtistMenuWidget(
-                title: L10nUtil.translateLocale(
-                    artistPageData.artist.artistName, context),
-                imageUrl: AppApi.baseUrl +
-                    artistPageData.artist.artistImages[0].imageMediumPath,
+                artist: artistPageData.artist,
                 noOfAlbum: artistPageData.noOfAlbum,
                 noOfSong: artistPageData.noOfSong,
-                isFollowing: artistPageData.artist.isFollowed!,
-                artistId: artistPageData.artist.artistId,
               ),
             );
           },

@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -90,7 +92,11 @@ class PlaylistMenuWidget extends StatelessWidget {
                     iconColor: AppColors.grey.withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().sharePlaylist,
-                    onTap: () {},
+                    onTap: () {
+                      BlocProvider.of<ShareButtonsBloc>(context).add(
+                        SharePlaylistEvent(playlist: playlist),
+                      );
+                    },
                   ),
                   SizedBox(height: AppMargin.margin_20),
                 ],
@@ -159,7 +165,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                     ),
               SizedBox(height: AppMargin.margin_4),
               Text(
-                AppLocale.of().byElfPlay.toUpperCase(),
+                AppLocale.of().byAppName.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.txtGrey,

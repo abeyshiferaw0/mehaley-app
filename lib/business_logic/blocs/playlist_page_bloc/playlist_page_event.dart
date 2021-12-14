@@ -11,3 +11,13 @@ class LoadPlaylistPageEvent extends PlaylistPageEvent {
   @override
   List<Object?> get props => [playlistId];
 }
+
+class LoadPaginatedPlaylistPageEvent extends PlaylistPageEvent {
+  final int playlistId;
+  final int page;
+
+  LoadPaginatedPlaylistPageEvent({required this.playlistId,required this.page});
+
+  @override
+  List<Object?> get props => [playlistId,page];
+}

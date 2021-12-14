@@ -24,6 +24,7 @@ import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'constants.dart';
 
 class AppHiveBoxes {
+  late Box systemUpdate;
   late Box songSyncBox;
   late Box likedSongsBox;
   late Box userBox;
@@ -54,6 +55,11 @@ class AppHiveBoxes {
   initHiveBoxes() async {
     ///REGISTER HIVE ADAPTERS
     await initHiveAdapters();
+
+    ///SYSTEM UPDATE BOX
+    systemUpdate = await Hive.openBox<String>(
+      AppValues.systemUpdateBox,
+    );
 
     ///SONG SYNC OBJECTS
     songSyncBox = await Hive.openBox<SongSync>(

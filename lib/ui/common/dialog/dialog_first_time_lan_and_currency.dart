@@ -71,8 +71,9 @@ class _DialogFirstTimeLanAndCurrencyState
                   ///LANGUAGE PICKER SECTION
                   buildLanguagePicker(context),
 
-                  ///LANGUAGE PICKER SECTION
-                  buildCurrencyPicker(context),
+                  ///CURRENCY REMOVE PICKER
+                  // ///CURRENCY PICKER SECTION
+                  // buildCurrencyPicker(context),
                   SizedBox(
                     height: AppMargin.margin_32,
                   ),
@@ -80,12 +81,15 @@ class _DialogFirstTimeLanAndCurrencyState
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Text(
-                      AppLocale.of().done.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppPadding.padding_8),
+                      child: Text(
+                        AppLocale.of().done.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                        ),
                       ),
                     ),
                   ),
@@ -248,12 +252,12 @@ class _DialogFirstTimeLanAndCurrencyState
                 Expanded(
                   child: buildPickerItem(
                     context: context,
-                    text: 'USD',
-                    isSelected: isCurrencySelected(AppCurrency.USD),
+                    text: 'ETB',
+                    isSelected: isCurrencySelected(AppCurrency.ETB),
                     onTap: () {
                       BlocProvider.of<CurrencyCubit>(context)
                           .changePreferredCurrency(
-                        mAppCurrency: AppCurrency.USD,
+                        mAppCurrency: AppCurrency.ETB,
                       );
                       setState(() {});
                     },

@@ -63,11 +63,11 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
                     maxHeight:
                         ScreenUtil(context: context).getScreenHeight() * 0.4,
                     minHeight:
-                        ScreenUtil(context: context).getScreenHeight() * 0.3,
+                        ScreenUtil(context: context).getScreenHeight() * 0.2,
                     maxWidth:
-                        ScreenUtil(context: context).getScreenWidth() * 0.8,
+                        ScreenUtil(context: context).getScreenWidth() * 0.85,
                     minWidth:
-                        ScreenUtil(context: context).getScreenWidth() * 0.5,
+                        ScreenUtil(context: context).getScreenWidth() * 0.6,
                   ),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,

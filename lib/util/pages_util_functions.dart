@@ -66,9 +66,9 @@ import 'package:mehaley/ui/screens/user_playlist/edit_user_playlist_page.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_initial.dart';
 import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
-import 'package:mehaley/util/date_util_extention.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:package_info/package_info.dart';
@@ -1196,7 +1196,7 @@ class PagesUtilFunctions {
     if (isAvailable) {
       inAppReview.requestReview();
     } else {
-      inAppReview.openStoreListing(appStoreId: '...', microsoftStoreId: '...');
+      inAppReview.openStoreListing(appStoreId: AppValues.appStoreId, );
     }
   }
 

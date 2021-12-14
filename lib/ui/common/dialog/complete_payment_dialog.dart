@@ -425,9 +425,9 @@ class _CompletePaymentDialogState extends State<CompletePaymentDialog> {
 
   AppCurrency getSelectedAppCurrency() {
     if (getSelectedPayment() == AppPaymentMethods.METHOD_VISA) {
-      return AppCurrency.USD;
+      return AppCurrency.ETB;
     } else if (getSelectedPayment() == AppPaymentMethods.METHOD_MASTERCARD) {
-      return AppCurrency.USD;
+      return AppCurrency.ETB;
     } else {
       return AppCurrency.ETB;
     }

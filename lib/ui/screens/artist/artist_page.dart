@@ -113,7 +113,7 @@ class _ArtistPageState extends State<ArtistPage> {
                   artistPageData.newSongs,
                   artistPageData.artist,
                 ),
-                buildArtistAlbumsList(artistPageData.topAlbums),
+                buildArtistAlbumsList(artistPageData.popularAlbums),
                 buildArtistFeaturingPlaylistList(
                   artistPageData.playlistsFeaturingArtists,
                   artistPageData.artist,
@@ -376,7 +376,7 @@ class _ArtistPageState extends State<ArtistPage> {
               width: AppMargin.margin_16,
             ),
             Text(
-              AppLocale.of().topAlbums,
+              AppLocale.of().popularAlbums,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_14.sp,
                 color: AppColors.black,
@@ -400,9 +400,9 @@ class _ArtistPageState extends State<ArtistPage> {
     );
   }
 
-  ListView buildArtistAlbumsList(List<Album> topAlbums) {
+  ListView buildArtistAlbumsList(List<Album> popularAlbums) {
     return ListView.builder(
-      itemCount: topAlbums.length,
+      itemCount: popularAlbums.length,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
@@ -411,7 +411,7 @@ class _ArtistPageState extends State<ArtistPage> {
           children: [
             position == 0 ? buildAlbumsHeader() : SizedBox(),
             //SizedBox(height: AppMargin.margin_4),
-            ArtistAlbumItem(position: position, album: topAlbums[position]),
+            ArtistAlbumItem(position: position, album: popularAlbums[position]),
             //SizedBox(height: AppMargin.margin_4),
           ],
         );

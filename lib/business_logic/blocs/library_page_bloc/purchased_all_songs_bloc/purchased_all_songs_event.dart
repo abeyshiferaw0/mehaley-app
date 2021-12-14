@@ -8,6 +8,20 @@ class LoadAllPurchasedSongsEvent extends PurchasedAllSongsEvent {
   List<Object?> get props => [];
 }
 
+class LoadAllPaginatedPurchasedSongsEvent extends PurchasedAllSongsEvent {
+  final int pageSize;
+  final int page;
+
+  LoadAllPaginatedPurchasedSongsEvent(
+      {required this.pageSize, required this.page});
+
+  @override
+  List<Object?> get props => [
+        pageSize,
+        page,
+      ];
+}
+
 class RefreshAllPurchasedSongsEvent extends PurchasedAllSongsEvent {
   @override
   List<Object?> get props => [];

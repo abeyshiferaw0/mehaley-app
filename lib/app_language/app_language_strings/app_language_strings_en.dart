@@ -1,5 +1,5 @@
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/util/date_util_extention.dart';
+import 'package:mehaley/util/app_extention.dart';
 
 import '../app_localizations.dart';
 
@@ -9,7 +9,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String appTermsAndCondition =
       "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "Log out";
-  final String byElfPlay = "by Mehaleye";
+
   final String removeFromCart = "Remove from cart";
   final String addToCart = "Add to cart";
   final String previewMode = "Preview mode";
@@ -23,7 +23,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String following = "following";
   final String addToFavorite = "Add to favorite";
   final String removeFromFavorite = "Remove from favorite";
-  final String followArtist = "Follow artist";
+  final String followArtist = "Follow zemari";
   final String followPlaylist = "Follow playlist";
   final String removeFromFollowedPlaylist = "Remove from followed playlist";
   final String uAreListingToPreviewDesc =
@@ -33,7 +33,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String retryDownload = "Retry download";
   final String deleteMezmur = "Delete mezmur";
   final String shareAlbum = "Share album";
-  final String shareArtist = "Share artist";
+  final String shareArtist = "Share zemari";
   final String sharePlaylist = "Share playlist";
   final String share = "Share";
   final String shareMezmur = "Share Mezmur";
@@ -41,7 +41,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String sortPlaylist = "Sort playlist";
   final String findInPlaylist = "Find in playlist";
   final String viewMezmursCategory = "View mezmur's category";
-  final String viewArtist = "View artist";
+  final String viewArtist = "View zemari";
   final String viewAlbum = "View album";
   final String addToQueue = "Add to queue";
   final String addToPlaylist = "Add to playlist";
@@ -74,7 +74,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String albumBy = "ALBUM BY";
   final String playingFromPlaylist = "Playing from playlist";
   final String playingFromAlbum = "Playing from album";
-  final String playingFromArtist = "Playing from artist";
+  final String playingFromArtist = "Playing from zemari";
   final String playingFromCart = "Playing from cart";
   final String playingFromCategory = "Playing from category";
   final String playingFromFeaturedAlbum = "Playing from featured album";
@@ -83,19 +83,18 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String playingFromRecentlyPlayed = "Playing from recently played";
   final String playingFrom = "Playing from";
   final String mostListened = "most listened";
-  final String verifiedArtist = "Verified Artist";
+  final String verifiedArtist = "Verified Zemari";
   final String albums = "Albums";
   final String playlists = "Playlists";
   final String playlist = "playlist";
   final String mezmurs = "Mezmurs";
   final String album = "Album";
   final String category = "Category";
-  final String artists = "Artists";
+  final String artists = "Zemarian";
   final String popular = "Popular";
   final String latestReleases = "Latest Releases";
-  final String topAlbums = "Top Albums";
-  final String featuring = "Featuring";
-  final String similarArtist = "Similar Artists";
+  final String popularAlbums = "Popular Albums";
+  final String similarArtist = "Similar Zemarian";
   final String enterYourPhoneNumber = "enter your phoneNumber";
   final String whatIsYourPhoneNumber = "What is your\nphone number ?";
   final String phoneVerificationMsg =
@@ -120,7 +119,6 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String continueWithFacebook = "Continue with facebook";
   final String continueWithGoogle = "Continue with google";
   final String continueWithPhone = "Continue with phone";
-  final String appWelcomeTxt = "ሰላም ፣ ወደ ኤልፊ ጨዋታ እንኳን\nበደህና መጡ";
   final String authenticationFailedMsg =
       "Authentication Failed!\nCheck your internet connection";
   final String couldntConnectMsg =
@@ -131,7 +129,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String cartCleared = "Cart cleared";
   final String cartIsEmpty = "Your cart is currently empty";
   final String empityCartCheckOutMsg =
-      "Before proceeding to check out, you must add some items to yor cart";
+      "Before proceeding to check out you, must add some items to yor cart";
   final String goToHomeScreen = "Go to home screen";
   final String cartTitle = "Mehaleye Cart";
   final String total = "Total";
@@ -147,18 +145,18 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String purchasedMezmurs = "Purchased Mezmurs";
   final String purchasedAlbums = "purchased albums";
   final String purchasedPlaylists = "purchased playlists";
-  final String followedArtists = "followed artists";
+  final String followedArtists = "followed zemarian";
   final String followedPlaylists = "followed playlists";
   final String listenOffline = "Listen Offline";
   final String noMezmursToPlay = "no mezmurs to play";
   final String noAlbumsToSelect = "no albums to select";
   final String myPlaylists = "My Playlists";
-  final String downloadAllPurchased = "Download All Purcahsed";
+  final String downloadAllPurchased = "Download All Purchased";
   final String sort = "Sort";
   final String sortBy = "Sort by";
   final String latestDownloads = "Latest downloads";
   final String titleAz = "Title(A-z)";
-  final String artistAz = "Artist(A-z)";
+  final String artistAz = "Zemari(A-z)";
   final String newest = "Newest";
   final String oldest = "Oldest";
   final String all = "All";
@@ -166,7 +164,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String uDontHaveFavAlbums = "You don't have any favorite\nAlbums";
   final String uDontHaveFavMezmurs = "You don't have any favorite\nMezmurs";
   final String favoriteMezmurs = "favorite mezmurs";
-  final String uAreNotFollowingArtist = "You are not following any\nArtist";
+  final String uAreNotFollowingArtist = "You are not following any\Zemarians";
   final String uAreNotFollowingPlaylist = "You are not following any\nPlaylist";
   final String uHaventCreatedPlaylist = "You haven't created any playlists";
   final String createNewPlaylist = "Create New playlist";
@@ -197,7 +195,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String profileUpdated = "Profile updated";
   final String profileName = "Profile Name";
   final String chooseImage = "Choose Image";
-  final String trackAPhoto = "Tack a Photo";
+  final String trackAPhoto = "Take a photo";
   final String pickFromGallery = "Pick From Gallery";
   final String removeImage = "Remove Image";
   final String changeImage = "change image";
@@ -210,19 +208,19 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String allCategories = "All Categories";
   final String topCategories = "Top Categories";
   final String topMezmurs = "Top Mezmurs";
-  final String topArtists = "Top Artists";
+  final String topArtists = "Top Zemarians";
   final String searchTitle = "Search Mehaleye";
   final String changeYourSearchKey = "Try changing your search key";
   final String searchHint = "Search mehaleye for mezmurs, albums, playlists";
-  final String searchHint2 = "Albums , artists , playlist's ...";
+  final String searchHint2 = "Albums , Zemarian , Playlist's ...";
   final String searchElfFor = "Search Mehaleye For";
   final String recentSearches = "Recent Searches";
   final String clearRecentSearches = "Clear Recent Searches";
   final String seeAllPlaylists = "see all playlists";
   final String seeAllAlbums = "see all albums";
-  final String seeAllArtists = "see all artists";
+  final String seeAllArtists = "see all zemarian";
   final String seeAllMezmurs = "see all mezmurs";
-  final String settings = "Settings en";
+  final String settings = "Settings";
   final String dataSaver = "Data Saver";
   final String dataSaverMsg =
       "Lowers the quality of your mezmurs streams, for lower data usage";
@@ -242,8 +240,8 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String albumRemovedToFavorites = "Album removed from favorites";
   final String playlistAddedToFavorites = "Playlist added to followed";
   final String playlistRemovedToFavorites = "Playlist removed from followed";
-  final String artistsAddedToFavorites = "Artists added to followed";
-  final String artistsRemovedToFavorites = "Artists removed from followed";
+  final String artistsAddedToFavorites = "Zemari added to followed";
+  final String artistsRemovedToFavorites = "Zemari removed from followed";
   final String albumAddedToCart = "Album added to cart";
   final String albumRemovedToCart = "Album removed from cart";
   final String songAddedToCart = "Mezmur added to cart";
@@ -268,7 +266,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String selectYourPrefrredPayment =
       "Select your preferred payment method for all purchases, you can change it at any time";
   final String unFollow = "UnFollow";
-  final String removeFromFollowedArtist = "Remove From Followed Artists";
+  final String removeFromFollowedArtist = "Remove From Followed Zemarian";
   final String removeFromFavoriteMezmurs = "Remove From Favorite Mezmurs";
   final String deletePlaylistPermanently = "Delete playlist permanently";
   final String clearAll = "Clear All";
@@ -335,16 +333,28 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String play = "Play";
   final String onlyOnElf = "Only On Mehaleye";
   final String welcome = "Welcome";
-  final String google = "Google en";
+  final String google = "Google am";
   final String facebook = "Facebook";
   final String apple = "Apple";
   final String downloadStartedMsg = "Download started";
-  final String expand = "Expand";
   final String firstTimeDialogMsg =
-      "Pick your default language and currency, you can change it latter in settings";
-  final String welcomeToMehaley = "Welcome to mehaleye en";
+      "Pick your default language, you can change it latter in settings";
+  final String welcomeToMehaley = "Welcome to mehaleye am";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
+  final String expand = "Expand";
+  final String enableNotifications = "Enable Notifications";
+  final String enableNotificationsMsg =
+      "Enable notifications, so you don't miss the latest mezmurs and updates from mehaleye";
+  final String notNow = "Not now";
   final String done = "Done";
+  final updateRequired = "Update required to continue using mehaleye";
+  final updateRequiredMsg =
+      "Dear user, the current version of the application is no longer supported, please update mehaleye to enjoy new features";
+  final newerVersion = "Newer Version";
+  final currentVersion = "Current Version";
+  final updateApp = "Update app";
+  final String openingSong = "Opening mezmur";
+  final String sharedMezmur = "Shared Mezmur";
   final String cartAlreadyCheckedOut = "Cart already checked out";
   final String cartAlreadyCheckedOutMsg =
       "Your cart is already checked out, try refreshing cart page!!";
@@ -352,9 +362,9 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String billCanceledMsg =
       "You bill was cancelled, use another bill to recharge your wallet";
   final String noHistory = "No History";
+
   final String giftReceived = "Gift Received";
   final String giftFrom = "Gift From";
-
   final String purchaseNetworkError =
       "Unable to complete purchase\nCheck your internet connection!!";
   final String completingPurchase = "Completing purchase";
@@ -363,23 +373,23 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String yesterday = "Yesarday";
   final String walletHistory = "Wallet History";
   final String help = "Help";
-  final String areYouSureUWantToCancelBill =
-      "Are You Sure You Want To Cancel Your Bill";
+  final String selectedAmount = "Selected amount";
   final String invalidWalletRechargeAmountSelected =
       "Please select a valid amount";
-  final String selectedAmount = "Selected amount";
-  final String billNotPaidYetMsg =
-      "Bill not paid yet,\nRecharge your wallet by paying this bill";
-  final String billAlreadyPaidMsg = "Bill is already paid!";
-  final String refreshingWallet = "Refreshing Wallet";
-  final String billStatusFailedMsg =
-      "Checking bill status failed, check your internet connection";
+  final String areYouSureUWantToCancelBill =
+      "Are You Sure You Want To Cancel Your Bill";
   final String walletRechargeInitialErrorMsg =
       "Something went wrong\nUnable to initiate wallet recharge";
 
   final String walletRechargeFinalErrorMsg =
       "Something went wrong\nUnable to recharge your wallet";
 
+  final String billNotPaidYetMsg =
+      "Bill not paid yet,\nRecharge your wallet by paying this bill";
+  final String billAlreadyPaidMsg = "Bill is already paid!";
+  final String refreshingWallet = "Refreshing Wallet";
+  final String billStatusFailedMsg =
+      "Checking bill status failed, check your internet connection";
   final String billCancelFailedMsg =
       "Canceling bill status failed, check your internet connection";
   final String checkBillStatus = "Check Bill Status";
@@ -391,14 +401,13 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String walletRechargedSuccessfully = "Wallet Recharged Successfully";
   final String walletRechargedSuccessfullyMsg =
       " Your payment has been processed!\ndetails of transaction are included below";
-
   final String cancelBill = "Cancel bill";
   final String howToPay = "How To Pay Bill?";
   final String howToPayMsg =
       "Get instruction on how to pay bill when recharging your wallet";
+  final String refreshWallet = "Refresh Wallet";
   final String refreshWalletMsg =
       "If you have recently recharged your wallet and didn't’t see any updates try refreshing your wallet";
-  final String refreshWallet = "Refresh Wallet";
   final String myWalletBalance = "My Wallet Balance";
   final String appWallet = "Maheleye Wallet";
   final String selectAmountToTopUp = "Select amount to top up";
@@ -407,35 +416,37 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String enterOtherAmount = "Enter Other Amount";
   final String proceedToPayment = "Proceed to payment";
   final String billInfoMsg =
-      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
-  final String payBillMsg =
-      "Hi, copy the bill code and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
-  final String payBill = "Pay Bill To Recharge Your Wallet";
-  final String unpaidBillCode = "Unpaid Bill Code";
+      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking …)";
   final String unPaidBillMsg =
       "You have an unpaid previous bill, you can recharge your wallet by paying this bill or you can cancel and create a new bill.";
   final String previousUnPaidBill = "Previous Unpaid Bill Available";
   final String cancelBillAndContinue = "Cancel bill & continue";
-  final String birr = "Birr";
   final String amount = "Amount";
+  final String birr = "Birr";
   final String copyCode = "Copy Code";
-  final String enableNotifications = "Enable Notifications";
-  final String enableNotificationsMsg =
-      "Enable notifications, so you don't miss the latest mezmurs and updates from mehaleye";
-  final String notNow = "Not now";
   final String billCode = "Bill Code";
+  final String unpaidBillCode = "Unpaid Bill Code";
+  final String payBill = "Pay Bill To Recharge Your Wallet";
+  final String payBillMsg =
+      "Hi, copy the bill code and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
+  final String goToPurchased = "Go to purchased";
   final String copiedToClipboard = "Copied To Clipboard";
+
   final String songPurchased = "Mezmur Purchased";
   final String albumPurchased = "Album Purchased";
   final String playlistPurchased = "Playlist Purchased";
   final String cartCheckedOut = "Cart Checked Out";
   final String cartCheckedOutMsg = "Purchase Multiple Items At once";
   final String walletRecharged = "Wallet Recharged";
-  final String goToPurchased = "Go to purchased";
+
   final String rechargeWallet = "Recharge Wallet";
   final String walletInsufficient = "Wallet Balance Insufficient";
   final String walletInsufficientMsg =
       "Your Wallet Balance Is Insufficient To Make This Purchase, Please Recharge Your Wallet And Try Again";
+
+  String featuring({required String artistName}) {
+    return "Playlists Featuring $artistName";
+  }
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";
@@ -599,7 +610,7 @@ class AppLanguageStringsEn extends AppLocalizations {
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
       item = "Playlist";
 
-    return "By Purchasing This $purchasedItemType ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+    return "By Purchasing This $item ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
   }
 
   String cartCheckOutMsg({required double cartTotalPrice}) {

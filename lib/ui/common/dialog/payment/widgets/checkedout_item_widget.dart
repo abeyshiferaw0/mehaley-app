@@ -6,7 +6,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
-import 'package:mehaley/util/date_util_extention.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:sizer/sizer.dart';
 
 class CheckedOutItemWidget extends StatelessWidget {

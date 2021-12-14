@@ -52,8 +52,8 @@ class AppGradients {
       end: Alignment.bottomCenter,
       //stops: [0.2, 0.7],
       colors: [
-        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.5), 0.15),
-        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.8), 0.1),
+        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.4), 0.1),
+        ColorUtil.darken(ColorUtil.changeColorSaturation(color, 0.7), 0.05),
         //ColorUtil.changeColorSaturation(color, 0.9),
         //Colors.black12.withOpacity(0.9),
       ],
@@ -177,7 +177,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         AppColors.completelyBlack.withOpacity(0.1),
-        AppColors.completelyBlack.withOpacity(0.3),
+        AppColors.completelyBlack.withOpacity(0.4),
       ],
     );
   }

@@ -17,7 +17,7 @@ import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_top_up.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_pay_with_carousel.dart';
-import 'package:mehaley/util/date_util_extention.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 

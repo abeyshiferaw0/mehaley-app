@@ -30,6 +30,12 @@
 @import connectivity_plus;
 #endif
 
+#if __has_include(<device_info/FLTDeviceInfoPlugin.h>)
+#import <device_info/FLTDeviceInfoPlugin.h>
+#else
+@import device_info;
+#endif
+
 #if __has_include(<firebase_auth/FLTFirebaseAuthPlugin.h>)
 #import <firebase_auth/FLTFirebaseAuthPlugin.h>
 #else
@@ -96,6 +102,12 @@
 @import package_info;
 #endif
 
+#if __has_include(<package_info_plus/FLTPackageInfoPlusPlugin.h>)
+#import <package_info_plus/FLTPackageInfoPlusPlugin.h>
+#else
+@import package_info_plus;
+#endif
+
 #if __has_include(<path_provider/FLTPathProviderPlugin.h>)
 #import <path_provider/FLTPathProviderPlugin.h>
 #else
@@ -120,6 +132,12 @@
 @import share_plus;
 #endif
 
+#if __has_include(<shared_preferences_ios/FLTSharedPreferencesPlugin.h>)
+#import <shared_preferences_ios/FLTSharedPreferencesPlugin.h>
+#else
+@import shared_preferences_ios;
+#endif
+
 #if __has_include(<sign_in_with_apple/SignInWithApplePlugin.h>)
 #import <sign_in_with_apple/SignInWithApplePlugin.h>
 #else
@@ -130,6 +148,12 @@
 #import <sqflite/SqflitePlugin.h>
 #else
 @import sqflite;
+#endif
+
+#if __has_include(<uni_links/UniLinksPlugin.h>)
+#import <uni_links/UniLinksPlugin.h>
+#else
+@import uni_links;
 #endif
 
 #if __has_include(<url_launcher/FLTURLLauncherPlugin.h>)
@@ -151,6 +175,7 @@
   [AudioServicePlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioServicePlugin"]];
   [AudioSessionPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioSessionPlugin"]];
   [FLTConnectivityPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTConnectivityPlusPlugin"]];
+  [FLTDeviceInfoPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTDeviceInfoPlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FlutterDownloaderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterDownloaderPlugin"]];
@@ -162,12 +187,15 @@
   [JustAudioPlugin registerWithRegistrar:[registry registrarForPlugin:@"JustAudioPlugin"]];
   [OneSignalPlugin registerWithRegistrar:[registry registrarForPlugin:@"OneSignalPlugin"]];
   [FLTPackageInfoPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlugin"]];
+  [FLTPackageInfoPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlusPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];
   [PurchasesFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"PurchasesFlutterPlugin"]];
   [FLTSharePlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharePlusPlugin"]];
+  [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
   [SignInWithApplePlugin registerWithRegistrar:[registry registrarForPlugin:@"SignInWithApplePlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
+  [UniLinksPlugin registerWithRegistrar:[registry registrarForPlugin:@"UniLinksPlugin"]];
   [FLTURLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTURLLauncherPlugin"]];
   [FLTWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTWebViewFlutterPlugin"]];
 }

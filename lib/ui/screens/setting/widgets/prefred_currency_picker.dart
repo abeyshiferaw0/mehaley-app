@@ -81,8 +81,8 @@ class PreferredCurrencyPicker extends StatelessWidget {
             ),
             buildDropdownMenuItem(
               context: context,
-              appCurrency: AppCurrency.USD,
-              isActive: settingsPageData.preferredCurrency == AppCurrency.USD,
+              appCurrency: AppCurrency.ETB,
+              isActive: settingsPageData.preferredCurrency == AppCurrency.ETB,
             ),
           ],
         ),

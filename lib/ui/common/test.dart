@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:mehaley/ui/common/testTwo.dart';
 
 class TestWidget extends StatelessWidget {
   @override
@@ -7,13 +7,7 @@ class TestWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Container(
-          width: 300,
-          height: 500,
-          child: WebView(
-            initialUrl: 'www.google.com',
-          ),
-        ),
+        body: TestTwoWidget(),
       ),
     );
   }

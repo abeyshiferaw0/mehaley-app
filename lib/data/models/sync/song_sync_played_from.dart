@@ -40,4 +40,6 @@ enum SongSyncPlayedFrom {
   OFFLINE_PAGE,
   @HiveField(17)
   UNK,
+  @HiveField(18)
+  SHARED_SONG,
 }

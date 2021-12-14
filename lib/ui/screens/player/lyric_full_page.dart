@@ -8,7 +8,7 @@ import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:mehaley/business_logic/blocs/share_bloc/share_bloc.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
@@ -548,12 +548,11 @@ class _LyricFullPageState extends State<LyricFullPage> {
                                           .getPixelRatio())
                                   .then(
                                 (value) {
-                                  BlocProvider.of<ShareBloc>(context).add(
+                                  BlocProvider.of<ShareButtonsBloc>(context)
+                                      .add(
                                     ShareLyricEvent(
                                       lyricScreenShotFile: value,
                                       song: widget.song,
-                                      subject:
-                                          '${L10nUtil.translateLocale(widget.song.songName, context)}\n${PagesUtilFunctions.getArtistsNames(widget.song.artistsName, context)}',
                                     ),
                                   );
                                 },

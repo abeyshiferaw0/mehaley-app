@@ -54,6 +54,20 @@ class LibraryPageDataProvider {
     return response;
   }
 
+  Future getPurchasedPaginatedAllSongs(int page, int pageSize) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.paymentBaseUrl + "/purchased/song/all/list/",
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
   Future getFavoriteItems(AppCacheStrategy appCacheStrategy,
       AppFavoritePageItemTypes appFavoritePageItemTypes) async {
     //GET CACHE OPTIONS

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio/just_audio.dart';
@@ -14,25 +15,35 @@ import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_s
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_link_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
+import 'package:mehaley/business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
+import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/wallet_gift.dart';
 import 'package:mehaley/data/models/payment/webirr_bill.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
+import 'package:mehaley/ui/common/dialog/deeplink_share/dialog_open_deeplink_song.dart';
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/ui/common/notifications/fresh_gift_notification_widget.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_bill_confirmed.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
@@ -55,9 +66,16 @@ class _MainScreenState extends State<MainScreen> {
     ///START LISTING SYNC RECORDING
     BlocProvider.of<SongListenRecorderBloc>(context).add(StartRecordEvent());
     BlocProvider.of<SongSyncBloc>(context).add(StartSongSyncEvent());
+    BlocProvider.of<DeepLinkListenerBloc>(context).add(
+      StartDeepLinkListenerEvent(),
+    );
     BlocProvider.of<AppStartBloc>(context).add(
       ShouldShowNotificationPermissionEvent(),
     );
+    BlocProvider.of<AppMinVersionBloc>(context).add(
+      CheckAppMinVersionEvent(),
+    );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
   }
 
@@ -65,6 +83,117 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<AppMinVersionBloc, AppMinVersionState>(
+          listener: (context, state) {
+            if (state is CheckAppMinVersionLoadedState) {
+              if (state.isAppBelowMinVersion) {
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.forceUpdate,
+                  arguments: ScreenArguments(
+                    args: {
+                      'newVersion': state.newVersion,
+                      'currentVersion': state.currentVersion,
+                    },
+                  ),
+                );
+              } else {
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.splashRoute,
+                );
+              }
+            }
+          },
+        ),
+        BlocListener<DeepLinkListenerBloc, DeepLinkListenerState>(
+          listener: (context, state) {
+            if (state is DeepLinkErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.black.withOpacity(0.9),
+                  isFloating: true,
+                  msg: 'invalid url used!!',
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+            if (state is DeepLinkOpenState) {
+              if (state.appShareTypes == AppShareTypes.SONG) {
+                ///OPEN SONG FROM DEEPLINK
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return BlocProvider(
+                      create: (context) => DeepLinkSongBloc(
+                        deeplinkSongRepository:
+                            AppRepositories.deeplinkSongRepository,
+                      ),
+                      child: DialogDeeplinkSong(
+                        songId: state.itemId,
+                        onSongFetched: (Song song) {
+                          PagesUtilFunctions.openSong(
+                            context: context,
+                            songs: [song],
+                            startPlaying: true,
+                            playingFrom: PlayingFrom(
+                              songSyncPlayedFrom:
+                                  SongSyncPlayedFrom.SHARED_SONG,
+                              songSyncPlayedFromId: -1,
+                              from: AppLocale.of().sharedMezmur,
+                              title: L10nUtil.translateLocale(
+                                song.songName,
+                                context,
+                              ),
+                            ),
+                            index: 0,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              }
+              if (state.appShareTypes == AppShareTypes.PLAYLIST) {
+                ///OPEN PLAYLIST FROM DEEPLINK
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.playlistRoute,
+                  arguments: ScreenArguments(
+                    args: {'playlistId': state.itemId},
+                  ),
+                );
+              }
+              if (state.appShareTypes == AppShareTypes.ALBUM) {
+                ///OPEN ALBUM FROM DEEPLINK
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.albumRoute,
+                  arguments: ScreenArguments(
+                    args: {'albumId': state.itemId},
+                  ),
+                );
+              }
+              if (state.appShareTypes == AppShareTypes.ARTIST) {
+                ///OPEN ARTIST FROM DEEPLINK
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.artistRoute,
+                  arguments: ScreenArguments(
+                    args: {'artistId': state.itemId},
+                  ),
+                );
+              }
+            }
+          },
+        ),
+        BlocListener<OpenProfilePageCubit, bool>(
+          listener: (context, state) {
+            if (state) {
+              _navigatorKey.currentState!.pushNamed(
+                AppRouterPaths.profileRoute,
+              );
+            }
+          },
+        ),
         BlocListener<FreshWalletBillCubit, WebirrBill?>(
           listener: (context, state) {
             if (state != null) {
@@ -300,7 +429,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is DownloadingSongsCompletedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                    bgColor: AppColors.darkGrey,
+                    bgColor: AppColors.blue,
                     isFloating: true,
                     msg: AppLocale.of().downloadComplete(
                       songName: L10nUtil.translateLocale(
@@ -310,7 +439,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     txtColor: AppColors.white,
                     icon: FlutterRemix.checkbox_circle_fill,
-                    iconColor: AppColors.darkOrange),
+                    iconColor: AppColors.white),
               );
             }
             if (state is SongDownloadedNetworkNotAvailableState) {

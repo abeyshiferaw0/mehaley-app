@@ -30,3 +30,29 @@ class AllPurchasedSongsLoadedState extends PurchasedAllSongsState {
   @override
   List<Object?> get props => [allPurchasedSong];
 }
+
+class PurchasedAllPaginatedSongsLoadingState extends PurchasedAllSongsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class PurchasedAllPaginatedSongsLoadingErrorState
+    extends PurchasedAllSongsState {
+  final String error;
+
+  PurchasedAllPaginatedSongsLoadingErrorState({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class AllPurchasedPaginatedSongsLoadedState extends PurchasedAllSongsState {
+  final List<PurchasedSong> allPurchasedSong;
+  final int page;
+
+  AllPurchasedPaginatedSongsLoadedState(
+      {required this.allPurchasedSong, required this.page});
+
+  @override
+  List<Object?> get props => [allPurchasedSong, page];
+}

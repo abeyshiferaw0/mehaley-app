@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/purchased_all_songs_bloc/purchased_all_songs_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/data/models/library_data/purchased_song.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
-import 'package:mehaley/ui/screens/library/widgets/auto_download.dart';
+import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
-import 'package:mehaley/ui/screens/library/widgets/library_error_widget.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 
@@ -21,38 +20,110 @@ class PurchasedAllSongsPage extends StatefulWidget {
   const PurchasedAllSongsPage({
     Key? key,
     required this.onSongsLoaded,
+    required this.onPagingController,
   }) : super(key: key);
 
   final Function(List<Song>) onSongsLoaded;
+  final Function(PagingController<int, Song>) onPagingController;
 
   @override
   _PurchasedAllSongsPageState createState() => _PurchasedAllSongsPageState();
 }
 
 class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
+  //PAGINATION CONTROLLER
+  final PagingController<int, Song> _pagingController =
+      PagingController(firstPageKey: 1);
+
   @override
   void initState() {
-    ///INITIALLY LOAD ALL PURCHASED SONGS
-    BlocProvider.of<PurchasedAllSongsBloc>(context)
-        .add(LoadAllPurchasedSongsEvent());
+    ///FETCH PAGINATED SONGS WITH PAGINATED CONTROLLER
+    _pagingController.addPageRequestListener(
+      (pageKey) {
+        ///INITIALLY LOAD ALL PURCHASED SONGS
+        BlocProvider.of<PurchasedAllSongsBloc>(context).add(
+          LoadAllPaginatedPurchasedSongsEvent(
+            pageSize: AppValues.pageSize,
+            page: pageKey,
+          ),
+        );
+      },
+    );
+    widget.onPagingController(_pagingController);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtil(context: context).getScreenHeight();
-    return BlocBuilder<PurchasedAllSongsBloc, PurchasedAllSongsState>(
-      builder: (context, state) {
-        if (state is PurchasedAllSongsLoadingState) {
-          return buildAppLoading(context, screenHeight);
-        } else if (state is AllPurchasedSongsLoadedState) {
-          ///PASS ALL LOADED SONGS TO PREVIOUS PAGE
-          widget.onSongsLoaded(
-            state.allPurchasedSong.map((e) => e.song).toList(),
-          );
-          if (state.allPurchasedSong.length > 0) {
-            return buildPageLoaded(state.allPurchasedSong);
+    return BlocListener<PurchasedAllSongsBloc, PurchasedAllSongsState>(
+      listener: (context, state) {
+        if (state is AllPurchasedPaginatedSongsLoadedState) {
+          final isLastPage = state.allPurchasedSong.length < AppValues.pageSize;
+
+          if (_pagingController.itemList != null) {
+            widget.onSongsLoaded(_pagingController.itemList!);
+          }
+
+          if (isLastPage) {
+            _pagingController.appendLastPage(
+              state.allPurchasedSong.map((e) => e.song).toList(),
+            );
           } else {
+            final nextPageKey = state.page + 1;
+            _pagingController.appendPage(
+              state.allPurchasedSong.map((e) => e.song).toList(),
+              nextPageKey,
+            );
+          }
+        }
+        if (state is PurchasedAllPaginatedSongsLoadingErrorState) {
+          _pagingController.error = AppLocale.of().networkError;
+        }
+      },
+      child: PagedListView<int, Song>(
+        pagingController: _pagingController,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        builderDelegate: PagedChildBuilderDelegate<Song>(
+          itemBuilder: (context, item, index) {
+            return Column(
+              children: [
+                SizedBox(height: AppMargin.margin_8),
+                SongItem(
+                  song: item,
+                  isForMyPlaylist: false,
+                  thumbUrl: AppApi.baseUrl + item.albumArt.imageSmallPath,
+                  thumbSize: AppValues.playlistSongItemSize,
+                  onPressed: () {
+                    //OPEN SONG
+                    PagesUtilFunctions.openSong(
+                      context: context,
+                      songs: _pagingController.itemList != null
+                          ? _pagingController.itemList!
+                          : [],
+                      startPlaying: true,
+                      playingFrom: PlayingFrom(
+                        from: AppLocale.of().playingFrom,
+                        title: AppLocale.of().purchasedMezmurs,
+                        songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
+                        songSyncPlayedFromId: -1,
+                      ),
+                      index: index,
+                    );
+                  },
+                ),
+                SizedBox(height: AppMargin.margin_8),
+              ],
+            );
+          },
+          noItemsFoundIndicatorBuilder: (context) {
             return Container(
               height: screenHeight * 0.5,
               child: LibraryEmptyPage(
@@ -60,20 +131,43 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
                 msg: AppLocale.of().uDontHavePurchase,
               ),
             );
-          }
-        } else if (state is PurchasedAllSongsLoadingErrorState) {
-          return Container(
-            height: ScreenUtil(context: context).getScreenHeight() * 0.5,
-            child: LibraryErrorWidget(
+          },
+          newPageProgressIndicatorBuilder: (context) {
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+              child: AppLoading(
+                size: 50,
+                strokeWidth: 3,
+              ),
+            );
+          },
+          firstPageProgressIndicatorBuilder: (context) {
+            return buildAppLoading(context, screenHeight);
+          },
+          noMoreItemsIndicatorBuilder: (context) {
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+              child: SizedBox(
+                height: 30,
+              ),
+            );
+          },
+          newPageErrorIndicatorBuilder: (context) {
+            return PaginationErrorWidget(
               onRetry: () {
-                BlocProvider.of<PurchasedAllSongsBloc>(context)
-                    .add(LoadAllPurchasedSongsEvent());
+                _pagingController.retryLastFailedRequest();
               },
-            ),
-          );
-        }
-        return buildAppLoading(context, screenHeight);
-      },
+            );
+          },
+          firstPageErrorIndicatorBuilder: (context) {
+            return PaginationErrorWidget(
+              onRetry: () {
+                _pagingController.refresh();
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -81,54 +175,6 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
     return Container(
       height: screenHeight * 0.5,
       child: AppLoading(size: AppValues.loadingWidgetSize / 2),
-    );
-  }
-
-  Widget buildPageLoaded(List<PurchasedSong> allPurchasedSong) {
-    return Column(
-      children: [
-        AutoDownloadRadio(downloadAllSelected: true),
-        SizedBox(height: AppMargin.margin_8),
-        buildSongsList(allPurchasedSong)
-      ],
-    );
-  }
-
-  ListView buildSongsList(List<PurchasedSong> allPurchasedSong) {
-    return ListView.builder(
-      itemCount: allPurchasedSong.length,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (BuildContext context, int position) {
-        return Column(
-          children: [
-            SizedBox(height: AppMargin.margin_8),
-            SongItem(
-              song: allPurchasedSong[position].song,
-              isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl +
-                  allPurchasedSong[position].song.albumArt.imageSmallPath,
-              thumbSize: AppValues.playlistSongItemSize,
-              onPressed: () {
-                //OPEN SONG
-                PagesUtilFunctions.openSong(
-                  context: context,
-                  songs: allPurchasedSong.map((e) => e.song).toList(),
-                  startPlaying: true,
-                  playingFrom: PlayingFrom(
-                    from: AppLocale.of().playingFrom,
-                    title: AppLocale.of().purchasedMezmurs,
-                    songSyncPlayedFrom: SongSyncPlayedFrom.PURCHASED_SONG,
-                    songSyncPlayedFromId: -1,
-                  ),
-                  index: position,
-                );
-              },
-            ),
-            SizedBox(height: AppMargin.margin_8),
-          ],
-        );
-      },
     );
   }
 }

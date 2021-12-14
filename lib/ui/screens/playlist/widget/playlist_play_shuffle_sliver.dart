@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -63,7 +65,11 @@ class PlaylistPlayShuffleSliver extends StatelessWidget {
 
                   ///SHARE BUTTON
                   SliverSmallTextButton(
-                    onTap: () {},
+                    onTap: () {
+                      BlocProvider.of<ShareButtonsBloc>(context).add(
+                        SharePlaylistEvent(playlist: playlist),
+                      );
+                    },
                     text: AppLocale.of().share.toUpperCase(),
                     textColor: AppColors.black,
                     icon: FlutterRemix.share_line,

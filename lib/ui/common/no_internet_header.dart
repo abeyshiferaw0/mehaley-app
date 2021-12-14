@@ -6,8 +6,8 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
@@ -59,37 +59,40 @@ class NoInternetHeader extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppMargin.margin_16),
-          AppBouncingButton(
-            onTap: () {
-              BlocProvider.of<BottomBarCubit>(context).changeScreen(
-                BottomBarPages.LIBRARY,
-              );
-              //////////////////////////////////////////////////////////////////////
-              //////////////////////////////////////////////////////////////////////
-              Navigator.pushNamed(
-                context,
-                AppRouterPaths.libraryRoute,
-                arguments: ScreenArguments(
-                  args: {AppValues.isLibraryForOffline: true},
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_16),
+            child: AppBouncingButton(
+              onTap: () {
+                BlocProvider.of<BottomBarCubit>(context).changeScreen(
+                  BottomBarPages.LIBRARY,
+                );
+                //////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.libraryRoute,
+                  arguments: ScreenArguments(
+                    args: {AppValues.isLibraryForOffline: true},
+                  ),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.black,
+                  borderRadius: BorderRadius.circular(100),
                 ),
-              );
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.black,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: AppPadding.padding_16,
-                vertical: AppPadding.padding_8,
-              ),
-              child: Text(
-                AppLocale.of().goToDownloadsMsg,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_12.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.lightGrey,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.padding_16,
+                  vertical: AppPadding.padding_8,
+                ),
+                child: Text(
+                  AppLocale.of().goToDownloadsMsg,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.lightGrey,
+                  ),
                 ),
               ),
             ),

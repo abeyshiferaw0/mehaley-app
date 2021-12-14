@@ -36,7 +36,10 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ///TOP ITEMS
-              SafeArea(child: MainPlayerTopItems()),
+              SafeArea(
+                child: MainPlayerTopItems(),
+                bottom: false,
+              ),
 
               ///ALBUM ART PAGER
               MainPlayerAlbumArtPager(),

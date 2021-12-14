@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/config/app_repositories.dart';
@@ -323,7 +324,11 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   iconColor: AppColors.grey.withOpacity(0.6),
                   icon: FlutterRemix.share_line,
                   title: AppLocale.of().shareMezmur,
-                  onTap: () {},
+                  onTap: () {
+                    BlocProvider.of<ShareButtonsBloc>(context).add(
+                      ShareSongEvent(song: song),
+                    );
+                  },
                 ),
                 SizedBox(height: AppMargin.margin_20),
               ],

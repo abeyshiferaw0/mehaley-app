@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/wallet_page_data.dart';
@@ -78,7 +78,9 @@ class WalletHeaderOne extends StatelessWidget {
                   ),
                   AppBouncingButton(
                     onTap: () {
-                      Navigator.pushNamed(context, AppRouterPaths.profileRoute);
+                      Navigator.pop(context);
+                      BlocProvider.of<OpenProfilePageCubit>(context)
+                          .openPage(true);
                     },
                     child: AppCard(
                       radius: AppValues.profilePagePicSize * 0.5,

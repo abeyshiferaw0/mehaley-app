@@ -11,6 +11,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
@@ -27,6 +28,7 @@ import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_one.dart'
 import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
 import 'package:mehaley/ui/screens/splash_main/main_screen.dart';
 import 'package:mehaley/ui/screens/splash_main/splash_page.dart';
+import 'package:mehaley/ui/screens/update/force_update_page.dart';
 import 'package:mehaley/util/app_bloc_deligate.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -40,15 +42,17 @@ import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'business_logic/blocs/share_bloc/share_bloc.dart';
+import 'business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
+import 'business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'business_logic/cubits/currency_cubit.dart';
 import 'business_logic/cubits/localization_cubit.dart';
+import 'business_logic/cubits/open_profile_page_cubit.dart';
 import 'business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'business_logic/cubits/player_cubits/muted_cubit.dart';
@@ -119,6 +123,17 @@ class _MyAppState extends State<MyApp> {
             //ALL BLOC AND CUBIT PROVIDER
             BlocProvider<AppStartBloc>(
               create: (context) => AppStartBloc(),
+            ),
+            BlocProvider<AppMinVersionBloc>(
+              create: (context) => AppMinVersionBloc(
+                appVersionRepository: AppRepositories.appVersionRepository,
+              ),
+            ),
+            BlocProvider<OpenProfilePageCubit>(
+              create: (context) => OpenProfilePageCubit(),
+            ),
+            BlocProvider<DeepLinkListenerBloc>(
+              create: (context) => DeepLinkListenerBloc(),
             ),
             BlocProvider<AppUserWidgetsCubit>(
               create: (context) => AppUserWidgetsCubit(),
@@ -275,7 +290,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => CurrencyCubit(),
             ),
             BlocProvider(
-              create: (context) => ShareBloc(),
+              create: (context) => ShareButtonsBloc(),
             ),
             BlocProvider(
               create: (context) => FreshWalletBillCubit(),
@@ -306,6 +321,8 @@ class _MyAppState extends State<MyApp> {
                         AppRouterPaths.signUp: (context) => const SignUpPage(),
                         AppRouterPaths.mainScreen: (context) =>
                             const MainScreen(),
+                        AppRouterPaths.forceUpdate: (context) =>
+                            const ForceUpdateWidget(),
                         AppRouterPaths.verifyPhonePageOne: (context) =>
                             const VerifyPhonePageOne(),
                         AppRouterPaths.verifyPhonePageTwo: (context) =>

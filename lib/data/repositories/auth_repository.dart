@@ -22,7 +22,7 @@ class AuthRepository {
 
   Future<void> setOneSignalExternalId(AppFireBaseUser appFireBaseUser) async {
     ///SET ONE SIGNAL EXTERNAL ID
-    OneSignal.shared.setExternalUserId(appFireBaseUser.authLoginId).then(
+    await OneSignal.shared.setExternalUserId(appFireBaseUser.authLoginId).then(
       (results) {
         return;
       },
@@ -134,6 +134,8 @@ class AuthRepository {
       (error, stackTrace) {
         throw error.toString();
       },
-    );
+    ).then((value) {
+      return;
+    });
   }
 }

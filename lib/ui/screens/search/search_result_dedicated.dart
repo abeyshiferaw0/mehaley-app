@@ -287,11 +287,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: ArtistMenuWidget(
-              title: L10nUtil.translateLocale(resultItem.artistName, context),
-              imageUrl:
-                  AppApi.baseUrl + resultItem.artistImages[0].imageMediumPath,
-              isFollowing: resultItem.isFollowed!,
-              artistId: resultItem.artistId,
+              artist: resultItem,
             ),
           );
         },

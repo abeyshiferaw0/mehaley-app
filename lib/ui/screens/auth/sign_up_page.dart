@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
@@ -30,6 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
         isFirstTime: false,
       ),
     );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
   }
 

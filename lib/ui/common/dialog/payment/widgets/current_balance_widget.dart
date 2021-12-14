@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/util/date_util_extention.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:sizer/sizer.dart';
 
 class CurrentBallanceWidget extends StatelessWidget {

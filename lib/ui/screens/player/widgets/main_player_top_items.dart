@@ -27,8 +27,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
     return Container(
       padding: EdgeInsets.only(
         top: 0.6.h,
-        //left: AppMargin.margin_16,
-        //right: AppMargin.margin_16,
+        bottom: 0.6.h,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +40,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
             icon: Icon(
               FlutterRemix.arrow_down_s_line,
               color: AppColors.white,
-              size: AppIconSizes.icon_size_24,
+              size: AppIconSizes.icon_size_28,
             ),
           ),
           BlocBuilder<PlayerPagePlayingFromCubit, PlayingFrom>(

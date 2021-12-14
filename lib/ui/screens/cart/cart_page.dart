@@ -421,12 +421,12 @@ class _CartPageState extends State<CartPage> with RouteAware {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(AppPadding.padding_20),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.padding_20,
+              ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: AppMargin.margin_58,
-                  ),
                   Container(
                     height: AppIconSizes.icon_size_64 * 3,
                     width: AppIconSizes.icon_size_64 * 3,

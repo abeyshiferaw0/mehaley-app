@@ -67,6 +67,20 @@ class LibraryPageDataRepository {
     );
   }
 
+  Future<List<PurchasedSong>> getPurchasedPaginatedAllSongs(
+      int page, int pageSize) async {
+    List<PurchasedSong> purchasedSongs;
+
+    var response = await libraryPageDataProvider.getPurchasedPaginatedAllSongs(
+        page, pageSize);
+
+    purchasedSongs = (response.data['songs'] as List)
+        .map((purchasedSong) => PurchasedSong.fromMap(purchasedSong))
+        .toList();
+
+    return purchasedSongs;
+  }
+
   Future<FavoriteItemsData> getFavoriteItems(
     AppCacheStrategy appCacheStrategy,
     AppFavoritePageItemTypes appFavoritePageItemTypes,

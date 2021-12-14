@@ -13,7 +13,6 @@ import 'package:mehaley/data/models/group.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/common/app_subscribe_card.dart';
 import 'package:mehaley/ui/common/no_internet_header.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_categories.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_albums.dart';
@@ -203,12 +202,11 @@ class _HomePageState extends State<HomePage>
           HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
           SizedBox(height: AppMargin.margin_32),
 
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-            child: AppSubscribeCard(),
-          ),
-
-          SizedBox(height: AppMargin.margin_32),
+          // Container(
+          //   padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+          //   child: AppSubscribeCard(),
+          // ),
+          //SizedBox(height: AppMargin.margin_32),
 
           ///BUILD FEATURED ALBUMS
           HomeFeaturedAlbums(
