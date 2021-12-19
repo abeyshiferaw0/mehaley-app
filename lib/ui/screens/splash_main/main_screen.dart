@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
@@ -20,6 +21,7 @@ import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:mehaley/business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
+import 'package:mehaley/business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
@@ -28,6 +30,7 @@ import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dar
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/wallet_gift.dart';
@@ -38,6 +41,7 @@ import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
 import 'package:mehaley/ui/common/dialog/deeplink_share/dialog_open_deeplink_song.dart';
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
+import 'package:mehaley/ui/common/dialog/dialog_new_app_version.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/ui/common/notifications/fresh_gift_notification_widget.dart';
@@ -48,7 +52,7 @@ import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
 final AppRouter _appRouter = AppRouter();
-final _navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 //INIT ROUTERS
 
 // GlobalKey<FormState> globalKey = GlobalKey<FormState>();
@@ -75,6 +79,9 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<AppMinVersionBloc>(context).add(
       CheckAppMinVersionEvent(),
     );
+    BlocProvider.of<NewerVersionBloc>(context).add(
+      ShouldShowNewVersionDialogEvent(),
+    );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
   }
@@ -83,11 +90,31 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<NewerVersionBloc, NewerVersionState>(
+          listener: (context, state) {
+            if (state is ShouldShowNewVersionLoadedState) {
+              if (state.shouldShow) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DialogNewAppVersion(
+                      onUpdateClicked: () {
+                        InAppReview.instance.openStoreListing(
+                          appStoreId: AppValues.appStoreId,
+                        );
+                      },
+                    );
+                  },
+                );
+              }
+            }
+          },
+        ),
         BlocListener<AppMinVersionBloc, AppMinVersionState>(
           listener: (context, state) {
             if (state is CheckAppMinVersionLoadedState) {
               if (state.isAppBelowMinVersion) {
-                Navigator.pushNamed(
+                Navigator.popAndPushNamed(
                   context,
                   AppRouterPaths.forceUpdate,
                   arguments: ScreenArguments(
@@ -98,10 +125,12 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 );
               } else {
-                Navigator.pushNamed(
-                  context,
-                  AppRouterPaths.splashRoute,
-                );
+                if (state.shouldGoToHomePage) {
+                  Navigator.popAndPushNamed(
+                    context,
+                    AppRouterPaths.homeRoute,
+                  );
+                }
               }
             }
           },
@@ -185,13 +214,11 @@ class _MainScreenState extends State<MainScreen> {
             }
           },
         ),
-        BlocListener<OpenProfilePageCubit, bool>(
+        BlocListener<OpenProfilePageCubit, int>(
           listener: (context, state) {
-            if (state) {
-              _navigatorKey.currentState!.pushNamed(
-                AppRouterPaths.profileRoute,
-              );
-            }
+            _navigatorKey.currentState!.pushNamed(
+              AppRouterPaths.profileRoute,
+            );
           },
         ),
         BlocListener<FreshWalletBillCubit, WebirrBill?>(
@@ -429,26 +456,27 @@ class _MainScreenState extends State<MainScreen> {
             if (state is DownloadingSongsCompletedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                    bgColor: AppColors.blue,
-                    isFloating: true,
-                    msg: AppLocale.of().downloadComplete(
-                      songName: L10nUtil.translateLocale(
-                        state.song!.songName,
-                        context,
-                      ),
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg: AppLocale.of().downloadComplete(
+                    songName: L10nUtil.translateLocale(
+                      state.song!.songName,
+                      context,
                     ),
-                    txtColor: AppColors.white,
-                    icon: FlutterRemix.checkbox_circle_fill,
-                    iconColor: AppColors.white),
+                  ),
+                  txtColor: AppColors.white,
+                  icon: FlutterRemix.checkbox_circle_fill,
+                  iconColor: AppColors.white,
+                ),
               );
             }
             if (state is SongDownloadedNetworkNotAvailableState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                  bgColor: AppColors.darkGrey,
+                  bgColor: AppColors.white,
                   isFloating: false,
                   msg: AppLocale.of().yourNotConnected,
-                  txtColor: AppColors.white,
+                  txtColor: AppColors.errorRed,
                   icon: FlutterRemix.wifi_off_line,
                   iconColor: AppColors.errorRed,
                 ),
@@ -468,6 +496,20 @@ class _MainScreenState extends State<MainScreen> {
         ),
         BlocListener<OneSignalBloc, OneSignalState>(
           listener: (BuildContext context, state) {
+            if (state is NotificationActionClickedState) {
+              if (state.actionId == 'copy_code') {
+                PagesUtilFunctions.goToWalletPage(
+                  context,
+                  copyCodeOnInit: true,
+                  codeToCopy: state.billCode,
+                );
+              } else if (state.actionId == 'how_to_pay') {
+                PagesUtilFunctions.goToWalletPage(
+                  context,
+                  showHowToPayOnInit: true,
+                );
+              }
+            }
             if (state is NotificationClickedState) {
               if (state.itemType == AppItemsType.PLAYLIST) {
                 _navigatorKey.currentState!.pushNamed(

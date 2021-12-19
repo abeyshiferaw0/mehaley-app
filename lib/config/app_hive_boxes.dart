@@ -57,7 +57,7 @@ class AppHiveBoxes {
     await initHiveAdapters();
 
     ///SYSTEM UPDATE BOX
-    systemUpdate = await Hive.openBox<String>(
+    systemUpdate = await Hive.openBox<dynamic>(
       AppValues.systemUpdateBox,
     );
 

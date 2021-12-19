@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -13,6 +12,7 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_cancel_bill.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/network_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -286,10 +286,7 @@ class _WalletActiveBillState extends State<WalletActiveBill>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  MaskedTextController(
-                    text: widget.activeBill.wbcCode,
-                    mask: '000 000 000',
-                  ).text,
+                  widget.activeBill.wbcCode.divideAfterThreeChar(),
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,

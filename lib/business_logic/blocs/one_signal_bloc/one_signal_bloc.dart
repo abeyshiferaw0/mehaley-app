@@ -13,6 +13,7 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
   OneSignalBloc() : super(OneSignalInitial()) {
     OneSignal.shared.setNotificationOpenedHandler(
       (OSNotificationOpenedResult result) async {
+        ///HANDLE NOTIFICATION CLICK EVENT
         if (result.notification.additionalData != null) {
           if (result.notification.additionalData!.isNotEmpty) {
             if (result.notification.additionalData!.containsKey('item_id') &&
@@ -49,6 +50,35 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
             }
           }
         }
+        print("resultresult => ${result.toString()}");
+        if (result.action != null) {
+          if (result.notification.additionalData != null) {
+            if (result.action!.actionId != null) {
+              if (result.notification.additionalData!.isNotEmpty) {
+                if (result.notification.additionalData!
+                    .containsKey('item_id')) {
+                  if (result.action!.actionId! == 'copy_code') {
+                    this.add(
+                      NotificationActionClickedEvent(
+                        billCode:
+                            result.notification.additionalData!['item_id'],
+                        actionId: 'copy_code',
+                      ),
+                    );
+                  }
+                }
+                if (result.action!.actionId! == 'how_to_pay') {
+                  this.add(
+                    NotificationActionClickedEvent(
+                      billCode: '',
+                      actionId: 'how_to_pay',
+                    ),
+                  );
+                }
+              }
+            }
+          }
+        }
       },
     );
   }
@@ -77,6 +107,11 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
       yield NotificationClickedState(
         itemId: event.itemId,
         itemType: event.itemType,
+      );
+    } else if (event is NotificationActionClickedEvent) {
+      yield NotificationActionClickedState(
+        billCode: event.billCode,
+        actionId: event.actionId,
       );
     } else if (event is NotificationClickedErrorEvent) {
       yield NotificationClickedErrorState(error: event.error);

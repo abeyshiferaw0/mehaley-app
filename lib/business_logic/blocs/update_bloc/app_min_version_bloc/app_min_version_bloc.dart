@@ -31,6 +31,7 @@ class AppMinVersionBloc extends Bloc<AppMinVersionEvent, AppMinVersionState> {
           minAppVersion: newVersion,
           newVersion: newVersion,
           currentVersion: currentVersion,
+          shouldGoToHomePage: false,
           isAppBelowMinVersion: isAppBelowMinVersionOne,
         );
 
@@ -49,6 +50,10 @@ class AppMinVersionBloc extends Bloc<AppMinVersionEvent, AppMinVersionState> {
         yield CheckAppMinVersionLoadedState(
           minAppVersion: minAppVersion,
           newVersion: newVersion,
+          shouldGoToHomePage:
+              (isAppBelowMinVersionOne && !isAppBelowMinVersionTwo)
+                  ? true
+                  : false,
           currentVersion: currentVersion,
           isAppBelowMinVersion: isAppBelowMinVersionTwo,
         );

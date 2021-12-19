@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
@@ -17,6 +16,7 @@ import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/copy_button.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_pay_with_carousel.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
@@ -25,9 +25,11 @@ class DialogWalletRechargeFinal extends StatefulWidget {
   final WebirrBill? activeBill;
   final double selectedAmount;
 
-  const DialogWalletRechargeFinal(
-      {Key? key, this.activeBill, required this.selectedAmount})
-      : super(key: key);
+  const DialogWalletRechargeFinal({
+    Key? key,
+    this.activeBill,
+    required this.selectedAmount,
+  }) : super(key: key);
 
   @override
   State<DialogWalletRechargeFinal> createState() =>
@@ -68,38 +70,32 @@ class _DialogWalletRechargeFinalState extends State<DialogWalletRechargeFinal> {
           );
         }
       },
-      child: Center(
-        child: Wrap(
-          children: [
-            Material(
-              child: Container(
-                width: ScreenUtil(context: context).getScreenWidth() * 0.9,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: BlocBuilder<WalletRechargeBloc, WalletRechargeState>(
-                  builder: (context, state) {
-                    if (state is WalletRechargeLoadingState) {
-                      return buildLoading();
-                    }
-                    if (state is WalletRechargeLoadingErrorState) {
-                      return buildError();
-                    }
-                    if (state is WalletRechargeLoadedState) {
-                      if (state.walletPageData.activeBill == null) {
-                        ///THERE MUST BE AN ACTIVE BILL AT THIS POINT
-                        return buildError();
-                      } else {
-                        return buildLoaded(state.walletPageData);
-                      }
-                    }
-                    return buildLoading();
-                  },
-                ),
-              ),
-            ),
-          ],
+      child: SingleChildScrollView(
+        child: Container(
+          width: ScreenUtil(context: context).getScreenWidth() * 0.9,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: BlocBuilder<WalletRechargeBloc, WalletRechargeState>(
+            builder: (context, state) {
+              if (state is WalletRechargeLoadingState) {
+                return buildLoading();
+              }
+              if (state is WalletRechargeLoadingErrorState) {
+                return buildError();
+              }
+              if (state is WalletRechargeLoadedState) {
+                if (state.walletPageData.activeBill == null) {
+                  ///THERE MUST BE AN ACTIVE BILL AT THIS POINT
+                  return buildError();
+                } else {
+                  return buildLoaded(state.walletPageData);
+                }
+              }
+              return buildLoading();
+            },
+          ),
         ),
       ),
     );
@@ -172,7 +168,7 @@ class _DialogWalletRechargeFinalState extends State<DialogWalletRechargeFinal> {
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppPadding.padding_12,
-              vertical: AppPadding.padding_12,
+              vertical: AppPadding.padding_16,
             ),
             margin: EdgeInsets.symmetric(
               horizontal: AppMargin.margin_16,
@@ -208,7 +204,7 @@ class _DialogWalletRechargeFinalState extends State<DialogWalletRechargeFinal> {
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: AppPadding.padding_12,
-              vertical: AppPadding.padding_12,
+              vertical: AppPadding.padding_16,
             ),
             margin: EdgeInsets.symmetric(
               horizontal: AppMargin.margin_16,
@@ -346,10 +342,7 @@ class _DialogWalletRechargeFinalState extends State<DialogWalletRechargeFinal> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                MaskedTextController(
-                  text: activeBill.wbcCode,
-                  mask: '000 000 000',
-                ).text,
+                activeBill.wbcCode.divideAfterThreeChar(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.black,

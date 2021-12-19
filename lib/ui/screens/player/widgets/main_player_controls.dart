@@ -373,8 +373,11 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ///PREVIOUS BUTTON
                 AppBouncingButton(
                   onTap: () {
+                    // BlocProvider.of<AudioPlayerBloc>(context)
+                    //     .add(PlayPreviousSongEvent());
                     BlocProvider.of<AudioPlayerBloc>(context)
-                        .add(PlayPreviousSongEvent());
+                        .audioPlayer
+                        .seekToPrevious();
                   },
                   child: Icon(
                     Icons.skip_previous_sharp,
@@ -406,8 +409,16 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 ///NEXT BUTTON
                 AppBouncingButton(
                   onTap: () {
-                    BlocProvider.of<AudioPlayerBloc>(context).add(
-                      PlayNextSongEvent(),
+                    // BlocProvider.of<AudioPlayerBloc>(context).add(
+                    //   PlayNextSongEvent(),
+                    // );
+                    BlocProvider.of<AudioPlayerBloc>(context)
+                        .audioPlayer
+                        .seekToNext()
+                        .catchError(
+                      (e) {
+                        print("PlayNextSongEvent ${e.toString()}");
+                      },
                     );
                   },
                   child: Icon(

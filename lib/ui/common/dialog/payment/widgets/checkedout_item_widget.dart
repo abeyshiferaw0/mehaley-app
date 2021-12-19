@@ -51,7 +51,7 @@ class CheckedOutItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocale.of().cartCheckedOut,
+                    AppLocale.of().cartCheckOut,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

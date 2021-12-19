@@ -153,10 +153,10 @@ class _WalletHeaderTwoState extends State<WalletHeaderTwo>
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: true,
               msg: AppLocale.of().noInternetMsg,
-              txtColor: AppColors.white,
+              txtColor: AppColors.black,
               icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),

@@ -28,6 +28,28 @@ extension PriceAmountParser on double {
   }
 }
 
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
+
+  String divideAfterThreeChar() {
+    String newStr = "";
+    List<String> strList = [];
+    for (int i = 0; i < this.length; i++) {
+      if ((i % 3 == 0) & (i > 0)) {
+        strList.add(' ');
+      }
+      strList.add(this[i]);
+    }
+    newStr = strList.join();
+    return newStr;
+  }
+}
+
 extension ExtendedVersionNumber on String {
   int getExtendedVersionNumber() {
     // Note that if you want to support bigger version cells than 99,

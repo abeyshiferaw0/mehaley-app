@@ -31,6 +31,7 @@ class WalletPageBloc extends Bloc<WalletPageEvent, WalletPageState> {
         yield WalletPageLoadedState(
           walletPageData: walletPageData,
           showFreshBillDialog: false,
+          showFreshWalletGifts: false,
         );
 
         if (isFromCatch(walletPageData.response)) {
@@ -47,6 +48,8 @@ class WalletPageBloc extends Bloc<WalletPageEvent, WalletPageState> {
               walletPageData: walletPageData,
               showFreshBillDialog:
                   walletPageData.freshBill != null ? true : false,
+              showFreshWalletGifts:
+                  walletPageData.freshWalletGifts.length > 0 ? true : false,
             );
           } catch (error) {
             //DON'T YIELD ERROR  BECAUSE CACHE IS FETCHED
@@ -68,6 +71,8 @@ class WalletPageBloc extends Bloc<WalletPageEvent, WalletPageState> {
         yield WalletPageLoadedState(
           walletPageData: walletPageData,
           showFreshBillDialog: walletPageData.freshBill != null ? true : false,
+          showFreshWalletGifts:
+              walletPageData.freshWalletGifts.length > 0 ? true : false,
         );
       } catch (error) {
         yield WalletPageLoadingErrorState(error: error.toString());
@@ -79,6 +84,7 @@ class WalletPageBloc extends Bloc<WalletPageEvent, WalletPageState> {
       yield WalletPageLoadedState(
         walletPageData: event.walletPageData,
         showFreshBillDialog: false,
+        showFreshWalletGifts: false,
       );
     }
   }

@@ -450,6 +450,7 @@ class AppLocale {
   String get albumPurchased => appLocalizations.albumPurchased;
   String get playlistPurchased => appLocalizations.playlistPurchased;
   String get cartCheckedOut => appLocalizations.cartCheckedOut;
+  String get cartCheckOut => appLocalizations.cartCheckOut;
   String get cartCheckedOutMsg => appLocalizations.cartCheckedOutMsg;
   String get walletRecharged => appLocalizations.walletRecharged;
 
@@ -472,6 +473,12 @@ class AppLocale {
   String get newerVersion => appLocalizations.newerVersion;
   String get currentVersion => appLocalizations.currentVersion;
   String get updateApp => appLocalizations.updateApp;
+
+  String get newVersionAvailable => appLocalizations.newVersionAvailable;
+  String get newVersionAvailableMsg => appLocalizations.newVersionAvailableMsg;
+  String get maybeLatter => appLocalizations.maybeLatter;
+  String get dontAskAgain => appLocalizations.dontAskAgain;
+  String get featuringTxt => appLocalizations.featuringTxt;
 
   ///FUNCTIONS
 

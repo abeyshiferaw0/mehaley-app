@@ -47,3 +47,14 @@ class NotificationClickedErrorEvent extends OneSignalEvent {
   @override
   List<Object?> get props => [error];
 }
+
+class NotificationActionClickedEvent extends OneSignalEvent {
+  final String actionId;
+  final String billCode;
+
+  NotificationActionClickedEvent(
+      {required this.actionId, required this.billCode});
+
+  @override
+  List<Object?> get props => [billCode, actionId];
+}

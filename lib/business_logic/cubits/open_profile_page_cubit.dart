@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 
-class OpenProfilePageCubit extends Cubit<bool> {
-  OpenProfilePageCubit() : super(false);
+class OpenProfilePageCubit extends Cubit<int> {
+  OpenProfilePageCubit() : super(DateTime.now().millisecondsSinceEpoch);
 
-  openPage(bool open) {
-    emit(open);
+  openPage() {
+    emit(DateTime.now().millisecondsSinceEpoch);
   }
 }

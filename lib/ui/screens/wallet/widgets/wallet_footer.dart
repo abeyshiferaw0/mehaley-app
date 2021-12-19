@@ -40,7 +40,8 @@ class WalletFooter extends StatelessWidget {
                   onTap: () {
                     if (!(state is WalletBillStatusLoadingState)) {
                       PagesUtilFunctions.openWalletRechargeInitialDialog(
-                          context);
+                        context,
+                      );
                     }
                   },
                   child: Container(

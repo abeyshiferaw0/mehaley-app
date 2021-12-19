@@ -18,34 +18,32 @@ class Album extends Equatable {
   @HiveField(3)
   final List<RemoteImage> albumImages;
   @HiveField(4)
-  final List<Song>? songs;
-  @HiveField(5)
   final Artist artist;
-  @HiveField(6)
+  @HiveField(5)
   final double priceEtb;
-  @HiveField(7)
+  @HiveField(6)
   final double priceDollar;
-  @HiveField(8)
+  @HiveField(7)
   final bool isFree;
-  @HiveField(9)
+  @HiveField(8)
   final bool isDiscountAvailable;
-  @HiveField(10)
+  @HiveField(9)
   final bool isBought;
-  @HiveField(11)
+  @HiveField(10)
   final double discountPercentage;
-  @HiveField(12)
+  @HiveField(11)
   final bool isOnlyOnElf;
-  @HiveField(13)
+  @HiveField(12)
   final bool isFeatured;
-  @HiveField(14)
+  @HiveField(13)
   final bool isLiked;
-  @HiveField(15)
+  @HiveField(14)
   final bool isInCart;
-  @HiveField(16)
+  @HiveField(15)
   final DateTime albumReleaseDate;
-  @HiveField(17)
+  @HiveField(16)
   final DateTime albumDateCreated;
-  @HiveField(18)
+  @HiveField(17)
   final DateTime albumDateUpdated;
 
   const Album({
@@ -54,7 +52,6 @@ class Album extends Equatable {
     required this.albumTitle,
     required this.albumDescription,
     required this.albumImages,
-    required this.songs,
     required this.artist,
     required this.priceEtb,
     required this.priceDollar,
@@ -76,7 +73,6 @@ class Album extends Equatable {
         albumTitle,
         albumDescription,
         albumImages,
-        songs,
         artist,
         priceEtb,
         priceDollar,
@@ -103,9 +99,6 @@ class Album extends Equatable {
               .map((remoteImage) => RemoteImage.fromMap(remoteImage))
               .toList()
           : [RemoteImage.emptyRemoteImage()],
-      songs: map['songs'] != null
-          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
-          : null,
       artist: Artist.fromMap(map['artist_id']),
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
@@ -130,7 +123,6 @@ class Album extends Equatable {
       'album_title_text': this.albumTitle,
       'album_description_text': this.albumDescription,
       'album_images': this.albumImages,
-      'songs': this.songs,
       'artist': this.artist,
       'price_etb': this.priceEtb,
       'price_dollar': this.priceDollar,

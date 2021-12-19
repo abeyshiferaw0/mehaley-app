@@ -17,32 +17,31 @@ class AlbumAdapter extends TypeAdapter<Album> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Album(
-      isBought: fields[10] as bool,
+      isBought: fields[9] as bool,
       albumId: fields[0] as int,
       albumTitle: fields[1] as TextLan,
       albumDescription: fields[2] as TextLan,
       albumImages: (fields[3] as List).cast<RemoteImage>(),
-      songs: (fields[4] as List?)?.cast<Song>(),
-      artist: fields[5] as Artist,
-      priceEtb: fields[6] as double,
-      priceDollar: fields[7] as double,
-      isFree: fields[8] as bool,
-      isDiscountAvailable: fields[9] as bool,
-      discountPercentage: fields[11] as double,
-      isOnlyOnElf: fields[12] as bool,
-      isFeatured: fields[13] as bool,
-      isLiked: fields[14] as bool,
-      isInCart: fields[15] as bool,
-      albumReleaseDate: fields[16] as DateTime,
-      albumDateCreated: fields[17] as DateTime,
-      albumDateUpdated: fields[18] as DateTime,
+      artist: fields[4] as Artist,
+      priceEtb: fields[5] as double,
+      priceDollar: fields[6] as double,
+      isFree: fields[7] as bool,
+      isDiscountAvailable: fields[8] as bool,
+      discountPercentage: fields[10] as double,
+      isOnlyOnElf: fields[11] as bool,
+      isFeatured: fields[12] as bool,
+      isLiked: fields[13] as bool,
+      isInCart: fields[14] as bool,
+      albumReleaseDate: fields[15] as DateTime,
+      albumDateCreated: fields[16] as DateTime,
+      albumDateUpdated: fields[17] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Album obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.albumId)
       ..writeByte(1)
@@ -52,34 +51,32 @@ class AlbumAdapter extends TypeAdapter<Album> {
       ..writeByte(3)
       ..write(obj.albumImages)
       ..writeByte(4)
-      ..write(obj.songs)
-      ..writeByte(5)
       ..write(obj.artist)
-      ..writeByte(6)
+      ..writeByte(5)
       ..write(obj.priceEtb)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.priceDollar)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.isFree)
-      ..writeByte(9)
+      ..writeByte(8)
       ..write(obj.isDiscountAvailable)
-      ..writeByte(10)
+      ..writeByte(9)
       ..write(obj.isBought)
-      ..writeByte(11)
+      ..writeByte(10)
       ..write(obj.discountPercentage)
-      ..writeByte(12)
+      ..writeByte(11)
       ..write(obj.isOnlyOnElf)
-      ..writeByte(13)
+      ..writeByte(12)
       ..write(obj.isFeatured)
-      ..writeByte(14)
+      ..writeByte(13)
       ..write(obj.isLiked)
-      ..writeByte(15)
+      ..writeByte(14)
       ..write(obj.isInCart)
-      ..writeByte(16)
+      ..writeByte(15)
       ..write(obj.albumReleaseDate)
-      ..writeByte(17)
+      ..writeByte(16)
       ..write(obj.albumDateCreated)
-      ..writeByte(18)
+      ..writeByte(17)
       ..write(obj.albumDateUpdated);
   }
 

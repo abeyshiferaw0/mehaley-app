@@ -17,6 +17,7 @@ class CheckAppMinVersionLoadingState extends AppMinVersionState {
 class CheckAppMinVersionLoadedState extends AppMinVersionState {
   final String minAppVersion;
   final bool isAppBelowMinVersion;
+  final bool shouldGoToHomePage;
   final String newVersion;
   final String currentVersion;
 
@@ -24,11 +25,17 @@ class CheckAppMinVersionLoadedState extends AppMinVersionState {
       {required this.newVersion,
       required this.currentVersion,
       required this.minAppVersion,
+      required this.shouldGoToHomePage,
       required this.isAppBelowMinVersion});
 
   @override
-  List<Object?> get props =>
-      [minAppVersion, newVersion, currentVersion, isAppBelowMinVersion];
+  List<Object?> get props => [
+        minAppVersion,
+        newVersion,
+        currentVersion,
+        shouldGoToHomePage,
+        isAppBelowMinVersion
+      ];
 }
 
 class CheckAppMinVersionLoadingErrorState extends AppMinVersionState {

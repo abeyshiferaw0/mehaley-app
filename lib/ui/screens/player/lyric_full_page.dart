@@ -35,11 +35,15 @@ import 'package:sizer/sizer.dart';
 
 class LyricFullPage extends StatefulWidget {
   const LyricFullPage(
-      {Key? key, required this.song, required this.dominantColor})
+      {Key? key,
+      required this.song,
+      required this.dominantColor,
+      required this.isForSharing})
       : super(key: key);
 
   final Song song;
   final Color dominantColor;
+  final bool isForSharing;
 
   @override
   _LyricFullPageState createState() =>
@@ -81,6 +85,17 @@ class _LyricFullPageState extends State<LyricFullPage> {
       0.15,
     );
     animPadding = 0;
+
+    WidgetsBinding.instance!.addPostFrameCallback(
+      (_) {
+        if (widget.isForSharing) {
+          Future.delayed(
+            Duration(milliseconds: 300),
+            () => shareLyric(),
+          );
+        }
+      },
+    );
     super.initState();
   }
 
@@ -521,45 +536,9 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         right: 0,
                         child: Center(
                           child: ShareBtnWidget(
+                            color: AppColors.white,
                             onTap: () async {
-                              setState(() {
-                                showAppLogo = true;
-                                animPadding = AppPadding.padding_16;
-                                lyricBgColor = ColorUtil.lighten(
-                                  ColorUtil.changeColorSaturation(
-                                      dominantColor, 0.8),
-                                  0.15,
-                                );
-                              });
-                              Future.delayed(Duration(milliseconds: 100), () {
-                                setState(() {
-                                  lyricBgColor = ColorUtil.darken(
-                                    ColorUtil.changeColorSaturation(
-                                        dominantColor, 0.8),
-                                    0.15,
-                                  );
-                                  animPadding = 0;
-                                });
-                              });
-                              await _screenshotController
-                                  .capture(
-                                      delay: const Duration(milliseconds: 10),
-                                      pixelRatio: ScreenUtil(context: context)
-                                          .getPixelRatio())
-                                  .then(
-                                (value) {
-                                  BlocProvider.of<ShareButtonsBloc>(context)
-                                      .add(
-                                    ShareLyricEvent(
-                                      lyricScreenShotFile: value,
-                                      song: widget.song,
-                                    ),
-                                  );
-                                },
-                              );
-                              setState(() {
-                                showAppLogo = false;
-                              });
+                              shareLyric();
                             },
                           ),
                         ),
@@ -591,5 +570,42 @@ class _LyricFullPageState extends State<LyricFullPage> {
 
   AppItemsImagePlaceHolder buildImagePlaceHolder() {
     return AppItemsImagePlaceHolder(appItemsType: AppItemsType.SINGLE_TRACK);
+  }
+
+  void shareLyric() async {
+    setState(() {
+      showAppLogo = true;
+      animPadding = AppPadding.padding_16;
+      lyricBgColor = ColorUtil.lighten(
+        ColorUtil.changeColorSaturation(dominantColor, 0.8),
+        0.15,
+      );
+    });
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        lyricBgColor = ColorUtil.darken(
+          ColorUtil.changeColorSaturation(dominantColor, 0.8),
+          0.15,
+        );
+        animPadding = 0;
+      });
+    });
+    await _screenshotController
+        .capture(
+            delay: const Duration(milliseconds: 10),
+            pixelRatio: ScreenUtil(context: context).getPixelRatio())
+        .then(
+      (value) {
+        BlocProvider.of<ShareButtonsBloc>(context).add(
+          ShareLyricEvent(
+            lyricScreenShotFile: value,
+            song: widget.song,
+          ),
+        );
+      },
+    );
+    setState(() {
+      showAppLogo = false;
+    });
   }
 }

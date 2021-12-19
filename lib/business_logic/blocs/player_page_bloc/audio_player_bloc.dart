@@ -54,6 +54,12 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
     //LISTEN FOR PLAYER QUEUE AND CURRENT INDEX CHANGE
     audioPlayerQueueListen();
+
+    audioPlayer.playbackEventStream.listen((event) {
+      print("playbackEventStream ${event.toString()}");
+    }, onError: (e) {
+      print("playbackEventStream ERROR=> ${e.toString()}");
+    });
   }
 
   @override
@@ -129,6 +135,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       );
     } else if (event is SeekAudioPlayerToEvent) {
       //SEEK PLAYER DURATION POSITION
+      print("SeekAudioPlayerToEventCALLED");
       seekPlayerToPosition(event.song);
     } else if (event is ChangePlayerVideoMode) {
       //PLAYER BG VIDEO MODE CHANGED
@@ -149,6 +156,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   @override
   Future<void> close() {
+    audioPlayer.stop();
     audioPlayer.dispose();
     return super.close();
   }
@@ -167,24 +175,31 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       )
           .catchError(
         (error) {
-          audioPlayer.pause();
+          audioPlayer.load();
           this.add(
             ReportPlayerEvent(
-              msg: 'Unable to play audio,\ncheck your internet connection',
+              msg:
+                  'catchError Unable to play audio,\ncheck your internet connection',
               error: error.toString(),
             ),
           );
         },
       );
     } on PlayerException catch (error) {
+      audioPlayer.pause();
       this.add(ReportPlayerEvent(
-          msg: 'Something Went Wrong With Player', error: error.toString()));
+          msg: 'Something Went Wrong With Player PlayerException',
+          error: error.toString()));
     } on PlayerInterruptedException catch (error) {
+      audioPlayer.pause();
       this.add(ReportPlayerEvent(
-          msg: 'Something Went Wrong With Player', error: error.toString()));
+          msg: 'Something Went Wrong With Player PlayerInterruptedException',
+          error: error.toString()));
     } catch (error) {
+      audioPlayer.pause();
       this.add(ReportPlayerEvent(
-          msg: 'Something Went Wrong With Player', error: error.toString()));
+          msg: 'Something Went Wrong With Player error',
+          error: error.toString()));
     }
 
     //START PLAYING
@@ -321,6 +336,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     });
 
     int currentIndex = queue.indexOf(song);
+    print("SeekAudioPlayerToEventCALLED FOUR $currentIndex");
 
     audioPlayer.seek(Duration.zero, index: currentIndex);
   }

@@ -4,7 +4,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
-import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -19,75 +18,54 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:sizer/sizer.dart';
 
-import 'daily_quotes_widget.dart';
+class MiniLyricPlayerWidget extends StatefulWidget {
+  final Song song;
 
-class LyricPlayerWidget extends StatefulWidget {
+  const MiniLyricPlayerWidget({Key? key, required this.song}) : super(key: key);
+
   @override
-  _LyricPlayerWidgetState createState() => _LyricPlayerWidgetState();
+  _MiniLyricPlayerWidgetState createState() => _MiniLyricPlayerWidgetState();
 }
 
-class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
+class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
   //SCROLLER CONTROLLER AND LISTENER
   final ItemScrollController lyricScrollController = ItemScrollController();
   final ItemPositionsListener lyricPositionsListener =
       ItemPositionsListener.create();
 
-  _LyricPlayerWidgetState();
+  _MiniLyricPlayerWidgetState();
 
   //CURRENT LYRIC ITEM
   LyricItem? currentLyricItem;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<CurrentPlayingCubit, Song?>(
-      listener: (context, state) {
-        if (state != null) {
-          BlocProvider.of<LyricBloc>(context).add(
-            LoadSongLyricEvent(
-              songId: state.songId,
-            ),
-          );
-        }
-      },
-      builder: (context, state) {
-        if (state != null) {
-          if (state.lyricIncluded) {
-            return buildLyricPlayer(state);
-          }
-
-          ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
-          return DailyQuotesWidget(
-            dominantColor: HexColor(
-              state.albumArt.primaryColorHex,
-            ),
-          );
-        } else {
-          ///SHOW QUOTES WIDGET IF LYRIC NOT AVAILABLE
-          return DailyQuotesWidget(
-            dominantColor: AppColors.appGradientDefaultColorBlack,
-          );
-        }
-      },
+  void initState() {
+    BlocProvider.of<LyricBloc>(context).add(
+      LoadSongLyricEvent(
+        songId: widget.song.songId,
+      ),
     );
+    super.initState();
   }
 
-  Widget buildLyricPlayer(Song song) {
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<LyricBloc, LyricState>(
       builder: (context, state) {
         if (state is LyricDataLoaded) {
-          if (state.lyricList.length > 0 && state.songId == song.songId) {
-            return buildLyricLoaded(context, state, song);
+          if (state.lyricList.length > 0) {
+            return buildLyricLoaded(context, state, widget.song);
           } else {
             return SizedBox();
           }
         }
         if (state is LyricDataLoadingError) {
-          return buildLyricLoadingError(song);
+          return buildLyricLoadingError(widget.song);
         }
         if (state is LyricDataLoading) {
           return ShimmerLyric(
             dominantColor: HexColor(
-              song.albumArt.primaryColorHex,
+              widget.song.albumArt.primaryColorHex,
             ),
           );
         }
@@ -106,6 +84,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
               page: BlocProvider.value(
                 value: BlocProvider.of<LyricBloc>(context),
                 child: LyricFullPage(
+                  isForSharing: false,
                   song: song,
                   dominantColor: HexColor(
                     song.albumArt.primaryColorHex,
@@ -184,6 +163,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                                   dominantColor: HexColor(
                                     song.albumArt.primaryColorHex,
                                   ),
+                                  isForSharing: false,
                                 ),
                               ),
                             ),
@@ -195,7 +175,7 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                             vertical: AppPadding.padding_4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.black.withOpacity(0.3),
+                            color: AppColors.black.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Row(
@@ -230,32 +210,48 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                     height: AppMargin.margin_8,
                   ),
                   Expanded(
-                    child: ScrollablePositionedList.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: lyricData.lyricList.length,
-                      itemBuilder: (context, index) {
-                        return Text(
-                          getLyricItemText(lyricData.lyricList, index),
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontSize: AppFontSizes.font_size_16.sp,
-                            color: currentLyricItem != null
-                                ? (currentLyricItem!.index == index
-                                    ? ColorUtil.changeColorSaturation(
-                                        HexColor(
-                                          song.albumArt.primaryColorHex,
-                                        ),
-                                        0.8,
-                                      )
-                                    : AppColors.black)
-                                : AppColors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        );
+                    child: ShaderMask(
+                      blendMode: BlendMode.dstOut,
+                      shaderCallback: (Rect bounds) {
+                        return LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            AppColors.white,
+                            Colors.transparent,
+                            Colors.transparent,
+                            AppColors.white,
+                          ],
+                          stops: [0.0, 0.05, 0.95, 1.0],
+                        ).createShader(bounds);
                       },
-                      itemScrollController: lyricScrollController,
-                      itemPositionsListener: lyricPositionsListener,
+                      child: ScrollablePositionedList.builder(
+                        //physics: NeverScrollableScrollPhysics(),
+                        itemCount: lyricData.lyricList.length,
+                        itemBuilder: (context, index) {
+                          return Text(
+                            getLyricItemText(lyricData.lyricList, index),
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                              fontSize: AppFontSizes.font_size_16.sp,
+                              color: currentLyricItem != null
+                                  ? (currentLyricItem!.index == index
+                                      ? ColorUtil.changeColorSaturation(
+                                          HexColor(
+                                            song.albumArt.primaryColorHex,
+                                          ),
+                                          0.8,
+                                        )
+                                      : AppColors.black)
+                                  : AppColors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        },
+                        itemScrollController: lyricScrollController,
+                        itemPositionsListener: lyricPositionsListener,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -264,7 +260,24 @@ class _LyricPlayerWidgetState extends State<LyricPlayerWidget> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ShareBtnWidget(
-                      onTap: () {},
+                      color: AppColors.black,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PagesUtilFunctions.createBottomToUpAnimatedRoute(
+                            page: BlocProvider.value(
+                              value: BlocProvider.of<LyricBloc>(context),
+                              child: LyricFullPage(
+                                isForSharing: true,
+                                song: song,
+                                dominantColor: HexColor(
+                                  song.albumArt.primaryColorHex,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   )
                 ],

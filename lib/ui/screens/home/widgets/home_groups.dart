@@ -6,6 +6,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/screens/home/widgets/item_custom_group.dart';
 import 'package:mehaley/ui/screens/home/widgets/item_custom_group_grid.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -53,11 +54,11 @@ class HomeGroups extends StatelessWidget {
             top: AppMargin.margin_32,
           ),
           child: Text(
-            groupTitle,
+            groupTitle.toTitleCase(),
             style: TextStyle(
               color: AppColors.black,
-              fontSize: AppFontSizes.font_size_14.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: AppFontSizes.font_size_16.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -116,11 +117,11 @@ class HomeGroups extends StatelessWidget {
             top: AppMargin.margin_32,
           ),
           child: Text(
-            groupTitle,
+            groupTitle.toTitleCase(),
             style: TextStyle(
               color: AppColors.black,
-              fontSize: AppFontSizes.font_size_14.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: AppFontSizes.font_size_16.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

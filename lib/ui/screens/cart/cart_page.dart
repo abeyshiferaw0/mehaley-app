@@ -94,14 +94,14 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.blue,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                   unabledName:
                       L10nUtil.translateLocale(state.song.songName, context)),
               txtColor: AppColors.white,
               icon: FlutterRemix.wifi_off_line,
-              iconColor: AppColors.errorRed,
+              iconColor: AppColors.white,
             ),
           );
         }
@@ -110,12 +110,15 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
-                  unabledName: L10nUtil.translateLocale(
-                      state.album.albumTitle, context)),
-              txtColor: AppColors.white,
+                unabledName: L10nUtil.translateLocale(
+                  state.album.albumTitle,
+                  context,
+                ),
+              ),
+              txtColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
@@ -126,7 +129,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               msg: AppLocale.of().unableToRemoveFromCart(
                 unabledName: L10nUtil.translateLocale(
@@ -134,7 +137,7 @@ class _CartPageState extends State<CartPage> with RouteAware {
                   context,
                 ),
               ),
-              txtColor: AppColors.white,
+              txtColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
@@ -143,10 +146,10 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovingErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               msg: AppLocale.of().unableToClearCart,
-              txtColor: AppColors.white,
+              txtColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
               iconColor: AppColors.errorRed,
             ),
@@ -165,14 +168,15 @@ class _CartPageState extends State<CartPage> with RouteAware {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildDownloadMsgSnackBar(
-                  bgColor: AppColors.darkGrey,
-                  isFloating: true,
-                  msg: AppLocale.of().removeedFromCart(
-                      removedName: L10nUtil.translateLocale(
-                          state.song.songName, context)),
-                  txtColor: AppColors.white,
-                  icon: FlutterRemix.checkbox_circle_fill,
-                  iconColor: AppColors.darkOrange),
+                bgColor: AppColors.blue,
+                isFloating: true,
+                msg: AppLocale.of().removeedFromCart(
+                    removedName:
+                        L10nUtil.translateLocale(state.song.songName, context)),
+                txtColor: AppColors.white,
+                icon: FlutterRemix.checkbox_circle_fill,
+                iconColor: AppColors.white,
+              ),
             );
 
             ///LOAD CART WITHOUT REMOVED SONG
@@ -190,14 +194,15 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.darkGrey,
-                isFloating: true,
-                msg: AppLocale.of().removeedFromCart(
-                    removedName: L10nUtil.translateLocale(
-                        state.album.albumTitle, context)),
-                txtColor: AppColors.white,
-                icon: FlutterRemix.checkbox_circle_fill,
-                iconColor: AppColors.darkOrange),
+              bgColor: AppColors.blue,
+              isFloating: true,
+              msg: AppLocale.of().removeedFromCart(
+                  removedName: L10nUtil.translateLocale(
+                      state.album.albumTitle, context)),
+              txtColor: AppColors.white,
+              icon: FlutterRemix.checkbox_circle_fill,
+              iconColor: AppColors.white,
+            ),
           );
 
           ///LOAD CART WITHOUT REMOVED ALBUM
@@ -214,17 +219,18 @@ class _CartPageState extends State<CartPage> with RouteAware {
             return;
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.darkGrey,
-                isFloating: true,
-                msg: AppLocale.of().removeedFromCart(
-                  removedName: L10nUtil.translateLocale(
-                    state.playlist.playlistNameText,
-                    context,
-                  ),
+              bgColor: AppColors.blue,
+              isFloating: true,
+              msg: AppLocale.of().removeedFromCart(
+                removedName: L10nUtil.translateLocale(
+                  state.playlist.playlistNameText,
+                  context,
                 ),
-                txtColor: AppColors.white,
-                icon: FlutterRemix.checkbox_circle_fill,
-                iconColor: AppColors.darkOrange),
+              ),
+              txtColor: AppColors.white,
+              icon: FlutterRemix.checkbox_circle_fill,
+              iconColor: AppColors.darkOrange,
+            ),
           );
 
           ///LOAD CART WITHOUT REMOVED PLAYLIST
@@ -239,12 +245,13 @@ class _CartPageState extends State<CartPage> with RouteAware {
         if (state is CartAllRemovedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-                bgColor: AppColors.darkGrey,
-                isFloating: true,
-                msg: AppLocale.of().cartCleared,
-                txtColor: AppColors.white,
-                icon: FlutterRemix.checkbox_circle_fill,
-                iconColor: AppColors.darkOrange),
+              bgColor: AppColors.blue,
+              isFloating: true,
+              msg: AppLocale.of().cartCleared,
+              txtColor: AppColors.white,
+              icon: FlutterRemix.checkbox_circle_fill,
+              iconColor: AppColors.white,
+            ),
           );
 
           ///LOAD CART WITHOUT REMOVED PLAYLIST

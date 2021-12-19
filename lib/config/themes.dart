@@ -53,6 +53,7 @@ class AppAssets {
   static String cancelledLottie = 'assets/lottie/cancelled.json';
   static String cartStatusLottie = 'assets/lottie/cart_status.json';
   static String cartSuccessLottie = 'assets/lottie/cart_success.json';
+  static String updateLottie = 'assets/lottie/update.json';
 }
 
 class AppColors {

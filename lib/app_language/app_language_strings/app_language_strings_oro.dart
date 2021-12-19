@@ -303,9 +303,9 @@ class AppLanguageStringsOro extends AppLocalizations {
       "You haven't created any playlists press new playlist to start adding.";
   final String addToNewPlaylist = "Add to newly created playlist";
   final String unableToAddMezmur =
-      "Unable add mezmur to playlist\ncheck your internet connection";
+      "Unable to add mezmur to playlist\ncheck your internet connection";
   final String unableToRemoveFromPlaylist =
-      "Unable remove mezmur from playlist\ncheck your internet connection";
+      "Unable to remove mezmur from playlist\ncheck your internet connection";
   final String unableToDeletePlaylist =
       "Unable to delete playlist\ncheck your internet connection";
   final String addSongs = "Add Mezmurs";
@@ -333,13 +333,13 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String play = "Play";
   final String onlyOnElf = "Only On Mehaleye";
   final String welcome = "Welcome";
-  final String google = "Google am";
+  final String google = "Google";
   final String facebook = "Facebook";
   final String apple = "Apple";
   final String downloadStartedMsg = "Download started";
   final String firstTimeDialogMsg =
       "Pick your default language, you can change it latter in settings";
-  final String welcomeToMehaley = "Welcome to mehaleye am";
+  final String welcomeToMehaley = "Welcome to mehaleye";
   final String chooseYourPreferredCurrency = "Choose your preferred currency";
   final String expand = "Expand";
   final String enableNotifications = "Enable Notifications";
@@ -436,6 +436,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String albumPurchased = "Album Purchased";
   final String playlistPurchased = "Playlist Purchased";
   final String cartCheckedOut = "Cart Checked Out";
+  final String cartCheckOut = "Cart Check Out";
   final String cartCheckedOutMsg = "Purchase Multiple Items At once";
   final String walletRecharged = "Wallet Recharged";
 
@@ -443,6 +444,13 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String walletInsufficient = "Wallet Balance Insufficient";
   final String walletInsufficientMsg =
       "Your Wallet Balance Is Insufficient To Make This Purchase, Please Recharge Your Wallet And Try Again";
+
+  final String newVersionAvailable = "New Version Available";
+  final String newVersionAvailableMsg =
+      "New version of mehaleye is available, update app to get the latest features and improvements";
+  final String maybeLatter = "Maybe latter";
+  final String dontAskAgain = "Don't ask again";
+  final String featuringTxt = "Featuring";
 
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";

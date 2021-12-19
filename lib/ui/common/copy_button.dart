@@ -5,9 +5,8 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sizer/sizer.dart';
-
-import 'app_snack_bar.dart';
 
 class CopyButton extends StatelessWidget {
   const CopyButton({
@@ -27,14 +26,33 @@ class CopyButton extends StatelessWidget {
           ClipboardData(text: copyText),
         ).then(
           (value) {
-            ///SHOW COPED SNACK
-            ScaffoldMessenger.of(context).showSnackBar(
-              buildAppSnackBar(
-                bgColor: AppColors.black.withOpacity(0.9),
-                isFloating: false,
-                msg: AppLocale.of().copiedToClipboard,
-                txtColor: AppColors.white,
+            // ///SHOW COPED SNACK
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   buildAppSnackBar(
+            //     bgColor: AppColors.black.withOpacity(0.9),
+            //     isFloating: true,
+            //     msg: AppLocale.of().copiedToClipboard,
+            //     txtColor: AppColors.white,
+            //   ),
+            // );
+            showSimpleNotification(
+              Container(
+                padding: EdgeInsets.all(AppPadding.padding_8),
+                color: AppColors.white,
+                child: Center(
+                  child: Text(
+                    AppLocale.of().copiedToClipboard,
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: AppFontSizes.font_size_10.sp,
+                    ),
+                  ),
+                ),
               ),
+              contentPadding: EdgeInsets.zero,
+              background: AppColors.white,
+              duration: Duration(milliseconds: 1200),
             );
           },
         );

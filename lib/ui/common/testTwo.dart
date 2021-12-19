@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/util/screen_util.dart';
-import 'package:sizer/sizer.dart';
+
+final AudioPlayer _audioPlayer = AudioPlayer();
 
 class TestTwoWidget extends StatefulWidget {
   const TestTwoWidget({Key? key}) : super(key: key);
@@ -14,121 +13,84 @@ class TestTwoWidget extends StatefulWidget {
 }
 
 class _TestTwoWidgetState extends State<TestTwoWidget> {
+  String name = "";
+  @override
+  void initState() {
+    _setInitialPlaylist();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: ScreenUtil(context: context).getScreenHeight(),
       width: ScreenUtil(context: context).getScreenWidth(),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppColors.orange, AppColors.orange2],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              name,
+              style: TextStyle(color: Colors.black),
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _audioPlayer.seekToPrevious();
+                  },
+                  icon: Icon(Icons.skip_previous_outlined),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    _audioPlayer.stop();
+                    _audioPlayer.dispose();
+                    // await _audioPlayer.seek(Duration.zero, index: 0);
+                    // _audioPlayer.play();
+                  },
+                  icon: Icon(Icons.ten_k),
+                ),
+                IconButton(
+                  onPressed: () {
+                    _audioPlayer.seekToNext();
+                  },
+                  icon: Icon(Icons.skip_next_outlined),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-      padding: EdgeInsets.all(AppPadding.padding_32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Image.asset(
-            AppAssets.icAppFullIconWhite,
-            width: ScreenUtil(context: context).getScreenWidth() * 0.6,
-          ),
-          SizedBox(
-            height: ScreenUtil(context: context).getScreenHeight() * 0.05,
-          ),
-          Text(
-            "Update required to continue using mehaleye".toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: AppFontSizes.font_size_12.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(
-            height: ScreenUtil(context: context).getScreenHeight() * 0.2,
-          ),
-          Text(
-            "Dear user update message Dear user update message Dear user update message Dear user update message",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: AppFontSizes.font_size_10.sp,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          SizedBox(
-            height: ScreenUtil(context: context).getScreenHeight() * 0.05,
-          ),
-          AppBouncingButton(
-            onTap: () {},
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(100.0),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 0),
-                    color: AppColors.completelyBlack.withOpacity(0.1),
-                    spreadRadius: 4,
-                    blurRadius: 12,
-                  ),
-                ],
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: AppPadding.padding_32,
-                vertical: AppPadding.padding_12,
-              ),
-              child: Text(
-                "Update App".toUpperCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: AppFontSizes.font_size_12.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: ScreenUtil(context: context).getScreenHeight() * 0.1,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Current Version\n1.0.2".toUpperCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: AppFontSizes.font_size_6.sp,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-                child: Icon(
-                  FlutterRemix.arrow_right_s_line,
-                  color: AppColors.lightGrey,
-                  size: AppIconSizes.icon_size_20,
-                ),
-              ),
-              Text(
-                "Newer Version\n1.0.5".toUpperCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: AppFontSizes.font_size_6.sp,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  void _setInitialPlaylist() async {
+    const prefix = 'https://www.soundhelix.com/examples/mp3';
+    final song1 = Uri.parse('$prefix/SoundHelix-Song-1.mp3');
+    final song2 = Uri.parse('$prefix/SoundHelix-Song-2.mp3');
+    final song3 = Uri.parse('$prefix/SoundHelix-Song-3.mp3');
+    ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(children: [
+      AudioSource.uri(song1, tag: MediaItem(id: 'Song 1', title: 'Song 1')),
+      AudioSource.uri(song2, tag: MediaItem(id: 'Song 2', title: 'Song 2')),
+      AudioSource.uri(song3, tag: MediaItem(id: 'Song 3', title: 'Song 3')),
+    ]);
+    await _audioPlayer.setAudioSource(_playlist);
+    await _audioPlayer.play();
+    _audioPlayer.sequenceStateStream.listen((event) async {
+      if (event != null) {
+        setState(() {
+          print(
+              "event.currentSource!.tag.toString() ${event.currentSource!.tag.toString()}");
+          name = event.currentSource!.tag.toString();
+        });
+      }
+    });
   }
 }

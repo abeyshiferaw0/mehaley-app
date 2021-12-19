@@ -36,22 +36,29 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildTitle(),
-          SizedBox(
-            height: AppMargin.margin_12,
-          ),
-          buildIndicators(),
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          buildFeaturedItemsPager()
-        ],
-      ),
-    );
+    if (widget.featuredSongs.length > 2) {
+      return Container(
+        margin: EdgeInsets.only(
+          bottom: AppMargin.margin_48,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildTitle(),
+            SizedBox(
+              height: AppMargin.margin_12,
+            ),
+            buildIndicators(),
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+            buildFeaturedItemsPager()
+          ],
+        ),
+      );
+    } else {
+      return SizedBox();
+    }
   }
 
   Container buildFeaturedItemsPager() {
@@ -126,8 +133,8 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
         AppLocale.of().featuredMezmurs,
         style: TextStyle(
           color: AppColors.black,
-          fontSize: AppFontSizes.font_size_14.sp,
-          fontWeight: FontWeight.w600,
+          fontSize: AppFontSizes.font_size_16.sp,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

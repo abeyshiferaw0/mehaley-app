@@ -46,12 +46,9 @@ class Playlist extends Equatable {
   final DateTime playlistDateCreated;
   @HiveField(18)
   final DateTime playlistDateUpdated;
-  @HiveField(19)
-  final List<Song>? songs;
 
   const Playlist({
     required this.isBought,
-    required this.songs,
     required this.playlistId,
     required this.playlistNameText,
     required this.playlistDescriptionText,
@@ -91,7 +88,6 @@ class Playlist extends Equatable {
         isInCart,
         playlistDateCreated,
         playlistDateUpdated,
-        songs,
       ];
 
   factory Playlist.fromMap(Map<String, dynamic> map) {
@@ -106,9 +102,6 @@ class Playlist extends Equatable {
       playlistImage: RemoteImage.fromMap(
         map['playlist_image_id'],
       ),
-      songs: map['songs'] != null
-          ? (map['songs'] as List).map((song) => Song.fromMap(song)).toList()
-          : null,
       priceEtb: map['price_etb'] as double,
       priceDollar: map['price_dollar'] as double,
       isFree: map['is_free'] == 1 ? true : false,

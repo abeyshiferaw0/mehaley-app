@@ -46,6 +46,7 @@ import 'business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.da
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
+import 'business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
@@ -123,6 +124,11 @@ class _MyAppState extends State<MyApp> {
             //ALL BLOC AND CUBIT PROVIDER
             BlocProvider<AppStartBloc>(
               create: (context) => AppStartBloc(),
+            ),
+            BlocProvider<NewerVersionBloc>(
+              create: (context) => NewerVersionBloc(
+                appVersionRepository: AppRepositories.appVersionRepository,
+              ),
             ),
             BlocProvider<AppMinVersionBloc>(
               create: (context) => AppMinVersionBloc(

@@ -21,8 +21,8 @@ class HomeCategories extends StatelessWidget {
             AppLocale.of().categories,
             style: TextStyle(
               color: AppColors.black,
-              fontSize: AppFontSizes.font_size_14.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: AppFontSizes.font_size_16.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

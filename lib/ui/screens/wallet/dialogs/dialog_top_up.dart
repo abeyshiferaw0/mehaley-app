@@ -45,63 +45,60 @@ class _DialogTopUpState extends State<DialogTopUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Wrap(
-        children: [
-          Material(
-            child: Container(
-              width: ScreenUtil(context: context).getScreenWidth() * 0.9,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: AppPadding.padding_16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  buildDialogHeader(),
-                  SizedBox(
-                    height: AppMargin.margin_8,
-                  ),
-                  Divider(
-                    color: AppColors.lightGrey,
-                  ),
-                  SizedBox(
-                    height: AppMargin.margin_16,
-                  ),
-                  buildSelectedAmount(),
-                  SizedBox(
-                    height: AppMargin.margin_16,
-                  ),
-                  Divider(
-                    color: AppColors.lightGrey,
-                  ),
-                  SizedBox(
-                    height: AppMargin.margin_16,
-                  ),
-                  buildFixedAmounts(),
-                  SizedBox(
-                    height: AppMargin.margin_48,
-                  ),
-                  buildOrContainer(),
-                  SizedBox(
-                    height: AppMargin.margin_48,
-                  ),
-                  buildTextFormField(),
-                  SizedBox(
-                    height: AppMargin.margin_24,
-                  ),
-                  buildPayButton(),
-                  SizedBox(
-                    height: AppMargin.margin_8,
-                  ),
-                ],
-              ),
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: ScreenUtil(context: context).getScreenWidth() * 0.9,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: AppPadding.padding_16,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            buildDialogHeader(),
+            SizedBox(
+              height: AppMargin.margin_8,
             ),
-          ),
-        ],
+            Divider(
+              color: AppColors.lightGrey,
+            ),
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+            buildSelectedAmount(),
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+            Divider(
+              color: AppColors.lightGrey,
+            ),
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+            buildFixedAmounts(),
+            SizedBox(
+              height: AppMargin.margin_48,
+            ),
+            buildOrContainer(),
+            SizedBox(
+              height: AppMargin.margin_48,
+            ),
+            buildTextFormField(),
+            SizedBox(
+              height: AppMargin.margin_24,
+            ),
+            buildPayButton(),
+            SizedBox(
+              height: AppMargin.margin_8,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -121,9 +118,12 @@ class _DialogTopUpState extends State<DialogTopUp> {
           FreshWalletBillCubit freshWalletBillCubit =
               BlocProvider.of<FreshWalletBillCubit>(context);
 
-          showDialog(
+          showModalBottomSheet(
             context: context,
-            barrierDismissible: false,
+            backgroundColor: AppColors.transparent,
+            isScrollControlled: true,
+            useRootNavigator: true,
+            isDismissible: false,
             builder: (context) {
               return MultiBlocProvider(
                 providers: [

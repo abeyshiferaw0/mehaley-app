@@ -9,8 +9,8 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -73,7 +73,7 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableUpdatePlaylist,
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -90,9 +90,9 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
                   context,
                 ),
               ),
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.blue,
               isFloating: true,
-              iconColor: AppColors.darkOrange,
+              iconColor: AppColors.white,
               icon: FlutterRemix.checkbox_circle_fill,
             ),
           );

@@ -49,6 +49,8 @@ class SongSyncPlayedFromAdapter extends TypeAdapter<SongSyncPlayedFrom> {
         return SongSyncPlayedFrom.OFFLINE_PAGE;
       case 17:
         return SongSyncPlayedFrom.UNK;
+      case 18:
+        return SongSyncPlayedFrom.SHARED_SONG;
       default:
         return SongSyncPlayedFrom.SEARCH;
     }
@@ -110,6 +112,9 @@ class SongSyncPlayedFromAdapter extends TypeAdapter<SongSyncPlayedFrom> {
         break;
       case SongSyncPlayedFrom.UNK:
         writer.writeByte(17);
+        break;
+      case SongSyncPlayedFrom.SHARED_SONG:
+        writer.writeByte(18);
         break;
     }
   }

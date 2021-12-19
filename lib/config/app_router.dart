@@ -310,6 +310,9 @@ class AppRouter {
               ),
               child: WalletPage(
                 startRechargeProcess: false,
+                copyCodeOnInit: false,
+                showHowToPayOnInit: false,
+                codeToCopy: '',
               ),
             );
         break;

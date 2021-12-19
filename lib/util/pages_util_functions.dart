@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
@@ -1196,14 +1197,22 @@ class PagesUtilFunctions {
     if (isAvailable) {
       inAppReview.requestReview();
     } else {
-      inAppReview.openStoreListing(appStoreId: AppValues.appStoreId, );
+      inAppReview.openStoreListing(
+        appStoreId: AppValues.appStoreId,
+      );
     }
   }
 
   static void shareApp() async {
+    String appLink;
+    if (Platform.isIOS) {
+      appLink = 'https://apps.apple.com/app/id1600274398';
+    } else {
+      appLink =
+          'https://play.google.com/store/apps/details?id=com.marathonsystems.mehaleye';
+    }
     await Share.share(
-      'check out my website https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-      subject: 'Look what I made!',
+      'check out Mehaleye, Ethiopia Orthodox Mezmur Streaming App $appLink',
     );
   }
 
@@ -1245,7 +1254,11 @@ class PagesUtilFunctions {
     return version;
   }
 
-  static void goToWalletPage(context, {bool startRechargeProcess = false}) {
+  static void goToWalletPage(context,
+      {bool startRechargeProcess = false,
+      bool showHowToPayOnInit = false,
+      bool copyCodeOnInit = false,
+      String codeToCopy = ''}) {
     Navigator.of(context, rootNavigator: true).push(
       PagesUtilFunctions.createBottomToUpAnimatedRoute(
         page: MultiBlocProvider(
@@ -1271,7 +1284,12 @@ class PagesUtilFunctions {
               ),
             ),
           ],
-          child: WalletPage(startRechargeProcess: startRechargeProcess),
+          child: WalletPage(
+            startRechargeProcess: startRechargeProcess,
+            showHowToPayOnInit: showHowToPayOnInit,
+            copyCodeOnInit: copyCodeOnInit,
+            codeToCopy: codeToCopy,
+          ),
         ),
       ),
     );
@@ -1282,8 +1300,12 @@ class PagesUtilFunctions {
     WalletPageBloc walletPageBloc = BlocProvider.of<WalletPageBloc>(context);
     FreshWalletBillCubit freshWalletBillCubit =
         BlocProvider.of<FreshWalletBillCubit>(context);
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      backgroundColor: AppColors.transparent,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      isDismissible: true,
       builder: (context) {
         return MultiBlocProvider(
           providers: [
@@ -1333,7 +1355,7 @@ class PagesUtilFunctions {
       return AppLocale.of().playlistPurchased;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.CART_PAYMENT) {
-      return AppLocale.of().cartCheckedOut;
+      return AppLocale.of().cartCheckOut;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
       return AppLocale.of().walletRecharged;

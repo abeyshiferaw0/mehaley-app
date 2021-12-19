@@ -101,8 +101,8 @@ dependencies:
   overlay_support: ^1.2.1
   #DEEP LINK
   uni_links: ^0.5.1
-  #IN APP UPDATE
-  upgrader: ^3.11.1
+  #NEW APP VERSION
+  new_version: ^0.2.3
 
 
 

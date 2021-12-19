@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
@@ -44,9 +45,6 @@ class _HomePageState extends State<HomePage>
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-
-    ///CANCEL PAGE REQUEST
-    BlocProvider.of<HomePageBloc>(context).add(CancelHomePageRequestEvent());
   }
 
   @override
@@ -128,6 +126,12 @@ class _HomePageState extends State<HomePage>
             width: AppIconSizes.icon_size_64,
             height: AppIconSizes.icon_size_64,
           ),
+          SvgPicture.asset(
+            'assets/icons/app_icons/mehaleysvg.svg',
+            width: AppIconSizes.icon_size_64,
+            height: AppIconSizes.icon_size_64,
+            fit: BoxFit.contain,
+          ),
         ],
       ),
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
@@ -196,11 +200,10 @@ class _HomePageState extends State<HomePage>
 
           ///BUILD HOME CATEGORIES
           HomeCategories(categories: homePageData.categories),
-          SizedBox(height: AppMargin.margin_32),
+          SizedBox(height: AppMargin.margin_48),
 
           ///BUILD USER LIBRARY GRIDS
           HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
-          SizedBox(height: AppMargin.margin_32),
 
           // Container(
           //   padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
@@ -213,13 +216,13 @@ class _HomePageState extends State<HomePage>
             featuredAlbums: homePageData.featuredAlbums,
           ),
 
-          ///BUILD HOME PAGE GROUPS
-          buildGroupsListView(groups),
-
           ///BUILD FEATURED PLAYLISTS
           HomeFeaturedPlaylists(
             featuredPlaylists: homePageData.featuredPlaylist,
           ),
+
+          ///BUILD HOME PAGE GROUPS
+          buildGroupsListView(groups),
         ],
       ),
     );
@@ -232,7 +235,7 @@ class _HomePageState extends State<HomePage>
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        if (groups[index].groupItems.length > 0 && groups[index].isVisible) {
+        if (groups[index].groupItems.length > 3 && groups[index].isVisible) {
           return HomeGroups(
             groupId: groups[index].groupId,
             groupTitle:

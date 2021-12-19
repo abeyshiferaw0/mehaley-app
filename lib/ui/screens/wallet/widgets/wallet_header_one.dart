@@ -29,6 +29,7 @@ class WalletHeaderOne extends StatelessWidget {
     return Container(
       height: height,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Padding(
@@ -79,8 +80,7 @@ class WalletHeaderOne extends StatelessWidget {
                   AppBouncingButton(
                     onTap: () {
                       Navigator.pop(context);
-                      BlocProvider.of<OpenProfilePageCubit>(context)
-                          .openPage(true);
+                      BlocProvider.of<OpenProfilePageCubit>(context).openPage();
                     },
                     child: AppCard(
                       radius: AppValues.profilePagePicSize * 0.5,

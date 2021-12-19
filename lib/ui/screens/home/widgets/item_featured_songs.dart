@@ -68,8 +68,8 @@ class FeaturedSongsItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: AppColors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: (AppFontSizes.font_size_10 - 1).sp,
+                        fontWeight: FontWeight.w600,
+                        fontSize: AppFontSizes.font_size_10.sp,
                       ),
                     ),
                     SizedBox(

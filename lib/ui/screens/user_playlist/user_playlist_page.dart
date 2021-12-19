@@ -51,7 +51,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         if (state is SongRemovedFromPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.blue,
               isFloating: true,
               msg: AppLocale.of().songRemovedPlaylist(
                 songName: L10nUtil.translateLocale(
@@ -65,7 +65,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               ),
               txtColor: AppColors.white,
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: AppColors.darkOrange,
+              iconColor: AppColors.white,
             ),
           );
 
@@ -79,7 +79,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         if (state is UserPlaylistDeletedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.blue,
               isFloating: true,
               msg: AppLocale.of().playlistDeleted(
                 playlistName: L10nUtil.translateLocale(
@@ -89,7 +89,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
               ),
               txtColor: AppColors.white,
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: AppColors.darkOrange,
+              iconColor: AppColors.white,
             ),
           );
           Navigator.pop(context, state.myPlaylist);
@@ -101,7 +101,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToRemoveFromPlaylist,
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -114,7 +114,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToDeletePlaylist,
-              bgColor: AppColors.darkGrey,
+              bgColor: AppColors.white,
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,

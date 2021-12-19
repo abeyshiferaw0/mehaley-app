@@ -25,10 +25,14 @@ class WalletPageLoadingErrorState extends WalletPageState {
 class WalletPageLoadedState extends WalletPageState {
   final WalletPageData walletPageData;
   final bool showFreshBillDialog;
+  final bool showFreshWalletGifts;
 
   WalletPageLoadedState(
-      {required this.showFreshBillDialog, required this.walletPageData});
+      {required this.showFreshWalletGifts,
+      required this.showFreshBillDialog,
+      required this.walletPageData});
 
   @override
-  List<Object?> get props => [walletPageData, showFreshBillDialog];
+  List<Object?> get props =>
+      [walletPageData, showFreshWalletGifts, showFreshBillDialog];
 }

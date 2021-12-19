@@ -173,7 +173,8 @@ class AppValues {
 
   //WALLET PAGE
   static const double walletFixedTopUpSize = 100.0;
-  static const String howToPayHelpGeneralUrl = 'www.kirayplc.com';
+  static const String howToPayHelpGeneralUrl =
+      'https://mehaleye.com/support/payment';
 
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';
@@ -223,6 +224,12 @@ class AppValues {
   static const String isFirstTimeKey = "IS_FIRST_TIME_KEY";
   static const String notificationPermissionShownDateKey =
       "NOTIFICATION_PERMISSION_SHOWN_KEY";
+  static const String lastNewVersionShownDateKey =
+      "LAST_NEW_VERSION_SHOWN_DATE_KEY";
+  static const String lastNewVersionShownVersionKey =
+      "LAST_NEW_VERSION_SHOWN_VERSION_KEY";
+  static const String newVersionDontAskAgainKey =
+      "NEW_VERSION_DONT_ASK_AGAIN_KEY";
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';

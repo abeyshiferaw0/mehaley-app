@@ -68,39 +68,36 @@ class _DialogWalletRechargeInitialState
           }
         }
       },
-      child: Center(
-        child: Wrap(
-          children: [
-            Material(
-              child: Container(
-                width: ScreenUtil(context: context).getScreenWidth() * 0.9,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: BlocBuilder<WalletRechargeInitialBloc,
-                    WalletRechargeInitialState>(
-                  builder: (context, state) {
-                    if (state is WalletRechargeInitialLoadingState) {
-                      return buildLoading();
-                    }
-                    if (state is WalletRechargeInitialLoadingErrorState) {
-                      return buildError();
-                    }
-                    if (state is WalletRechargeInitialLoadedState) {
-                      if (state.walletPageData.activeBill != null) {
-                        return buildPreviousBillInfo(
-                          state.walletPageData.activeBill!,
-                          state.walletPageData.paymentMethods,
-                        );
-                      }
-                    }
-                    return buildLoading();
-                  },
-                ),
-              ),
-            ),
-          ],
+      child: Container(
+        width: ScreenUtil(context: context).getScreenWidth() * 0.9,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
+            topRight: Radius.circular(AppValues.menuBottomSheetRadius),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: BlocBuilder<WalletRechargeInitialBloc,
+              WalletRechargeInitialState>(
+            builder: (context, state) {
+              if (state is WalletRechargeInitialLoadingState) {
+                return buildLoading();
+              }
+              if (state is WalletRechargeInitialLoadingErrorState) {
+                return buildError();
+              }
+              if (state is WalletRechargeInitialLoadedState) {
+                if (state.walletPageData.activeBill != null) {
+                  return buildPreviousBillInfo(
+                    state.walletPageData.activeBill!,
+                    state.walletPageData.paymentMethods,
+                  );
+                }
+              }
+              return buildLoading();
+            },
+          ),
         ),
       ),
     );
@@ -128,7 +125,7 @@ class _DialogWalletRechargeInitialState
           activeBill,
         ),
         SizedBox(
-          height: AppMargin.margin_24,
+          height: AppMargin.margin_32,
         ),
       ],
     );
@@ -166,7 +163,7 @@ class _DialogWalletRechargeInitialState
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: AppPadding.padding_12,
-          vertical: AppPadding.padding_12,
+          vertical: AppPadding.padding_16,
         ),
         margin: EdgeInsets.symmetric(
           horizontal: AppMargin.margin_16,
@@ -308,7 +305,7 @@ class _DialogWalletRechargeInitialState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                activeBill.wbcCode,
+                activeBill.wbcCode.divideAfterThreeChar(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.black,
@@ -340,9 +337,12 @@ class _DialogWalletRechargeInitialState
     FreshWalletBillCubit freshWalletBillCubit =
         BlocProvider.of<FreshWalletBillCubit>(context);
 
-    showDialog(
-      useSafeArea: false,
+    showModalBottomSheet(
       context: context,
+      backgroundColor: AppColors.transparent,
+      isScrollControlled: true,
+      useRootNavigator: true,
+      isDismissible: true,
       builder: (context) {
         return MultiBlocProvider(
           providers: [

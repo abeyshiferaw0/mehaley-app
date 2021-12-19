@@ -10,8 +10,9 @@ class AppVersionProvider {
     dio = Dio();
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.userBaseUrl + "/getAppMinVersion",
+      url: AppApi.userBaseUrl + "/getAppMinVersion/",
     );
+
     return response;
   }
 

@@ -179,7 +179,7 @@ class _DialogWalletCartCheckOutState extends State<DialogWalletCartCheckOut>
           height: AppMargin.margin_32,
         ),
         Text(
-          AppLocale.of().cartCheckedOut.toUpperCase(),
+          AppLocale.of().cartCheckOut.toUpperCase(),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,

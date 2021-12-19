@@ -8,8 +8,10 @@ import 'package:sizer/sizer.dart';
 
 class ShareBtnWidget extends StatelessWidget {
   final VoidCallback onTap;
+  final Color color;
 
-  const ShareBtnWidget({Key? key, required this.onTap}) : super(key: key);
+  const ShareBtnWidget({Key? key, required this.onTap, required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class ShareBtnWidget extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          border: Border.all(color: AppColors.white, width: 0.8),
+          border: Border.all(color: color, width: 0.8),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -30,7 +32,7 @@ class ShareBtnWidget extends StatelessWidget {
             Icon(
               FlutterRemix.share_line,
               size: AppIconSizes.icon_size_12,
-              color: AppColors.white,
+              color: color,
             ),
             SizedBox(
               width: AppMargin.margin_8,
@@ -39,7 +41,7 @@ class ShareBtnWidget extends StatelessWidget {
               AppLocale.of().share.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
-                color: AppColors.white,
+                color: color,
                 letterSpacing: 1.1,
                 fontWeight: FontWeight.w500,
               ),

@@ -364,6 +364,7 @@ abstract class AppLocalizations {
   String get playlistPurchased;
   String get cartCheckedOut;
   String get cartCheckedOutMsg;
+  String get cartCheckOut;
   String get walletRecharged;
 
   String get cartAlreadyCheckedOut;
@@ -381,6 +382,12 @@ abstract class AppLocalizations {
   String get newerVersion;
   String get currentVersion;
   String get updateApp;
+
+  String get newVersionAvailable;
+  String get newVersionAvailableMsg;
+  String get maybeLatter;
+  String get dontAskAgain;
+  String get featuringTxt;
 
   String featuring({required String artistName});
 

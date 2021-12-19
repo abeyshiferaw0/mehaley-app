@@ -19,42 +19,47 @@ class HomeRecentlyPlayed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (recentlyPlayed.length > 2) {
-      return Column(
-        children: [
-          Container(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: AppMargin.margin_16),
-                  child: Text(
-                    AppLocale.of().recentlyPlayed,
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: AppFontSizes.font_size_14.sp,
-                      fontWeight: FontWeight.w600,
+    if (recentlyPlayed.length > 3) {
+      return Container(
+        margin: EdgeInsets.only(
+          bottom: AppMargin.margin_24,
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: AppMargin.margin_16),
+                    child: Text(
+                      AppLocale.of().recentlyPlayed,
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: AppFontSizes.font_size_16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  //    height: AppValues.recentlyPlayedItemSize + 70,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          buildRecentlyPlayedItems(recentlyPlayed, context),
+                  Container(
+                    //    height: AppValues.recentlyPlayedItemSize + 70,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:
+                            buildRecentlyPlayedItems(recentlyPlayed, context),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: AppMargin.margin_16),
-        ],
+            SizedBox(height: AppMargin.margin_16),
+          ],
+        ),
       );
     } else {
       return SizedBox();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -26,15 +27,24 @@ import 'package:mehaley/ui/screens/wallet/widgets/wallet_history_shimmer.dart';
 import 'package:mehaley/ui/screens/wallet/widgets/wallet_sliver_delegates.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sizer/sizer.dart';
 
 import 'dialogs/dialog_bill_cancled.dart';
 
 class WalletPage extends StatefulWidget {
-  const WalletPage({Key? key, required this.startRechargeProcess})
+  const WalletPage(
+      {Key? key,
+      required this.startRechargeProcess,
+      required this.showHowToPayOnInit,
+      required this.copyCodeOnInit,
+      required this.codeToCopy})
       : super(key: key);
 
   final bool startRechargeProcess;
+  final bool showHowToPayOnInit;
+  final bool copyCodeOnInit;
+  final String codeToCopy;
 
   @override
   _WalletPageState createState() => _WalletPageState();
@@ -71,6 +81,49 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
       (_) {
         if (widget.startRechargeProcess) {
           PagesUtilFunctions.openWalletRechargeInitialDialog(context);
+        }
+        if (widget.showHowToPayOnInit) {
+          PagesUtilFunctions.goToHowToPayPage(
+            context,
+            AppValues.howToPayHelpGeneralUrl,
+          );
+        }
+        if (widget.copyCodeOnInit) {
+          ///COPY TEXT TO CLIP BOARD
+          Clipboard.setData(
+            ClipboardData(text: widget.codeToCopy),
+          ).then(
+            (value) {
+              ///SHOW COPED SNACK
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   buildAppSnackBar(
+              //     bgColor: AppColors.black.withOpacity(0.9),
+              //     isFloating: false,
+              //     msg: AppLocale.of().copiedToClipboard,
+              //     txtColor: AppColors.white,
+              //   ),
+              // );
+              showSimpleNotification(
+                Container(
+                  padding: EdgeInsets.all(AppPadding.padding_8),
+                  color: AppColors.white,
+                  child: Center(
+                    child: Text(
+                      AppLocale.of().copiedToClipboard,
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: AppFontSizes.font_size_10.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                contentPadding: EdgeInsets.zero,
+                background: AppColors.white,
+                duration: Duration(milliseconds: 1200),
+              );
+            },
+          );
         }
       },
     );
@@ -144,10 +197,10 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
               if (state is WalletBillStatusLoadingErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   buildDownloadMsgSnackBar(
-                    bgColor: AppColors.darkGrey,
+                    bgColor: AppColors.white,
                     isFloating: true,
                     msg: AppLocale.of().billStatusFailedMsg,
-                    txtColor: AppColors.white,
+                    txtColor: AppColors.black,
                     icon: FlutterRemix.wifi_off_line,
                     iconColor: AppColors.errorRed,
                   ),
@@ -191,10 +244,10 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
               if (state is CancelWalletBillLoadingErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   buildDownloadMsgSnackBar(
-                    bgColor: AppColors.darkGrey,
+                    bgColor: AppColors.white,
                     isFloating: true,
                     msg: AppLocale.of().billCancelFailedMsg,
-                    txtColor: AppColors.white,
+                    txtColor: AppColors.black,
                     icon: FlutterRemix.wifi_off_line,
                     iconColor: AppColors.errorRed,
                   ),
@@ -261,9 +314,12 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
                 }
 
                 ///SHOW FRESH GIFT NOTIFICATION
-                BlocProvider.of<FreshWalletGiftCubit>(context).showGiftReceived(
-                  state.walletPageData.freshWalletGifts,
-                );
+                if (state.showFreshWalletGifts) {
+                  BlocProvider.of<FreshWalletGiftCubit>(context)
+                      .showGiftReceived(
+                    state.walletPageData.freshWalletGifts,
+                  );
+                }
               }
             },
           ),
@@ -416,7 +472,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
                 floating: true,
                 delegate: WalletPageHeadersDelegate(
                   headerOneHeight:
-                      ScreenUtil(context: context).getScreenHeight() * 0.11,
+                      ScreenUtil(context: context).getScreenHeight() * 0.12,
                   headerTwoHeight:
                       ScreenUtil(context: context).getScreenHeight() * 0.15,
                   walletPageData: walletPageData,

@@ -44,3 +44,14 @@ class NotificationClickedErrorState extends OneSignalState {
   @override
   List<Object> get props => [error];
 }
+
+class NotificationActionClickedState extends OneSignalState {
+  final String actionId;
+  final String billCode;
+
+  NotificationActionClickedState(
+      {required this.actionId, required this.billCode});
+
+  @override
+  List<Object?> get props => [billCode, actionId];
+}

@@ -4,6 +4,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/app_extention.dart';
 import 'package:sizer/sizer.dart';
 
 class GroupHeaderWidget extends StatelessWidget {
@@ -45,7 +46,7 @@ class GroupHeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  groupSubTitle != null ? '$groupSubTitle' : '',
+                  groupSubTitle != null ? groupSubTitle!.toTitleCase() : '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -55,13 +56,13 @@ class GroupHeaderWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  groupTitle,
+                  groupTitle.toTitleCase(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: AppColors.black,
-                    fontSize: AppFontSizes.font_size_12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: AppFontSizes.font_size_14.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
