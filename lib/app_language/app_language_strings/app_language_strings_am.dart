@@ -403,7 +403,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String unpaidBillCode = "ያልተከፈለ ቢል ኮድ";
   final String payBill = "ዋሌትዎን ለመሙላት ቢሉን ይክፈሉ";
   final String payBillMsg =
-      "ታዲያስ፣ ቢሉን ኮፒ በማድረግ በሲቢኢ ብር፣ በኢትዮጵያ ንግድ ባንክ ሞባይል ባንኪንግ፣ በአቢሲኒያ ባንክ ሞባይል ባንኪንግ... በመክፈል ዋሌትዎን ይሙሉ።";
+      "ታዲያስ፣ ቢሉን ኮፒ በማድረግ በሲቢኢ ብር፣ በኢትዮጵያ ንግድ ባንክ ሞባይል ባንኪንግ፣ በአቢሲኒያ ባንክ ሞባይል ባንኪንግ... በመክፈል ዋሌትዎን ይሙሉ.";
   final String goToPurchased = "ወደ ተገዙ መዝሙሮች ይሂዱ";
   final String copiedToClipboard = "ወደ ሰሌዳ ተቀድቷል";
 
@@ -420,7 +420,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String walletInsufficientMsg =
       "ይህንን ግዢ ለመፈጸም የዋሌትዎ ሒሳብ በቂ አይደለም፣ እባክዎ ዋሌትዎን ይሙሉ እና እንደገና ይሞክሩ";
 
-  final String newVersionAvailable = "የመሀለዬ መተግበሪያ አዲስ ሥሪት አለ።";
+  final String newVersionAvailable = "የመሀለዬ መተግበሪያ አዲስ ሥሪት አለ.";
   final String newVersionAvailableMsg =
       "አዲስ የ መሃለየ ስሪት አለ ፣ የቅርብ ጊዜ ባህሪዎችን እና ማሻሻያዎችን ለማግኘት መተግበሪያዉን ያዘምኑ";
   final String maybeLatter = "ምናልባት በኋላ";
