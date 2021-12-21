@@ -389,6 +389,13 @@ abstract class AppLocalizations {
   String get dontAskAgain;
   String get featuringTxt;
 
+  String get youPurchasedSong;
+  String get youPurchasedAlbum;
+  String get youPurchasedPlaylist;
+  String get youCheckedOutCart;
+  String get youRechargedWallet;
+  String get youReceivedGift;
+
   String featuring({required String artistName});
 
   String noOfSongs({required String noOfSong});
@@ -399,8 +406,6 @@ abstract class AppLocalizations {
       {required String searchKey, required String appItemType});
 
   String cantFind({required String searchKey});
-
-  String areUSureYouWantToDeleteFromDownloads({required String songName});
 
   String songRemoveFromPlaylist({required String songName});
 

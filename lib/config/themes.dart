@@ -16,12 +16,13 @@ class App {
 class AppAssets {
   ///APP ICONS
   static String icAppIconOnly = 'assets/icons/app_icons/ic_app_icon_only.png';
-  static String icAppFullIcon = 'assets/icons/app_icons/ic_app_full_icon.png';
-  static String icAppFullIconWhite =
-      'assets/icons/app_icons/ic_app_full_icon_white.png';
-  static String icAppLetterIcon =
-      'assets/icons/app_icons/ic_app_letter_icon.png';
-  static String icAppSmallIcon = 'assets/icons/app_icons/ic_app_small_icon.png';
+  static String icAppWordIcon = 'assets/icons/app_icons/ic_app_word_icon.png';
+  static String icAppWordIconWhite =
+      'assets/icons/app_icons/ic_app_word_icon_white.png';
+  static String icAppLetterIconWhite =
+      'assets/icons/app_icons/ic_app_letter_icon_white.png';
+  static String icAppIconWhite = 'assets/icons/app_icons/ic_app_icon_white.png';
+  static String icSplashIcon = 'assets/icons/app_icons/ic_splash_icon.png';
 
   ///AUTH ICONS
   static String icApple = 'assets/icons/auth_icons/ic_apple.svg';

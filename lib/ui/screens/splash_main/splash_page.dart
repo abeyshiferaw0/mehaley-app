@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/auth_util.dart';
@@ -20,7 +19,6 @@ class _SplashPageState extends State<SplashPage> {
       ///CHECK AUTH HERE
       checkIfUserLoggedIn();
     });
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     super.initState();
   }
 
@@ -40,13 +38,14 @@ class _SplashPageState extends State<SplashPage> {
           body: SizedBox(),
         ),
         Align(
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           child: Container(
-            color: AppColors.pagesBgColor,
+            // color: AppColors.pagesBgColor,
             child: Center(
               child: Image.asset(
-                AppAssets.icAppFullIcon,
-                width: ScreenUtil(context: context).getScreenWidth() * 0.4,
+                AppAssets.icSplashIcon,
+                width: ScreenUtil(context: context).getScreenWidth() * 0.41,
+                height: ScreenUtil(context: context).getScreenWidth() * 0.41,
               ),
             ),
           ),

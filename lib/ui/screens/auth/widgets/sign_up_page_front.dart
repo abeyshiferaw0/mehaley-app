@@ -157,7 +157,7 @@ class SignUpPageFront extends StatelessWidget {
 
   Image buildAppLogo() {
     return Image.asset(
-      AppAssets.icAppFullIcon,
+      AppAssets.icAppWordIcon,
       width: AppValues.signUpAppIconSize,
       fit: BoxFit.contain,
     );

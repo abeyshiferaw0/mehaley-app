@@ -1346,22 +1346,22 @@ class PagesUtilFunctions {
 
   static String getWalletHistoryAction(WalletHistory walletHistory) {
     if (walletHistory.walletHistoryItemType == PurchasedItemType.SONG_PAYMENT) {
-      return AppLocale.of().songPurchased;
+      return AppLocale.of().youPurchasedSong;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.ALBUM_PAYMENT) {
-      return AppLocale.of().albumPurchased;
+      return AppLocale.of().youPurchasedAlbum;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.PLAYLIST_PAYMENT) {
-      return AppLocale.of().playlistPurchased;
+      return AppLocale.of().youPurchasedPlaylist;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.CART_PAYMENT) {
-      return AppLocale.of().cartCheckOut;
+      return AppLocale.of().youCheckedOutCart;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
-      return AppLocale.of().walletRecharged;
+      return AppLocale.of().youRechargedWallet;
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_GIFT) {
-      return AppLocale.of().giftReceived;
+      return AppLocale.of().youReceivedGift;
     }
     return '';
   }

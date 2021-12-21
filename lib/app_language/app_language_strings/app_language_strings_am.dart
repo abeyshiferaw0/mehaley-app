@@ -330,7 +330,7 @@ class AppLanguageStringsAm extends AppLocalizations {
       "አዳዳዲስ መዝሙሮች አና ተጨማሪ ዝማኔዎች እንዳያመልጥዎ የማሳወቂያ ፐርሚሽን ያብሩ";
   final String notNow = "አሁን አይሆንም";
   final String done = "ፈፅም";
-  final updateRequired = "በመሃሌዬ መጠቀሙዎን ለመቀጠል የመተግበሪያዉን ማሻሻያ ያስፈልጋል";
+  final updateRequired = "በመሃሌዬ መጠቀሙዎን ለመቀጠል መተግበሪያዉን ማሻሻል ያስፈልጋል";
   final updateRequiredMsg =
       "ውድ ተጠቃሚ, አሁን ያለዎት መተግበሪያ ያለፈበተ ነው, አዳዲስ ባህሪያትን ለማግኘት እባክዎ መሃለየን ያዘምኑ";
   final newerVersion = "አዲስ ስሪት";
@@ -411,7 +411,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String albumPurchased = "አልበሙ ተገዝቶል";
   final String playlistPurchased = "ፕሌይሊስቱ ተገዝቶል";
   final String cartCheckedOut = "የጥቅል ግዢዉ ተፈጵሞል";
-  final String cartCheckOut = "የጥቅል ግዢዉ ፈጵም";
+  final String cartCheckOut = "የጥቅል ግዢ ፈጵም";
   final String cartCheckedOutMsg = "መዝሙሮችን፣ አልበሞችን፣ ፕሌይሊስቶችን በአንድ ጊዜ ይግዙ";
   final String walletRecharged = "ዋሌትዎ ተሞልቷል";
 
@@ -427,103 +427,107 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String dontAskAgain = "እንደገና አትጠይቅ";
   final String featuringTxt = "ተለይተዉ የቀረቡ";
 
+  ///NOT TRANSLATED
+  final String youPurchasedSong = "መዝሙር ገዝተዋል";
+  final String youPurchasedAlbum = "አልበም ገዝተዋል";
+  final String youPurchasedPlaylist = "ፕሌይሊስት ገዝተዋል";
+  final String youCheckedOutCart = "ጥቅል ግዢ ፈጽመዋል";
+  final String youRechargedWallet = "ዋሌት ሞልተዋል";
+  final String youReceivedGift = "የዋሌት ስጦታ ተቀብለዋል";
+
   String featuring({required String artistName}) {
-    return "Playlists Featuring $artistName";
+    return "$artistName ያካተቱ ፕሌይሊስትዎች";
   }
 
   String noOfSongs({required String noOfSong}) {
-    return "$noOfSong Mezmurs";
+    return "$noOfSong መዝሙርዎች";
   }
 
   String downloading({required String songName}) {
-    return "Downloading $songName";
+    return "$songNameን በማውረድ ላይ";
   }
 
   String searchDedicatedTitle(
       {required String searchKey, required String appItemType}) {
-    return "\"$searchKey\" in $appItemType";
+    return "\"$searchKey\" $appItemType ዉስጥ";
   }
 
   String cantFind({required String searchKey}) {
-    return "Can't find $searchKey";
-  }
-
-  String areUSureYouWantToDeleteFromDownloads({required String songName}) {
-    return "Are you sure you want to Delete $songName from downloads?";
+    return "$searchKeyን ማግኘት አልተቻለም";
   }
 
   String songRemoveFromPlaylist({required String songName}) {
-    return "Remove $songName From this playlist?";
+    return "$songNameን ከፕሌይሊስት አስወግድ?";
   }
 
   String areYouSureUwantDeleteFromDownloads({required String songName}) {
-    return "Are you sure you want to Delete $songName from downloads?";
+    return "እርግጠኛ ነዎት $songNameን ከወረዱ ዉስጥ መሰረዝ ይፈልጋሉ?";
   }
 
   String downloadComplete({required String songName}) {
-    return "$songName Download complete";
+    return "$songNameን ማውረድ ተጠናቅቋል";
   }
 
   String preferredPaymentChangedTo({required String paymentName}) {
-    return "Preferred payment changed to $paymentName";
+    return "ተመራጭ የክፍያ መንገድ ወደ $paymentName ተቀይሮል";
   }
 
   String popularSongsBy({required String artistName}) {
-    return "Popular mezmur's by $artistName";
+    return "ታዋቂ መዝሙሮች በ $artistName";
   }
 
   String playlistUpdated({required String playlistName}) {
-    return "Playlist $playlistName updated";
+    return "ፕሌይሊስት $playlistName ተስተካክሎል";
   }
 
   String playlistCreated({required String playlistName}) {
-    return "Playlist $playlistName created";
+    return "ፕሌይሊስት $playlistName ተፈጥሮል";
   }
 
   String songAddedToPlaylist(
       {required String songName, required String playlistName}) {
-    return "$songName added to $playlistName";
+    return "$songName ወደ $playlistName ተካቶል";
   }
 
   String songRemovedPlaylist(
       {required String songName, required String playlistName}) {
-    return "$songName removed from $playlistName";
+    return "$songName ከ $playlistName ተወግዶል";
   }
 
   String playlistDeleted({required String playlistName}) {
-    return "$playlistName deleted";
+    return "$playlistName ተሰርዟል";
   }
 
   String unableToRemoveFromCart({required String unabledName}) {
-    return "Unable to remove $unabledName from cart\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
+    return "$unabledNameን ከጥቅል ግዢ ማስወገድ አልተቻለም\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
   }
 
   String playingFromSearchResult({required String searchKey}) {
-    return "Playing From Search Result $searchKey";
+    return "ከፍለጋ ውጤት በመጫወት ላይ $searchKey";
   }
 
   String playingFromArtistName({required String artistName}) {
-    return "Playing From $artistName";
+    return "ከ $artistName በመጫወት ላይ";
   }
 
   String byUserName({required String userName}) {
-    return "by $userName";
+    return "በ $userName";
   }
 
   String noOfAlbum({required String noOfAlbums}) {
-    return "$noOfAlbums Albums";
+    return "$noOfAlbums አልበሞች";
   }
 
   String numberOfFollowers({required String numberOf}) {
-    return "$numberOf Followers";
+    return "$numberOf ተከታዮች";
   }
 
   String numberOfMezmurs({required String numberOf}) {
-    return "$numberOf Mezmurs";
+    return "$numberOf መዝሙሮች";
   }
 
   String removedFromCart({required String removedName}) {
-    return "$removedName removed from cart";
+    return "$removedName ከጥቅል ግዢ ተወግዷል";
   }
 
   String appNameAndVersion({required String versionCode}) {
@@ -531,72 +535,70 @@ class AppLanguageStringsAm extends AppLocalizations {
   }
 
   String appVersion({required String versionCode}) {
-    return "Version $versionCode";
+    return "ሥሪት $versionCode";
   }
 
   String activeBillMsg({required String date}) {
-    return "You have created a bill on $date, which isn't paid yet, you can recharge your wallet by paying this bill.";
+    return "በ$date እስካሁን ያልተከፈለ ቢል ፈጥረዋል፣ይህን ቢል በመክፈል ዋሌትዎን መሙላት ይችላሉ.";
   }
 
   String walletRechargedSuccessTransactionNumber(
       {required String transactionNumber}) {
-    return "Transaction Number : $transactionNumber";
+    return "የግብይት ቁጥር : $transactionNumber";
   }
 
   String howToPayWith({required String paymentMethod}) {
-    return "How to pay bill with\n$paymentMethod ?";
+    return "በ$paymentMethod\nእንዴት ቢልዎን መክፈል ይችላሉ?";
   }
 
   String alreadyPurchased({required PurchasedItemType purchasedItemType}) {
     String item = '';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur ";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album ";
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙሩ";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበሙ";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist ";
-    return "${item}Already Purchased";
+      item = "ፕሌይሊስቱ";
+    return "$item አስቀድሞ ተገዝቶል";
   }
 
   String alreadyPurchasedMsg({required PurchasedItemType purchasedItemType}) {
     String item = '';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = " Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = " Album";
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበም";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = " Playlist";
-    return "You Have Already Purchased This$item";
+      item = "ፕሌይሊስት";
+    return "ይህንን $item ከዚ በፊት አስቀድመዉ ገዝተዋል";
   }
 
   String itemIsForFree({required PurchasedItemType purchasedItemType}) {
     String item = '';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
-      item = "Mezmur Is ";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
-      item = "Album Is ";
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "ይህን መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "ይህን አልበም";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist Is ";
-    return "${item}Available For Free";
+      item = "ይህን ፕሌይሊስት";
+    return "$item በነጻ ማግጀት ይችላሉ";
   }
 
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) {
-    String item = 'Item';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበም";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist";
-    return "The $item you're trying to buy is now free, enjoy listening on Mehaleye";
+      item = "ፕሌይሊስት";
+    return "ሊገዙት የሞከሩትን $item በነጻ ማግጀት ይችላሉ";
   }
 
   String purchaseItemMsg(
       {required double amount, required PurchasedItemType purchasedItemType}) {
-    String item = 'Item';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "ይህን መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "ይህን አልበም";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist";
+      item = "ይህን ፕሌይሊስት";
 
-    return "By Purchasing This $item ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+    return "$item ሲገዙ ${amount.parsePriceAmount()} $birr ከዋሌትዎ ይቀነሳል";
   }
 
   String cartCheckOutMsg({required double cartTotalPrice}) {
-    return "By Checking Out Your Cart ${cartTotalPrice.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+    return "ይህን ጥቅል ግዢ ሲፈፅሙ ${cartTotalPrice.parsePriceAmount()} $birr ከዋሌትዎ ይቀነሳል";
   }
 }

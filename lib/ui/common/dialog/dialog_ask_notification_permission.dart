@@ -58,7 +58,7 @@ class _DialogAskNotificationPermissionState
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(
-                              AppAssets.icAppFullIcon,
+                              AppAssets.icAppWordIcon,
                               width: AppIconSizes.icon_size_64,
                               fit: BoxFit.contain,
                             ),

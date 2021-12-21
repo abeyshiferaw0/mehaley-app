@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_link_song_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -10,8 +9,8 @@ import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../app_bouncing_button.dart';
 import '../../app_loading.dart';
+import '../../app_top_header_with_icon.dart';
 
 class DialogDeeplinkSong extends StatefulWidget {
   const DialogDeeplinkSong({
@@ -52,7 +51,7 @@ class _DialogDeeplinkSongState extends State<DialogDeeplinkSong> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ///TOP HEADER
-                  buildTopCard(context),
+                  AppTopHeaderWithIcon(),
                   BlocConsumer<DeepLinkSongBloc, DeepLinkSongState>(
                     listener: (context, state) {
                       if (state is DeepLinkSongLoaded) {
@@ -125,51 +124,6 @@ class _DialogDeeplinkSongState extends State<DialogDeeplinkSong> {
             LoadDeepLinkSongEvent(songId: widget.songId),
           );
         },
-      ),
-    );
-  }
-
-  Container buildTopCard(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_8,
-        horizontal: AppPadding.padding_16,
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: AppColors.lightGrey,
-          ),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              AppAssets.icAppFullIcon,
-              width: AppIconSizes.icon_size_48,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AppBouncingButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(AppPadding.padding_4),
-                child: Icon(
-                  FlutterRemix.close_line,
-                  color: AppColors.black,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              ),
-            ),
-          )
-        ],
       ),
     );
   }

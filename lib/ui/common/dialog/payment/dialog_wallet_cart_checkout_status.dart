@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/purcahsed_item_status_bloc/purchase_item_status_bloc.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
@@ -8,6 +7,7 @@ import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dar
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/cart_check_out_status_data.dart';
+import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/checkedout_item_widget.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/current_balance_widget.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/payment_button_filled.dart';
@@ -17,7 +17,6 @@ import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../app_bouncing_button.dart';
 import '../../app_loading.dart';
 
 class DialogCartCheckOutStatus extends StatefulWidget {
@@ -58,7 +57,7 @@ class _DialogCartCheckOutStatusState extends State<DialogCartCheckOutStatus> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ///TOP HEADER
-                buildTopCard(context),
+                AppTopHeaderWithIcon(),
                 BlocConsumer<PurchaseItemStatusBloc, PurchaseItemStatusState>(
                   listener: (context, state) {
                     ///IF NOTE ALREADY CHECKED OUT(TOTAL PRICE = 0.0) , NOT BALANCE INSUFFICIENT GO TO CHECKOUT DIALOG
@@ -228,51 +227,6 @@ class _DialogCartCheckOutStatusState extends State<DialogCartCheckOutStatus> {
             CheckCartCheckOutStatusEvent(),
           );
         },
-      ),
-    );
-  }
-
-  Container buildTopCard(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_8,
-        horizontal: AppPadding.padding_16,
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: AppColors.lightGrey,
-          ),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              AppAssets.icAppFullIcon,
-              width: AppIconSizes.icon_size_48,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AppBouncingButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(AppPadding.padding_4),
-                child: Icon(
-                  FlutterRemix.close_line,
-                  color: AppColors.black,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              ),
-            ),
-          )
-        ],
       ),
     );
   }

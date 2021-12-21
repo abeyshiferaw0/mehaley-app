@@ -22,9 +22,9 @@ class MainAppBar extends StatelessWidget {
         leading != null
             ? leading!
             : Image.asset(
-                AppAssets.icAppFullIcon,
-                width: AppIconSizes.icon_size_64,
-                fit: BoxFit.contain,
+                AppAssets.icAppWordIcon,
+                height: AppIconSizes.icon_size_20,
+                fit: BoxFit.cover,
               ),
         Expanded(
           child: SizedBox(),

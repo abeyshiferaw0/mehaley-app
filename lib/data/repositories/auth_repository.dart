@@ -105,12 +105,12 @@ class AuthRepository {
     return appUser;
   }
 
-  logOut() {
-    AppHiveBoxes.instance.userBox.clear();
-    FirebaseAuth.instance.signOut();
-    FacebookAuth.instance.logOut();
-    OneSignal.shared.removeExternalUserId();
-    OneSignal.shared.disablePush(true);
+  logOut() async {
+    await AppHiveBoxes.instance.userBox.clear();
+    await FirebaseAuth.instance.signOut();
+    await FacebookAuth.instance.logOut();
+    await OneSignal.shared.removeExternalUserId();
+    await OneSignal.shared.disablePush(true);
   }
 
   Future<void> turnAllNotificationOn() async {

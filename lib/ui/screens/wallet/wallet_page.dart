@@ -564,7 +564,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
         },
       ),
       separatorBuilder: (context, index) => SizedBox(
-        height: AppMargin.margin_32,
+        height: AppMargin.margin_24,
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
@@ -18,6 +17,7 @@ import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
+import '../app_top_header_with_icon.dart';
 
 class DialogSongPreviewMode extends StatelessWidget {
   final Song song;
@@ -46,7 +46,7 @@ class DialogSongPreviewMode extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              buildTopCard(context),
+              AppTopHeaderWithIcon(),
               buildPreviewTitle(context),
               SizedBox(
                 height: AppMargin.margin_16,
@@ -100,7 +100,7 @@ class DialogSongPreviewMode extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: AppMargin.margin_8,
+              width: AppMargin.margin_16,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,51 +233,6 @@ class DialogSongPreviewMode extends StatelessWidget {
           SizedBox(
             height: AppMargin.margin_8,
           ),
-        ],
-      ),
-    );
-  }
-
-  Container buildTopCard(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_8,
-        horizontal: AppPadding.padding_16,
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: AppColors.lightGrey,
-          ),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              AppAssets.icAppFullIcon,
-              width: AppIconSizes.icon_size_48,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AppBouncingButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(AppPadding.padding_4),
-                child: Icon(
-                  FlutterRemix.close_line,
-                  color: AppColors.black,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

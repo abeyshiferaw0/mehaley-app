@@ -54,6 +54,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: buildAlbumItems(),
       ),
     );

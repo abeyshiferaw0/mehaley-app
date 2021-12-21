@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/purchase_item_bloc/purchase_item_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -14,8 +13,8 @@ import 'package:mehaley/ui/common/dialog/payment/widgets/purchased_item_widget.d
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../app_bouncing_button.dart';
 import '../../app_loading.dart';
+import '../../app_top_header_with_icon.dart';
 
 class DialogWalletPurchase extends StatefulWidget {
   const DialogWalletPurchase({
@@ -59,7 +58,7 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ///TOP HEADER
-                buildTopCard(context),
+                AppTopHeaderWithIcon(),
                 BlocConsumer<PurchaseItemBloc, PurchaseItemState>(
                   listener: (context, state) {
                     if (state is PurchaseItemLoadedState) {
@@ -188,51 +187,6 @@ class _DialogWalletPurchaseState extends State<DialogWalletPurchase> {
           SizedBox(
             height: AppMargin.margin_32,
           ),
-        ],
-      ),
-    );
-  }
-
-  Container buildTopCard(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: AppPadding.padding_8,
-        horizontal: AppPadding.padding_16,
-      ),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: AppColors.lightGrey,
-          ),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Image.asset(
-              AppAssets.icAppFullIcon,
-              width: AppIconSizes.icon_size_48,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AppBouncingButton(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(AppPadding.padding_4),
-                child: Icon(
-                  FlutterRemix.close_line,
-                  color: AppColors.black,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

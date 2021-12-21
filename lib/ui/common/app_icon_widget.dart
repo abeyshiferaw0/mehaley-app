@@ -15,11 +15,11 @@ class AppIconWidget extends StatelessWidget {
         top: AppMargin.margin_6,
       ),
       child: Image.asset(
-        AppAssets.icAppLetterIcon,
-        height: AppIconSizes.icon_size_20,
-        width: AppIconSizes.icon_size_20,
+        AppAssets.icAppIconWhite,
+        height: AppIconSizes.icon_size_24,
+        width: AppIconSizes.icon_size_24,
         fit: BoxFit.contain,
-        color: AppColors.white.withOpacity(0.5),
+        color: AppColors.white.withOpacity(0.4),
       ),
     );
   }

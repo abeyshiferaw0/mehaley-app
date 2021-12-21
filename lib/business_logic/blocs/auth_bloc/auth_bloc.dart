@@ -151,7 +151,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthErrorState(error: error.toString());
       }
     } else if (event is LogOutEvent) {
-      authRepository.logOut();
+      await authRepository.logOut();
       yield AuthLoggedOutState();
     }
   }

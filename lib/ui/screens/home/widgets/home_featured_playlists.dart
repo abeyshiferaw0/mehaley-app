@@ -54,6 +54,7 @@ class _HomeFeaturedPlaylistsState extends State<HomeFeaturedPlaylists> {
       scrollDirection: Axis.horizontal,
       physics: BouncingScrollPhysics(),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: buildPlaylistItems(),
       ),
     );

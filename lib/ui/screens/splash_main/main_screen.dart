@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -82,7 +81,6 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<NewerVersionBloc>(context).add(
       ShouldShowNewVersionDialogEvent(),
     );
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
   }
 

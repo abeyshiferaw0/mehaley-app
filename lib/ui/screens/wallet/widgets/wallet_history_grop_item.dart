@@ -37,7 +37,7 @@ class WalletHistoryGroupItem extends StatelessWidget {
                 color: AppColors.txtGrey,
               ),
             ),
-            SizedBox(height: AppMargin.margin_24),
+            SizedBox(height: AppMargin.margin_16),
             ListView.separated(
               itemCount: walletHistoryGroup.walletHistoryList.length,
               physics: NeverScrollableScrollPhysics(),

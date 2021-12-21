@@ -147,7 +147,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
                     mainButtonText: AppLocale.of().delete.toUpperCase(),
                     cancelButtonText: AppLocale.of().cancel.toUpperCase(),
                     titleText:
-                        AppLocale.of().areUSureYouWantToDeleteFromDownloads(
+                        AppLocale.of().areYouSureUwantDeleteFromDownloads(
                       songName: L10nUtil.translateLocale(
                         widget.song.songName,
                         context,

@@ -480,6 +480,13 @@ class AppLocale {
   String get dontAskAgain => appLocalizations.dontAskAgain;
   String get featuringTxt => appLocalizations.featuringTxt;
 
+  String get youPurchasedSong => appLocalizations.youPurchasedSong;
+  String get youPurchasedAlbum => appLocalizations.youPurchasedAlbum;
+  String get youPurchasedPlaylist => appLocalizations.youPurchasedPlaylist;
+  String get youCheckedOutCart => appLocalizations.youCheckedOutCart;
+  String get youRechargedWallet => appLocalizations.youRechargedWallet;
+  String get youReceivedGift => appLocalizations.youReceivedGift;
+
   ///FUNCTIONS
 
   String featuring({required String artistName}) =>
@@ -500,9 +507,6 @@ class AppLocale {
 
   String cantFind({required String searchKey}) =>
       appLocalizations.cantFind(searchKey: searchKey);
-
-  String areUSureYouWantToDeleteFromDownloads({required String songName}) =>
-      appLocalizations.areUSureYouWantToDeleteFromDownloads(songName: songName);
 
   String songRemoveFromPlaylist({required String songName}) =>
       appLocalizations.songRemoveFromPlaylist(songName: songName);

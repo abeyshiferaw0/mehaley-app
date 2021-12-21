@@ -40,7 +40,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              AppAssets.icAppFullIconWhite,
+              AppAssets.icAppWordIconWhite,
               width: ScreenUtil(context: context).getScreenWidth() * 0.6,
             ),
             SizedBox(

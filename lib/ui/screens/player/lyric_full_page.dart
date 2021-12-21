@@ -288,7 +288,7 @@ class _LyricFullPageState extends State<LyricFullPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      AppAssets.icAppSmallIcon,
+                      AppAssets.icAppIconOnly,
                       width: AppIconSizes.icon_size_4.h,
                       fit: BoxFit.contain,
                     ),

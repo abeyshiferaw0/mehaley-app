@@ -452,6 +452,14 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String dontAskAgain = "Don't ask again";
   final String featuringTxt = "Featuring";
 
+  ///NOT TRANSLATED
+  final String youPurchasedSong = "Mezmur Purchased";
+  final String youPurchasedAlbum = "Album Purchased";
+  final String youPurchasedPlaylist = "Playlist Purchased";
+  final String youCheckedOutCart = "Cart Checked Cleared";
+  final String youRechargedWallet = "Wallet Recharged";
+  final String youReceivedGift = "Gift Received";
+
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";
   }
@@ -471,10 +479,6 @@ class AppLanguageStringsOro extends AppLocalizations {
 
   String cantFind({required String searchKey}) {
     return "Can't find $searchKey";
-  }
-
-  String areUSureYouWantToDeleteFromDownloads({required String songName}) {
-    return "Are you sure you want to Delete $songName from downloads?";
   }
 
   String songRemoveFromPlaylist({required String songName}) {

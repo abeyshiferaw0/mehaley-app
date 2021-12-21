@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
@@ -113,24 +112,18 @@ class _HomePageState extends State<HomePage>
 
   AppBar buildAppBar() {
     return AppBar(
-      toolbarHeight: AppIconSizes.icon_size_64,
-      leadingWidth: AppIconSizes.icon_size_64 + AppMargin.margin_16,
-      leading: Row(
+      leadingWidth: 0,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: AppMargin.margin_16,
-          ),
           Image.asset(
-            AppAssets.icAppFullIcon,
-            fit: BoxFit.contain,
-            width: AppIconSizes.icon_size_64,
-            height: AppIconSizes.icon_size_64,
+            AppAssets.icAppWordIcon,
+            fit: BoxFit.cover,
+            height: AppIconSizes.icon_size_20,
           ),
-          SvgPicture.asset(
-            'assets/icons/app_icons/mehaleysvg.svg',
-            width: AppIconSizes.icon_size_64,
-            height: AppIconSizes.icon_size_64,
-            fit: BoxFit.contain,
+          Expanded(
+            child: SizedBox(),
           ),
         ],
       ),
@@ -168,7 +161,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
         SizedBox(
-          width: AppPadding.padding_4,
+          width: AppPadding.padding_8,
         ),
       ],
     );

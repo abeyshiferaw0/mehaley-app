@@ -93,8 +93,9 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
             ///SEARCH PAGE HEADER
             SliverToBoxAdapter(
               child: MainAppBar(
-                leading: buildSearchElf(),
-              ),
+                  // leading: buildSearchElf(),
+
+                  ),
             ),
 
             SliverToBoxAdapter(

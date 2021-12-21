@@ -430,7 +430,12 @@ class _ArtistPageState extends State<ArtistPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            '${AppLocale.of().featuring} ${L10nUtil.translateLocale(artist.artistName, context)}',
+            '${AppLocale.of().featuring(
+              artistName: L10nUtil.translateLocale(
+                artist.artistName,
+                context,
+              ),
+            )}',
             textAlign: TextAlign.start,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
