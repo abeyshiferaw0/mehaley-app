@@ -26,7 +26,7 @@ class ItemHomeCategory extends StatelessWidget {
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(3),
         child: Container(
           height: AppValues.homeCategoriesItemHeight,
           width: AppValues.homeCategoriesItemWidth,

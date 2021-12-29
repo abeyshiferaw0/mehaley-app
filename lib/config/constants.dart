@@ -7,8 +7,8 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String baseUrl = 'http://3.142.111.145:8000/';
-  //static const String baseUrl = 'http://192.168.223.202:8181';
+  static const String baseUrl = 'https://api.mehaleye.com/';
+  // const String fileBaseUrl = 'https://d3h553g79vtr4k.cloudfront.net/';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
@@ -181,6 +181,7 @@ class AppValues {
   static const String systemUpdateBox = 'SYSTEM_UPDATE_BOX';
   static const String recentSearchesBox = 'RECENT_SEARCHES';
   static const String userBox = 'USER_BOX_KEY';
+  static const String AppMiscBox = 'APP_MISC_BOX';
   static const String minAppVersionKey = 'MIN_APP_VERSION_KEY';
   static const String likedSongsBox = 'LIKED_SONGS_BOX_KEY';
   static const String recentlyUnLikedSongBox = 'RECENTLY_LIKED_SONG_BOX';
@@ -259,6 +260,7 @@ class AppValues {
   static const double previewDialogSongItemSize = 60;
   static const int songSyncTimerGapInSeconds = 120;
   static const double appSplashIconSize = 150;
+  static const double songVideoItemHeight = 100;
 
   //static const String languageRadioGroupValue = 'LANGUAGE_RADIO';
 }

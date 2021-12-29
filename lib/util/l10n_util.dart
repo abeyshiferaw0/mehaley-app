@@ -15,6 +15,8 @@ class L10nUtil {
       return textLan.textEn;
     } else if (currentLocale == AppLanguage.OROMIFA) {
       return textLan.textOro;
+    } else if (currentLocale == AppLanguage.TIGRINYA) {
+      return textLan.textTig;
     } else {
       throw '${EnumToString.convertToString(currentLocale)} LANGUAGE NOT SUPPORTED';
     }

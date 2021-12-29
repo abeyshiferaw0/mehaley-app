@@ -23,7 +23,6 @@ import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/strings.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
-import 'package:mehaley/ui/common/test.dart';
 import 'package:mehaley/ui/screens/auth/sign_up_page.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
@@ -100,14 +99,14 @@ void main() async {
   });
 
   ///RUN APP
-  runApp(
-    Sizer(
-      builder: (context, orientation, deviceType) {
-        return TestWidget();
-      },
-    ),
-  );
-  //runApp(MyApp());
+  // runApp(
+  //   Sizer(
+  //     builder: (context, orientation, deviceType) {
+  //       return TestWidget();
+  //     },
+  //   ),
+  // );
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

@@ -28,6 +28,7 @@ class AppHiveBoxes {
   late Box songSyncBox;
   late Box likedSongsBox;
   late Box userBox;
+  late Box AppMiscBox;
   late Box settingsBox;
   late Box recentlyLikedSongBox;
   late Box recentlyUnLikedSongBox;
@@ -144,6 +145,11 @@ class AppHiveBoxes {
     ///USER DATA BOX
     userBox = await Hive.openBox<dynamic>(
       AppValues.userBox,
+    );
+
+    ///APP MISC BOX
+    AppMiscBox = await Hive.openBox<dynamic>(
+      AppValues.AppMiscBox,
     );
 
     ///RECENT SEARCH BOX

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -57,12 +58,16 @@ class SearchPersistentSliverHeaderDelegate
                     SizedBox(
                       width: AppMargin.margin_12,
                     ),
-                    Text(
-                      AppLocale.of().searchHint,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.txtGrey,
+                    Expanded(
+                      child: Text(
+                        AppLocale.of().searchHint,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.txtGrey,
+                        ),
                       ),
                     ),
                   ],

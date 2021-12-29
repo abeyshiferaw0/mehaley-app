@@ -37,6 +37,8 @@ import 'package:mehaley/ui/screens/search/search_result_dedicated.dart';
 import 'package:mehaley/ui/screens/search/search_result_page.dart';
 import 'package:mehaley/ui/screens/setting/settings_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
+import 'package:mehaley/ui/screens/videos/all_videos_page.dart';
+import 'package:mehaley/ui/screens/videos/yt_player.dart';
 import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 
@@ -74,6 +76,8 @@ class AppRouterPaths {
   static const String cartRoute = '/cart';
   static const String songAddToPlaylist = '/song_add_to_playlist';
   static const String howToPayPageRoute = 'how_to_pay_page';
+  static const String ytPlayerPage = 'yt_player_page';
+  static const String allVideosPage = 'all_videos_page';
 
   //ROUTE OBSERVER
   static final RouteObserver<ModalRoute<void>> routeObserver =
@@ -246,6 +250,7 @@ class AppRouter {
               child: SearchPage(),
             );
         break;
+
       case AppRouterPaths.searchResultRoute:
         final args = settings.arguments as ScreenArguments;
         builder = (_) => MultiBlocProvider(
@@ -319,6 +324,15 @@ class AppRouter {
       case AppRouterPaths.howToPayPageRoute:
         final args = settings.arguments as ScreenArguments;
         builder = (_) => HowToPayPage(initialUrl: args.args['initialUrl']);
+        break;
+
+      case AppRouterPaths.ytPlayerPage:
+        final args = settings.arguments as ScreenArguments;
+        builder = (_) => YouTubePlayerPage(videoLink: args.args['videoLink']);
+        break;
+
+      case AppRouterPaths.allVideosPage:
+        builder = (_) => AllVideosPage();
         break;
 
       default:

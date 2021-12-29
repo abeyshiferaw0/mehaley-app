@@ -527,6 +527,14 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 );
               }
+              if (state.itemType == AppItemsType.ARTIST) {
+                _navigatorKey.currentState!.pushNamed(
+                  AppRouterPaths.artistRoute,
+                  arguments: ScreenArguments(
+                    args: {'artistId': state.itemId},
+                  ),
+                );
+              }
             }
           },
         ),

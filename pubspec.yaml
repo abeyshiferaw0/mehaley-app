@@ -3,7 +3,7 @@ description: a music player engine
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.1+2
+version: 1.0.3+4
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -94,7 +94,7 @@ dependencies:
   #SCREEN SHOT
   screenshot: ^1.2.3
   #INAPP PURCHASE
-  purchases_flutter: ^3.7.0
+  in_app_purchase: ^2.0.1
   #WEBVIEW
   webview_flutter: ^2.3.1
   #BOT_TOAST
@@ -103,6 +103,8 @@ dependencies:
   uni_links: ^0.5.1
   #NEW APP VERSION
   new_version: ^0.2.3
+  #YOUTUBE
+  youtube_player_flutter: ^8.0.0
 
 
 

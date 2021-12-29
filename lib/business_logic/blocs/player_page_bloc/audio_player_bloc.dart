@@ -92,6 +92,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     } else if (event is PlayPauseEvent) {
       //PLAY PAUSE AUDIO
       playPauseAudio();
+    } else if (event is PauseEvent) {
+      if (audioPlayer.playing) {
+        audioPlayer.pause();
+      }
     } else if (event is PlayPauseChangedEvent) {
       //CHANGE PLAY PAUSE UI LISTENER
       yield AudioPlayerPlayPauseStateChangedState(isPlaying: event.isPlaying);

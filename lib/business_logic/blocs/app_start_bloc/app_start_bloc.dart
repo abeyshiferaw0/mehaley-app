@@ -19,19 +19,24 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
   ) async* {
     if (event is IsAppFirstLaunchEvent) {
       //CHECK IF APP IS FIRST TIME
-      final bool contains = AppHiveBoxes.instance.userBox.containsKey(
+      final bool contains = AppHiveBoxes.instance.AppMiscBox.containsKey(
         AppValues.isFirstTimeKey,
       );
       if (contains) {
-        final bool isFirstTime = AppHiveBoxes.instance.userBox.get(
+        final bool isFirstTime = AppHiveBoxes.instance.AppMiscBox.get(
           AppValues.isFirstTimeKey,
         );
         yield IsAppFirstLaunchState(isFirstTime: isFirstTime);
       } else {
         yield IsAppFirstLaunchState(isFirstTime: true);
       }
+
+      ///SET IS FIRST HIVE TO FALSE
+      this.add(
+        SetAppFirstLaunchEvent(isFirstTime: false),
+      );
     } else if (event is SetAppFirstLaunchEvent) {
-      AppHiveBoxes.instance.userBox.put(
+      await AppHiveBoxes.instance.AppMiscBox.put(
         AppValues.isFirstTimeKey,
         event.isFirstTime,
       );

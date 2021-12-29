@@ -64,6 +64,7 @@ import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/ui/screens/profile/edit_profile_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/create_user_playlist_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/edit_user_playlist_page.dart';
+import 'package:mehaley/ui/screens/videos/yt_player.dart';
 import 'package:mehaley/ui/screens/wallet/dialogs/dialog_wallet_recharge_initial.dart';
 import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
 import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
@@ -1244,12 +1245,10 @@ class PagesUtilFunctions {
   static Future<String> getAppVersionNumber() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    String appName = packageInfo.appName;
-    String packageName = packageInfo.packageName;
+    // String appName = packageInfo.appName;
+    // String packageName = packageInfo.packageName;
     String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-
-    print("packageInfo=> ${packageInfo.packageName}");
+    //String buildNumber = packageInfo.buildNumber;
 
     return version;
   }
@@ -1513,6 +1512,20 @@ class PagesUtilFunctions {
           ),
         );
       },
+    );
+  }
+
+  static void openYtPlayerPage(context, String videoLink) {
+    ///STOP PLAYER IF PLAYING
+    BlocProvider.of<AudioPlayerBloc>(context).add(
+      PauseEvent(),
+    );
+
+    ///NAVIGATE TO PLAYER PAGE
+    Navigator.of(context, rootNavigator: true).push(
+      createBottomToUpAnimatedRoute(
+        page: YouTubePlayerPage(videoLink: videoLink),
+      ),
     );
   }
 }

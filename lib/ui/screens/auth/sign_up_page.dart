@@ -25,11 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
     BlocProvider.of<AppStartBloc>(context).add(
       IsAppFirstLaunchEvent(),
     );
-    BlocProvider.of<AppStartBloc>(context).add(
-      SetAppFirstLaunchEvent(
-        isFirstTime: false,
-      ),
-    );
     super.initState();
   }
 

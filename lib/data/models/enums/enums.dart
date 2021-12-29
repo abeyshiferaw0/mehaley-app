@@ -89,3 +89,9 @@ enum PaymentType {
   WALLET,
   IN_APP,
 }
+
+enum AppVideoItemAction {
+  SHARE,
+  OPEN_AUDIO,
+  OPEN_WITH_YOUTUBE,
+}

@@ -110,7 +110,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                   (MyPlaylist myPlaylist) {},
                               onSongBuyClicked: () {
                                 PurchaseUtil.songMenuBuyButtonOnClick(
-                                    context, state);
+                                  context,
+                                  state,
+                                );
                               },
                             ),
                           );
@@ -131,7 +133,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100.0),
                                   border: Border.all(
-                                    width: 1,
+                                    width: 1.3,
                                     color: AppColors.lightGrey,
                                   ),
                                 ),

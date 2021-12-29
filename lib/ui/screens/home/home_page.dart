@@ -19,6 +19,7 @@ import 'package:mehaley/ui/screens/home/widgets/home_featured_albums.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_playlists.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_songs.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_groups.dart';
+import 'package:mehaley/ui/screens/home/widgets/home_page_carousel.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_recently_played.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -68,8 +69,8 @@ class _HomePageState extends State<HomePage>
   void initState() {
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
-
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+
     super.initState();
   }
 
@@ -178,6 +179,7 @@ class _HomePageState extends State<HomePage>
       physics: ClampingScrollPhysics(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: AppMargin.margin_32),
 
@@ -213,6 +215,9 @@ class _HomePageState extends State<HomePage>
           HomeFeaturedPlaylists(
             featuredPlaylists: homePageData.featuredPlaylist,
           ),
+
+          ///SONGS WITH VIDEOS
+          HomePageVideoCarousel(),
 
           ///BUILD HOME PAGE GROUPS
           buildGroupsListView(groups),

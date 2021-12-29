@@ -127,18 +127,18 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       }
                     },
                   ),
-                  // LanguageSettingItem(
-                  //   text: 'Tigrinya',
-                  //   isSelected: false,
-                  //   onTap: () {
-                  //     BlocProvider.of<LocalizationCubit>(context).changeLocale(
-                  //       appLanguage: AppLanguage.AMHARIC,
-                  //     );
-                  //     if (widget.onLanguageChanged != null) {
-                  //       widget.onLanguageChanged!();
-                  //     }
-                  //   },
-                  // ),
+                  LanguageSettingItem(
+                    text: 'Tigregna',
+                    isSelected: isLocaleSelected(AppLanguage.TIGRINYA),
+                    onTap: () {
+                      BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                        appLanguage: AppLanguage.TIGRINYA,
+                      );
+                      if (widget.onLanguageChanged != null) {
+                        widget.onLanguageChanged!();
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

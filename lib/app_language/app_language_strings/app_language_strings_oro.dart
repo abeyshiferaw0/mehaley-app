@@ -4,555 +4,586 @@ import 'package:mehaley/util/app_extention.dart';
 import '../app_localizations.dart';
 
 class AppLanguageStringsOro extends AppLocalizations {
-  final String appName = "Mehaleye";
-  final String byAppName = "By Mehaleye";
+  final String appName = "Gidduukoo";
+  final String byAppName = "Mahaaliyyee";
   final String appTermsAndCondition =
-      "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
-  final String logOut = "Log out";
-
-  final String removeFromCart = "Remove from cart";
-  final String addToCart = "Add to cart";
-  final String previewMode = "Preview mode";
-  final String buyMezmur = "Buy Mezmur";
-  final String buyAlbum = "Buy album";
-  final String buy = "Buy";
-  final String buyPlaylist = "Buy Playlist";
+      "Some text about Mahaaliyyee and terms and conditions and privacy policy, Some text about Mahaaliyyee and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
+  final String logOut = "Bahi";
+  final String removeFromCart = "Bittadownloadinga marsaa irraa ballessi";
+  final String addToCart = "Gara bittaa marsaatti galchi";
+  final String previewMode = " naamunaa isaa dhaggeeffadhaa";
+  final String buyMezmur = "Faarfannicha biti";
+  final String buyAlbum = "Albeemicha biti";
+  final String buy = "biti";
+  final String buyPlaylist = "Tarree sirbaa biti";
   final String buyMezmurToListenOffline =
-      "Buy the mezmur to download and listen offline";
-  final String follow = "follow";
-  final String following = "following";
-  final String addToFavorite = "Add to favorite";
-  final String removeFromFavorite = "Remove from favorite";
-  final String followArtist = "Follow zemari";
-  final String followPlaylist = "Follow playlist";
-  final String removeFromFollowedPlaylist = "Remove from followed playlist";
+      "Buusu fi intarneeta malee dhaggeeffachuuf faarfannicha biti";
+  final String follow = "duukaa bu’i";
+  final String following = "duukaa bu’aa jira";
+  final String addToFavorite = "gara filatamtootaatti galchi";
+  final String removeFromFavorite = "filatamtoota keessaa balleessi";
+  final String followArtist = "Faarfaticha duukaa bu’i";
+  final String followPlaylist = "Tarree sirbichaa dukaa bu’i";
+  final String removeFromFollowedPlaylist =
+      " Tarree sirbichaa dukaa bu’uu dhaabi";
   final String uAreListingToPreviewDesc =
-      "You are listening to a preview version, buy the mezmur to listen the full version";
-  final String downloadMezmur = "Download mezmur";
-  final String downloadProgressing = "Downloading...";
-  final String retryDownload = "Retry download";
-  final String deleteMezmur = "Delete mezmur";
-  final String shareAlbum = "Share album";
-  final String shareArtist = "Share zemari";
-  final String sharePlaylist = "Share playlist";
-  final String share = "Share";
-  final String shareMezmur = "Share Mezmur";
+      "Naamunaa faarfannichaa dhaggeeffataa jirta, hunda isaa dhaggeeffachuuf faarfannicha biti";
+  final String downloadMezmur = "faarfannicha buusi";
+  final String downloadProgressing = "buusaa jira...";
+  final String retryDownload = "buusuuf irra deebiyii yaali";
+  final String deleteMezmur = "faarfannicha haqi";
+  final String shareAlbum = "Albeemicha qoodi";
+  final String shareArtist = "faarfaticha qoodi";
+  final String sharePlaylist = "Tarree sirbichaa qoodi";
+  final String share = "Qoodi";
+  final String shareMezmur = "faarfannicha qoodi";
 
-  final String sortPlaylist = "Sort playlist";
-  final String findInPlaylist = "Find in playlist";
-  final String viewMezmursCategory = "View mezmur's category";
-  final String viewArtist = "View zemari";
-  final String viewAlbum = "View album";
-  final String addToQueue = "Add to queue";
-  final String addToPlaylist = "Add to playlist";
-  final String removeFromPlaylistMsg = "Remove from playlist";
-  final String addMezmurs = "Add mezmurs";
-  final String addToHomeScreen = "Add to home screen";
-  final String editPlaylist = "Edit playlist";
-  final String deletePlaylist = "Delete playlist";
-  final String delete = "Delete";
-  final String cancel = "Cancel";
-  final String downloadingStr = "Downloading";
-  final String noInternetMsg = "No internet connection";
+  final String sortPlaylist = "Tarree sirbichaa daraddari";
+  final String findInPlaylist = "Tarree sirbichaa keessa barbaadi";
+  final String viewMezmursCategory = "Rimiddii faarfannichaa ilaali";
+  final String viewArtist = "faarfaticha ilaali";
+  final String viewAlbum = "Albeemicha ilaalaa";
+  final String addToQueue = "Gara tarree xabachiiftuutti dabali";
+  final String addToPlaylist = "Gara tarree sirbaatti dabali";
+  final String removeFromPlaylistMsg = "tarree sirbaa keessaa balleessi";
+  final String addMezmurs = "Faarfannoowwan dabali";
+  final String addToHomeScreen = "Gara fuula agarsiistuu ka’umsaatti dabali";
+  final String editPlaylist = "Tarree sirbichaa sirreessi";
+  final String deletePlaylist = "Tarree sirbichaa haqi";
+  final String delete = "Haqi";
+  final String cancel = "Dhiisi";
+  final String downloadingStr = "Buusaa jira";
+  final String noInternetMsg = "Walqunnamtiin toora saaphanaa hinjiru";
   final String noInternetMsgDetail =
-      "You don't have a working internet connection, Check your internet connection";
-  final String tryAgain = "Try Again";
-  final String subscribeDialogTitle = "Subscribe To Mehaleye";
+      "Toora walqunnamtii saaphanaa hojjetu hinqabdu, walqunnamtii toora saaphanaa kee mirkaneeffadhu";
+  final String tryAgain = "Irra deebi’ii yaali";
+  final String subscribeDialogTitle = "Mahaliyyee sabskiraayib godhi";
   final String subscribeDialogMsg =
-      "Subscribe to Mehaleye and get unlimited access to all streams.";
-  final String subscribeNow = "Subscribe Now";
-  final String home = "Home";
-  final String search = "Search";
-  final String myLibrary = "My Library";
-  final String cart = "Cart";
-  final String libraryShort = "Li";
-  final String downAllPurchased = "Download all purchased";
-  final String yourOffline = "Your offline";
-  final String goToDownloadsMsg = "Go to downloads to listen offline";
-  final String free = "FREE";
-  final String purchased = "Purchased";
-  final String albumBy = "ALBUM BY";
-  final String playingFromPlaylist = "Playing from playlist";
-  final String playingFromAlbum = "Playing from album";
-  final String playingFromArtist = "Playing from zemari";
-  final String playingFromCart = "Playing from cart";
-  final String playingFromCategory = "Playing from category";
-  final String playingFromFeaturedAlbum = "Playing from featured album";
-  final String playingFromFeaturedPlaylist = "Playing from featured playlist";
-  final String playingFromFeaturedMezmurs = "Playing from featured mezmurs";
-  final String playingFromRecentlyPlayed = "Playing from recently played";
-  final String playingFrom = "Playing from";
-  final String mostListened = "most listened";
-  final String verifiedArtist = "Verified Zemari";
-  final String albums = "Albums";
-  final String playlists = "Playlists";
-  final String playlist = "playlist";
-  final String mezmurs = "Mezmurs";
-  final String album = "Album";
-  final String category = "Category";
-  final String artists = "Zemarian";
-  final String popular = "Popular";
-  final String latestReleases = "Latest Releases";
-  final String popularAlbums = "Top Albums";
-  final String similarArtist = "Similar Zemarian";
-  final String enterYourPhoneNumber = "enter your phoneNumber";
-  final String whatIsYourPhoneNumber = "What is your\nphone number ?";
+      "Mahaaliyyee sabskiraayib godhiti bilisaan onlaayiniidhaan dhaggeeffadhu";
+  final String subscribeNow = "Sabskiraayib godhi";
+  final String home = "Fuula ka’umsaa";
+  final String search = "Fuula barbaachaa";
+  final String myLibrary = "Fuula kiyya";
+  final String cart = "Bittaa marsaa";
+  final String libraryShort = "Ana";
+  final String downAllPurchased = "Kan bitaman hunda buusi";
+  final String yourOffline = "Walqunnamtii interneetaatiin ala jirta";
+  final String goToDownloadsMsg = "gara tarree buufamanii deemi";
+  final String free = "bilisaan";
+  final String purchased = "Kan bitame";
+  final String albumBy = "Albeemii tiin";
+  final String playingFromPlaylist = "Tarree sirbaa irraa xabachiisaa jira";
+  final String playingFromAlbum = "Albeemii irraa xabachiisaa jira";
+  final String playingFromArtist = "Faarfataa irraa xabachiisaa jira";
+  final String playingFromCart = "Bittaa marsaa irraa xabachiisaa jira";
+  final String playingFromCategory = "Rimiddii irraa xabachiisaa jira";
+  final String playingFromFeaturedAlbum =
+      "Albeemota adda bahanii dhiyaatan irraa xabachiisaa jira";
+  final String playingFromFeaturedPlaylist =
+      "Tarree sirbaa sirbaa irraa xabachiisaa jira";
+  final String playingFromFeaturedMezmurs =
+      "Faarfannoowwan adda bahaanii dhiyaatani irraa xabachiisaa jira";
+  final String playingFromRecentlyPlayed =
+      "Kan dhiyeenya xabate irraa xabachaa jira";
+  final String playingFrom = "ከIrraa xabachaa jira";
+  final String mostListened = "Kan baayyee dhaggeeffatame";
+  final String verifiedArtist = "Faarfataa mirkanaa’e";
+  final String albums = "Albeemota";
+  final String playlists = "Tarreewwan sirbaa";
+  final String playlist = "Tarree sirbaa";
+  final String mezmurs = "Faarfannoo";
+  final String album = "Albeemii";
+  final String category = "Rimiddii";
+  final String artists = "Faarffattoota";
+  final String popular = "Beekamaa";
+  final String latestReleases = "Kan dhiyeenya kana gadhiifaman";
+  final String popularAlbums = "Albeemota beekamoo";
+  final String similarArtist = "Faarfattoota walfakkaatoo";
+  final String enterYourPhoneNumber = "Lakkoofsa bilbilaa ke galchi";
+  final String whatIsYourPhoneNumber = "Lakkoofsi bilbilaa kee meeqa dha?";
   final String phoneVerificationMsg =
-      "We will text you a verification code to verify\nyour identity";
-  final String sendSms = "Send SMS";
-  final String sendingSms = "Sending SMS";
-  final String continueWithPhoneNumber = "Continue with phone";
-  final String searchForCountryCode = "Search for country code";
-  final String invalidPhoneNumber = "Invalid phone number !";
-  final String noCountryCode = "No country found";
+      "Eenyummaa kee mirkaneessuuf koodii mirkaneessituu siif ergina።";
+  final String sendSms = "SMS ergi";
+  final String sendingSms = "SMS ergaa jira";
+  final String continueWithPhoneNumber = "Bilbila keetiin itti fufi";
+  final String searchForCountryCode = "Koodii biyya keetii barbaadi";
+  final String invalidPhoneNumber = "Lakkoofsa bilbilaa sirrii hintaane!";
+  final String noCountryCode = "Biyyi kamiyyu hinargamne";
   final String pinAlreadySent =
-      "Pin code already sent\ntry again after a while";
-  final String verifying = "Verifying";
-  final String verify = "Verify";
-  final String pinNotFilled = "Pin not filled";
-  final String didntReciveSms = "Didn't receive SMS?";
-  final String resendCode = "Resend Code";
-  final String enterSixDigitMenu = "Enter the  6 digit pin sent to";
-  final String enterYourCode = "Enter your code";
-  final String verifyYourPhone = "Verify your phone";
-  final String continueWithApple = "Continue with apple";
-  final String continueWithFacebook = "Continue with facebook";
-  final String continueWithGoogle = "Continue with google";
-  final String continueWithPhone = "Continue with phone";
+      "PIN koodiin ergameera yeroo xiqqoon booda\nirra deebiyii yaali";
+  final String verifying = "Mirkaneessaa jira";
+  final String verify = "Mirkaneessi";
+  final String pinNotFilled = "PINiin hinguutamne";
+  final String didntReciveSms = "SMS’n si hinqaqqabnee?";
+  final String resendCode = "Koodicha irra deebiyii ergi";
+  final String enterSixDigitMenu = "PInii abbaa lakkoofsa 6 ergame galchi";
+  final String enterYourCode = "Koodii kee galchi";
+  final String verifyYourPhone = "Bilbila kee mirkaneessi";
+  final String continueWithApple = "Appiliidhaan itti fufi";
+  final String continueWithFacebook = "Feesbuukiidhaan itti fufi";
+  final String continueWithGoogle = "Googiliidhaan itti fufi";
+  final String continueWithPhone = "Bilbila keetiin itti fufi";
   final String authenticationFailedMsg =
-      "Authentication Failed!\nCheck your internet connection";
+      "Mirkaneessi hinmilkoofne!\n Walqunnamtii toora saaphanaa nke mirkaneeffadhu";
   final String couldntConnectMsg =
-      "Couldn't connect to the internet, check your internet connection";
-  final String queue = "Queue";
+      "Toora saaphanaa waliin walqunnamuu hindandeenye, walqunnamtii toora saaphanaa ke mirkaneeffadhu";
+  final String queue = "Tarree xabachiiftuu";
   final String unableToClearCart =
-      "Unable to clear cart\ncheck your internet connection";
-  final String cartCleared = "Cart cleared";
-  final String cartIsEmpty = "Your cart is currently empty";
+      "Bittaa marsaa kee balleessuun hindanda’amne\nWalqunnamtii toora saaphanaa kee mirkaneeffadhu";
+  final String cartCleared = "Bittaan marsaa kee balleffameera";
+  final String cartIsEmpty = "Bittaan marsaa kee duwwadha";
   final String empityCartCheckOutMsg =
-      "Before proceeding to check out you, must add some items to yor cart";
-  final String goToHomeScreen = "Go to home screen";
-  final String cartTitle = "Mehaleye Cart";
-  final String total = "Total";
-  final String checkOut = "Check Out";
-  final String cartSummery = "Cart Summery";
+      "Wantoota adda addaa kaa’uudhaan bitta marsaa kee raawwadhu";
+  final String goToHomeScreen = "Gara fuula ka’umsaaa deemi";
+  final String cartTitle = "Bittaa marsaa";
+  final String total = "Waliigala";
+  final String checkOut = "Hunda isaa biti";
+  final String cartSummery = "Tarree bittaa marsaa";
   final String remove = "Remove";
-  final String networkError = "Network Error";
-  final String emptyCategory = "Empty category";
-  final String checkYourInternetConnection = "Check your internet Connection";
-  final String categories = "Categories";
-  final String featuredMezmurs = "Featured Mezmurs";
-  final String recentlyPlayed = "Recently Played";
-  final String purchasedMezmurs = "Purchased Mezmurs";
-  final String purchasedAlbums = "purchased albums";
-  final String purchasedPlaylists = "purchased playlists";
-  final String followedArtists = "followed zemarian";
-  final String followedPlaylists = "followed playlists";
-  final String listenOffline = "Listen Offline";
-  final String noMezmursToPlay = "no mezmurs to play";
-  final String noAlbumsToSelect = "no albums to select";
-  final String myPlaylists = "My Playlists";
-  final String downloadAllPurchased = "Download All Purchased";
-  final String sort = "Sort";
-  final String sortBy = "Sort by";
-  final String latestDownloads = "Latest downloads";
-  final String titleAz = "Title(A-z)";
-  final String artistAz = "Zemari(A-z)";
-  final String newest = "Newest";
-  final String oldest = "Oldest";
-  final String all = "All";
-  final String noPlaylistToSelect = "no playlists to select";
-  final String uDontHaveFavAlbums = "You don't have any favorite\nAlbums";
-  final String uDontHaveFavMezmurs = "You don't have any favorite\nMezmurs";
-  final String favoriteMezmurs = "favorite mezmurs";
-  final String uAreNotFollowingArtist = "You are not following any\Zemarians";
-  final String uAreNotFollowingPlaylist = "You are not following any\nPlaylist";
-  final String uHaventCreatedPlaylist = "You haven't created any playlists";
-  final String createNewPlaylist = "Create New playlist";
-  final String uDontHaveDownloads = "You don't have any downloads";
-  final String offlineMezmurs = "offline mezmurs";
-  final String uDontHavePurchasedAlbums =
-      "You don't have any purchased\nAlbums";
-  final String uDontHavePurchase = "You don't have any\nPurchases";
+  final String networkError = "Interneetiin hinjiru";
+  final String emptyCategory = "Rimiddiin duwwaadha";
+  final String checkYourInternetConnection =
+      "Walqunnamtii toora saaphanaa ke mirkaneffadhu";
+  final String categories = "Rimiddiiwwan";
+  final String featuredMezmurs = "Faarfannoowwan adda bahanii dhiyaatan";
+  final String recentlyPlayed = "Kan dhhiyeenya xabachiifaman";
+  final String purchasedMezmurs = "Faarfannawwan bitaman";
+  final String purchasedAlbums = "የተገዙ አልበሞች";
+  final String purchasedPlaylists = "Tarreewwan sirbaa bitaman";
+  final String followedArtists = "የሚከተሉዋቸው ዘማሪያን";
+  final String followedPlaylists = "Tarreewwan sirbaa duukaa buutu";
+  final String listenOffline = "Intarneta malee dhaggeffadhu";
+  final String noMezmursToPlay =
+      "Faarfannaa gosa kamiiyyu dhaggeffachuun hindanda’amne";
+  final String noAlbumsToSelect =
+      "Albeemii kamiyyu xxabachiisuun hindanda’amne";
+  final String myPlaylists = "Tarreewwan sirbaa kiyya";
+  final String downloadAllPurchased = "Kan bitaman hunda buusi";
+  final String sort = "Daraddarri";
+  final String sortBy = "Akka itti aanuti daraddari";
+  final String latestDownloads = "Kan dhiyeenya buufamna";
+  final String titleAz = "Mata duree (A-z)";
+  final String artistAz = "Faarfataa(A-z)";
+  final String newest = "Haaraadhaan ";
+  final String oldest = "Kan tureen";
+  final String all = "Hunda";
+  final String noPlaylistToSelect = "Tarreen sirbaa filatamu hinjiru";
+  final String uDontHaveFavAlbums = "Albeemota jaallatamoo kamiyyu\nhinqabdu";
+  final String uDontHaveFavMezmurs =
+      "Faarfannoowwan jaallatamoo kamiyyu\nhinqabdu";
+  final String favoriteMezmurs = "Faarfannowan jaaallatamoo";
+  final String uAreNotFollowingArtist =
+      "Faarfattota kamiyyu duukaa bu’aa\n hinjirtu";
+  final String uAreNotFollowingPlaylist =
+      "Tarree sirbaa kamiyyu duukaa bu’aa\n hinjrtu";
+  final String uHaventCreatedPlaylist = "Tarreewwan sirbaa kamiyyu hin uumamne";
+  final String createNewPlaylist = "Tarree sirbaa haaraa uumi";
+  final String uDontHaveDownloads = "Faarfannaa bu’e kamiyyu hinqabdu";
+  final String offlineMezmurs = "Faarfannowwan bu’an";
+  final String uDontHavePurchasedAlbums = "Albeemota bitaman kamiyyu\nhinqabdu";
+  final String uDontHavePurchase = "Bittaa kamiyyu\nhinqabdu";
   final String uDontHavePurchasedPlaylists =
-      "You don't have any purchased\nPlaylists";
+      "Tarreewwan sirbaa bitaman kamiyyu\nhinqabdu";
   final String uDontHavePurchasedMezmurs =
-      "You don't have any purchased\nMezmurs";
-  final String autoDownload = "Auto download";
+      "Faarfannoowwan bitaman kamiyyu \nhinqabdu";
+  final String autoDownload = "Tokko tokkoon buusi";
   final String autoDownloadMsg =
-      "Start Downloading Purchased Mezmurs Automatically";
-  final String newPlaylist = "New playlist";
-  final String somethingWentWrong = "Something Went Wrong";
-  final String offline = "Offline";
-  final String favorites = "Favorites";
-  final String refreshing = "Refreshing ...";
-  final String dailyQuotes = "Daily Quotes";
-  final String lyrics = "Lyrics";
-  final String lyricBy = "Lyric By";
-  final String cantLoadLyrics = "Can't load lyric";
-  final String playlistBy = "Playlist By";
+      "Faarfannoowwan bitaman tokko tokkoon buusuu jalaqabi";
+  final String newPlaylist = "Tarree sirbaa haaraa";
+  final String somethingWentWrong = "Dogoggorri uumameera";
+  final String offline = "Kan buufaman";
+  final String favorites = "Kan jaallataman";
+  final String refreshing = "Haaromsu irra...";
+  final String dailyQuotes = "Caqafamtoota guyyaa";
+  final String lyrics = "Walaloo";
+  final String lyricBy = "Walaloo irraa";
+  final String cantLoadLyrics = "Walaloo argachuun hindanda’mne";
+  final String playlistBy = "Tarree sirbaa irraa";
   final String unableToUpdateProfile =
-      "Unable to update profile\ncheck your internet connection";
-  final String profileUpdated = "Profile updated";
-  final String profileName = "Profile Name";
-  final String chooseImage = "Choose Image";
-  final String trackAPhoto = "Take a photo";
-  final String pickFromGallery = "Pick From Gallery";
-  final String removeImage = "Remove Image";
-  final String changeImage = "change image";
-  final String editProfile = "Edit Profile";
-  final String userNameCantBeEmpty = "User name can't be empty";
-  final String save = "Save";
-  final String notingToShow = "Noting to show";
-  final String seeAll = "See All";
-  final String purchases = "Purchases";
-  final String allCategories = "All Categories";
-  final String topCategories = "Top Categories";
-  final String topMezmurs = "Top Mezmurs";
-  final String topArtists = "Top Zemarians";
-  final String searchTitle = "Search Mehaleye";
-  final String changeYourSearchKey = "Try changing your search key";
-  final String searchHint = "Search mehaleye for mezmurs, albums, playlists";
-  final String searchHint2 = "Albums , Zemarian , Playlist's ...";
-  final String searchElfFor = "Search Mehaleye For";
-  final String recentSearches = "Recent Searches";
-  final String clearRecentSearches = "Clear Recent Searches";
-  final String seeAllPlaylists = "see all playlists";
-  final String seeAllAlbums = "see all albums";
-  final String seeAllArtists = "see all zemarian";
-  final String seeAllMezmurs = "see all mezmurs";
-  final String settings = "Settings";
-  final String dataSaver = "Data Saver";
+      "ibsam kee sirreessuun hindanda’amne\n Walqunnamtii toora saaphanaa kee mirkaneeffadhu";
+  final String profileUpdated = "ibsamni kee sirraa’eera";
+  final String profileName = "Maqaa ibsamaa";
+  final String chooseImage = "fakii filadhu";
+  final String trackAPhoto = "suura kaasii";
+  final String pickFromGallery = "Gaalarii keessaa filadhu";
+  final String removeImage = "Fakii ke balleesi";
+  final String changeImage = "Fakii kee jijjiri";
+  final String editProfile = "Ibsama kee sirressi";
+  final String userNameCantBeEmpty = "Maqaan ibsamaa duwwaa ta’uu hindanda’u";
+  final String save = "itti fufi";
+  final String notingToShow = "wanti argamu oomtuu hinjiru";
+  final String seeAll = "Hunda ilaali";
+  final String purchases = "bittaawwan";
+  final String allCategories = "Rimiddiiwwan hunda";
+  final String topCategories = "Rimiddiwwan beekamoo";
+  final String topMezmurs = "Faarfannoowwan beekamoo";
+  final String topArtists = "Faarfattota beekamoo";
+  final String searchTitle = "Mahaaliyyedhaan barbaadi";
+  final String changeYourSearchKey = "Barreeffama kee jijjiruuf yaali";
+  final String searchHint =
+      "Faarfannoowwan, Albeemota fi faarfattoota Mahaaliyyedhaan barbaadaa";
+  final String searchHint2 = "Albeemota, Faarfattoota, Tarree sirbootaa ...";
+  final String searchElfFor = " Mahaaliyyedhaan barbaadi ";
+  final String recentSearches = "Barbaachota yeroo dhiyoo";
+  final String clearRecentSearches = " Barbaachota yeroo dhiyoo balleessi";
+  final String seeAllPlaylists = " Tarree sirbootaa hunda ilaali";
+  final String seeAllAlbums = "Albeemota hunda ilaali";
+  final String seeAllArtists = "Faarfattota hunda ilaali";
+  final String seeAllMezmurs = "Faarfannowwan hunda ilaali";
+  final String settings = "Sirreessituu";
+  final String dataSaver = "Daataa qusattuu";
   final String dataSaverMsg =
-      "Lowers the quality of your mezmurs streams, for lower data usage";
-  final String preferredPaymentMethod = "Preferred Payment method";
+      "Fayyadama daataa gadi bu’aadhaaf qulqullina istriimii faarfannowwanii hirrisa";
+  final String preferredPaymentMethod = "Mala kaffaltii filatamaa";
   final String chooseYourPreferredMethod =
-      "Choose your preferred payment method for all purchases";
-  final String preferredDownlaodQuality = "Preferred download quality";
+      "Bittaawwan hundaaf mala kaffaltii filatamaa ke filadhu";
+  final String preferredDownlaodQuality = "Qulqullina buustuu filatamaa";
   final String preferredDownlaodQualityMsg =
-      "Choose your preferred audio quality for all downloads";
-  final String chooseYourLanguge = "Choose Your Language";
-  final String reciveNotifications = "Receive Notifications";
-  final String viewProfile = "View profile";
-  final String couldntConnect = "Couldn't connect to the internet";
-  final String songAddedToFavorites = "Mezmur added to favorites";
-  final String songRemovedToFavorites = "Mezmur removed from favorites";
-  final String albumAddedToFavorites = "Album added to favorites";
-  final String albumRemovedToFavorites = "Album removed from favorites";
-  final String playlistAddedToFavorites = "Playlist added to followed";
-  final String playlistRemovedToFavorites = "Playlist removed from followed";
-  final String artistsAddedToFavorites = "Zemari added to followed";
-  final String artistsRemovedToFavorites = "Zemari removed from followed";
-  final String albumAddedToCart = "Album added to cart";
-  final String albumRemovedToCart = "Album removed from cart";
-  final String songAddedToCart = "Mezmur added to cart";
-  final String songRemovedToCart = "Mezmur removed from cart";
-  final String playlistAddedToCart = "Playlist added to cart";
-  final String playlistRemovedToCart = "Playlist removed from cart";
-  final String by = "By";
-  final String yourNotConnected = "You're not connected to the internet";
-  final String helloCash = "Hello Cash";
-  final String mbirr = "Mbirr";
-  final String cbeBirr = "CBE Birr";
-  final String amole = "Amole";
-  final String visa = "Visa";
-  final String mastercard = "MasterCard";
-  final String alwaysUsePayment = "Always use selected payment method?";
-  final String chooseYourPaymentMethod = "Choose your payment method";
+      "Buustuu hundaatiif qulqullina sagalee filatamaa ke filadhu";
+  final String chooseYourLanguge = "Afaan kee filadhu";
+  final String reciveNotifications = "Biiksiftuu simadhu";
+  final String viewProfile = "Ibsama kee ilaali";
+  final String couldntConnect =
+      "Toora saaphanichaa waliin walqunnamuu hindana’mne";
+  final String songAddedToFavorites =
+      "Faarfannichi gara jaallatamtootaatti makameera";
+  final String songRemovedToFavorites =
+      "መFaarfannichi jaallatamtoota keessaa balleeffameera";
+  final String albumAddedToFavorites =
+      "Albeemichi gara jaallatamtootaatti makameera";
+  final String albumRemovedToFavorites =
+      "Albeemichi jaallatamtoota keessaa balleeffameera";
+  final String playlistAddedToFavorites =
+      "Tarreen sirbichaa gara duukaa buututti makameera";
+  final String playlistRemovedToFavorites =
+      "Tarreen sirbichaa duukaa buutuu keessaa balleeffameera";
+  final String artistsAddedToFavorites =
+      "Faarfatichi gara duukaa buututti makameera";
+  final String artistsRemovedToFavorites =
+      "Faarfataan dukaa buutuu keessaa balleeffameera";
+  final String albumAddedToCart = "Albeemichi gara bittaa marsaatti makameera";
+  final String albumRemovedToCart =
+      "Albeemichi bittaa marsaa keessaa balleeffameera";
+  final String songAddedToCart = "Faarfannichi gara bittaa marsaatti makameera";
+  final String songRemovedToCart =
+      "Faarfannichi bittaa marsaa irraa balleeffameera";
+  final String playlistAddedToCart =
+      "Tarreen sirbaa gara bittaa marsaatti makameera";
+  final String playlistRemovedToCart =
+      "Tarreen sirbaa bittaa marsaa keessaa balleeffameera";
+  final String by = "tiin";
+  final String yourNotConnected = "Toora saaphana waliin walhinquunnamne";
+  final String helloCash = "Helookaashii";
+  final String mbirr = "Emmi Birrii";
+  final String cbeBirr = "CBE Birrii";
+  final String amole = "Amoolee";
+  final String visa = "Viizaa";
+  final String mastercard = "Maasterkaardii";
+  final String alwaysUsePayment =
+      "Yeroo hunda mala kaffaltii filatametti fayyadamtaa?";
+  final String chooseYourPaymentMethod = "Mala kaffaltii";
   final String chooseYourPaymentMethodMsg =
-      "Complete your purchase with your preferred payment method";
-  final String currentlySeletced = "Currently Selected";
-  final String selectPaymentMethod = "Select Payment Method";
-  final String paymentMethod = "Payment Method";
+      "Mala kaffaltii kee filatteen xumuri";
+  final String currentlySeletced = "Kan amma filatame";
+  final String selectPaymentMethod = "Mala kaffaltii filadhu";
+  final String paymentMethod = "Mala kaffaltii";
   final String selectYourPrefrredPayment =
-      "Select your preferred payment method for all purchases, you can change it at any time";
-  final String unFollow = "UnFollow";
-  final String removeFromFollowedArtist = "Remove From Followed Zemarian";
-  final String removeFromFavoriteMezmurs = "Remove From Favorite Mezmurs";
-  final String deletePlaylistPermanently = "Delete playlist permanently";
-  final String clearAll = "Clear All";
+      "Bittaawwan hundaatiif mala kaffaltii filatamaa kee filadhu, yeroo kamiyyu tti jijjiiru dandeessa";
+  final String unFollow = "Duukaa hinbu’iin";
+  final String removeFromFollowedArtist =
+      "Tarree duukaa bu’uu keessaa balleessa";
+  final String removeFromFavoriteMezmurs =
+      "Tarree jaallatamaa keessaa balleessi";
+  final String deletePlaylistPermanently =
+      "Tarree sirbichaa hanga dhumaatti haqi";
+  final String clearAll = "Hunda isaa qulqulleessi";
   final String areYouSureUWantToClearCart =
-      "Are you sure you want to clear your cart?";
-  final String goodMorning = "Good Morning";
-  final String goodAfterNoon = "Good Afternoon";
-  final String goodEvening = "Good Evening";
-  final String goodNight = "Good Night";
-  final String nowPlaying = "Now Playing";
-  final String nextUp = "Next Up";
-  final String pushNotifications = "Push notifications";
-  final String newReleases = "New Releases";
-  final String latestUpdates = "Latest Updates";
-  final String dailyCerlabrations = "Daily Ceremonies";
+      "Bittaa marsaa kee qulqulleessuu akka barbaaddu mirkaneeffatteettaa?";
+  final String goodMorning = "Akkam bulte";
+  final String goodAfterNoon = "Akkam ooltan";
+  final String goodEvening = "Akkam ooltan";
+  final String goodNight = "Akkam ooltan";
+  final String nowPlaying = "Amma xabachaa jira";
+  final String nextUp = "Itti aanee";
+  final String pushNotifications = "Beeksisoota adda addaa";
+  final String newReleases = "Beeksisoota haaraa gadhiifaman";
+  final String latestUpdates = "Beeksisoota yeroo dhiyoo";
+  final String dailyCerlabrations = "Ayyaanota guyyaanii";
   final String unableToCreatePlaylist =
-      "Unable to create playlist\ncheck your internet connection";
+      "Tarree sirbaa uumuun hindanda’amne\nWalqunnamtii toora saaphanaa kee mirkaneeffadhu";
 
-  final String createPlaylist = "Create Playlist";
-  final String addDescripption = "Add Description";
-  final String createPlaylistMsg =
-      "Create and manage your own customized playlists with Mehaleye";
-  final String playlistName = "Playlist Name";
-  final String takeAPhoto = "Take a Photo";
-  final String removeIImage = "Remove Image";
-  final String playlistNameCantBeEmpty = "Playlist name can't be empty";
+  final String createPlaylist = " Tarree sirbaa uumi";
+  final String addDescripption = "Ibsa itti maki";
+  final String createPlaylistMsg = "Tarree sirbaa mataa keetii uumiiti bulchi";
+  final String playlistName = "Maqaa tarree sirbaa";
+  final String takeAPhoto = "Suura kaasi";
+  final String removeIImage = "fakii balleessi";
+  final String playlistNameCantBeEmpty =
+      "Maqaan tarree sirbaa duwwaa ta’uu hindanda’u";
   final String unableUpdatePlaylist =
-      "Unable to update playlist\ncheck your internet connection";
-  final String addSomeDescription = "Add some description";
-  final String addDescription = "Add Description";
+      "Tarree sirbichaa sirreessuun hindanda’amne\nWalqunnamtii toora saaphana kee mirkaneeffadhu";
+  final String addSomeDescription = "Ibsama dabalataa maki";
+  final String addDescription = "Ibsama guuti";
 
-  final String addToExistingPlaylist = "Add to existing playlists";
+  final String addToExistingPlaylist =
+      "Gara tarree sirbaa duraan tureetti maki";
   final String youHaventCreatedAnyPlaylistMsg =
-      "You haven't created any playlists press new playlist to start adding.";
-  final String addToNewPlaylist = "Add to newly created playlist";
+      "Tarreewwan sirbaa oomtuu hin uumamne, faarfannoowwan gara tarree sirbaatti makuu jalqabuuf tarree sirbichaa gadi qabaa";
+  final String addToNewPlaylist = "Gara tarree sirbaa haaraa uumameetti maki";
   final String unableToAddMezmur =
-      "Unable to add mezmur to playlist\ncheck your internet connection";
+      "Faarfannicha gara tarree sirbaatti makuun hindanda’amne\nwalqunnamtii toora saphanaa kee mirkaneeffadhu";
   final String unableToRemoveFromPlaylist =
-      "Unable to remove mezmur from playlist\ncheck your internet connection";
+      "Faarfannicha tarree sirbaa keessaa balleessuun hindanda’amne\n walqunnamtii toora saphanaa kee mirkaneeffadhu";
   final String unableToDeletePlaylist =
-      "Unable to delete playlist\ncheck your internet connection";
-  final String addSongs = "Add Mezmurs";
-  final String addSongsToPlaylist = "Add Mezmurs to your playlist";
-  final String dailyQuotesFromApp = "Daily Quotes From Mehaleye";
-  final String enablePermissions = "Enable Permissions";
+      "Tarree sirbichaa haquun hindanda’amne\n walqunnamtii toora saaphanaa kee mirkaneeffadhu";
+  final String addSongs = "Faarfannoowwan maki";
+  final String addSongsToPlaylist = "Faarfannowwan gara tarree sirbaatti maki";
+  final String dailyQuotesFromApp = "Caqafamtoota guyyaa Mahaaliyyee irraa";
+  final String enablePermissions = "Hayyama kenni";
   final String enablePermissionsMsg =
-      "Following Permissions are Required To Continue, please go to system setting and allow permissions";
-  final String goToSystemSettings = "Go To Settings";
-  final String cameraAccess = "Camera Access";
-  final String notificationAccess = "Notification Access";
-  final String photoAccess = "Photos Access";
-  final String rateApp = "Rate Mehaleye";
+      "Itti fufuudhaaf hayyamoonni itti aanan ni barbaachisu, Maaloo gara sirreessituu sirnaa deemiti hayyama kenni";
+  final String goToSystemSettings = "Gara sirreessituu sirnaa deemi";
+  final String cameraAccess = "Hayyama kaameraa";
+  final String notificationAccess = "Beeksisa hayyami";
+  final String photoAccess = "Suuraalee hayyami";
+  final String rateApp = "Mahaaliyyeef sadarkaa kenni";
   final String rateAppMsg =
-      "Take a minute to rate our app and help support to improve more new features";
-  final String areUSureWantToLogOut = "Are you sure?";
+      "Mahaaliyyeef qabxii kennudhaan raawwachiiftuicha akka fooyyesinuuf nugargaari";
+  final String areUSureWantToLogOut = "Mirkaneefattee jirtaa?";
   final String areUSureWantToLogOutMsg =
-      "Are you sure you want to log out from Mehaleye";
-  final String preferredCurrency = "Preferred Currency";
+      "Bahuu akka barbaaddu mirkaneeffattee jirtaa";
+  final String preferredCurrency = "Sharafa filatamaa";
   final String preferredCurrencySettingMsg =
-      "Your Preferred currency will be used to display prices";
-  final String shareApp = "Share Mehaleye";
-  final String shareAppMsg = "Share Mehaleye with friends and family";
-  final String retryingDownloadMsg = "Retrying Download";
-  final String play = "Play";
-  final String onlyOnElf = "Only On Mehaleye";
-  final String welcome = "Welcome";
-  final String google = "Google";
-  final String facebook = "Facebook";
-  final String apple = "Apple";
-  final String downloadStartedMsg = "Download started";
+      "Gatii sharafaa filatamaa kee agarsiisuf tajaajila irra ola";
+  final String shareApp = "Mahaaliyyee qoodaa";
+  final String shareAppMsg = "Mahaaliyyee hiriyya fi maatii keetiif qoodi።";
+  final String retryingDownloadMsg = "irra deebi’ee yaalutti jira";
+  final String play = "Xabachiisi";
+  final String onlyOnElf = "Mahaaliyyee irratti qofa";
+  final String welcome = "Baga nagaan dhuftan";
+  final String google = "Googilii";
+  final String facebook = "Feesbookii";
+  final String apple = "Appilii";
+  final String downloadStartedMsg = "Buusuun jalqabameera";
   final String firstTimeDialogMsg =
-      "Pick your default language, you can change it latter in settings";
-  final String welcomeToMehaley = "Welcome to mehaleye";
-  final String chooseYourPreferredCurrency = "Choose your preferred currency";
-  final String expand = "Expand";
-  final String enableNotifications = "Enable Notifications";
+      "Afaan kee filadhu, sirreessituu keessatti booda sirreessuu dandeessa";
+  final String welcomeToMehaley = "Baga gara Mahaaliyyeetti nagaan dhuftan";
+  final String chooseYourPreferredCurrency = "Sharafa filatamtuu kee filadhu";
+  final String expand = "Ballisi";
+  final String enableNotifications = "Beeksisaaf hayyama kenni";
   final String enableNotificationsMsg =
-      "Enable notifications, so you don't miss the latest mezmurs and updates from mehaleye";
-  final String notNow = "Not now";
-  final String done = "Done";
-  final updateRequired = "Update required to continue using mehaleye";
+      "Akka farfannoowwan haaraa fi haaromsitoonni dabalataa si hindabarreef hayyama beeksiftuu ibsi";
+  final String notNow = "Amma hinta’u";
+  final String done = "Raawwadhu";
+  final updateRequired =
+      "Maahaliyyeetti fayyadamuu itti fufuudhaaf raawwachiftichi haaromfamuu barbaada";
   final updateRequiredMsg =
-      "Dear user, the current version of the application is no longer supported, please update mehaleye to enjoy new features";
-  final newerVersion = "Newer Version";
-  final currentVersion = "Current Version";
-  final updateApp = "Update app";
-  final String openingSong = "Opening mezmur";
-  final String sharedMezmur = "Shared Mezmur";
-  final String cartAlreadyCheckedOut = "Cart already checked out";
-  final String cartAlreadyCheckedOutMsg =
-      "Your cart is already checked out, try refreshing cart page!!";
-  final String billCanceled = "Bill Canceled";
-  final String billCanceledMsg =
-      "You bill was cancelled, use another bill to recharge your wallet";
-  final String noHistory = "No History";
+      "Jaalle fayyadama, raawwachiiftuun amma harkaa qabdan kan yeroon itti darbe dha, maaloo amaloota haaraa argachuudhaaf Mahaaliyyee haaromsi";
+  final newerVersion = "Oomishama haaraa";
+  final currentVersion = "Oomishama ammaa";
+  final updateApp = "Raawwachiiftuu haarmsi";
+  final String openingSong = "Faarfannicha banaa jira";
+  final String sharedMezmur = "Faarfannaa qoodame";
 
-  final String giftReceived = "Gift Received";
-  final String giftFrom = "Gift From";
+  final String cartAlreadyCheckedOut = "Bittaan Marsaa durumaan bitameera";
+  final String cartAlreadyCheckedOutMsg = " Bittaan Marsaa durumaan bitameera";
+  final String billCanceled = "Biilichi haqameera";
+  final String billCanceledMsg =
+      "Biilichi haqameera, waaletii kee guutuuf biilii haaraa uumi";
+  final String noHistory = "Seenaan hinjiru";
+
+  final String giftReceived = "Kennaa simatteetta";
+  final String giftFrom = "Kennaa irraa";
   final String purchaseNetworkError =
-      "Unable to complete purchase\nCheck your internet connection!!";
-  final String completingPurchase = "Completing purchase";
-  final String yourCurrentBalance = "Your Current Balance";
-  final String today = "Today";
-  final String yesterday = "Yesarday";
-  final String walletHistory = "Wallet History";
-  final String help = "Help";
-  final String selectedAmount = "Selected amount";
+      "Bittaa taasisuun hindanda’amne\n Walqunnamtii toora saaphanaa kee mirkaneffadhu!!";
+  final String completingPurchase = "Bittaa taasisaa jira";
+  final String yourCurrentBalance = "Herrega haftee kee";
+  final String today = "Harr’a";
+  final String yesterday = "Kaleessa";
+  final String walletHistory = "Seenaa halkan keetii";
+  final String help = "Fuula gargaarsaa";
+  final String selectedAmount = "Hanga filatame";
   final String invalidWalletRechargeAmountSelected =
-      "Please select a valid amount";
+      "Maaloo hanga sirrii filadhu";
   final String areYouSureUWantToCancelBill =
-      "Are You Sure You Want To Cancel Your Bill";
+      "Herrega kee haquu akka barbaaddu mirkaneeffattee?";
   final String walletRechargeInitialErrorMsg =
-      "Something went wrong\nUnable to initiate wallet recharge";
+      "Dogoggorri uumameera\n Waaletii kee gutuu jalqabuun hindanda’amne";
 
   final String walletRechargeFinalErrorMsg =
-      "Something went wrong\nUnable to recharge your wallet";
+      "Dogoggorri uumameera\n Waaletii kee gutuu jalqabuun hindanda’amne";
 
   final String billNotPaidYetMsg =
-      "Bill not paid yet,\nRecharge your wallet by paying this bill";
-  final String billAlreadyPaidMsg = "Bill is already paid!";
-  final String refreshingWallet = "Refreshing Wallet";
+      "Biilichi hanga ammaa hinkaffalamne\n Biilii kana kaffaluudhaan waaletii kee irra deebi’ii guuti";
+  final String billAlreadyPaidMsg = "Biilichi dursee kaffalamee jira!";
+  final String refreshingWallet = "Waaletii kee haaromsaa jira";
   final String billStatusFailedMsg =
-      "Checking bill status failed, check your internet connection";
+      "Haala biilii keetii mirkaneeffachuun hindanda’amne, walqunnamtii toora saaphanaa kee mirkaneefadha";
   final String billCancelFailedMsg =
-      "Canceling bill status failed, check your internet connection";
-  final String checkBillStatus = "Check Bill Status";
-  final String checkingBillStatus = "Checking Bill Status";
-  final String close = "Close";
-  final String transactionDate = "Transaction Date";
-  final String paidUsing = "Paid using";
-  final String totalAmountPaid = "Total Amount Paid";
-  final String walletRechargedSuccessfully = "Wallet Recharged Successfully";
+      "Biilii kee haquun hindanda’amne, walqunnamtii toora saaphanaa kee mirkaneefadha ";
+  final String checkBillStatus = "Biilicha mirkaneeffadhu";
+  final String checkingBillStatus = "Hala biilichaa sakatta’aa jira";
+  final String close = "cufi";
+  final String transactionDate = "Guyyaa bittee fi gurgurtaa";
+  final String paidUsing = "Kan kaffalame tiin";
+  final String totalAmountPaid = "Waliigala hanga kaffalamee";
+  final String walletRechargedSuccessfully =
+      "Waaletiin kee haala milkaa’een guutameera";
   final String walletRechargedSuccessfullyMsg =
-      " Your payment has been processed!\ndetails of transaction are included below";
-  final String cancelBill = "Cancel bill";
-  final String howToPay = "How To Pay Bill?";
+      "Kaffaltiin kee haala milkaa’en taasifameera!\n Tarreen bittee fi gurgurtaa armaan gadii kessatti ammatameera";
+  final String cancelBill = "Biilicha haqi";
+  final String howToPay = "Biilii akamiin kaffaluun danda’ama?";
   final String howToPayMsg =
-      "Get instruction on how to pay bill when recharging your wallet";
-  final String refreshWallet = "Refresh Wallet";
+      "ዋYeroo waaletiin kee guutamu akkamiin akka herrega kaffaltu qajeelfama argadhu";
+  final String refreshWallet = "Waaletii haaromsi";
   final String refreshWalletMsg =
-      "If you have recently recharged your wallet and didn't’t see any updates try refreshing your wallet";
-  final String myWalletBalance = "My Wallet Balance";
-  final String appWallet = "Maheleye Wallet";
-  final String selectAmountToTopUp = "Select amount to top up";
-  final String rechargeYourWallet = "Recharge your wallet";
-  final String or = "Or";
-  final String enterOtherAmount = "Enter Other Amount";
-  final String proceedToPayment = "Proceed to payment";
+      "Yeroo dhiyootti yoo waaletii kee guutte fi jijjirama yoo hinargine waaletii kee haaromsuudhaan yaali";
+  final String myWalletBalance = "Herrega haftee";
+  final String appWallet = "Waaleetii Mahaliyyee";
+  final String selectAmountToTopUp = "Hanga guutamu filadhu";
+  final String rechargeYourWallet = "Waaleetii ke guuti";
+  final String or = "yokiin";
+  final String enterOtherAmount = "hanga garabiroo galchi";
+  final String proceedToPayment = "gara kaffaltiitti itti fufi";
   final String billInfoMsg =
-      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking …)";
+      "Akkam bo, hanga guutuu barbaaddu filadhuuti waaletii kee CBE Birritiin, mobaayil baankiingii Baki Daldalaa, mobaayil baankingi Baankii Abisiiniyaatiin ...........kaffaluudhaan waletii ke guuti";
   final String unPaidBillMsg =
-      "You have an unpaid previous bill, you can recharge your wallet by paying this bill or you can cancel and create a new bill.";
-  final String previousUnPaidBill = "Previous Unpaid Bill Available";
-  final String cancelBillAndContinue = "Cancel bill & continue";
-  final String amount = "Amount";
-  final String birr = "Birr";
-  final String copyCode = "Copy Code";
-  final String billCode = "Bill Code";
-  final String unpaidBillCode = "Unpaid Bill Code";
-  final String payBill = "Pay Bill To Recharge Your Wallet";
+      "Biilii hinkaffalamiin darbe qabda, biilii kana kaffaludhaan waaletii kee guutu dandessa, ykn biilicha haquudhaan haaraa uumuu dandeessa";
+  final String previousUnPaidBill = "Biiliin kan hinkaffalmii darbe jira";
+  final String cancelBillAndContinue = "Biilicha haqiiti itti fufi";
+  final String amount = "Hanga";
+  final String birr = "Qarshii";
+  final String copyCode = "Koodii koppii godi";
+  final String billCode = "Koodii biilii";
+  final String unpaidBillCode = "Koodii biilii hinkaffalamnee";
+  final String payBill = "Waaletii ke guutuuf biilicha kaffali";
   final String payBillMsg =
-      "Hi, copy the bill code and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
-  final String goToPurchased = "Go to purchased";
-  final String copiedToClipboard = "Copied To Clipboard";
+      "Akkami bo, biilicha koppii gochuudhaan CBE Birritiin, mobaayil baankiingii Baki Daldalaa, mobaayil baankingi Baankii Abisiiniyaatiin ...........kaffaluudhaan waletii ke guuti";
+  final String goToPurchased = "Gara faarfannowwan bitamanii deemi";
+  final String copiedToClipboard = "Gara gabateetti waraabameera";
 
-  final String songPurchased = "Mezmur Purchased";
-  final String albumPurchased = "Album Purchased";
-  final String playlistPurchased = "Playlist Purchased";
-  final String cartCheckedOut = "Cart Checked Out";
-  final String cartCheckOut = "Cart Check Out";
-  final String cartCheckedOutMsg = "Purchase Multiple Items At once";
-  final String walletRecharged = "Wallet Recharged";
+  final String songPurchased = "Faarfannichi bitameera";
+  final String albumPurchased = "Albeemichi bitameera";
+  final String playlistPurchased = "Tarreen sirbaa bitameera";
+  final String cartCheckedOut = "Bittaan marsaa raawwatameera";
+  final String cartCheckOut = "Bittaa marsaa raawwadhu";
+  final String cartCheckedOutMsg =
+      "Faarfannowwan, Albeemota, tarreewwan sirbootaa yeroo tokkoon biti";
+  final String walletRecharged = "Waaletiin kee guutameera";
 
-  final String rechargeWallet = "Recharge Wallet";
-  final String walletInsufficient = "Wallet Balance Insufficient";
+  final String rechargeWallet = "Waaletii keee guuti";
+  final String walletInsufficient =
+      "Waaletii kee keessa herregni gahaan hinjiru";
   final String walletInsufficientMsg =
-      "Your Wallet Balance Is Insufficient To Make This Purchase, Please Recharge Your Wallet And Try Again";
+      "Bittaa kana raawwachuuf herregni waaletii keeti gahaa miti, maaloo waletii kee guutiti irra deebi’ii yaali";
 
-  final String newVersionAvailable = "New Version Available";
+  final String newVersionAvailable =
+      "Raawwachiiftuun Mahaliyyee oomishni haaraan jira";
   final String newVersionAvailableMsg =
-      "New version of mehaleye is available, update app to get the latest features and improvements";
-  final String maybeLatter = "Maybe latter";
-  final String dontAskAgain = "Don't ask again";
-  final String featuringTxt = "Featuring";
+      "Oomishni Mahaaliyyee haaraan jira, amaloota yeroo dhiyoo fi fooyyefamoota argachuuf rawwachifticha haaromsi";
+  final String maybeLatter = "Tarii booddee";
+  final String dontAskAgain = "Irra deebitee hingaafatiin";
+  final String featuringTxt = "Adda baafamanii kan dhiyaatan";
 
-  ///NOT TRANSLATED
-  final String youPurchasedSong = "Mezmur Purchased";
-  final String youPurchasedAlbum = "Album Purchased";
-  final String youPurchasedPlaylist = "Playlist Purchased";
-  final String youCheckedOutCart = "Cart Checked Cleared";
-  final String youRechargedWallet = "Wallet Recharged";
-  final String youReceivedGift = "Gift Received";
-
+  final String youPurchasedSong = "Faarfannaa  bitteetta";
+  final String youPurchasedAlbum = "Albeemii bitteetta";
+  final String youPurchasedPlaylist = "Tarree sirbaa bitteetta";
+  final String youCheckedOutCart = "Bittaa marsaa rawwatteetta";
+  final String youRechargedWallet = "Waaletii guuttetta";
+  final String youReceivedGift = "Kennaa waaletii simatteetta";
   String featuring({required String artistName}) {
-    return "Playlists Featuring $artistName";
+    return "$artistName Tarree sirbootaa hammataman";
   }
 
   String noOfSongs({required String noOfSong}) {
-    return "$noOfSong Mezmurs";
+    return "$noOfSong Faarfannoowwan";
   }
 
   String downloading({required String songName}) {
-    return "Downloading $songName";
+    return "$songNameን Buusaa jira";
   }
 
   String searchDedicatedTitle(
       {required String searchKey, required String appItemType}) {
-    return "\"$searchKey\" in $appItemType";
+    return "\"$searchKey\" $appItemType Keessa";
   }
 
   String cantFind({required String searchKey}) {
-    return "Can't find $searchKey";
+    return "$searchKeyን Argachuu hindandenye";
   }
 
   String songRemoveFromPlaylist({required String songName}) {
-    return "Remove $songName From this playlist?";
+    return "$songNameን Tarree sirbaa keessa balleessuu?";
   }
 
   String areYouSureUwantDeleteFromDownloads({required String songName}) {
-    return "Are you sure you want to Delete $songName from downloads?";
+    return "Mirkaneeffatteettaa $songName’n Kan buufaman keessaa haquu barbaaddaa?";
   }
 
   String downloadComplete({required String songName}) {
-    return "$songName Download complete";
+    return "$songNameን Buusuun xummuramee jira";
   }
 
   String preferredPaymentChangedTo({required String paymentName}) {
-    return "Preferred payment changed to $paymentName";
+    return "Malli kaffaltii filatamaan gara $paymentName tii jijjiirameera";
   }
 
   String popularSongsBy({required String artistName}) {
-    return "Popular mezmur's by $artistName";
+    return "Faarfannoowwan beekamoo  $artistName tti";
   }
 
   String playlistUpdated({required String playlistName}) {
-    return "Playlist $playlistName updated";
+    return "Tarree sirbaa $playlistName sirraa’eera";
   }
 
   String playlistCreated({required String playlistName}) {
-    return "Playlist $playlistName created";
+    return "Tarree sirbaa $playlistName uumameera";
   }
 
   String songAddedToPlaylist(
       {required String songName, required String playlistName}) {
-    return "$songName added to $playlistName";
+    return "$songName gara $playlistName makameera";
   }
 
   String songRemovedPlaylist(
       {required String songName, required String playlistName}) {
-    return "$songName removed from $playlistName";
+    return "$songName  $playlistName irraa balleffameera balleeffameera";
   }
 
   String playlistDeleted({required String playlistName}) {
-    return "$playlistName deleted";
+    return "$playlistName balleeffameera";
   }
 
   String unableToRemoveFromCart({required String unabledName}) {
-    return "Unable to remove $unabledName from cart\ncheck your internet connection";
+    return "$unabledName’n bittaa marsaa irraa balleessun hindanda’amne\n walqunnamtii toora saaphanaa kee mirkaneeffadhu";
   }
 
   String playingFromSearchResult({required String searchKey}) {
-    return "Playing From Search Result $searchKey";
+    return "Bu’aa barbaachaa irraa xabachaa jira $searchKey";
   }
 
   String playingFromArtistName({required String artistName}) {
-    return "Playing From $artistName";
+    return " $artistName irraa xabachaa jira";
   }
 
   String byUserName({required String userName}) {
-    return "by $userName";
+    return "tti $userName";
   }
 
   String noOfAlbum({required String noOfAlbums}) {
-    return "$noOfAlbums Albums";
+    return "$noOfAlbums Albeemota";
   }
 
   String numberOfFollowers({required String numberOf}) {
-    return "$numberOf Followers";
+    return "$numberOf duuka buutota";
   }
 
   String numberOfMezmurs({required String numberOf}) {
-    return "$numberOf Mezmurs";
+    return "$numberOf Faarfannowwan";
   }
 
   String removedFromCart({required String removedName}) {
-    return "$removedName removed from cart";
+    return "$removedName Bittaa marsaa irraa balleeffameera";
   }
 
   String appNameAndVersion({required String versionCode}) {
@@ -560,72 +591,78 @@ class AppLanguageStringsOro extends AppLocalizations {
   }
 
   String appVersion({required String versionCode}) {
-    return "Version $versionCode";
+    return "oomisha $versionCode";
   }
 
   String activeBillMsg({required String date}) {
-    return "You have created a bill on $date, which isn't paid yet, you can recharge your wallet by paying this bill.";
+    return "ttin $date Biilii hanga ammaa hinkaffalamiin uummteetta,  biilii kana kaffaluudhaan waaletii kee guutuu dandeessa.";
   }
 
   String walletRechargedSuccessTransactionNumber(
       {required String transactionNumber}) {
-    return "Transaction Number : $transactionNumber";
+    return "lakk. Bittaa fi gurgurtaa : $transactionNumber";
   }
 
   String howToPayWith({required String paymentMethod}) {
-    return "How to pay bill with\n$paymentMethod ?";
+    return "$paymentMethod’n \n akkamitti biilii ke kaffaluu dandeessa?";
   }
 
   String alreadyPurchased({required PurchasedItemType purchasedItemType}) {
     String item = '';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur ";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album ";
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannichi";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
+      item = "Albeemichi";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist ";
-    return "${item}Already Purchased";
+      item = "Tarree sirbichaa";
+    return "$item dursee bitameera";
   }
 
   String alreadyPurchasedMsg({required PurchasedItemType purchasedItemType}) {
     String item = '';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = " Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = " Album";
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannaa";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Albeemii";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = " Playlist";
-    return "You Have Already Purchased This$item";
+      item = "Tarree sirba";
+    return " $item kana armaan dura bittee jirta";
   }
 
   String itemIsForFree({required PurchasedItemType purchasedItemType}) {
     String item = '';
     if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
-      item = "Mezmur Is ";
+      item = "Faarfannaa kana";
     if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
-      item = "Album Is ";
+      item = "Albeemii kana";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist Is ";
-    return "${item}Available For Free";
+      item = "Tarree sirbaa kana";
+    return "$item bilisaan argachuu dandeessa";
   }
 
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) {
-    String item = 'Item';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannaa";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
+      item = "Albeem,ii";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist";
-    return "The $item you're trying to buy is now free, enjoy listening on Mehaleye";
+      item = "Tarree sirbaa";
+    return "Kan bituuf yaalte $item bilisaan argachuu dandeessa, enjoy listening on Mehaleye";
   }
 
   String purchaseItemMsg(
       {required double amount, required PurchasedItemType purchasedItemType}) {
-    String item = 'Item';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannaa kana";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT)
+      item = "Albeemii kana";
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist";
-
-    return "By Purchasing This $item ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+      item = "Tarree sirbaa kana";
+    return "$item yommuu bittu ${amount.parsePriceAmount()} $birr waletii kee irraa hirrifama";
   }
 
   String cartCheckOutMsg({required double cartTotalPrice}) {
-    return "By Checking Out Your Cart ${cartTotalPrice.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
+    return "yommuu bittaa marsaa kanaa raawwattu${cartTotalPrice.parsePriceAmount()} $birr waaletii kee irraa hirrifama";
   }
 }

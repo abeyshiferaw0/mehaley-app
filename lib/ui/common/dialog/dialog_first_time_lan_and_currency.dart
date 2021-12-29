@@ -204,6 +204,20 @@ class _DialogFirstTimeLanAndCurrencyState
                 widget.onLanguageChange();
               },
             ),
+            SizedBox(
+              height: AppMargin.margin_16,
+            ),
+            buildPickerItem(
+              context: context,
+              text: 'Tigregna',
+              isSelected: isLocaleSelected(AppLanguage.TIGRINYA),
+              onTap: () {
+                BlocProvider.of<LocalizationCubit>(context).changeLocale(
+                  appLanguage: AppLanguage.TIGRINYA,
+                );
+                widget.onLanguageChange();
+              },
+            ),
           ],
         );
       },

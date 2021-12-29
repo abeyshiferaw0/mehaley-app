@@ -53,6 +53,11 @@ class PlayPauseEvent extends AudioPlayerEvent {
   List<Object?> get props => [];
 }
 
+class PauseEvent extends AudioPlayerEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class PlayPauseChangedEvent extends AudioPlayerEvent {
   final bool isPlaying;
 

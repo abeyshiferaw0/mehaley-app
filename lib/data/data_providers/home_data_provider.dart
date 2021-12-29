@@ -23,7 +23,7 @@ class HomeDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/home-api",
+        url: AppApi.musicBaseUrl + "/home-api/",
       );
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
@@ -37,7 +37,7 @@ class HomeDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/home-api",
+        url: AppApi.musicBaseUrl + "/home-api/",
       );
       return response;
     }

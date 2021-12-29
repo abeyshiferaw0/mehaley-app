@@ -1,3 +1,4 @@
+import 'package:mehaley/app_language/app_language_strings/app_language_strings_tig.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -20,6 +21,8 @@ class AppLocale {
       appLocalizations = AppLanguageStringsEn();
     } else if (appLanguage == AppLanguage.OROMIFA) {
       appLocalizations = AppLanguageStringsOro();
+    } else if (appLanguage == AppLanguage.TIGRINYA) {
+      appLocalizations = AppLanguageStringsTig();
     } else {
       throw '$appLanguage LANGUAGE NOT SUPPORTED';
     }
