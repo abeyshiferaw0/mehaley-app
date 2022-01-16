@@ -74,4 +74,8 @@ class AuthProvider {
     );
     return response;
   }
+
+  clearDioCache() async {
+    await ApiUtil.deleteAllCache();
+  }
 }

@@ -52,7 +52,7 @@ class SongQueueItem extends StatelessWidget {
                 width: AppValues.queueSongItemSize,
                 height: AppValues.queueSongItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl + song.albumArt.imageMediumPath,
+                imageUrl: song.albumArt.imageMediumPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),

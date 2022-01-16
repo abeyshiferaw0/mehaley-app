@@ -4,17 +4,17 @@ import 'package:logger/logger.dart';
 class AppBlocDelegate extends BlocObserver {
   var logger = Logger();
 
-  // @override
-  // void onTransition(Bloc bloc, Transition transition) {
-  //   super.onTransition(bloc, transition);
-  //   logger.d(transition);
-  // }
-  //
-  // @override
-  // void onChange(BlocBase bloc, Change change) {
-  //   logger.i(change);
-  //   super.onChange(bloc, change);
-  // }
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    logger.d(transition);
+  }
+
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    logger.i(change);
+    super.onChange(bloc, change);
+  }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {

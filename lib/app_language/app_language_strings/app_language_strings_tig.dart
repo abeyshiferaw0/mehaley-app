@@ -441,6 +441,12 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String youRechargedWallet = "ዋሌት መሊኦም ኣለው";
   final String youReceivedGift = "ናይ ዋሌት ውፅኢት ተቐቢሎም";
 
+  final String videos = "ስ";
+  final String allVideos = "ኩሎም ቪዲዮታት";
+  final String emptyVideos = "ባዶ ቪዲዮ";
+  final String otherVideos = "ካልእ ቪዲዮ";
+  final String cantFindOtherVideos = "ካልእ ቪዲዮ ክደሊ አይክኣልኩን";
+
   String featuring({required String artistName}) {
     return "$artistName ዘእተኻዮም ፕሌይሊስትታት";
   }

@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -33,8 +32,7 @@ class LibraryPlaylistItem extends StatelessWidget {
               withShadow: false,
               radius: 6.0,
               child: CachedNetworkImage(
-                imageUrl:
-                    AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
+                imageUrl: playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) => Stack(
                   children: [
                     Container(

@@ -24,7 +24,7 @@ class PlaylistDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-playlist",
+        url: AppApi.musicBaseUrl + "/get-playlist/",
         queryParameters: {'id': playlistId},
       );
       return response;
@@ -39,7 +39,7 @@ class PlaylistDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-playlist",
+        url: AppApi.musicBaseUrl + "/get-playlist/",
         queryParameters: {'id': playlistId},
       );
       return response;

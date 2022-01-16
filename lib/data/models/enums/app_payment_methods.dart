@@ -5,17 +5,11 @@ part 'app_payment_methods.g.dart';
 @HiveType(typeId: 24)
 enum AppPaymentMethods {
   @HiveField(0)
-  METHOD_AMOLE,
+  METHOD_YENEPAY,
   @HiveField(1)
-  METHOD_CBE_BIRR,
+  METHOD_TELEBIRR,
   @HiveField(2)
-  METHOD_HELLO_CASH,
+  METHOD_INAPP,
   @HiveField(3)
-  METHOD_MBIRR,
-  @HiveField(4)
-  METHOD_VISA,
-  @HiveField(5)
-  METHOD_MASTERCARD,
-  @HiveField(6)
   METHOD_UNK,
 }

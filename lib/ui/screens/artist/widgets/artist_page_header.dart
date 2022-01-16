@@ -62,8 +62,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             fit: BoxFit.cover,
             height: AppValues.artistSliverHeaderHeight,
             width: double.infinity,
-            imageUrl: AppApi.baseUrl +
-                artistPageData.artist.artistImages[0].imageMediumPath,
+            imageUrl: artistPageData.artist.artistImages[0].imageLargePath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, e) => buildImagePlaceHolder(),
           ),
@@ -166,6 +165,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: AppColors.white,
+                    fontStyle: FontStyle.italic,
                     fontSize: AppFontSizes.font_size_28.sp,
                     fontWeight: FontWeight.w600,
                   ),

@@ -15,7 +15,6 @@ import 'package:sizer/sizer.dart';
 import '../app_card.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
-import 'menu_items/album_cart_menu_item.dart';
 import 'menu_items/menu_item.dart';
 
 class AlbumMenuWidget extends StatelessWidget {
@@ -65,7 +64,6 @@ class AlbumMenuWidget extends StatelessWidget {
                           },
                         )
                       : SizedBox(),
-                  AlbumCartMenuItem(album: album),
                   AlbumFavoriteMenuItem(
                     hasTopMargin: true,
                     isDisabled: false,
@@ -121,7 +119,7 @@ class AlbumMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
+              imageUrl: album.albumImages[0].imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),

@@ -112,7 +112,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Expanded(
       flex: 25,
       child: CachedNetworkImage(
-        imageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
+        imageUrl:  song.albumArt.imageSmallPath,
         imageBuilder: (context, imageProvider) => Stack(
           children: [
             Container(

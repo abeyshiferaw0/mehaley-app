@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -14,7 +15,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
   final String imgUrl;
   final String title;
   final double priceEtb;
-  final double priceUsd;
+  final IapProduct priceUsd;
   final bool isDiscountAvailable;
   final bool isBought;
   final double discountPercentage;

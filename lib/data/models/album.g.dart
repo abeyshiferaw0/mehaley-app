@@ -24,24 +24,23 @@ class AlbumAdapter extends TypeAdapter<Album> {
       albumImages: (fields[3] as List).cast<RemoteImage>(),
       artist: fields[4] as Artist,
       priceEtb: fields[5] as double,
-      priceDollar: fields[6] as double,
+      priceDollar: fields[6] as IapProduct,
       isFree: fields[7] as bool,
       isDiscountAvailable: fields[8] as bool,
       discountPercentage: fields[10] as double,
       isOnlyOnElf: fields[11] as bool,
       isFeatured: fields[12] as bool,
       isLiked: fields[13] as bool,
-      isInCart: fields[14] as bool,
-      albumReleaseDate: fields[15] as DateTime,
-      albumDateCreated: fields[16] as DateTime,
-      albumDateUpdated: fields[17] as DateTime,
+      albumReleaseDate: fields[14] as DateTime,
+      albumDateCreated: fields[15] as DateTime,
+      albumDateUpdated: fields[16] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Album obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.albumId)
       ..writeByte(1)
@@ -71,12 +70,10 @@ class AlbumAdapter extends TypeAdapter<Album> {
       ..writeByte(13)
       ..write(obj.isLiked)
       ..writeByte(14)
-      ..write(obj.isInCart)
-      ..writeByte(15)
       ..write(obj.albumReleaseDate)
-      ..writeByte(16)
+      ..writeByte(15)
       ..write(obj.albumDateCreated)
-      ..writeByte(17)
+      ..writeByte(16)
       ..write(obj.albumDateUpdated);
   }
 

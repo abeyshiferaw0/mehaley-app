@@ -11,6 +11,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/screens/player/widgets/bg_player_gradient.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_widgets.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class PlayerPage extends StatefulWidget {
   const PlayerPage({Key? key}) : super(key: key);
@@ -86,7 +87,11 @@ class _PlayerPageState extends State<PlayerPage> {
   void playerPageListeners(BuildContext context, AudioPlayerState state) {
     if (state is AudioPlayerCurrentSongChangeState) {
       ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
-      if (!state.song.isFree && !state.song.isBought && !isPagePopped) {
+      final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+      if (!state.song.isFree &&
+          !state.song.isBought &&
+          !isUserSubscribed &&
+          !isPagePopped) {
         isPagePopped = true;
         Navigator.pop(context);
       }
@@ -110,7 +115,8 @@ class _PlayerPageState extends State<PlayerPage> {
           if (currentItem != null) {
             MediaItem mediaItem = (currentItem.tag as MediaItem);
             Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
-            if (!song.isFree && !song.isBought) {
+            final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+            if (!song.isBought && !song.isFree && !isUserSubscribed) {
               ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
               if (!isPagePopped) {
                 Navigator.pop(context);

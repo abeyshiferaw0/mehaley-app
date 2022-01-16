@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -16,220 +14,6 @@ class PurchaseUtil {
   ////////////////////////////////////
   /////////MAIN FUNCTIONS////////////
   ///////////////////////////////////
-  static void miniPlayerBuyButtonOnClick(
-      context, GlobalKey<NavigatorState> navigatorKey, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startSongBuyingProcess(
-      context: context,
-      song: song,
-      onPurchasesSuccess: () {
-        ///STEP => STOP PLAYER
-        BlocProvider.of<AudioPlayerBloc>(context).add(StopPlayerEvent());
-
-        ///STEP => GO TO PURCHASED SONGS
-        goToLibraryPageWithNavigatorKey(
-          navigatorKey,
-          LibraryFromOtherPageTypes.PURCHASED_SONGS,
-        );
-      },
-    );
-  }
-
-  static void songMenuBuyButtonOnClick(context, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startSongBuyingProcess(
-      context: context,
-      song: song,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED SONGS
-        goToLibraryPage(
-          context,
-          LibraryFromOtherPageTypes.PURCHASED_SONGS,
-        );
-      },
-    );
-  }
-
-  static void songPreviewModeDialogBuyButtonOnClick(
-      context, GlobalKey<NavigatorState> navigatorKey, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startSongBuyingProcess(
-      context: context,
-      song: song,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED SONGS
-        goToLibraryPageWithNavigatorKey(
-          navigatorKey,
-          LibraryFromOtherPageTypes.PURCHASED_SONGS,
-        );
-      },
-    );
-  }
-
-  static void playlistHomePageBuyButtonOnClick(context, Playlist playlist) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPlaylistBuyingProcess(
-      context: context,
-      playlist: playlist,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED ALBUM PAGE
-        goToPlaylistPage(
-          context,
-          playlist,
-        );
-
-        ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-        showPlaylistSuccessTransparentDialog(
-          context,
-          playlist,
-        );
-      },
-    );
-  }
-
-  static void albumHomePageBuyButtonOnClick(context, Album album) {
-    ///STEP => SHOW BUYING DIALOGS
-    startAlbumBuyingProcess(
-      context: context,
-      album: album,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED ALBUM PAGE
-        goToAlbumPage(
-          context,
-          album,
-        );
-
-        ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-        showAlbumSuccessTransparentDialog(
-          context,
-          album,
-        );
-      },
-    );
-  }
-
-  static void playlistPageHeaderBuyButtonOnClick(context, Playlist playlist) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPlaylistBuyingProcess(
-      context: context,
-      playlist: playlist,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED PLAYLIST PAGE
-        goToPlaylistPage(
-          context,
-          playlist,
-        );
-
-        ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-        showPlaylistSuccessTransparentDialog(
-          context,
-          playlist,
-        );
-      },
-    );
-  }
-
-  static void playlistMenuBuyButtonOnClick(
-      context, Playlist playlist, bool isFromPlaylistPage) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPlaylistBuyingProcess(
-      context: context,
-      playlist: playlist,
-      onPurchasesSuccess: () {
-        if (isFromPlaylistPage) {
-          ///IF FROM PLAYLIST PAGE
-          ///STEP => GO TO PURCHASED PLAYLIST PAGE
-          goToPlaylistPage(
-            context,
-            playlist,
-          );
-
-          ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-          showPlaylistSuccessTransparentDialog(
-            context,
-            playlist,
-          );
-        } else {
-          ///IF NOT FROM PLAYLIST PAGE
-          ///STEP => GO TO PURCHASED PLAYLIST
-          goToLibraryPage(
-            context,
-            LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS,
-          );
-        }
-      },
-    );
-  }
-
-  static void albumPageHeaderBuyButtonOnClick(context, Album album) {
-    ///STEP => SHOW BUYING DIALOGS
-    startAlbumBuyingProcess(
-      context: context,
-      album: album,
-      onPurchasesSuccess: () {
-        ///STEP => GO TO PURCHASED ALBUM PAGE
-        goToAlbumPage(
-          context,
-          album,
-        );
-
-        ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-        showAlbumSuccessTransparentDialog(
-          context,
-          album,
-        );
-      },
-    );
-  }
-
-  static void albumMenuBuyButtonOnClick(
-      context, Album album, bool isFromAlbumPage) {
-    ///STEP => SHOW BUYING DIALOGS
-    startAlbumBuyingProcess(
-      context: context,
-      album: album,
-      onPurchasesSuccess: () {
-        if (isFromAlbumPage) {
-          ///IF FROM ALBUM PAGE
-          ///STEP => GO TO PURCHASED ALBUM PAGE
-          goToAlbumPage(
-            context,
-            album,
-          );
-
-          ///STEP => SHOW TRANSPARENT SUCCESS ANIMATION
-          showAlbumSuccessTransparentDialog(
-            context,
-            album,
-          );
-        } else {
-          ///IF NOT FROM ALBUM PAGE
-          ///STEP => GO TO PURCHASED ALBUM
-          goToLibraryPage(
-            context,
-            LibraryFromOtherPageTypes.PURCHASED_ALBUMS,
-          );
-        }
-      },
-    );
-  }
-
-  static void cartCheckoutButtonOnClick(context) {
-    ///STEP => SHOW CART CHECK OUT DIALOGS
-    startCartCheckOutProcess(
-      context: context,
-      onPurchasesSuccess: () {
-        ///STEP => STOP PLAYER
-        BlocProvider.of<AudioPlayerBloc>(context).add(StopPlayerEvent());
-
-        ///STEP => GO TO ALL PURCHASED SONGS TAB
-        goToLibraryPage(
-          context,
-          LibraryFromOtherPageTypes.PURCHASED_ALL_SONGS,
-        );
-      },
-    );
-  }
 
   ////////////////////////////////////
   /////////UTIL FUNCTIONS////////////
@@ -245,7 +29,7 @@ class PurchaseUtil {
       purchasedItemType: PurchasedItemType.SONG_PAYMENT,
       itemId: song.songId,
       itemTitle: L10nUtil.translateLocale(song.songName, context),
-      itemImageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
+      itemImageUrl: song.albumArt.imageSmallPath,
       itemSubTitle: PagesUtilFunctions.getArtistsNames(
         song.artistsName,
         context,
@@ -264,7 +48,7 @@ class PurchaseUtil {
       purchasedItemType: PurchasedItemType.ALBUM_PAYMENT,
       itemId: album.albumId,
       itemTitle: L10nUtil.translateLocale(album.albumTitle, context),
-      itemImageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
+      itemImageUrl: album.albumImages[0].imageSmallPath,
       itemSubTitle: L10nUtil.translateLocale(album.artist.artistName, context),
       onPurchasesSuccess: onPurchasesSuccess,
     );
@@ -280,19 +64,9 @@ class PurchaseUtil {
       purchasedItemType: PurchasedItemType.PLAYLIST_PAYMENT,
       itemId: playlist.playlistId,
       itemTitle: L10nUtil.translateLocale(playlist.playlistNameText, context),
-      itemImageUrl: AppApi.baseUrl + playlist.playlistImage.imageSmallPath,
+      itemImageUrl: playlist.playlistImage.imageSmallPath,
       itemSubTitle:
           L10nUtil.translateLocale(playlist.playlistDescriptionText, context),
-      onPurchasesSuccess: onPurchasesSuccess,
-    );
-  }
-
-  static void startCartCheckOutProcess({
-    required context,
-    required VoidCallback onPurchasesSuccess,
-  }) {
-    PagesUtilFunctions.openCartCheckOutStatusDialog(
-      context: context,
       onPurchasesSuccess: onPurchasesSuccess,
     );
   }

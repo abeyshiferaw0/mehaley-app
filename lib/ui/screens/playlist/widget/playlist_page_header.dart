@@ -9,9 +9,9 @@ import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/menu/playlist_menu_widget.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/screens/playlist/widget/playlist_info_pages.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class PlaylistPageHeader extends StatefulWidget {
@@ -159,7 +159,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                 child: PlaylistMenuWidget(
                   playlist: playlistPageData.playlist,
                   onBuyButtonClicked: () {
-                    PurchaseUtil.playlistMenuBuyButtonOnClick(
+                    IapPurchaseUtil.playlistMenuBuyButtonOnClick(
                       context,
                       playlistPageData.playlist,
                       true,

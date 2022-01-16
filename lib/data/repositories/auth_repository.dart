@@ -20,9 +20,9 @@ class AuthRepository {
 
   const AuthRepository({required this.authProvider});
 
-  Future<void> setOneSignalExternalId(AppFireBaseUser appFireBaseUser) async {
+  Future<void> setOneSignalExternalId(AppUser appUser) async {
     ///SET ONE SIGNAL EXTERNAL ID
-    await OneSignal.shared.setExternalUserId(appFireBaseUser.authLoginId).then(
+    await OneSignal.shared.setExternalUserId(appUser.userId.toString()).then(
       (results) {
         return;
       },
@@ -107,6 +107,7 @@ class AuthRepository {
 
   logOut() async {
     await AppHiveBoxes.instance.userBox.clear();
+    await authProvider.clearDioCache();
     await FirebaseAuth.instance.signOut();
     await FacebookAuth.instance.logOut();
     await OneSignal.shared.removeExternalUserId();

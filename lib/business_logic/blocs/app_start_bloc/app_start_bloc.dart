@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'app_start_event.dart';
@@ -19,11 +20,11 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
   ) async* {
     if (event is IsAppFirstLaunchEvent) {
       //CHECK IF APP IS FIRST TIME
-      final bool contains = AppHiveBoxes.instance.AppMiscBox.containsKey(
+      final bool contains = AppHiveBoxes.instance.appMiscBox.containsKey(
         AppValues.isFirstTimeKey,
       );
       if (contains) {
-        final bool isFirstTime = AppHiveBoxes.instance.AppMiscBox.get(
+        final bool isFirstTime = AppHiveBoxes.instance.appMiscBox.get(
           AppValues.isFirstTimeKey,
         );
         yield IsAppFirstLaunchState(isFirstTime: isFirstTime);
@@ -36,7 +37,7 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
         SetAppFirstLaunchEvent(isFirstTime: false),
       );
     } else if (event is SetAppFirstLaunchEvent) {
-      await AppHiveBoxes.instance.AppMiscBox.put(
+      await AppHiveBoxes.instance.appMiscBox.put(
         AppValues.isFirstTimeKey,
         event.isFirstTime,
       );
@@ -54,7 +55,7 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
         if (notificationStatus.isDenied ||
             notificationStatus.isPermanentlyDenied) {
           ///THEN CHECK LAST NOTIFICATION SHOWN DATE (MUST BE > 3 DAYS)
-          if (isLastNotiMoreThan3Days()) {
+          if (isLastPermissionNotiMoreThan3Days()) {
             yield ShowNotificationPermissionState(shouldShow: true);
           } else {
             yield ShowNotificationPermissionState(shouldShow: false);
@@ -65,10 +66,27 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
       } else {
         yield ShowNotificationPermissionState(shouldShow: false);
       }
+    } else if (event is ShouldShowSubscribeDialogEvent) {
+      ///CHECK IF ACTIVE SUBSCRIPTION
+      bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
+      ///Check Is Iap Available
+      bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
+
+      ///CHECK IF LAST SHOWN IS 7 DAYS A GO
+      bool isLastSubDialogMoreThan7Days = isLastSubscriptionMoreThan7Days();
+      if (isIapAvailable) {
+        if (!isUserSubscribed) {
+          if (isLastSubDialogMoreThan7Days) {
+            setLastSubscriptionMoreThan7Days();
+            yield ShowSubscribeDialogState(shouldShow: true);
+          }
+        }
+      }
     }
   }
 
-  bool isLastNotiMoreThan3Days() {
+  bool isLastPermissionNotiMoreThan3Days() {
     if (AppHiveBoxes.instance.settingsBox.containsKey(
       AppValues.notificationPermissionShownDateKey,
     )) {
@@ -84,5 +102,30 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
     } else {
       return true;
     }
+  }
+
+  bool isLastSubscriptionMoreThan7Days() {
+    if (AppHiveBoxes.instance.settingsBox.containsKey(
+      AppValues.dialogSubscribeShownDateKey,
+    )) {
+      ///GET THE NUMBER OF DAYS BETWEEN NOTIFICATION SHOWN
+      int preDateInMilliSeconds = AppHiveBoxes.instance.settingsBox.get(
+        AppValues.dialogSubscribeShownDateKey,
+      );
+      DateTime preDateTime = DateTime.fromMillisecondsSinceEpoch(
+        preDateInMilliSeconds,
+      );
+      int diffDays = DateTime.now().difference(preDateTime).inDays;
+      return diffDays > 6 ? true : false;
+    } else {
+      return true;
+    }
+  }
+
+  setLastSubscriptionMoreThan7Days() {
+    AppHiveBoxes.instance.settingsBox.put(
+      AppValues.dialogSubscribeShownDateKey,
+      DateTime.now().millisecondsSinceEpoch,
+    );
   }
 }

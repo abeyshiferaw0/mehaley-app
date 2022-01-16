@@ -72,11 +72,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>To Take Pictures</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>ENABLE FOR SPEECH SEARCH</string>
+	<string>Mehaleye needs access to your camera when creating your own playlist or when updating your profile picture</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Mehaleye needs access to your location for recommendation purposes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To Access Photo Library</string>
+	<string>Mehaleye needs access to your photos when picking an image for creating playlist or when you update your profile picture</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

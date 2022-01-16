@@ -23,6 +23,9 @@ class AppAssets {
       'assets/icons/app_icons/ic_app_letter_icon_white.png';
   static String icAppIconWhite = 'assets/icons/app_icons/ic_app_icon_white.png';
   static String icSplashIcon = 'assets/icons/app_icons/ic_splash_icon.png';
+  static String isAppSmallIcon = 'assets/icons/app_icons/ic_app_icon_small.png';
+  static String isAppSmallGreyIcon =
+      'assets/icons/app_icons/ic_app_icon_small_grey.png';
 
   ///AUTH ICONS
   static String icApple = 'assets/icons/auth_icons/ic_apple.svg';
@@ -40,7 +43,9 @@ class AppAssets {
   static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
 
   ///IMAGES
-  static String imageSignUpBg = 'assets/images/image_sign_up_bg.png';
+  static String imageSignUpBg = 'assets/images/image_sign_up_bg.jpg';
+  static String imageSubscribeCardBg =
+      'assets/images/image_subscription_card_bg.png';
 
   ///LOTTIE FILES
   static String cartEmptyLottie = 'assets/lottie/cart_empty.json';
@@ -55,6 +60,8 @@ class AppAssets {
   static String cartStatusLottie = 'assets/lottie/cart_status.json';
   static String cartSuccessLottie = 'assets/lottie/cart_success.json';
   static String updateLottie = 'assets/lottie/update.json';
+  static String subscriptionEndLottie = 'assets/lottie/subscription_end.json';
+  static String subscriptionSuccess = 'assets/lottie/subscription_success.json';
 }
 
 class AppColors {
@@ -79,7 +86,7 @@ class AppColors {
   static Color txtGrey = HexColor('#8b8b8b');
   static Color grey = HexColor('#88898D');
   static Color black = HexColor('#292929'); //1F1F1F
-  static Color completelyBlack = HexColor('#000');
+  static Color completelyBlack = Colors.black;
 
   ///SECONDARY COLORS
   static Color blue = HexColor('#1E96ED');

@@ -10,10 +10,16 @@ import 'package:just_audio/just_audio.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
-import 'package:mehaley/business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_available_bloc/iap_available_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_verification_bloc/iap_purchase_verification_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_link_song_bloc.dart';
@@ -41,6 +47,10 @@ import 'package:mehaley/ui/common/bottom_bar.dart';
 import 'package:mehaley/ui/common/dialog/deeplink_share/dialog_open_deeplink_song.dart';
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
 import 'package:mehaley/ui/common/dialog/dialog_new_app_version.dart';
+import 'package:mehaley/ui/common/dialog/dialog_subscibe_notification.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_iap_verfication.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_end.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_succes.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/ui/common/notifications/fresh_gift_notification_widget.dart';
@@ -75,12 +85,22 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<AppStartBloc>(context).add(
       ShouldShowNotificationPermissionEvent(),
     );
+    BlocProvider.of<AppStartBloc>(context).add(
+      ShouldShowSubscribeDialogEvent(),
+    );
     BlocProvider.of<AppMinVersionBloc>(context).add(
       CheckAppMinVersionEvent(),
     );
     BlocProvider.of<NewerVersionBloc>(context).add(
       ShouldShowNewVersionDialogEvent(),
     );
+    BlocProvider.of<IapSubscriptionStatusBloc>(context).add(
+      CheckIapSubscriptionEvent(),
+    );
+    BlocProvider.of<IapAvailableBloc>(context).add(
+      CheckIapAvailabilityEvent(),
+    );
+
     super.initState();
   }
 
@@ -124,8 +144,7 @@ class _MainScreenState extends State<MainScreen> {
                 );
               } else {
                 if (state.shouldGoToHomePage) {
-                  Navigator.popAndPushNamed(
-                    context,
+                  _navigatorKey.currentState!.popAndPushNamed(
                     AppRouterPaths.homeRoute,
                   );
                 }
@@ -217,6 +236,145 @@ class _MainScreenState extends State<MainScreen> {
             _navigatorKey.currentState!.pushNamed(
               AppRouterPaths.profileRoute,
             );
+          },
+        ),
+        BlocListener<IapConsumablePurchaseBloc, IapConsumablePurchaseState>(
+          listener: (context, state) {
+            if (state is IapPurchaseSuccessVerifyState) {
+              ///VERIFY IAP PURCHASE DIALOG
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return WillPopScope(
+                    onWillPop: () async => false,
+                    child: BlocProvider(
+                      create: (context) => IapPurchaseVerificationBloc(
+                        iapPurchaseRepository:
+                            AppRepositories.iapPurchaseRepository,
+                      ),
+                      child: DialogIapVerification(
+                        appPurchasedItemType: state.appPurchasedItemType,
+                        itemId: state.itemId,
+                        purchasedItem: state.purchasedItem,
+                        isFromSelfPage: state.isFromSelfPage,
+                        appPurchasedSources: state.appPurchasedSources,
+                        purchaseToken: state.purchaseToken,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+            if (state is IapConsumablePurchaseErrorState) {
+              ///SHOW IAP PURCHASE ERROR MESSAGE
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.errorRed,
+                  isFloating: false,
+                  msg: "Something went wrong\n purchase could not be completed",
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+            if (state is IapConsumablePurchaseNoInternetState) {
+              ///SHOW NO INTERNET MESSAGE
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildDownloadMsgSnackBar(
+                  bgColor: AppColors.white,
+                  isFloating: true,
+                  msg: AppLocale.of().noInternetMsg,
+                  txtColor: AppColors.errorRed,
+                  icon: FlutterRemix.wifi_off_line,
+                  iconColor: AppColors.errorRed,
+                ),
+              );
+            }
+            if (state is IapNotAvailableState) {
+              ///SHOW NO INTERNET MESSAGE
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildDownloadMsgSnackBar(
+                  bgColor: AppColors.blue,
+                  isFloating: true,
+                  msg:
+                      "Purchasing not available in your location!!\nmore payment options comming soon",
+                  txtColor: AppColors.white,
+                  icon: FlutterRemix.secure_payment_line,
+                  iconColor: AppColors.white,
+                ),
+              );
+            }
+          },
+        ),
+        BlocListener<IapPurchaseActionBloc, IapPurchaseActionState>(
+          listener: (context, state) {
+            if (state is IapSongPurchaseActionState) {
+              if (state.appPurchasedSources ==
+                  AppPurchasedSources.MINI_PLAYER_BUY_BUTTON_ON_CLICK) {
+                ///STOP PLAYER
+                BlocProvider.of<AudioPlayerBloc>(context).add(
+                  StopPlayerEvent(),
+                );
+              }
+
+              ///GO TO ALL PURCHASED SONGS LIBRARY PAGE
+              goToLibraryPageWithNavigatorKey(
+                _navigatorKey,
+                LibraryFromOtherPageTypes.PURCHASED_ALL_SONGS,
+              );
+
+              ///SHOW SUCCESS SNACK BAR
+              showPurchasedSuccessSnack(
+                context,
+                AppPurchasedItemType.SONG_PAYMENT,
+              );
+            }
+            if (state is IapAlbumPurchaseActionState) {
+              if (state.isFromSelfPage) {
+                ///IF FROM SELF(BOUGHT FROM ALBUM PAGE) PAGE
+                ///OPEN PURCHASED ALBUM PAGE
+                goToPlaylistPage(
+                  _navigatorKey,
+                  state.itemId,
+                );
+              } else {
+                ///IF NOR FROM SELF PAGE
+                ///GO TO PURCHASED PLAYLIST PAGE
+                goToLibraryPageWithNavigatorKey(
+                  _navigatorKey,
+                  LibraryFromOtherPageTypes.PURCHASED_ALBUMS,
+                );
+              }
+
+              ///SHOW SUCCESS SNACK BAR
+              showPurchasedSuccessSnack(
+                context,
+                AppPurchasedItemType.ALBUM_PAYMENT,
+              );
+            }
+            if (state is IapPlaylistPurchaseActionState) {
+              if (state.isFromSelfPage) {
+                ///IF FROM SELF(BOUGHT FROM PLAYLIST PAGE) PAGE
+                ///OPEN PURCHASED PLAYLIST PAGE
+                goToPlaylistPage(
+                  _navigatorKey,
+                  state.itemId,
+                );
+              } else {
+                ///IF NOR FROM SELF PAGE
+                ///GO TO PURCHASED PLAYLIST PAGE
+                goToLibraryPageWithNavigatorKey(
+                  _navigatorKey,
+                  LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS,
+                );
+              }
+
+              ///SHOW SUCCESS SNACK BAR
+              showPurchasedSuccessSnack(
+                context,
+                AppPurchasedItemType.PLAYLIST_PAYMENT,
+              );
+            }
           },
         ),
         BlocListener<FreshWalletBillCubit, WebirrBill?>(
@@ -365,90 +523,6 @@ class _MainScreenState extends State<MainScreen> {
             }
           },
         ),
-        BlocListener<CartUtilBloc, CartUtilState>(
-          listener: (context, state) {
-            ///ALBUM CART ADD REMOVE SUCCESS
-            if (state is CartUtilAlbumAddedSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: true,
-                  msg:
-                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocale.of().albumAddedToCart
-                          : AppLocale.of().albumRemovedToCart,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-
-            ///ALBUM CART ADD REMOVE ERROR
-            if (state is CartUtilAlbumAddingErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-
-            ///SONG CART ADD REMOVE SUCCESS
-            if (state is CartUtilSongAddedSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: true,
-                  msg:
-                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocale.of().songAddedToCart
-                          : AppLocale.of().songRemovedToCart,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-
-            ///SONG CART ADD REMOVE ERROR
-            if (state is CartUtilSongAddingErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-
-            ///PLAYLIST CART ADD REMOVE SUCCESS
-            if (state is CartUtilPlaylistAddedSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: true,
-                  msg:
-                      state.appCartAddRemoveEvents == AppCartAddRemoveEvents.ADD
-                          ? AppLocale.of().playlistAddedToCart
-                          : AppLocale.of().playlistRemovedToCart,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-
-            ///PLAYLIST CART ADD REMOVE ERROR
-            if (state is CartUtilPlaylistAddingErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
-                ),
-              );
-            }
-          },
-        ),
         BlocListener<DownloadingSongBloc, DownloadingSongState>(
           listener: (context, state) {
             if (state is DownloadingSongsCompletedState) {
@@ -489,6 +563,99 @@ class _MainScreenState extends State<MainScreen> {
                 AppRouterPaths.signUp,
                 (Route<dynamic> route) => false,
               );
+            }
+          },
+        ),
+        BlocListener<IapSubscriptionPurchaseBloc, IapSubscriptionPurchaseState>(
+          listener: (BuildContext context, state) {
+            if (state is IapSubscriptionPurchasedState) {
+              if (state.isSubscribed) {
+                ///STOP PLAYER
+                BlocProvider.of<AudioPlayerBloc>(context).add(
+                  StopPlayerEvent(),
+                );
+
+                ///SHOW SUBSCRIPTION SUCCESS DIALOG
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return DialogSubscriptionSuccess();
+                  },
+                );
+
+                ///GO BACK TO HOME PAGE
+                _navigatorKey.currentState!.popAndPushNamed(
+                  AppRouterPaths.homeRoute,
+                );
+              }
+            }
+          },
+        ),
+        BlocListener<IapSubscriptionRestoreBloc, IapSubscriptionRestoreState>(
+          listener: (BuildContext context, state) {
+            if (state is IapSubscriptionRestoredState) {
+              if (state.isSubscribed) {
+                ///STOP PLAYER
+                BlocProvider.of<AudioPlayerBloc>(context).add(
+                  StopPlayerEvent(),
+                );
+
+                ///SHOW SUBSCRIPTION SUCCESS DIALOG
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return DialogSubscriptionSuccess();
+                  },
+                );
+
+                ///GO BACK TO HOME PAGE
+                _navigatorKey.currentState!.popAndPushNamed(
+                  AppRouterPaths.homeRoute,
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  buildAppSnackBar(
+                    bgColor: AppColors.blue,
+                    txtColor: AppColors.white,
+                    msg: "No purchases to restore!!",
+                    isFloating: true,
+                  ),
+                );
+              }
+            }
+          },
+        ),
+        BlocListener<IapSubscriptionStatusBloc, IapSubscriptionStatusState>(
+          listener: (BuildContext context, state) {
+            if (state is IapSubscriptionStatusCheckedState) {
+              if (state.isSubscribedEnded) {
+                ///STOP PLAYER
+                BlocProvider.of<AudioPlayerBloc>(context).add(
+                  StopPlayerEvent(),
+                );
+
+                ///SHOW SUBSCRIPTION SUCCESS DIALOG
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return DialogSubscriptionEnd(
+                      onGoToSubscriptionPage: () {
+                        _navigatorKey.currentState!.pushNamed(
+                          AppRouterPaths.subscriptionRoute,
+                        );
+                      },
+                    );
+                  },
+                );
+
+                ///GO BACK TO HOME PAGE
+                _navigatorKey.currentState!.popAndPushNamed(
+                  AppRouterPaths.homeRoute,
+                );
+              }
             }
           },
         ),
@@ -569,6 +736,24 @@ class _MainScreenState extends State<MainScreen> {
                 );
               }
             }
+
+            if (state is ShowSubscribeDialogState) {
+              if (state.shouldShow) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DialogSubscribeNotification(
+                      onSubscribeButtonClicked: () {
+                        ///OPEN SUBSCRIPTION PAGE
+                        _navigatorKey.currentState!.pushNamed(
+                          AppRouterPaths.subscriptionRoute,
+                        );
+                      },
+                    );
+                  },
+                );
+              }
+            }
           },
         ),
       ],
@@ -601,7 +786,9 @@ class _MainScreenState extends State<MainScreen> {
         body: Column(
           children: [
             //MAIN ROUTEING PART OF APP
-            Expanded(child: buildWillPopScope()),
+            Expanded(
+              child: buildWillPopScope(),
+            ),
             //NO INTERNET INDICATOR
             BlocBuilder<ConnectivityCubit, ConnectivityResult>(
               builder: (context, state) {
@@ -661,6 +848,64 @@ class _MainScreenState extends State<MainScreen> {
           ),
         );
       },
+    );
+  }
+
+  ///GO TO PURCHASED LIBRARY PAGE
+  static void goToLibraryPageWithNavigatorKey(
+      GlobalKey<NavigatorState> navigatorKey,
+      LibraryFromOtherPageTypes libraryFromOtherPageTypes) {
+    ///GO TO LIBRARY PAGE BASED ON => libraryFromOtherPageTypes
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
+      AppRouterPaths.libraryRoute,
+      ModalRoute.withName(
+        AppRouterPaths.homeRoute,
+      ),
+      arguments: ScreenArguments(
+        args: {
+          AppValues.isLibraryForOffline: false,
+          AppValues.isLibraryForOtherPage: true,
+          AppValues.libraryFromOtherPageTypes: libraryFromOtherPageTypes,
+        },
+      ),
+    );
+  }
+
+  static void showPurchasedSuccessSnack(
+      context, AppPurchasedItemType appPurchasedItemType) {
+    String msg = "";
+    if (appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+      msg = AppLocale.of().songPurchased;
+    }
+    if (appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+      msg = AppLocale.of().albumPurchased;
+    }
+    if (appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+      msg = AppLocale.of().playlistPurchased;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      buildDownloadMsgSnackBar(
+        bgColor: AppColors.blue,
+        isFloating: true,
+        msg: msg,
+        txtColor: AppColors.white,
+        icon: FlutterRemix.check_fill,
+        iconColor: AppColors.white,
+      ),
+    );
+  }
+
+  ///GO TO PURCHASED PLAYLIST PAGE
+  static void goToPlaylistPage(GlobalKey<NavigatorState> navigatorKey, itemId) {
+    ///GO TO PURCHASED PLAYLIST PAGE
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
+      AppRouterPaths.playlistRoute,
+      ModalRoute.withName(
+        AppRouterPaths.homeRoute,
+      ),
+      arguments: ScreenArguments(
+        args: {'playlistId': itemId},
+      ),
     );
   }
 }

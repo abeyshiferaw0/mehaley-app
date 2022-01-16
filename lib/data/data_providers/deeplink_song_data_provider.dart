@@ -12,7 +12,7 @@ class DeeplinkSongDataProvider {
 
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.musicBaseUrl + "/get_song",
+      url: AppApi.musicBaseUrl + "/get_song/",
       queryParameters: {"id": id},
     );
     return response;

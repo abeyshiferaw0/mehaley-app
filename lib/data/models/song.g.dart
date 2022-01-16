@@ -27,15 +27,15 @@ class SongAdapter extends TypeAdapter<Song> {
       artistsName: (fields[4] as List).cast<TextLan>(),
       lyricIncluded: fields[5] as bool,
       priceEtb: fields[6] as double,
-      priceDollar: fields[7] as double,
+      priceDollar: fields[7] as IapProduct,
       isFree: fields[8] as bool,
       isOnlyOnElf: fields[13] as bool,
       performedBy: fields[14] as String,
       writtenByText: fields[15] as String,
       producedBy: fields[16] as String,
       source: fields[17] as String,
-      isLiked: fields[18] as bool,
-      isInCart: fields[19] as bool,
+      isLiked: fields[19] as bool,
+      youtubeUrl: fields[18] as String?,
       releasedDate: fields[20] as DateTime,
       songCreatedDate: fields[21] as DateTime,
       songUpdatedDated: fields[22] as DateTime,
@@ -81,9 +81,9 @@ class SongAdapter extends TypeAdapter<Song> {
       ..writeByte(17)
       ..write(obj.source)
       ..writeByte(18)
-      ..write(obj.isLiked)
+      ..write(obj.youtubeUrl)
       ..writeByte(19)
-      ..write(obj.isInCart)
+      ..write(obj.isLiked)
       ..writeByte(20)
       ..write(obj.releasedDate)
       ..writeByte(21)

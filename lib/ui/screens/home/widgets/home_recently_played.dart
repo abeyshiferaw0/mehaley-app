@@ -97,8 +97,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
             },
             width: AppValues.recentlyPlayedItemSize,
             height: AppValues.recentlyPlayedItemSize,
-            imgUrl: AppApi.baseUrl +
-                recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
+            imgUrl: recentlyPlayed.elementAt(i).albumArt.imageMediumPath,
             isDiscountAvailable:
                 recentlyPlayed.elementAt(i).isDiscountAvailable,
             title: L10nUtil.translateLocale(

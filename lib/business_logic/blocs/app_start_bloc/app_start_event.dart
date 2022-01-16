@@ -22,8 +22,12 @@ class ShouldShowNotificationPermissionEvent extends AppStartEvent {
   List<Object?> get props => [];
 }
 
-class SetNotificationPermissionShownDateEvent extends AppStartEvent {
+class ShouldShowSubscribeDialogEvent extends AppStartEvent {
+  @override
+  List<Object?> get props => [];
+}
 
+class SetNotificationPermissionShownDateEvent extends AppStartEvent {
   final DateTime date;
 
   SetNotificationPermissionShownDateEvent({required this.date});
@@ -31,4 +35,3 @@ class SetNotificationPermissionShownDateEvent extends AppStartEvent {
   @override
   List<Object?> get props => [date];
 }
-

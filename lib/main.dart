@@ -1,20 +1,29 @@
+import 'dart:io';
 import 'dart:isolate';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profile_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
 import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
@@ -33,21 +42,23 @@ import 'package:mehaley/util/app_bloc_deligate.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import 'business_logic/blocs/app_start_bloc/app_start_bloc.dart';
-import 'business_logic/blocs/cart_page_bloc/cart_util_bloc/cart_util_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'business_logic/blocs/payment_blocs/iap_available_bloc/iap_available_bloc.dart';
+import 'business_logic/blocs/payment_blocs/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
 import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
+import 'business_logic/blocs/payment_blocs/recently_purchased_items_bloc/recently_purchased_items_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
-import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_cart_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_library_cubit.dart';
 import 'business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
@@ -97,6 +108,10 @@ void main() async {
   OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
     print("Accepted permission: $accepted");
   });
+
+  ///INITIALIZE IN APP APP AND REVENUE CAT
+  await initRevenueCatPlatformState();
+  await initFlutterPurchase();
 
   ///RUN APP
   // runApp(
@@ -203,6 +218,40 @@ class _MyAppState extends State<MyApp> {
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),
+
+            BlocProvider<IapSubscriptionPurchaseBloc>(
+              create: (context) => IapSubscriptionPurchaseBloc(
+                iapSubscriptionRepository:
+                    AppRepositories.iapSubscriptionRepository,
+              ),
+            ),
+            BlocProvider<IapAvailableBloc>(
+              create: (context) => IapAvailableBloc(
+                iapPurchaseRepository: AppRepositories.iapPurchaseRepository,
+              ),
+            ),
+            BlocProvider<IapSubscriptionRestoreBloc>(
+              create: (context) => IapSubscriptionRestoreBloc(
+                iapSubscriptionRepository:
+                    AppRepositories.iapSubscriptionRepository,
+              ),
+            ),
+
+            BlocProvider<IapConsumablePurchaseBloc>(
+              create: (context) => IapConsumablePurchaseBloc(
+                iapPurchaseRepository: AppRepositories.iapPurchaseRepository,
+              ),
+            ),
+            BlocProvider<IapPurchaseActionBloc>(
+              create: (context) => IapPurchaseActionBloc(),
+            ),
+            BlocProvider<IapSubscriptionStatusBloc>(
+              create: (context) => IapSubscriptionStatusBloc(
+                iapSubscriptionRepository:
+                    AppRepositories.iapSubscriptionRepository,
+              ),
+            ),
+
             BlocProvider<PreferredPaymentMethodBloc>(
               create: (context) => PreferredPaymentMethodBloc(
                 paymentRepository: AppRepositories.paymentRepository,
@@ -211,11 +260,7 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => OneSignalBloc(),
             ),
-            BlocProvider(
-              create: (context) => CartUtilBloc(
-                cartRepository: AppRepositories.cartRepository,
-              ),
-            ),
+
             // BlocProvider<PlayerVideoModeCubit>(
             //   create: (context) => PlayerVideoModeCubit(
             //     audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
@@ -256,14 +301,24 @@ class _MyAppState extends State<MyApp> {
             BlocProvider<BottomBarHomeCubit>(
               create: (context) => BottomBarHomeCubit(),
             ),
-            BlocProvider<BottomBarCartCubit>(
-              create: (context) => BottomBarCartCubit(),
+
+            BlocProvider<BottomBarSubscriptionCubit>(
+              create: (context) => BottomBarSubscriptionCubit(),
+            ),
+            BlocProvider<BottomBarProfileCubit>(
+              create: (context) => BottomBarProfileCubit(),
             ),
             BlocProvider<BottomBarLibraryCubit>(
               create: (context) => BottomBarLibraryCubit(),
             ),
             BlocProvider<BottomBarSearchCubit>(
               create: (context) => BottomBarSearchCubit(),
+            ),
+            BlocProvider<RecentlyPurchasedItemsBloc>(
+              create: (context) => RecentlyPurchasedItemsBloc(
+                recentlyPurchasedItemsRepository:
+                    AppRepositories.recentlyPurchasedItemsRepository,
+              ),
             ),
 
             BlocProvider(
@@ -344,4 +399,38 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    endFlutterPurchase();
+  }
+}
+
+Future<void> initRevenueCatPlatformState() async {
+  await Purchases.setDebugLogsEnabled(true);
+
+  if (Platform.isAndroid) {
+    await Purchases.setup("goog_iYQtnabbQMCTZLTLfyBTJroeeUP");
+  } else if (Platform.isIOS) {
+    await Purchases.setup("appl_ijMxTzjhkuJyZXglGFGWoAeVGmb");
+  }
+}
+
+Future<void> initFlutterPurchase() async {
+  try {
+    await FlutterInappPurchase.instance.initialize();
+  } catch (e) {
+    if (e is PlatformException) {
+      if (e.message ==
+          'IAP not prepared. Check if Google Play service is available.') {
+        await AppRepositories.iapPurchaseRepository.setIsIapAvailable(false);
+        print("errorrr => ${e.message}");
+      }
+    }
+  }
+}
+
+Future<void> endFlutterPurchase() async {
+  await FlutterInappPurchase.instance.finalize();
 }

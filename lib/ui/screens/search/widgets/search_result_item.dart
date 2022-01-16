@@ -7,8 +7,8 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -135,7 +135,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 height: AppValues.customGroupItemSize,
-                imageUrl: AppApi.baseUrl + imagePath,
+                imageUrl: imagePath,
                 placeholder: (context, url) =>
                     buildImagePlaceHolder(appSearchItemTypes),
                 errorWidget: (context, url, e) =>
@@ -192,7 +192,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
               width: AppValues.queueSongItemSize,
               height: AppValues.queueSongItemSize,
               fit: BoxFit.cover,
-              imageUrl: AppApi.baseUrl + imagePath,
+              imageUrl: imagePath,
               placeholder: (context, url) =>
                   buildImagePlaceHolder(appSearchItemTypes),
               errorWidget: (context, url, e) =>

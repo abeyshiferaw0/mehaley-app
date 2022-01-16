@@ -6,6 +6,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DownloadUtil {
@@ -13,6 +14,9 @@ class DownloadUtil {
     Song song,
     DownloadSongQuality downloadSongQuality,
   ) {
+    ///IS USER SUBSCRIBED
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
     String downloadPath = '';
     if (downloadSongQuality == DownloadSongQuality.LOW_QUALITY) {
       downloadPath = song.audioFile.audioSmallPath;
@@ -23,7 +27,7 @@ class DownloadUtil {
     if (downloadSongQuality == DownloadSongQuality.HIGH_QUALITY) {
       downloadPath = song.audioFile.audioLargePath;
     }
-    return '${AppApi.baseUrl}$downloadPath?song=${Song.toBase64Str(song)}';
+    return '$downloadPath?val=${Song.toBase64Str(song)}&val=${isUserSubscribed ? '1' : '0'}';
   }
 
   getSongFileName(Song song) {
@@ -65,7 +69,7 @@ class DownloadUtil {
     if (tasks != null) {
       if (tasks.length > 0) {
         tasks.forEach((element) {
-          songs.add(Song.fromBase64(element.url.split('?song=')[1]));
+          songs.add(Song.fromBase64(getSongPortion(element.url)));
         });
         return songs;
       }
@@ -85,7 +89,7 @@ class DownloadUtil {
     if (tasks != null) {
       if (tasks.length > 0) {
         tasks.forEach((element) {
-          songs.add(Song.fromBase64(element.url.split('?song=')[1]));
+          songs.add(Song.fromBase64(getSongPortion(element.url)));
         });
         return songs;
       }
@@ -102,7 +106,7 @@ class DownloadUtil {
 
     if (tasks != null) {
       if (tasks.length > 0) {
-        return Song.fromBase64(tasks.first.url.split('?song=')[1]);
+        return Song.fromBase64(getSongPortion(tasks.first.url));
       }
     }
     return null;
@@ -129,10 +133,26 @@ class DownloadUtil {
     if (tasks == null) return DownloadTaskStatus.undefined;
     if (tasks.length < 1) return DownloadTaskStatus.undefined;
 
-    if (Song.fromBase64(tasks.first.url.split('?song=')[1]) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
       return tasks.first.status;
     }
     return DownloadTaskStatus.undefined;
+  }
+
+  Future<DownloadTask?> getSongDownloadTask(Song song) async {
+    ///GET LIST OF COMPLETED DOWNLOADS
+    final String fileName = getSongFileName(song);
+    final List<DownloadTask>? tasks =
+        await FlutterDownloader.loadTasksWithRawQuery(
+      query: "SELECT * FROM task WHERE file_name='$fileName'",
+    );
+
+    if (tasks != null) {
+      if (tasks.length > 0) {
+        return tasks.first;
+      }
+    }
+    return null;
   }
 
   Future<DownloadTask?> isSongDownloadedForPlayback(Song song) async {
@@ -146,7 +166,7 @@ class DownloadUtil {
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
-    if (Song.fromBase64(tasks.first.url.split('?song=')[1]) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
       return tasks.first;
     }
     return null;
@@ -169,7 +189,7 @@ class DownloadUtil {
       downloadedTaskWithSongs.add(
         DownloadedTaskWithSong(
           task: e,
-          song: Song.fromBase64(e.url.split('?song=')[1]),
+          song: Song.fromBase64(getSongPortion(e.url)),
         ),
       );
     });
@@ -187,8 +207,7 @@ class DownloadUtil {
     if (tasks.length < 1) return null;
 
     return tasks.firstWhere((element) {
-      if (Song.fromBase64(element.url.split('?song=')[1]).songId ==
-          song.songId) {
+      if (Song.fromBase64(getSongPortion(element.url)).songId == song.songId) {
         return true;
       }
       return false;
@@ -216,7 +235,7 @@ class DownloadUtil {
     if (tasks == null) return false;
     if (tasks.length < 1) return false;
 
-    if (Song.fromBase64(tasks.first.url.split('?song=')[1]) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
       return true;
     }
     return false;
@@ -233,7 +252,7 @@ class DownloadUtil {
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
-    if (Song.fromBase64(tasks.first.url.split('?song=')[1]) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
       return tasks.first.taskId;
     }
     return null;
@@ -245,6 +264,16 @@ class DownloadUtil {
             'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}');
     if (tasks == null) return 0;
     return tasks.length;
+  }
+
+  static String getSongPortion(String url) {
+    String str = url.split('val=')[1];
+
+    return str.substring(0, str.length - 1);
+  }
+
+  static String getIsUserSubscribedPortion(String url) {
+    return url.split('val=')[2];
   }
 }
 

@@ -36,6 +36,30 @@ class ApiUtil {
     return response;
   }
 
+  static Future<Response> yenepayPost({
+    required Dio dio,
+    required String url,
+    dynamic data,
+  }) async {
+    ///INIT OPTIONS
+    Options? options;
+
+    print("YENEPAYY ID parame => ${data}");
+
+    ///CONFIG HEADER CONTENT TYPE JSON
+    options = Options(
+      headers: {'content-type': 'application/json'},
+    );
+
+    var response = await dio.post(
+      url,
+      data: data,
+      options: options,
+    );
+
+    return response;
+  }
+
   static Future<Response> post({
     required Dio dio,
     required String url,
@@ -50,6 +74,9 @@ class ApiUtil {
       ///GET USER TOKEN AND CSRF TOKEN
       String token =
           AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
+
+      print("INAPPPPP USER TOKEN => ${token}");
+      print("INAPPPPP ID parame => ${data}");
 
       ///CONFIG HEADER TOKEN
       options = Options(
@@ -67,6 +94,14 @@ class ApiUtil {
     );
 
     return response;
+  }
+
+  static Future<void> deleteAllCache() async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    HiveCacheStore hiveCacheStore = HiveCacheStore(appDocPath);
+    await hiveCacheStore.clean();
+    return;
   }
 
   static Future<void> deleteFromCache(String urlKey, isUrl) async {

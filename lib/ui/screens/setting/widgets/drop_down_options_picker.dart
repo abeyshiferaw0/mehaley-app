@@ -92,7 +92,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
               child: Column(
                 children: [
                   LanguageSettingItem(
-                    text: 'ኣማርኟ',
+                    text: 'አማርኛ',
                     isSelected: isLocaleSelected(AppLanguage.AMHARIC),
                     onTap: () {
                       BlocProvider.of<LocalizationCubit>(context).changeLocale(

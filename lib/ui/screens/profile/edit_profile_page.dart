@@ -244,7 +244,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                         return CachedNetworkImage(
                           width: AppValues.editProfileImageSize,
                           height: AppValues.editProfileImageSize,
-                          imageUrl: AppApi.baseUrl +
+                          imageUrl: 
                               appUser.profileImageId!.imageMediumPath,
                           fit: BoxFit.cover,
                           placeholder: (context, url) =>

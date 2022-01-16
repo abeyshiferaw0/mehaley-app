@@ -22,6 +22,8 @@ class SongSync {
   final int? secondsPlayed;
   @HiveField(7)
   final int songId;
+  @HiveField(8)
+  final bool isUserSubscribed;
   SongSync({
     required this.songId,
     required this.uuid,
@@ -31,6 +33,7 @@ class SongSync {
     required this.isOffline,
     required this.listenDate,
     required this.secondsPlayed,
+    required this.isUserSubscribed,
   });
 
   factory SongSync.fromMap(Map<String, dynamic> json) {
@@ -45,6 +48,7 @@ class SongSync {
       listenDate: json["listen_date"],
       secondsPlayed:
           json["s_played"] != null ? int.parse(json["s_played"]) : null,
+      isUserSubscribed: json["is_user_subscribed"],
     );
   }
 
@@ -58,6 +62,7 @@ class SongSync {
       "is_offline": this.isOffline,
       "listen_date": this.listenDate,
       "s_played": this.secondsPlayed,
+      "is_user_subscribed": this.isUserSubscribed,
     };
   }
 
@@ -72,6 +77,7 @@ class SongSync {
         "\"is_offline\"": this.isOffline ? 1 : 0,
         "\"listen_date\"": "\"${this.listenDate}\"",
         "\"s_played\"": this.secondsPlayed,
+        "\"is_user_subscribed\"": this.isUserSubscribed ? 1 : 0,
       };
     }
     return {
@@ -83,6 +89,7 @@ class SongSync {
       "\"is_offline\"": this.isOffline ? 1 : 0,
       "\"listen_date\"": "\"${this.listenDate}\"",
       "\"s_played\"": this.secondsPlayed,
+      "\"is_user_subscribed\"": this.isUserSubscribed ? 1 : 0,
     };
   }
 
@@ -95,6 +102,7 @@ class SongSync {
     String? listenDate,
     int? secondsPlayed,
     int? songId,
+    bool? isUserSubscribed,
   }) {
     return SongSync(
       songId: songId ?? this.songId,
@@ -105,6 +113,7 @@ class SongSync {
       isOffline: isOffline ?? this.isOffline,
       listenDate: listenDate ?? this.listenDate,
       secondsPlayed: secondsPlayed ?? this.secondsPlayed,
+      isUserSubscribed: isUserSubscribed ?? this.isUserSubscribed,
     );
   }
 }

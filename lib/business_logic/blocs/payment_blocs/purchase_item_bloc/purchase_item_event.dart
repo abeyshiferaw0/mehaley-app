@@ -19,8 +19,3 @@ class PurchaseItem extends PurchaseItemEvent {
         purchasedItemType,
       ];
 }
-
-class CheckOutCartEvent extends PurchaseItemEvent {
-  @override
-  List<Object?> get props => [];
-}

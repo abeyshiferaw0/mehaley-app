@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other_videos_bloc.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
-import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item_video.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YouTubePlayerPage extends StatefulWidget {
-  const YouTubePlayerPage({Key? key, required this.videoLink})
+  const YouTubePlayerPage(
+      {Key? key, required this.videoId, required this.songId})
       : super(key: key);
 
-  final String videoLink;
+  final int songId;
+  final String videoId;
 
   @override
   _YouTubePlayerPageState createState() => _YouTubePlayerPageState();
@@ -27,27 +37,17 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
 
   @override
   void initState() {
-    String? id = YoutubePlayer.convertUrlToId(widget.videoLink);
-    if (id != null) {
-      _controller = YoutubePlayerController(
-        initialVideoId: id,
-        flags: YoutubePlayerFlags(
-          autoPlay: true,
-          mute: false,
-          captionLanguage: getCaptionLanguage(),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        buildAppSnackBar(
-          bgColor: AppColors.errorRed,
-          txtColor: AppColors.white,
-          msg: 'Unable To Play Video',
-          isFloating: false,
-        ),
-      );
-      Navigator.pop(context);
-    }
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.videoId,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+        captionLanguage: getCaptionLanguage(),
+      ),
+    );
+    BlocProvider.of<OtherVideosBloc>(context).add(
+      LoadOtherVideosEvent(id: widget.songId),
+    );
     super.initState();
   }
 
@@ -98,24 +98,70 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
 
   Expanded buildOtherVideosList() {
     return Expanded(
-      child: ListView.separated(
-        padding: EdgeInsets.zero,
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              index == 0 ? buildTitle() : SizedBox(),
-              SongItemVideo(),
-            ],
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            color: AppColors.lightGrey,
-          );
+      child: BlocBuilder<OtherVideosBloc, OtherVideosState>(
+        builder: (context, state) {
+          if (state is OtherVideosLoadingState) {
+            return AppLoading(size: AppValues.loadingWidgetSize * 0.7);
+          }
+          if (state is OtherVideosLoadedState) {
+            if (state.otherVideosPageData.videoSongsList.length > 0) {
+              return buildVideoList(state.otherVideosPageData.videoSongsList);
+            } else {
+              return buildEmptyVideoList();
+            }
+          }
+          if (state is OtherVideosLoadingErrorState) {
+            return AppError(
+              bgWidget: AppLoading(
+                size: AppValues.loadingWidgetSize * 0.7,
+              ),
+              onRetry: () {
+                BlocProvider.of(context).addError(
+                  LoadOtherVideosEvent(id: widget.songId),
+                );
+              },
+            );
+          }
+          return SizedBox();
         },
       ),
+    );
+  }
+
+  Widget buildVideoList(List<Song> videoSongsList) {
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      itemCount: videoSongsList.length,
+      itemBuilder: (context, index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            index == 0 ? buildTitle() : SizedBox(),
+            SongItemVideo(
+              videoSong: videoSongsList.elementAt(index),
+              onTap: () {
+                PagesUtilFunctions.openYtPlayerPage(
+                  context,
+                  videoSongsList.elementAt(index),
+                  true,
+                );
+              },
+              onOpenAudioOnly: () {
+                PagesUtilFunctions.openVideoAudioOnly(
+                  context,
+                  videoSongsList.elementAt(index),
+                  true,
+                );
+              },
+            ),
+          ],
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return Divider(
+          color: AppColors.lightGrey,
+        );
+      },
     );
   }
 
@@ -143,6 +189,38 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
     );
   }
 
+  Container buildEmptyVideoList() {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          FlutterRemix.video_line,
+          size: AppIconSizes.icon_size_72,
+          color: AppColors.lightGrey.withOpacity(0.8),
+        ),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32 * 2,
+          ),
+          child: Text(
+            AppLocale.of().cantFindOtherVideos,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.txtGrey,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    ));
+  }
+
   Padding buildTitle() {
     return Padding(
       padding: EdgeInsets.only(
@@ -151,7 +229,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
         bottom: AppMargin.margin_24,
       ),
       child: Text(
-        "Other Videos",
+        AppLocale.of().otherVideos,
         style: TextStyle(
           color: AppColors.black,
           fontSize: AppFontSizes.font_size_14.sp,

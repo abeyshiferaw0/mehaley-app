@@ -396,6 +396,12 @@ abstract class AppLocalizations {
   String get youRechargedWallet;
   String get youReceivedGift;
 
+  String get videos;
+  String get allVideos;
+  String get emptyVideos;
+  String get otherVideos;
+  String get cantFindOtherVideos;
+
   String featuring({required String artistName});
 
   String noOfSongs({required String noOfSong});

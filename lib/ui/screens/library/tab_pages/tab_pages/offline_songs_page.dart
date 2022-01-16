@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/offline_songs_bloc/offline_songs_bloc.dart';
-import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
-import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/library/widgets/auto_download.dart';
@@ -109,22 +107,14 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SongItem(
               song: offlineSong[position],
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl +
-                  offlineSong[position].albumArt.imageSmallPath,
+              thumbUrl: offlineSong[position].albumArt.imageSmallPath,
               thumbSize: AppValues.offlineSongsSize,
-              onPressed: () {
-                //OPEN SONG
-                PagesUtilFunctions.openSong(
-                  context: context,
-                  songs: offlineSong,
-                  startPlaying: true,
-                  playingFrom: PlayingFrom(
-                    from: AppLocale.of().playingFrom,
-                    title: AppLocale.of().offlineMezmurs,
-                    songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
-                    songSyncPlayedFromId: -1,
-                  ),
-                  index: position,
+              onPressed: () async {
+                await PagesUtilFunctions.offlineSongOnClick(
+                  context,
+                  offlineSong[position],
+                  offlineSong,
+                  position,
                 );
               },
             ),

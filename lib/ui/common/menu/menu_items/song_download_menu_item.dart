@@ -14,6 +14,7 @@ import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
 import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class SongDownloadMenuItem extends StatefulWidget {
   SongDownloadMenuItem({
@@ -23,6 +24,7 @@ class SongDownloadMenuItem extends StatefulWidget {
     required this.downloadedColor,
     required this.downloadingFailedColor,
     required this.onBuyButtonClicked,
+    required this.onSubscribeButtonClicked,
   }) : super(key: key);
 
   final Song song;
@@ -30,6 +32,7 @@ class SongDownloadMenuItem extends StatefulWidget {
   final Color downloadedColor;
   final Color downloadingFailedColor;
   final VoidCallback onBuyButtonClicked;
+  final VoidCallback onSubscribeButtonClicked;
 
   @override
   _SongDownloadMenuItemState createState() => _SongDownloadMenuItemState();
@@ -37,6 +40,8 @@ class SongDownloadMenuItem extends StatefulWidget {
 
 class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
   final DownloadUtil downloadUtil = DownloadUtil();
+
+  final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
   ///
   bool showDownloading = false;
@@ -54,7 +59,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         song: widget.song,
       ),
     );
-    if (widget.song.isBought || widget.song.isFree) {
+    if (widget.song.isBought || widget.song.isFree || isUserSubscribed) {
       showEmpty = true;
     }
     super.initState();
@@ -236,7 +241,8 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         icon: FlutterRemix.arrow_down_circle_line,
         title: AppLocale.of().downloadMezmur,
         onTap: () {
-          if (widget.song.isBought || widget.song.isFree) {
+          final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+          if (widget.song.isBought || widget.song.isFree || isUserSubscribed) {
             ///SHOW DOWNLOAD STARTED MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
@@ -272,6 +278,9 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
                     isForDownload: true,
                     isForPlaying: false,
                     song: widget.song,
+                    onSubscribeButtonClicked: () {
+                      widget.onSubscribeButtonClicked();
+                    },
                     onBuyButtonClicked: () {
                       widget.onBuyButtonClicked();
                     },

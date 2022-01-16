@@ -25,21 +25,32 @@ class ProfileLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (profileListTypes == LibraryFromOtherPageTypes.PURCHASED_SONGS) {
-      return buildPurchasedSongsList(profilePageData);
-    } else if (profileListTypes == LibraryFromOtherPageTypes.PURCHASED_ALBUMS) {
-      return buildPurchasedAlbumsList(profilePageData);
-    } else if (profileListTypes ==
-        LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS) {
-      return buildPurchasedPlaylistsList(profilePageData);
-    } else if (profileListTypes == LibraryFromOtherPageTypes.FOLLOWED_ARTISTS) {
-      return buildFollowedArtistList(profilePageData);
-    } else if (profileListTypes ==
-        LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS) {
-      return buildFollowedPlaylistsList(profilePageData);
-    } else {
-      return SizedBox();
-    }
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppPadding.padding_16,
+      ),
+      child: Builder(
+        builder: (context) {
+          if (profileListTypes == LibraryFromOtherPageTypes.PURCHASED_SONGS) {
+            return buildPurchasedSongsList(profilePageData);
+          } else if (profileListTypes ==
+              LibraryFromOtherPageTypes.PURCHASED_ALBUMS) {
+            return buildPurchasedAlbumsList(profilePageData);
+          } else if (profileListTypes ==
+              LibraryFromOtherPageTypes.PURCHASED_PLAYLISTS) {
+            return buildPurchasedPlaylistsList(profilePageData);
+          } else if (profileListTypes ==
+              LibraryFromOtherPageTypes.FOLLOWED_ARTISTS) {
+            return buildFollowedArtistList(profilePageData);
+          } else if (profileListTypes ==
+              LibraryFromOtherPageTypes.FOLLOWED_PLAYLISTS) {
+            return buildFollowedPlaylistsList(profilePageData);
+          } else {
+            return SizedBox();
+          }
+        },
+      ),
+    );
   }
 
   ListView buildPurchasedSongsList(ProfilePageData profilePageData) {
@@ -71,7 +82,7 @@ class ProfileLists extends StatelessWidget {
                   index: position,
                 );
               },
-              thumbUrl: AppApi.baseUrl +
+              thumbUrl:
                   profilePageData.boughtSongs[position].albumArt.imageSmallPath,
               thumbSize: AppValues.artistSongItemSize,
             ),
@@ -141,9 +152,6 @@ class ProfileLists extends StatelessWidget {
     final items = <Widget>[];
 
     if (artists.length > 0) {
-      items.add(
-        SizedBox(width: AppMargin.margin_16),
-      );
       for (int i = 0; i < artists.length; i++) {
         items.add(ItemSimilarArtistsPlaylist(artist: artists[i]));
         items.add(
@@ -158,11 +166,6 @@ class ProfileLists extends StatelessWidget {
     final items = <Widget>[];
 
     if (playlists.length > 0) {
-      items.add(
-        SizedBox(
-          width: AppMargin.margin_16,
-        ),
-      );
       for (int i = 0; i < playlists.length; i++) {
         items.add(
           ItemPopularPlaylist(

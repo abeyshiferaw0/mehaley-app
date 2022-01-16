@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:sizer/sizer.dart';
 
 class BuyItemBtnWidget extends StatelessWidget {
   final double priceEtb;
-  final double priceUsd;
+  final IapProduct priceUsd;
   final String title;
   final bool hasLeftMargin;
   final bool isFree;

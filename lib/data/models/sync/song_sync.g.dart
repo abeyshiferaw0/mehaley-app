@@ -25,13 +25,14 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       isOffline: fields[4] as bool,
       listenDate: fields[5] as String,
       secondsPlayed: fields[6] as int?,
+      isUserSubscribed: fields[8] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, SongSync obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       ..writeByte(6)
       ..write(obj.secondsPlayed)
       ..writeByte(7)
-      ..write(obj.songId);
+      ..write(obj.songId)
+      ..writeByte(8)
+      ..write(obj.isUserSubscribed);
   }
 
   @override

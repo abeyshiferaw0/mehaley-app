@@ -17,7 +17,7 @@ class SongMenuDataProvider {
 
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.musicBaseUrl + "/get-song-menu",
+      url: AppApi.musicBaseUrl + "/get-song-menu/",
       queryParameters: {"id": id},
     );
     return response;

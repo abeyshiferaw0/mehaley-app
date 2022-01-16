@@ -98,7 +98,7 @@ class ArtistMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
+              imageUrl: artist.artistImages[0].imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),

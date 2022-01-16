@@ -61,14 +61,3 @@ class CartCheckoutStatusLoadingErrorState extends PurchaseItemStatusState {
   @override
   List<Object?> get props => [error];
 }
-
-class CartCheckoutStatusLoadedState extends PurchaseItemStatusState {
-  final CartCheckOutStatusData cartCheckOutStatusData;
-
-  CartCheckoutStatusLoadedState({
-    required this.cartCheckOutStatusData,
-  });
-
-  @override
-  List<Object?> get props => [];
-}

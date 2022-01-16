@@ -24,3 +24,11 @@ class ShowNotificationPermissionState extends AppStartState {
   @override
   List<Object?> get props => [shouldShow];
 }
+
+class ShowSubscribeDialogState extends AppStartState {
+  final bool shouldShow;
+
+  ShowSubscribeDialogState({required this.shouldShow});
+  @override
+  List<Object?> get props => [shouldShow];
+}

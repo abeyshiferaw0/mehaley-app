@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:mehaley/config/constants.dart';
@@ -23,18 +25,8 @@ class PaymentProvider {
     return response;
   }
 
-  Future checkCartCheckOutStatusData() async {
-    dio = Dio();
-
-    //SEND REQUEST
-    Response response = await ApiUtil.get(
-      dio: dio,
-      url: AppApi.cartBaseUrl + "/payment_status/",
-    );
-    return response;
-  }
-
-  Future purchaseItem(int itemId, PurchasedItemType purchasedItemType) async {
+  Future purchaseItem(int itemId, PurchasedItemType purchasedItemType,
+      String purchaseToken) async {
     dio = Dio();
 
     String url = '';
@@ -56,7 +48,9 @@ class PaymentProvider {
       useToken: true,
       data: {
         'item_id': itemId,
-        'payment_type': EnumToString.convertToString(PaymentType.WALLET),
+        'payment_type': EnumToString.convertToString(PaymentType.IN_APP),
+        'device': Platform.isAndroid ? 'ANDROID' : 'IOS',
+        'token': purchaseToken,
       },
     );
     return response;

@@ -24,7 +24,7 @@ class ArtistDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-artist",
+        url: AppApi.musicBaseUrl + "/get-artist/",
         queryParameters: {'id': artistId},
       );
       return response;
@@ -39,7 +39,7 @@ class ArtistDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-artist",
+        url: AppApi.musicBaseUrl + "/get-artist/",
         queryParameters: {'id': artistId},
       );
       return response;

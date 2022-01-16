@@ -13,6 +13,7 @@ import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
 import 'package:mehaley/data/models/library_data/purchased_song.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/util/api_util.dart';
+import 'package:mehaley/util/download_util.dart';
 
 class LibraryPageDataRepository {
   //INIT PROVIDER FOR API CALL
@@ -156,9 +157,10 @@ class LibraryPageDataRepository {
     List<Song> songs = [];
     List<int> timeDownloaded = [];
     if (tasks != null) {
+      print("taskstaskstasks => ${tasks.length}");
       if (tasks.length > 0) {
         tasks.forEach((element) {
-          songs.add(Song.fromBase64(element.url.split("?song=")[1]));
+          songs.add(Song.fromBase64(DownloadUtil.getSongPortion(element.url)));
           timeDownloaded.add(element.timeCreated);
         });
         return ApiUtil.sortDownloadedSongs(

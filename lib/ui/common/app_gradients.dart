@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/color_util.dart';
 
@@ -177,7 +178,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         AppColors.completelyBlack.withOpacity(0.1),
-        AppColors.completelyBlack.withOpacity(0.4),
+        AppColors.completelyBlack.withOpacity(0.5),
       ],
     );
   }
@@ -188,6 +189,31 @@ class AppGradients {
       end: Alignment.bottomLeft,
       colors: [
         AppColors.orange1,
+        AppColors.orange2,
+      ],
+    );
+  }
+
+  static getSubscriptionOfferingsGradient(
+      HexColor color1, HexColor color2, HexColor color3) {
+    return LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [
+        color1,
+        color2,
+        color3,
+      ],
+    );
+  }
+
+  static getSubscribeButtonGradient() {
+    return LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [
+        AppColors.orange1,
+        AppColors.orange,
         AppColors.orange2,
       ],
     );

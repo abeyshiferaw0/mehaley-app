@@ -36,7 +36,7 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                   width: AppValues.similarItemImageSize,
                   height: AppValues.similarItemImageSize,
                   imageUrl:
-                      AppApi.baseUrl + artist.artistImages[0].imageMediumPath,
+                       artist.artistImages[0].imageMediumPath,
                   imageBuilder: (context, imageProvider) => Stack(
                     children: [
                       Container(

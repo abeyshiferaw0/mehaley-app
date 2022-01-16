@@ -12,9 +12,10 @@ class SearchDataProvider {
 
   //GET RAW DATA FOR SEARCH FRONT PAGE
   Future getRawSearchFrontData(AppCacheStrategy appCacheStrategy) async {
+    //GET CACHE OPTIONS
+    cacheOptions = await AppApi.getDioCacheOptions();
+
     if (appCacheStrategy == AppCacheStrategy.LOAD_CACHE_FIRST) {
-      //GET CACHE OPTIONS
-      cacheOptions = await AppApi.getDioCacheOptions();
       //INIT DIO WITH CACHE OPTION FORCE CACHE
       dio = Dio()
         ..interceptors.add(
@@ -25,7 +26,7 @@ class SearchDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/search-page",
+        url: AppApi.musicBaseUrl + "/search-page/",
       );
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
@@ -39,7 +40,7 @@ class SearchDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/search-page",
+        url: AppApi.musicBaseUrl + "/search-page/",
       );
       return response;
     }
@@ -49,6 +50,7 @@ class SearchDataProvider {
       String key, CancelToken searchResultCancelToken) async {
     //GET CACHE OPTIONS
     cacheOptions = await AppApi.getDioCacheOptions();
+
     dio = Dio()
       ..interceptors.add(
         DioCacheInterceptor(
@@ -58,7 +60,7 @@ class SearchDataProvider {
     //SEND REQUEST
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.musicBaseUrl + "/search",
+      url: AppApi.musicBaseUrl + "/search/",
       queryParameters: {"query": key},
     );
     return response;
@@ -68,6 +70,7 @@ class SearchDataProvider {
       String key, AppSearchItemTypes appSearchItemTypes) async {
     //GET CACHE OPTIONS
     cacheOptions = await AppApi.getDioCacheOptions();
+
     dio = Dio()
       ..interceptors.add(
         DioCacheInterceptor(
@@ -91,13 +94,13 @@ class SearchDataProvider {
 
   String getAppSearchItemTypes(AppSearchItemTypes appSearchItemTypes) {
     if (appSearchItemTypes == AppSearchItemTypes.ARTIST) {
-      return "/search-all-artist";
+      return "/search-all-artist/";
     } else if (appSearchItemTypes == AppSearchItemTypes.ALBUM) {
-      return "/search-all-album";
+      return "/search-all-album/";
     } else if (appSearchItemTypes == AppSearchItemTypes.PLAYLIST) {
-      return "/search-all-playlist";
+      return "/search-all-playlist/";
     } else {
-      return "/search-all-song";
+      return "/search-all-song/";
     }
   }
 }

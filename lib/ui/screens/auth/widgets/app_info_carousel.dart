@@ -103,8 +103,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
       children: [
         ///TITLE
         buildInfoHeaderText(
-          titleOne: 'WELCOME TO',
-          titleTwo: 'APP NAME',
+          titleOne: 'Welcome to',
+          titleTwo: 'Mehaleye',
           isOdd: false,
         ),
         SizedBox(
@@ -115,7 +115,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             horizontal: AppPadding.padding_24 * 2,
           ),
           child: Text(
-            "Some Description About App and May be some slogan".toUpperCase(),
+            'Listen to Ethiopian orthodox tewahedo mezmurs, teachings and kidase. stream or download mezmurs and listen offline'
+                .toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -149,27 +150,16 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildPayWithItemsText(paymentMethodName: 'Mbirr'),
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'Cbe birr'),
+            buildPayWithItemsText(paymentMethodName: 'CBE BIRR'),
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'Amole'),
+            buildPayWithItemsText(paymentMethodName: 'CBE MOBILE'),
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'hello cash'),
+            buildPayWithItemsText(paymentMethodName: 'ABYSSINIA MOBILE'),
           ],
         ),
         SizedBox(
           height: AppMargin.margin_4,
-        ),
-
-        ///INTERNATIONAL
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildPayWithItemsText(paymentMethodName: 'MASTERCARD'),
-            buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'VISA'),
-          ],
         ),
       ],
     );
@@ -238,7 +228,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
         ///TITLE
         buildInfoHeaderText(
           titleOne: 'Subscribe TO',
-          titleTwo: 'APP NAME',
+          titleTwo: 'Mehaleye',
           isOdd: false,
         ),
         SizedBox(
@@ -249,7 +239,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             horizontal: AppPadding.padding_24 * 2,
           ),
           child: Text(
-            "subscribe and get unlimited access to all mezmur streams"
+            "Subscribe to mehaleye and get unlimited access to all streams and downloads."
                 .toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,

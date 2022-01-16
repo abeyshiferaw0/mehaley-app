@@ -23,7 +23,7 @@ class AlbumDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-album",
+        url: AppApi.musicBaseUrl + "/get-album/",
         queryParameters: {'id': albumId},
       );
       return response;
@@ -37,7 +37,7 @@ class AlbumDataProvider {
         );
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-album",
+        url: AppApi.musicBaseUrl + "/get-album/",
         queryParameters: {'id': albumId},
       );
       return response;

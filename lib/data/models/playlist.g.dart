@@ -25,23 +25,22 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       isVerified: fields[4] as bool,
       isFeatured: fields[5] as bool,
       priceEtb: fields[6] as double,
-      priceDollar: fields[7] as double,
+      priceDollar: fields[7] as IapProduct,
       isFree: fields[8] as bool,
       isDiscountAvailable: fields[9] as bool,
       discountPercentage: fields[11] as double,
       createdBy: fields[12] as PlaylistCreatedBy,
       createdById: fields[13] as String,
       isFollowed: fields[14] as bool?,
-      isInCart: fields[15] as bool,
-      playlistDateCreated: fields[17] as DateTime,
-      playlistDateUpdated: fields[18] as DateTime,
+      playlistDateCreated: fields[15] as DateTime,
+      playlistDateUpdated: fields[16] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Playlist obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.playlistId)
       ..writeByte(1)
@@ -73,10 +72,8 @@ class PlaylistAdapter extends TypeAdapter<Playlist> {
       ..writeByte(14)
       ..write(obj.isFollowed)
       ..writeByte(15)
-      ..write(obj.isInCart)
-      ..writeByte(17)
       ..write(obj.playlistDateCreated)
-      ..writeByte(18)
+      ..writeByte(16)
       ..write(obj.playlistDateUpdated);
   }
 

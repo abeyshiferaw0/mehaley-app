@@ -10,8 +10,8 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/pagination_error_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
-import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -99,7 +99,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
                 SongItem(
                   song: item,
                   isForMyPlaylist: false,
-                  thumbUrl: AppApi.baseUrl + item.albumArt.imageSmallPath,
+                  thumbUrl: item.albumArt.imageSmallPath,
                   thumbSize: AppValues.playlistSongItemSize,
                   onPressed: () {
                     //OPEN SONG

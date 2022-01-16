@@ -7,13 +7,18 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String baseUrl = 'https://api.mehaleye.com/';
-  // const String fileBaseUrl = 'https://d3h553g79vtr4k.cloudfront.net/';
+  static const String baseUrl = 'https://api.mehaleye.com';
+  //static const String baseUrl = 'http://192.168.77.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
-  static const String cartBaseUrl = '$baseUrl/cart';
+  static const String cartBaseUrl = '$baseUrl/subscription';
   static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
+
+  ///FOR YENE PAY
+  static const yenePayGetCheckOutUrl =
+      "https://testapi.yenepay.com/api/urlgenerate/getcheckouturl/";
+  //static const yenePayGetCheckOutUrl = "https://endpoints.yenepay.com/api/urlgenerate/getcheckouturl/  ";
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -26,7 +31,7 @@ class AppApi {
       // Optional. Returns a cached response on error but for statuses 401 & 403.
       // hitCacheOnErrorExcept: [401, 403],
       // Optional. Overrides any HTTP directive to delete entry past this duration.
-      maxStale: const Duration(days: 7),
+      maxStale: const Duration(days: 5),
       // Default. Allows 3 cache sets and ease cleanup.
       priority: CachePriority.high,
       // Default. Body and headers encryption with your own algorithm.
@@ -79,6 +84,22 @@ class AppApi {
     String decode = stringToBase64.decode(str);
     return decode;
   }
+}
+
+class YenepayValues {
+  static const String express = 'Express';
+
+  static const String merchantId = 'SB1356';
+
+  static const String successUrl =
+      'com.marathonsystems.mehaleye://yenepay_success_return_url';
+  static const String cancelUrl =
+      'com.marathonsystems.mehaleye://yenepay_cancel_return_url';
+  static const String failureUrl =
+      'com.marathonsystems.mehaleye://yenepay_failure_return_url';
+
+  static const String ipnUrl =
+      '${AppApi.paymentBaseUrl}/purchase/ipn/yene_pay/';
 }
 
 class AppValues {
@@ -188,6 +209,9 @@ class AppValues {
   static const String recentlyLikedSongBox = 'RECENTLY_UNLIKED_SONG_BOX';
   static const String recentlyLikedAlbumBox = 'RECENTLY_LIKED_ALBUM_BOX';
   static const String recentlyUnLikedAlbumBox = 'RECENTLY_UNLIKED_ALBUM_BOX';
+  static const String isSubscribedKey = 'IS_SUBSCRIBED_KEY';
+  static const String isIapAvailableKey = 'IS_IAP_AVAILABLE_KEY';
+  static const String iapUtilBox = "IAP_UTIL_BOX";
   static const String recentlyFollowedPlaylistBox =
       'RECENTLY_FOLLOWED_PLAYLIST_BOX';
   static const String recentlyUnFollowedPlaylistBox =
@@ -208,6 +232,12 @@ class AppValues {
   static const String recentlyCartRemovedPlaylistBox =
       'RECENTLY_CART_REMOVED_PLAYLIST_BOX';
   static const String settingsBox = 'SETTINGS_BOX';
+  static const String subscriptionBox = 'SUBSCRIPTION_BOX';
+  static const String recentlyPurchasedSongBox = 'RECENTLY_PURCHASED_SONGS_BOX';
+  static const String recentlyPurchasedAlbumBox =
+      'RECENTLY_PURCHASED_ALBUMS_BOX';
+  static const String recentlyPurchasedPlaylistBox =
+      'RECENTLY_PURCHASED_PLAYLISTS_BOX';
 
   //HIVE BOX KEYS
   static const String lastPhoneAuthSentTimeKey = 'LAST_PHONE_AUTH_SENT';
@@ -225,12 +255,22 @@ class AppValues {
   static const String isFirstTimeKey = "IS_FIRST_TIME_KEY";
   static const String notificationPermissionShownDateKey =
       "NOTIFICATION_PERMISSION_SHOWN_KEY";
+  static const String dialogSubscribeShownDateKey =
+      "DIALOG_SUBSCRIPTION_SHOWN_DATE_KEY";
   static const String lastNewVersionShownDateKey =
       "LAST_NEW_VERSION_SHOWN_DATE_KEY";
   static const String lastNewVersionShownVersionKey =
       "LAST_NEW_VERSION_SHOWN_VERSION_KEY";
   static const String newVersionDontAskAgainKey =
       "NEW_VERSION_DONT_ASK_AGAIN_KEY";
+  static const String lastToBePurchasedItemTypeKey =
+      "LAST_TO_BE_PURCHASED_ITEM_TYPE_KEY";
+  static const String lastToBePurchasedIapPurchasedSourcesKey =
+      "LAST_TO_BE_PURCHASED_IAP_PURCHASED_SOURCES_KEY";
+  static const String lastToBePurchasedItemIdKey =
+      "LAST_TO_BE_PURCHASED_ITE_ID_KEY";
+  static const String lastToBePurchasedIsFromSelfPageKey =
+      "LAST_TO_BE_PURCHASED_IS_FROM_SELF_PAGE_KEY";
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';

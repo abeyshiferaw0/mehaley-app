@@ -35,69 +35,71 @@ class NoInternetHeader extends StatelessWidget {
       padding: EdgeInsets.only(
         bottom: AppPadding.padding_24 * 2,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            AppLocale.of().yourOffline,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_14.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppLocale.of().yourOffline,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_14.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+              ),
             ),
-          ),
-          SizedBox(height: AppMargin.margin_16),
-          Text(
-            AppLocale.of().noInternetMsg.toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_8.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.grey,
+            SizedBox(height: AppMargin.margin_16),
+            Text(
+              AppLocale.of().noInternetMsg.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_8.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.grey,
+              ),
             ),
-          ),
-          SizedBox(height: AppMargin.margin_16),
-          Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_16),
-            child: AppBouncingButton(
-              onTap: () {
-                BlocProvider.of<BottomBarCubit>(context).changeScreen(
-                  BottomBarPages.LIBRARY,
-                );
-                //////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////
-                Navigator.pushNamed(
-                  context,
-                  AppRouterPaths.libraryRoute,
-                  arguments: ScreenArguments(
-                    args: {AppValues.isLibraryForOffline: true},
+            SizedBox(height: AppMargin.margin_16),
+            Padding(
+              padding: const EdgeInsets.all(AppPadding.padding_16),
+              child: AppBouncingButton(
+                onTap: () {
+                  BlocProvider.of<BottomBarCubit>(context).changeScreen(
+                    BottomBarPages.LIBRARY,
+                  );
+                  //////////////////////////////////////////////////////////////////////
+                  //////////////////////////////////////////////////////////////////////
+                  Navigator.pushNamed(
+                    context,
+                    AppRouterPaths.libraryRoute,
+                    arguments: ScreenArguments(
+                      args: {AppValues.isLibraryForOffline: true},
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.black,
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppPadding.padding_16,
-                  vertical: AppPadding.padding_8,
-                ),
-                child: Text(
-                  AppLocale.of().goToDownloadsMsg,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.lightGrey,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppPadding.padding_16,
+                    vertical: AppPadding.padding_8,
+                  ),
+                  child: Text(
+                    AppLocale.of().goToDownloadsMsg,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.lightGrey,
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

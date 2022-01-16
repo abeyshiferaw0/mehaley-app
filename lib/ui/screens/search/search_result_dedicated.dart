@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
+import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -20,9 +21,9 @@ import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_empty_message.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
 import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
@@ -195,8 +196,15 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
               song: resultItem,
               isForMyPlaylist: false,
               onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+              onSubscribeButtonClicked: () {
+                ///GO TO SUBSCRIPTION PAGE
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.subscriptionRoute,
+                );
+              },
               onSongBuyClicked: () {
-                PurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
+                IapPurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
               },
             ),
           );
@@ -222,7 +230,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             child: PlaylistMenuWidget(
               playlist: resultItem,
               onBuyButtonClicked: () {
-                PurchaseUtil.playlistMenuBuyButtonOnClick(
+                IapPurchaseUtil.playlistMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,
@@ -259,7 +267,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
                 );
               },
               onBuyAlbumClicked: () {
-                PurchaseUtil.albumMenuBuyButtonOnClick(
+                IapPurchaseUtil.albumMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,

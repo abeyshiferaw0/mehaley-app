@@ -31,6 +31,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     if (event is LoadHomePageEvent) {
       //LOAD CACHE AND REFRESH
       yield HomePageLoading();
+
       try {
         //YIELD CACHE DATA
         final HomePageData cachedHomePageData = await homeDataRepository

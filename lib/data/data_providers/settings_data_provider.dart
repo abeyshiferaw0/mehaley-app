@@ -55,8 +55,8 @@ class SettingsDataProvider {
     AppHiveBoxes.instance.settingsBox.put(
       AppValues.preferredCurrencyKey,
       this.getPreferredCurrency() == AppCurrency.ETB
-          ? AppCurrency.USD
-          : AppCurrency.ETB,
+          ? AppCurrency.ETB
+          : AppCurrency.USD,
     );
   }
 

@@ -6,6 +6,8 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profile_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -14,11 +16,14 @@ import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
+import 'package:mehaley/ui/common/app_subscription_active_card.dart';
 import 'package:mehaley/ui/screens/profile/widgets/profile_lists.dart';
 import 'package:mehaley/ui/screens/profile/widgets/profile_page_header_deligate.dart';
 import 'package:mehaley/ui/screens/profile/widgets/profile_page_tabs_deligate.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,15 +34,65 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with RouteAware {
   //NOTIFIER FOR DOTED INDICATOR
   final ValueNotifier<int> pageNotifier = new ValueNotifier<int>(0);
 
   //DOMINANT COLOR INIT
   Color dominantColor = AppColors.appGradientDefaultColorBlack;
 
+  ///IS USER SUBSCRIBED AND IAP AVAILABLE
+  final bool isUsersSubscribed = PagesUtilFunctions.isUserSubscribed();
+  final bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    //SUBSCRIBE TO ROUTH OBSERVER
+    AppRouterPaths.routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPopNext() {
+    if (isUsersSubscribed || !isIapAvailable) {
+      BlocProvider.of<BottomBarCubit>(context)
+          .changeScreen(BottomBarPages.PROFILE);
+      BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(true);
+    }
+  }
+
+  @override
+  void didPushNext() {
+    if (isUsersSubscribed || !isIapAvailable) {
+      BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(false);
+    }
+    super.didPushNext();
+  }
+
+  @override
+  void didPop() {
+    if (isUsersSubscribed || !isIapAvailable) {
+      BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(false);
+    }
+    super.didPop();
+  }
+
+  @override
+  void dispose() {
+    AppRouterPaths.routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
   @override
   void initState() {
+    if (isUsersSubscribed || !isIapAvailable) {
+      BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(true);
+
+      ///CHANGE BOTTOM BAR TO SUBSCRIPTION PAGE
+      BlocProvider.of<BottomBarCubit>(context).changeScreen(
+        BottomBarPages.PROFILE,
+      );
+    }
+
     ///LOAD PROFILE DATA
     BlocProvider.of<ProfilePageBloc>(context).add(
       LoadProfilePageEvent(),
@@ -166,9 +221,15 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: AppMargin.margin_32,
+        ///ACTIVE SUBSCRIPTION CARD
+        AppSubscriptionActiveCard(
+          topMargin: 0.0,
+          bottomMargin: AppMargin.margin_24,
         ),
+
+        // SizedBox(
+        //   height: AppMargin.margin_16,
+        // ),
         profilePageData.boughtSongs.length > 0
             ? buildProfileListHeader(
                 title: AppLocale.of().purchasedMezmurs,
@@ -291,6 +352,12 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         SizedBox(
           height: AppMargin.margin_16,
+        ),
+
+        ///SUBSCRIBE CARD
+        AppSubscribeCard(
+          topMargin: AppMargin.margin_24,
+          bottomMargin: 0.0,
         ),
       ],
     );

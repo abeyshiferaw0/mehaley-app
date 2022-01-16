@@ -33,8 +33,7 @@ class ItemHomeCategory extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl:
-                    AppApi.baseUrl + category.categoryImage.imageSmallPath,
+                imageUrl: category.categoryImage.imageMediumPath,
                 fit: BoxFit.cover,
                 height: AppValues.homeCategoriesItemHeight,
                 width: AppValues.homeCategoriesItemWidth,
@@ -51,7 +50,7 @@ class ItemHomeCategory extends StatelessWidget {
                     buildItemsImagePlaceHolder(),
               ),
               Container(
-                color: AppColors.black.withOpacity(0.35),
+                color: AppColors.black.withOpacity(0.4),
               ),
               Padding(
                 padding: const EdgeInsets.all(AppPadding.padding_8),
@@ -67,7 +66,7 @@ class ItemHomeCategory extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: AppFontSizes.font_size_12.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

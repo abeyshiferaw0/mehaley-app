@@ -29,7 +29,7 @@ class LyricDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio!,
-        url: AppApi.musicBaseUrl + "/get-song-lyrics",
+        url: AppApi.musicBaseUrl + "/get-song-lyrics/",
         queryParameters: {'id': songId},
       );
       return response;
@@ -44,7 +44,7 @@ class LyricDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio!,
-        url: AppApi.musicBaseUrl + "/get-song-lyrics",
+        url: AppApi.musicBaseUrl + "/get-song-lyrics/",
         queryParameters: {'id': songId},
         cancelToken: cancelToken,
       );

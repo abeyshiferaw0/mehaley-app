@@ -489,6 +489,11 @@ class AppLocale {
   String get youCheckedOutCart => appLocalizations.youCheckedOutCart;
   String get youRechargedWallet => appLocalizations.youRechargedWallet;
   String get youReceivedGift => appLocalizations.youReceivedGift;
+  String get videos => appLocalizations.videos;
+  String get allVideos => appLocalizations.allVideos;
+  String get emptyVideos => appLocalizations.emptyVideos;
+  String get otherVideos => appLocalizations.otherVideos;
+  String get cantFindOtherVideos => appLocalizations.cantFindOtherVideos;
 
   ///FUNCTIONS
 

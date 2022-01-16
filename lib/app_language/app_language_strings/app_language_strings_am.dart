@@ -199,11 +199,11 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String topCategories = "ታዋቂ ምድቦች";
   final String topMezmurs = "ታዋቂ መዝሙሮች";
   final String topArtists = "ታዋቂ ዘማሪያን";
-  final String searchTitle = "በመሃልዬ ይፈልጉ";
+  final String searchTitle = "በመኃልዬ ይፈልጉ";
   final String changeYourSearchKey = "ጽሑፍዎን ለመቀየር ይሞክሩ";
-  final String searchHint = "በመሃልዬ ይፈልጉ መዝሙሮች, አልበሞች, ዘማሪያን";
+  final String searchHint = "በመኃልዬ ይፈልጉ መዝሙሮች, አልበሞች, ዘማሪያን";
   final String searchHint2 = "አልበሞች, ዘማሪያን, ፕሌይሊስትዎች ...";
-  final String searchElfFor = "በመሃልዬ ይፈልጉ";
+  final String searchElfFor = "በመኃልዬ ይፈልጉ";
   final String recentSearches = "የቅርብ ጊዜ ፍለጋዎች";
   final String clearRecentSearches = "የቅርብ ጊዜ ፍለጋዎችን አስወግድ";
   final String seeAllPlaylists = "ሁሉንም ፕሌይሊስትዎች ይመልከቱ";
@@ -296,7 +296,7 @@ class AppLanguageStringsAm extends AppLocalizations {
       "ፕሌይሊስቱን መሰረዝ አልተቻለም\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String addSongs = "መዝሙሮች ይጨምሩ";
   final String addSongsToPlaylist = "መዝሙሮችን ወደ ፕሌይሊስት ይጨምሩ";
-  final String dailyQuotesFromApp = "ዕለታዊ ጥቅሶች ከመሃልዬ";
+  final String dailyQuotesFromApp = "ዕለታዊ ጥቅሶች ከመኃልዬ";
   final String enablePermissions = "ፐርሚሽኖችን ፍቀድ";
   final String enablePermissionsMsg =
       "ለመቀጠል የሚከተሉት ፐርሚሽኖች ያስፈልጋሉ., እባክዎ ወደ ሲስተም ሴቲንግ ይሂዱ እና ፐርሚሽኖችን ይፍቀዱ";
@@ -427,13 +427,21 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String dontAskAgain = "እንደገና አትጠይቅ";
   final String featuringTxt = "ተለይተዉ የቀረቡ";
 
-  ///NOT TRANSLATED
   final String youPurchasedSong = "መዝሙር ገዝተዋል";
   final String youPurchasedAlbum = "አልበም ገዝተዋል";
   final String youPurchasedPlaylist = "ፕሌይሊስት ገዝተዋል";
   final String youCheckedOutCart = "ጥቅል ግዢ ፈጽመዋል";
   final String youRechargedWallet = "ዋሌት ሞልተዋል";
   final String youReceivedGift = "የዋሌት ስጦታ ተቀብለዋል";
+
+  ///NOT TRANSLATED
+  final String videos = "ቪዲዮዎች";
+  final String allVideos = "ሁሉም ቪዲዮዎች";
+  final String emptyVideos = "ቪዲዮዎች ማግጀት አልተቻለም";
+  final String otherVideos = "ሌሎች ቪዲዮዎች";
+  final String cantFindOtherVideos = "ሌሎች ቪዲዮዎች ማግጀት አልተቻለም";
+
+  ///
 
   String featuring({required String artistName}) {
     return "$artistName ያካተቱ ፕሌይሊስትዎች";

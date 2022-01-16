@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
@@ -10,14 +11,14 @@ import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
-import 'package:mehaley/ui/common/cart_buttons/playlist_info_cart_button.dart';
 import 'package:mehaley/ui/common/like_follow/playlist_follow_button.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/common/subscribe_small_button.dart';
 import 'package:mehaley/ui/screens/playlist/widget/icon_text.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
@@ -49,7 +50,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl +
+                imageUrl:
                     playlistPageData.playlist.playlistImage.imageMediumPath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
@@ -149,7 +150,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                             playlistPageData.playlist.isDiscountAvailable,
                         isBought: playlistPageData.playlist.isBought,
                         onBuyClicked: () {
-                          PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                          IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
                             context,
                             playlistPageData.playlist,
                           );
@@ -316,7 +317,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
             ),
           ),
 
-          buildBuyAndAddToCart(context),
+          buildBuyButton(context),
 
           SizedBox(height: AppMargin.margin_20),
         ],
@@ -324,7 +325,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
     );
   }
 
-  Container buildBuyAndAddToCart(context) {
+  Container buildBuyButton(context) {
     return Container(
       child: playlist.isBought
           ? Center(
@@ -355,7 +356,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       isBought: playlist.isBought,
                       onBuyClicked: () {
-                        PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                        IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
                           context,
                           playlist,
                         );
@@ -364,8 +365,16 @@ class PlaylistInfoPageThree extends StatelessWidget {
                     SizedBox(
                       height: AppMargin.margin_8,
                     ),
-                    PlaylistInfoCartButton(
-                      playlist: playlist,
+
+                    ///SUBSCRIBE SMALL BUTTON
+                    SubscribeSmallButton(
+                      text: "Subscribe to mehaleye",
+                      textColor: AppColors.black,
+                      fontSize: AppFontSizes.font_size_10,
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRouterPaths.subscriptionRoute);
+                      },
                     ),
                   ],
                 ),

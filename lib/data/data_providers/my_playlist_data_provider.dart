@@ -24,7 +24,7 @@ class MyPlaylistDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/playlists",
+        url: AppApi.userBaseUrl + "/playlists/",
       );
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
@@ -38,7 +38,7 @@ class MyPlaylistDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/playlists",
+        url: AppApi.userBaseUrl + "/playlists/",
       );
       return response;
     }

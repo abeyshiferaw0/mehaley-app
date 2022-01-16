@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -110,7 +109,7 @@ class UserImageSm extends StatelessWidget {
         child: CachedNetworkImage(
           height: size,
           width: size,
-          imageUrl: AppApi.baseUrl + appUser.profileImageId!.imageMediumPath,
+          imageUrl: appUser.profileImageId!.imageMediumPath,
           fit: BoxFit.cover,
           placeholder: (context, url) => buildItemsImagePlaceHolder(),
           errorWidget: (context, url, error) => buildItemsImagePlaceHolder(),

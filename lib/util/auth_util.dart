@@ -75,4 +75,10 @@ class AuthUtil {
       '#${getUserColor(appUser).value.toRadixString(16)}',
     );
   }
+
+  static String getUserId() {
+    AppUser appUser =
+        AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
+    return appUser.userId.toString();
+  }
 }

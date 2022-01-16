@@ -11,6 +11,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
@@ -18,10 +19,9 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
-import 'package:mehaley/ui/screens/cart/widgets/remove_from_cart_button.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
@@ -35,16 +35,13 @@ class SongItem extends StatefulWidget {
     required this.onPressed,
     this.badges,
     required this.isForMyPlaylist,
-    this.isForCart,
-    this.onRemoveFromCart,
     this.onRemoveSongFromPlaylist,
   });
 
   final Song song;
   final int? position;
   final bool isForMyPlaylist;
-  final bool? isForCart;
-  final VoidCallback? onRemoveFromCart;
+
   final Function(Song song)? onRemoveSongFromPlaylist;
   final String? thumbUrl;
   final double? thumbSize;
@@ -60,8 +57,6 @@ class SongItem extends StatefulWidget {
         onPressed: onPressed,
         badges: badges,
         isForMyPlaylist: isForMyPlaylist,
-        isForCart: isForCart,
-        onRemoveFromCart: onRemoveFromCart,
       );
 }
 
@@ -71,15 +66,12 @@ class _SongItemState extends State<SongItem> {
   final double? thumbSize;
   final String? thumbUrl;
   final bool isForMyPlaylist;
-  final bool? isForCart;
-  final VoidCallback? onRemoveFromCart;
+
   final VoidCallback onPressed;
   final List<SongItemBadge>? badges;
 
   _SongItemState({
     required this.isForMyPlaylist,
-    this.isForCart,
-    this.onRemoveFromCart,
     required this.song,
     this.position,
     this.thumbSize,
@@ -202,7 +194,7 @@ class _SongItemState extends State<SongItem> {
             downloadingColor: AppColors.darkOrange,
             downloadedColor: AppColors.darkOrange,
           ),
-          showDotsMenuOrRemoveFromCart(isForCart),
+          showDotsMenu(),
         ],
       ),
     );
@@ -264,7 +256,7 @@ class _SongItemState extends State<SongItem> {
     }
   }
 
-  getPriceBadge(double priceEtb, double priceUsd, bool isFree,
+  getPriceBadge(double priceEtb, IapProduct priceUsd, bool isFree,
       bool isDiscountAvailable, double discountPercentage, bool isBought) {
     return Padding(
       padding: const EdgeInsets.only(
@@ -281,27 +273,12 @@ class _SongItemState extends State<SongItem> {
     );
   }
 
-  Widget showDotsMenuOrRemoveFromCart(bool? isForCart) {
-    if (isForCart == null) {
-      return SongMenuDotsWidget(
-        song: song,
-        isForMyPlaylist: isForMyPlaylist,
-        onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
-      );
-    } else {
-      if (isForCart) {
-        return RemoveFromCartButton(
-          onRemoveFromCart: onRemoveFromCart!,
-          isWithText: false,
-        );
-      } else {
-        return SongMenuDotsWidget(
-          song: song,
-          isForMyPlaylist: isForMyPlaylist,
-          onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
-        );
-      }
-    }
+  Widget showDotsMenu() {
+    return SongMenuDotsWidget(
+      song: song,
+      isForMyPlaylist: isForMyPlaylist,
+      onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
+    );
   }
 }
 
@@ -445,6 +422,13 @@ void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
     child: SongMenuWidget(
       song: song,
       onRemoveSongFromPlaylist: onRemoveSongFromPlaylist,
+      onSubscribeButtonClicked: () {
+        ///GO TO SUBSCRIPTION PAGE
+        Navigator.pushNamed(
+          context,
+          AppRouterPaths.subscriptionRoute,
+        );
+      },
       onCreateWithSongSuccess: (MyPlaylist myPlaylist) {
         ///GO TO USER PLAYLIST PAGE
         Navigator.pushNamed(
@@ -457,7 +441,7 @@ void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
       },
       isForMyPlaylist: isForMyPlaylist,
       onSongBuyClicked: () {
-        PurchaseUtil.songMenuBuyButtonOnClick(context, song);
+        IapPurchaseUtil.songMenuBuyButtonOnClick(context, song);
       },
     ),
   );

@@ -93,9 +93,9 @@ class LibraryPageDataProvider {
 
     String url = "";
     if (appFavoritePageItemTypes == AppFavoritePageItemTypes.SONGS) {
-      url = "/liked_songs";
+      url = "/liked_songs/";
     } else if (appFavoritePageItemTypes == AppFavoritePageItemTypes.ALBUMS) {
-      url = "/liked_albums";
+      url = "/liked_albums/";
     } else {
       throw "AppFavoritePageItemTypes IS INCORRECT";
     }
@@ -132,9 +132,9 @@ class LibraryPageDataProvider {
 
     String url = "";
     if (appFollowedPageItemTypes == AppFollowedPageItemTypes.PLAYLISTS) {
-      url = "/followed_playlists";
+      url = "/followed_playlists/";
     } else if (appFollowedPageItemTypes == AppFollowedPageItemTypes.ARTIST) {
-      url = "/followed_artists";
+      url = "/followed_artists/";
     } else {
       throw "AppFavoritePageItemTypes IS INCORRECT";
     }

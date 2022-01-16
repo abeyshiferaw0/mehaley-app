@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/data/models/api_response/cart_check_out_status_data.dart';
 import 'package:mehaley/data/models/api_response/purchase_item_status_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/repositories/payment_repository.dart';
@@ -43,19 +42,6 @@ class PurchaseItemStatusBloc
         );
       } catch (error) {
         yield PurchaseItemStatusLoadingErrorState(error: error.toString());
-      }
-    } else if (event is CheckCartCheckOutStatusEvent) {
-      yield CartCheckoutStatusLoadingState();
-
-      try {
-        final CartCheckOutStatusData cartCheckOutStatusData =
-            await paymentRepository.checkCartCheckOutStatusData();
-
-        yield CartCheckoutStatusLoadedState(
-          cartCheckOutStatusData: cartCheckOutStatusData,
-        );
-      } catch (error) {
-        yield CartCheckoutStatusLoadingErrorState(error: error.toString());
       }
     }
   }

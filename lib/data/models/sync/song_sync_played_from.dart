@@ -33,13 +33,11 @@ enum SongSyncPlayedFrom {
   @HiveField(13)
   PURCHASED_SONG,
   @HiveField(14)
-  CART_PAGE,
-  @HiveField(15)
   PROFILE_PAGE,
-  @HiveField(16)
+  @HiveField(15)
   OFFLINE_PAGE,
-  @HiveField(17)
+  @HiveField(16)
   UNK,
-  @HiveField(18)
+  @HiveField(17)
   SHARED_SONG,
 }

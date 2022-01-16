@@ -4,14 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class MainPlayerTopItems extends StatefulWidget {
@@ -91,8 +92,16 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                         song: state,
                         isForMyPlaylist: false,
                         onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+                        onSubscribeButtonClicked: () {
+                          ///GO TO SUBSCRIPTION PAGE
+                          Navigator.pushNamed(
+                            context,
+                            AppRouterPaths.subscriptionRoute,
+                          );
+                        },
                         onSongBuyClicked: () {
-                          PurchaseUtil.songMenuBuyButtonOnClick(context, state);
+                          IapPurchaseUtil.songMenuBuyButtonOnClick(
+                              context, state);
                         },
                       ),
                     );

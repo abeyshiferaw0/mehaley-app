@@ -10,6 +10,7 @@ import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/audio_file.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/remote_image.dart';
 import 'package:mehaley/data/models/sync/song_sync.dart';
 import 'package:mehaley/data/models/text_lan.dart';
@@ -37,7 +38,7 @@ class Song extends Equatable {
   @HiveField(6)
   final double priceEtb;
   @HiveField(7)
-  final double priceDollar;
+  final IapProduct priceDollar;
   @HiveField(8)
   final bool isFree;
   @HiveField(9)
@@ -57,9 +58,9 @@ class Song extends Equatable {
   @HiveField(17)
   final String source;
   @HiveField(18)
-  final bool isLiked;
+  final String? youtubeUrl;
   @HiveField(19)
-  final bool isInCart;
+  final bool isLiked;
   @HiveField(20)
   final DateTime releasedDate;
   @HiveField(21)
@@ -87,7 +88,7 @@ class Song extends Equatable {
     required this.producedBy,
     required this.source,
     required this.isLiked,
-    required this.isInCart,
+    required this.youtubeUrl,
     required this.releasedDate,
     required this.songCreatedDate,
     required this.songUpdatedDated,
@@ -113,7 +114,8 @@ class Song extends Equatable {
         writtenByText,
         producedBy,
         source,
-        isLiked, isInCart,
+        youtubeUrl,
+        isLiked,
         releasedDate,
         songCreatedDate,
         songUpdatedDated,
@@ -131,7 +133,7 @@ class Song extends Equatable {
           .toList(),
       lyricIncluded: map['lyric_included'] == 1 ? true : false,
       priceEtb: map['price_etb'] as double,
-      priceDollar: map['price_dollar'] as double,
+      priceDollar: IapProduct.fromJson(map['price_dollar']),
       isFree: map['is_free'] == 1 ? true : false,
       isBought: map['is_bought'] == 1 ? true : false,
       isOnlyOnElf: map['is_only_on_elf'] == 1 ? true : false,
@@ -139,8 +141,9 @@ class Song extends Equatable {
       writtenByText: map['written_by_text'] as String,
       producedBy: map['produced_by'] as String,
       source: map['source'] as String,
+      youtubeUrl:
+          map['youtube_url'] != null ? map['youtube_url'] as String : null,
       isLiked: map['is_liked'] == 1 ? true : false,
-      isInCart: map['is_in_cart'] == 1 ? true : false,
       releasedDate: DateTime.parse(map['released_date']),
       songCreatedDate: DateTime.parse(map['song_created_date']),
       songUpdatedDated: DateTime.parse(map['song_updated_dated']),
@@ -159,7 +162,7 @@ class Song extends Equatable {
       'artists': getTextLanListMap(this.artistsName),
       'lyric_included': this.lyricIncluded ? 1 : 0,
       'price_etb': this.priceEtb,
-      'price_dollar': this.priceDollar,
+      'price_dollar': this.priceDollar.toJson(),
       'is_free': this.isFree ? 1 : 0,
       'is_bought': this.isBought ? 1 : 0,
       'is_only_on_elf': this.isOnlyOnElf ? 1 : 0,
@@ -167,14 +170,64 @@ class Song extends Equatable {
       'written_by_text': this.writtenByText,
       'produced_by': this.producedBy,
       'source': this.source,
+      'youtube_url': this.youtubeUrl,
       'is_liked': this.isLiked ? 1 : 0,
-      'is_in_cart': this.isInCart ? 1 : 0,
       'released_date': this.releasedDate.toString(),
       'song_created_date': this.songCreatedDate.toString(),
       'song_updated_dated': this.songUpdatedDated.toString(),
       'is_discount_available': this.isDiscountAvailable ? 1 : 0,
       'discount_percentage': this.discountPercentage,
     };
+  }
+
+  Song copyWith({
+    int? songI,
+    TextLan? songName,
+    RemoteImage? albumArt,
+    AudioFile? audioFile,
+    List<TextLan>? artistsName,
+    bool? lyricIncluded,
+    double? priceEtb,
+    IapProduct? priceDollar,
+    bool? isFree,
+    bool? isBought,
+    bool? isDiscountAvailable,
+    double? discountPercentage,
+    bool? isOnlyOnElf,
+    String? performedBy,
+    String? writtenByText,
+    String? producedBy,
+    String? source,
+    String? youtubeUrl,
+    bool? isLiked,
+    DateTime? releasedDate,
+    DateTime? songCreatedDate,
+    DateTime? songUpdatedDated,
+  }) {
+    return Song(
+      isBought: isBought ?? this.isBought,
+      isDiscountAvailable: isDiscountAvailable ?? this.isDiscountAvailable,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      songId: songI ?? this.songId,
+      songName: songName ?? this.songName,
+      albumArt: albumArt ?? this.albumArt,
+      audioFile: audioFile ?? this.audioFile,
+      artistsName: artistsName ?? this.artistsName,
+      lyricIncluded: lyricIncluded ?? this.lyricIncluded,
+      priceEtb: priceEtb ?? this.priceEtb,
+      priceDollar: priceDollar ?? this.priceDollar,
+      isFree: isFree ?? this.isFree,
+      isOnlyOnElf: isOnlyOnElf ?? this.isOnlyOnElf,
+      performedBy: performedBy ?? this.performedBy,
+      writtenByText: writtenByText ?? this.writtenByText,
+      producedBy: producedBy ?? this.producedBy,
+      source: source ?? this.source,
+      isLiked: isLiked ?? this.isLiked,
+      youtubeUrl: youtubeUrl ?? this.youtubeUrl,
+      releasedDate: releasedDate ?? this.releasedDate,
+      songCreatedDate: songCreatedDate ?? this.songCreatedDate,
+      songUpdatedDated: songUpdatedDated ?? this.songUpdatedDated,
+    );
   }
 
   dynamic getTextLanListMap(List<TextLan> items) {
@@ -193,6 +246,9 @@ class Song extends Equatable {
     SettingsDataProvider settingsDataProvider,
   ) async {
     List<AudioSource> audioSources = [];
+
+    ///IS USER SUBSCRIBED
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
     ///GET ALL DOWNLOADS SONGS AND TASKS
     List<DownloadedTaskWithSong> allDownloads =
@@ -217,10 +273,13 @@ class Song extends Equatable {
             ? false
             : song.isBought
                 ? false
-                : true,
+                : isUserSubscribed
+                    ? false
+                    : true,
         isOffline: downloadedTaskWithSong != null ? true : false,
         listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
         secondsPlayed: null,
+        isUserSubscribed: isUserSubscribed,
       );
 
       if (downloadedTaskWithSong == null) {
@@ -235,26 +294,25 @@ class Song extends Equatable {
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
-          artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
+          artUri: Uri.parse(song.albumArt.imageSmallPath),
           extras: {
             AppValues.songExtraStr: song.toMap(),
             AppValues.songSyncExtraStr: songSync.toMap(),
           },
         );
 
-        ///CHECK IF SONG BOUGHT
         HlsAudioSource hlsAudioSource = HlsAudioSource(
           Uri.parse(
-            AppApi.baseUrl +
-                (settingsDataProvider.isDataSaverTurnedOn()
-                    ? song.audioFile.audio64KpsStreamPath
-                    : song.audioFile.audio96KpsStreamPath),
+            (settingsDataProvider.isDataSaverTurnedOn()
+                ? song.audioFile.audio64KpsStreamPath
+                : song.audioFile.audio96KpsStreamPath),
           ),
           tag: tag,
         );
 
-        if (!song.isBought && !song.isFree) {
-          ///CLIP IF NOT BOUGHT
+        ///CHECK IF SONG BOUGHT
+        if (!song.isBought && !song.isFree && !isUserSubscribed) {
+          ///CLIP IF NOT BOUGHT OR NOT SUBSCRIBED OR NOT FREE
           clippingAudioSource = ClippingAudioSource(
             child: hlsAudioSource,
             tag: tag,
@@ -284,7 +342,7 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
+            artUri: Uri.parse(song.albumArt.imageSmallPath),
             extras: {
               AppValues.songExtraStr: song.toMap(),
               AppValues.songSyncExtraStr: songSync.toMap(),
@@ -297,110 +355,114 @@ class Song extends Equatable {
     return audioSources;
   }
 
-  static Future<AudioSource> toAudioSourceStreamUri(
-    DownloadUtil downloadUtil,
-    Song song,
-    PlayingFrom playingFrom,
-    BuildContext context,
-    SettingsDataProvider settingsDataProvider,
-  ) async {
-    ///GET ALL DOWNLOADS SONGS AND TASKS
-    List<DownloadedTaskWithSong> allDownloads =
-        await downloadUtil.getAllDownloadedSongs();
-
-    ///CHECK IF DOWNLOADED
-    DownloadedTaskWithSong? downloadedTaskWithSong =
-        downloadUtil.isSongDownloaded(song, allDownloads);
-
-    ///GENERATE SONG SYNC OBJECT
-    var uuid = Uuid();
-    SongSync songSync = SongSync(
-      songId: song.songId,
-      uuid: uuid.v5(
-        Uuid.NAMESPACE_NIL,
-        "${DateTime.now().toString()}_${song.songId}",
-      ),
-      playedFrom: playingFrom.songSyncPlayedFrom,
-      playedFromId: playingFrom.songSyncPlayedFromId,
-      isPreview: song.isFree
-          ? false
-          : song.isBought
-              ? false
-              : true,
-      isOffline: downloadedTaskWithSong != null ? true : false,
-      listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
-      secondsPlayed: null,
-    );
-
-    if (downloadedTaskWithSong == null) {
-      ///SONG IS NOT DOWNLOADED
-      ClippingAudioSource clippingAudioSource;
-
-      ///TAG MEDIA
-      MediaItem tag = MediaItem(
-        id: song.songId.toString(),
-        title: L10nUtil.translateLocale(song.songName, context),
-        artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
-        duration: Duration(
-          seconds: song.audioFile.audioDurationSeconds.toInt(),
-        ),
-        artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
-        extras: {
-          AppValues.songExtraStr: song.toMap(),
-          AppValues.songSyncExtraStr: songSync.toMap(),
-        },
-      );
-
-      ///CHECK IF SONG BOUGHT
-      HlsAudioSource hlsAudioSource = HlsAudioSource(
-        Uri.parse(
-          AppApi.baseUrl +
-              (settingsDataProvider.isDataSaverTurnedOn()
-                  ? song.audioFile.audio64KpsStreamPath
-                  : song.audioFile.audio96KpsStreamPath),
-        ),
-        tag: tag,
-      );
-      print(
-          "settingsDataProvider.isDataSaverTurnedOn() => ${settingsDataProvider.isDataSaverTurnedOn()}  => ${hlsAudioSource.uri}");
-      if (!song.isBought && !song.isFree) {
-        ///CLIP IF NOT BOUGHT
-        clippingAudioSource = ClippingAudioSource(
-          child: hlsAudioSource,
-          tag: tag,
-          start: song.audioFile.audioPreviewStartTime,
-          end: Duration(
-            seconds: (song.audioFile.audioPreviewDurationSeconds.toInt() +
-                    song.audioFile.audioPreviewStartTime.inSeconds) +
-                2,
-          ),
-        );
-        return clippingAudioSource;
-      } else {
-        return hlsAudioSource;
-      }
-    } else {
-      ///SONG IS DOWNLOADED
-      AudioSource audioSource = AudioSource.uri(
-        Uri.file(
-            "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
-        tag: MediaItem(
-          id: song.songId.toString(),
-          title: L10nUtil.translateLocale(song.songName, context),
-          artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
-          duration: Duration(
-            seconds: song.audioFile.audioDurationSeconds.toInt(),
-          ),
-          artUri: Uri.parse(AppApi.baseUrl + song.albumArt.imageSmallPath),
-          extras: {
-            AppValues.songExtraStr: song.toMap(),
-            AppValues.songSyncExtraStr: songSync.toMap(),
-          },
-        ),
-      );
-      return audioSource;
-    }
-  }
+  // static Future<AudioSource> toAudioSourceStreamUri(
+  //   DownloadUtil downloadUtil,
+  //   Song song,
+  //   PlayingFrom playingFrom,
+  //   BuildContext context,
+  //   SettingsDataProvider settingsDataProvider,
+  // ) async {
+  //   ///IS USER SUBSCRIBED
+  //   final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+  //
+  //   ///GET ALL DOWNLOADS SONGS AND TASKS
+  //   List<DownloadedTaskWithSong> allDownloads =
+  //       await downloadUtil.getAllDownloadedSongs();
+  //
+  //   ///CHECK IF DOWNLOADED
+  //   DownloadedTaskWithSong? downloadedTaskWithSong =
+  //       downloadUtil.isSongDownloaded(song, allDownloads);
+  //
+  //   ///GENERATE SONG SYNC OBJECT
+  //   var uuid = Uuid();
+  //   SongSync songSync = SongSync(
+  //     songId: song.songId,
+  //     uuid: uuid.v5(
+  //       Uuid.NAMESPACE_NIL,
+  //       "${DateTime.now().toString()}_${song.songId}",
+  //     ),
+  //     playedFrom: playingFrom.songSyncPlayedFrom,
+  //     playedFromId: playingFrom.songSyncPlayedFromId,
+  //     isPreview: song.isFree
+  //         ? false
+  //         : song.isBought
+  //             ? false
+  //             : isUserSubscribed
+  //                 ? false
+  //                 : true,
+  //     isOffline: downloadedTaskWithSong != null ? true : false,
+  //     listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
+  //     secondsPlayed: null,
+  //     isUserSubscribed: isUserSubscribed,
+  //   );
+  //
+  //   if (downloadedTaskWithSong == null) {
+  //     ///SONG IS NOT DOWNLOADED
+  //     ClippingAudioSource clippingAudioSource;
+  //
+  //     ///TAG MEDIA
+  //     MediaItem tag = MediaItem(
+  //       id: song.songId.toString(),
+  //       title: L10nUtil.translateLocale(song.songName, context),
+  //       artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+  //       duration: Duration(
+  //         seconds: song.audioFile.audioDurationSeconds.toInt(),
+  //       ),
+  //       artUri: Uri.parse(song.albumArt.imageSmallPath),
+  //       extras: {
+  //         AppValues.songExtraStr: song.toMap(),
+  //         AppValues.songSyncExtraStr: songSync.toMap(),
+  //       },
+  //     );
+  //
+  //     ///CHECK IF SONG BOUGHT
+  //     HlsAudioSource hlsAudioSource = HlsAudioSource(
+  //       Uri.parse(
+  //         (settingsDataProvider.isDataSaverTurnedOn()
+  //             ? song.audioFile.audio64KpsStreamPath
+  //             : song.audioFile.audio96KpsStreamPath),
+  //       ),
+  //       tag: tag,
+  //     );
+  //
+  //     if (!song.isBought && !song.isFree && !isUserSubscribed) {
+  //       ///CLIP IF NOT BOUGHT OR NOT SUBSCRIBED OR NOT FREE
+  //       clippingAudioSource = ClippingAudioSource(
+  //         child: hlsAudioSource,
+  //         tag: tag,
+  //         start: song.audioFile.audioPreviewStartTime,
+  //         end: Duration(
+  //           seconds: (song.audioFile.audioPreviewDurationSeconds.toInt() +
+  //                   song.audioFile.audioPreviewStartTime.inSeconds) +
+  //               2,
+  //         ),
+  //       );
+  //       return clippingAudioSource;
+  //     } else {
+  //       return hlsAudioSource;
+  //     }
+  //   } else {
+  //     ///SONG IS DOWNLOADED
+  //     AudioSource audioSource = AudioSource.uri(
+  //       Uri.file(
+  //           "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
+  //       tag: MediaItem(
+  //         id: song.songId.toString(),
+  //         title: L10nUtil.translateLocale(song.songName, context),
+  //         artist: PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+  //         duration: Duration(
+  //           seconds: song.audioFile.audioDurationSeconds.toInt(),
+  //         ),
+  //         artUri: Uri.parse(song.albumArt.imageSmallPath),
+  //         extras: {
+  //           AppValues.songExtraStr: song.toMap(),
+  //           AppValues.songSyncExtraStr: songSync.toMap(),
+  //         },
+  //       ),
+  //     );
+  //     return audioSource;
+  //   }
+  // }
 
   static String toBase64Str(Song song) {
     ///CONVERT JSON TO STRING

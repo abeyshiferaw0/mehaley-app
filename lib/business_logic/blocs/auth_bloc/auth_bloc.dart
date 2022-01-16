@@ -127,11 +127,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthErrorState(error: event.error);
     } else if (event is SaveUserEvent) {
       try {
-        await authRepository.setOneSignalExternalId(event.appFireBaseUser);
         await authRepository.turnAllNotificationOn();
         await OneSignal.shared.disablePush(false);
-        SaveUserData saveUserData =
-            await authRepository.saveUser(event.appFireBaseUser);
+        SaveUserData saveUserData = await authRepository.saveUser(
+          event.appFireBaseUser,
+        );
+        await authRepository.setOneSignalExternalId(saveUserData.appUser);
         yield AuthSuccessState(
           appUser: saveUserData.appUser,
         );

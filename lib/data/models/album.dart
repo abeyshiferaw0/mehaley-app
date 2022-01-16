@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/remote_image.dart';
-import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 
 part 'album.g.dart';
@@ -22,7 +22,7 @@ class Album extends Equatable {
   @HiveField(5)
   final double priceEtb;
   @HiveField(6)
-  final double priceDollar;
+  final IapProduct priceDollar;
   @HiveField(7)
   final bool isFree;
   @HiveField(8)
@@ -38,12 +38,10 @@ class Album extends Equatable {
   @HiveField(13)
   final bool isLiked;
   @HiveField(14)
-  final bool isInCart;
-  @HiveField(15)
   final DateTime albumReleaseDate;
-  @HiveField(16)
+  @HiveField(15)
   final DateTime albumDateCreated;
-  @HiveField(17)
+  @HiveField(16)
   final DateTime albumDateUpdated;
 
   const Album({
@@ -61,7 +59,6 @@ class Album extends Equatable {
     required this.isOnlyOnElf,
     required this.isFeatured,
     required this.isLiked,
-    required this.isInCart,
     required this.albumReleaseDate,
     required this.albumDateCreated,
     required this.albumDateUpdated,
@@ -83,7 +80,6 @@ class Album extends Equatable {
         isOnlyOnElf,
         isFeatured,
         isLiked,
-        isInCart,
         albumReleaseDate,
         albumDateCreated,
         albumDateUpdated,
@@ -101,7 +97,9 @@ class Album extends Equatable {
           : [RemoteImage.emptyRemoteImage()],
       artist: Artist.fromMap(map['artist_id']),
       priceEtb: map['price_etb'] as double,
-      priceDollar: map['price_dollar'] as double,
+      priceDollar: IapProduct.fromJson(
+        map['price_dollar'],
+      ),
       isFree: map['is_free'] == 1 ? true : false,
       isBought: map['is_bought'] == 1 ? true : false,
       isDiscountAvailable: map['is_discount_available'] == 1 ? true : false,
@@ -109,7 +107,6 @@ class Album extends Equatable {
       isOnlyOnElf: map['is_only_on_elf'] == 1 ? true : false,
       isFeatured: map['is_featured'] == 1 ? true : false,
       isLiked: map['is_liked'] == 1 ? true : false,
-      isInCart: map['is_in_cart'] == 1 ? true : false,
       albumReleaseDate: DateTime.parse(map['album_release_date']),
       albumDateCreated: DateTime.parse(map['album_date_created']),
       albumDateUpdated: DateTime.parse(map['album_date_updated']),
@@ -133,10 +130,49 @@ class Album extends Equatable {
       'is_only_on_elf': this.isOnlyOnElf,
       'is_featured': this.isFeatured,
       'is_liked': this.isLiked,
-      'is_in_cart': this.isInCart,
       'album_release_date': this.albumReleaseDate,
       'album_date_created': this.albumDateCreated,
       'album_date_updated': this.albumDateUpdated,
     } as Map<String, dynamic>;
+  }
+
+  Album copyWith({
+    int? albumId,
+    TextLan? albumTitle,
+    TextLan? albumDescription,
+    List<RemoteImage>? albumImages,
+    Artist? artist,
+    double? priceEtb,
+    IapProduct? priceDollar,
+    bool? isFree,
+    bool? isDiscountAvailable,
+    bool? isBought,
+    double? discountPercentage,
+    bool? isOnlyOnElf,
+    bool? isFeatured,
+    bool? isLiked,
+    DateTime? albumReleaseDate,
+    DateTime? albumDateCreated,
+    DateTime? albumDateUpdated,
+  }) {
+    return Album(
+      isBought: isBought ?? this.isBought,
+      albumId: albumId ?? this.albumId,
+      albumTitle: albumTitle ?? this.albumTitle,
+      albumDescription: albumDescription ?? this.albumDescription,
+      albumImages: albumImages ?? this.albumImages,
+      artist: artist ?? this.artist,
+      priceEtb: priceEtb ?? this.priceEtb,
+      priceDollar: priceDollar ?? this.priceDollar,
+      isFree: isFree ?? this.isFree,
+      isDiscountAvailable: isDiscountAvailable ?? this.isDiscountAvailable,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      isOnlyOnElf: isOnlyOnElf ?? this.isOnlyOnElf,
+      isFeatured: isFeatured ?? this.isFeatured,
+      isLiked: isLiked ?? this.isLiked,
+      albumReleaseDate: albumReleaseDate ?? this.albumReleaseDate,
+      albumDateCreated: albumDateCreated ?? this.albumDateCreated,
+      albumDateUpdated: albumDateUpdated ?? this.albumDateUpdated,
+    );
   }
 }

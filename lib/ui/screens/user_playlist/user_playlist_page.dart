@@ -281,8 +281,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           ),
                         );
                       },
-                      thumbUrl: AppApi.baseUrl +
-                          songs[position].albumArt.imageSmallPath,
+                      thumbUrl: songs[position].albumArt.imageSmallPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG

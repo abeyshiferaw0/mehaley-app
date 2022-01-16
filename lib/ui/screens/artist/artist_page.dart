@@ -101,6 +101,7 @@ class _ArtistPageState extends State<ArtistPage> {
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: AppMargin.margin_48,
@@ -167,27 +168,53 @@ class _ArtistPageState extends State<ArtistPage> {
           ),
 
           Expanded(child: SizedBox()),
-          PlayShuffleLgBtnWidget(
-            onTap: () {
-              //OPEN SHUFFLE SONGS
-              PagesUtilFunctions.openSongShuffled(
-                context: context,
-                startPlaying: true,
-                songs: artistPageData.popularSongs,
-                playingFrom: PlayingFrom(
-                  from: AppLocale.of().playingFromArtist,
-                  title: L10nUtil.translateLocale(
-                      artistPageData.artist.artistName, context),
-                  songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
-                  songSyncPlayedFromId: artistPageData.artist.artistId,
-                ),
-                index: PagesUtilFunctions.getRandomIndex(
-                  min: 0,
-                  max: artistPageData.popularSongs.length,
-                ),
-              );
-            },
-          ),
+          artistPageData.popularSongs.length > 0
+              ? PlayShuffleLgBtnWidget(
+                  onTap: () {
+                    //OPEN SHUFFLE SONGS
+                    PagesUtilFunctions.openSongShuffled(
+                      context: context,
+                      startPlaying: true,
+                      songs: artistPageData.popularSongs,
+                      playingFrom: PlayingFrom(
+                        from: AppLocale.of().playingFromArtist,
+                        title: L10nUtil.translateLocale(
+                            artistPageData.artist.artistName, context),
+                        songSyncPlayedFrom: SongSyncPlayedFrom.ARTIST_DETAIL,
+                        songSyncPlayedFromId: artistPageData.artist.artistId,
+                      ),
+                      index: PagesUtilFunctions.getRandomIndex(
+                        min: 0,
+                        max: artistPageData.popularSongs.length,
+                      ),
+                    );
+                  },
+                )
+              : artistPageData.newSongs.length > 0
+                  ? PlayShuffleLgBtnWidget(
+                      onTap: () {
+                        //OPEN SHUFFLE SONGS
+                        PagesUtilFunctions.openSongShuffled(
+                          context: context,
+                          startPlaying: true,
+                          songs: artistPageData.newSongs,
+                          playingFrom: PlayingFrom(
+                            from: AppLocale.of().playingFromArtist,
+                            title: L10nUtil.translateLocale(
+                                artistPageData.artist.artistName, context),
+                            songSyncPlayedFrom:
+                                SongSyncPlayedFrom.ARTIST_DETAIL,
+                            songSyncPlayedFromId:
+                                artistPageData.artist.artistId,
+                          ),
+                          index: PagesUtilFunctions.getRandomIndex(
+                            min: 0,
+                            max: artistPageData.newSongs.length,
+                          ),
+                        );
+                      },
+                    )
+                  : SizedBox(),
           Expanded(child: SizedBox()),
 
           ///FAV BUTTON
@@ -306,8 +333,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: AppApi.baseUrl +
-                    popularSongs[position].albumArt.imageSmallPath,
+                thumbUrl: popularSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -352,8 +378,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl:
-                    AppApi.baseUrl + newSongs[position].albumArt.imageSmallPath,
+                thumbUrl: newSongs[position].albumArt.imageSmallPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -426,27 +451,22 @@ class _ArtistPageState extends State<ArtistPage> {
         bottom: AppPadding.padding_6,
         left: AppPadding.padding_16,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            '${AppLocale.of().featuring(
-              artistName: L10nUtil.translateLocale(
-                artist.artistName,
-                context,
-              ),
-            )}',
-            textAlign: TextAlign.start,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_14.sp,
-              color: AppColors.black,
-              letterSpacing: 0.4,
-              fontWeight: FontWeight.w500,
-            ),
+      child: Text(
+        '${AppLocale.of().featuring(
+          artistName: L10nUtil.translateLocale(
+            artist.artistName,
+            context,
           ),
-        ],
+        )}',
+        textAlign: TextAlign.start,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: AppFontSizes.font_size_14.sp,
+          color: AppColors.black,
+          letterSpacing: 0.4,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
@@ -457,6 +477,7 @@ class _ArtistPageState extends State<ArtistPage> {
   ) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           playlistsFeaturingArtists.length > 0
               ? buildFeaturingArtistPlaylistHeader(artist)

@@ -6,6 +6,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({
@@ -73,7 +74,7 @@ class SignUpButton extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: AppFontSizes.font_size_14,
+                  fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),

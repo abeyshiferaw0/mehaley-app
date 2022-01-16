@@ -25,7 +25,7 @@ class CategoryDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-categoreies-top",
+        url: AppApi.musicBaseUrl + "/get-categoreies-top/",
         queryParameters: {
           'id': categoryId,
         },
@@ -42,7 +42,7 @@ class CategoryDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.musicBaseUrl + "/get-categoreies-top",
+        url: AppApi.musicBaseUrl + "/get-categoreies-top/",
         queryParameters: {
           'id': categoryId,
         },
@@ -57,7 +57,7 @@ class CategoryDataProvider {
 
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.musicBaseUrl + "/get-categoreies-songs",
+      url: AppApi.musicBaseUrl + "/get-categoreies-songs/",
       queryParameters: {
         'id': categoryId,
         'page': page,

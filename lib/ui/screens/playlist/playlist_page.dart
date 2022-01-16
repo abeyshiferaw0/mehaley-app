@@ -181,8 +181,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 return SongItem(
                   song: songs[position],
                   isForMyPlaylist: false,
-                  thumbUrl:
-                      AppApi.baseUrl + songs[position].albumArt.imageSmallPath,
+                  thumbUrl: songs[position].albumArt.imageSmallPath,
                   thumbSize: AppValues.playlistSongItemSize,
                   onPressed: () {
                     //OPEN SONG

@@ -51,7 +51,7 @@ class ArtistAlbumItem extends StatelessWidget {
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl + album.albumImages[0].imageSmallPath,
+                imageUrl:  album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),

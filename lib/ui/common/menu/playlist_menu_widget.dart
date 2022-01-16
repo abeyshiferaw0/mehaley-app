@@ -9,7 +9,6 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/ui/common/app_card.dart';
-import 'package:mehaley/ui/common/menu/menu_items/playlist_cart_menu_item.dart';
 import 'package:mehaley/ui/common/menu/menu_items/playlist_follow_menu_item.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:sizer/sizer.dart';
@@ -63,9 +62,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                           },
                         )
                       : SizedBox(),
-                  PlaylistCartMenuItem(
-                    playlist: playlist,
-                  ),
+
                   PlaylistFollowMenuItem(
                     playlistId: playlist.playlistId,
                     isFollowing: playlist.isFollowed!,
@@ -122,7 +119,7 @@ class PlaylistMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: AppApi.baseUrl + playlist.playlistImage.imageMediumPath,
+              imageUrl: playlist.playlistImage.imageMediumPath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
@@ -137,43 +134,45 @@ class PlaylistMenuWidget extends StatelessWidget {
             ),
           ),
           SizedBox(width: AppMargin.margin_16),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                L10nUtil.translateLocale(playlist.playlistNameText, context),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: AppFontSizes.font_size_12.sp,
-                  fontWeight: FontWeight.w500,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  L10nUtil.translateLocale(playlist.playlistNameText, context),
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: AppFontSizes.font_size_12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: AppMargin.margin_4),
-              playlist.isFree
-                  ? SizedBox()
-                  : SmallTextPriceWidget(
-                      priceEtb: playlist.priceEtb,
-                      priceUsd: playlist.priceDollar,
-                      isDiscountAvailable: playlist.isDiscountAvailable,
-                      isFree: playlist.isFree,
-                      discountPercentage: playlist.discountPercentage,
-                      isPurchased: playlist.isBought,
-                    ),
-              SizedBox(height: AppMargin.margin_4),
-              Text(
-                AppLocale.of().byAppName.toUpperCase(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.txtGrey,
-                  fontSize: AppFontSizes.font_size_8.sp,
-                  fontWeight: FontWeight.w400,
+                SizedBox(height: AppMargin.margin_4),
+                playlist.isFree
+                    ? SizedBox()
+                    : SmallTextPriceWidget(
+                        priceEtb: playlist.priceEtb,
+                        priceUsd: playlist.priceDollar,
+                        isDiscountAvailable: playlist.isDiscountAvailable,
+                        isFree: playlist.isFree,
+                        discountPercentage: playlist.discountPercentage,
+                        isPurchased: playlist.isBought,
+                      ),
+                SizedBox(height: AppMargin.margin_4),
+                Text(
+                  AppLocale.of().byAppName.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.txtGrey,
+                    fontSize: AppFontSizes.font_size_8.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

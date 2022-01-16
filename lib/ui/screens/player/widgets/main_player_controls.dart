@@ -15,6 +15,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -25,9 +26,9 @@ import 'package:mehaley/ui/common/like_follow/song_favorite_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../queue_list_page.dart';
@@ -106,10 +107,17 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             child: SongMenuWidget(
                               song: state,
                               isForMyPlaylist: false,
+                              onSubscribeButtonClicked: () {
+                                ///GO TO SUBSCRIPTION PAGE
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRouterPaths.subscriptionRoute,
+                                );
+                              },
                               onCreateWithSongSuccess:
                                   (MyPlaylist myPlaylist) {},
                               onSongBuyClicked: () {
-                                PurchaseUtil.songMenuBuyButtonOnClick(
+                                IapPurchaseUtil.songMenuBuyButtonOnClick(
                                   context,
                                   state,
                                 );
@@ -419,7 +427,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         .seekToNext()
                         .catchError(
                       (e) {
-                        print("PlayNextSongEvent ${e.toString()}");
+                        //print("PlayNextSongEvent ${e.toString()}");
                       },
                     );
                   },

@@ -13,7 +13,9 @@ import 'package:mehaley/data/models/group.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
 import 'package:mehaley/ui/common/no_internet_header.dart';
+import 'package:mehaley/ui/common/subscribed_tag.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_categories.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_albums.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_featured_playlists.dart';
@@ -70,7 +72,6 @@ class _HomePageState extends State<HomePage>
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
-
     super.initState();
   }
 
@@ -123,6 +124,13 @@ class _HomePageState extends State<HomePage>
             fit: BoxFit.cover,
             height: AppIconSizes.icon_size_20,
           ),
+
+          ///SUBSCRIBED CARD
+          SubscribedTag(
+            color: AppColors.darkOrange,
+          ),
+
+          ///
           Expanded(
             child: SizedBox(),
           ),
@@ -200,12 +208,6 @@ class _HomePageState extends State<HomePage>
           ///BUILD USER LIBRARY GRIDS
           HomeFeaturedSongs(featuredSongs: homePageData.featuredSongs),
 
-          // Container(
-          //   padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-          //   child: AppSubscribeCard(),
-          // ),
-          //SizedBox(height: AppMargin.margin_32),
-
           ///BUILD FEATURED ALBUMS
           HomeFeaturedAlbums(
             featuredAlbums: homePageData.featuredAlbums,
@@ -217,7 +219,15 @@ class _HomePageState extends State<HomePage>
           ),
 
           ///SONGS WITH VIDEOS
-          HomePageVideoCarousel(),
+          HomePageVideoCarousel(
+            songVideos: homePageData.videoSongs,
+          ),
+
+          ///SUBSCRIBE CARD
+          AppSubscribeCard(
+            topMargin: AppMargin.margin_48,
+            bottomMargin: AppMargin.margin_8,
+          ),
 
           ///BUILD HOME PAGE GROUPS
           buildGroupsListView(groups),
@@ -243,7 +253,7 @@ class _HomePageState extends State<HomePage>
                     groups[index].groupSubTitleText!, context)
                 : null,
             groupHeaderImageUrl: groups[index].headerImageId != null
-                ? AppApi.baseUrl + groups[index].headerImageId!.imageSmallPath
+                ? groups[index].headerImageId!.imageSmallPath
                 : null,
             groupUiType: groups[index].groupUiType,
             groupItems: groups[index].groupItems,

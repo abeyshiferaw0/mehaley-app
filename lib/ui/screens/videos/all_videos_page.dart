@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/videos_bloc/all_videos_bloc/all_videos_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_error.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/pagination_error_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item_video.dart';
+import 'package:mehaley/ui/screens/videos/widgets/shimmer_videos.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -14,40 +23,125 @@ class AllVideosPage extends StatefulWidget {
 }
 
 class _AllVideosPageState extends State<AllVideosPage> {
+  //PAGINATION CONTROLLER
+  final PagingController<int, Song> _pagingController =
+      PagingController(firstPageKey: 1);
+
+  @override
+  void initState() {
+    //FETCH PAGINATED SONG VIDEOS WITH PAGINATED CONTROLLER
+    _pagingController.addPageRequestListener(
+      (pageKey) {
+        BlocProvider.of<AllVideosBloc>(context).add(
+          LoadAllVideosEvent(
+            pageSize: AppValues.pageSize,
+            page: pageKey,
+          ),
+        );
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
-      appBar: buildAppBar(context),
-      body: ListView.separated(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              ///ADD SPACE IF FIRST
-              index == 0
-                  ? SizedBox(
-                      height: AppMargin.margin_16,
-                    )
-                  : SizedBox(),
-
-              ///VIDE ITEM
-              SongItemVideo(),
-
-              ///ADD SPACE IF LAST
-              index == 19
-                  ? SizedBox(
-                      height: AppMargin.margin_16,
-                    )
-                  : SizedBox(),
-            ],
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            color: AppColors.lightGrey,
-          );
-        },
+    return BlocListener<AllVideosBloc, AllVideosState>(
+      listener: (context, state) {
+        if (state is AllVideosLoadedState) {
+          final isLastPage = state.videoSongsList.length < AppValues.pageSize;
+          if (isLastPage) {
+            _pagingController.appendLastPage(
+              state.videoSongsList,
+            );
+          } else {
+            final nextPageKey = state.page + 1;
+            _pagingController.appendPage(
+              state.videoSongsList,
+              nextPageKey,
+            );
+          }
+        }
+        if (state is AllVideosLoadingErrorState) {
+          _pagingController.error = AppLocale.of().networkError;
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.pagesBgColor,
+        appBar: buildAppBar(context),
+        body: PagedListView<int, Song>(
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<Song>(
+            itemBuilder: (context, item, index) {
+              return Column(
+                children: [
+                  ///VIDE ITEM
+                  SizedBox(height: AppMargin.margin_8),
+                  SongItemVideo(
+                    videoSong: item,
+                    onTap: () {
+                      PagesUtilFunctions.openYtPlayerPage(
+                        context,
+                        item,
+                        false,
+                      );
+                    },
+                    onOpenAudioOnly: () {
+                      PagesUtilFunctions.openVideoAudioOnly(
+                        context,
+                        item,
+                        false,
+                      );
+                    },
+                  ),
+                  SizedBox(height: AppMargin.margin_8),
+                ],
+              );
+            },
+            noItemsFoundIndicatorBuilder: (context) {
+              return buildEmptyVideosList();
+            },
+            newPageProgressIndicatorBuilder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+                child: AppLoading(
+                  size: 50,
+                  strokeWidth: 3,
+                ),
+              );
+            },
+            firstPageProgressIndicatorBuilder: (context) {
+              return VideosShimmer();
+            },
+            noMoreItemsIndicatorBuilder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+                child: SizedBox(
+                  height: 30,
+                ),
+              );
+            },
+            newPageErrorIndicatorBuilder: (context) {
+              return PaginationErrorWidget(
+                onRetry: () {
+                  _pagingController.retryLastFailedRequest();
+                },
+              );
+            },
+            firstPageErrorIndicatorBuilder: (context) {
+              return PaginationErrorWidget(
+                onRetry: () {
+                  _pagingController.refresh();
+                },
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -69,13 +163,60 @@ class _AllVideosPageState extends State<AllVideosPage> {
         ),
       ),
       title: Text(
-        "All Videos",
+        AppLocale.of().allVideos,
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.black,
         ),
+      ),
+    );
+  }
+
+  Container buildEmptyVideosList() {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          FlutterRemix.video_line,
+          size: AppIconSizes.icon_size_72,
+          color: AppColors.lightGrey.withOpacity(0.8),
+        ),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32 * 2,
+          ),
+          child: Text(
+            AppLocale.of().emptyVideos,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_10.sp,
+              color: AppColors.txtGrey,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ],
+    ));
+  }
+
+  Widget buildPageLoading() {
+    return AppLoading(
+      size: AppValues.loadingWidgetSize,
+    );
+  }
+
+  Widget buildPageError() {
+    return AppError(
+      onRetry: () {},
+      bgWidget: AppLoading(
+        size: AppValues.loadingWidgetSize,
       ),
     );
   }

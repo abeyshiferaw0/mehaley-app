@@ -1,35 +1,52 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class SongItemVideo extends StatelessWidget {
-  const SongItemVideo({Key? key}) : super(key: key);
+  const SongItemVideo(
+      {Key? key,
+      required this.videoSong,
+      required this.onTap,
+      required this.onOpenAudioOnly})
+      : super(key: key);
+
+  final Song videoSong;
+  final VoidCallback onTap;
+  final VoidCallback onOpenAudioOnly;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppValues.songVideoItemHeight,
-      padding: EdgeInsets.symmetric(
-        horizontal: AppPadding.padding_16,
-      ),
-      child: Row(
-        children: [
-          buildExpandedImage(),
-          buildExpandedDetails(),
-        ],
+    return AppBouncingButton(
+      onTap: onTap,
+      child: Container(
+        height: AppValues.songVideoItemHeight,
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.padding_16,
+        ),
+        child: Row(
+          children: [
+            buildExpandedImage(),
+            buildExpandedDetails(context),
+          ],
+        ),
       ),
     );
   }
 
-  Expanded buildExpandedDetails() {
+  Expanded buildExpandedDetails(context) {
     return Expanded(
       flex: 60,
       child: Padding(
@@ -47,7 +64,10 @@ class SongItemVideo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Song name of song name",
+                        L10nUtil.translateLocale(
+                          videoSong.songName,
+                          context,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
@@ -61,7 +81,10 @@ class SongItemVideo extends StatelessWidget {
                         height: AppMargin.margin_4,
                       ),
                       Text(
-                        "Artist singer name",
+                        PagesUtilFunctions.getArtistsNames(
+                          videoSong.artistsName,
+                          context,
+                        ),
                         textAlign: TextAlign.start,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -81,7 +104,16 @@ class SongItemVideo extends StatelessWidget {
                     size: AppIconSizes.icon_size_24,
                     color: AppColors.black,
                   ),
-                  onSelected: (AppVideoItemAction appVideoItemAction) {},
+                  onSelected: (AppVideoItemAction appVideoItemAction) {
+                    if (appVideoItemAction == AppVideoItemAction.OPEN_AUDIO) {
+                      onOpenAudioOnly();
+                    }
+                    if (appVideoItemAction == AppVideoItemAction.SHARE) {
+                      BlocProvider.of<ShareButtonsBloc>(context).add(
+                        ShareSongEvent(song: videoSong),
+                      );
+                    }
+                  },
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<AppVideoItemAction>>[
                     buildMenuItem(
@@ -92,10 +124,6 @@ class SongItemVideo extends StatelessWidget {
                       AppVideoItemAction.OPEN_AUDIO,
                       "Open Audio",
                     ),
-                    buildMenuItem(
-                      AppVideoItemAction.OPEN_WITH_YOUTUBE,
-                      "Open With Youtube",
-                    ),
                   ],
                 ),
               ],
@@ -104,7 +132,7 @@ class SongItemVideo extends StatelessWidget {
               child: SizedBox(),
             ),
             AppBouncingButton(
-              onTap: () {},
+              onTap: onOpenAudioOnly,
               child: AppCard(
                 withShadow: false,
                 radius: 100.0,
@@ -140,8 +168,7 @@ class SongItemVideo extends StatelessWidget {
       child: AppCard(
         radius: 0.0,
         child: CachedNetworkImage(
-          imageUrl:
-              "http://cdn1-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-2.jpg",
+          imageUrl: videoSong.albumArt.imageMediumPath,
           fit: BoxFit.cover,
           placeholder: (context, url) => buildImagePlaceHolder(),
           errorWidget: (context, url, error) => buildImagePlaceHolder(),

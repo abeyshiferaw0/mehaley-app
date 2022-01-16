@@ -6,10 +6,14 @@ import 'package:mehaley/config/themes.dart';
 import 'app_bouncing_button.dart';
 
 class AppTopHeaderWithIcon extends StatelessWidget {
-  const AppTopHeaderWithIcon({Key? key, this.isForNewAppVersionDialog = false})
-      : super(key: key);
+  const AppTopHeaderWithIcon({
+    Key? key,
+    this.isForNewAppVersionDialog = false,
+    this.disableCloseButton = false,
+  }) : super(key: key);
 
   final bool isForNewAppVersionDialog;
+  final bool disableCloseButton;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class AppTopHeaderWithIcon extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(
-                left: AppIconSizes.icon_size_16,
+                left: AppIconSizes.icon_size_24,
               ),
               child: Image.asset(
                 AppAssets.icAppWordIcon,
@@ -46,21 +50,23 @@ class AppTopHeaderWithIcon extends StatelessWidget {
               ),
             ),
           ),
-          AppBouncingButton(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(AppPadding.padding_4),
-              child: Container(
-                child: Icon(
-                  FlutterRemix.close_line,
-                  color: AppColors.black,
-                  size: AppIconSizes.icon_size_24,
-                ),
-              ),
-            ),
-          ),
+          !disableCloseButton
+              ? AppBouncingButton(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppPadding.padding_4),
+                    child: Container(
+                      child: Icon(
+                        FlutterRemix.close_line,
+                        color: AppColors.black,
+                        size: AppIconSizes.icon_size_24,
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(),
         ],
       ),
     );

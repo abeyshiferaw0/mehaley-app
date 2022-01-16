@@ -14,47 +14,32 @@ class AppPaymentMethodsAdapter extends TypeAdapter<AppPaymentMethods> {
   AppPaymentMethods read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return AppPaymentMethods.METHOD_AMOLE;
+        return AppPaymentMethods.METHOD_YENEPAY;
       case 1:
-        return AppPaymentMethods.METHOD_CBE_BIRR;
+        return AppPaymentMethods.METHOD_TELEBIRR;
       case 2:
-        return AppPaymentMethods.METHOD_HELLO_CASH;
+        return AppPaymentMethods.METHOD_INAPP;
       case 3:
-        return AppPaymentMethods.METHOD_MBIRR;
-      case 4:
-        return AppPaymentMethods.METHOD_VISA;
-      case 5:
-        return AppPaymentMethods.METHOD_MASTERCARD;
-      case 6:
         return AppPaymentMethods.METHOD_UNK;
       default:
-        return AppPaymentMethods.METHOD_AMOLE;
+        return AppPaymentMethods.METHOD_YENEPAY;
     }
   }
 
   @override
   void write(BinaryWriter writer, AppPaymentMethods obj) {
     switch (obj) {
-      case AppPaymentMethods.METHOD_AMOLE:
+      case AppPaymentMethods.METHOD_YENEPAY:
         writer.writeByte(0);
         break;
-      case AppPaymentMethods.METHOD_CBE_BIRR:
+      case AppPaymentMethods.METHOD_TELEBIRR:
         writer.writeByte(1);
         break;
-      case AppPaymentMethods.METHOD_HELLO_CASH:
+      case AppPaymentMethods.METHOD_INAPP:
         writer.writeByte(2);
         break;
-      case AppPaymentMethods.METHOD_MBIRR:
-        writer.writeByte(3);
-        break;
-      case AppPaymentMethods.METHOD_VISA:
-        writer.writeByte(4);
-        break;
-      case AppPaymentMethods.METHOD_MASTERCARD:
-        writer.writeByte(5);
-        break;
       case AppPaymentMethods.METHOD_UNK:
-        writer.writeByte(6);
+        writer.writeByte(3);
         break;
     }
   }

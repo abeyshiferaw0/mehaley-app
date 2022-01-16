@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/subscribed_tag.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_controls.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_top_items.dart';
 import 'package:mehaley/ui/screens/player/widgets/mini_lyric_or_quotes_widget.dart';
@@ -35,6 +37,11 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
               SafeArea(
                 child: MainPlayerTopItems(),
                 bottom: false,
+              ),
+
+              ///ACTIVE SUBSCRIPTION TAG
+              SubscribedTag(
+                color: AppColors.white,
               ),
 
               ///ALBUM ART PAGER

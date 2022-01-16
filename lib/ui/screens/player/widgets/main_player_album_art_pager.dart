@@ -2,19 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.dart';
-import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
-import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
-import 'package:sizer/sizer.dart';
 
 class MainPlayerAlbumArtPager extends StatefulWidget {
   const MainPlayerAlbumArtPager({Key? key}) : super(key: key);
@@ -44,7 +38,6 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
       listener: (context, state) {
         isBlocScroll = true;
         if (isBlocScroll) {
-          print("SeekAudioPlayerToEventCALLED THREE ${state.currentIndex}");
           _pageController.jumpToPage(state.currentIndex);
           // _pageController.animateToPage(
           //   state.currentIndex,
@@ -80,8 +73,7 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
                     children: [
                       CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: AppApi.baseUrl +
-                            state.queue[index].albumArt.imageMediumPath,
+                        imageUrl: state.queue[index].albumArt.imageLargePath,
                         errorWidget: (context, url, error) =>
                             buildImagePlaceHolder(),
                         placeholder: (context, url) => buildImagePlaceHolder(),
@@ -96,52 +88,52 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
                           );
                         },
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: AppBouncingButton(
-                          onTap: () {
-                            ///STOP PLAYER AND GO TO YT PLAYER PAGE
-                            PagesUtilFunctions.openYtPlayerPage(
-                              context,
-                              "https://www.youtube.com/watch?v=m6HJ3pUM8Hc",
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppPadding.padding_16,
-                              vertical: AppPadding.padding_8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FlutterRemix.play_circle_line,
-                                  size: AppIconSizes.icon_size_16,
-                                  color: AppColors.darkOrange,
-                                ),
-                                SizedBox(
-                                  width: AppMargin.margin_8,
-                                ),
-                                Text(
-                                  "Play Video".toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: AppFontSizes.font_size_10.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.darkOrange,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.bottomRight,
+                      //   child: AppBouncingButton(
+                      //     onTap: () {
+                      //       ///STOP PLAYER AND GO TO YT PLAYER PAGE
+                      //       PagesUtilFunctions.openYtPlayerPage(
+                      //         context,
+                      //         "https://www.youtube.com/watch?v=m6HJ3pUM8Hc",
+                      //       );
+                      //     },
+                      //     child: Container(
+                      //       padding: EdgeInsets.symmetric(
+                      //         horizontal: AppPadding.padding_16,
+                      //         vertical: AppPadding.padding_8,
+                      //       ),
+                      //       decoration: BoxDecoration(
+                      //         color: AppColors.white,
+                      //         borderRadius: BorderRadius.only(
+                      //           topLeft: Radius.circular(10.0),
+                      //         ),
+                      //       ),
+                      //       child: Row(
+                      //         mainAxisSize: MainAxisSize.min,
+                      //         crossAxisAlignment: CrossAxisAlignment.center,
+                      //         children: [
+                      //           Icon(
+                      //             FlutterRemix.play_circle_line,
+                      //             size: AppIconSizes.icon_size_16,
+                      //             color: AppColors.darkOrange,
+                      //           ),
+                      //           SizedBox(
+                      //             width: AppMargin.margin_8,
+                      //           ),
+                      //           Text(
+                      //             "Play Video".toUpperCase(),
+                      //             style: TextStyle(
+                      //               fontSize: AppFontSizes.font_size_10.sp,
+                      //               fontWeight: FontWeight.w600,
+                      //               color: AppColors.darkOrange,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -150,9 +142,9 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
             onPageChanged: (pos) {
               // //SEEK AUDIO PLAYER SLIDER ALONG WITH SONG POSITION DURATION
 
-              print("SeekAudioPlayerToEventCALLED ONE $pos");
+              //print("SeekAudioPlayerToEventCALLED ONE $pos");
               if (!isBlocScroll) {
-                print("SeekAudioPlayerToEventCALLED TWO $pos");
+                //print("SeekAudioPlayerToEventCALLED TWO $pos");
                 BlocProvider.of<AudioPlayerBloc>(context).add(
                   SeekAudioPlayerToEvent(
                     song: state.queue.elementAt(pos),

@@ -18,9 +18,9 @@ import 'package:mehaley/ui/screens/search/widgets/search_result_footer_button.da
 import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_top_artist_song_item.dart';
 import 'package:mehaley/util/audio_player_util.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultList extends StatefulWidget {
@@ -164,8 +164,15 @@ class _SearchResultListState extends State<SearchResultList> {
               song: resultItem,
               isForMyPlaylist: false,
               onCreateWithSongSuccess: (MyPlaylist myPlaylist) {},
+              onSubscribeButtonClicked: () {
+                ///GO TO SUBSCRIPTION PAGE
+                Navigator.pushNamed(
+                  context,
+                  AppRouterPaths.subscriptionRoute,
+                );
+              },
               onSongBuyClicked: () {
-                PurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
+                IapPurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
               },
             ),
           );
@@ -191,7 +198,7 @@ class _SearchResultListState extends State<SearchResultList> {
             child: PlaylistMenuWidget(
               playlist: resultItem,
               onBuyButtonClicked: () {
-                PurchaseUtil.playlistMenuBuyButtonOnClick(
+                IapPurchaseUtil.playlistMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,
@@ -228,7 +235,7 @@ class _SearchResultListState extends State<SearchResultList> {
                 );
               },
               onBuyAlbumClicked: () {
-                PurchaseUtil.albumMenuBuyButtonOnClick(
+                IapPurchaseUtil.albumMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,

@@ -13,6 +13,7 @@ import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
 import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
 import 'package:mehaley/data/models/lyric.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/remote_image.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -28,7 +29,7 @@ class AppHiveBoxes {
   late Box songSyncBox;
   late Box likedSongsBox;
   late Box userBox;
-  late Box AppMiscBox;
+  late Box appMiscBox;
   late Box settingsBox;
   late Box recentlyLikedSongBox;
   late Box recentlyUnLikedSongBox;
@@ -39,12 +40,13 @@ class AppHiveBoxes {
   late Box recentlyFollowedArtistBox;
   late Box recentlyUnFollowedArtistBox;
   late Box recentSearchesBox;
-  late Box recentlyCartAddedAlbumBox;
-  late Box recentlyCartRemovedAlbumBox;
-  late Box recentlyCartAddedSongBox;
-  late Box recentlyCartRemovedSongBox;
-  late Box recentlyCartAddedPlaylistBox;
-  late Box recentlyCartRemovedPlaylistBox;
+  late Box iapUtilBox;
+  late Box subscriptionBox;
+
+  ///RECENTLY PURCHASED ITEMS
+  late Box recentlyPurchasedSong;
+  late Box recentlyPurchasedAlbum;
+  late Box recentlyPurchasedPlaylist;
 
   AppHiveBoxes._privateConstructor();
 
@@ -65,36 +67,6 @@ class AppHiveBoxes {
     ///SONG SYNC OBJECTS
     songSyncBox = await Hive.openBox<SongSync>(
       AppValues.songSyncBox,
-    );
-
-    ///RECENTLY CART ADDED ALBUM
-    recentlyCartAddedAlbumBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartAddedAlbumBox,
-    );
-
-    ///RECENTLY CART REMOVED ALBUM
-    recentlyCartRemovedAlbumBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartRemovedAlbumBox,
-    );
-
-    ///RECENTLY CART ADDED SONG
-    recentlyCartAddedSongBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartAddedSongBox,
-    );
-
-    ///RECENTLY CART REMOVED SONG
-    recentlyCartRemovedSongBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartRemovedSongBox,
-    );
-
-    ///RECENTLY CART ADDED PLAYLIST
-    recentlyCartAddedPlaylistBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartAddedPlaylistBox,
-    );
-
-    ///RECENTLY CART REMOVED PLAYLIST
-    recentlyCartRemovedPlaylistBox = await Hive.openBox<dynamic>(
-      AppValues.recentlyCartRemovedPlaylistBox,
     );
 
     ///RECENTLY LIKED SONG
@@ -142,19 +114,44 @@ class AppHiveBoxes {
       AppValues.recentlyUnFollowedArtistBox,
     );
 
+    ///APP SUBSCRIPTION BLOC
+    subscriptionBox = await Hive.openBox<dynamic>(
+      AppValues.subscriptionBox,
+    );
+
     ///USER DATA BOX
     userBox = await Hive.openBox<dynamic>(
       AppValues.userBox,
     );
 
     ///APP MISC BOX
-    AppMiscBox = await Hive.openBox<dynamic>(
+    appMiscBox = await Hive.openBox<dynamic>(
       AppValues.AppMiscBox,
     );
 
     ///RECENT SEARCH BOX
     recentSearchesBox = await Hive.openBox<dynamic>(
       AppValues.recentSearchesBox,
+    );
+
+    ///IAP UTIL BOX
+    iapUtilBox = await Hive.openBox<dynamic>(
+      AppValues.iapUtilBox,
+    );
+
+    ///RECENTLY PURCHASED SONGS
+    recentlyPurchasedSong = await Hive.openBox<Song>(
+      AppValues.recentlyPurchasedSongBox,
+    );
+
+    ///RECENTLY PURCHASED ALBUMS
+    recentlyPurchasedAlbum = await Hive.openBox<Album>(
+      AppValues.recentlyPurchasedAlbumBox,
+    );
+
+    ///RECENTLY PURCHASED PLAYLISTS
+    recentlyPurchasedPlaylist = await Hive.openBox<Playlist>(
+      AppValues.recentlyPurchasedPlaylistBox,
     );
 
     ///CLEAR RECENTLY LIKED AND UNLIKED SONGS
@@ -173,20 +170,10 @@ class AppHiveBoxes {
     recentlyFollowedArtistBox.clear();
     recentlyUnFollowedArtistBox.clear();
 
-    ///CLEAR RECENTLY CART ADDED AND REMOVED ALBUMS
-    recentlyCartAddedAlbumBox.clear();
-    recentlyCartRemovedAlbumBox.clear();
-
-    ///CLEAR RECENTLY CART ADDED AND REMOVED SONGS
-    recentlyCartAddedSongBox.clear();
-    recentlyCartRemovedSongBox.clear();
-
-    ///CLEAR RECENTLY CART ADDED AND REMOVED PLAYLISTS
-    recentlyCartAddedPlaylistBox.clear();
-    recentlyCartRemovedPlaylistBox.clear();
-
     ///INIT SETTINGS BOX
     initSettingsBox();
+
+    ///todo clear 5 days old recently purchased
   }
 
   void initSettingsBox() async {
@@ -239,7 +226,6 @@ class AppHiveBoxes {
     Hive.registerAdapter(PlaylistAdapter());
     Hive.registerAdapter(AlbumAdapter());
     Hive.registerAdapter(ArtistAdapter());
-    Hive.registerAdapter(AudioFileAdapter());
     Hive.registerAdapter(BgVideoAdapter());
     Hive.registerAdapter(LyricAdapter());
     Hive.registerAdapter(RemoteImageAdapter());
@@ -253,5 +239,7 @@ class AppHiveBoxes {
     Hive.registerAdapter(AppPaymentMethodsAdapter());
     Hive.registerAdapter(AppCurrencyAdapter());
     Hive.registerAdapter(AppLanguageAdapter());
+    Hive.registerAdapter(AudioFileAdapter());
+    Hive.registerAdapter(IapProductAdapter());
   }
 }

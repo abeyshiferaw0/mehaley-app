@@ -505,6 +505,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.0+2"
+  flutter_inapp_purchase:
+    dependency: "direct main"
+    description:
+      name: flutter_inapp_purchase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.1.2"
   flutter_inappwebview:
     dependency: transitive
     description:
@@ -532,7 +539,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   flutter_remix:
     dependency: "direct main"
     description:
@@ -557,6 +564,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.15.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -676,34 +690,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
-  in_app_purchase:
-    dependency: "direct main"
-    description:
-      name: in_app_purchase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
-  in_app_purchase_android:
-    dependency: transitive
-    description:
-      name: in_app_purchase_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2"
-  in_app_purchase_platform_interface:
-    dependency: transitive
-    description:
-      name: in_app_purchase_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.0"
-  in_app_purchase_storekit:
-    dependency: transitive
-    description:
-      name: in_app_purchase_storekit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   in_app_review:
     dependency: "direct main"
     description:
@@ -1089,6 +1075,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  purchases_flutter:
+    dependency: "direct main"
+    description:
+      name: purchases_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.9.0"
   quiver:
     dependency: transitive
     description:
@@ -1429,14 +1422,14 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.1"
+    version: "3.0.0"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.0"
+    version: "2.8.2"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -1450,7 +1443,7 @@ packages:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.0"
+    version: "2.7.1"
   win32:
     dependency: transitive
     description:

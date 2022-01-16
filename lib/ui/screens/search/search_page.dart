@@ -11,9 +11,9 @@ import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/category.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_bar/main_app_bar.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/screens/home/widgets/main_app_bar.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_front_page_groups.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_page_persistant_header_deligate.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -94,7 +94,6 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
             SliverToBoxAdapter(
               child: MainAppBar(
                   // leading: buildSearchElf(),
-
                   ),
             ),
 

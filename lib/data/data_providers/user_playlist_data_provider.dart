@@ -117,9 +117,10 @@ class UserPlaylistDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/get_playlist",
+        url: AppApi.userBaseUrl + "/get_playlist/",
         queryParameters: {'playlist_id': playlistId},
       );
+
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
       dio = Dio()
@@ -132,9 +133,10 @@ class UserPlaylistDataProvider {
 
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.userBaseUrl + "/get_playlist",
+        url: AppApi.userBaseUrl + "/get_playlist/",
         queryParameters: {'playlist_id': playlistId},
       );
+
       return response;
     }
   }

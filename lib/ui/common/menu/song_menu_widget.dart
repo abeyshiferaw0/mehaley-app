@@ -24,7 +24,6 @@ import 'package:sizer/sizer.dart';
 import '../player_items_placeholder.dart';
 import '../small_text_price_widget.dart';
 import 'menu_items/menu_item.dart';
-import 'menu_items/song_cart_menu_item.dart';
 
 class SongMenuWidget extends StatefulWidget {
   const SongMenuWidget({
@@ -34,11 +33,13 @@ class SongMenuWidget extends StatefulWidget {
     this.onRemoveSongFromPlaylist,
     required this.onCreateWithSongSuccess,
     required this.onSongBuyClicked,
+    required this.onSubscribeButtonClicked,
   }) : super(key: key);
 
   final Song song;
   final bool isForMyPlaylist;
   final VoidCallback onSongBuyClicked;
+  final VoidCallback onSubscribeButtonClicked;
   final Function(Song song)? onRemoveSongFromPlaylist;
   final Function(MyPlaylist myPlaylist) onCreateWithSongSuccess;
 
@@ -113,7 +114,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           CachedNetworkImage(
             height: AppValues.menuHeaderImageSize,
             width: AppValues.menuHeaderImageSize,
-            imageUrl: AppApi.baseUrl + song.albumArt.imageMediumPath,
+            imageUrl: song.albumArt.imageMediumPath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, error) => buildImagePlaceHolder(),
             imageBuilder: (context, imageProvider) => Container(
@@ -230,6 +231,10 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   downloadingFailedColor: AppColors.black,
                   downloadingColor: AppColors.darkOrange,
                   downloadedColor: AppColors.darkOrange,
+                  onSubscribeButtonClicked: () {
+                    Navigator.pop(context);
+                    widget.onSubscribeButtonClicked();
+                  },
                   onBuyButtonClicked: () {
                     Navigator.pop(context);
                     widget.onSongBuyClicked();
@@ -248,9 +253,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                         },
                       )
                     : SizedBox(),
-                SongCartMenuItem(
-                  song: song,
-                ),
+
                 SongFavoriteMenuItem(
                   hasTopMargin: true,
                   isDisabled: false,

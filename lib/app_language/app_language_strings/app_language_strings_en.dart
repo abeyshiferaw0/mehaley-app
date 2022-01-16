@@ -10,8 +10,8 @@ class AppLanguageStringsEn extends AppLocalizations {
       "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "Log out";
 
-  final String removeFromCart = "Remove from cart";
-  final String addToCart = "Add to cart";
+  final String removeFromCart = "Remove from subscription";
+  final String addToCart = "Add to subscription";
   final String previewMode = "Preview mode";
   final String buyMezmur = "Buy Mezmur";
   final String buyAlbum = "Buy album";
@@ -75,7 +75,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String playingFromPlaylist = "Playing from playlist";
   final String playingFromAlbum = "Playing from album";
   final String playingFromArtist = "Playing from zemari";
-  final String playingFromCart = "Playing from cart";
+  final String playingFromCart = "Playing from subscription";
   final String playingFromCategory = "Playing from category";
   final String playingFromFeaturedAlbum = "Playing from featured album";
   final String playingFromFeaturedPlaylist = "Playing from featured playlist";
@@ -125,11 +125,11 @@ class AppLanguageStringsEn extends AppLocalizations {
       "Couldn't connect to the internet, check your internet connection";
   final String queue = "Queue";
   final String unableToClearCart =
-      "Unable to clear cart\ncheck your internet connection";
+      "Unable to clear subscription\ncheck your internet connection";
   final String cartCleared = "Cart cleared";
-  final String cartIsEmpty = "Your cart is currently empty";
+  final String cartIsEmpty = "Your subscription is currently empty";
   final String empityCartCheckOutMsg =
-      "Before proceeding to check out you, must add some items to yor cart";
+      "Before proceeding to check out you, must add some items to yor subscription";
   final String goToHomeScreen = "Go to home screen";
   final String cartTitle = "Mehaleye Cart";
   final String total = "Total";
@@ -242,12 +242,12 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String playlistRemovedToFavorites = "Playlist removed from followed";
   final String artistsAddedToFavorites = "Zemari added to followed";
   final String artistsRemovedToFavorites = "Zemari removed from followed";
-  final String albumAddedToCart = "Album added to cart";
-  final String albumRemovedToCart = "Album removed from cart";
-  final String songAddedToCart = "Mezmur added to cart";
-  final String songRemovedToCart = "Mezmur removed from cart";
-  final String playlistAddedToCart = "Playlist added to cart";
-  final String playlistRemovedToCart = "Playlist removed from cart";
+  final String albumAddedToCart = "Album added to subscription";
+  final String albumRemovedToCart = "Album removed from subscription";
+  final String songAddedToCart = "Mezmur added to subscription";
+  final String songRemovedToCart = "Mezmur removed from subscription";
+  final String playlistAddedToCart = "Playlist added to subscription";
+  final String playlistRemovedToCart = "Playlist removed from subscription";
   final String by = "By";
   final String yourNotConnected = "You're not connected to the internet";
   final String helloCash = "Hello Cash";
@@ -271,7 +271,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String deletePlaylistPermanently = "Delete playlist permanently";
   final String clearAll = "Clear All";
   final String areYouSureUWantToClearCart =
-      "Are you sure you want to clear your cart?";
+      "Are you sure you want to clear your subscription?";
   final String goodMorning = "Good Morning";
   final String goodAfterNoon = "Good Afternoon";
   final String goodEvening = "Good Evening";
@@ -357,7 +357,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String sharedMezmur = "Shared Mezmur";
   final String cartAlreadyCheckedOut = "Cart already checked out";
   final String cartAlreadyCheckedOutMsg =
-      "Your cart is already checked out, try refreshing cart page!!";
+      "Your subscription is already checked out, try refreshing subscription page!!";
   final String billCanceled = "Bill Canceled";
   final String billCanceledMsg =
       "You bill was cancelled, use another bill to recharge your wallet";
@@ -452,13 +452,19 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String dontAskAgain = "Don't ask again";
   final String featuringTxt = "Featured";
 
-  ///NOT TRANSLATED
   final String youPurchasedSong = "Mezmur Purchased";
   final String youPurchasedAlbum = "Album Purchased";
   final String youPurchasedPlaylist = "Playlist Purchased";
   final String youCheckedOutCart = "Cart Checked Cleared";
   final String youRechargedWallet = "Wallet Recharged";
   final String youReceivedGift = "Gift Received";
+
+  ///NOT TRANSLATED
+  final String videos = "Videos";
+  final String allVideos = "All Videos";
+  final String emptyVideos = "Empty Videos";
+  final String otherVideos = "Other Videos";
+  final String cantFindOtherVideos = "Can't Find Other Videos";
 
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";
@@ -524,7 +530,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   }
 
   String unableToRemoveFromCart({required String unabledName}) {
-    return "Unable to remove $unabledName from cart\ncheck your internet connection";
+    return "Unable to remove $unabledName from subscription\ncheck your internet connection";
   }
 
   String playingFromSearchResult({required String searchKey}) {
@@ -552,7 +558,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   }
 
   String removedFromCart({required String removedName}) {
-    return "$removedName removed from cart";
+    return "$removedName removed from subscription";
   }
 
   String appNameAndVersion({required String versionCode}) {

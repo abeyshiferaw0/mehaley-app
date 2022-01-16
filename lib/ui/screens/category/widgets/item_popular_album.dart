@@ -29,7 +29,7 @@ class ItemPopularAlbum extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedNetworkImage(
-              imageUrl: AppApi.baseUrl + album.albumImages[0].imageMediumPath,
+              imageUrl: album.albumImages[0].imageMediumPath,
               width: AppValues.categoryPopularItemsSize,
               height: AppValues.categoryPopularItemsSize,
               imageBuilder: (context, imageProvider) => Stack(

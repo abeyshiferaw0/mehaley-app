@@ -13,6 +13,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.d
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -20,16 +21,17 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/common/subscribe_small_button.dart';
 import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/color_util.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
+import 'package:mehaley/util/yenepay_purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_card.dart';
-import 'cart_buttons/mini_player_preview_cart_button.dart';
 import 'like_follow/song_favorite_button.dart';
 
 class MiniPlayer extends StatefulWidget {
@@ -56,6 +58,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   double progress = 0.0;
   double bufferedPosition = 0.0;
   double totalDuration = 0.0;
+
+  ///
+  final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
   @override
   void initState() {
@@ -89,9 +94,13 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  ///OPEN PLAYER PAGE IF PURCHASED OR FREE
+                  ///OPEN PLAYER PAGE IF PURCHASED OR FREE OR SUBSCRIBED
+                  final bool isUserSubscribed =
+                      PagesUtilFunctions.isUserSubscribed();
+
                   if (currentPlayingSong.isBought ||
-                      currentPlayingSong.isFree) {
+                      currentPlayingSong.isFree ||
+                      isUserSubscribed) {
                     Navigator.of(context, rootNavigator: true).push(
                       PagesUtilFunctions.createBottomToUpAnimatedRoute(
                         page: PlayerPage(),
@@ -107,11 +116,15 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                             song: currentPlayingSong,
                             isForDownload: false,
                             isForPlaying: true,
+                            onSubscribeButtonClicked: () {
+                              widget.navigatorKey.currentState!.pushNamed(
+                                AppRouterPaths.subscriptionRoute,
+                              );
+                            },
                             onBuyButtonClicked: () {
-                              PurchaseUtil
+                              IapPurchaseUtil
                                   .songPreviewModeDialogBuyButtonOnClick(
                                 context,
-                                widget.navigatorKey,
                                 currentPlayingSong,
                               );
                             },
@@ -164,7 +177,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               !currentPlayingSong.isBought &&
-                                      !currentPlayingSong.isFree
+                                      !currentPlayingSong.isFree &&
+                                      !isUserSubscribed
                                   ? buildPreviewModeBuyContainer(
                                       currentPlayingSong,
                                     )
@@ -239,8 +253,20 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               Expanded(
                 child: SizedBox(),
               ),
-              MiniPlayerPreviewCartButton(
-                song: song,
+
+              ///SUBSCRIBE SMALL BUTTON
+              SubscribeSmallButton(
+                text: "Subscribe to mehaleye",
+                textColor: AppColors.white,
+                fontSize: AppFontSizes.font_size_10,
+                onTap: () {
+                  widget.navigatorKey.currentState!.pushNamed(
+                    AppRouterPaths.subscriptionRoute,
+                  );
+                },
+              ),
+              SizedBox(
+                width: AppMargin.margin_16,
               ),
             ],
           ),
@@ -468,8 +494,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(
-          imageUrl:
-              song != null ? AppApi.baseUrl + song.albumArt.imageSmallPath : '',
+          imageUrl: song != null ? song.albumArt.imageSmallPath : '',
           fit: BoxFit.cover,
           height: AppValues.miniPlayerAlbumArtSize,
           width: AppValues.miniPlayerAlbumArtSize,
@@ -571,11 +596,9 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       builder: (BuildContext builderContext) {
         return AppBouncingButton(
           onTap: () async {
-            PurchaseUtil.miniPlayerBuyButtonOnClick(
-              context,
-              widget.navigatorKey,
-              song,
-            );
+            //await InAppPurchase.instance.restorePurchases();
+            //IapPurchaseUtil.miniPlayerBuyButtonOnClick(context, song);
+            YenepayPurchaseUtil.miniPlayerBuyButtonOnClick(context, song);
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -605,40 +628,6 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           ),
         );
       },
-    );
-  }
-
-  buildAddToCartButton() {
-    return AppBouncingButton(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppPadding.padding_16,
-          vertical: AppPadding.padding_4,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              FlutterRemix.shopping_cart_2_line,
-              size: AppIconSizes.icon_size_16,
-              color: AppColors.black,
-            ),
-            SizedBox(
-              width: AppMargin.margin_4,
-            ),
-            Text(
-              AppLocale.of().addToCart.toUpperCase(),
-              style: TextStyle(
-                fontSize: AppFontSizes.font_size_8.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

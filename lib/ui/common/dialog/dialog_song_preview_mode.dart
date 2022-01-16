@@ -8,7 +8,6 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
-import 'package:mehaley/ui/common/cart_buttons/dialog_song_preview_cart_button.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -18,12 +17,14 @@ import 'package:sizer/sizer.dart';
 
 import '../app_card.dart';
 import '../app_top_header_with_icon.dart';
+import '../subscribe_small_button.dart';
 
 class DialogSongPreviewMode extends StatelessWidget {
   final Song song;
   final bool isForDownload;
   final bool isForPlaying;
   final VoidCallback onBuyButtonClicked;
+  final VoidCallback onSubscribeButtonClicked;
 
   const DialogSongPreviewMode({
     Key? key,
@@ -31,6 +32,7 @@ class DialogSongPreviewMode extends StatelessWidget {
     required this.isForDownload,
     required this.isForPlaying,
     required this.onBuyButtonClicked,
+    required this.onSubscribeButtonClicked,
   }) : super(key: key);
 
   @override
@@ -47,9 +49,12 @@ class DialogSongPreviewMode extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               AppTopHeaderWithIcon(),
+              SizedBox(
+                height: AppMargin.margin_24,
+              ),
               buildPreviewTitle(context),
               SizedBox(
-                height: AppMargin.margin_16,
+                height: AppMargin.margin_32,
               ),
               buildSongItem(context),
               SizedBox(
@@ -63,27 +68,27 @@ class DialogSongPreviewMode extends StatelessWidget {
     );
   }
 
-  Padding buildPreviewTitle(context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: AppMargin.margin_16),
-      child: Text(
-        isForPlaying
-            ? AppLocale.of().previewMode.toUpperCase()
-            : isForDownload
-                ? AppLocale.of().buyMezmur.toUpperCase()
-                : '',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: AppFontSizes.font_size_12.sp,
-          fontWeight: FontWeight.w600,
-          color: AppColors.black,
-        ),
+  Text buildPreviewTitle(context) {
+    return Text(
+      isForPlaying
+          ? AppLocale.of().previewMode.toUpperCase()
+          : isForDownload
+              ? AppLocale.of().buyMezmur.toUpperCase()
+              : '',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: AppFontSizes.font_size_12.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.black,
       ),
     );
   }
 
   Container buildSongItem(context) {
     return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: AppMargin.margin_16,
+      ),
       child: Center(
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -94,7 +99,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                 width: AppValues.previewDialogSongItemSize,
                 height: AppValues.previewDialogSongItemSize,
                 fit: BoxFit.cover,
-                imageUrl: AppApi.baseUrl + song.albumArt.imageMediumPath,
+                imageUrl: song.albumArt.imageMediumPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),
@@ -102,68 +107,71 @@ class DialogSongPreviewMode extends StatelessWidget {
             SizedBox(
               width: AppMargin.margin_16,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 25,
-                  child: AutoSizeText(
-                    L10nUtil.translateLocale(song.songName, context),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: AppFontSizes.font_size_16,
-                      color: AppColors.black,
-                    ),
-                    maxLines: 1,
-                    minFontSize: AppFontSizes.font_size_16,
-                    maxFontSize: AppFontSizes.font_size_16,
-                    overflowReplacement: Marquee(
-                      text: L10nUtil.translateLocale(song.songName, context),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 25,
+                    child: AutoSizeText(
+                      L10nUtil.translateLocale(song.songName, context),
                       style: TextStyle(
-                        fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w500,
+                        fontSize: AppFontSizes.font_size_16,
                         color: AppColors.black,
                       ),
-                      scrollAxis: Axis.horizontal,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      blankSpace: AppPadding.padding_32,
-                      velocity: 50.0,
-                      pauseAfterRound: Duration(seconds: 2),
-                      startPadding: AppPadding.padding_16,
-                      accelerationDuration: Duration(seconds: 1),
-                      accelerationCurve: Curves.easeIn,
-                      decelerationDuration: Duration(milliseconds: 500),
-                      decelerationCurve: Curves.easeOut,
-                      showFadingOnlyWhenScrolling: false,
-                      fadingEdgeEndFraction: 0.2,
-                      fadingEdgeStartFraction: 0.2,
+                      maxLines: 1,
+                      minFontSize: AppFontSizes.font_size_16,
+                      maxFontSize: AppFontSizes.font_size_16,
+                      overflowReplacement: Marquee(
+                        text: L10nUtil.translateLocale(song.songName, context),
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                        ),
+                        scrollAxis: Axis.horizontal,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        blankSpace: AppPadding.padding_32,
+                        velocity: 50.0,
+                        pauseAfterRound: Duration(seconds: 2),
+                        startPadding: AppPadding.padding_16,
+                        accelerationDuration: Duration(seconds: 1),
+                        accelerationCurve: Curves.easeIn,
+                        decelerationDuration: Duration(milliseconds: 500),
+                        decelerationCurve: Curves.easeOut,
+                        showFadingOnlyWhenScrolling: false,
+                        fadingEdgeEndFraction: 0.2,
+                        fadingEdgeStartFraction: 0.2,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  PagesUtilFunctions.getArtistsNames(song.artistsName, context),
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.txtGrey,
-                    fontWeight: FontWeight.w300,
+                  Text(
+                    PagesUtilFunctions.getArtistsNames(
+                        song.artistsName, context),
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_10.sp,
+                      color: AppColors.txtGrey,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: AppMargin.margin_4,
-                ),
-                Text(
-                  '${song.priceEtb.parsePriceAmount()} ${AppLocale().birr}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.darkOrange,
-                    fontWeight: FontWeight.w400,
+                  SizedBox(
+                    height: AppMargin.margin_4,
                   ),
-                ),
-              ],
+                  Text(
+                    '${song.priceEtb.parsePriceAmount()} ${AppLocale().birr}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.font_size_10.sp,
+                      color: AppColors.darkOrange,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -177,6 +185,7 @@ class DialogSongPreviewMode extends StatelessWidget {
         horizontal: AppPadding.padding_20,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: AppMargin.margin_16,
@@ -195,7 +204,7 @@ class DialogSongPreviewMode extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: AppMargin.margin_32,
+            height: AppMargin.margin_24,
           ),
           AppBouncingButton(
             onTap: () {
@@ -224,14 +233,19 @@ class DialogSongPreviewMode extends StatelessWidget {
           SizedBox(
             height: AppMargin.margin_16,
           ),
-          AppBouncingButton(
-            onTap: () {},
-            child: DialogSongPreviewCartButton(
-              song: song,
-            ),
+
+          ///SUBSCRIBE SMALL BUTTON
+          SubscribeSmallButton(
+            text: "Subscribe to mehaleye",
+            textColor: AppColors.black,
+            fontSize: AppFontSizes.font_size_8,
+            onTap: () {
+              Navigator.pop(context);
+              onSubscribeButtonClicked();
+            },
           ),
           SizedBox(
-            height: AppMargin.margin_8,
+            height: AppMargin.margin_12,
           ),
         ],
       ),

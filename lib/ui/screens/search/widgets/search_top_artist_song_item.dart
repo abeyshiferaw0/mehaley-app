@@ -2,10 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
@@ -67,7 +66,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
           children: [
             ClipRRect(
               child: CachedNetworkImage(
-                imageUrl: AppApi.baseUrl + song.albumArt.imageSmallPath,
+                imageUrl: song.albumArt.imageSmallPath,
                 width: width,
                 height: width,
                 imageBuilder: (context, imageProvider) => Stack(

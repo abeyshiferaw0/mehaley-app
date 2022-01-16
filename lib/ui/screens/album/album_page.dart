@@ -13,13 +13,12 @@ import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/common/cart_buttons/album_cart_button.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
+import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/purchase_util.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.albumId}) : super(key: key);
@@ -95,7 +94,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                     SongItem(
                       position: position + 1,
                       isForMyPlaylist: false,
-                      thumbUrl: AppApi.baseUrl +
+                      thumbUrl:
                           albumPageData.album.albumImages[0].imageSmallPath,
                       thumbSize: AppIconSizes.icon_size_52,
                       song: albumPageData.songs[position],
@@ -158,9 +157,6 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
         },
       ),
       actions: [
-        AlbumCartButton(
-          album: album,
-        ),
         AppBouncingButton(
           child: Padding(
             padding: EdgeInsets.all(AppPadding.padding_8),
@@ -182,7 +178,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                   );
                 },
                 onBuyAlbumClicked: () {
-                  PurchaseUtil.albumMenuBuyButtonOnClick(
+                  IapPurchaseUtil.albumMenuBuyButtonOnClick(
                     context,
                     album,
                     true,

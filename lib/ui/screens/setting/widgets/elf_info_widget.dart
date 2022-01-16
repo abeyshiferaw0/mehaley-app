@@ -49,15 +49,15 @@ class ElfInfoWidget extends StatelessWidget {
           SizedBox(
             height: AppMargin.margin_16,
           ),
-          Text(
-            AppLocale.of().appTermsAndCondition,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_8.sp,
-              fontWeight: FontWeight.w400,
-              color: AppColors.txtGrey,
-            ),
-          ),
+          // Text(
+          //   AppLocale.of().appTermsAndCondition,
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(
+          //     fontSize: AppFontSizes.font_size_8.sp,
+          //     fontWeight: FontWeight.w400,
+          //     color: AppColors.txtGrey,
+          //   ),
+          // ),
         ],
       ),
     );

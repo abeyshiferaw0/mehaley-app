@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,10 +20,9 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/purcahsed_item_status_bloc/purchase_item_status_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/purchase_item_bloc/purchase_item_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other_videos_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_cancel_bloc/wallet_bill_cancel_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_bill_status_bloc/wallet_bill_status_bloc.dart';
 import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_history_bloc/wallet_history_bloc.dart';
@@ -36,6 +36,8 @@ import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
+import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/app_permission.dart';
@@ -46,17 +48,18 @@ import 'package:mehaley/data/models/enums/app_payment_methods.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/payment/wallet_history.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/data/repositories/iap_purchase_repository.dart';
+import 'package:mehaley/data/repositories/iap_subscription_repository.dart';
 import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
+import 'package:mehaley/ui/common/dialog/dialog_offline_song_subscribe_to_listen.dart';
 import 'package:mehaley/ui/common/dialog/dialog_permission_permanent_refused.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_cart_checkout.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_cart_checkout_status.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_wallet_purchase_status.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
@@ -77,6 +80,7 @@ import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PagesUtilFunctions {
   static String getPlaylistDescription(Playlist playlist, context) {
@@ -159,13 +163,13 @@ class PagesUtilFunctions {
 
   static String getGroupImageUrl(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
-      return AppApi.baseUrl + (item as Song).albumArt.imageMediumPath;
+      return (item as Song).albumArt.imageMediumPath;
     } else if (groupType == GroupType.PLAYLIST) {
-      return AppApi.baseUrl + (item as Playlist).playlistImage.imageMediumPath;
+      return (item as Playlist).playlistImage.imageMediumPath;
     } else if (groupType == GroupType.ALBUM) {
-      return AppApi.baseUrl + (item as Album).albumImages[0].imageMediumPath;
+      return (item as Album).albumImages[0].imageMediumPath;
     } else if (groupType == GroupType.ARTIST) {
-      return AppApi.baseUrl + (item as Artist).artistImages[0].imageMediumPath;
+      return (item as Artist).artistImages[0].imageMediumPath;
     } else {
       return '';
     }
@@ -189,6 +193,9 @@ class PagesUtilFunctions {
       );
     } else if (groupType == GroupType.PLAYLIST) {
       item as Playlist;
+      if (item.isFree) {
+        return SizedBox();
+      }
       return Padding(
         padding: const EdgeInsets.only(
           top: AppPadding.padding_2,
@@ -226,7 +233,7 @@ class PagesUtilFunctions {
 
   static Widget getItemPrice({
     required double priceEtb,
-    required double priceUsd,
+    required IapProduct priceUsd,
     required bool isDiscountAvailable,
     required double discountPercentage,
     required bool isFree,
@@ -656,11 +663,11 @@ class PagesUtilFunctions {
   static String getSearchFrontPageItemImageUrl(
       AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return AppApi.baseUrl + (item as Category).categoryImage.imageSmallPath;
+      return (item as Category).categoryImage.imageSmallPath;
     } else if (appItemsType == AppItemsType.ARTIST) {
-      return AppApi.baseUrl + (item as Artist).artistImages[0].imageSmallPath;
+      return (item as Artist).artistImages[0].imageSmallPath;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
-      return AppApi.baseUrl + (item as Song).albumArt.imageSmallPath;
+      return (item as Song).albumArt.imageSmallPath;
     }
     return '';
   }
@@ -853,7 +860,7 @@ class PagesUtilFunctions {
           width: AppValues.libraryMusicItemSize,
           height: AppValues.libraryMusicItemSize,
           fit: BoxFit.cover,
-          imageUrl: AppApi.baseUrl + myPlaylist.playlistImage!.imageMediumPath,
+          imageUrl: myPlaylist.playlistImage!.imageMediumPath,
           placeholder: (context, url) =>
               buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
           errorWidget: (context, url, e) =>
@@ -870,8 +877,7 @@ class PagesUtilFunctions {
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
             fit: BoxFit.cover,
-            imageUrl: AppApi.baseUrl +
-                myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
+            imageUrl: myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
             placeholder: (context, url) =>
                 buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
             errorWidget: (context, url, e) =>
@@ -895,7 +901,7 @@ class PagesUtilFunctions {
                   width: AppValues.libraryMusicItemSize,
                   height: AppValues.libraryMusicItemSize,
                   fit: BoxFit.cover,
-                  imageUrl: AppApi.baseUrl +
+                  imageUrl:
                       myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
                   placeholder: (context, url) =>
                       buildImagePlaceHolder(AppItemsType.OTHER),
@@ -1038,14 +1044,16 @@ class PagesUtilFunctions {
   }
 
   static double getSongLength(Song song) {
-    if (!song.isBought && !song.isFree) {
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+    if (!song.isBought && !song.isFree && !isUserSubscribed) {
       return song.audioFile.audioPreviewDurationSeconds;
     }
     return song.audioFile.audioDurationSeconds;
   }
 
   static String getFormatdMaxSongDuration(Song song) {
-    if (!song.isBought && !song.isFree) {
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+    if (!song.isBought && !song.isFree && !isUserSubscribed) {
       return formatSongDurationTimeTo(
         Duration(
           seconds: song.audioFile.audioPreviewDurationSeconds.toInt(),
@@ -1071,38 +1079,14 @@ class PagesUtilFunctions {
 
   static String getPaymentMethodName(
       AppPaymentMethods appPaymentMethod, context) {
-    if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return AppLocale.of().helloCash;
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return AppLocale.of().mbirr;
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return AppLocale.of().cbeBirr;
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return AppLocale.of().amole;
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return AppLocale.of().visa;
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return AppLocale.of().mastercard;
+    if (appPaymentMethod == AppPaymentMethods.METHOD_INAPP) {
+      return "${Platform.isAndroid ? "Google play" : "App store"} in app purchases";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_TELEBIRR) {
+      return "Telebirr";
+    } else if (appPaymentMethod == AppPaymentMethods.METHOD_YENEPAY) {
+      return "Yenepay";
     } else {
       return 'Unknown';
-    }
-  }
-
-  static String getPaymentMethodIcon(AppPaymentMethods appPaymentMethod) {
-    if (appPaymentMethod == AppPaymentMethods.METHOD_HELLO_CASH) {
-      return 'assets/icons/payment_icons/ic_hello_cash.png';
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MBIRR) {
-      return 'assets/icons/payment_icons/ic_mbirr.png';
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_CBE_BIRR) {
-      return 'assets/icons/payment_icons/ic_cbe_birr.png';
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_AMOLE) {
-      return 'assets/icons/payment_icons/ic_amole.png';
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_VISA) {
-      return 'assets/icons/payment_icons/ic_visa.png';
-    } else if (appPaymentMethod == AppPaymentMethods.METHOD_MASTERCARD) {
-      return 'assets/icons/payment_icons/ic_mastercard.png';
-    } else {
-      return '';
     }
   }
 
@@ -1353,9 +1337,6 @@ class PagesUtilFunctions {
         PurchasedItemType.PLAYLIST_PAYMENT) {
       return AppLocale.of().youPurchasedPlaylist;
     } else if (walletHistory.walletHistoryItemType ==
-        PurchasedItemType.CART_PAYMENT) {
-      return AppLocale.of().youCheckedOutCart;
-    } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
       return AppLocale.of().youRechargedWallet;
     } else if (walletHistory.walletHistoryItemType ==
@@ -1373,9 +1354,6 @@ class PagesUtilFunctions {
       return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.PLAYLIST_PAYMENT) {
-      return '-${walletHistory.amount.parsePriceAmount()}';
-    } else if (walletHistory.walletHistoryItemType ==
-        PurchasedItemType.CART_PAYMENT) {
       return '-${walletHistory.amount.parsePriceAmount()}';
     } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
@@ -1397,9 +1375,6 @@ class PagesUtilFunctions {
         PurchasedItemType.PLAYLIST_PAYMENT) {
       return AppColors.errorRed;
     } else if (walletHistory.walletHistoryItemType ==
-        PurchasedItemType.CART_PAYMENT) {
-      return AppColors.errorRed;
-    } else if (walletHistory.walletHistoryItemType ==
         PurchasedItemType.WALLET_RECHARGE) {
       return AppColors.green;
     } else if (walletHistory.walletHistoryItemType ==
@@ -1418,43 +1393,24 @@ class PagesUtilFunctions {
     required String itemSubTitle,
     required VoidCallback onPurchasesSuccess,
   }) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return BlocProvider(
-          create: (context) => PurchaseItemStatusBloc(
-            paymentRepository: AppRepositories.paymentRepository,
-          ),
-          child: DialogWalletPurchaseStatus(
-            purchasedItemType: purchasedItemType,
-            itemImageUrl: itemImageUrl,
-            itemTitle: itemTitle,
-            itemSubTitle: itemSubTitle,
-            itemId: itemId,
-            onPurchasesSuccess: onPurchasesSuccess,
-          ),
-        );
-      },
-    );
-  }
-
-  static void openCartCheckOutStatusDialog({
-    required context,
-    required VoidCallback onPurchasesSuccess,
-  }) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return BlocProvider(
-          create: (context) => PurchaseItemStatusBloc(
-            paymentRepository: AppRepositories.paymentRepository,
-          ),
-          child: DialogCartCheckOutStatus(
-            onPurchasesSuccess: onPurchasesSuccess,
-          ),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return BlocProvider(
+    //       create: (context) => PurchaseItemStatusBloc(
+    //         paymentRepository: AppRepositories.paymentRepository,
+    //       ),
+    //       child: DialogWalletPurchaseStatus(
+    //         purchasedItemType: purchasedItemType,
+    //         itemImageUrl: itemImageUrl,
+    //         itemTitle: itemTitle,
+    //         itemSubTitle: itemSubTitle,
+    //         itemId: itemId,
+    //         onPurchasesSuccess: onPurchasesSuccess,
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
   static void openPurchaseItemDialog({
@@ -1468,64 +1424,175 @@ class PagesUtilFunctions {
     required balance,
     required onPurchasesSuccess,
   }) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return BlocProvider(
-          create: (context) => PurchaseItemBloc(
-            paymentRepository: AppRepositories.paymentRepository,
-          ),
-          child: DialogWalletPurchase(
-            itemId: itemId,
-            purchasedItemType: purchasedItemType,
-            itemImageUrl: itemImageUrl,
-            itemTitle: itemTitle,
-            itemSubTitle: itemSubTitle,
-            itemPrice: priceEtb,
-            balance: balance,
-            onPurchasesSuccess: onPurchasesSuccess,
-          ),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (context) {
+    //     return BlocProvider(
+    //       create: (context) => PurchaseItemBloc(
+    //         paymentRepository: AppRepositories.paymentRepository,
+    //       ),
+    //       child: DialogWalletPurchase(
+    //         itemId: itemId,
+    //         purchasedItemType: purchasedItemType,
+    //         itemImageUrl: itemImageUrl,
+    //         itemTitle: itemTitle,
+    //         itemSubTitle: itemSubTitle,
+    //         itemPrice: priceEtb,
+    //         balance: balance,
+    //         onPurchasesSuccess: onPurchasesSuccess,
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
-  static void openCartCheckOutDialog({
-    required context,
-    required cartTotalPrice,
-    required balance,
-    required onPurchasesSuccess,
-  }) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return BlocProvider(
-          create: (context) => PurchaseItemBloc(
-            paymentRepository: AppRepositories.paymentRepository,
-          ),
-          child: DialogWalletCartCheckOut(
-            cartTotalPrice: cartTotalPrice,
-            balance: balance,
-            onPurchasesSuccess: onPurchasesSuccess,
-          ),
-        );
-      },
-    );
-  }
+  static void openYtPlayerPage(context, Song songVideo, bool shouldPop) {
+    String videoLink =
+        songVideo.youtubeUrl != null ? songVideo.youtubeUrl! : "";
 
-  static void openYtPlayerPage(context, String videoLink) {
     ///STOP PLAYER IF PLAYING
     BlocProvider.of<AudioPlayerBloc>(context).add(
       PauseEvent(),
     );
 
-    ///NAVIGATE TO PLAYER PAGE
-    Navigator.of(context, rootNavigator: true).push(
-      createBottomToUpAnimatedRoute(
-        page: YouTubePlayerPage(videoLink: videoLink),
+    String? videoId = YoutubePlayer.convertUrlToId(videoLink);
+
+    if (videoId != null) {
+      ///NAVIGATE TO PLAYER PAGE
+      if (shouldPop == true) Navigator.pop(context);
+      Navigator.of(context, rootNavigator: true).push(
+        createBottomToUpAnimatedRoute(
+          page: BlocProvider(
+            create: (context) => OtherVideosBloc(
+              videosRepository: AppRepositories.videosRepository,
+            ),
+            child: YouTubePlayerPage(
+              videoId: videoId,
+              songId: songVideo.songId,
+            ),
+          ),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        buildAppSnackBar(
+          bgColor: AppColors.errorRed,
+          txtColor: AppColors.white,
+          msg: 'Unable To Play Video',
+          isFloating: false,
+        ),
+      );
+    }
+  }
+
+  static void openVideoAudioOnly(context, Song songVideo, bool shouldPop) {
+    if (shouldPop) Navigator.pop(context);
+
+    ///PLAY AUDIO ONLY
+    openSong(
+      context: context,
+      songs: [songVideo],
+      startPlaying: true,
+      playingFrom: PlayingFrom(
+        from: "Featured Videos",
+        title: PagesUtilFunctions.getArtistsNames(
+          songVideo.artistsName,
+          context,
+        ),
+        songSyncPlayedFrom: SongSyncPlayedFrom.UNK,
+        songSyncPlayedFromId: -1,
       ),
+      index: 0,
     );
+  }
+
+  static bool isUserSubscribed() {
+    bool isUserSubscribed = IapSubscriptionRepository(
+      iapSubscriptionProvider: IapSubscriptionProvider(),
+    ).getUserIsSubscribes();
+
+    bool isIapAvailable = IapPurchaseRepository(
+      iapPurchaseProvider: IapPurchaseProvider(),
+    ).getIsIapAvailable();
+
+    if (isUserSubscribed & isIapAvailable) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static bool isIapAvailable() {
+    ///Check Is Iap Available
+    bool isIapAvailable = IapPurchaseRepository(
+      iapPurchaseProvider: IapPurchaseProvider(),
+    ).getIsIapAvailable();
+
+    return isIapAvailable;
+  }
+
+  static offlineSongOnClick(
+      context, Song song, List<Song> offlineSong, int position) async {
+    DownloadTask? downloadTask = await DownloadUtil().getSongDownloadTask(song);
+    if (downloadTask != null) {
+      ///GET VALUES
+      final bool isSongDownloadedWithSubscription =
+          DownloadUtil.getIsUserSubscribedPortion(downloadTask.url) == '1'
+              ? true
+              : false;
+      final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
+      ///IF SONG DOWNLOADED WITH SUBSCRIPTION AND IS NOT BOUGHT AND IS NOT FREE
+      ///AND SUBSCRIPTION IS NOT ACTIVE SHOW DIALOG
+      if (isSongDownloadedWithSubscription &&
+          !isUserSubscribed &&
+          !song.isBought &&
+          !song.isFree) {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return Center(
+              child: DialogOfflineSongSubscribeToListen(
+                onSubscribeButtonClicked: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRouterPaths.subscriptionRoute,
+                  );
+                },
+              ),
+            );
+          },
+        );
+      } else {
+        //OPEN SONG
+        PagesUtilFunctions.openSong(
+          context: context,
+          songs: offlineSong,
+          startPlaying: true,
+          playingFrom: PlayingFrom(
+            from: AppLocale.of().playingFrom,
+            title: AppLocale.of().offlineMezmurs,
+            songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
+            songSyncPlayedFromId: -1,
+          ),
+          index: position,
+        );
+      }
+    } else {
+      //OPEN SONG
+      PagesUtilFunctions.openSong(
+        context: context,
+        songs: offlineSong,
+        startPlaying: true,
+        playingFrom: PlayingFrom(
+          from: AppLocale.of().playingFrom,
+          title: AppLocale.of().offlineMezmurs,
+          songSyncPlayedFrom: SongSyncPlayedFrom.OFFLINE_PAGE,
+          songSyncPlayedFromId: -1,
+        ),
+        index: position,
+      );
+    }
   }
 }

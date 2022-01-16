@@ -65,13 +65,14 @@ class ItemCustomGroupGrid extends StatelessWidget {
           SizedBox(height: AppMargin.margin_8),
           Text(
             PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: AppColors.darkGrey,
-                fontWeight: FontWeight.w600,
-                fontSize: AppFontSizes.font_size_10.sp),
+              color: AppColors.grey,
+              fontWeight: FontWeight.w400,
+              fontSize: AppFontSizes.font_size_10.sp,
+            ),
           ),
           SizedBox(
             height: AppMargin.margin_2,

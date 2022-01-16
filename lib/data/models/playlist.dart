@@ -2,8 +2,8 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
+import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/remote_image.dart';
-import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 
 part 'playlist.g.dart';
@@ -25,7 +25,7 @@ class Playlist extends Equatable {
   @HiveField(6)
   final double priceEtb;
   @HiveField(7)
-  final double priceDollar;
+  final IapProduct priceDollar;
   @HiveField(8)
   final bool isFree;
   @HiveField(9)
@@ -41,10 +41,8 @@ class Playlist extends Equatable {
   @HiveField(14)
   final bool? isFollowed;
   @HiveField(15)
-  final bool isInCart;
-  @HiveField(17)
   final DateTime playlistDateCreated;
-  @HiveField(18)
+  @HiveField(16)
   final DateTime playlistDateUpdated;
 
   const Playlist({
@@ -63,7 +61,6 @@ class Playlist extends Equatable {
     required this.createdBy,
     required this.createdById,
     required this.isFollowed,
-    required this.isInCart,
     required this.playlistDateCreated,
     required this.playlistDateUpdated,
   });
@@ -85,7 +82,6 @@ class Playlist extends Equatable {
         createdBy,
         createdById,
         isFollowed,
-        isInCart,
         playlistDateCreated,
         playlistDateUpdated,
       ];
@@ -103,7 +99,7 @@ class Playlist extends Equatable {
         map['playlist_image_id'],
       ),
       priceEtb: map['price_etb'] as double,
-      priceDollar: map['price_dollar'] as double,
+      priceDollar: IapProduct.fromJson(map['price_dollar']),
       isFree: map['is_free'] == 1 ? true : false,
       isBought: map['is_bought'] == 1 ? true : false,
       isDiscountAvailable: map['is_discount_available'] == 1 ? true : false,
@@ -113,7 +109,6 @@ class Playlist extends Equatable {
       isFollowed: map['is_followed'] != null
           ? (map['is_followed'] == 1 ? true : false)
           : null,
-      isInCart: map['is_in_cart'] == 1 ? true : false,
       createdBy: EnumToString.fromString(
         PlaylistCreatedBy.values,
         map['created_by'],
@@ -146,9 +141,49 @@ class Playlist extends Equatable {
       'discount_percentage': this.discountPercentage,
       'created_by_id': this.createdById,
       'is_followed': this.isFollowed,
-      'is_in_cart': this.isInCart,
       'playlist_date_created': this.playlistDateCreated,
       'playlist_date_updated': this.playlistDateUpdated,
     } as Map<String, dynamic>;
+  }
+
+  Playlist copyWith({
+    int? playlistId,
+    TextLan? playlistNameText,
+    TextLan? playlistDescriptionText,
+    RemoteImage? playlistImage,
+    bool? isVerified,
+    bool? isFeatured,
+    double? priceEtb,
+    IapProduct? priceDollar,
+    bool? isFree,
+    bool? isDiscountAvailable,
+    bool? isBought,
+    double? discountPercentage,
+    PlaylistCreatedBy? createdBy,
+    String? createdById,
+    bool? isFollowed,
+    DateTime? playlistDateCreated,
+    DateTime? playlistDateUpdated,
+  }) {
+    return Playlist(
+      isBought: isBought ?? this.isBought,
+      playlistId: playlistId ?? this.playlistId,
+      playlistNameText: playlistNameText ?? this.playlistNameText,
+      playlistDescriptionText:
+          playlistDescriptionText ?? this.playlistDescriptionText,
+      playlistImage: playlistImage ?? this.playlistImage,
+      isVerified: isVerified ?? this.isVerified,
+      isFeatured: isFeatured ?? this.isFeatured,
+      priceEtb: priceEtb ?? this.priceEtb,
+      priceDollar: priceDollar ?? this.priceDollar,
+      isFree: isFree ?? this.isFree,
+      isDiscountAvailable: isDiscountAvailable ?? this.isDiscountAvailable,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
+      createdBy: createdBy ?? this.createdBy,
+      createdById: createdById ?? this.createdById,
+      isFollowed: isFollowed ?? this.isFollowed,
+      playlistDateCreated: playlistDateCreated ?? this.playlistDateCreated,
+      playlistDateUpdated: playlistDateUpdated ?? this.playlistDateUpdated,
+    );
   }
 }

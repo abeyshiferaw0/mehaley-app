@@ -109,21 +109,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Purchases.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PurchasesCoreSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PurchasesHybridCommon.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -194,6 +179,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>in_app_purchase_storekit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>in_app_review.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -230,11 +220,6 @@
 			<false/>
 		</dict>
 		<key>permission_handler.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>purchases_flutter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

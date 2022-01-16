@@ -72,8 +72,8 @@ class _DialogFirstTimeLanAndCurrencyState
                   buildLanguagePicker(context),
 
                   ///CURRENCY REMOVE PICKER
-                  // ///CURRENCY PICKER SECTION
-                  // buildCurrencyPicker(context),
+                  ///CURRENCY PICKER SECTION
+                  buildCurrencyPicker(context),
                   SizedBox(
                     height: AppMargin.margin_32,
                   ),
@@ -167,7 +167,7 @@ class _DialogFirstTimeLanAndCurrencyState
             ),
             buildPickerItem(
               context: context,
-              text: 'ኣማርኟ',
+              text: 'አማርኛ',
               isSelected: isLocaleSelected(AppLanguage.AMHARIC),
               onTap: () {
                 BlocProvider.of<LocalizationCubit>(context).changeLocale(
@@ -266,12 +266,12 @@ class _DialogFirstTimeLanAndCurrencyState
                 Expanded(
                   child: buildPickerItem(
                     context: context,
-                    text: 'ETB',
-                    isSelected: isCurrencySelected(AppCurrency.ETB),
+                    text: 'USD',
+                    isSelected: isCurrencySelected(AppCurrency.USD),
                     onTap: () {
                       BlocProvider.of<CurrencyCubit>(context)
                           .changePreferredCurrency(
-                        mAppCurrency: AppCurrency.ETB,
+                        mAppCurrency: AppCurrency.USD,
                       );
                       setState(() {});
                     },

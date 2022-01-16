@@ -103,8 +103,7 @@ class _PurchasedSongsPageState extends State<PurchasedSongsPage> {
             SongItem(
               song: purchasedSong[position].song,
               isForMyPlaylist: false,
-              thumbUrl: AppApi.baseUrl +
-                  purchasedSong[position].song.albumArt.imageSmallPath,
+              thumbUrl: purchasedSong[position].song.albumArt.imageSmallPath,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {
                 //OPEN SONG

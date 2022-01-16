@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -122,8 +122,7 @@ class _WalletPayWithCarouselState extends State<WalletPayWithCarousel> {
               ),
               child: Center(
                 child: CachedNetworkImage(
-                  imageUrl:
-                      AppApi.baseUrl + paymentMethod.imageUrl.imageSmallPath,
+                  imageUrl: paymentMethod.imageUrl.imageSmallPath,
                   fit: BoxFit.contain,
                   placeholder: (context, url) => buildImagePlaceHolder(),
                   errorWidget: (context, url, error) => buildImagePlaceHolder(),

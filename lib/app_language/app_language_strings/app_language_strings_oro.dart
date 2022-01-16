@@ -491,6 +491,14 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String youCheckedOutCart = "Bittaa marsaa rawwatteetta";
   final String youRechargedWallet = "Waaletii guuttetta";
   final String youReceivedGift = "Kennaa waaletii simatteetta";
+
+  final String videos = "Viidiyoowwan";
+  final String allVideos = "Viidiyoowwan hunda";
+  final String emptyVideos = "Viidiyoowwan duwwaa";
+  final String otherVideos = "Viidiyoowwan biroo";
+  final String cantFindOtherVideos = "Viidiyoowwan biroo argachuu hindandeenye";
+
+
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";
   }

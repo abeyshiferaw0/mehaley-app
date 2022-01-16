@@ -10,11 +10,13 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/settings_page_data.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
-import 'package:mehaley/ui/common/dialog/prefred_payment_method_dialog.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
+import 'package:mehaley/ui/common/app_subscription_active_card.dart';
 import 'package:mehaley/ui/screens/setting/widgets/download_quality_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/drop_down_options_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/elf_info_widget.dart';
 import 'package:mehaley/ui/screens/setting/widgets/logout_button.dart';
+import 'package:mehaley/ui/screens/setting/widgets/prefred_currency_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/profile_button.dart';
 import 'package:mehaley/ui/screens/setting/widgets/setting_large_button.dart';
 import 'package:mehaley/ui/screens/setting/widgets/setting_radio_item.dart';
@@ -140,7 +142,18 @@ class _SettingsPageState extends State<SettingsPage> {
         SingleChildScrollView(
           child: Column(
             children: [
-              //AppSubscribeCard(),
+              ///SUBSCRIBE CARD
+              AppSubscribeCard(
+                topMargin: 0.0,
+                bottomMargin: AppMargin.margin_24,
+              ),
+
+              ///ACTIVE SUBSCRIPTION CARD
+              AppSubscriptionActiveCard(
+                topMargin: 0.0,
+                bottomMargin: AppMargin.margin_24,
+              ),
+
               Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: AppMargin.margin_16,
@@ -182,8 +195,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            //return CompletePaymentDialog();
-                            return PreferredPaymentDialog();
+                            //return PreferredPaymentDialog();
+                            return SizedBox();
                           },
                         );
                       },
@@ -199,8 +212,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     SizedBox(height: AppMargin.margin_32),
 
                     ///DOLLAR BIRR CHOOSER REMOVED
-                    // PreferredCurrencyPicker(settingsPageData: settingsPageData),
-                    // SizedBox(height: AppMargin.margin_32),
+                    PreferredCurrencyPicker(settingsPageData: settingsPageData),
+                    SizedBox(height: AppMargin.margin_32),
                     SettingLargeButton(
                       title: AppLocale.of().rateApp,
                       subTitle: AppLocale.of().rateAppMsg,

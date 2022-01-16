@@ -15,10 +15,10 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/pagination_error_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/category/widgets/item_popular_album.dart';
 import 'package:mehaley/ui/screens/category/widgets/item_popular_playlist.dart';
-import 'package:mehaley/ui/screens/category/widgets/pagination_error_widget.dart';
 import 'package:mehaley/ui/screens/category/widgets/shimmer_category.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -202,7 +202,7 @@ class _CategoryPageState extends State<CategoryPage>
                 SongItem(
                   song: item,
                   isForMyPlaylist: false,
-                  thumbUrl: AppApi.baseUrl + item.albumArt.imageSmallPath,
+                  thumbUrl: item.albumArt.imageSmallPath,
                   thumbSize: AppValues.categorySongItemSize,
                   onPressed: () {
                     //OPEN SONG
