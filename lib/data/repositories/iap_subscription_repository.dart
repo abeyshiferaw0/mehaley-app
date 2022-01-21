@@ -46,7 +46,7 @@ class IapSubscriptionRepository {
 
   Future<PurchaserInfo> purchaseSubscription(Offering offering) async {
     PurchaserInfo purchaserInfo = await Purchases.purchasePackage(
-      offering.availablePackages[0],
+      offering.availablePackages.first,
     );
     return purchaserInfo;
   }

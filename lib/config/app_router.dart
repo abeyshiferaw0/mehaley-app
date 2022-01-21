@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
@@ -18,7 +17,6 @@ import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bl
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/videos_bloc/all_videos_bloc/all_videos_bloc.dart';
 import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other_videos_bloc.dart';
-import 'package:mehaley/business_logic/blocs/wallet_bloc/wallet_page_bloc/wallet_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
@@ -41,8 +39,6 @@ import 'package:mehaley/ui/screens/subscription/subscription_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
 import 'package:mehaley/ui/screens/videos/all_videos_page.dart';
 import 'package:mehaley/ui/screens/videos/yt_player.dart';
-import 'package:mehaley/ui/screens/wallet/how_to_pay_page.dart';
-import 'package:mehaley/ui/screens/wallet/wallet_page.dart';
 
 import 'constants.dart';
 
@@ -62,7 +58,6 @@ class AppRouterPaths {
   static const String homeRoute = 'home';
   static const String settingRoute = '/setting';
   static const String profileRoute = '/profile';
-  static const String walletPage = '/wallet_page';
   static const String editProfileRoute = '/edit_profile';
   static const String albumRoute = '/album';
   static const String playlistRoute = '/playlist';
@@ -307,23 +302,6 @@ class AppRouter {
               child: SubscriptionPage(),
             );
 
-        break;
-      case AppRouterPaths.walletPage:
-        builder = (_) => BlocProvider(
-              create: (context) => WalletPageBloc(
-                walletDataRepository: AppRepositories.walletDataRepository,
-              ),
-              child: WalletPage(
-                startRechargeProcess: false,
-                copyCodeOnInit: false,
-                showHowToPayOnInit: false,
-                codeToCopy: '',
-              ),
-            );
-        break;
-      case AppRouterPaths.howToPayPageRoute:
-        final args = settings.arguments as ScreenArguments;
-        builder = (_) => HowToPayPage(initialUrl: args.args['initialUrl']);
         break;
 
       case AppRouterPaths.ytPlayerPage:

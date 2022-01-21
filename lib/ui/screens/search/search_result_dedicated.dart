@@ -21,9 +21,9 @@ import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_empty_message.dart';
 import 'package:mehaley/ui/screens/search/widgets/search_result_item.dart';
 import 'package:mehaley/util/audio_player_util.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class SearchResultDedicated extends StatefulWidget {
@@ -204,7 +204,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
                 );
               },
               onSongBuyClicked: () {
-                IapPurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
+                PurchaseUtil.songMenuBuyButtonOnClick(context, resultItem);
               },
             ),
           );
@@ -230,7 +230,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
             child: PlaylistMenuWidget(
               playlist: resultItem,
               onBuyButtonClicked: () {
-                IapPurchaseUtil.playlistMenuBuyButtonOnClick(
+                PurchaseUtil.playlistMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,
@@ -267,7 +267,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
                 );
               },
               onBuyAlbumClicked: () {
-                IapPurchaseUtil.albumMenuBuyButtonOnClick(
+                PurchaseUtil.albumMenuBuyButtonOnClick(
                   context,
                   resultItem,
                   false,

@@ -127,22 +127,26 @@ class Playlist extends Equatable {
     // ignore: unnecessary_cast
     return {
       'playlist_id': this.playlistId,
-      'playlist_name_text': this.playlistNameText,
-      'playlist_description_text': this.playlistDescriptionText,
-      'playlist_image': this.playlistImage,
-      'is_verified': this.isVerified,
-      'is_featured': this.isFeatured,
-      'created_by': this.createdBy,
+      'playlist_name_text_id': this.playlistNameText.toMap(),
+      'playlist_description_text_id': this.playlistDescriptionText.toMap(),
+      'playlist_image_id': this.playlistImage.toMap(),
       'price_etb': this.priceEtb,
-      'price_dollar': this.priceDollar,
-      'is_free': this.isFree,
-      'is_bought': this.isBought,
-      'is_discount_available': this.isDiscountAvailable,
+      'price_dollar': this.priceDollar.toJson(),
+      'is_free': this.isFree ? 1 : 0,
+      'is_bought': this.isBought ? 1 : 0,
+      'is_discount_available': this.isDiscountAvailable ? 1 : 0,
       'discount_percentage': this.discountPercentage,
+      'is_verified': this.isVerified ? 1 : 0,
+      'is_featured': this.isFeatured ? 1 : 0,
+      'is_followed': this.isFollowed != null
+          ? this.isFollowed!
+              ? 1
+              : 0
+          : null,
+      'created_by': EnumToString.convertToString(this.createdBy),
       'created_by_id': this.createdById,
-      'is_followed': this.isFollowed,
-      'playlist_date_created': this.playlistDateCreated,
-      'playlist_date_updated': this.playlistDateUpdated,
+      'playlist_date_created': this.playlistDateCreated.toString(),
+      'playlist_date_updated': this.playlistDateUpdated.toString(),
     } as Map<String, dynamic>;
   }
 

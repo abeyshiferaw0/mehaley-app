@@ -1,39 +1,54 @@
 import 'package:equatable/equatable.dart';
-
-import '../remote_image.dart';
-import '../text_lan.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/payment/payment_method_image.dart';
 
 class PaymentMethod extends Equatable {
-  final TextLan paymentMethodName;
-  final RemoteImage imageUrl;
-  final String helpUrl;
+  final AppPaymentMethods appPaymentMethods;
+  final bool isSelected;
+  final String title;
+  final String description;
+  final bool isAvailable;
+  final PaymentMethodImage paymentMethodImage;
+  final List<PaymentMethodImage> paymentOptionImages;
 
   PaymentMethod({
-    required this.paymentMethodName,
-    required this.imageUrl,
-    required this.helpUrl,
+    required this.appPaymentMethods,
+    required this.isSelected,
+    required this.title,
+    required this.isAvailable,
+    required this.description,
+    required this.paymentMethodImage,
+    required this.paymentOptionImages,
   });
 
   @override
   List<Object?> get props => [
-        paymentMethodName,
-        imageUrl,
-        helpUrl,
+        appPaymentMethods,
+        isSelected,
+        title,
+        isAvailable,
+        description,
+        paymentMethodImage,
+        paymentOptionImages,
       ];
 
-  factory PaymentMethod.fromMap(Map<String, dynamic> json) {
+  PaymentMethod copyWith({
+    AppPaymentMethods? appPaymentMethods,
+    bool? isSelected,
+    String? title,
+    bool? isAvailable,
+    String? description,
+    PaymentMethodImage? paymentMethodImage,
+    List<PaymentMethodImage>? paymentOptionImages,
+  }) {
     return PaymentMethod(
-      paymentMethodName: TextLan.fromMap(json["payment_method_name"]),
-      imageUrl: RemoteImage.fromMap(json["image_url"]),
-      helpUrl: json["help_url"],
+      appPaymentMethods: appPaymentMethods ?? this.appPaymentMethods,
+      isSelected: isSelected ?? this.isSelected,
+      title: title ?? this.title,
+      isAvailable: isAvailable ?? this.isAvailable,
+      description: description ?? this.description,
+      paymentMethodImage: paymentMethodImage ?? this.paymentMethodImage,
+      paymentOptionImages: paymentOptionImages ?? this.paymentOptionImages,
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      "payment_method_name": this.paymentMethodName,
-      "image_url": this.imageUrl,
-      "help_url": this.helpUrl,
-    };
   }
 }

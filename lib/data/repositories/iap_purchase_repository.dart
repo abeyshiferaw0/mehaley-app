@@ -4,9 +4,7 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
-import 'package:mehaley/data/models/api_response/iap_validation_result_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/util/api_util.dart';
 import 'package:mehaley/util/network_util.dart';
 
 class IapPurchaseRepository {
@@ -144,17 +142,6 @@ class IapPurchaseRepository {
     return info;
   }
 
-  Future<IapValidationResult> verifyPurchase(
-      String purchaseToken, int itemId, AppPurchasedItemType itemType) async {
-    //bool isValid = await iapPurchaseProvider.verifyPurchase();
-    await Future.delayed(Duration(seconds: 4), () {});
-    //throw 'test error';
-    return IapValidationResult(
-      isValid: true,
-      isAlreadyPurchased: false,
-    );
-  }
-
   Future<bool> verifyItem(int itemId, AppPurchasedItemType appPurchasedItemType,
       String purchaseToken) async {
     Response response = await iapPurchaseProvider.verifyItem(
@@ -170,10 +157,6 @@ class IapPurchaseRepository {
     }
 
     throw "UNABLE TO COMPLETE ITEM PURCHASE";
-  }
-
-  Future<void> deleteAllCache() async {
-    await ApiUtil.deleteAllCache();
   }
 
   cancelDio() {

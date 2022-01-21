@@ -76,14 +76,26 @@ class Artist extends Equatable {
     // ignore: unnecessary_cast
     return {
       'artist_id': this.artistId,
-      'artist_name': this.artistName,
-      'artist_about_biography': this.artistAboutBiography,
-      'artist_images': this.artistImages,
-      'is_verified': this.isVerified,
-      'is_suggested': this.isSuggested,
-      'is_followed': this.isFollowed,
-      'artist_date_created': this.artistDateCreated,
-      'artist_date_updated': this.artistDateUpdated,
+      'artist_name_text_id': this.artistName.toMap(),
+      'artist_about_biography_text_id': this.artistAboutBiography.toMap(),
+      'artist_images': getRemoteImagesListMap(this.artistImages),
+      'is_verified': this.isVerified ? '1' : '0',
+      'is_suggested': this.isSuggested ? '1' : '0',
+      'is_followed': this.isFollowed != null
+          ? this.isFollowed!
+              ? '1'
+              : '0'
+          : null,
+      'artist_date_created': this.artistDateCreated.toString(),
+      'artist_date_updated': this.artistDateUpdated.toString(),
     } as Map<String, dynamic>;
+  }
+
+  dynamic getRemoteImagesListMap(List<RemoteImage> remoteImages) {
+    List<Map<String, dynamic>> mapItems = [];
+    remoteImages.forEach((element) {
+      mapItems.add(element.toMap());
+    });
+    return mapItems;
   }
 }

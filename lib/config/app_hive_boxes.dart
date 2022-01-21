@@ -140,17 +140,17 @@ class AppHiveBoxes {
     );
 
     ///RECENTLY PURCHASED SONGS
-    recentlyPurchasedSong = await Hive.openBox<Song>(
+    recentlyPurchasedSong = await Hive.openBox<Map<String, dynamic>>(
       AppValues.recentlyPurchasedSongBox,
     );
 
     ///RECENTLY PURCHASED ALBUMS
-    recentlyPurchasedAlbum = await Hive.openBox<Album>(
+    recentlyPurchasedAlbum = await Hive.openBox<Map<String, dynamic>>(
       AppValues.recentlyPurchasedAlbumBox,
     );
 
     ///RECENTLY PURCHASED PLAYLISTS
-    recentlyPurchasedPlaylist = await Hive.openBox<Playlist>(
+    recentlyPurchasedPlaylist = await Hive.openBox<Map<String, dynamic>>(
       AppValues.recentlyPurchasedPlaylistBox,
     );
 

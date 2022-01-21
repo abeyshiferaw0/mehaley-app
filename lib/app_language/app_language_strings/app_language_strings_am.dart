@@ -352,19 +352,13 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String yourCurrentBalance = "ቀሪ ሂሳብዎ";
   final String today = "ዛሬ";
   final String yesterday = "ትላንትና";
-  final String walletHistory = "የዋሌትዎ ታሪክ";
+
   final String help = "የእገዛ ገጽ";
   final String selectedAmount = "የተመረጠው መጠን";
-  final String invalidWalletRechargeAmountSelected = "እባክዎ ትክክለኛ መጠን ይምረጡ";
-  final String areYouSureUWantToCancelBill = "እርግጠኛ ነዎት ሂሳብዎን መሰረዝ ይፈልጋሉ";
-  final String walletRechargeInitialErrorMsg =
-      "ስተት ተፈጥሮኣል\nዋሌትዎን መሙላት መጀመር አልተቻለም";
-
-  final String walletRechargeFinalErrorMsg = "ስተት ተፈጥሮኣል\nዋሌትዎን መሙላት አልተቻለም";
 
   final String billNotPaidYetMsg = "ቢሉ እስካሁን አልተከፈለም,\nይህን ቢል በመክፈል ዋሌትዎን ይሙሉ";
   final String billAlreadyPaidMsg = "ቢሉ አስቀድሞ ተከፍሏል!";
-  final String refreshingWallet = "ዋሌትዎን በማደስ ለይ";
+
   final String billStatusFailedMsg =
       "የቢልዎን ሁኔታ ማረጋገጥ አልተቻለም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String billCancelFailedMsg = "ቢልዎን መሰረዝ አልተቻለም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
@@ -374,19 +368,13 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String transactionDate = "የግብይት ቀን";
   final String paidUsing = "የተከፈለዉ በ";
   final String totalAmountPaid = "የተከፈለ ጠቅላላ መጠን";
-  final String walletRechargedSuccessfully = "ዋሌትዎ በተሳካ ሁኔታ ተሞልቷል";
-  final String walletRechargedSuccessfullyMsg =
-      "ክፍያዎ በተሳካ ሁኔታ ተካሂዷል!\nየግብይት ዝርዝሮች ከዚህ በታች ተካትተዋል";
+
   final String cancelBill = "ቢሉን ሰርዝ";
   final String howToPay = "ቢል እንዴት መክፈል ይቻላል?";
   final String howToPayMsg = "ዋሌትዎን በሚሞሉበት ጊዜ ሂሳብ እንዴት እንደሚከፍሉ መመሪያ ያግኙ";
-  final String refreshWallet = "ዋሌትዎን ያድሱ";
-  final String refreshWalletMsg =
-      "በቅርቡ ዋሌትዎን ከሞሉ እና ምንም ለውጥ ካላዩ ዋሌትዎን በማደስ ይሞክሩ";
-  final String myWalletBalance = "ቀሪ ሂሳብ";
-  final String appWallet = "የማህለዬ ዋሌት";
+
   final String selectAmountToTopUp = "የሚሞላውን መጠን ይምረጡ";
-  final String rechargeYourWallet = "ዋሌትዎን ይሙሉ";
+
   final String or = "ወይም";
   final String enterOtherAmount = "ሌላ መጠን ያስገቡ";
   final String proceedToPayment = "ወደ ክፍያ ይቀጥሉ";
@@ -413,12 +401,6 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String cartCheckedOut = "የጥቅል ግዢዉ ተፈጵሞል";
   final String cartCheckOut = "የጥቅል ግዢ ፈጵም";
   final String cartCheckedOutMsg = "መዝሙሮችን፣ አልበሞችን፣ ፕሌይሊስቶችን በአንድ ጊዜ ይግዙ";
-  final String walletRecharged = "ዋሌትዎ ተሞልቷል";
-
-  final String rechargeWallet = "ዋሌትዎን ይሙሉ";
-  final String walletInsufficient = "ዋሌትዎ ዉስጥ በቂ ሂሳብ የለም";
-  final String walletInsufficientMsg =
-      "ይህንን ግዢ ለመፈጸም የዋሌትዎ ሒሳብ በቂ አይደለም፣ እባክዎ ዋሌትዎን ይሙሉ እና እንደገና ይሞክሩ";
 
   final String newVersionAvailable = "የመሀለዬ መተግበሪያ አዲስ ሥሪት አለ.";
   final String newVersionAvailableMsg =
@@ -431,7 +413,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String youPurchasedAlbum = "አልበም ገዝተዋል";
   final String youPurchasedPlaylist = "ፕሌይሊስት ገዝተዋል";
   final String youCheckedOutCart = "ጥቅል ግዢ ፈጽመዋል";
-  final String youRechargedWallet = "ዋሌት ሞልተዋል";
+
   final String youReceivedGift = "የዋሌት ስጦታ ተቀብለዋል";
 
   ///NOT TRANSLATED
@@ -544,15 +526,6 @@ class AppLanguageStringsAm extends AppLocalizations {
 
   String appVersion({required String versionCode}) {
     return "ሥሪት $versionCode";
-  }
-
-  String activeBillMsg({required String date}) {
-    return "በ$date እስካሁን ያልተከፈለ ቢል ፈጥረዋል፣ይህን ቢል በመክፈል ዋሌትዎን መሙላት ይችላሉ.";
-  }
-
-  String walletRechargedSuccessTransactionNumber(
-      {required String transactionNumber}) {
-    return "የግብይት ቁጥር : $transactionNumber";
   }
 
   String howToPayWith({required String paymentMethod}) {

@@ -34,13 +34,19 @@ class AppAssets {
   static String icPhone = 'assets/icons/auth_icons/ic_phone.svg';
 
   ///PAYMENT ICONS
-  static String icWeBirr = 'assets/icons/payment_icons/we_birr.png';
+  static String icApplePay = 'assets/icons/payment_icons/ic_apple_pay.png';
+  static String icAppleStore = 'assets/icons/payment_icons/ic_apple_store.png';
+  static String icCbe = 'assets/icons/payment_icons/ic_cbe.png';
   static String icAmole = 'assets/icons/payment_icons/ic_amole.png';
-  static String icCbeBirr = 'assets/icons/payment_icons/ic_cbe_birr.png';
+  static String icGooglePlay = 'assets/icons/payment_icons/ic_google_play.png';
+  static String icGooglePay = 'assets/icons/payment_icons/ic_google_pay.png';
   static String icHelloCash = 'assets/icons/payment_icons/ic_hello_cash.png';
   static String icMasterCard = 'assets/icons/payment_icons/ic_mastercard.png';
   static String icMbirr = 'assets/icons/payment_icons/ic_mbirr.png';
+  static String icPaypal = 'assets/icons/payment_icons/ic_paypal.png';
+  static String icTelebirr = 'assets/icons/payment_icons/ic_telebirr.png';
   static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
+  static String icYenepay = 'assets/icons/payment_icons/ic_yene_pay.png';
 
   ///IMAGES
   static String imageSignUpBg = 'assets/images/image_sign_up_bg.jpg';

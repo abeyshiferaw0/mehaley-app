@@ -357,20 +357,13 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String yourCurrentBalance = "ተራፊ ሒሳቦም";
   final String today = "ሎሚ መዓልቲ";
   final String yesterday = "ትማሊ";
-  final String walletHistory = " ታሪኽ ዋሌቶም";
   final String help = "ናይ ሓገዝ ገጽ";
   final String selectedAmount = "ዝተመረጸ ዓቐን";
-  final String invalidWalletRechargeAmountSelected = "በጅኦም ትኽክለኛ ዓቐን ይምረጹ";
-  final String areYouSureUWantToCancelBill = "ርግጸኛ ድዮም ኺሳቦም ክስርዙ ይደልዩ ድዮም ";
-  final String walletRechargeInitialErrorMsg =
-      "ጌጋ ኣጋጢሙ ኣሎ\nምምላእ ዋሌቶም ክጅመር አልተኻኣለን";
-
-  final String walletRechargeFinalErrorMsg = "ጌጋ ኣጋጢሙ ኣሎ\nንዋሌቶም ምምላእ ኣይተኻኣለን";
 
   final String billNotPaidYetMsg =
       "’ቲ ቢል ክሳብ ህዚ ኣይተኸፈለን  እስካሁን,\nንዚ ቢል ብምኽዳል ዋሌቶም ይምልኡ";
   final String billAlreadyPaidMsg = "’ቲ ቢል ኣቐዲሙ ተኸፊሉ ኣሎ!";
-  final String refreshingWallet = "ንዋሌቶም ኣብ ምሕዳስ";
+
   final String billStatusFailedMsg =
       "ኩነታ ቦሎም ምርግጋጽ ኣይተኻኣለን, ናይ በይነመረብ ርክቦም የረጋግጹ";
   final String billCancelFailedMsg =
@@ -381,19 +374,13 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String transactionDate = "ዕለት ዕድጊት ";
   final String paidUsing = "ዝተኸፍለ ብ";
   final String totalAmountPaid = "ዝተኸፈለ ሓደሻዊ ዓቐን";
-  final String walletRechargedSuccessfully = "ዋሌቶም ብዕውት ኩነታ ተመሊኡ ኣሎ";
-  final String walletRechargedSuccessfullyMsg =
-      " ክፍሊቶም ብዕውት ኩነታ ተመሊኡ ኣሎ!\nዝርዝራት ዕድጊት ከምዝስዕብ ክኣትው ተገይሩ ኣሎ";
+
   final String cancelBill = "ምተ ቢል ደምስስ";
   final String howToPay = "ከመይ ገይርካ ’ዩ ቢል ምኽፋል ዝከኣል?";
   final String howToPayMsg = "ዋሌቶም ኣብዝመልእሉ እዋን ኺሳብ ከመይ ገይሮም ከምዝኽፍሉ መመምርሒ ይርከቡ";
-  final String refreshWallet = "ዋሌቶም ይሓድሱ";
-  final String refreshWalletMsg =
-      "ኣብ ቀረባ እዋን ዋሌቶም  ዝመልኡ ምስኮነን ዝኾነ ለውጢ ምስ ዘይርኣዩ ንዋሌቶም ብምሕዳስ መሊሶም ይፈትኑ";
-  final String myWalletBalance = "ተራፊ ሒሳብ";
-  final String appWallet = "ናይ ማህልዬ ዋሌት";
+
   final String selectAmountToTopUp = "ንቲ ዝምላእ ዓቐን ይምረፁ";
-  final String rechargeYourWallet = "ዋሌቶም ይምልኡ";
+
   final String or = "ወይ ከኣ";
   final String enterOtherAmount = "ካሊእ ዓቐን የእትዉ";
   final String proceedToPayment = "ናብ ክፍሊት ይቐፅሉ ";
@@ -420,12 +407,6 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String cartCheckedOut = "’ቲ ናይ ጥቕሉል ግዝኢት ተፈጺሙ ኣሎ";
   final String cartCheckOut = "ናይ ጥቕሉል ግዝኢት ፈጽም";
   final String cartCheckedOutMsg = "ንመዝሙትን፣ አልበሞትን፣ ፕሌይሊስትታትን ብሓደ ግዜ ይግዝኡ";
-  final String walletRecharged = "ዋሌቶም ተመሊኡ ኣሎ";
-
-  final String rechargeWallet = "ዋሌቶም ይምልኡ";
-  final String walletInsufficient = "ኣብ ውሽጢ ዋሌቶም እኹል ሒሳብ የለን";
-  final String walletInsufficientMsg =
-      "ንዚ ግዝኢት ንምፍጻም ናይ ዋሌቶም ሒሳብ እኹል ኣይኮነን፣ በጃኹም ዋሌቶም መሊኦም መሊሶም ይፈትኑ";
 
   final String newVersionAvailable = "ሓድሽ ናይ መሃለየ ስርሒት አሎ ";
   final String newVersionAvailableMsg =
@@ -438,7 +419,7 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String youPurchasedAlbum = "ኣልበም ገዚኦም ኣለው";
   final String youPurchasedPlaylist = "ፕሌይሊስት ገዚኦም ኣለው";
   final String youCheckedOutCart = "ጥቅሉል ግዝኢት ፈፂሞም ኣለው";
-  final String youRechargedWallet = "ዋሌት መሊኦም ኣለው";
+
   final String youReceivedGift = "ናይ ዋሌት ውፅኢት ተቐቢሎም";
 
   final String videos = "ስ";
@@ -544,15 +525,6 @@ class AppLanguageStringsTig extends AppLocalizations {
 
   String appVersion({required String versionCode}) {
     return "ሥሪት $versionCode";
-  }
-
-  String activeBillMsg({required String date}) {
-    return "ብ$date ክሳብ ህዚ ዘይተኽፍለ ቢል ፈጢሮም ኣለው ፣ንዚ ቢል ከፊሎም ዋሌቶም ክመልኡ ይኽእሉ  ";
-  }
-
-  String walletRechargedSuccessTransactionNumber(
-      {required String transactionNumber}) {
-    return "ናይ ግብይት ቑፅሪ : $transactionNumber";
   }
 
   String howToPayWith({required String paymentMethod}) {

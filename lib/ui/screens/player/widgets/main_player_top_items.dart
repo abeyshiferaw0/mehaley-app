@@ -11,8 +11,8 @@ import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class MainPlayerTopItems extends StatefulWidget {
@@ -100,8 +100,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                           );
                         },
                         onSongBuyClicked: () {
-                          IapPurchaseUtil.songMenuBuyButtonOnClick(
-                              context, state);
+                          PurchaseUtil.songMenuBuyButtonOnClick(context, state);
                         },
                       ),
                     );

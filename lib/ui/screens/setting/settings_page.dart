@@ -12,6 +12,7 @@ import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/app_subscribe_card.dart';
 import 'package:mehaley/ui/common/app_subscription_active_card.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_prefred_payment_method.dart';
 import 'package:mehaley/ui/screens/setting/widgets/download_quality_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/drop_down_options_picker.dart';
 import 'package:mehaley/ui/screens/setting/widgets/elf_info_widget.dart';
@@ -172,15 +173,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         );
                       },
                     ),
-                    SizedBox(height: AppMargin.margin_32),
-                    SettingLargeButton(
-                      title: AppLocale.of().appWallet,
-                      subTitle: AppLocale.of().rechargeYourWallet,
-                      onTap: () {
-                        PagesUtilFunctions.goToWalletPage(context);
-                      },
-                    ),
                     SizedBox(height: AppMargin.margin_20),
+
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
                       onLanguageChanged: () {
@@ -195,8 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            //return PreferredPaymentDialog();
-                            return SizedBox();
+                            return PreferredPaymentDialog();
                           },
                         );
                       },
@@ -230,16 +223,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                     ),
                     SizedBox(height: AppMargin.margin_32),
-                    SettingLargeButton(
-                      title: AppLocale.of().howToPay,
-                      subTitle: AppLocale.of().howToPayMsg,
-                      onTap: () {
-                        PagesUtilFunctions.goToHowToPayPage(
-                          context,
-                          AppValues.howToPayHelpGeneralUrl,
-                        );
-                      },
-                    ),
+
                     SizedBox(
                       height: AppMargin.margin_48,
                     ),

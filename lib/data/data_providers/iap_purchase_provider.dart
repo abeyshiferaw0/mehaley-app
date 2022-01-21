@@ -19,7 +19,7 @@ class IapPurchaseProvider {
     //SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.paymentBaseUrl + "/purchase/iap/",
+      url: AppApi.paymentBaseUrl + "/purchase/in_app_purchases/",
       useToken: true,
       data: {
         'item_id': itemId,
@@ -28,6 +28,7 @@ class IapPurchaseProvider {
         'token': purchaseToken,
       },
     );
+    print("INAPPPPP USER DATA => ${response.data}");
     return response;
   }
 

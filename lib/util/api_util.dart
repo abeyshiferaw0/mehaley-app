@@ -36,29 +36,6 @@ class ApiUtil {
     return response;
   }
 
-  static Future<Response> yenepayPost({
-    required Dio dio,
-    required String url,
-    dynamic data,
-  }) async {
-    ///INIT OPTIONS
-    Options? options;
-
-    print("YENEPAYY ID parame => ${data}");
-
-    ///CONFIG HEADER CONTENT TYPE JSON
-    options = Options(
-      headers: {'content-type': 'application/json'},
-    );
-
-    var response = await dio.post(
-      url,
-      data: data,
-      options: options,
-    );
-
-    return response;
-  }
 
   static Future<Response> post({
     required Dio dio,

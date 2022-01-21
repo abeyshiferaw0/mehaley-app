@@ -16,9 +16,9 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/common/subscribe_small_button.dart';
 import 'package:mehaley/ui/screens/playlist/widget/icon_text.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class PlaylistInfoPageOne extends StatelessWidget {
@@ -150,7 +150,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                             playlistPageData.playlist.isDiscountAvailable,
                         isBought: playlistPageData.playlist.isBought,
                         onBuyClicked: () {
-                          IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                          PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
                             context,
                             playlistPageData.playlist,
                           );
@@ -356,7 +356,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
                       isDiscountAvailable: playlist.isDiscountAvailable,
                       isBought: playlist.isBought,
                       onBuyClicked: () {
-                        IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+                        PurchaseUtil.playlistPageHeaderBuyButtonOnClick(
                           context,
                           playlist,
                         );

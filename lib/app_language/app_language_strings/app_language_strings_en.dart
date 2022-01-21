@@ -1,5 +1,4 @@
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/util/app_extention.dart';
 
 import '../app_localizations.dart';
 
@@ -359,8 +358,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String cartAlreadyCheckedOutMsg =
       "Your subscription is already checked out, try refreshing subscription page!!";
   final String billCanceled = "Bill Canceled";
-  final String billCanceledMsg =
-      "You bill was cancelled, use another bill to recharge your wallet";
+
   final String noHistory = "No History";
 
   final String giftReceived = "Gift Received";
@@ -371,23 +369,12 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String yourCurrentBalance = "Your Current Balance";
   final String today = "Today";
   final String yesterday = "Yesterday";
-  final String walletHistory = "Wallet History";
+
   final String help = "Help";
   final String selectedAmount = "Selected amount";
-  final String invalidWalletRechargeAmountSelected =
-      "Please select a valid amount";
-  final String areYouSureUWantToCancelBill =
-      "Are You Sure You Want To Cancel Your Bill";
-  final String walletRechargeInitialErrorMsg =
-      "Something went wrong\nUnable to initiate wallet recharge";
 
-  final String walletRechargeFinalErrorMsg =
-      "Something went wrong\nUnable to recharge your wallet";
-
-  final String billNotPaidYetMsg =
-      "Bill not paid yet,\nRecharge your wallet by paying this bill";
   final String billAlreadyPaidMsg = "Bill is already paid!";
-  final String refreshingWallet = "Refreshing Wallet";
+
   final String billStatusFailedMsg =
       "Checking bill status failed, check your internet connection";
   final String billCancelFailedMsg =
@@ -398,27 +385,15 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String transactionDate = "Transaction Date";
   final String paidUsing = "Paid using";
   final String totalAmountPaid = "Total Amount Paid";
-  final String walletRechargedSuccessfully = "Wallet Recharged Successfully";
-  final String walletRechargedSuccessfullyMsg =
-      " Your payment has been processed!\ndetails of transaction are included below";
+
   final String cancelBill = "Cancel bill";
   final String howToPay = "How To Pay Bill?";
-  final String howToPayMsg =
-      "Get instruction on how to pay bill when recharging your wallet";
-  final String refreshWallet = "Refresh Wallet";
-  final String refreshWalletMsg =
-      "If you have recently recharged your wallet and didn't’t see any updates try refreshing your wallet";
-  final String myWalletBalance = "My Wallet Balance";
-  final String appWallet = "Maheleye Wallet";
+
   final String selectAmountToTopUp = "Select amount to top up";
-  final String rechargeYourWallet = "Recharge your wallet";
+
   final String or = "Or";
   final String enterOtherAmount = "Enter Other Amount";
   final String proceedToPayment = "Proceed to payment";
-  final String billInfoMsg =
-      "Hi, Select the amount you want to top up and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking …)";
-  final String unPaidBillMsg =
-      "You have an unpaid previous bill, you can recharge your wallet by paying this bill or you can cancel and create a new bill.";
   final String previousUnPaidBill = "Previous Unpaid Bill Available";
   final String cancelBillAndContinue = "Cancel bill & continue";
   final String amount = "Amount";
@@ -426,9 +401,6 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String copyCode = "Copy Code";
   final String billCode = "Bill Code";
   final String unpaidBillCode = "Unpaid Bill Code";
-  final String payBill = "Pay Bill To Recharge Your Wallet";
-  final String payBillMsg =
-      "Hi, copy the bill code and recharge your wallet by paying with Webirr( CBE Birr, CBE mobile banking, Boa mobile banking…)";
   final String goToPurchased = "Go to purchased";
   final String copiedToClipboard = "Copied To Clipboard";
 
@@ -438,12 +410,6 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String cartCheckedOut = "Cart Checked Out";
   final String cartCheckOut = "Cart Check Out";
   final String cartCheckedOutMsg = "Purchase Multiple Items At Once";
-  final String walletRecharged = "Wallet Recharged";
-
-  final String rechargeWallet = "Recharge Wallet";
-  final String walletInsufficient = "Wallet Balance Insufficient";
-  final String walletInsufficientMsg =
-      "Your Wallet Balance Is Insufficient To Make This Purchase, Please Recharge Your Wallet And Try Again";
 
   final String newVersionAvailable = "New Version Available";
   final String newVersionAvailableMsg =
@@ -456,7 +422,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String youPurchasedAlbum = "Album Purchased";
   final String youPurchasedPlaylist = "Playlist Purchased";
   final String youCheckedOutCart = "Cart Checked Cleared";
-  final String youRechargedWallet = "Wallet Recharged";
+
   final String youReceivedGift = "Gift Received";
 
   ///NOT TRANSLATED
@@ -569,15 +535,6 @@ class AppLanguageStringsEn extends AppLocalizations {
     return "Version $versionCode";
   }
 
-  String activeBillMsg({required String date}) {
-    return "You have created a bill on $date, which isn't paid yet, you can recharge your wallet by paying this bill.";
-  }
-
-  String walletRechargedSuccessTransactionNumber(
-      {required String transactionNumber}) {
-    return "Transaction Number : $transactionNumber";
-  }
-
   String howToPayWith({required String paymentMethod}) {
     return "How to pay bill with\n$paymentMethod ?";
   }
@@ -618,20 +575,5 @@ class AppLanguageStringsEn extends AppLocalizations {
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
       item = "Playlist";
     return "The $item you're trying to buy is now free, enjoy listening on Mehaleye";
-  }
-
-  String purchaseItemMsg(
-      {required double amount, required PurchasedItemType purchasedItemType}) {
-    String item = 'Item';
-    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
-    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
-    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
-      item = "Playlist";
-
-    return "By Purchasing This $item ${amount.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
-  }
-
-  String cartCheckOutMsg({required double cartTotalPrice}) {
-    return "By Checking Out Your Cart ${cartTotalPrice.parsePriceAmount()} $birr Will Be Deducted From Your Wallet";
   }
 }

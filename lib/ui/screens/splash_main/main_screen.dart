@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +11,13 @@ import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_available_bloc/iap_available_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_verification_bloc/iap_purchase_verification_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_available_bloc/iap_available_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_verification_bloc/iap_purchase_verification_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_link_song_bloc.dart';
@@ -31,17 +29,16 @@ import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
-import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/data/models/payment/wallet_gift.dart';
-import 'package:mehaley/data/models/payment/webirr_bill.dart';
+import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/bottom_bar.dart';
 import 'package:mehaley/ui/common/dialog/deeplink_share/dialog_open_deeplink_song.dart';
@@ -49,15 +46,13 @@ import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart
 import 'package:mehaley/ui/common/dialog/dialog_new_app_version.dart';
 import 'package:mehaley/ui/common/dialog/dialog_subscibe_notification.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_iap_verfication.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_purchase_success_transparent.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_end.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_succes.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
-import 'package:mehaley/ui/common/notifications/fresh_gift_notification_widget.dart';
-import 'package:mehaley/ui/screens/wallet/dialogs/dialog_bill_confirmed.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
 final AppRouter _appRouter = AppRouter();
@@ -333,7 +328,7 @@ class _MainScreenState extends State<MainScreen> {
               if (state.isFromSelfPage) {
                 ///IF FROM SELF(BOUGHT FROM ALBUM PAGE) PAGE
                 ///OPEN PURCHASED ALBUM PAGE
-                goToPlaylistPage(
+                goToAlbumPage(
                   _navigatorKey,
                   state.itemId,
                 );
@@ -374,45 +369,6 @@ class _MainScreenState extends State<MainScreen> {
                 context,
                 AppPurchasedItemType.PLAYLIST_PAYMENT,
               );
-            }
-          },
-        ),
-        BlocListener<FreshWalletBillCubit, WebirrBill?>(
-          listener: (context, state) {
-            if (state != null) {
-              ///SHOW FRESH BILL DIALOG
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return DialogBillConfirmed(
-                    freshBill: state,
-                  );
-                },
-              );
-            }
-          },
-        ),
-        BlocListener<FreshWalletGiftCubit, List<WalletGift>?>(
-          listener: (context, state) async {
-            if (state != null) {
-              ///SHOW FRESH GIFT NOTIFICATIONS
-              if (state.length > 0) {
-                final random = Random();
-                for (var i = 0; i < state.length; i++) {
-                  await Future.delayed(
-                    Duration(milliseconds: 300 + random.nextInt(300)),
-                  );
-                  showSimpleNotification(
-                    FreshGiftNotificationWidget(
-                      freshWalletGift: state[i],
-                    ),
-                    background: AppColors.pagesBgColor,
-                    duration: Duration(
-                      seconds: 4 * (state.length - i),
-                    ),
-                  );
-                }
-              }
             }
           },
         ),
@@ -661,20 +617,6 @@ class _MainScreenState extends State<MainScreen> {
         ),
         BlocListener<OneSignalBloc, OneSignalState>(
           listener: (BuildContext context, state) {
-            if (state is NotificationActionClickedState) {
-              if (state.actionId == 'copy_code') {
-                PagesUtilFunctions.goToWalletPage(
-                  context,
-                  copyCodeOnInit: true,
-                  codeToCopy: state.billCode,
-                );
-              } else if (state.actionId == 'how_to_pay') {
-                PagesUtilFunctions.goToWalletPage(
-                  context,
-                  showHowToPayOnInit: true,
-                );
-              }
-            }
             if (state is NotificationClickedState) {
               if (state.itemType == AppItemsType.PLAYLIST) {
                 _navigatorKey.currentState!.pushNamed(
@@ -783,37 +725,54 @@ class _MainScreenState extends State<MainScreen> {
         //     ),
         //   ],
         // ),
-        body: Column(
+        body: Stack(
           children: [
-            //MAIN ROUTEING PART OF APP
-            Expanded(
-              child: buildWillPopScope(),
-            ),
-            //NO INTERNET INDICATOR
-            BlocBuilder<ConnectivityCubit, ConnectivityResult>(
-              builder: (context, state) {
-                if (state == ConnectivityResult.none) {
-                  return NoInternetIndicatorSmall();
-                } else {
-                  return SizedBox();
-                }
-              },
-            ),
+            Column(
+              children: [
+                //MAIN ROUTEING PART OF APP
+                Expanded(
+                  child: buildWillPopScope(),
+                ),
+                //NO INTERNET INDICATOR
+                BlocBuilder<ConnectivityCubit, ConnectivityResult>(
+                  builder: (context, state) {
+                    if (state == ConnectivityResult.none) {
+                      return NoInternetIndicatorSmall();
+                    } else {
+                      return SizedBox();
+                    }
+                  },
+                ),
 
-            ///MINI PLAYER SHOWN IF MUSIC IS PLAYING
-            BlocBuilder<PlayerStateCubit, PlayerState>(
-              builder: (context, state) {
-                if (state.processingState == ProcessingState.ready ||
-                    state.processingState == ProcessingState.buffering ||
-                    state.processingState == ProcessingState.loading) {
-                  return MiniPlayer(
-                    navigatorKey: _navigatorKey,
-                  );
-                } else {
-                  return SizedBox();
-                }
-              },
+                ///MINI PLAYER SHOWN IF MUSIC IS PLAYING
+                BlocBuilder<PlayerStateCubit, PlayerState>(
+                  builder: (context, state) {
+                    if (state.processingState == ProcessingState.ready ||
+                        state.processingState == ProcessingState.buffering ||
+                        state.processingState == ProcessingState.loading) {
+                      return MiniPlayer(
+                        navigatorKey: _navigatorKey,
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  },
+                ),
+              ],
             ),
+            BlocBuilder<IapConsumablePurchaseBloc, IapConsumablePurchaseState>(
+              builder: (context, state) {
+                if (state is IapConsumablePurchaseStartedState) {
+                  return Container(
+                    color: AppColors.completelyBlack.withOpacity(0.5),
+                    child: AppLoading(
+                      size: AppValues.loadingWidgetSize,
+                    ),
+                  );
+                }
+                return Container();
+              },
+            )
           ],
         ),
         bottomNavigationBar: BottomBar(
@@ -906,6 +865,52 @@ class _MainScreenState extends State<MainScreen> {
       arguments: ScreenArguments(
         args: {'playlistId': itemId},
       ),
+    );
+  }
+
+  ///GO TO PURCHASED ALBUM PAGE
+  static void goToAlbumPage(GlobalKey<NavigatorState> navigatorKey, itemId) {
+    ///GO TO PURCHASED PLAYLIST PAGE
+    navigatorKey.currentState!.pushNamedAndRemoveUntil(
+      AppRouterPaths.albumRoute,
+      ModalRoute.withName(
+        AppRouterPaths.homeRoute,
+      ),
+      arguments: ScreenArguments(
+        args: {'albumId': itemId},
+      ),
+    );
+  }
+
+  ///SHOW ALBUM PURCHASED SUCCESS TRANSPARENT DIALOG
+  static void showAlbumSuccessTransparentDialog(context, Album album) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogPurchaseSuccess(
+          title: AppLocale.of().albumPurchased,
+          subTitle: L10nUtil.translateLocale(
+            album.albumTitle,
+            context,
+          ),
+        );
+      },
+    );
+  }
+
+  ///SHOW PLAYLIST PURCHASED SUCCESS TRANSPARENT DIALOG
+  static void showPlaylistSuccessTransparentDialog(context, Playlist playlist) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogPurchaseSuccess(
+          title: AppLocale.of().playlistPurchased,
+          subTitle: L10nUtil.translateLocale(
+            playlist.playlistNameText,
+            context,
+          ),
+        );
+      },
     );
   }
 }

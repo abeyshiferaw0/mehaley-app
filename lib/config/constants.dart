@@ -4,6 +4,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/payment/payment_method.dart';
+import 'package:mehaley/data/models/payment/payment_method_image.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
@@ -14,11 +18,6 @@ class AppApi {
   static const String paymentBaseUrl = '$baseUrl/payment';
   static const String cartBaseUrl = '$baseUrl/subscription';
   static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
-
-  ///FOR YENE PAY
-  static const yenePayGetCheckOutUrl =
-      "https://testapi.yenepay.com/api/urlgenerate/getcheckouturl/";
-  //static const yenePayGetCheckOutUrl = "https://endpoints.yenepay.com/api/urlgenerate/getcheckouturl/  ";
 
   static Future<CacheOptions> getDioCacheOptions() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -45,34 +44,6 @@ class AppApi {
     return options;
   }
 
-  static Future<CacheOptions> getDioWalletRequestsCacheOptions() async {
-    ///USE SAME CACHE KEY FOR ALL WALLET RELATED API REQUESTS
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    String appDocPath = appDocDir.path;
-    final options = CacheOptions(
-      // A default store is required for interceptor.
-      store: HiveCacheStore(appDocPath),
-      // Default.
-      policy: CachePolicy.refresh,
-      // Optional. Returns a cached response on error but for statuses 401 & 403.
-      // hitCacheOnErrorExcept: [401, 403],
-      // Optional. Overrides any HTTP directive to delete entry past this duration.
-      maxStale: const Duration(days: 7),
-      // Default. Allows 3 cache sets and ease cleanup.
-      priority: CachePriority.high,
-      // Default. Body and headers encryption with your own algorithm.
-      cipher: null,
-      // Default. Key builder to retrieve requests.
-      keyBuilder: (requestOptions) {
-        return 'WALLET_PAGES_API_CACHE_KEY';
-      },
-      // Default. Allows to cache POST requests.
-      // Overriding [keyBuilder] is strongly recommended.
-      allowPostMethod: false,
-    );
-    return options;
-  }
-
   static String toBase64Str(String str) {
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
     String encoded = stringToBase64.encode(str);
@@ -86,20 +57,17 @@ class AppApi {
   }
 }
 
-class YenepayValues {
-  static const String express = 'Express';
-
-  static const String merchantId = 'SB1356';
-
-  static const String successUrl =
-      'com.marathonsystems.mehaleye://yenepay_success_return_url';
+class WebPaymentValues {
   static const String cancelUrl =
-      'com.marathonsystems.mehaleye://yenepay_cancel_return_url';
+      AppApi.paymentBaseUrl + '/purchase/web_payment/cancel/';
   static const String failureUrl =
-      'com.marathonsystems.mehaleye://yenepay_failure_return_url';
-
-  static const String ipnUrl =
-      '${AppApi.paymentBaseUrl}/purchase/ipn/yene_pay/';
+      AppApi.paymentBaseUrl + '/purchase/web_payment/fail/';
+  static const String completedUrl =
+      AppApi.paymentBaseUrl + '/purchase/web_payment/completed/';
+  static const String alreadyPurchasedUrl =
+      AppApi.paymentBaseUrl + '/purchase/web_payment/exists/';
+  static const String isFreeUrl =
+      AppApi.paymentBaseUrl + '/purchase/web_payment/free/';
 }
 
 class AppValues {
@@ -191,11 +159,6 @@ class AppValues {
   //CART PAGE
   static const double cartItemsSize = 120;
   static const double cartClearAndCheckoutHeaderHeight = 100;
-
-  //WALLET PAGE
-  static const double walletFixedTopUpSize = 100.0;
-  static const String howToPayHelpGeneralUrl =
-      'https://mehaleye.com/support/payment';
 
   //HIVE BOXES
   static const String songSyncBox = 'SONG_SYNC';
@@ -351,4 +314,88 @@ class AppDio {
     final dio = Dio()..interceptors.add(DioCacheInterceptor(options: options));
     return dio;
   }
+}
+
+class AppPaymentMethodsList {
+  static List<PaymentMethod> list = [
+    PaymentMethod(
+      appPaymentMethods: AppPaymentMethods.METHOD_TELEBIRR,
+      isSelected: false,
+      title: "Pay with Telebirr",
+      isAvailable: true,
+      description:
+          "Use your Telebirr account to complete your mehaleye purchase.",
+      paymentMethodImage: PaymentMethodImage(
+        imagePath: AppAssets.icTelebirr,
+        height: AppIconSizes.icon_size_36,
+      ),
+      paymentOptionImages: [],
+    ),
+    PaymentMethod(
+      appPaymentMethods: AppPaymentMethods.METHOD_YENEPAY,
+      isSelected: false,
+      title: "Pay with Yenepay",
+      isAvailable: true,
+      description:
+          "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options",
+      paymentMethodImage: PaymentMethodImage(
+        imagePath: AppAssets.icYenepay,
+        height: AppIconSizes.icon_size_32,
+      ),
+      paymentOptionImages: [
+        PaymentMethodImage(
+          imagePath: AppAssets.icAmole,
+          height: AppIconSizes.icon_size_20,
+        ),
+        PaymentMethodImage(
+          imagePath: AppAssets.icCbe,
+          height: AppIconSizes.icon_size_20,
+        ),
+        PaymentMethodImage(
+          imagePath: AppAssets.icHelloCash,
+          height: AppIconSizes.icon_size_24,
+        ),
+        PaymentMethodImage(
+          imagePath: AppAssets.icMbirr,
+          height: AppIconSizes.icon_size_24,
+        ),
+      ],
+    ),
+    PaymentMethod(
+      appPaymentMethods: AppPaymentMethods.METHOD_INAPP,
+      isSelected: false,
+      isAvailable: true,
+      title: Platform.isAndroid
+          ? "Pay With Google Play In-App Purchases"
+          : "Pay With App Store In-App Purchases",
+      description: Platform.isAndroid
+          ? "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options"
+          : "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options",
+      paymentMethodImage: PaymentMethodImage(
+        imagePath: Platform.isAndroid
+            ? AppAssets.icGooglePlay
+            : AppAssets.icAppleStore,
+        height: AppIconSizes.icon_size_32,
+      ),
+      paymentOptionImages: [
+        PaymentMethodImage(
+          imagePath: AppAssets.icVisa,
+          height: AppIconSizes.icon_size_16,
+        ),
+        PaymentMethodImage(
+          imagePath: AppAssets.icMasterCard,
+          height: AppIconSizes.icon_size_16,
+        ),
+        PaymentMethodImage(
+          imagePath: AppAssets.icPaypal,
+          height: AppIconSizes.icon_size_16,
+        ),
+        PaymentMethodImage(
+          imagePath:
+              Platform.isAndroid ? AppAssets.icGooglePay : AppAssets.icApplePay,
+          height: AppIconSizes.icon_size_16,
+        ),
+      ],
+    ),
+  ];
 }

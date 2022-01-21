@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';

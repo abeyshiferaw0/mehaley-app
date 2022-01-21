@@ -12,9 +12,9 @@ import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/buy_item_btn.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 
 import 'album_play_shuffle_header.dart';
 
@@ -93,7 +93,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
                               isDiscountAvailable: album.isDiscountAvailable,
                               isBought: album.isBought,
                               onBuyClicked: () {
-                                IapPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+                                PurchaseUtil.albumPageHeaderBuyButtonOnClick(
                                   context,
                                   album,
                                 );

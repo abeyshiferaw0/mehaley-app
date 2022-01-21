@@ -26,9 +26,9 @@ import 'package:mehaley/ui/common/like_follow/song_favorite_button.dart';
 import 'package:mehaley/ui/common/menu/song_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/util/audio_player_util.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../queue_list_page.dart';
@@ -117,7 +117,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                               onCreateWithSongSuccess:
                                   (MyPlaylist myPlaylist) {},
                               onSongBuyClicked: () {
-                                IapPurchaseUtil.songMenuBuyButtonOnClick(
+                                PurchaseUtil.songMenuBuyButtonOnClick(
                                   context,
                                   state,
                                 );

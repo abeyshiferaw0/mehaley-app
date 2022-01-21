@@ -1,13 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/data_providers/payment_provider.dart';
-import 'package:mehaley/data/models/api_response/purchase_item_status_data.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/data/models/payment/wallet_gift.dart';
-import 'package:mehaley/data/models/payment/webirr_bill.dart';
-import 'package:mehaley/util/api_util.dart';
+import 'package:mehaley/data/models/payment/payment_method.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class PaymentRepository {
   //INIT PROVIDER FOR API CALL
@@ -15,9 +11,9 @@ class PaymentRepository {
 
   const PaymentRepository({required this.paymentProvider});
 
-  AppPaymentMethods setPreferredPaymentMethod(
-      AppPaymentMethods appPaymentMethod) {
-    AppHiveBoxes.instance.settingsBox.put(
+  Future<AppPaymentMethods> setPreferredPaymentMethod(
+      AppPaymentMethods appPaymentMethod) async {
+    await AppHiveBoxes.instance.settingsBox.put(
       AppValues.preferredPaymentMethodKey,
       appPaymentMethod,
     );
@@ -26,118 +22,98 @@ class PaymentRepository {
   }
 
   AppPaymentMethods getPreferredPaymentMethod() {
-    return AppHiveBoxes.instance.settingsBox
-        .get(AppValues.preferredPaymentMethodKey);
-  }
-
-  Future<PurchaseItemStatusData> checkPurchaseItemStatus(
-      int itemId, PurchasedItemType purchasedItemType) async {
-    final bool isAlreadyPurchased;
-    final bool isFree;
-    final double balance;
-    final double priceEtb;
-    final double priceDollar;
-    final List<WalletGift> freshWalletGifts;
-    final WebirrBill? freshBill;
-
-    Response response = await paymentProvider.checkPurchaseItemStatus(
-        itemId, purchasedItemType);
-
-    //PARSE IS ALREADY PURCHASED
-    isAlreadyPurchased =
-        response.data['is_already_purchased'] == 1 ? true : false;
-
-    //PARSE IS FREE
-    isFree = response.data['is_free'] == 1 ? true : false;
-
-    freshWalletGifts = (response.data['fresh_gift'] as List)
-        .map((walletGift) => WalletGift.fromMap(walletGift))
-        .toList();
-
-    //PARSE FRESH BILL
-    freshBill = response.data['fresh_bill'] != null
-        ? WebirrBill.fromMap(response.data['fresh_bill'])
-        : null;
-
-    //PARSE CURRENT BALANCE
-    balance = response.data['balance'];
-
-    //PARSE PRICE IN ETB
-    priceEtb = response.data['price_etb'];
-
-    //PARSE PRICE IN DOLLAR
-    priceDollar = response.data['price_dollar'];
-
-    PurchaseItemStatusData purchaseItemStatusData = PurchaseItemStatusData(
-      isAlreadyPurchased: isAlreadyPurchased,
-      isFree: isFree,
-      balance: balance,
-      priceEtb: priceEtb,
-      freshBill: freshBill,
-      freshWalletGifts: freshWalletGifts,
-      priceDollar: priceDollar,
-    );
-
-    return purchaseItemStatusData;
-  }
-
-  Future<Response> purchaseItem(
-      int itemId, PurchasedItemType purchasedItemType) async {
-    Response response =
-        await paymentProvider.purchaseItem(itemId, purchasedItemType, "adasd");
-
-    if (response.statusCode == 200) {
-      return response;
+    if (AppHiveBoxes.instance.settingsBox
+        .containsKey(AppValues.preferredPaymentMethodKey)) {
+      return AppHiveBoxes.instance.settingsBox
+          .get(AppValues.preferredPaymentMethodKey);
+    } else {
+      return AppPaymentMethods.METHOD_UNK;
     }
-
-    throw "UNABLE TO COMPLETE ITEM PURCHASE";
   }
 
-  Future<void> clearHomePageCache() async {
-    await ApiUtil.deleteFromCache(AppApi.musicBaseUrl + "/home-api/", true);
+  List<PaymentMethod> getPaymentList() {
+    List<PaymentMethod> list = [];
+    AppPaymentMethods preferredPaymentMethod = getPreferredPaymentMethod();
+
+    AppPaymentMethodsList.list.forEach((element) {
+      PaymentMethod paymentMethod = element;
+
+      ///CHECK IF PREFERRED
+      if (element.appPaymentMethods == preferredPaymentMethod) {
+        paymentMethod = paymentMethod.copyWith(
+          isSelected: true,
+        );
+      }
+
+      ///IF IN APP CHECK AVAILABILITY
+      if (element.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
+        if (PagesUtilFunctions.isIapAvailable()) {
+          paymentMethod = paymentMethod.copyWith(
+            isAvailable: true,
+          );
+        } else {
+          paymentMethod = paymentMethod.copyWith(
+            isAvailable: false,
+          );
+        }
+      }
+      list.add(paymentMethod);
+    });
+    return list;
   }
 
-  Future<void> clearWalletPageCache() async {
-    await ApiUtil.deleteFromCache("WALLET_PAGES_API_CACHE_KEY", false);
+  PaymentMethod? getSelectedPreferredPaymentMethod() {
+    AppPaymentMethods preferredPaymentMethod = getPreferredPaymentMethod();
+    PaymentMethod? method;
+    AppPaymentMethodsList.list.forEach((element) {
+      if (element.appPaymentMethods == preferredPaymentMethod) {
+        method = element;
+
+        ///IF IN APP CHECK AVAILABILITY
+        if (method!.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
+          if (PagesUtilFunctions.isIapAvailable()) {
+            method = method!.copyWith(
+              isAvailable: true,
+            );
+          } else {
+            method = method!.copyWith(
+              isAvailable: false,
+            );
+          }
+        }
+      }
+    });
+    return method;
   }
 
-  Future<void> clearLibraryPurchasedSongsCache() async {
-    await ApiUtil.deleteFromCache(
-        AppApi.paymentBaseUrl + "/purchased/song/all/", true);
-    await ApiUtil.deleteFromCache(
-        AppApi.paymentBaseUrl + "/purchased/song/", true);
-  }
+  List<PaymentMethod> getPaymentListWithSelected(PaymentMethod selected) {
+    List<PaymentMethod> list = [];
 
-  Future<void> clearLibraryPurchasedAlbumsCache() async {
-    await ApiUtil.deleteFromCache(
-      AppApi.paymentBaseUrl + "/purchased/album/",
-      true,
-    );
-  }
+    AppPaymentMethodsList.list.forEach((element) {
+      PaymentMethod paymentMethod = element;
 
-  Future<void> clearAlbumPageCache(int itemId) async {
-    await ApiUtil.deleteFromCache(
-      AppApi.musicBaseUrl + "/get-album/?id=$itemId",
-      true,
-    );
-  }
-
-  Future<void> deleteAllCache() async {
-    await ApiUtil.deleteAllCache();
-  }
-
-  Future<void> clearLibraryPurchasedPlaylistsCache() async {
-    await ApiUtil.deleteFromCache(
-      AppApi.paymentBaseUrl + "/purchased/playlist/",
-      true,
-    );
-  }
-
-  Future<void> clearPlaylistsPageCache(int itemId) async {
-    await ApiUtil.deleteFromCache(
-      AppApi.musicBaseUrl + "/get-playlist/?id=$itemId",
-      true,
-    );
+      ///IF IN APP CHECK AVAILABILITY
+      if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
+        if (PagesUtilFunctions.isIapAvailable()) {
+          paymentMethod = paymentMethod.copyWith(
+            isAvailable: true,
+          );
+        } else {
+          paymentMethod = paymentMethod.copyWith(
+            isAvailable: false,
+          );
+        }
+      }
+      list.add(
+        paymentMethod.copyWith(
+          isSelected:
+              paymentMethod.appPaymentMethods == selected.appPaymentMethods
+                  ? true
+                  : false,
+        ),
+      );
+    });
+    return list;
   }
 
   cancelDio() {

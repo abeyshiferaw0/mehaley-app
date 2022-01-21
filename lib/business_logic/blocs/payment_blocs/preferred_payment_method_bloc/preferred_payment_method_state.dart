@@ -19,10 +19,10 @@ class PreferredPaymentMethodChangedState extends PreferredPaymentMethodState {
 }
 
 class PreferredPaymentMethodLoadedState extends PreferredPaymentMethodState {
-  final AppPaymentMethods appPaymentMethod;
+  final List<PaymentMethod> availableMethods;
 
-  PreferredPaymentMethodLoadedState({required this.appPaymentMethod});
+  PreferredPaymentMethodLoadedState({required this.availableMethods});
 
   @override
-  List<Object> get props => [appPaymentMethod];
+  List<Object> get props => [availableMethods];
 }

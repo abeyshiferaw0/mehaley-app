@@ -14,10 +14,6 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -25,8 +21,6 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profile_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
-import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_bill_cubit.dart';
-import 'package:mehaley/business_logic/cubits/wallet/fresh_wallet_gift_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/strings.dart';
@@ -49,8 +43,12 @@ import 'business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
-import 'business_logic/blocs/payment_blocs/iap_available_bloc/iap_available_bloc.dart';
-import 'business_logic/blocs/payment_blocs/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_available_bloc/iap_available_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'business_logic/blocs/payment_blocs/recently_purchased_items_bloc/recently_purchased_items_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
@@ -352,12 +350,6 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => ShareButtonsBloc(),
-            ),
-            BlocProvider(
-              create: (context) => FreshWalletBillCubit(),
-            ),
-            BlocProvider(
-              create: (context) => FreshWalletGiftCubit(),
             ),
           ],
           child: Builder(

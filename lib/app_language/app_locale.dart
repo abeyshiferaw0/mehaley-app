@@ -61,7 +61,6 @@ class AppLocale {
   String get deleteMezmur => appLocalizations.deleteMezmur;
   String get shareAlbum => appLocalizations.shareAlbum;
   String get shareArtist => appLocalizations.shareArtist;
-  String get walletHistory => appLocalizations.walletHistory;
   String get sharePlaylist => appLocalizations.sharePlaylist;
   String get share => appLocalizations.share;
   String get shareMezmur => appLocalizations.shareMezmur;
@@ -72,7 +71,6 @@ class AppLocale {
   String get viewAlbum => appLocalizations.viewAlbum;
   String get addToQueue => appLocalizations.addToQueue;
   String get addToPlaylist => appLocalizations.addToPlaylist;
-  String get howToPayMsg => appLocalizations.howToPayMsg;
   String get removeFromPlaylistMsg => appLocalizations.removeFromPlaylistMsg;
   String get addMezmurs => appLocalizations.addMezmurs;
   String get addToHomeScreen => appLocalizations.addToHomeScreen;
@@ -162,7 +160,6 @@ class AppLocale {
   String get unableToClearCart => appLocalizations.unableToClearCart;
   String get cartCleared => appLocalizations.cartCleared;
   String get cartIsEmpty => appLocalizations.cartIsEmpty;
-  String get empityCartCheckOutMsg => appLocalizations.empityCartCheckOutMsg;
 
   String get goToHomeScreen => appLocalizations.goToHomeScreen;
   String get cartTitle => appLocalizations.cartTitle;
@@ -401,53 +398,25 @@ class AppLocale {
   String get enableNotificationsMsg => appLocalizations.enableNotificationsMsg;
 
   String get copyCode => appLocalizations.copyCode;
-  String get payBillMsg => appLocalizations.payBillMsg;
-  String get payBill => appLocalizations.payBill;
-  String get billInfoMsg => appLocalizations.billInfoMsg;
   String get amount => appLocalizations.amount;
-  String get billCode => appLocalizations.billCode;
+
   String get birr => appLocalizations.birr;
-  String get walletRechargeInitialErrorMsg =>
-      appLocalizations.walletRechargeInitialErrorMsg;
-  String get cancelBillAndContinue => appLocalizations.cancelBillAndContinue;
-  String get previousUnPaidBill => appLocalizations.previousUnPaidBill;
-  String get unPaidBillMsg => appLocalizations.unPaidBillMsg;
-  String get unpaidBillCode => appLocalizations.unpaidBillCode;
 
   String get proceedToPayment => appLocalizations.proceedToPayment;
   String get enterOtherAmount => appLocalizations.enterOtherAmount;
   String get or => appLocalizations.or;
-  String get rechargeYourWallet => appLocalizations.rechargeYourWallet;
   String get selectAmountToTopUp => appLocalizations.selectAmountToTopUp;
-  String get appWallet => appLocalizations.appWallet;
-  String get myWalletBalance => appLocalizations.myWalletBalance;
-  String get refreshWalletMsg => appLocalizations.refreshWalletMsg;
-  String get refreshWallet => appLocalizations.refreshWallet;
+
   String get copiedToClipboard => appLocalizations.copiedToClipboard;
-  String get cancelBill => appLocalizations.cancelBill;
+
   String get howToPay => appLocalizations.howToPay;
-  String get walletRechargedSuccessfully =>
-      appLocalizations.walletRechargedSuccessfully;
-  String get walletRechargedSuccessfullyMsg =>
-      appLocalizations.walletRechargedSuccessfullyMsg;
+
   String get totalAmountPaid => appLocalizations.totalAmountPaid;
   String get paidUsing => appLocalizations.paidUsing;
   String get transactionDate => appLocalizations.transactionDate;
   String get close => appLocalizations.close;
-  String get checkBillStatus => appLocalizations.checkBillStatus;
-  String get billStatusFailedMsg => appLocalizations.billStatusFailedMsg;
-  String get billCancelFailedMsg => appLocalizations.billCancelFailedMsg;
-  String get refreshingWallet => appLocalizations.refreshingWallet;
-  String get checkingBillStatus => appLocalizations.checkingBillStatus;
-  String get billNotPaidYetMsg => appLocalizations.billNotPaidYetMsg;
-  String get areYouSureUWantToCancelBill =>
-      appLocalizations.areYouSureUWantToCancelBill;
-  String get billAlreadyPaidMsg => appLocalizations.billAlreadyPaidMsg;
+
   String get selectedAmount => appLocalizations.selectedAmount;
-  String get invalidWalletRechargeAmountSelected =>
-      appLocalizations.invalidWalletRechargeAmountSelected;
-  String get walletRechargeFinalErrorMsg =>
-      appLocalizations.walletRechargeFinalErrorMsg;
 
   String get songPurchased => appLocalizations.songPurchased;
   String get albumPurchased => appLocalizations.albumPurchased;
@@ -455,18 +424,12 @@ class AppLocale {
   String get cartCheckedOut => appLocalizations.cartCheckedOut;
   String get cartCheckOut => appLocalizations.cartCheckOut;
   String get cartCheckedOutMsg => appLocalizations.cartCheckedOutMsg;
-  String get walletRecharged => appLocalizations.walletRecharged;
 
   String get cartAlreadyCheckedOut => appLocalizations.cartAlreadyCheckedOut;
   String get cartAlreadyCheckedOutMsg =>
       appLocalizations.cartAlreadyCheckedOutMsg;
-  String get billCanceled => appLocalizations.billCanceled;
-  String get billCanceledMsg => appLocalizations.billCanceledMsg;
-  String get noHistory => appLocalizations.noHistory;
 
-  String get rechargeWallet => appLocalizations.rechargeWallet;
-  String get walletInsufficient => appLocalizations.walletInsufficient;
-  String get walletInsufficientMsg => appLocalizations.walletInsufficientMsg;
+  String get noHistory => appLocalizations.noHistory;
 
   String get purchaseNetworkError => appLocalizations.purchaseNetworkError;
   String get completingPurchase => appLocalizations.completingPurchase;
@@ -487,7 +450,7 @@ class AppLocale {
   String get youPurchasedAlbum => appLocalizations.youPurchasedAlbum;
   String get youPurchasedPlaylist => appLocalizations.youPurchasedPlaylist;
   String get youCheckedOutCart => appLocalizations.youCheckedOutCart;
-  String get youRechargedWallet => appLocalizations.youRechargedWallet;
+
   String get youReceivedGift => appLocalizations.youReceivedGift;
   String get videos => appLocalizations.videos;
   String get allVideos => appLocalizations.allVideos;
@@ -580,14 +543,6 @@ class AppLocale {
   String appVersion({required String versionCode}) =>
       appLocalizations.appNameAndVersion(versionCode: versionCode);
 
-  String activeBillMsg({required String date}) =>
-      appLocalizations.activeBillMsg(date: date);
-
-  String walletRechargedSuccessTransactionNumber(
-          {required String transactionNumber}) =>
-      appLocalizations.walletRechargedSuccessTransactionNumber(
-          transactionNumber: transactionNumber);
-
   String howToPayWith({required String paymentMethod}) =>
       appLocalizations.howToPayWith(paymentMethod: paymentMethod);
 
@@ -607,18 +562,5 @@ class AppLocale {
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType}) =>
       appLocalizations.itemIsForFreeMsg(
         purchasedItemType: purchasedItemType,
-      );
-
-  String purchaseItemMsg(
-          {required double amount,
-          required PurchasedItemType purchasedItemType}) =>
-      appLocalizations.purchaseItemMsg(
-        amount: amount,
-        purchasedItemType: purchasedItemType,
-      );
-
-  String cartCheckOutMsg({required double cartTotalPrice}) =>
-      appLocalizations.cartCheckOutMsg(
-        cartTotalPrice: cartTotalPrice,
       );
 }

@@ -104,10 +104,8 @@ dependencies:
   #YOUTUBE
   youtube_player_flutter: ^8.0.0
   #INAP
-  purchases_flutter: ^3.9.0
+  purchases_flutter: ^3.9.2
   flutter_inapp_purchase: ^5.1.2
-
-
 
 
 dev_dependencies:

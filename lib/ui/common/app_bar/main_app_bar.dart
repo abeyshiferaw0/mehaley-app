@@ -5,7 +5,6 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/subscribed_tag.dart';
-import 'package:mehaley/util/pages_util_functions.dart';
 
 class MainAppBar extends StatelessWidget {
   final Widget? leading;
@@ -36,19 +35,7 @@ class MainAppBar extends StatelessWidget {
         Expanded(
           child: SizedBox(),
         ),
-        AppBouncingButton(
-          onTap: () {
-            PagesUtilFunctions.goToWalletPage(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_8),
-            child: Icon(
-              FlutterRemix.wallet_3_line,
-              size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
-            ),
-          ),
-        ),
+
         SizedBox(
           width: AppPadding.padding_16,
         ),

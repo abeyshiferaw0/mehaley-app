@@ -78,13 +78,6 @@ enum PurchasedItemType {
   SONG_PAYMENT,
   ALBUM_PAYMENT,
   PLAYLIST_PAYMENT,
-  WALLET_RECHARGE,
-  WALLET_GIFT,
-}
-
-enum PaymentType {
-  WALLET,
-  IN_APP,
 }
 
 enum AppVideoItemAction {

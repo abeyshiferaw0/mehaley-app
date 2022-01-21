@@ -16,9 +16,9 @@ import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/album/widgets/album_page_header.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 
 class AlbumPage extends StatefulWidget {
   const AlbumPage({Key? key, required this.albumId}) : super(key: key);
@@ -178,7 +178,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                   );
                 },
                 onBuyAlbumClicked: () {
-                  IapPurchaseUtil.albumMenuBuyButtonOnClick(
+                  PurchaseUtil.albumMenuBuyButtonOnClick(
                     context,
                     album,
                     true,

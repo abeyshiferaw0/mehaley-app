@@ -10,9 +10,9 @@ import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryAlbumItem extends StatelessWidget {
@@ -133,7 +133,7 @@ class LibraryAlbumItem extends StatelessWidget {
                         );
                       },
                       onBuyAlbumClicked: () {
-                        IapPurchaseUtil.albumMenuBuyButtonOnClick(
+                        PurchaseUtil.albumMenuBuyButtonOnClick(
                           context,
                           album,
                           false,

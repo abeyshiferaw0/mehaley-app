@@ -117,23 +117,31 @@ class Album extends Equatable {
     // ignore: unnecessary_cast
     return {
       'album_id': this.albumId,
-      'album_title_text': this.albumTitle,
-      'album_description_text': this.albumDescription,
-      'album_images': this.albumImages,
-      'artist': this.artist,
+      'album_title_text_id': this.albumTitle.toMap(),
+      'album_description_text_id': this.albumDescription.toMap(),
+      'album_images': getRemoteImagesListMap(this.albumImages),
+      'artist_id': this.artist.toMap(),
       'price_etb': this.priceEtb,
-      'price_dollar': this.priceDollar,
-      'is_free': this.isFree,
-      'is_bought': this.isBought,
-      'is_discount_available': this.isDiscountAvailable,
+      'price_dollar': this.priceDollar.toJson(),
+      'is_free': this.isFree ? 1 : 0,
+      'is_bought': this.isBought ? 1 : 0,
+      'is_discount_available': this.isDiscountAvailable ? 1 : 0,
       'discount_percentage': this.discountPercentage,
-      'is_only_on_elf': this.isOnlyOnElf,
-      'is_featured': this.isFeatured,
-      'is_liked': this.isLiked,
-      'album_release_date': this.albumReleaseDate,
-      'album_date_created': this.albumDateCreated,
-      'album_date_updated': this.albumDateUpdated,
+      'is_only_on_elf': this.isOnlyOnElf ? 1 : 0,
+      'is_featured': this.isFeatured ? 1 : 0,
+      'is_liked': this.isLiked ? 1 : 0,
+      'album_release_date': this.albumReleaseDate.toString(),
+      'album_date_created': this.albumDateCreated.toString(),
+      'album_date_updated': this.albumDateUpdated.toString(),
     } as Map<String, dynamic>;
+  }
+
+  dynamic getRemoteImagesListMap(List<RemoteImage> remoteImages) {
+    List<Map<String, dynamic>> mapItems = [];
+    remoteImages.forEach((element) {
+      mapItems.add(element.toMap());
+    });
+    return mapItems;
   }
 
   Album copyWith({

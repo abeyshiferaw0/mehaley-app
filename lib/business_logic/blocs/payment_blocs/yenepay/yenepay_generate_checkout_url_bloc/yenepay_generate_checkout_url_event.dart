@@ -5,22 +5,18 @@ abstract class YenepayGenerateCheckoutUrlEvent extends Equatable {
 }
 
 class GenerateCheckoutUrlEvent extends YenepayGenerateCheckoutUrlEvent {
-  const GenerateCheckoutUrlEvent(
-      {required this.itemId,
-      required this.itemNameEn,
-      required this.appPurchasedItemType,
-      required this.price});
+  const GenerateCheckoutUrlEvent({
+    required this.itemId,
+    required this.appPurchasedItemType,
+  });
 
   final int itemId;
-  final String itemNameEn;
+
   final AppPurchasedItemType appPurchasedItemType;
-  final double price;
 
   @override
   List<Object?> get props => [
         itemId,
-        itemNameEn,
         appPurchasedItemType,
-        price,
       ];
 }

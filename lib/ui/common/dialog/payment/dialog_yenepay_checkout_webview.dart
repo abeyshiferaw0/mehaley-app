@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
-import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
+import 'package:mehaley/ui/common/widget_error_widget.dart';
+import 'package:mehaley/util/payment_utils/yenepay_purchase_util.dart';
 import 'package:mehaley/util/screen_util.dart';
-import 'package:mehaley/util/yenepay_purchase_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../app_loading.dart';
@@ -19,7 +19,6 @@ class DialogYenepayCheckoutWebView extends StatefulWidget {
   const DialogYenepayCheckoutWebView({
     Key? key,
     required this.itemId,
-    required this.item,
     required this.appPurchasedItemType,
     required this.checkOutUrl,
     required this.appPurchasedSources,
@@ -27,7 +26,7 @@ class DialogYenepayCheckoutWebView extends StatefulWidget {
   }) : super(key: key);
 
   final int itemId;
-  final dynamic item;
+
   final AppPurchasedItemType appPurchasedItemType;
   final String checkOutUrl;
   final AppPurchasedSources appPurchasedSources;
@@ -90,6 +89,7 @@ class _DialogYenepayCheckoutWebViewState
         webViewContainer = mWebViewController;
       },
       onPageStarted: (String s) {
+        print("WEBBB => onPageStarted ${s}");
         setState(() {
           loading = true;
           hasError = false;
@@ -99,7 +99,8 @@ class _DialogYenepayCheckoutWebViewState
         dialogReturnActions(s);
       },
       onPageFinished: (String s) {
-        if (checkIfIsReturnUrl(s)) {
+        print("WEBBB => onPageFinished ${s}");
+        if (YenepayPurchaseUtil.isReturnUrl(s)) {
           setState(() {
             loading = true;
             hasError = false;
@@ -112,7 +113,8 @@ class _DialogYenepayCheckoutWebViewState
       },
       onProgress: (int s) {},
       onWebResourceError: (WebResourceError error) {
-        if (checkIfIsReturnUrl(error.failingUrl)) {
+        print("WEBBB => onWebResourceError ${error.failingUrl}");
+        if (YenepayPurchaseUtil.isReturnUrl(error.failingUrl)) {
           setState(() {
             loading = true;
             hasError = false;
@@ -165,13 +167,7 @@ class _DialogYenepayCheckoutWebViewState
   }
 
   void onSuccess() {
-    // ///SAVE TO RECENTLY PURCHASED
-    // BlocProvider.of<RecentlyPurchasedItemsBloc>(context).add(
-    //   SaveRecentlyPurchasedItemEvent(
-    //     item: widget.item,
-    //     appPurchasedItemType: widget.appPurchasedItemType,
-    //   ),
-    // );
+    Navigator.pop(context);
 
     ///YENEPAY PURCHASE SUCCESS ACTIONS MAPPING
     if (widget.appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
@@ -200,10 +196,10 @@ class _DialogYenepayCheckoutWebViewState
         ),
       );
     }
-    Navigator.pop(context);
   }
 
   void onCancel() {
+    Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
       buildAppSnackBar(
         bgColor: AppColors.blue,
@@ -212,10 +208,10 @@ class _DialogYenepayCheckoutWebViewState
         txtColor: AppColors.white,
       ),
     );
-    Navigator.pop(context);
   }
 
   void onFailure() {
+    Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
       buildAppSnackBar(
         bgColor: AppColors.errorRed,
@@ -224,35 +220,26 @@ class _DialogYenepayCheckoutWebViewState
         txtColor: AppColors.white,
       ),
     );
-    Navigator.pop(context);
   }
 
   dialogReturnActions(returnUrl) {
-    bool isSuccessReturnUrl = YenepayPurchaseUtil.isSuccessReturnUrl(returnUrl);
-    bool isCancelReturnUrl = YenepayPurchaseUtil.isCancelReturnUrl(returnUrl);
+    bool isCompletedReturnUrl =
+        YenepayPurchaseUtil.isCompletedReturnUrl(returnUrl);
+    bool isCanceledReturnUrl =
+        YenepayPurchaseUtil.isCanceledReturnUrl(returnUrl);
     bool isFailureReturnUrl = YenepayPurchaseUtil.isFailureReturnUrl(returnUrl);
+    bool isAlreadyPaidReturnUrl =
+        YenepayPurchaseUtil.isAlreadyPaidReturnUrl(returnUrl);
+    bool isFreeReturnUrl = YenepayPurchaseUtil.isFreeReturnUrl(returnUrl);
 
-    if (isSuccessReturnUrl) {
+    if (isCompletedReturnUrl || isAlreadyPaidReturnUrl || isFreeReturnUrl) {
       onSuccess();
     }
-    if (isCancelReturnUrl) {
+    if (isCanceledReturnUrl) {
       onCancel();
     }
     if (isFailureReturnUrl) {
       onFailure();
     }
-  }
-
-  bool checkIfIsReturnUrl(String? failingUrl) {
-    if (failingUrl == null) return false;
-    bool isSuccessReturnUrl =
-        YenepayPurchaseUtil.isSuccessReturnUrl(failingUrl);
-    bool isCancelReturnUrl = YenepayPurchaseUtil.isCancelReturnUrl(failingUrl);
-    bool isFailureReturnUrl =
-        YenepayPurchaseUtil.isFailureReturnUrl(failingUrl);
-    if (isSuccessReturnUrl || isCancelReturnUrl || isFailureReturnUrl) {
-      return true;
-    }
-    return false;
   }
 }

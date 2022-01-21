@@ -5,7 +5,7 @@ import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
-import 'package:mehaley/ui/screens/wallet/widgets/wallet_error_widget.dart';
+import 'package:mehaley/ui/common/widget_error_widget.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 

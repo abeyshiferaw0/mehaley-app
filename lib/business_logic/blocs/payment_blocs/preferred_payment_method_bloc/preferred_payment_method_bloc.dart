@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/payment/payment_method.dart';
 import 'package:mehaley/data/repositories/payment_repository.dart';
 
 part 'preferred_payment_method_event.dart';
@@ -18,18 +19,21 @@ class PreferredPaymentMethodBloc
       PreferredPaymentMethodEvent event) async* {
     if (event is SetPreferredPaymentMethodEvent) {
       yield PreferredPaymentMethodInitial();
-      AppPaymentMethods appPaymentMethod =
-          paymentRepository.setPreferredPaymentMethod(event.appPaymentMethods);
-      yield PreferredPaymentMethodChangedState(
-          appPaymentMethod: event.appPaymentMethods);
+
+      ///SET PAYMENT METHODS THE RELOAD
+      await paymentRepository
+          .setPreferredPaymentMethod(event.appPaymentMethods);
+
+      List<PaymentMethod> availableMethods = paymentRepository.getPaymentList();
       yield PreferredPaymentMethodLoadedState(
-          appPaymentMethod: appPaymentMethod);
+        availableMethods: availableMethods,
+      );
     } else if (event is LoadPreferredPaymentMethodEvent) {
       yield PreferredPaymentMethodInitial();
-      AppPaymentMethods appPaymentMethod =
-          paymentRepository.getPreferredPaymentMethod();
+      List<PaymentMethod> availableMethods = paymentRepository.getPaymentList();
       yield PreferredPaymentMethodLoadedState(
-          appPaymentMethod: appPaymentMethod);
+        availableMethods: availableMethods,
+      );
     }
   }
 }

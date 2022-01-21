@@ -10,26 +10,20 @@ class YenepayPurchaseRepository {
 
   Future<String> generateCheckoutUrl(
     int itemId,
-    String itemNameEn,
-    double price,
     AppPurchasedItemType appPurchasedItemType,
-    String userId,
   ) async {
     Response response = await yenepayPurchaseProvider.generateCheckoutUrl(
       itemId,
-      itemNameEn,
-      price,
       appPurchasedItemType,
-      userId,
     );
 
     print("YENEPAYYY  DATA => ${response.data}");
     if (response.statusCode == 200) {
-      String checkOutUrl = response.data['result'];
+      String checkOutUrl = response.data['payment_url'];
       return checkOutUrl;
     }
 
-    throw "UNABLE TO COMPLETE ITEM YENE PAY PURCHASE";
+    throw "UNABLE TO GENERATE YENE PAY PURCHASE URL";
   }
 
   cancelDio() {

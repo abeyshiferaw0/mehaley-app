@@ -19,3 +19,11 @@ class LoadPreferredPaymentMethodEvent extends PreferredPaymentMethodEvent {
   @override
   List<Object?> get props => [];
 }
+
+class LoadSelectedPreferredPaymentMethodEvent
+    extends PreferredPaymentMethodEvent {
+  LoadSelectedPreferredPaymentMethodEvent();
+
+  @override
+  List<Object?> get props => [];
+}

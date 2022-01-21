@@ -140,19 +140,6 @@ class _HomePageState extends State<HomePage>
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       actions: [
-        AppBouncingButton(
-          onTap: () {
-            PagesUtilFunctions.goToWalletPage(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.padding_8),
-            child: Icon(
-              FlutterRemix.wallet_3_line,
-              size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
-            ),
-          ),
-        ),
         SizedBox(
           width: AppPadding.padding_16,
         ),

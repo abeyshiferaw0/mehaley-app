@@ -400,23 +400,14 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String yourCurrentBalance = "Herrega haftee kee";
   final String today = "Harr’a";
   final String yesterday = "Kaleessa";
-  final String walletHistory = "Seenaa halkan keetii";
+
   final String help = "Fuula gargaarsaa";
   final String selectedAmount = "Hanga filatame";
-  final String invalidWalletRechargeAmountSelected =
-      "Maaloo hanga sirrii filadhu";
-  final String areYouSureUWantToCancelBill =
-      "Herrega kee haquu akka barbaaddu mirkaneeffattee?";
-  final String walletRechargeInitialErrorMsg =
-      "Dogoggorri uumameera\n Waaletii kee gutuu jalqabuun hindanda’amne";
-
-  final String walletRechargeFinalErrorMsg =
-      "Dogoggorri uumameera\n Waaletii kee gutuu jalqabuun hindanda’amne";
 
   final String billNotPaidYetMsg =
       "Biilichi hanga ammaa hinkaffalamne\n Biilii kana kaffaluudhaan waaletii kee irra deebi’ii guuti";
   final String billAlreadyPaidMsg = "Biilichi dursee kaffalamee jira!";
-  final String refreshingWallet = "Waaletii kee haaromsaa jira";
+
   final String billStatusFailedMsg =
       "Haala biilii keetii mirkaneeffachuun hindanda’amne, walqunnamtii toora saaphanaa kee mirkaneefadha";
   final String billCancelFailedMsg =
@@ -427,21 +418,14 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String transactionDate = "Guyyaa bittee fi gurgurtaa";
   final String paidUsing = "Kan kaffalame tiin";
   final String totalAmountPaid = "Waliigala hanga kaffalamee";
-  final String walletRechargedSuccessfully =
-      "Waaletiin kee haala milkaa’een guutameera";
-  final String walletRechargedSuccessfullyMsg =
-      "Kaffaltiin kee haala milkaa’en taasifameera!\n Tarreen bittee fi gurgurtaa armaan gadii kessatti ammatameera";
+
   final String cancelBill = "Biilicha haqi";
   final String howToPay = "Biilii akamiin kaffaluun danda’ama?";
   final String howToPayMsg =
       "ዋYeroo waaletiin kee guutamu akkamiin akka herrega kaffaltu qajeelfama argadhu";
-  final String refreshWallet = "Waaletii haaromsi";
-  final String refreshWalletMsg =
-      "Yeroo dhiyootti yoo waaletii kee guutte fi jijjirama yoo hinargine waaletii kee haaromsuudhaan yaali";
-  final String myWalletBalance = "Herrega haftee";
-  final String appWallet = "Waaleetii Mahaliyyee";
+
   final String selectAmountToTopUp = "Hanga guutamu filadhu";
-  final String rechargeYourWallet = "Waaleetii ke guuti";
+
   final String or = "yokiin";
   final String enterOtherAmount = "hanga garabiroo galchi";
   final String proceedToPayment = "gara kaffaltiitti itti fufi";
@@ -469,13 +453,6 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String cartCheckOut = "Bittaa marsaa raawwadhu";
   final String cartCheckedOutMsg =
       "Faarfannowwan, Albeemota, tarreewwan sirbootaa yeroo tokkoon biti";
-  final String walletRecharged = "Waaletiin kee guutameera";
-
-  final String rechargeWallet = "Waaletii keee guuti";
-  final String walletInsufficient =
-      "Waaletii kee keessa herregni gahaan hinjiru";
-  final String walletInsufficientMsg =
-      "Bittaa kana raawwachuuf herregni waaletii keeti gahaa miti, maaloo waletii kee guutiti irra deebi’ii yaali";
 
   final String newVersionAvailable =
       "Raawwachiiftuun Mahaliyyee oomishni haaraan jira";
@@ -489,7 +466,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String youPurchasedAlbum = "Albeemii bitteetta";
   final String youPurchasedPlaylist = "Tarree sirbaa bitteetta";
   final String youCheckedOutCart = "Bittaa marsaa rawwatteetta";
-  final String youRechargedWallet = "Waaletii guuttetta";
+
   final String youReceivedGift = "Kennaa waaletii simatteetta";
 
   final String videos = "Viidiyoowwan";
@@ -497,7 +474,6 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String emptyVideos = "Viidiyoowwan duwwaa";
   final String otherVideos = "Viidiyoowwan biroo";
   final String cantFindOtherVideos = "Viidiyoowwan biroo argachuu hindandeenye";
-
 
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";
@@ -600,15 +576,6 @@ class AppLanguageStringsOro extends AppLocalizations {
 
   String appVersion({required String versionCode}) {
     return "oomisha $versionCode";
-  }
-
-  String activeBillMsg({required String date}) {
-    return "ttin $date Biilii hanga ammaa hinkaffalamiin uummteetta,  biilii kana kaffaluudhaan waaletii kee guutuu dandeessa.";
-  }
-
-  String walletRechargedSuccessTransactionNumber(
-      {required String transactionNumber}) {
-    return "lakk. Bittaa fi gurgurtaa : $transactionNumber";
   }
 
   String howToPayWith({required String paymentMethod}) {

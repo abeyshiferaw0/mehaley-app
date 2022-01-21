@@ -33,7 +33,6 @@ abstract class AppLocalizations {
   String get sharePlaylist;
   String get share;
   String get shareMezmur;
-  String get howToPayMsg;
   String get sortPlaylist;
   String get findInPlaylist;
   String get viewMezmursCategory;
@@ -56,7 +55,6 @@ abstract class AppLocalizations {
   String get tryAgain;
   String get subscribeDialogTitle;
   String get subscribeDialogMsg;
-  String get walletHistory;
   String get subscribeNow;
   String get home;
   String get search;
@@ -122,7 +120,6 @@ abstract class AppLocalizations {
   String get unableToClearCart;
   String get cartCleared;
   String get cartIsEmpty;
-  String get empityCartCheckOutMsg;
   String get goToHomeScreen;
   String get cartTitle;
   String get total;
@@ -319,63 +316,38 @@ abstract class AppLocalizations {
   String get enableNotificationsMsg;
   String get lyricBy;
   String get copyCode;
-  String get payBillMsg;
-  String get payBill;
-  String get billInfoMsg;
+
   String get amount;
-  String get billCode;
   String get birr;
-  String get cancelBillAndContinue;
-  String get previousUnPaidBill;
-  String get unPaidBillMsg;
-  String get unpaidBillCode;
+
   String get proceedToPayment;
   String get enterOtherAmount;
   String get or;
-  String get rechargeYourWallet;
+
   String get selectAmountToTopUp;
-  String get appWallet;
-  String get myWalletBalance;
-  String get refreshWalletMsg;
-  String get refreshWallet;
+
   String get copiedToClipboard;
-  String get cancelBill;
+
   String get howToPay;
-  String get walletRechargedSuccessfully;
-  String get walletRechargedSuccessfullyMsg;
+
   String get totalAmountPaid;
   String get paidUsing;
   String get transactionDate;
   String get close;
-  String get checkBillStatus;
-  String get billStatusFailedMsg;
-  String get billCancelFailedMsg;
-  String get refreshingWallet;
-  String get checkingBillStatus;
-  String get billNotPaidYetMsg;
-  String get areYouSureUWantToCancelBill;
-  String get billAlreadyPaidMsg;
-  String get walletRechargeInitialErrorMsg;
+
   String get selectedAmount;
-  String get invalidWalletRechargeAmountSelected;
-  String get walletRechargeFinalErrorMsg;
+
   String get songPurchased;
   String get albumPurchased;
   String get playlistPurchased;
   String get cartCheckedOut;
   String get cartCheckedOutMsg;
   String get cartCheckOut;
-  String get walletRecharged;
 
   String get cartAlreadyCheckedOut;
   String get cartAlreadyCheckedOutMsg;
-  String get billCanceled;
-  String get billCanceledMsg;
-  String get noHistory;
 
-  String get rechargeWallet;
-  String get walletInsufficient;
-  String get walletInsufficientMsg;
+  String get noHistory;
 
   String get updateRequired;
   String get updateRequiredMsg;
@@ -393,7 +365,7 @@ abstract class AppLocalizations {
   String get youPurchasedAlbum;
   String get youPurchasedPlaylist;
   String get youCheckedOutCart;
-  String get youRechargedWallet;
+
   String get youReceivedGift;
 
   String get videos;
@@ -455,11 +427,6 @@ abstract class AppLocalizations {
 
   String appVersion({required String versionCode});
 
-  String activeBillMsg({required String date});
-
-  String walletRechargedSuccessTransactionNumber(
-      {required String transactionNumber});
-
   String howToPayWith({required String paymentMethod});
 
   String alreadyPurchased({required PurchasedItemType purchasedItemType});
@@ -469,9 +436,4 @@ abstract class AppLocalizations {
   String itemIsForFree({required PurchasedItemType purchasedItemType});
 
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType});
-
-  String purchaseItemMsg(
-      {required double amount, required PurchasedItemType purchasedItemType});
-
-  String cartCheckOutMsg({required double cartTotalPrice});
 }

@@ -19,9 +19,9 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_download_indicator.dart';
 import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import '../like_follow/song_is_liked_indicator.dart';
@@ -441,7 +441,7 @@ void showSongMenu(context, song, isForMyPlaylist, onRemoveSongFromPlaylist) {
       },
       isForMyPlaylist: isForMyPlaylist,
       onSongBuyClicked: () {
-        IapPurchaseUtil.songMenuBuyButtonOnClick(context, song);
+        PurchaseUtil.songMenuBuyButtonOnClick(context, song);
       },
     ),
   );

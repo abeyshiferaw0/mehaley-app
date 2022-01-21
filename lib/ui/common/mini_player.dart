@@ -25,10 +25,9 @@ import 'package:mehaley/ui/common/subscribe_small_button.dart';
 import 'package:mehaley/ui/screens/player/player_page.dart';
 import 'package:mehaley/util/audio_player_util.dart';
 import 'package:mehaley/util/color_util.dart';
-import 'package:mehaley/util/iap_purchase_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
-import 'package:mehaley/util/yenepay_purchase_util.dart';
+import 'package:mehaley/util/payment_utils/purchase_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_card.dart';
@@ -122,7 +121,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                               );
                             },
                             onBuyButtonClicked: () {
-                              IapPurchaseUtil
+                              PurchaseUtil
                                   .songPreviewModeDialogBuyButtonOnClick(
                                 context,
                                 currentPlayingSong,
@@ -596,9 +595,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       builder: (BuildContext builderContext) {
         return AppBouncingButton(
           onTap: () async {
-            //await InAppPurchase.instance.restorePurchases();
-            //IapPurchaseUtil.miniPlayerBuyButtonOnClick(context, song);
-            YenepayPurchaseUtil.miniPlayerBuyButtonOnClick(context, song);
+            PurchaseUtil.miniPlayerBuyButtonOnClick(context, song);
           },
           child: Container(
             padding: EdgeInsets.symmetric(
