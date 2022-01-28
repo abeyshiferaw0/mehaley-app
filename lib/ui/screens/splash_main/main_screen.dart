@@ -510,6 +510,18 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               );
             }
+            if (state is SongDownloadedPhoneRootedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildDownloadMsgSnackBar(
+                  bgColor: AppColors.white,
+                  isFloating: false,
+                  msg: 'Download not available for rooted phones',
+                  txtColor: AppColors.errorRed,
+                  icon: FlutterRemix.lock_2_line,
+                  iconColor: AppColors.errorRed,
+                ),
+              );
+            }
           },
         ),
         BlocListener<AuthBloc, AuthState>(

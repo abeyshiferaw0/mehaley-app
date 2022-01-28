@@ -79,6 +79,7 @@ class _DialogTelebirrGenerateCheckoutUrlState
                             return DialogTelebirrCheckoutWebView(
                               itemId: widget.itemId,
                               appPurchasedItemType: widget.appPurchasedItemType,
+                              transactionNumber: state.transactionNumber,
                               checkOutUrl: state.checkoutUrl,
                               isFromSelfPage: widget.isFromSelfPage,
                               appPurchasedSources: widget.appPurchasedSources,

@@ -1,4 +1,3 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -29,7 +28,11 @@ class _PlayerPageState extends State<PlayerPage> {
   void initState() {
     _singleChildScrollViewController = ScrollController();
     isPagePopped = false;
-    checkIfShouldPop();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      ///CHECK IF NOT PURCHASED OR FREE OR OR SUBSCRIBED AND POP
+      checkIfShouldPop();
+    });
+
     super.initState();
   }
 
@@ -99,33 +102,25 @@ class _PlayerPageState extends State<PlayerPage> {
   }
 
   void checkIfShouldPop() {
-    EasyDebounce.debounce(
-      'PLAYER_DEBOUNCE',
-      Duration(milliseconds: 100),
-      () {
-        if (BlocProvider.of<AudioPlayerBloc>(context)
-                .audioPlayer
-                .sequenceState !=
-            null) {
-          IndexedAudioSource? currentItem =
-              BlocProvider.of<AudioPlayerBloc>(context)
-                  .audioPlayer
-                  .sequenceState!
-                  .currentSource;
-          if (currentItem != null) {
-            MediaItem mediaItem = (currentItem.tag as MediaItem);
-            Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
-            final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-            if (!song.isBought && !song.isFree && !isUserSubscribed) {
-              ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
-              if (!isPagePopped) {
-                Navigator.pop(context);
-                isPagePopped = true;
-              }
-            }
+    if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState !=
+        null) {
+      IndexedAudioSource? currentItem =
+          BlocProvider.of<AudioPlayerBloc>(context)
+              .audioPlayer
+              .sequenceState!
+              .currentSource;
+      if (currentItem != null) {
+        MediaItem mediaItem = (currentItem.tag as MediaItem);
+        Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
+        final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+        if (!song.isBought && !song.isFree && !isUserSubscribed) {
+          ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
+          if (!isPagePopped) {
+            Navigator.pop(context);
+            isPagePopped = true;
           }
         }
-      },
-    );
+      }
+    }
   }
 }

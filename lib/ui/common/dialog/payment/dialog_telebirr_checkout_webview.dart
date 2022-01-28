@@ -21,6 +21,7 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
     required this.itemId,
     required this.appPurchasedItemType,
     required this.checkOutUrl,
+    required this.transactionNumber,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   }) : super(key: key);
@@ -29,6 +30,7 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
 
   final AppPurchasedItemType appPurchasedItemType;
   final String checkOutUrl;
+  final String transactionNumber;
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
@@ -47,6 +49,7 @@ class _DialogTelebirrCheckoutWebViewState
   @override
   void initState() {
     super.initState();
+    print("transactionNumber ${widget.transactionNumber}");
   }
 
   @override
@@ -57,18 +60,21 @@ class _DialogTelebirrCheckoutWebViewState
         child: Wrap(
           children: [
             Container(
-              width: ScreenUtil(context: context).getScreenWidth() * 0.9,
-              height: ScreenUtil(context: context).getScreenHeight() * 0.7,
+              width: ScreenUtil(context: context).getScreenWidth() * 0.95,
+              height: ScreenUtil(context: context).getScreenHeight() * 0.9,
               color: AppColors.white,
               child: Column(
                 children: [
-                  AppTopHeaderWithIcon(),
                   Expanded(
                     child: Stack(
                       children: [
                         buildWebView(),
                         buildLoading(),
                         buildError(),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: AppTopHeaderWithIcon(),
+                        ),
                       ],
                     ),
                   ),
@@ -95,7 +101,7 @@ class _DialogTelebirrCheckoutWebViewState
           hasError = false;
         });
 
-        ///IF RETURN URL SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
+        ///IF RETURN URL RESULT SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
         dialogReturnActions(s);
       },
       onPageFinished: (String s) {

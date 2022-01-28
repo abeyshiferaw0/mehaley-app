@@ -23,6 +23,7 @@ class AppTopHeaderWithIcon extends StatelessWidget {
         horizontal: AppPadding.padding_16,
       ),
       decoration: BoxDecoration(
+        color: AppColors.white,
         border: !isForNewAppVersionDialog
             ? Border(
                 bottom: BorderSide(

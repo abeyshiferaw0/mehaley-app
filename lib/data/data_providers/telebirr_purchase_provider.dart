@@ -16,7 +16,7 @@ class TelebirrPurchaseProvider {
     //SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.paymentBaseUrl + '/purchase/telebirr/checkout/generate_url/',
+      url: AppApi.paymentBaseUrl + '/purchase/tele_birr/checkout/generate_url/',
       useToken: true,
       data: {
         'item_id': itemId,

@@ -1103,6 +1103,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.2"
+  safe_device:
+    dependency: "direct main"
+    description:
+      name: safe_device
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   screenshot:
     dependency: "direct main"
     description:
@@ -1304,6 +1311,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  trust_location:
+    dependency: transitive
+    description:
+      name: trust_location
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.13"
   typed_data:
     dependency: transitive
     description:

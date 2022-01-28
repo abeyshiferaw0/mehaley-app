@@ -105,6 +105,11 @@ class AuthRepository {
     return appUser;
   }
 
+  logOutFirebase() async {
+    await FirebaseAuth.instance.signOut();
+    await FacebookAuth.instance.logOut();
+  }
+
   logOut() async {
     await AppHiveBoxes.instance.userBox.clear();
     await authProvider.clearDioCache();

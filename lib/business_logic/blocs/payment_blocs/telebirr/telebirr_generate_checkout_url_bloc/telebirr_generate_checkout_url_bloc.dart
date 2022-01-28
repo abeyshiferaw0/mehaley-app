@@ -25,7 +25,13 @@ class TelebirrGenerateCheckoutUrlBloc extends Bloc<
           event.itemId,
           event.appPurchasedItemType,
         );
-        yield TelebirrCheckoutUrlGeneratedState(checkoutUrl: checkoutUrl);
+
+        ///GET TRANSACTION NUMBER
+        final String transactionNumber = await telebirrPurchaseRepository
+            .generateTransactionNumber(checkoutUrl);
+
+        yield TelebirrCheckoutUrlGeneratedState(
+            checkoutUrl: checkoutUrl, transactionNumber: transactionNumber);
       } catch (e) {
         yield TelebirrCheckoutUrlGeneratingErrorState(error: e.toString());
       }

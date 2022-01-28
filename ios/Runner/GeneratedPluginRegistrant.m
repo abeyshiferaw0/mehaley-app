@@ -132,6 +132,12 @@
 @import purchases_flutter;
 #endif
 
+#if __has_include(<safe_device/SafeDevicePlugin.h>)
+#import <safe_device/SafeDevicePlugin.h>
+#else
+@import safe_device;
+#endif
+
 #if __has_include(<share_plus/FLTSharePlusPlugin.h>)
 #import <share_plus/FLTSharePlusPlugin.h>
 #else
@@ -192,6 +198,7 @@
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];
   [PurchasesFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"PurchasesFlutterPlugin"]];
+  [SafeDevicePlugin registerWithRegistrar:[registry registrarForPlugin:@"SafeDevicePlugin"]];
   [FLTSharePlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharePlusPlugin"]];
   [SignInWithApplePlugin registerWithRegistrar:[registry registrarForPlugin:@"SignInWithApplePlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];

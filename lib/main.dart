@@ -136,7 +136,9 @@ class _MyAppState extends State<MyApp> {
           providers: [
             //ALL BLOC AND CUBIT PROVIDER
             BlocProvider<AppStartBloc>(
-              create: (context) => AppStartBloc(),
+              create: (context) => AppStartBloc(
+                authRepository: AppRepositories.authRepository,
+              ),
             ),
             BlocProvider<NewerVersionBloc>(
               create: (context) => NewerVersionBloc(

@@ -52,6 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthErrorState(error: e.toString());
       }
     } else if (event is ContinueWithGoogleEvent) {
+
       yield AuthLoadingState(userLoginType: UserLoginType.GOOGLE);
       try {
         AppFireBaseUser? appFireBaseUser = await signInWithGoogle();

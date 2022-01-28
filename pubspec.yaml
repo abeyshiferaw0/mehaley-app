@@ -106,6 +106,8 @@ dependencies:
   #INAP
   purchases_flutter: ^3.9.2
   flutter_inapp_purchase: ^5.1.2
+  #SECURITY
+  safe_device: ^1.1.0
 
 
 dev_dependencies:

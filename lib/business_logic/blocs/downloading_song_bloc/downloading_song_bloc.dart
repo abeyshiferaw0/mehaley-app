@@ -11,6 +11,7 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/repositories/setting_data_repository.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/network_util.dart';
+import 'package:safe_device/safe_device.dart';
 
 part 'downloading_song_event.dart';
 part 'downloading_song_state.dart';
@@ -60,26 +61,32 @@ class DownloadingSongBloc
 
       ///CHECK IF INTERNET CONNECTION AVAILABLE
       bool isNetAvailable = await NetworkUtil.isInternetAvailable();
-      if (isNetAvailable) {
-        if (!isAlreadyInQueue) {
-          String saveDir = await downloadUtil.getSaveDir(event.song);
-          await FlutterDownloader.enqueue(
-            url: downloadUtil.getDownloadUrl(
-              event.song,
-              downloadSongQuality,
-            ),
-            savedDir: saveDir,
-            fileName: downloadUtil.getSongFileName(
-              event.song,
-            ),
-            notificationTitle: event.notificationTitle,
-            showNotification: true,
-            openFileFromNotification: false,
-          );
+      bool isJailBroken = await SafeDevice.isJailBroken;
+      if (!isJailBroken) {
+        if (isNetAvailable) {
+          if (!isAlreadyInQueue) {
+            String saveDir = await downloadUtil.getSaveDir(event.song);
+            await FlutterDownloader.enqueue(
+              url: downloadUtil.getDownloadUrl(
+                event.song,
+                downloadSongQuality,
+              ),
+              savedDir: saveDir,
+              fileName: downloadUtil.getSongFileName(
+                event.song,
+              ),
+              notificationTitle: event.notificationTitle,
+              showNotification: true,
+              openFileFromNotification: false,
+            );
+          }
+        } else {
+          yield DownloadingSongInitial();
+          yield SongDownloadedNetworkNotAvailableState();
         }
       } else {
         yield DownloadingSongInitial();
-        yield SongDownloadedNetworkNotAvailableState();
+        yield SongDownloadedPhoneRootedState();
       }
     } else if (event is RetryDownloadSongEvent) {
       ///GET FAILED TASK ID

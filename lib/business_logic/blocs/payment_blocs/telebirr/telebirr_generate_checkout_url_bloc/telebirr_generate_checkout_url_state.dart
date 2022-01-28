@@ -28,9 +28,11 @@ class TelebirrCheckoutUrlGeneratingErrorState
 class TelebirrCheckoutUrlGeneratedState
     extends TelebirrGenerateCheckoutUrlInitial {
   final String checkoutUrl;
+  final String transactionNumber;
 
-  TelebirrCheckoutUrlGeneratedState({required this.checkoutUrl});
+  TelebirrCheckoutUrlGeneratedState(
+      {required this.checkoutUrl, required this.transactionNumber});
 
   @override
-  List<Object> get props => [checkoutUrl];
+  List<Object> get props => [checkoutUrl, transactionNumber];
 }

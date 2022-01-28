@@ -26,6 +26,22 @@ class TelebirrPurchaseRepository {
     throw "UNABLE TO GENERATE TELEBIRR PURCHASE URL";
   }
 
+  Future<String> generateTransactionNumber(
+    String chUrl,
+  ) async {
+    String checkoutUrl = chUrl;
+    if (checkoutUrl.contains('#')) {
+      checkoutUrl = checkoutUrl.replaceAll('/#/', '/');
+    }
+    Uri url = Uri.parse(checkoutUrl);
+
+    if (url.queryParameters['transactionNo'] != null) {
+      return url.queryParameters['transactionNo']!;
+    }
+
+    throw "transactionNo NOT FOUND FROM checkoutUrl";
+  }
+
   cancelDio() {
     telebirrPurchaseProvider.cancel();
   }

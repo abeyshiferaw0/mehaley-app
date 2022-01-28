@@ -11,8 +11,8 @@ import 'package:mehaley/data/models/payment/payment_method_image.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String baseUrl = 'https://api.mehaleye.com';
-  //static const String baseUrl = 'http://192.168.77.202:8181';
+  //static const String baseUrl = 'https://api.mehaleye.com';
+  static const String baseUrl = 'http://192.168.40.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';

@@ -19,7 +19,7 @@ class IapPurchaseProvider {
     //SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.paymentBaseUrl + "/purchase/in_app_purchases/",
+      url: AppApi.paymentBaseUrl + "/purchase/iap/",
       useToken: true,
       data: {
         'item_id': itemId,

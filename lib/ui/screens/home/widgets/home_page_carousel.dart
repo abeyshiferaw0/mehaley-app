@@ -53,11 +53,13 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
         currentPage = 0;
       }
 
-      _pageController.animateToPage(
-        currentPage,
-        duration: Duration(milliseconds: 700),
-        curve: Curves.easeIn,
-      );
+      if (widget.songVideos.length > 0) {
+        _pageController.animateToPage(
+          currentPage,
+          duration: Duration(milliseconds: 700),
+          curve: Curves.easeIn,
+        );
+      }
     });
     super.initState();
   }

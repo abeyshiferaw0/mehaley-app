@@ -99,3 +99,8 @@ class SongDownloadedNetworkNotAvailableState extends DownloadingSongState {
   @override
   List<Object?> get props => [];
 }
+
+class SongDownloadedPhoneRootedState extends DownloadingSongState {
+  @override
+  List<Object?> get props => [];
+}

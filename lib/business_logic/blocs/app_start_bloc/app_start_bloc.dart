@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/repositories/auth_repository.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -12,7 +13,9 @@ part 'app_start_event.dart';
 part 'app_start_state.dart';
 
 class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
-  AppStartBloc() : super(AppStartInitial());
+  AppStartBloc({required this.authRepository}) : super(AppStartInitial());
+
+  final AuthRepository authRepository;
 
   @override
   Stream<AppStartState> mapEventToState(
@@ -41,6 +44,9 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
         AppValues.isFirstTimeKey,
         event.isFirstTime,
       );
+      if (event.isFirstTime) {
+        authRepository.logOutFirebase();
+      }
       yield IsAppFirstLaunchState(isFirstTime: event.isFirstTime);
     } else if (event is SetNotificationPermissionShownDateEvent) {
       AppHiveBoxes.instance.settingsBox.put(
