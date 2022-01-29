@@ -1069,11 +1069,13 @@ class PagesUtilFunctions {
   static String getPaymentMethodName(
       AppPaymentMethods appPaymentMethod, context) {
     if (appPaymentMethod == AppPaymentMethods.METHOD_INAPP) {
-      return "${Platform.isAndroid ? "Google play" : "App store"} in app purchases";
+      return Platform.isAndroid
+          ? AppLocale.of().googlePlayInappPurcahses
+          : AppLocale.of().appStoreInappPurcahses;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_TELEBIRR) {
-      return "Telebirr";
+      return AppLocale.of().telebirr;
     } else if (appPaymentMethod == AppPaymentMethods.METHOD_YENEPAY) {
-      return "Yenepay";
+      return AppLocale.of().yenepay;
     } else {
       return 'Unknown';
     }
@@ -1239,7 +1241,7 @@ class PagesUtilFunctions {
 
   static void openYtPlayerPage(context, Song songVideo, bool shouldPop) {
     String videoLink =
-        songVideo.youtubeUrl != null ? songVideo.youtubeUrl! : "";
+        songVideo.youtubeUrl != null ? songVideo.youtubeUrl! : '';
 
     ///STOP PLAYER IF PLAYING
     BlocProvider.of<AudioPlayerBloc>(context).add(
@@ -1285,7 +1287,7 @@ class PagesUtilFunctions {
       songs: [songVideo],
       startPlaying: true,
       playingFrom: PlayingFrom(
-        from: "Featured Videos",
+        from: AppLocale.of().featuredVideos,
         title: PagesUtilFunctions.getArtistsNames(
           songVideo.artistsName,
           context,
@@ -1392,5 +1394,18 @@ class PagesUtilFunctions {
       return true;
     }
     return false;
+  }
+
+  static String getIapPurchasedMessage(
+      AppPurchasedItemType appPurchasedItemType) {
+    if (appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+      return AppLocale.of().songPurchased;
+    } else if (appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+      return AppLocale.of().playlistPurchased;
+    } else if (appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+      return AppLocale.of().albumPurchased;
+    } else {
+      return 'Purchase Completed';
+    }
   }
 }

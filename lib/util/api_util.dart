@@ -36,7 +36,6 @@ class ApiUtil {
     return response;
   }
 
-
   static Future<Response> post({
     required Dio dio,
     required String url,
@@ -51,9 +50,6 @@ class ApiUtil {
       ///GET USER TOKEN AND CSRF TOKEN
       String token =
           AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
-
-      print("INAPPPPP USER TOKEN => ${token}");
-      print("INAPPPPP ID parame => ${data}");
 
       ///CONFIG HEADER TOKEN
       options = Options(

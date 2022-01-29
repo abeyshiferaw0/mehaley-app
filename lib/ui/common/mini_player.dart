@@ -109,7 +109,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                     ///SHOW BUY OR PURCHASE DIALOG
                     showDialog(
                       context: context,
-                      builder: (context) {
+                      builder: (_) {
                         return Center(
                           child: DialogSongPreviewMode(
                             song: currentPlayingSong,
@@ -255,7 +255,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
 
               ///SUBSCRIBE SMALL BUTTON
               SubscribeSmallButton(
-                text: "Subscribe to mehaleye",
+                text: AppLocale.of().subscribeDialogTitle,
                 textColor: AppColors.white,
                 fontSize: AppFontSizes.font_size_10,
                 onTap: () {

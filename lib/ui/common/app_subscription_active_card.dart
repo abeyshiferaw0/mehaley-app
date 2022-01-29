@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -76,7 +77,7 @@ class _AppSubscriptionActiveCardState extends State<AppSubscriptionActiveCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Subscribed".toUpperCase(),
+                      AppLocale.of().subscribed.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         color: AppColors.white,
@@ -88,7 +89,8 @@ class _AppSubscriptionActiveCardState extends State<AppSubscriptionActiveCard> {
                       height: AppMargin.margin_8,
                     ),
                     Text(
-                      "You have a premium account\nmanage your subscriptions with ${Platform.isAndroid ? "google play store" : "App Store"}",
+                      AppLocale.of().youHavPremiumAccountMsg(
+                          isAndroid: Platform.isAndroid),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,

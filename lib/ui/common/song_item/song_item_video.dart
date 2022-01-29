@@ -122,7 +122,7 @@ class SongItemVideo extends StatelessWidget {
                     ),
                     buildMenuItem(
                       AppVideoItemAction.OPEN_AUDIO,
-                      "Open Audio",
+                      AppLocale.of().openAudio,
                     ),
                   ],
                 ),
@@ -143,7 +143,7 @@ class SongItemVideo extends StatelessWidget {
                     vertical: AppPadding.padding_6,
                   ),
                   child: Text(
-                    "Open Audio".toUpperCase(),
+                    AppLocale.of().openAudio.toUpperCase(),
                     textAlign: TextAlign.start,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

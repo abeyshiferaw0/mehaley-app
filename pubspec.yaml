@@ -73,6 +73,8 @@ dependencies:
   flutter_facebook_auth: ^3.5.1
   sign_in_with_apple: ^3.2.0
   crypto: ^3.0.1
+  #FIREBASE ANALYTICS
+  firebase_analytics: ^9.1.0
   #DOWNLOADER
   #flutter_downloader: ^1.7.0
   flutter_downloader:
@@ -108,6 +110,7 @@ dependencies:
   flutter_inapp_purchase: ^5.1.2
   #SECURITY
   safe_device: ^1.1.0
+
 
 
 dev_dependencies:

@@ -22,6 +22,7 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
     required this.appPurchasedItemType,
     required this.checkOutUrl,
     required this.transactionNumber,
+    required this.resultSuccessRedirectUrl,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   }) : super(key: key);
@@ -31,6 +32,8 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
   final AppPurchasedItemType appPurchasedItemType;
   final String checkOutUrl;
   final String transactionNumber;
+  final String resultSuccessRedirectUrl;
+
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
@@ -44,12 +47,11 @@ class _DialogTelebirrCheckoutWebViewState
   ///
   bool hasError = false;
   bool loading = true;
-  late WebViewController webViewContainer;
+  late WebViewController webViewController;
 
   @override
   void initState() {
     super.initState();
-    print("transactionNumber ${widget.transactionNumber}");
   }
 
   @override
@@ -92,20 +94,15 @@ class _DialogTelebirrCheckoutWebViewState
       initialUrl: widget.checkOutUrl,
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (mWebViewController) {
-        webViewContainer = mWebViewController;
+        webViewController = mWebViewController;
       },
       onPageStarted: (String s) {
-        print("WEBBB => onPageStarted ${s}");
         setState(() {
           loading = true;
           hasError = false;
         });
-
-        ///IF RETURN URL RESULT SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
-        dialogReturnActions(s);
       },
       onPageFinished: (String s) {
-        print("WEBBB => onPageFinished ${s}");
         if (TelebirrPurchaseUtil.isReturnUrl(s)) {
           setState(() {
             loading = true;
@@ -116,21 +113,14 @@ class _DialogTelebirrCheckoutWebViewState
             loading = false;
           });
         }
+
+        ///IF RETURN URL RESULT SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
+        dialogReturnActions(s);
       },
       onProgress: (int s) {},
       onWebResourceError: (WebResourceError error) {
-        print("WEBBB => onWebResourceError ${error.failingUrl}");
-        if (TelebirrPurchaseUtil.isReturnUrl(error.failingUrl)) {
-          setState(() {
-            loading = true;
-            hasError = false;
-          });
-        } else {
-          setState(() {
-            loading = false;
-            hasError = true;
-          });
-        }
+        loading = false;
+        hasError = true;
       },
     );
   }
@@ -161,7 +151,7 @@ class _DialogTelebirrCheckoutWebViewState
             ),
             child: WidgetErrorWidget(
               onRetry: () {
-                webViewContainer.reload();
+                webViewController.reload();
               },
               title: AppLocale.of().noInternetMsgDetail,
               subTitle: '',
@@ -210,7 +200,7 @@ class _DialogTelebirrCheckoutWebViewState
       buildAppSnackBar(
         bgColor: AppColors.blue,
         isFloating: true,
-        msg: "Payment was canceled!!",
+        msg: AppLocale.of().paymentCanceled,
         txtColor: AppColors.white,
       ),
     );
@@ -222,31 +212,42 @@ class _DialogTelebirrCheckoutWebViewState
       buildAppSnackBar(
         bgColor: AppColors.errorRed,
         isFloating: false,
-        msg: "Something went wrong",
+        msg: AppLocale.of().somethingWentWrong,
         txtColor: AppColors.white,
       ),
     );
   }
 
   dialogReturnActions(returnUrl) {
+    ///CHECK REDIRECTED URL
     bool isCompletedReturnUrl =
         TelebirrPurchaseUtil.isCompletedReturnUrl(returnUrl);
-    bool isCanceledReturnUrl =
-        TelebirrPurchaseUtil.isCanceledReturnUrl(returnUrl);
-    bool isFailureReturnUrl =
-        TelebirrPurchaseUtil.isFailureReturnUrl(returnUrl);
     bool isAlreadyPaidReturnUrl =
         TelebirrPurchaseUtil.isAlreadyPaidReturnUrl(returnUrl);
     bool isFreeReturnUrl = TelebirrPurchaseUtil.isFreeReturnUrl(returnUrl);
+    bool isFailureReturnUrl =
+        TelebirrPurchaseUtil.isFailureReturnUrl(returnUrl);
 
+    ///CHECK IF IS TELEBIRR RESULT PAGE
+    bool isResultFailureUrl =
+        TelebirrPurchaseUtil.isResultFailureUrl(returnUrl);
+    bool isResultSuccessUrl =
+        TelebirrPurchaseUtil.isResultSuccessUrl(returnUrl);
+
+    if (isResultFailureUrl) {
+      onFailure();
+    }
     if (isCompletedReturnUrl || isAlreadyPaidReturnUrl || isFreeReturnUrl) {
       onSuccess();
     }
-    if (isCanceledReturnUrl) {
-      onCancel();
-    }
     if (isFailureReturnUrl) {
       onFailure();
+    }
+    if (isResultSuccessUrl) {
+      String status = TelebirrPurchaseUtil.getResultSuccessUrlStatus(returnUrl);
+      webViewController.loadUrl(
+        '${widget.resultSuccessRedirectUrl}?transactionNo=${widget.transactionNumber}&status=$status',
+      );
     }
   }
 }

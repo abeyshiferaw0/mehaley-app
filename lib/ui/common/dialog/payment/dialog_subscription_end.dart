@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -44,7 +45,7 @@ class _DialogSubscriptionEndState extends State<DialogSubscriptionEnd> {
                       ),
                     ),
                     Text(
-                      "Sad to see you go",
+                      AppLocale.of().sadToSeeYouGo,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
@@ -60,7 +61,7 @@ class _DialogSubscriptionEndState extends State<DialogSubscriptionEnd> {
                         vertical: AppPadding.padding_8,
                       ),
                       child: Text(
-                        "Your subscription could not be renewed, due to active cancellation or payment issues.",
+                        AppLocale.of().subscriptionCouldNotBeRenewd,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: (AppFontSizes.font_size_10 - 1).sp,
@@ -91,7 +92,7 @@ class _DialogSubscriptionEndState extends State<DialogSubscriptionEnd> {
                             ),
                             child: Center(
                               child: Text(
-                                "Resubscribe",
+                                AppLocale.of().resubscribe,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   color: AppColors.white,
@@ -115,7 +116,7 @@ class _DialogSubscriptionEndState extends State<DialogSubscriptionEnd> {
                           AppPadding.padding_8,
                         ),
                         child: Text(
-                          "No, thanks",
+                          AppLocale.of().noThanks,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
                             color: AppColors.txtGrey,

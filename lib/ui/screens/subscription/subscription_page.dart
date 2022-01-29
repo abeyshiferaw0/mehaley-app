@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
@@ -183,7 +184,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Subscription is currently not available.\nComing soon!!",
+                  AppLocale.of().subscriptionNotAvlavableMsg,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -289,7 +290,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Our Plans".toUpperCase(),
+                AppLocale.of().ourPlans.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
@@ -305,7 +306,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                   horizontal: AppPadding.padding_24,
                 ),
                 child: Text(
-                  "Subscribe to Mehaleye and get access to unlimited access to all streams.",
+                  AppLocale.of().subscribeDialogMsg,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -349,7 +350,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             height: AppMargin.margin_32,
           ),
           Text(
-            "All Plans Include",
+            AppLocale.of().allPlansInclude,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               color: AppColors.black,
@@ -363,7 +364,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Unlimited streaming to all mezmurs",
+                AppLocale.of().unlimitedStreamingAllMezmurs,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   color: AppColors.black,
@@ -387,7 +388,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Unlimited downloads for offline usage",
+                AppLocale.of().unlimitedDownloadOffline,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   color: AppColors.black,
@@ -411,7 +412,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "High quality audio",
+                AppLocale.of().highQualityAudio,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   color: AppColors.black,

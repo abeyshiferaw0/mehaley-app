@@ -368,7 +368,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
 
                     ///SUBSCRIBE SMALL BUTTON
                     SubscribeSmallButton(
-                      text: "Subscribe to mehaleye",
+                      text: AppLocale.of().subscribeDialogTitle,
                       textColor: AppColors.black,
                       fontSize: AppFontSizes.font_size_10,
                       onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -64,7 +65,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                       ],
                     ),
                     Text(
-                      "Thank you for subscribing",
+                      AppLocale.of().thankYouForSubscribing,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
@@ -80,7 +81,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                         vertical: AppPadding.padding_8,
                       ),
                       child: Text(
-                        "You have successfully subscribed to mehaleye, enjoy listening mezmurs on mehaleye with unlimited access",
+                        AppLocale.of().subscribedMsg,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: (AppFontSizes.font_size_10 - 1).sp,
@@ -109,7 +110,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                             ),
                             child: Center(
                               child: Text(
-                                "Continue",
+                                AppLocale.of().continueStr,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   color: AppColors.white,

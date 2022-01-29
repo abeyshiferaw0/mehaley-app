@@ -245,7 +245,9 @@ class _BottomBarState extends State<BottomBar> {
     bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
     return BottomNavigationBarItem(
-      tooltip: !isUserSubscribed & isIapAvailable ? "Subscription" : "Profile",
+      tooltip: !isUserSubscribed & isIapAvailable
+          ? AppLocale.of().subscription
+          : AppLocale.of().profile,
       activeIcon: !isUserSubscribed & isIapAvailable
           ? Image.asset(
               AppAssets.isAppSmallIcon,
@@ -274,7 +276,9 @@ class _BottomBarState extends State<BottomBar> {
               color: AppColors.grey,
               isForLibrary: false,
             ),
-      label: !isUserSubscribed & isIapAvailable ? "Subscription" : "Profile",
+      label: !isUserSubscribed & isIapAvailable
+          ? AppLocale.of().subscription
+          : AppLocale.of().profile,
     );
   }
 }

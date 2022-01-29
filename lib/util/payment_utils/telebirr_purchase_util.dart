@@ -188,19 +188,10 @@ class TelebirrPurchaseUtil {
     return false;
   }
 
-  static bool isCanceledReturnUrl(String s) {
+  static bool isFreeReturnUrl(String s) {
     Uri curUrl = Uri.parse(s);
-    Uri cancelUrl = Uri.parse(WebPaymentValues.cancelUrl);
-    if (PagesUtilFunctions.isUrlsEqual(curUrl, cancelUrl)) {
-      return true;
-    }
-    return false;
-  }
-
-  static bool isFailureReturnUrl(String s) {
-    Uri curUrl = Uri.parse(s);
-    Uri failureUrl = Uri.parse(WebPaymentValues.failureUrl);
-    if (PagesUtilFunctions.isUrlsEqual(curUrl, failureUrl)) {
+    Uri isFreeUrl = Uri.parse(WebPaymentValues.isFreeUrl);
+    if (PagesUtilFunctions.isUrlsEqual(curUrl, isFreeUrl)) {
       return true;
     }
     return false;
@@ -215,10 +206,10 @@ class TelebirrPurchaseUtil {
     return false;
   }
 
-  static bool isFreeReturnUrl(String s) {
+  static bool isFailureReturnUrl(String s) {
     Uri curUrl = Uri.parse(s);
-    Uri isFreeUrl = Uri.parse(WebPaymentValues.isFreeUrl);
-    if (PagesUtilFunctions.isUrlsEqual(curUrl, isFreeUrl)) {
+    Uri failureUrl = Uri.parse(WebPaymentValues.failureUrl);
+    if (PagesUtilFunctions.isUrlsEqual(curUrl, failureUrl)) {
       return true;
     }
     return false;
@@ -228,10 +219,63 @@ class TelebirrPurchaseUtil {
     if (returnUrl == null) return false;
     Uri url = Uri.parse(returnUrl);
 
-    if (url.host == AppApi.baseUrl) {
+    if (url.host == Uri.parse(AppApi.baseUrl).host) {
       return true;
     }
 
     return false;
+  }
+
+  static bool isResultSuccessUrl(String rUrl) {
+    String? returnUrl = removeUrlHash(rUrl);
+    if (returnUrl == null) return false;
+    Uri url = Uri.parse(returnUrl);
+
+    if (url.path.contains('ammsdkpay') && url.path.contains('result')) {
+      if (url.queryParameters['status'] != null) {
+        if (url.queryParameters['status'] == '200') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static String getResultSuccessUrlStatus(String rUrl) {
+    String returnUrl = removeUrlHash(rUrl)!;
+
+    Uri url = Uri.parse(returnUrl);
+
+    if (url.path.contains('ammsdkpay') && url.path.contains('result')) {
+      if (url.queryParameters['status'] != null) {
+        return url.queryParameters['status']!;
+      }
+    }
+    throw 'STATUS MISSING FROM getResultSuccessUrlStatus // ${returnUrl}';
+  }
+
+  static bool isResultFailureUrl(String rUrl) {
+    String? returnUrl = removeUrlHash(rUrl);
+    if (returnUrl == null) return false;
+    Uri url = Uri.parse(returnUrl);
+
+    if (url.path.contains('ammsdkpay') && url.path.contains('result')) {
+      if (url.queryParameters['status'] != null) {
+        if (url.queryParameters['status'] != '200') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static String? removeUrlHash(String? url) {
+    if (url != null) {
+      if (url.contains('/#/')) {
+        return url.replaceAll('/#/', '/');
+      }
+    }
+
+    return url;
   }
 }

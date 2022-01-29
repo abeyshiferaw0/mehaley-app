@@ -585,4 +585,70 @@ class AppLanguageStringsTig extends AppLocalizations {
   String playlistDeleted({required String playlistName}) {
     return "$playlistName ተደምሲሱ ኣሎ";
   }
+
+  ///UNTRANSLATED
+  ///
+  final String subscription = "subscription";
+  final String profile = "Profile";
+  final String subscribed = "Subscribed";
+  final String continueStr = "Continue";
+  final String tryForFree = "Try for free";
+  final String paymentCanceled = "Payment was canceled!!";
+  final String noThanks = "No, Thanks";
+  final String openAudio = "Open Audio";
+  final String purchaseCouldNotBeCompleted = "Purchase could not be completed";
+  final String subscriptionRequired = "Subscription Required To Listen";
+  final String resubscribe = "Resubscribe";
+  final String thankYouForSubscribing = "Thank you for subscribing.";
+  final String subscribtionNotAvlvable = "Subscription currently not available";
+  final String subscribedMsg =
+      "You have successfully subscribed to mehaleye, enjoy listening mezmurs on mehaleye with unlimited access";
+  final String subscriptionNotAvlavableMsg =
+      "Subscription is currently not available in your country, we will notify you when available.";
+  final String purchaseCouldNotBeVerfied =
+      "Your Purchase Could Not Be Verified";
+  final String purchaseCouldNotBeVerfiedMsg =
+      "There was a problem verifying your purchase\nplease try again!!";
+  final String subscriptionCouldNotBeRenewd =
+      "Your subscription could not be renewed, due to active cancellation or payment issues.";
+  final String completeingYourPurchase =
+      "Completing your purchase\nplease wait...";
+  final String sadToSeeYouGo = "Sad to see you go";
+  final String purchasePending = "Purchase Pending\nPlease wait...";
+  final String inAppNotAvlable =
+      "In app purchasing not available in your location!!";
+  final String ourPlans = "Our Plans";
+  final String allPlansInclude = "All Plans Include";
+  final String unlimitedStreamingAllMezmurs =
+      "Unlimited streaming to all mezmurs";
+  final String unlimitedDownloadOffline =
+      "Unlimited downloads for offline usage";
+  final String highQualityAudio = "High quality audio";
+  final String featuredVideos = "Featured Videos";
+  final String yenepay = "Yenepay";
+  final String telebirr = "Telebirr";
+  final String googlePlayInappPurcahses = "Google Play In-App Purchases";
+  final String appStoreInappPurcahses = "App Store In-App Purchases";
+  final String payWithTelebirr = "Pay with Telebirr";
+  final String payWithTelebirrMsg =
+      "Use your Telebirr account to complete your mehaleye purchase.";
+  final String payWithYenepay = "Pay with Yenepay";
+  final String payWithYenepayMsg =
+      "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
+  final String payWithGoogleplayInappPurchases =
+      "Pay With Google Play In-App Purchases";
+  final String payWithAppStoreInappPurchases =
+      "Pay With App Store In-App Purchases";
+  final String payWithGoogleplayInappPurchasesMsg =
+      "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options";
+  final String payWithAppStoreInappPurchasesMsg =
+      "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options";
+
+  String youHavPremiumAccountMsg({required bool isAndroid}) {
+    if (isAndroid) {
+      return "You have a premium account\nmanage your subscriptions with google play store";
+    } else {
+      return "You have a premium account\nmanage your subscriptions with App Store";
+    }
+  }
 }

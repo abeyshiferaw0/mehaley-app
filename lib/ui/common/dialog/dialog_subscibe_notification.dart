@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -72,7 +73,7 @@ class DialogSubscribeNotification extends StatelessWidget {
 
   Text buildDialogTitle(context) {
     return Text(
-      "Subscribe To Mehaleye",
+      AppLocale.of().subscribeDialogTitle,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
@@ -88,7 +89,7 @@ class DialogSubscribeNotification extends StatelessWidget {
         horizontal: AppPadding.padding_16,
       ),
       child: Text(
-        "Subscribe to mehaleye and get unlimited access to all streams and downloads.",
+        AppLocale.of().subscribeDialogMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: (AppFontSizes.font_size_10 - 1).sp,
@@ -117,7 +118,7 @@ class DialogSubscribeNotification extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Try for free".toUpperCase(),
+            AppLocale.of().tryForFree.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w600,
@@ -141,7 +142,7 @@ class DialogSubscribeNotification extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "No, thanks",
+            AppLocale.of().noThanks,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,

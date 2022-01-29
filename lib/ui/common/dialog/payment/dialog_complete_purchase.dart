@@ -82,8 +82,21 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
                 children: [
                   buildDialogHeader(context),
                   Expanded(
-                    child: BlocBuilder<CompletePurchaseBloc,
+                    child: BlocConsumer<CompletePurchaseBloc,
                         CompletePurchaseState>(
+                      listener: (context, state) {
+                        if (state is PaymentMethodsLoadedState) {
+                          ///IF A PAYMENT METHOD IS ALREADY SELECTED
+                          ///CHECK BOX TO TRUE
+                          state.availableMethods.forEach((element) {
+                            if (element.isSelected) {
+                              setState(() {
+                                alwaysUseSelected = true;
+                              });
+                            }
+                          });
+                        }
+                      },
                       builder: (context, state) {
                         if (state is PaymentMethodsLoadedState) {
                           return buildPaymentMethodsList(

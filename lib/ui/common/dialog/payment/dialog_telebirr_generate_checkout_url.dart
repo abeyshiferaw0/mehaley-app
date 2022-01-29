@@ -22,9 +22,7 @@ class DialogTelebirrGenerateCheckoutUrl extends StatefulWidget {
   }) : super(key: key);
 
   final int itemId;
-
   final AppPurchasedItemType appPurchasedItemType;
-
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
@@ -81,6 +79,8 @@ class _DialogTelebirrGenerateCheckoutUrlState
                               appPurchasedItemType: widget.appPurchasedItemType,
                               transactionNumber: state.transactionNumber,
                               checkOutUrl: state.checkoutUrl,
+                              resultSuccessRedirectUrl:
+                                  state.resultSuccessRedirectUrl,
                               isFromSelfPage: widget.isFromSelfPage,
                               appPurchasedSources: widget.appPurchasedSources,
                             );

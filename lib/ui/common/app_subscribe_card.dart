@@ -89,7 +89,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                       height: AppMargin.margin_8,
                     ),
                     Text(
-                      "Subscribe to Mehaleye and get unlimited access to all streams and downloads.",
+                      AppLocale.of().subscribeDialogMsg,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: (AppFontSizes.font_size_10 - 1).sp,
@@ -124,7 +124,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                           ],
                         ),
                         child: Text(
-                          "Try for free".toUpperCase(),
+                          AppLocale.of().tryForFree.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: (AppFontSizes.font_size_10 - 1).sp,

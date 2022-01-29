@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -27,7 +28,7 @@ class IapPurchasePendingUi extends StatelessWidget {
                   height: AppMargin.margin_16,
                 ),
                 Text(
-                  "Purchase Pending\nPlease wait...".toUpperCase(),
+                  AppLocale.of().purchasePending.toUpperCase(),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

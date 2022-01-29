@@ -20,7 +20,7 @@ class IapVerificationErrorWidget extends StatelessWidget {
               height: AppMargin.margin_16,
             ),
             Text(
-              "Your Purchase Could Not Be Completed",
+              AppLocale.of().purchaseCouldNotBeCompleted,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.darkGrey,

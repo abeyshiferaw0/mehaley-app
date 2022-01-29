@@ -228,7 +228,7 @@ class YenepayPurchaseUtil {
     if (returnUrl == null) return false;
     Uri url = Uri.parse(returnUrl);
 
-    if (url.host == AppApi.baseUrl) {
+    if (url.host == Uri.parse((AppApi.baseUrl)).host) {
       return true;
     }
 

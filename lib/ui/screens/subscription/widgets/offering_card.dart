@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/subscription_offerings.dart';
@@ -142,7 +143,7 @@ class OfferingCard extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Try for free".toUpperCase(),
+            AppLocale.of().tryForFree.toUpperCase(),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,

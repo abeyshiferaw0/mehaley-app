@@ -373,6 +373,48 @@ abstract class AppLocalizations {
   String get emptyVideos;
   String get otherVideos;
   String get cantFindOtherVideos;
+  String get subscription;
+  String get profile;
+  String get subscribed;
+  String get continueStr;
+  String get tryForFree;
+  String get paymentCanceled;
+  String get noThanks;
+
+  String get openAudio;
+  String get purchaseCouldNotBeCompleted;
+  String get subscriptionRequired;
+  String get resubscribe;
+  String get thankYouForSubscribing;
+  String get subscribtionNotAvlvable;
+  String get subscribedMsg;
+  String get subscriptionNotAvlavableMsg;
+  String get purchaseCouldNotBeVerfied;
+  String get purchaseCouldNotBeVerfiedMsg;
+  String get subscriptionCouldNotBeRenewd;
+  String get completeingYourPurchase;
+  String get sadToSeeYouGo;
+  String get purchasePending;
+  String get inAppNotAvlable;
+  String get ourPlans;
+  String get allPlansInclude;
+  String get unlimitedStreamingAllMezmurs;
+  String get unlimitedDownloadOffline;
+  String get highQualityAudio;
+
+  String get featuredVideos;
+  String get yenepay;
+  String get telebirr;
+  String get googlePlayInappPurcahses;
+  String get appStoreInappPurcahses;
+  String get payWithTelebirr;
+  String get payWithTelebirrMsg;
+  String get payWithYenepay;
+  String get payWithYenepayMsg;
+  String get payWithGoogleplayInappPurchases;
+  String get payWithAppStoreInappPurchases;
+  String get payWithGoogleplayInappPurchasesMsg;
+  String get payWithAppStoreInappPurchasesMsg;
 
   String featuring({required String artistName});
 
@@ -436,4 +478,6 @@ abstract class AppLocalizations {
   String itemIsForFree({required PurchasedItemType purchasedItemType});
 
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType});
+
+  String youHavPremiumAccountMsg({required bool isAndroid});
 }

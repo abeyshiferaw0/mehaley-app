@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/api_response/telebirr_checkout_api_result.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/repositories/telebirr_purchase_repository.dart';
 
@@ -20,18 +21,18 @@ class TelebirrGenerateCheckoutUrlBloc extends Bloc<
       yield TelebirrCheckoutUrlGeneratingState();
       try {
         ///GENERATE TELEBIRR CHECKOUT URL
-        final String checkoutUrl =
+        final TelebirrCheckoutApiResult telebirrCheckoutApiResult =
             await telebirrPurchaseRepository.generateCheckoutUrl(
           event.itemId,
           event.appPurchasedItemType,
         );
 
-        ///GET TRANSACTION NUMBER
-        final String transactionNumber = await telebirrPurchaseRepository
-            .generateTransactionNumber(checkoutUrl);
-
         yield TelebirrCheckoutUrlGeneratedState(
-            checkoutUrl: checkoutUrl, transactionNumber: transactionNumber);
+          checkoutUrl: telebirrCheckoutApiResult.checkOutUrl,
+          transactionNumber: telebirrCheckoutApiResult.transactionNumber,
+          resultSuccessRedirectUrl:
+              telebirrCheckoutApiResult.resultSuccessRedirectUrl,
+        );
       } catch (e) {
         yield TelebirrCheckoutUrlGeneratingErrorState(error: e.toString());
       }

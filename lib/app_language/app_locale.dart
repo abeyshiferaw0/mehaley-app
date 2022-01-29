@@ -457,6 +457,62 @@ class AppLocale {
   String get emptyVideos => appLocalizations.emptyVideos;
   String get otherVideos => appLocalizations.otherVideos;
   String get cantFindOtherVideos => appLocalizations.cantFindOtherVideos;
+  String get subscription => appLocalizations.subscription;
+  String get profile => appLocalizations.profile;
+  String get subscribed => appLocalizations.subscribed;
+  String get continueStr => appLocalizations.continueStr;
+  String get tryForFree => appLocalizations.tryForFree;
+  String get paymentCanceled => appLocalizations.paymentCanceled;
+  String get noThanks => appLocalizations.noThanks;
+
+  String get openAudio => appLocalizations.openAudio;
+  String get purchaseCouldNotBeCompleted =>
+      appLocalizations.purchaseCouldNotBeCompleted;
+  String get subscriptionRequired => appLocalizations.subscriptionRequired;
+  String get resubscribe => appLocalizations.resubscribe;
+  String get thankYouForSubscribing => appLocalizations.thankYouForSubscribing;
+  String get subscribtionNotAvlvable =>
+      appLocalizations.subscribtionNotAvlvable;
+  String get subscribedMsg => appLocalizations.subscribedMsg;
+  String get subscriptionNotAvlavableMsg =>
+      appLocalizations.subscriptionNotAvlavableMsg;
+  String get purchaseCouldNotBeVerfied =>
+      appLocalizations.purchaseCouldNotBeVerfied;
+  String get purchaseCouldNotBeVerfiedMsg =>
+      appLocalizations.purchaseCouldNotBeVerfiedMsg;
+  String get subscriptionCouldNotBeRenewd =>
+      appLocalizations.subscriptionCouldNotBeRenewd;
+  String get completeingYourPurchase =>
+      appLocalizations.completeingYourPurchase;
+  String get sadToSeeYouGo => appLocalizations.sadToSeeYouGo;
+  String get purchasePending => appLocalizations.purchasePending;
+  String get inAppNotAvlable => appLocalizations.inAppNotAvlable;
+  String get ourPlans => appLocalizations.ourPlans;
+  String get allPlansInclude => appLocalizations.allPlansInclude;
+  String get unlimitedStreamingAllMezmurs =>
+      appLocalizations.unlimitedStreamingAllMezmurs;
+  String get unlimitedDownloadOffline =>
+      appLocalizations.unlimitedDownloadOffline;
+  String get highQualityAudio => appLocalizations.highQualityAudio;
+
+  String get featuredVideos => appLocalizations.featuredVideos;
+  String get yenepay => appLocalizations.yenepay;
+  String get telebirr => appLocalizations.telebirr;
+  String get googlePlayInappPurcahses =>
+      appLocalizations.googlePlayInappPurcahses;
+  String get appStoreInappPurcahses => appLocalizations.appStoreInappPurcahses;
+  String get payWithTelebirr => appLocalizations.payWithTelebirr;
+  String get payWithTelebirrMsg => appLocalizations.payWithTelebirrMsg;
+  String get payWithYenepay => appLocalizations.payWithYenepay;
+  String get payWithYenepayMsg => appLocalizations.payWithYenepayMsg;
+  String get payWithGoogleplayInappPurchases =>
+      appLocalizations.payWithGoogleplayInappPurchases;
+  String get payWithAppStoreInappPurchases =>
+      appLocalizations.payWithAppStoreInappPurchases;
+  String get payWithGoogleplayInappPurchasesMsg =>
+      appLocalizations.payWithGoogleplayInappPurchasesMsg;
+  String get payWithAppStoreInappPurchasesMsg =>
+      appLocalizations.payWithAppStoreInappPurchasesMsg;
 
   ///FUNCTIONS
 
@@ -563,4 +619,7 @@ class AppLocale {
       appLocalizations.itemIsForFreeMsg(
         purchasedItemType: purchasedItemType,
       );
+
+  String youHavPremiumAccountMsg({required bool isAndroid}) =>
+      appLocalizations.youHavPremiumAccountMsg(isAndroid: isAndroid);
 }

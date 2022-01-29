@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -65,7 +66,7 @@ class DialogSubscribeNotAvailable extends StatelessWidget {
 
   Text buildDialogTitle(context) {
     return Text(
-      "Subscription currently not available",
+      AppLocale.of().subscribtionNotAvlvable,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
@@ -81,7 +82,7 @@ class DialogSubscribeNotAvailable extends StatelessWidget {
         horizontal: AppPadding.padding_16,
       ),
       child: Text(
-        "Subscription is currently not available in your country, we will notify you when available.",
+        AppLocale.of().subscriptionNotAvlavableMsg,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: (AppFontSizes.font_size_10 - 1).sp,
@@ -109,7 +110,7 @@ class DialogSubscribeNotAvailable extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Close".toUpperCase(),
+            AppLocale.of().close.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w600,

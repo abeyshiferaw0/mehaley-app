@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_verification_bloc/iap_purchase_verification_bloc.dart';
 import 'package:mehaley/config/constants.dart';
@@ -12,6 +13,7 @@ import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
 import 'package:mehaley/ui/common/dialog/payment/widgets/iap_verfication_error_widget.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -166,7 +168,8 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 height: AppMargin.margin_16,
               ),
               Text(
-                "Purchase Completed".toUpperCase(),
+                PagesUtilFunctions.getIapPurchasedMessage(
+                    widget.appPurchasedItemType),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -201,7 +204,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 height: AppMargin.margin_16,
               ),
               Text(
-                "Your Purchase Could Not Be Verified".toUpperCase(),
+                AppLocale.of().purchaseCouldNotBeVerfied.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -213,7 +216,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 height: AppMargin.margin_8,
               ),
               Text(
-                "There was a problem verifying your purchase\nplease try again!!",
+                AppLocale.of().purchaseCouldNotBeVerfiedMsg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
@@ -229,7 +232,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Close".toUpperCase(),
+                  AppLocale.of().close.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
@@ -262,7 +265,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 height: AppMargin.margin_16,
               ),
               Text(
-                "Completing your purchase\nplease wait...".toUpperCase(),
+                AppLocale.of().completeingYourPurchase.toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,

@@ -236,7 +236,7 @@ class DialogSongPreviewMode extends StatelessWidget {
 
           ///SUBSCRIBE SMALL BUTTON
           SubscribeSmallButton(
-            text: "Subscribe to mehaleye",
+            text: AppLocale.of().subscribeDialogTitle,
             textColor: AppColors.black,
             fontSize: AppFontSizes.font_size_8,
             onTap: () {

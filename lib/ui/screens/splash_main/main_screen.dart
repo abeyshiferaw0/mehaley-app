@@ -267,7 +267,8 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.errorRed,
                   isFloating: false,
-                  msg: "Something went wrong\n purchase could not be completed",
+                  msg:
+                      '${AppLocale.of().somethingWentWrong}\n${AppLocale.of().purchaseCouldNotBeCompleted}',
                   txtColor: AppColors.white,
                 ),
               );
@@ -291,8 +292,7 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg:
-                      "Purchasing not available in your location!!\nmore payment options comming soon",
+                  msg: AppLocale.of().inAppNotAvlable,
                   txtColor: AppColors.white,
                   icon: FlutterRemix.secure_payment_line,
                   iconColor: AppColors.white,
@@ -587,7 +587,7 @@ class _MainScreenState extends State<MainScreen> {
                   buildAppSnackBar(
                     bgColor: AppColors.blue,
                     txtColor: AppColors.white,
-                    msg: "No purchases to restore!!",
+                    msg: 'No purchases to restore!!',
                     isFloating: true,
                   ),
                 );
@@ -844,7 +844,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static void showPurchasedSuccessSnack(
       context, AppPurchasedItemType appPurchasedItemType) {
-    String msg = "";
+    String msg = '';
     if (appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
       msg = AppLocale.of().songPurchased;
     }

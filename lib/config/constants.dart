@@ -4,10 +4,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
-import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/data/models/enums/app_payment_methods.dart';
-import 'package:mehaley/data/models/payment/payment_method.dart';
-import 'package:mehaley/data/models/payment/payment_method_image.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
@@ -314,88 +310,4 @@ class AppDio {
     final dio = Dio()..interceptors.add(DioCacheInterceptor(options: options));
     return dio;
   }
-}
-
-class AppPaymentMethodsList {
-  static List<PaymentMethod> list = [
-    PaymentMethod(
-      appPaymentMethods: AppPaymentMethods.METHOD_TELEBIRR,
-      isSelected: false,
-      title: "Pay with Telebirr",
-      isAvailable: true,
-      description:
-          "Use your Telebirr account to complete your mehaleye purchase.",
-      paymentMethodImage: PaymentMethodImage(
-        imagePath: AppAssets.icTelebirr,
-        height: AppIconSizes.icon_size_36,
-      ),
-      paymentOptionImages: [],
-    ),
-    PaymentMethod(
-      appPaymentMethods: AppPaymentMethods.METHOD_YENEPAY,
-      isSelected: false,
-      title: "Pay with Yenepay",
-      isAvailable: true,
-      description:
-          "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options",
-      paymentMethodImage: PaymentMethodImage(
-        imagePath: AppAssets.icYenepay,
-        height: AppIconSizes.icon_size_32,
-      ),
-      paymentOptionImages: [
-        PaymentMethodImage(
-          imagePath: AppAssets.icAmole,
-          height: AppIconSizes.icon_size_20,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icCbe,
-          height: AppIconSizes.icon_size_20,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icHelloCash,
-          height: AppIconSizes.icon_size_24,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icMbirr,
-          height: AppIconSizes.icon_size_24,
-        ),
-      ],
-    ),
-    PaymentMethod(
-      appPaymentMethods: AppPaymentMethods.METHOD_INAPP,
-      isSelected: false,
-      isAvailable: true,
-      title: Platform.isAndroid
-          ? "Pay With Google Play In-App Purchases"
-          : "Pay With App Store In-App Purchases",
-      description: Platform.isAndroid
-          ? "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options"
-          : "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options",
-      paymentMethodImage: PaymentMethodImage(
-        imagePath: Platform.isAndroid
-            ? AppAssets.icGooglePlay
-            : AppAssets.icAppleStore,
-        height: AppIconSizes.icon_size_32,
-      ),
-      paymentOptionImages: [
-        PaymentMethodImage(
-          imagePath: AppAssets.icVisa,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icMasterCard,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icPaypal,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath:
-              Platform.isAndroid ? AppAssets.icGooglePay : AppAssets.icApplePay,
-          height: AppIconSizes.icon_size_16,
-        ),
-      ],
-    ),
-  ];
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -239,7 +240,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             horizontal: AppPadding.padding_24 * 2,
           ),
           child: Text(
-            "Subscribe to mehaleye and get unlimited access to all streams and downloads."
+            AppLocale.of().subscribeDialogMsg
                 .toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,

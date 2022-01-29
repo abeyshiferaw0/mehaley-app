@@ -57,8 +57,8 @@ class _DialogYenepayCheckoutWebViewState
         child: Wrap(
           children: [
             Container(
-              width: ScreenUtil(context: context).getScreenWidth() * 0.9,
-              height: ScreenUtil(context: context).getScreenHeight() * 0.7,
+              width: ScreenUtil(context: context).getScreenWidth() * 0.95,
+              height: ScreenUtil(context: context).getScreenHeight() * 0.9,
               color: AppColors.white,
               child: Column(
                 children: [
@@ -89,7 +89,6 @@ class _DialogYenepayCheckoutWebViewState
         webViewContainer = mWebViewController;
       },
       onPageStarted: (String s) {
-        print("WEBBB => onPageStarted ${s}");
         setState(() {
           loading = true;
           hasError = false;
@@ -99,7 +98,6 @@ class _DialogYenepayCheckoutWebViewState
         dialogReturnActions(s);
       },
       onPageFinished: (String s) {
-        print("WEBBB => onPageFinished ${s}");
         if (YenepayPurchaseUtil.isReturnUrl(s)) {
           setState(() {
             loading = true;
@@ -113,7 +111,6 @@ class _DialogYenepayCheckoutWebViewState
       },
       onProgress: (int s) {},
       onWebResourceError: (WebResourceError error) {
-        print("WEBBB => onWebResourceError ${error.failingUrl}");
         if (YenepayPurchaseUtil.isReturnUrl(error.failingUrl)) {
           setState(() {
             loading = true;
@@ -204,7 +201,7 @@ class _DialogYenepayCheckoutWebViewState
       buildAppSnackBar(
         bgColor: AppColors.blue,
         isFloating: true,
-        msg: "Payment was canceled!!",
+        msg: AppLocale.of().paymentCanceled,
         txtColor: AppColors.white,
       ),
     );
@@ -216,7 +213,7 @@ class _DialogYenepayCheckoutWebViewState
       buildAppSnackBar(
         bgColor: AppColors.errorRed,
         isFloating: false,
-        msg: "Something went wrong",
+        msg: AppLocale.of().somethingWentWrong,
         txtColor: AppColors.white,
       ),
     );

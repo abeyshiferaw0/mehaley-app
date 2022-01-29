@@ -29,10 +29,14 @@ class TelebirrCheckoutUrlGeneratedState
     extends TelebirrGenerateCheckoutUrlInitial {
   final String checkoutUrl;
   final String transactionNumber;
+  final String resultSuccessRedirectUrl;
 
   TelebirrCheckoutUrlGeneratedState(
-      {required this.checkoutUrl, required this.transactionNumber});
+      {required this.checkoutUrl,
+      required this.transactionNumber,
+      required this.resultSuccessRedirectUrl});
 
   @override
-  List<Object> get props => [checkoutUrl, transactionNumber];
+  List<Object> get props =>
+      [checkoutUrl, transactionNumber, resultSuccessRedirectUrl];
 }

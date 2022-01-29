@@ -60,7 +60,7 @@ class SubscriptionAppBar extends StatelessWidget {
                         width: AppMargin.margin_6,
                       ),
                       Text(
-                        "Restore Purchases",
+                        'Restore Purchases',
                         style: TextStyle(
                           color: AppColors.black,
                           fontSize: AppFontSizes.font_size_8.sp,

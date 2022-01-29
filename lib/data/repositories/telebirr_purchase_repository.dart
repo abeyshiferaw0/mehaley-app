@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mehaley/data/data_providers/telebirr_purchase_provider.dart';
+import 'package:mehaley/data/models/api_response/telebirr_checkout_api_result.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 
 class TelebirrPurchaseRepository {
@@ -8,7 +9,7 @@ class TelebirrPurchaseRepository {
 
   const TelebirrPurchaseRepository({required this.telebirrPurchaseProvider});
 
-  Future<String> generateCheckoutUrl(
+  Future<TelebirrCheckoutApiResult> generateCheckoutUrl(
     int itemId,
     AppPurchasedItemType appPurchasedItemType,
   ) async {
@@ -19,16 +20,28 @@ class TelebirrPurchaseRepository {
 
     print("TELEBIRR  DATA => ${response.data}");
     if (response.statusCode == 200) {
+      ///
       String checkOutUrl = response.data['payment_url'];
-      return checkOutUrl;
+      String transactionNumber =
+          generateTransactionNumber(response.data['payment_url']);
+      String resultSuccessRedirectUrl = response.data['redirect_url'];
+
+      ///
+      TelebirrCheckoutApiResult telebirrCheckoutApiResult =
+          TelebirrCheckoutApiResult(
+        checkOutUrl: checkOutUrl,
+        transactionNumber: transactionNumber,
+        resultSuccessRedirectUrl: resultSuccessRedirectUrl,
+      );
+      return telebirrCheckoutApiResult;
     }
 
     throw "UNABLE TO GENERATE TELEBIRR PURCHASE URL";
   }
 
-  Future<String> generateTransactionNumber(
+  String generateTransactionNumber(
     String chUrl,
-  ) async {
+  ) {
     String checkoutUrl = chUrl;
     if (checkoutUrl.contains('#')) {
       checkoutUrl = checkoutUrl.replaceAll('/#/', '/');

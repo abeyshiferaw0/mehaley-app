@@ -1,4 +1,5 @@
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/app_payment_methods_list.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/data_providers/payment_provider.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
