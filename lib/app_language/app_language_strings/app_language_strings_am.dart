@@ -7,7 +7,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String appName = "መኃልዬ";
   final String byAppName = "በ መኃልዬ";
   final String appTermsAndCondition =
-      "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
+      "Some text about mehaleye and terms and conditions and privacy policy፣ Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "ውጣ";
 
   final String removeFromCart = "ከጥቅል ግዢ አስወግድ";
@@ -26,7 +26,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String followPlaylist = "ፕሌይሊስቱን ተከተል";
   final String removeFromFollowedPlaylist = "ፕሌይሊስቱን መከተል አቁም";
   final String uAreListingToPreviewDesc =
-      "የመዝሙሩን ሳምፕል እያዳመጡ ነው, ሙሉውን ለማዳመጥ መዝሙሩን ይግዙ";
+      "የመዝሙሩን ሳምፕል እያዳመጡ ነው፣ ሙሉውን ለማዳመጥ መዝሙሩን ይግዙ";
   final String downloadMezmur = "መዝሙሩን አውርድ";
   final String downloadProgressing = "በማውረድ ላይ...";
   final String retryDownload = "ለማውረድ እንደገና ይሞክሩ";
@@ -54,7 +54,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String downloadingStr = "በማውረድ ላይ";
   final String noInternetMsg = "የበይነመረብ ግንኙነት የለም.";
   final String noInternetMsgDetail =
-      "የሚሰራ የበይነመረብ ግንኙነት የለዎትም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
+      "የሚሰራ የበይነመረብ ግንኙነት የለዎትም፣ የበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String tryAgain = "እንደገና ሞክር";
   final String subscribeDialogTitle = "መኃልዬን ሰብስክራይብ ያድርጉ";
   final String subscribeDialogMsg = "መኃልዬን ሰብስክራይብ ያድርጉ እና በነጻነት ኦንላየን ያዳምጡ";
@@ -117,7 +117,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String continueWithPhone = "በስልክዎ ይቀጥሉ";
   final String authenticationFailedMsg = "ማረጋገጥ አልተቻለም!\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String couldntConnectMsg =
-      "ከበይነመረቡ ጋር መገናኘት አልተቻለም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
+      "ከበይነመረቡ ጋር መገናኘት አልተቻለም፣ የበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String queue = "ማጫወቻ ዝርዝር";
   final String unableToClearCart =
       "የጥቅል ግዢዎን ማስወግድ አልተቻለም\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
@@ -201,8 +201,8 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String topArtists = "ታዋቂ ዘማሪያን";
   final String searchTitle = "በመኃልዬ ይፈልጉ";
   final String changeYourSearchKey = "ጽሑፍዎን ለመቀየር ይሞክሩ";
-  final String searchHint = "በመኃልዬ ይፈልጉ መዝሙሮች, አልበሞች, ዘማሪያን";
-  final String searchHint2 = "አልበሞች, ዘማሪያን, ፕሌይሊስትዎች ...";
+  final String searchHint = "በመኃልዬ ይፈልጉ መዝሙሮች፣ አልበሞች፣ ዘማሪያን";
+  final String searchHint2 = "አልበሞች፣ ዘማሪያን፣ ፕሌይሊስትዎች ...";
   final String searchElfFor = "በመኃልዬ ይፈልጉ";
   final String recentSearches = "የቅርብ ጊዜ ፍለጋዎች";
   final String clearRecentSearches = "የቅርብ ጊዜ ፍለጋዎችን አስወግድ";
@@ -252,7 +252,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String selectPaymentMethod = "የመክፈያ ዘዴን ምረጥ";
   final String paymentMethod = "የመክፈያ ዘዴ";
   final String selectYourPrefrredPayment =
-      "ለሁሉም ግዢዎች የእርስዎን ተመራጭ የመክፈያ ዘዴ ይምረጡ, በማንኛውም ጊዜ ሊቀይሩት ይችላሉ.";
+      "ለሁሉም ግዢዎች የእርስዎን ተመራጭ የመክፈያ ዘዴ ይምረጡ፣ በማንኛውም ጊዜ ሊቀይሩት ይችላሉ.";
   final String unFollow = "አትከተል";
   final String removeFromFollowedArtist = "ከመከተል ዝርዝር አስወግድ";
   final String removeFromFavoriteMezmurs = "ከተወዳጅ ዝርዝር አስወግድ";
@@ -286,7 +286,7 @@ class AppLanguageStringsAm extends AppLocalizations {
 
   final String addToExistingPlaylist = "ወደ ነባር ፕሌይሊስት ይጨምሩ";
   final String youHaventCreatedAnyPlaylistMsg =
-      "ምንም ፕሌይሊስትዎች አልፈጠሩም, መዝሙሮች ወደ ፕሌይሊስትዎች መጨመር ለመጀመር ፕሌይሊስትን ይጫኑ.";
+      "ምንም ፕሌይሊስትዎች አልፈጠሩም፣ መዝሙሮች ወደ ፕሌይሊስትዎች መጨመር ለመጀመር ፕሌይሊስትን ይጫኑ.";
   final String addToNewPlaylist = "ወደ አዲስ የተፈጠረው ፕሌይሊስት ይጨምሩ";
   final String unableToAddMezmur =
       "መዝሙሩን ወደ ፕሌይሊስት ማከል አልተቻለም\nየበይነመረብ ግንኙነትዎን ያረጋግጡ";
@@ -299,7 +299,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String dailyQuotesFromApp = "ዕለታዊ ጥቅሶች ከመኃልዬ";
   final String enablePermissions = "ፐርሚሽኖችን ፍቀድ";
   final String enablePermissionsMsg =
-      "ለመቀጠል የሚከተሉት ፐርሚሽኖች ያስፈልጋሉ., እባክዎ ወደ ሲስተም ሴቲንግ ይሂዱ እና ፐርሚሽኖችን ይፍቀዱ";
+      "ለመቀጠል የሚከተሉት ፐርሚሽኖች ያስፈልጋሉ.፣ እባክዎ ወደ ሲስተም ሴቲንግ ይሂዱ እና ፐርሚሽኖችን ይፍቀዱ";
   final String goToSystemSettings = "ወደ ሲስተም ሴቲንግ ሂድ";
   final String cameraAccess = "የካሜራ ፍቃድ";
   final String notificationAccess = "የማሳወቂያ ፍቃድ";
@@ -307,7 +307,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String rateApp = "መሃለዬን ደረጃ ይስጡ";
   final String rateAppMsg = "መሃለዬን ሬት በማድረግ መተግበሪያውን አንድናሻሻል ያግዙን";
   final String areUSureWantToLogOut = "እርግጠኛ ነዎት?";
-  final String areUSureWantToLogOutMsg = "እርግጠኛ ነዎት, መውጣት ይፈልጋሉ";
+  final String areUSureWantToLogOutMsg = "እርግጠኛ ነዎት፣ መውጣት ይፈልጋሉ";
   final String preferredCurrency = "ተመራጭ ምንዛሪ";
   final String preferredCurrencySettingMsg =
       "የእርስዎ ተመራጭ ምንዛሬ ዋጋዎችን ለማሳየት ጥቅም ላይ ይውላል";
@@ -321,7 +321,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String facebook = "ፌስቡክ";
   final String apple = "አፕል";
   final String downloadStartedMsg = "ማውረድ ተጀምሮል";
-  final String firstTimeDialogMsg = "ቋንቋዎን ይምረጡ, በሴቲንግ ውስጥ በኋላ ሊለውጡት ይችላሉ.";
+  final String firstTimeDialogMsg = "ቋንቋዎን ይምረጡ፣ በሴቲንግ ውስጥ በኋላ ሊለውጡት ይችላሉ.";
   final String welcomeToMehaley = "እንኳን ወደ መሃሌዬ በደህና መጡ";
   final String chooseYourPreferredCurrency = "የእርስዎን ተመራጭ ምንዛሬ ይምረጡ";
   final String expand = "አስፋ";
@@ -332,7 +332,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String done = "ፈፅም";
   final updateRequired = "በመሃሌዬ መጠቀሙዎን ለመቀጠል መተግበሪያዉን ማሻሻል ያስፈልጋል";
   final updateRequiredMsg =
-      "ውድ ተጠቃሚ, አሁን ያለዎት መተግበሪያ ያለፈበተ ነው, አዳዲስ ባህሪያትን ለማግኘት እባክዎ መሃለየን ያዘምኑ";
+      "ውድ ተጠቃሚ፣ አሁን ያለዎት መተግበሪያ ያለፈበተ ነው፣ አዳዲስ ባህሪያትን ለማግኘት እባክዎ መሃለየን ያዘምኑ";
   final newerVersion = "አዲስ ስሪት";
   final currentVersion = "የአሁኑ ስሪት";
   final updateApp = "መተግበሪያን አዘምን";
@@ -340,9 +340,9 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String sharedMezmur = "የተጋራ መዝሙሩ";
   final String cartAlreadyCheckedOut = "የጥቅል ግዢው አስቀድሞ ትገዝቶል";
   final String cartAlreadyCheckedOutMsg =
-      "የጥቅል ግዢው አስቀድሞ ትገዝቶል , ገጽን ድጋሚ ለማደስ ይሞክሩ";
+      "የጥቅል ግዢው አስቀድሞ ትገዝቶል ፣ ገጽን ድጋሚ ለማደስ ይሞክሩ";
   final String billCanceled = "ቢሉ ተሰርዟል";
-  final String billCanceledMsg = "ቢሉዎ ተሰርዟል, ዋሌትዎን ለመሙላት አዲስ ቢል ይፍጠሩ";
+  final String billCanceledMsg = "ቢሉዎ ተሰርዟል፣ ዋሌትዎን ለመሙላት አዲስ ቢል ይፍጠሩ";
   final String noHistory = "ታሪክ የለም";
 
   final String giftReceived = "ስጦታ ተቀብለዋል";
@@ -356,12 +356,12 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String help = "የእገዛ ገጽ";
   final String selectedAmount = "የተመረጠው መጠን";
 
-  final String billNotPaidYetMsg = "ቢሉ እስካሁን አልተከፈለም,\nይህን ቢል በመክፈል ዋሌትዎን ይሙሉ";
+  final String billNotPaidYetMsg = "ቢሉ እስካሁን አልተከፈለም፣\nይህን ቢል በመክፈል ዋሌትዎን ይሙሉ";
   final String billAlreadyPaidMsg = "ቢሉ አስቀድሞ ተከፍሏል!";
 
   final String billStatusFailedMsg =
-      "የቢልዎን ሁኔታ ማረጋገጥ አልተቻለም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
-  final String billCancelFailedMsg = "ቢልዎን መሰረዝ አልተቻለም, የበይነመረብ ግንኙነትዎን ያረጋግጡ";
+      "የቢልዎን ሁኔታ ማረጋገጥ አልተቻለም፣ የበይነመረብ ግንኙነትዎን ያረጋግጡ";
+  final String billCancelFailedMsg = "ቢልዎን መሰረዝ አልተቻለም፣ የበይነመረብ ግንኙነትዎን ያረጋግጡ";
   final String checkBillStatus = "ቢሉን ያረጋግጡ";
   final String checkingBillStatus = "የቢሉን ሁኔታን በመፈተሽ ላይ";
   final String close = "ዝጋ";
@@ -379,7 +379,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String enterOtherAmount = "ሌላ መጠን ያስገቡ";
   final String proceedToPayment = "ወደ ክፍያ ይቀጥሉ";
   final String billInfoMsg =
-      "ታዲያስ, ለመሙላት የሚፈልጉትን መጠን ይምረጡና ዋሌትዎን በሲቢኢ ብር, በ ንግድ ባንክ የሞባይል ባንኪንግ, አቢሲንያ ባንክ የሞባይል ባንኪንግ... በመክፈል ዋሌትዎን ይሙሉ.";
+      "ታዲያስ፣ ለመሙላት የሚፈልጉትን መጠን ይምረጡና ዋሌትዎን በሲቢኢ ብር፣ በ ንግድ ባንክ የሞባይል ባንኪንግ፣ አቢሲንያ ባንክ የሞባይል ባንኪንግ... በመክፈል ዋሌትዎን ይሙሉ.";
   final String unPaidBillMsg =
       "ያለፈ ያልተከፈለ ቢል አለዎት፣ ይህን ቢል በመክፈል ዋሌትዎን መሙላት ይችላሉ ወይም ቢሉን መሰርዝ እና አዲስ ቢል መፍጠር ይችላሉ.";
   final String previousUnPaidBill = "ያለፈ ያልተከፈለ ቢል አለ";
@@ -583,68 +583,59 @@ class AppLanguageStringsAm extends AppLocalizations {
 
   ///UNTRANSLATED
   ///
-  final String subscription = "subscription";
-  final String profile = "Profile";
-  final String subscribed = "Subscribed";
-  final String continueStr = "Continue";
-  final String tryForFree = "Try for free";
-  final String paymentCanceled = "Payment was canceled!!";
-  final String noThanks = "No, Thanks";
-
-  final String openAudio = "Open Audio";
-  final String purchaseCouldNotBeCompleted = "Purchase could not be completed";
-  final String subscriptionRequired = "Subscription Required To Listen";
-  final String resubscribe = "Resubscribe";
-  final String thankYouForSubscribing = "Thank you for subscribing.";
-  final String subscribtionNotAvlvable = "Subscription currently not available";
+  final String subscription = "ሰብስክሪብሽን";
+  final String profile = "የግል መገለጫ";
+  final String subscribed = "ሰብስክራይብ አድርገዋል";
+  final String continueStr = "ቀጥል";
+  final String tryForFree = "በነጻ ይሞክሩ";
+  final String paymentCanceled = "ክፍያ ተሰርዟል!!";
+  final String noThanks = "አይ፣ አመሰግናለሁ";
+  final String openAudio = "ኦዲዮን ክፈት";
+  final String purchaseCouldNotBeCompleted = "ግዢዎ ሊጠናቀቅ አልቻለም";
+  final String subscriptionRequired = "ለማዳመጥ ሰብስክሪብሽን ያስፈልጋል";
+  final String resubscribe = "እንደገና ሰብስክራይብ ያድርጉ";
+  final String thankYouForSubscribing = "ሰብስክራይብ ስላደረጉ እናመሰግናለን";
+  final String subscribtionNotAvlvable = "የ ሰብስክሪብሽን አገልግሎት አልተጀመረም";
   final String subscribedMsg =
-      "You have successfully subscribed to mehaleye, enjoy listening mezmurs on mehaleye with unlimited access";
+      "በመኃልዬ ሰብስክሪብሽን በተሳካ ሁኔታ ተመዝግበዋል፣ ከገደብ ነጻ መዝሙሮችን ያዳምጡ፣ ያውርዱ";
   final String subscriptionNotAvlavableMsg =
-      "Subscription is currently not available in your country, we will notify you when available.";
-  final String purchaseCouldNotBeVerfied =
-      "Your Purchase Could Not Be Verified";
+      "የ ሰብስክሪብሽን አገልግሎት አልተጀመረም፣ የመኃልዬ ሰብስክሪብሽን ባሉበት አካባቢ ሲጀመር እናሳውቅዎታለን";
+  final String purchaseCouldNotBeVerfied = "ግዢህ ሊረጋገጥ አልቻለም";
   final String purchaseCouldNotBeVerfiedMsg =
-      "There was a problem verifying your purchase\nplease try again!!";
+      "ግዢህን ማረጋገጥ ላይ ችግር ነበር\nእባክህ እንደገና ይሞክሩ!!";
   final String subscriptionCouldNotBeRenewd =
-      "Your subscription could not be renewed, due to active cancellation or payment issues.";
-  final String completeingYourPurchase =
-      "Completing your purchase\nplease wait...";
-  final String sadToSeeYouGo = "Sad to see you go";
-  final String purchasePending = "Purchase Pending\nPlease wait...";
-  final String inAppNotAvlable =
-      "In app purchasing not available in your location!!";
-  final String ourPlans = "Our Plans";
-  final String allPlansInclude = "All Plans Include";
-  final String unlimitedStreamingAllMezmurs =
-      "Unlimited streaming to all mezmurs";
-  final String unlimitedDownloadOffline =
-      "Unlimited downloads for offline usage";
-  final String highQualityAudio = "High quality audio";
-  final String featuredVideos = "Featured Videos";
-  final String yenepay = "Yenepay";
-  final String telebirr = "Telebirr";
-  final String googlePlayInappPurcahses = "Google Play In-App Purchases";
-  final String appStoreInappPurcahses = "App Store In-App Purchases";
-  final String payWithTelebirr = "Pay with Telebirr";
-  final String payWithTelebirrMsg =
-      "Use your Telebirr account to complete your mehaleye purchase.";
-  final String payWithYenepay = "Pay with Yenepay";
+      "ሰብስክሪብሽንዎ በመሰርዝ ምክንያት ወይም በክፍያ ችግሮች ሊታደስ አልቻለም.";
+  final String completeingYourPurchase = "ግዢዎን በማጠናቀቅ ላይ\nእባክዎ ይጠብቁ...";
+  final String sadToSeeYouGo = "ሰብስክሪብሽንዎ ተሰርዞል";
+  final String purchasePending = "ግዢ በመጠባበቅ ላይ\nእባክዎ ይጠብቁ...";
+  final String inAppNotAvlable = "የ ጉግል መተግበሪያ ግዢ በእርስዎ አካባቢ አይገኝም!!";
+  final String ourPlans = "የሰብስክሪብሽን ዓይነቶች";
+  final String allPlansInclude = "ሁሉም የሰብስክሪብሽን ዓይነቶች የሚያካትቱት";
+  final String unlimitedStreamingAllMezmurs = "ያልተገደበ ስትሪሚንግ አገልግሎት";
+  final String unlimitedDownloadOffline = "መዝሙሮችን በማውረድ ያለ ኢንተርኔት ማዳመጥ";
+  final String highQualityAudio = "ከፍተኛ ጥራት ያለው ኦዲዮ";
+  final String featuredVideos = "ተለይተው የቀረቡ ቪዲዮዎች";
+  final String yenepay = "የኔፔይ";
+  final String telebirr = "ቴሌብር";
+  final String googlePlayInappPurcahses = "የጉግል ፕሌይ መተግበሪያ ግዢ";
+  final String appStoreInappPurcahses = "የአፕ ስቶር መተግበሪያ ግዢ";
+  final String payWithTelebirr = "በቴሌብር ይክፈሉ";
+  final String payWithTelebirrMsg = "የመኃልዬ ግዢን ለማጠናቀቅ የቴሌቢር መለያዎን ይጠቀሙ.";
+  final String payWithYenepay = "በየኔፔይ ይክፈሉ";
   final String payWithYenepayMsg =
-      "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
-  final String payWithGoogleplayInappPurchases =
-      "Pay With Google Play In-App Purchases";
-  final String payWithAppStoreInappPurchases =
-      "Pay With App Store In-App Purchases";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የየኔፔይ መለያዎን ይጠቀሙ፣ የኔፔይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
+  final String payWithGoogleplayInappPurchases = "በ ጉግል ፕሌይ መተግበሪያ ግዢ ይክፈሉ";
+  final String payWithAppStoreInappPurchases = "በ አፕ ስቶር መተግበሪያ ግዢ ይክፈሉ";
   final String payWithGoogleplayInappPurchasesMsg =
-      "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የጉግል መለያዎን ይጠቀሙ። ጉግል ፕለይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
   final String payWithAppStoreInappPurchasesMsg =
-      "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የአፕል መለያዎን ይጠቀሙ። አፕ ስቶር የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
 
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {
-      return "You have a premium account\nmanage your subscriptions with google play store";
+      return "የፕሪሚየም ሰብስክሪብሽን ተጠቃሚ አገልግሎት ነዎት\nሰብስክሪብሽንዎን በ ጉግል ፕለይ ያቀናብሩ";
     } else {
-      return "You have a premium account\nmanage your subscriptions with App Store";
+      return "የፕሪሚየም ሰብስክሪብሽን ተጠቃሚ አገልግሎት ነዎት\nሰብስክሪብሽንዎን በ አፕ ስቶር ያቀናብሩ";
     }
   }
 }

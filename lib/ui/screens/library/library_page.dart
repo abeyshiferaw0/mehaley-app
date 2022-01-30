@@ -50,17 +50,20 @@ class _LibraryPageState extends State<LibraryPage>
     BlocProvider.of<BottomBarCubit>(context)
         .changeScreen(BottomBarPages.LIBRARY);
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
+    print("BottomBarProfileCubittt // didPopNext // true");
   }
 
   @override
   void didPushNext() {
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(false);
+    print("BottomBarProfileCubittt // didPushNext // false");
     super.didPushNext();
   }
 
   @override
   void didPop() {
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(false);
+    print("BottomBarProfileCubittt // didPop // false");
     super.didPop();
   }
 
@@ -75,6 +78,7 @@ class _LibraryPageState extends State<LibraryPage>
     BlocProvider.of<BottomBarCubit>(context)
         .changeScreen(BottomBarPages.LIBRARY);
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
+    print("BottomBarProfileCubittt // initState // true");
 
     ///INIT TAB CONTROLLER
     _tabController = new TabController(length: 5, vsync: this);
@@ -103,8 +107,7 @@ class _LibraryPageState extends State<LibraryPage>
         widget.libraryFromOtherPageTypes != null) {
       if (widget.isLibraryForOtherPage!) {
         ///MAKE BOTTOM BAR LIBRARY ICON ACTIVE
-        BlocProvider.of<BottomBarCubit>(context)
-            .changeScreen(BottomBarPages.LIBRARY);
+
         if (widget.libraryFromOtherPageTypes! ==
                 LibraryFromOtherPageTypes.PURCHASED_SONGS ||
             widget.libraryFromOtherPageTypes! ==
