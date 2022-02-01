@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -45,13 +45,13 @@ class ArtistAlbumItem extends StatelessWidget {
             // SizedBox(width: AppMargin.margin_16),
             ClipRRect(
               borderRadius: BorderRadius.all(
-                Radius.circular(0),
+                Radius.circular(4.0),
               ),
               child: CachedNetworkImage(
                 width: AppValues.artistAlbumItemSize,
                 height: AppValues.artistAlbumItemSize,
                 fit: BoxFit.cover,
-                imageUrl:  album.albumImages[0].imageSmallPath,
+                imageUrl: album.albumImages[0].imageSmallPath,
                 placeholder: (context, url) => buildImagePlaceHolder(),
                 errorWidget: (context, url, e) => buildImagePlaceHolder(),
               ),

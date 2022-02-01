@@ -12,6 +12,11 @@ class AddRecentSearchEvent extends RecentSearchEvent {
   List<Object?> get props => [item];
 }
 
+class LoadRecentSearchEvent extends RecentSearchEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class RemoveRecentSearchEvent extends RecentSearchEvent {
   final dynamic item;
 

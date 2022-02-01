@@ -241,16 +241,18 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
 
                       ///IMAGE FROM NETWORK
                       if (appUser.profileImageId != null) {
-                        return CachedNetworkImage(
-                          width: AppValues.editProfileImageSize,
-                          height: AppValues.editProfileImageSize,
-                          imageUrl: 
-                              appUser.profileImageId!.imageMediumPath,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) =>
-                              buildImagePlaceHolder(),
+                        return AppCard(
+                          radius: 4.0,
+                          child: CachedNetworkImage(
+                            width: AppValues.editProfileImageSize,
+                            height: AppValues.editProfileImageSize,
+                            imageUrl: appUser.profileImageId!.imageMediumPath,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) =>
+                                buildImagePlaceHolder(),
+                            errorWidget: (context, url, error) =>
+                                buildImagePlaceHolder(),
+                          ),
                         );
                       } else {
                         return Container(

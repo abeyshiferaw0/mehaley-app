@@ -61,7 +61,22 @@ class PurchasedAllSongsBloc
           }
         }
       } catch (error) {
-        yield PurchasedAllSongsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH AFTER CACHE YIELD
+          final PurchasedItemsData allPurchasedSongsData =
+              await libraryPageDataRepository.getPurchasedItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppPurchasedPageItemTypes.ALL_SONGS,
+          );
+          yield PurchasedAllSongsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield AllPurchasedSongsLoadedState(
+            allPurchasedSong: allPurchasedSongsData.allPurchasedSong!,
+          );
+        } catch (error) {
+          yield PurchasedAllSongsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshAllPurchasedSongsEvent) {
       libraryPageDataRepository.cancelDio();

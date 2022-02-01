@@ -17,8 +17,8 @@ import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_positi
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/custom_track_shape.dart';
@@ -368,13 +368,13 @@ class _QueueListPageState extends State<QueueListPage> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.all(
-            Radius.circular(4),
+            Radius.circular(4.0),
           ),
           child: CachedNetworkImage(
             width: AppValues.queueSongItemSize + 10,
             height: AppValues.queueSongItemSize + 10,
             fit: BoxFit.cover,
-            imageUrl:  song.albumArt.imageSmallPath,
+            imageUrl: song.albumArt.imageSmallPath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, e) => buildImagePlaceHolder(),
           ),

@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/player_queue_cubit.d
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/screens/player/widgets/player_page_ad.dart';
 import 'package:mehaley/util/screen_util.dart';
 
 class MainPlayerAlbumArtPager extends StatefulWidget {
@@ -48,122 +49,76 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
         }
       },
       builder: (context, state) {
-        return GestureDetector(
-          onHorizontalDragEnd: (dragDetails) {},
-          child: PageView.builder(
-            scrollDirection: Axis.horizontal,
-            controller: _pageController,
-            itemCount: state.queue.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Center(
-                child: AppCard(
-                  radius: 8,
-                  withShadow: true,
-                  constraints: BoxConstraints(
-                    maxHeight:
-                        ScreenUtil(context: context).getScreenHeight() * 0.4,
-                    minHeight:
-                        ScreenUtil(context: context).getScreenHeight() * 0.2,
-                    maxWidth:
-                        ScreenUtil(context: context).getScreenWidth() * 0.85,
-                    minWidth:
-                        ScreenUtil(context: context).getScreenWidth() * 0.6,
-                  ),
-                  child: Stack(
-                    children: [
-                      CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl: state.queue[index].albumArt.imageLargePath,
-                        errorWidget: (context, url, error) =>
-                            buildImagePlaceHolder(),
-                        placeholder: (context, url) => buildImagePlaceHolder(),
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      // Align(
-                      //   alignment: Alignment.bottomRight,
-                      //   child: AppBouncingButton(
-                      //     onTap: () {
-                      //       ///STOP PLAYER AND GO TO YT PLAYER PAGE
-                      //       PagesUtilFunctions.openYtPlayerPage(
-                      //         context,
-                      //         "https://www.youtube.com/watch?v=m6HJ3pUM8Hc",
-                      //       );
-                      //     },
-                      //     child: Container(
-                      //       padding: EdgeInsets.symmetric(
-                      //         horizontal: AppPadding.padding_16,
-                      //         vertical: AppPadding.padding_8,
-                      //       ),
-                      //       decoration: BoxDecoration(
-                      //         color: AppColors.white,
-                      //         borderRadius: BorderRadius.only(
-                      //           topLeft: Radius.circular(10.0),
-                      //         ),
-                      //       ),
-                      //       child: Row(
-                      //         mainAxisSize: MainAxisSize.min,
-                      //         crossAxisAlignment: CrossAxisAlignment.center,
-                      //         children: [
-                      //           Icon(
-                      //             FlutterRemix.play_circle_line,
-                      //             size: AppIconSizes.icon_size_16,
-                      //             color: AppColors.darkOrange,
-                      //           ),
-                      //           SizedBox(
-                      //             width: AppMargin.margin_8,
-                      //           ),
-                      //           Text(
-                      //             "Play Video".toUpperCase(),
-                      //             style: TextStyle(
-                      //               fontSize: AppFontSizes.font_size_10.sp,
-                      //               fontWeight: FontWeight.w600,
-                      //               color: AppColors.darkOrange,
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
+        return PageView.builder(
+          scrollDirection: Axis.horizontal,
+          controller: _pageController,
+          itemCount: state.queue.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Center(
+              child: AppCard(
+                radius: 8,
+                withShadow: true,
+                constraints: BoxConstraints(
+                  maxHeight:
+                      ScreenUtil(context: context).getScreenHeight() * 0.4,
+                  minHeight:
+                      ScreenUtil(context: context).getScreenHeight() * 0.2,
+                  maxWidth:
+                      ScreenUtil(context: context).getScreenWidth() * 0.85,
+                  minWidth: ScreenUtil(context: context).getScreenWidth() * 0.6,
+                ),
+                child: Stack(
+                  children: [
+                    buildCachedNetworkImage(state, index),
+                    PlayerPageAd(),
+                  ],
+                ),
+              ),
+            );
+          },
+          onPageChanged: (pos) {
+            // //SEEK AUDIO PLAYER SLIDER ALONG WITH SONG POSITION DURATION
+
+            //print("SeekAudioPlayerToEventCALLED ONE $pos");
+            if (!isBlocScroll) {
+              //print("SeekAudioPlayerToEventCALLED TWO $pos");
+              BlocProvider.of<AudioPlayerBloc>(context).add(
+                SeekAudioPlayerToEvent(
+                  song: state.queue.elementAt(pos),
                 ),
               );
-            },
-            onPageChanged: (pos) {
-              // //SEEK AUDIO PLAYER SLIDER ALONG WITH SONG POSITION DURATION
+            }
+            isBlocScroll = false;
 
-              //print("SeekAudioPlayerToEventCALLED ONE $pos");
-              if (!isBlocScroll) {
-                //print("SeekAudioPlayerToEventCALLED TWO $pos");
-                BlocProvider.of<AudioPlayerBloc>(context).add(
-                  SeekAudioPlayerToEvent(
-                    song: state.queue.elementAt(pos),
-                  ),
-                );
-              }
-              isBlocScroll = false;
-
-              // if (currentSong.id != state.queue.elementAt(pos).id) {
-              //   BlocProvider.of<AudioPlayerBloc>(context).add(
-              //     SeekAudioPlayerToEvent(
-              //         mediaItem: state.queue.elementAt(pos)),
-              //   );
-              // }
-            },
-          ),
+            // if (currentSong.id != state.queue.elementAt(pos).id) {
+            //   BlocProvider.of<AudioPlayerBloc>(context).add(
+            //     SeekAudioPlayerToEvent(
+            //         mediaItem: state.queue.elementAt(pos)),
+            //   );
+            // }
+          },
         );
       },
     ));
+  }
+
+  CachedNetworkImage buildCachedNetworkImage(QueueAndIndex state, int index) {
+    return CachedNetworkImage(
+      fit: BoxFit.cover,
+      imageUrl: state.queue[index].albumArt.imageLargePath,
+      errorWidget: (context, url, error) => buildImagePlaceHolder(),
+      placeholder: (context, url) => buildImagePlaceHolder(),
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void initPageControllerPosition() {

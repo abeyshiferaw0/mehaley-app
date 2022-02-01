@@ -513,6 +513,7 @@ class AppLocale {
       appLocalizations.payWithGoogleplayInappPurchasesMsg;
   String get payWithAppStoreInappPurchasesMsg =>
       appLocalizations.payWithAppStoreInappPurchasesMsg;
+  String get mezmur => appLocalizations.mezmur;
 
   ///FUNCTIONS
 

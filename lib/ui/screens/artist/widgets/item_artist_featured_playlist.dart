@@ -4,6 +4,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
+import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -31,26 +32,29 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CachedNetworkImage(
-                width: AppValues.featuringArtistItemImageSize,
-                height: AppValues.featuringArtistItemImageSize,
-                imageUrl: playlist.playlistImage.imageMediumPath,
-                imageBuilder: (context, imageProvider) => Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+              AppCard(
+                radius: 4.0,
+                child: CachedNetworkImage(
+                  width: AppValues.featuringArtistItemImageSize,
+                  height: AppValues.featuringArtistItemImageSize,
+                  imageUrl: playlist.playlistImage.imageMediumPath,
+                  imageBuilder: (context, imageProvider) => Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    AppIconWidget()
-                  ],
+                      AppIconWidget()
+                    ],
+                  ),
+                  placeholder: (context, url) => buildItemsImagePlaceHolder(),
+                  errorWidget: (context, url, error) =>
+                      buildItemsImagePlaceHolder(),
                 ),
-                placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
               ),
               SizedBox(height: AppMargin.margin_8),
               Text(

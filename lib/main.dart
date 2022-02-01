@@ -39,6 +39,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:sizer/sizer.dart';
 
+import 'business_logic/blocs/app_ad_bloc/app_ad_bloc.dart';
 import 'business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
@@ -170,6 +171,7 @@ class _MyAppState extends State<MyApp> {
                 connectivity: Connectivity(),
               ),
             ),
+
             BlocProvider<AudioPlayerBloc>(
               create: (context) => AudioPlayerBloc(
                 audioPlayer: AudioPlayer(),
@@ -259,6 +261,11 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => OneSignalBloc(),
+            ),
+            BlocProvider(
+              create: (context) => AppAdBloc(
+                appAdDataRepository: AppRepositories.appAdDataRepository,
+              ),
             ),
 
             // BlocProvider<PlayerVideoModeCubit>(

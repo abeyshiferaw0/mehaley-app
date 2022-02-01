@@ -130,28 +130,31 @@ class _SearchResultItemState extends State<SearchResultItem> {
         children: [
           Stack(
             children: [
-              CachedNetworkImage(
-                //height: AppValues.customGroupItemSize,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                height: AppValues.customGroupItemSize,
-                imageUrl: imagePath,
-                placeholder: (context, url) =>
-                    buildImagePlaceHolder(appSearchItemTypes),
-                errorWidget: (context, url, e) =>
-                    buildImagePlaceHolder(appSearchItemTypes),
-                imageBuilder: (context, imageProvider) => Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+              AppCard(
+                radius: 4.0,
+                child: CachedNetworkImage(
+                  //height: AppValues.customGroupItemSize,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  height: AppValues.customGroupItemSize,
+                  imageUrl: imagePath,
+                  placeholder: (context, url) =>
+                      buildImagePlaceHolder(appSearchItemTypes),
+                  errorWidget: (context, url, e) =>
+                      buildImagePlaceHolder(appSearchItemTypes),
+                  imageBuilder: (context, imageProvider) => Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    AppIconWidget()
-                  ],
+                      AppIconWidget()
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -187,7 +190,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
             withShadow: false,
             radius: appSearchItemTypes == AppSearchItemTypes.ARTIST
                 ? AppValues.queueSongItemSize
-                : 0.0,
+                : 4.0,
             child: CachedNetworkImage(
               width: AppValues.queueSongItemSize,
               height: AppValues.queueSongItemSize,
@@ -219,8 +222,14 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   children: [
                     SongItemBadge(
                       tag: appSearchItemTypes == AppSearchItemTypes.SONG
-                          ? AppLocale.of().mezmurs.toUpperCase()
-                          : EnumToString.convertToString(appSearchItemTypes),
+                          ? AppLocale.of().mezmur.toUpperCase()
+                          : appSearchItemTypes == AppSearchItemTypes.ALBUM
+                              ? AppLocale.of().album.toUpperCase()
+                              : appSearchItemTypes ==
+                                      AppSearchItemTypes.PLAYLIST
+                                  ? AppLocale.of().playlist.toUpperCase()
+                                  : EnumToString.convertToString(
+                                      appSearchItemTypes),
                     ),
                     Text(
                       subTitle,

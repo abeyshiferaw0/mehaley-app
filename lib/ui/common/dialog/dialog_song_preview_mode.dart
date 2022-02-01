@@ -89,92 +89,91 @@ class DialogSongPreviewMode extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         horizontal: AppMargin.margin_16,
       ),
-      child: Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AppCard(
-              radius: 4.0,
-              child: CachedNetworkImage(
-                width: AppValues.previewDialogSongItemSize,
-                height: AppValues.previewDialogSongItemSize,
-                fit: BoxFit.cover,
-                imageUrl: song.albumArt.imageMediumPath,
-                placeholder: (context, url) => buildImagePlaceHolder(),
-                errorWidget: (context, url, e) => buildImagePlaceHolder(),
-              ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AppCard(
+            radius: 4.0,
+            child: CachedNetworkImage(
+              width: AppValues.previewDialogSongItemSize,
+              height: AppValues.previewDialogSongItemSize,
+              fit: BoxFit.cover,
+              imageUrl: song.albumArt.imageMediumPath,
+              placeholder: (context, url) => buildImagePlaceHolder(),
+              errorWidget: (context, url, e) => buildImagePlaceHolder(),
             ),
-            SizedBox(
-              width: AppMargin.margin_16,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 25,
-                    child: AutoSizeText(
-                      L10nUtil.translateLocale(song.songName, context),
+          ),
+          SizedBox(
+            width: AppMargin.margin_16,
+          ),
+          Flexible(
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 25,
+                  child: AutoSizeText(
+                    L10nUtil.translateLocale(song.songName, context),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: AppFontSizes.font_size_16,
+                      color: AppColors.black,
+                    ),
+                    maxLines: 1,
+                    minFontSize: AppFontSizes.font_size_16,
+                    maxFontSize: AppFontSizes.font_size_16,
+                    overflowReplacement: Marquee(
+                      text: L10nUtil.translateLocale(song.songName, context),
                       style: TextStyle(
-                        fontWeight: FontWeight.w500,
                         fontSize: AppFontSizes.font_size_16,
+                        fontWeight: FontWeight.w500,
                         color: AppColors.black,
                       ),
-                      maxLines: 1,
-                      minFontSize: AppFontSizes.font_size_16,
-                      maxFontSize: AppFontSizes.font_size_16,
-                      overflowReplacement: Marquee(
-                        text: L10nUtil.translateLocale(song.songName, context),
-                        style: TextStyle(
-                          fontSize: AppFontSizes.font_size_16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.black,
-                        ),
-                        scrollAxis: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        blankSpace: AppPadding.padding_32,
-                        velocity: 50.0,
-                        pauseAfterRound: Duration(seconds: 2),
-                        startPadding: AppPadding.padding_16,
-                        accelerationDuration: Duration(seconds: 1),
-                        accelerationCurve: Curves.easeIn,
-                        decelerationDuration: Duration(milliseconds: 500),
-                        decelerationCurve: Curves.easeOut,
-                        showFadingOnlyWhenScrolling: false,
-                        fadingEdgeEndFraction: 0.2,
-                        fadingEdgeStartFraction: 0.2,
-                      ),
+                      scrollAxis: Axis.horizontal,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      blankSpace: AppPadding.padding_32,
+                      velocity: 50.0,
+                      pauseAfterRound: Duration(seconds: 2),
+                      startPadding: AppPadding.padding_16,
+                      accelerationDuration: Duration(seconds: 1),
+                      accelerationCurve: Curves.easeIn,
+                      decelerationDuration: Duration(milliseconds: 500),
+                      decelerationCurve: Curves.easeOut,
+                      showFadingOnlyWhenScrolling: false,
+                      fadingEdgeEndFraction: 0.2,
+                      fadingEdgeStartFraction: 0.2,
                     ),
                   ),
-                  Text(
-                    PagesUtilFunctions.getArtistsNames(
-                        song.artistsName, context),
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.txtGrey,
-                      fontWeight: FontWeight.w300,
-                    ),
+                ),
+                Text(
+                  PagesUtilFunctions.getArtistsNames(song.artistsName, context),
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    color: AppColors.txtGrey,
+                    fontWeight: FontWeight.w300,
                   ),
-                  SizedBox(
-                    height: AppMargin.margin_4,
+                ),
+                SizedBox(
+                  height: AppMargin.margin_4,
+                ),
+                Text(
+                  '${song.priceEtb.parsePriceAmount()} ${AppLocale().birr}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    color: AppColors.darkOrange,
+                    fontWeight: FontWeight.w400,
                   ),
-                  Text(
-                    '${song.priceEtb.parsePriceAmount()} ${AppLocale().birr}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.darkOrange,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

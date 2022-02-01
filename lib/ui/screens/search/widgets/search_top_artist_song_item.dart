@@ -7,6 +7,7 @@ import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
+import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -65,28 +66,31 @@ class SearchTopArtistSongItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              child: CachedNetworkImage(
-                imageUrl: song.albumArt.imageSmallPath,
-                width: width,
-                height: width,
-                imageBuilder: (context, imageProvider) => Stack(
-                  children: [
-                    Container(
-                      width: width,
-                      height: width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+              child: AppCard(
+                radius: 4.0,
+                child: CachedNetworkImage(
+                  imageUrl: song.albumArt.imageSmallPath,
+                  width: width,
+                  height: width,
+                  imageBuilder: (context, imageProvider) => Stack(
+                    children: [
+                      Container(
+                        width: width,
+                        height: width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    AppIconWidget()
-                  ],
+                      AppIconWidget()
+                    ],
+                  ),
+                  placeholder: (context, url) => buildItemsImagePlaceHolder(),
+                  errorWidget: (context, url, error) =>
+                      buildItemsImagePlaceHolder(),
                 ),
-                placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
               ),
             ),
             SizedBox(

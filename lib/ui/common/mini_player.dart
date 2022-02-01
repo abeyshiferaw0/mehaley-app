@@ -489,7 +489,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
 
   AppCard buildMiniAlbumArt(Song? song) {
     return AppCard(
-      radius: 0.0,
+      radius: 4.0,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(

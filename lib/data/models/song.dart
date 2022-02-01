@@ -294,7 +294,7 @@ class Song extends Equatable {
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
-          artUri: Uri.parse(song.albumArt.imageSmallPath),
+          artUri: Uri.parse(song.albumArt.imageMediumPath),
           extras: {
             AppValues.songExtraStr: song.toMap(),
             AppValues.songSyncExtraStr: songSync.toMap(),
@@ -342,7 +342,7 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri: Uri.parse(song.albumArt.imageSmallPath),
+            artUri: Uri.parse(song.albumArt.imageMediumPath),
             extras: {
               AppValues.songExtraStr: song.toMap(),
               AppValues.songSyncExtraStr: songSync.toMap(),
@@ -408,7 +408,7 @@ class Song extends Equatable {
   //       duration: Duration(
   //         seconds: song.audioFile.audioDurationSeconds.toInt(),
   //       ),
-  //       artUri: Uri.parse(song.albumArt.imageSmallPath),
+  //       artUri: Uri.parse(song.albumArt.imageMediumPath),
   //       extras: {
   //         AppValues.songExtraStr: song.toMap(),
   //         AppValues.songSyncExtraStr: songSync.toMap(),
@@ -453,7 +453,7 @@ class Song extends Equatable {
   //         duration: Duration(
   //           seconds: song.audioFile.audioDurationSeconds.toInt(),
   //         ),
-  //         artUri: Uri.parse(song.albumArt.imageSmallPath),
+  //         artUri: Uri.parse(song.albumArt.imageMediumPath),
   //         extras: {
   //           AppValues.songExtraStr: song.toMap(),
   //           AppValues.songSyncExtraStr: songSync.toMap(),

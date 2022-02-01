@@ -13,6 +13,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/ui/common/menu/menu_items/song_download_menu_item.dart';
 import 'package:mehaley/ui/common/menu/menu_items/song_favorite_menu_item.dart';
@@ -111,17 +112,20 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CachedNetworkImage(
-            height: AppValues.menuHeaderImageSize,
-            width: AppValues.menuHeaderImageSize,
-            imageUrl: song.albumArt.imageMediumPath,
-            placeholder: (context, url) => buildImagePlaceHolder(),
-            errorWidget: (context, url, error) => buildImagePlaceHolder(),
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
+          AppCard(
+            radius: 6.0,
+            child: CachedNetworkImage(
+              height: AppValues.menuHeaderImageSize,
+              width: AppValues.menuHeaderImageSize,
+              imageUrl: song.albumArt.imageMediumPath,
+              placeholder: (context, url) => buildImagePlaceHolder(),
+              errorWidget: (context, url, error) => buildImagePlaceHolder(),
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

@@ -11,6 +11,7 @@ abstract class AppLocalizations {
   String get previewMode;
   String get buyMezmur;
   String get buyAlbum;
+  String get mezmur;
   String get buy;
   String get buyPlaylist;
   String get buyMezmurToListenOffline;

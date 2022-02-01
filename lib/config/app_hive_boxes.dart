@@ -8,6 +8,7 @@ import 'package:mehaley/data/models/audio_file.dart';
 import 'package:mehaley/data/models/bg_video.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/enums/iap_product_types.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
 import 'package:mehaley/data/models/enums/setting_enums/download_song_quality.dart';
@@ -20,6 +21,7 @@ import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/util/hive_duration_adapter.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 
 import 'constants.dart';
@@ -40,6 +42,8 @@ class AppHiveBoxes {
   late Box recentlyFollowedArtistBox;
   late Box recentlyUnFollowedArtistBox;
   late Box recentSearchesBox;
+  late Box recentlyPurchasedMadeBox;
+  late Box recentlyAdShownBox;
   late Box iapUtilBox;
   late Box subscriptionBox;
 
@@ -112,6 +116,16 @@ class AppHiveBoxes {
     ///RECENTLY UN FOLLOWED ARTIST
     recentlyUnFollowedArtistBox = await Hive.openBox<dynamic>(
       AppValues.recentlyUnFollowedArtistBox,
+    );
+
+    ///RECENTLY PURCHASE WAS MADE BOX
+    recentlyPurchasedMadeBox = await Hive.openBox<bool>(
+      AppValues.recentlyPurchasedMadeBox,
+    );
+
+    ///RECENTLY AD WAS SHOWN BOX
+    recentlyAdShownBox = await Hive.openBox<dynamic>(
+      AppValues.recentlyAdShownBox,
     );
 
     ///APP SUBSCRIPTION BLOC
@@ -241,5 +255,7 @@ class AppHiveBoxes {
     Hive.registerAdapter(AppLanguageAdapter());
     Hive.registerAdapter(AudioFileAdapter());
     Hive.registerAdapter(IapProductAdapter());
+    Hive.registerAdapter(IapProductTypesAdapter());
+    Hive.registerAdapter(HiveDurationAdapter());
   }
 }

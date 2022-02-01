@@ -188,6 +188,21 @@ class ApiUtil {
       throw 'SORT TYPE NOT CORRECT';
     }
   }
+
+  static setRecentlyPurchased(bool bool) async {
+    await AppHiveBoxes.instance.recentlyPurchasedMadeBox
+        .put(AppValues.recentlyPurchasedMadeKey, bool);
+  }
+
+  static isRecentlyPurchasedWasMade() {
+    if (AppHiveBoxes.instance.recentlyPurchasedMadeBox
+        .containsKey(AppValues.recentlyPurchasedMadeKey)) {
+      return AppHiveBoxes.instance.recentlyPurchasedMadeBox
+          .get(AppValues.recentlyPurchasedMadeKey);
+    }
+
+    return false;
+  }
 }
 
 class SongDownloaded {

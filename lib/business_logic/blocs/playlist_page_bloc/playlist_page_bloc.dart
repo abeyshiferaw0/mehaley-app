@@ -46,7 +46,18 @@ class PlaylistPageBloc extends Bloc<PlaylistPageEvent, PlaylistPageState> {
           }
         }
       } catch (error) {
-        yield PlaylistPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final PlaylistPageData playlistPageData =
+              await playlistDataRepository.getPlaylistData(
+            event.playlistId,
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield PlaylistPageLoadingState();
+          yield PlaylistPageLoadedState(playlistPageData: playlistPageData);
+        } catch (error) {
+          yield PlaylistPageLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

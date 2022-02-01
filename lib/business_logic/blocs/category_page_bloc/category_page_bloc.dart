@@ -51,7 +51,18 @@ class CategoryPageBloc extends Bloc<CategoryPageEvent, CategoryPageState> {
           }
         }
       } catch (error) {
-        yield CategoryPageTopLoadingError(error: error.toString());
+        try {
+          //REFRESH WITH CACHE_LATER AFTER CACHE ERROR
+          final CategoryPageTopData categoryPageTopData =
+              await categoryDataRepository.getCategoryTopData(
+                  event.categoryId, AppCacheStrategy.CACHE_LATER);
+          yield CategoryPageTopLoading();
+          yield CategoryPageTopLoaded(
+            categoryPageTopData: categoryPageTopData,
+          );
+        } catch (error) {
+          yield CategoryPageTopLoadingError(error: error.toString());
+        }
       }
     }
   }

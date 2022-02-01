@@ -59,7 +59,22 @@ class FollowedArtistsBloc
           }
         }
       } catch (error) {
-        yield FollowedArtistsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH WITH CACHE_LATER AFTER CACHE ERROR
+          final FollowingItemsData followedArtistsData =
+              await libraryPageDataRepository.getFollowedItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppFollowedPageItemTypes.ARTIST,
+          );
+          yield FollowedArtistsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield FollowedArtistsLoadedState(
+            followedArtists: followedArtistsData.followedArtists!,
+          );
+        } catch (error) {
+          yield FollowedArtistsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshFollowedArtistsEvent) {
       libraryPageDataRepository.cancelDio();

@@ -51,7 +51,19 @@ class UserPlaylistPageBloc
           }
         }
       } catch (error) {
-        yield UserPlaylistPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final UserPlaylistPageData userPlaylistPageData =
+              await userPLayListRepository.getUserPlaylistData(
+            event.playlistId,
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield UserPlaylistPageLoadingState();
+          yield UserPlaylistPageLoadedState(
+              userPlaylistPageData: userPlaylistPageData);
+        } catch (error) {
+          yield UserPlaylistPageLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshUserPlaylistPageEvent) {
       ///REFRESH PLAYLIST PAGE
@@ -100,7 +112,19 @@ class UserPlaylistPageBloc
           }
         }
       } catch (error) {
-        yield UserPlaylistPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final UserPlaylistPageData userPlaylistPageData =
+              await userPLayListRepository.getUserPlaylistData(
+            event.playlistId,
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield UserPlaylistPageLoadingState();
+          yield UserPlaylistPageLoadedState(
+              userPlaylistPageData: userPlaylistPageData);
+        } catch (error) {
+          yield UserPlaylistPageLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

@@ -31,7 +31,7 @@ class ItemCustomGroupGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(
                 groupType == GroupType.ARTIST
                     ? AppValues.customGroupItemSize
-                    : 0,
+                    : 4.0,
               ),
               child: CachedNetworkImage(
                 //height: AppValues.customGroupItemSize,

@@ -60,7 +60,22 @@ class PurchasedPlaylistBloc
           }
         }
       } catch (error) {
-        yield PurchasedPlaylistsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final PurchasedItemsData purchasedPlaylistsData =
+              await libraryPageDataRepository.getPurchasedItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppPurchasedPageItemTypes.PLAYLISTS,
+          );
+          yield PurchasedPlaylistsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield PurchasedPlaylistsLoadedState(
+            purchasedPlaylists: purchasedPlaylistsData.purchasedPlaylists!,
+          );
+        } catch (error) {
+          yield PurchasedPlaylistsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshPurchasedPlaylistsEvent) {
       libraryPageDataRepository.cancelDio();

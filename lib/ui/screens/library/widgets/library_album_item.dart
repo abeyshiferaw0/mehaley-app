@@ -50,7 +50,7 @@ class LibraryAlbumItem extends StatelessWidget {
               SizedBox(width: AppMargin.margin_16),
               ClipRRect(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(6.0),
+                  Radius.circular(4.0),
                 ),
                 child: CachedNetworkImage(
                   width: AppValues.artistAlbumItemSize,

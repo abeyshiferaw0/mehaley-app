@@ -61,7 +61,22 @@ class PurchasedAlbumsBloc
           }
         }
       } catch (error) {
-        yield PurchasedAlbumsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final PurchasedItemsData purchasedAlbumsData =
+              await libraryPageDataRepository.getPurchasedItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppPurchasedPageItemTypes.ALBUMS,
+          );
+          yield PurchasedAlbumsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield PurchasedAlbumsLoadedState(
+            purchasedAlbums: purchasedAlbumsData.purchasedAlbums!,
+          );
+        } catch (error) {
+          yield PurchasedAlbumsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshPurchasedAlbumsEvent) {
       libraryPageDataRepository.cancelDio();

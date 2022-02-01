@@ -1,7 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/data/models/enums/iap_product_types.dart';
 
 part 'iap_product.g.dart';
 

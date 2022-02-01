@@ -10,6 +10,7 @@ class AppLanguageStringsAm extends AppLocalizations {
       "Some text about mehaleye and terms and conditions and privacy policy፣ Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "ውጣ";
 
+  final String mezmur = "መዝሙር";
   final String removeFromCart = "ከጥቅል ግዢ አስወግድ";
   final String addToCart = "ወደ ጥቅል ግዢ አስገባ";
   final String previewMode = "ሳምፕሉን ያዳምጡ";
@@ -627,13 +628,13 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String payWithGoogleplayInappPurchases = "በ ጉግል ፕሌይ መተግበሪያ ግዢ ይክፈሉ";
   final String payWithAppStoreInappPurchases = "በ አፕ ስቶር መተግበሪያ ግዢ ይክፈሉ";
   final String payWithGoogleplayInappPurchasesMsg =
-      "የመኃልዬ ግዢን ለማጠናቀቅ የጉግል መለያዎን ይጠቀሙ። ጉግል ፕለይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የጉግል መለያዎን ይጠቀሙ። ጉግል ፕሌይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
   final String payWithAppStoreInappPurchasesMsg =
       "የመኃልዬ ግዢን ለማጠናቀቅ የአፕል መለያዎን ይጠቀሙ። አፕ ስቶር የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
 
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {
-      return "የፕሪሚየም ሰብስክሪብሽን ተጠቃሚ አገልግሎት ነዎት\nሰብስክሪብሽንዎን በ ጉግል ፕለይ ያቀናብሩ";
+      return "የፕሪሚየም ሰብስክሪብሽን ተጠቃሚ አገልግሎት ነዎት\nሰብስክሪብሽንዎን በ ጉግል ፕሌይ ያቀናብሩ";
     } else {
       return "የፕሪሚየም ሰብስክሪብሽን ተጠቃሚ አገልግሎት ነዎት\nሰብስክሪብሽንዎን በ አፕ ስቶር ያቀናብሩ";
     }

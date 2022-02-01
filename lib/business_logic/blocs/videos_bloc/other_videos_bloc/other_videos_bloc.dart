@@ -48,7 +48,19 @@ class OtherVideosBloc extends Bloc<OtherVideosEvent, OtherVideosState> {
           }
         }
       } catch (error) {
-        yield OtherVideosLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final OtherVideosPageData otherVideosPageData =
+              await videosRepository.getOtherVideos(
+            AppCacheStrategy.CACHE_LATER,
+            event.id,
+          );
+          yield OtherVideosLoadingState();
+          yield OtherVideosLoadedState(
+              otherVideosPageData: otherVideosPageData);
+        } catch (error) {
+          yield OtherVideosLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mehaley/data/data_providers/album_data_provider.dart';
+import 'package:mehaley/data/data_providers/app_ad_data_provider.dart';
 import 'package:mehaley/data/data_providers/app_version_provider.dart';
 import 'package:mehaley/data/data_providers/artist_data_provider.dart';
 import 'package:mehaley/data/data_providers/auth_provider.dart';
@@ -26,6 +27,7 @@ import 'package:mehaley/data/data_providers/user_playlist_data_provider.dart';
 import 'package:mehaley/data/data_providers/videos_data_provider.dart';
 import 'package:mehaley/data/data_providers/yenepay_purchase_provider.dart';
 import 'package:mehaley/data/repositories/album_data_repository.dart';
+import 'package:mehaley/data/repositories/app_ad_repository.dart';
 import 'package:mehaley/data/repositories/app_version_repository.dart';
 import 'package:mehaley/data/repositories/artist_data_repository.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
@@ -157,5 +159,9 @@ class AppRepositories {
   static TelebirrPurchaseRepository telebirrPurchaseRepository =
       TelebirrPurchaseRepository(
     telebirrPurchaseProvider: TelebirrPurchaseProvider(),
+  );
+
+  static AppAdDataRepository appAdDataRepository = AppAdDataRepository(
+    appAdDataProvider: AppAdDataProvider(),
   );
 }

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/api_response/library_page_following_data.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/library_data/followed_playlist.dart';
 import 'package:mehaley/data/repositories/library_page_data_repository.dart';
 
@@ -59,7 +59,22 @@ class FollowedPlaylistsBloc
           }
         }
       } catch (error) {
-        yield FollowedPlaylistsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final FollowingItemsData followedPlaylistsData =
+              await libraryPageDataRepository.getFollowedItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppFollowedPageItemTypes.PLAYLISTS,
+          );
+          yield FollowedPlaylistsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield FollowedPlaylistsLoadedState(
+            followedPlaylists: followedPlaylistsData.followedPlaylists!,
+          );
+        } catch (error) {
+          yield FollowedPlaylistsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshFollowedPlaylistsEvent) {
       libraryPageDataRepository.cancelDio();

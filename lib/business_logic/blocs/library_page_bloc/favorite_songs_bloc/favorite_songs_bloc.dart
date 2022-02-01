@@ -58,7 +58,22 @@ class FavoriteSongsBloc extends Bloc<FavoriteSongsEvent, FavoriteSongsState> {
           }
         }
       } catch (error) {
-        yield FavoriteSongsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final FavoriteItemsData favoriteSongsData =
+              await libraryPageDataRepository.getFavoriteItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppFavoritePageItemTypes.SONGS,
+          );
+          yield FavoriteSongsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield FavoriteSongsLoadedState(
+            favoriteSongs: favoriteSongsData.favoriteSongs!,
+          );
+        } catch (error) {
+          yield FavoriteSongsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshFavoriteSongsEvent) {
       libraryPageDataRepository.cancelDio();

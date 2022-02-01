@@ -44,7 +44,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
           children: [
             //ALBUM ART
             AppCard(
-              radius: 2,
+              radius: 4.0,
               withShadow: false,
               child: CachedNetworkImage(
                 width: AppValues.playlistPageOneImageSize,

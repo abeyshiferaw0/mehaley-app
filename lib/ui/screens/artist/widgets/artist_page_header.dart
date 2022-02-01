@@ -8,6 +8,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/menu/artist_menu_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -58,13 +59,16 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
       ),
       child: Stack(
         children: [
-          CachedNetworkImage(
-            fit: BoxFit.cover,
-            height: AppValues.artistSliverHeaderHeight,
-            width: double.infinity,
-            imageUrl: artistPageData.artist.artistImages[0].imageLargePath,
-            placeholder: (context, url) => buildImagePlaceHolder(),
-            errorWidget: (context, url, e) => buildImagePlaceHolder(),
+          AppCard(
+            radius: 4.0,
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              height: AppValues.artistSliverHeaderHeight,
+              width: double.infinity,
+              imageUrl: artistPageData.artist.artistImages[0].imageLargePath,
+              placeholder: (context, url) => buildImagePlaceHolder(),
+              errorWidget: (context, url, e) => buildImagePlaceHolder(),
+            ),
           ),
           Container(
             width: double.infinity,

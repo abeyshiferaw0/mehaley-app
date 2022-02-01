@@ -27,6 +27,8 @@ class RecentSearchBloc extends Bloc<RecentSearchEvent, RecentSearchState> {
       }
       recentBox.put(PagesUtilFunctions.getItemKey(event.item), event.item);
       yield RecentChangedState(items: recentBox.values.toList());
+    } else if (event is LoadRecentSearchEvent) {
+      yield RecentChangedState(items: recentBox.values.toList());
     } else if (event is RemoveRecentSearchEvent) {
       recentBox.delete(PagesUtilFunctions.getItemKey(event.item));
       yield RecentChangedState(items: recentBox.values.toList());

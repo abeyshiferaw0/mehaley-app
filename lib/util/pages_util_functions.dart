@@ -34,6 +34,7 @@ import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/app_ad.dart';
 import 'package:mehaley/data/models/app_permission.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -652,11 +653,11 @@ class PagesUtilFunctions {
   static String getSearchFrontPageItemImageUrl(
       AppItemsType appItemsType, dynamic item) {
     if (appItemsType == AppItemsType.CATEGORY) {
-      return (item as Category).categoryImage.imageSmallPath;
+      return (item as Category).categoryImage.imageLargePath;
     } else if (appItemsType == AppItemsType.ARTIST) {
-      return (item as Artist).artistImages[0].imageSmallPath;
+      return (item as Artist).artistImages[0].imageLargePath;
     } else if (appItemsType == AppItemsType.SINGLE_TRACK) {
-      return (item as Song).albumArt.imageSmallPath;
+      return (item as Song).albumArt.imageLargePath;
     }
     return '';
   }
@@ -844,7 +845,7 @@ class PagesUtilFunctions {
     if (myPlaylist.playlistImage != null) {
       return AppCard(
         withShadow: false,
-        radius: 2.0,
+        radius: 4.0,
         child: CachedNetworkImage(
           width: AppValues.libraryMusicItemSize,
           height: AppValues.libraryMusicItemSize,
@@ -861,7 +862,7 @@ class PagesUtilFunctions {
       if (myPlaylist.gridSongImages.length <= 3) {
         return AppCard(
           withShadow: false,
-          radius: 2.0,
+          radius: 4.0,
           child: CachedNetworkImage(
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
@@ -877,7 +878,7 @@ class PagesUtilFunctions {
       if (myPlaylist.gridSongImages.length >= 4) {
         return AppCard(
           withShadow: false,
-          radius: 2.0,
+          radius: 4.0,
           child: GridView.count(
             crossAxisCount: 2,
             childAspectRatio: 1,
@@ -905,7 +906,7 @@ class PagesUtilFunctions {
     }
     return AppCard(
       withShadow: false,
-      radius: 2.0,
+      radius: 4.0,
       child: CachedNetworkImage(
         width: AppValues.libraryMusicItemSize,
         height: AppValues.libraryMusicItemSize,
@@ -1262,6 +1263,10 @@ class PagesUtilFunctions {
             child: YouTubePlayerPage(
               videoId: videoId,
               songId: songVideo.songId,
+              title: L10nUtil.translateLocale(
+                songVideo.songName,
+                context,
+              ),
             ),
           ),
         ),
@@ -1408,4 +1413,5 @@ class PagesUtilFunctions {
       return 'Purchase Completed';
     }
   }
+
 }

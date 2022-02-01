@@ -6,6 +6,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/app_ad_bloc/app_ad_bloc.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
@@ -94,6 +95,9 @@ class _MainScreenState extends State<MainScreen> {
     );
     BlocProvider.of<IapAvailableBloc>(context).add(
       CheckIapAvailabilityEvent(),
+    );
+    BlocProvider.of<AppAdBloc>(context).add(
+      LoadAppAdEvent(),
     );
 
     super.initState();

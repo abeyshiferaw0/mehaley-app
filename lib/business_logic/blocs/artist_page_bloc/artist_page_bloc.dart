@@ -53,7 +53,18 @@ class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
           }
         }
       } catch (error) {
-        yield ArtistPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH WITH CACHE_LATER AFTER CACHE ERROR
+          final ArtistPageData artistPageData =
+              await artistDataRepository.getArtistData(
+            event.artistId,
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield ArtistPageLoadingState();
+          yield ArtistPageLoadedState(artistPageData: artistPageData);
+        } catch (error) {
+          yield ArtistPageLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

@@ -31,7 +31,7 @@ class ItemSongVideo extends StatelessWidget {
           );
         },
         child: AppCard(
-          radius: 6.0,
+          radius: 4.0,
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageBuilder: (context, imageProvider) => Stack(
@@ -42,7 +42,7 @@ class ItemSongVideo extends StatelessWidget {
                 buildOpenAudioButton(),
               ],
             ),
-            imageUrl: songVideo.albumArt.imageMediumPath,
+            imageUrl: songVideo.albumArt.imageLargePath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, e) => buildImagePlaceHolder(),
           ),

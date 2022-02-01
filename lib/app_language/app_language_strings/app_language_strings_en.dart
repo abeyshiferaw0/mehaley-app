@@ -8,7 +8,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String appTermsAndCondition =
       "Some text about mehaleye and terms and conditions and privacy policy, Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
   final String logOut = "Log out";
-
+  final String mezmur = "mezmur";
   final String removeFromCart = "Remove from subscription";
   final String addToCart = "Add to subscription";
   final String previewMode = "Preview mode";

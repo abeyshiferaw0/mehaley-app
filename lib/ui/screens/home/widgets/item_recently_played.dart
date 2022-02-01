@@ -4,6 +4,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
@@ -46,27 +47,31 @@ class ItemRecentlyPlayed extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              width: width,
-              height: height,
-              fit: BoxFit.cover,
-              imageUrl: imgUrl,
-              imageBuilder: (context, imageProvider) => Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+            AppCard(
+              radius: 4.0,
+              withShadow: false,
+              child: CachedNetworkImage(
+                width: width,
+                height: height,
+                fit: BoxFit.cover,
+                imageUrl: imgUrl,
+                imageBuilder: (context, imageProvider) => Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  AppIconWidget()
-                ],
+                    AppIconWidget()
+                  ],
+                ),
+                placeholder: (context, url) => buildItemsImagePlaceHolder(),
+                errorWidget: (context, url, error) =>
+                    buildItemsImagePlaceHolder(),
               ),
-              placeholder: (context, url) => buildItemsImagePlaceHolder(),
-              errorWidget: (context, url, error) =>
-                  buildItemsImagePlaceHolder(),
             ),
             SizedBox(height: AppMargin.margin_6),
             Text(

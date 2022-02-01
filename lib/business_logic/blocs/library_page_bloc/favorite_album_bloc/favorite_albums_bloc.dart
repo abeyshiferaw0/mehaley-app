@@ -59,7 +59,22 @@ class FavoriteAlbumsBloc
           }
         }
       } catch (error) {
-        yield FavoriteAlbumsLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final FavoriteItemsData favoriteAlbumsData =
+              await libraryPageDataRepository.getFavoriteItems(
+            AppCacheStrategy.CACHE_LATER,
+            AppFavoritePageItemTypes.ALBUMS,
+          );
+          yield FavoriteAlbumsLoadingState();
+
+          ///YIELD BASED ON PAGE
+          yield FavoriteAlbumsLoadedState(
+            favoriteAlbums: favoriteAlbumsData.favoriteAlbums!,
+          );
+        } catch (error) {
+          yield FavoriteAlbumsLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is RefreshFavoriteAlbumsEvent) {
       libraryPageDataRepository.cancelDio();

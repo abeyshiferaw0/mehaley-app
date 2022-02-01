@@ -706,4 +706,6 @@ class AppLanguageStringsOro extends AppLocalizations {
       return "You have a premium account\nmanage your subscriptions with App Store";
     }
   }
+
+  final String mezmur = "mezmur";
 }

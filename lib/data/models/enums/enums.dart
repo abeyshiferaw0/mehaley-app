@@ -86,12 +86,6 @@ enum AppVideoItemAction {
   //OPEN_WITH_YOUTUBE,
 }
 
-enum IapProductTypes {
-  SONG,
-  ALBUM,
-  PLAYLIST,
-}
-
 enum AppPurchasedItemType {
   SONG_PAYMENT,
   ALBUM_PAYMENT,
@@ -106,4 +100,11 @@ enum AppPurchasedSources {
   PLAYLIST_MENU_BUY_BUTTON_ON_CLICK,
   ALBUM_PAGE_HEADER_BUY_BUTTON_ON_CLICK,
   ALBUM_MENU_BUY_BUTTON_ON_CLICK,
+}
+
+enum AppAddEmbedPlace { HOME_PAGE, PLAYER_PAGE_ALBUM_ART }
+
+enum AppAdAction {
+  CALL,
+  LAUNCH_URL,
 }

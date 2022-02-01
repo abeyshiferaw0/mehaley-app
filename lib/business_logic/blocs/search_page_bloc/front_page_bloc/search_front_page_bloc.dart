@@ -29,7 +29,6 @@ class SearchFrontPageBloc
     SearchFrontPageEvent event,
   ) async* {
     if (event is LoadSearchFrontPageEvent) {
-
       //LOAD CACHE AND REFRESH
       yield SearchFrontPageLoadingState();
       try {
@@ -55,7 +54,18 @@ class SearchFrontPageBloc
           }
         }
       } catch (error) {
-        yield SearchFrontPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final SearchPageFrontData searchPageFrontData =
+              await searchDataRepository.getSearchFrontPageData(
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield SearchFrontPageLoadingState();
+          yield SearchFrontPageLoadedState(
+              searchPageFrontData: searchPageFrontData);
+        } catch (error) {
+          yield SearchFrontPageLoadingErrorState(error: error.toString());
+        }
       }
     } else if (event is CancelSearchFrontPageEvent) {
       searchDataRepository.cancelDio();

@@ -47,7 +47,15 @@ class AlbumPageBloc extends Bloc<AlbumPageEvent, AlbumPageState> {
           }
         }
       } catch (error) {
-        yield AlbumPageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH WITH CACHE_LATER AFTER CACHE ERROR
+          final AlbumPageData albumPageData = await albumDataRepository
+              .getAlbumData(event.albumId, AppCacheStrategy.CACHE_LATER);
+          yield AlbumPageLoadingState();
+          yield AlbumPageLoadedState(albumPageData: albumPageData);
+        } catch (error) {
+          yield AlbumPageLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

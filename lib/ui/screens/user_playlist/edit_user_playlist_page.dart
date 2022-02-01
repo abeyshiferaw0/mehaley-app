@@ -388,16 +388,19 @@ class _EditUserPlaylistPageState extends State<EditUserPlaylistPage> {
 
                       ///IMAGE FROM NETWORK
                       if (widget.myPlaylist.playlistImage != null) {
-                        return CachedNetworkImage(
-                          width: AppValues.createPlaylistImageSize,
-                          height: AppValues.createPlaylistImageSize,
-                          imageUrl:
-                              widget.myPlaylist.playlistImage!.imageMediumPath,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              buildImagePlaceHolder(),
-                          errorWidget: (context, url, error) =>
-                              buildImagePlaceHolder(),
+                        return AppCard(
+                          radius: 4.0,
+                          child: CachedNetworkImage(
+                            width: AppValues.createPlaylistImageSize,
+                            height: AppValues.createPlaylistImageSize,
+                            imageUrl: widget
+                                .myPlaylist.playlistImage!.imageMediumPath,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) =>
+                                buildImagePlaceHolder(),
+                            errorWidget: (context, url, error) =>
+                                buildImagePlaceHolder(),
+                          ),
                         );
                       } else {
                         return Container(

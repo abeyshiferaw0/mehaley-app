@@ -43,7 +43,17 @@ class ProfilePageBloc extends Bloc<ProfilePageEvent, ProfilePageState> {
           }
         }
       } catch (error) {
-        yield ProfilePageLoadingErrorState(error: error.toString());
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          final ProfilePageData profilePageData =
+              await profileDataRepository.getProfileData(
+            AppCacheStrategy.CACHE_LATER,
+          );
+          yield ProfilePageLoadingState();
+          yield ProfilePageLoadedState(profilePageData: profilePageData);
+        } catch (error) {
+          yield ProfilePageLoadingErrorState(error: error.toString());
+        }
       }
     }
   }

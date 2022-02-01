@@ -16,7 +16,7 @@ class IapPurchaseActionBloc
     if (event is IapSongPurchaseActionEvent) {
       ///CLEAR ALL CACHE
       await ApiUtil.deleteAllCache();
-
+      await ApiUtil.setRecentlyPurchased(true);
       yield IapSongPurchaseActionState(
         itemId: event.itemId,
         appPurchasedSources: event.appPurchasedSources,
@@ -25,6 +25,7 @@ class IapPurchaseActionBloc
     } else if (event is IapAlbumPurchaseActionEvent) {
       ///CLEAR ALL CACHE
       await ApiUtil.deleteAllCache();
+      await ApiUtil.setRecentlyPurchased(true);
       yield IapAlbumPurchaseActionState(
         itemId: event.itemId,
         isFromSelfPage: event.isFromSelfPage,
@@ -34,6 +35,7 @@ class IapPurchaseActionBloc
     } else if (event is IapPlaylistPurchaseActionEvent) {
       ///CLEAR ALL CACHE
       await ApiUtil.deleteAllCache();
+      await ApiUtil.setRecentlyPurchased(true);
       yield IapPlaylistPurchaseActionState(
         itemId: event.itemId,
         isFromSelfPage: event.isFromSelfPage,

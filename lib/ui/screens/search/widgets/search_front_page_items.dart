@@ -38,26 +38,29 @@ class _SearchFrontPageItemsState extends State<SearchFrontPageItems> {
         child: Stack(
           children: [
             buildBackgroundContainer(),
-            CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: widget.imageUrl,
-              placeholder: (context, url) => buildBackgroundContainer(),
-              errorWidget: (context, url, e) => buildBackgroundContainer(),
-              imageBuilder: (context, imageProvider) => Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+            AppCard(
+              radius: 4.0,
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: widget.imageUrl,
+                placeholder: (context, url) => buildBackgroundContainer(),
+                errorWidget: (context, url, e) => buildBackgroundContainer(),
+                imageBuilder: (context, imageProvider) => Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    color: ColorUtil.darken(widget.dominantColor, 0.5)
-                        .withOpacity(0.5),
-                  ),
-                ],
+                    Container(
+                      color: ColorUtil.darken(widget.dominantColor, 0.5)
+                          .withOpacity(0.5),
+                    ),
+                  ],
+                ),
               ),
             ),
             Align(

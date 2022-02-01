@@ -35,8 +35,7 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: AppValues.similarItemImageSize,
                   height: AppValues.similarItemImageSize,
-                  imageUrl:
-                       artist.artistImages[0].imageMediumPath,
+                  imageUrl: artist.artistImages[0].imageMediumPath,
                   imageBuilder: (context, imageProvider) => Stack(
                     children: [
                       Container(

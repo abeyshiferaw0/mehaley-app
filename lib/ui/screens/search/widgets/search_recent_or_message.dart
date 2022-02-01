@@ -17,10 +17,22 @@ import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
-class SearchRecentOrMessage extends StatelessWidget {
+class SearchRecentOrMessage extends StatefulWidget {
   const SearchRecentOrMessage({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<SearchRecentOrMessage> createState() => _SearchRecentOrMessageState();
+}
+
+class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
+
+  @override
+  void initState() {
+    BlocProvider.of<RecentSearchBloc>(context).add(LoadRecentSearchEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

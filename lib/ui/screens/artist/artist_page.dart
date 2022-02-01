@@ -100,28 +100,33 @@ class _ArtistPageState extends State<ArtistPage> {
           },
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: AppMargin.margin_48,
-                ),
-                buildArtistPopularSongList(
-                  artistPageData.popularSongs,
-                  artistPageData.artist,
-                ),
-                buildArtistLatestSongList(
-                  artistPageData.newSongs,
-                  artistPageData.artist,
-                ),
-                buildArtistAlbumsList(artistPageData.popularAlbums),
-                buildArtistFeaturingPlaylistList(
-                  artistPageData.playlistsFeaturingArtists,
-                  artistPageData.artist,
-                ),
-                buildSimilarArtistList(artistPageData.similarArtists),
-                SizedBox(height: AppMargin.margin_16),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: AppPadding.padding_16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: AppMargin.margin_48,
+                  ),
+                  buildArtistPopularSongList(
+                    artistPageData.popularSongs,
+                    artistPageData.artist,
+                  ),
+                  buildArtistLatestSongList(
+                    artistPageData.newSongs,
+                    artistPageData.artist,
+                  ),
+                  buildArtistAlbumsList(artistPageData.popularAlbums),
+                  buildArtistFeaturingPlaylistList(
+                    artistPageData.playlistsFeaturingArtists,
+                    artistPageData.artist,
+                  ),
+                  buildSimilarArtistList(artistPageData.similarArtists),
+                  SizedBox(height: AppMargin.margin_16),
+                ],
+              ),
             ),
           ),
         ),
@@ -347,7 +352,9 @@ class _ArtistPageState extends State<ArtistPage> {
   Padding buildArtistLatestSongList(List<Song> newSongs, Artist artist) {
     return Padding(
       padding: const EdgeInsets.only(
-          left: AppPadding.padding_16, top: AppPadding.padding_16),
+        left: AppPadding.padding_16,
+        top: AppPadding.padding_16,
+      ),
       child: ListView.builder(
         itemCount: newSongs.length,
         padding: EdgeInsets.zero,
@@ -459,13 +466,12 @@ class _ArtistPageState extends State<ArtistPage> {
           ),
         )}',
         textAlign: TextAlign.start,
-        maxLines: 1,
+        maxLines: 2,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
           color: AppColors.black,
-          letterSpacing: 0.4,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -529,8 +535,7 @@ class _ArtistPageState extends State<ArtistPage> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
               color: AppColors.black,
-              letterSpacing: 0.4,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

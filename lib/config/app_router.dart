@@ -16,7 +16,6 @@ import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bl
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/videos_bloc/all_videos_bloc/all_videos_bloc.dart';
-import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other_videos_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
@@ -38,7 +37,6 @@ import 'package:mehaley/ui/screens/setting/settings_page.dart';
 import 'package:mehaley/ui/screens/subscription/subscription_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
 import 'package:mehaley/ui/screens/videos/all_videos_page.dart';
-import 'package:mehaley/ui/screens/videos/yt_player.dart';
 
 import 'constants.dart';
 
@@ -73,7 +71,6 @@ class AppRouterPaths {
   static const String subscriptionRoute = '/subscription_page';
   static const String songAddToPlaylist = '/song_add_to_playlist';
   static const String howToPayPageRoute = 'how_to_pay_page';
-  static const String ytPlayerPage = 'yt_player_page';
   static const String allVideosPage = 'all_videos_page';
 
   //ROUTE OBSERVER
@@ -303,20 +300,6 @@ class AppRouter {
             );
 
         break;
-
-      case AppRouterPaths.ytPlayerPage:
-        final args = settings.arguments as ScreenArguments;
-        builder = (_) => BlocProvider(
-              create: (context) => OtherVideosBloc(
-                videosRepository: AppRepositories.videosRepository,
-              ),
-              child: YouTubePlayerPage(
-                videoId: args.args['videoId'],
-                songId: args.args['songId'],
-              ),
-            );
-        break;
-
       case AppRouterPaths.allVideosPage:
         builder = (_) => BlocProvider(
               create: (context) => AllVideosBloc(

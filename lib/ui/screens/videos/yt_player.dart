@@ -17,12 +17,16 @@ import 'package:sizer/sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YouTubePlayerPage extends StatefulWidget {
-  const YouTubePlayerPage(
-      {Key? key, required this.videoId, required this.songId})
-      : super(key: key);
+  const YouTubePlayerPage({
+    Key? key,
+    required this.videoId,
+    required this.songId,
+    required this.title,
+  }) : super(key: key);
 
   final int songId;
   final String videoId;
+  final String title;
 
   @override
   _YouTubePlayerPageState createState() => _YouTubePlayerPageState();
@@ -85,6 +89,29 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       builder: (context, player) {
         return Scaffold(
           backgroundColor: AppColors.pagesBgColor,
+          appBar: AppBar(
+            //brightness: Brightness.dark,
+            systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
+            backgroundColor: AppColors.white,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              color: AppColors.black,
+              icon: Icon(
+                FlutterRemix.arrow_left_line,
+                size: AppIconSizes.icon_size_24,
+              ),
+            ),
+            title: Text(
+              widget.title,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_12.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black,
+              ),
+            ),
+          ),
           body: Column(
             children: [
               player,

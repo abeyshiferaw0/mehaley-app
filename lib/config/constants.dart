@@ -7,8 +7,8 @@ import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_stor
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  //static const String baseUrl = 'https://api.mehaleye.com';
-  static const String baseUrl = 'http://192.168.40.202:8181';
+  static const String baseUrl = 'https://api.mehaleye.com';
+  //static const String baseUrl = 'http://192.168.40.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
@@ -170,6 +170,9 @@ class AppValues {
   static const String recentlyUnLikedAlbumBox = 'RECENTLY_UNLIKED_ALBUM_BOX';
   static const String isSubscribedKey = 'IS_SUBSCRIBED_KEY';
   static const String isIapAvailableKey = 'IS_IAP_AVAILABLE_KEY';
+  static const String recentlyPurchasedMadeKey =
+      'RECENTLY_PURCHASE_WAS_MADE_KEY';
+  static const String recentlyPlayerAdShownTimeKey = "RECENTLY_AD_SHOWN_KEY";
   static const String iapUtilBox = "IAP_UTIL_BOX";
   static const String recentlyFollowedPlaylistBox =
       'RECENTLY_FOLLOWED_PLAYLIST_BOX';
@@ -190,6 +193,7 @@ class AppValues {
       'RECENTLY_CART_ADDED_PLAYLIST_BOX';
   static const String recentlyCartRemovedPlaylistBox =
       'RECENTLY_CART_REMOVED_PLAYLIST_BOX';
+  static const String recentlyPurchasedMadeBox = 'RECENTLY_PURCHASE_MADE_BOX';
   static const String settingsBox = 'SETTINGS_BOX';
   static const String subscriptionBox = 'SUBSCRIPTION_BOX';
   static const String recentlyPurchasedSongBox = 'RECENTLY_PURCHASED_SONGS_BOX';
@@ -197,6 +201,7 @@ class AppValues {
       'RECENTLY_PURCHASED_ALBUMS_BOX';
   static const String recentlyPurchasedPlaylistBox =
       'RECENTLY_PURCHASED_PLAYLISTS_BOX';
+  static const String recentlyAdShownBox = 'RECENTLY_AD_SHOWN_BOX';
 
   //HIVE BOX KEYS
   static const String lastPhoneAuthSentTimeKey = 'LAST_PHONE_AUTH_SENT';
@@ -260,6 +265,9 @@ class AppValues {
   static const int songSyncTimerGapInSeconds = 120;
   static const double appSplashIconSize = 150;
   static const double songVideoItemHeight = 100;
+  static const double appAdPreferredMaxHeight = 150;
+  static const double appAdPreferredDefaultHeight = 100;
+  static const double appAdMaxLength = 10;
 
   //static const String languageRadioGroupValue = 'LANGUAGE_RADIO';
 }

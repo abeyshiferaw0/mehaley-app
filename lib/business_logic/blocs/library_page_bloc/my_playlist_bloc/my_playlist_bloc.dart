@@ -60,10 +60,20 @@ class MyPlaylistBloc extends Bloc<MyPlaylistEvent, MyPlaylistState> {
           }
         }
       } catch (error) {
-        if (error is DioError) {
-          if (CancelToken.isCancel(error)) {}
+        try {
+          //REFRESH CACHE_LATER AFTER CACHE ERROR
+          if (event.isForAddSongPage) {
+            yield MyPlaylistRefreshLoadingState();
+          }
+          final MyPlaylistPageData refreshedMyPlaylistPageData =
+              await myPlaylistRepository
+                  .getMyPlaylistData(AppCacheStrategy.CACHE_LATER);
+          yield MyPlaylistLoadingState();
+          yield MyPlaylistPageDataLoaded(
+              myPlaylistPageData: refreshedMyPlaylistPageData);
+        } catch (error) {
+          yield MyPlaylistLoadingErrorState(error: error.toString());
         }
-        yield MyPlaylistLoadingErrorState(error: error.toString());
       }
     } else if (event is RefreshMyPlaylistEvent) {
       myPlaylistRepository.cancelDio();
