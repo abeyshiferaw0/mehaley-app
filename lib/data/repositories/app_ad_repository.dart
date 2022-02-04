@@ -15,8 +15,7 @@ class AppAdDataRepository {
     var response = await appAdDataProvider.getAppAds(appCacheStrategy);
 
     //PARSE APP ADS LIST
-    appAdList =
-        (response.data['ads'] as List).map((ad) => AppAd.fromMap(ad)).toList();
+    appAdList = (response.data as List).map((ad) => AppAd.fromMap(ad)).toList();
 
     AppAdData appAdData = AppAdData(
       appAdList: appAdList,

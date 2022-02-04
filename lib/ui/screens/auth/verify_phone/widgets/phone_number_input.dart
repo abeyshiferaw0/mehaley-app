@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,12 @@ class PhoneNumberInput extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.hasError,
+    required this.selectedCountryCode,
   }) : super(key: key);
 
   final MaskedTextController controller;
   final bool hasError;
+  final CountryCode selectedCountryCode;
 
   @override
   State<PhoneNumberInput> createState() => _PhoneNumberInputState();
@@ -23,6 +26,8 @@ class PhoneNumberInput extends StatefulWidget {
 class _PhoneNumberInputState extends State<PhoneNumberInput> {
   ///
   bool readOnly = false;
+
+  final String etCode = 'ET';
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,8 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   autofocus: true,
                   cursorColor: AppColors.darkOrange,
                   onChanged: (key) {},
-                  maxLength: 11,
+                  maxLength:
+                      widget.selectedCountryCode.code == etCode ? 11 : 12,
                   readOnly: readOnly,
                   keyboardType: TextInputType.number,
                   // inputFormatters: [
@@ -55,7 +61,11 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     if (text == null || text.isEmpty) {
                       return '';
                     } else {
-                      if (text.length < 11)
+                      if (widget.selectedCountryCode.code == etCode &&
+                          text.length < 11)
+                        return AppLocale.of().invalidPhoneNumber;
+                      if (widget.selectedCountryCode.code != etCode &&
+                          text.length < 12)
                         return AppLocale.of().invalidPhoneNumber;
                       return null;
                     }

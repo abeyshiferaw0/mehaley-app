@@ -13,6 +13,7 @@ class AppApi {
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
   static const String cartBaseUrl = '$baseUrl/subscription';
+  static const String adBaseUrl = '$baseUrl/ad';
   static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
 
   static Future<CacheOptions> getDioCacheOptions() async {

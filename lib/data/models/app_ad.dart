@@ -31,41 +31,49 @@ class AppAd extends Equatable {
         appAddEmbedPlace,
         appAdAction,
         preferredHeight,
-        preferredHeight,
         actionPhoneNumber,
+        actionLaunchLink,
         maxAdLength,
       ];
 
   factory AppAd.fromMap(Map<String, dynamic> json) {
     return AppAd(
-      id: int.parse(json["id"]),
+      id: json["ad_id"],
       link: Uri.parse(json["link"]),
       appAddEmbedPlace: EnumToString.fromString(
         AppAddEmbedPlace.values,
-        json["appAddEmbedPlace"],
+        json["embed_place"],
       )!,
-      appAdAction:
-          EnumToString.fromString(AppAdAction.values, json["appAdAction"]),
-      preferredHeight: json["preferredHeight"] != null
-          ? json["preferredHeight"] > AppValues.appAdPreferredMaxHeight
-              ? AppValues.appAdPreferredMaxHeight
-              : json["preferredHeight"]
+      appAdAction: json["action"] != null
+          ? EnumToString.fromString(AppAdAction.values, json["action"])
           : null,
-      maxAdLength: json["maxAdLength"] != null
-          ? json["maxAdLength"]! > AppValues.appAdMaxLength
+      preferredHeight: json["preferred_height"] != null
+          ? json["preferred_height"] > AppValues.appAdPreferredMaxHeight
+              ? AppValues.appAdPreferredMaxHeight
+              : json["preferred_height"]
+          : null,
+      actionPhoneNumber:
+          json["phone_number"] != null ? json["phone_number"] : null,
+      actionLaunchLink:
+          json["launch_link"] != null ? Uri.parse(json["launch_link"]) : null,
+      maxAdLength: json["max_ad_length"] != null
+          ? json["max_ad_length"]! > AppValues.appAdMaxLength
               ? AppValues.appAdMaxLength
-              : json["maxAdLength"]
+              : json["max_ad_length"]
           : AppValues.appAdMaxLength,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
-      "id": this.id,
+      "ad_id": this.id,
       "link": this.link,
-      "appAddEmbedPlace": this.appAddEmbedPlace,
-      "appAdAction": this.appAdAction,
-      "preferredHeight": this.preferredHeight,
+      "embed_place": this.appAddEmbedPlace,
+      "action": this.appAdAction,
+      "phone_number": this.actionPhoneNumber,
+      "launch_link": this.actionLaunchLink,
+      "preferred_height": this.preferredHeight,
+      "max_ad_length": this.maxAdLength,
     };
   }
 }

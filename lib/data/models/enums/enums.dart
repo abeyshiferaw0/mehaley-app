@@ -102,7 +102,12 @@ enum AppPurchasedSources {
   ALBUM_MENU_BUY_BUTTON_ON_CLICK,
 }
 
-enum AppAddEmbedPlace { HOME_PAGE, PLAYER_PAGE_ALBUM_ART }
+enum AppAddEmbedPlace {
+  HOME_PAGE_TOP,
+  HOME_PAGE_MIDDLE,
+  HOME_PAGE_BOTTOM,
+  PLAYER_PAGE_ALBUM_ART
+}
 
 enum AppAdAction {
   CALL,

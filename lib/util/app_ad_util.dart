@@ -1,3 +1,4 @@
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/app_ad.dart';
@@ -5,11 +6,27 @@ import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppAdUtil {
-  static AppAd? getAppAdForHomePage(List<AppAd> appAdList) {
+  static AppAd? getAppAdForHomePage(
+      List<AppAd> appAdList, AppAddEmbedPlace appAddEmbedPlace) {
     AppAd? appAd;
-    appAd = appAdList.firstWhere(
-      (element) => element.appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE,
-    );
+
+    if (appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_TOP) {
+      appAd = appAdList.firstWhereOrNull(
+        (element) => element.appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_TOP,
+      );
+    } else if (appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_MIDDLE) {
+      appAd = appAdList.firstWhereOrNull(
+        (element) =>
+            element.appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_MIDDLE,
+      );
+    } else if (appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_BOTTOM) {
+      appAd = appAdList.firstWhereOrNull(
+        (element) =>
+            element.appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_BOTTOM,
+      );
+    } else {
+      return null;
+    }
 
     return appAd;
   }
@@ -39,8 +56,8 @@ class AppAdUtil {
       DateTime preDateTime = DateTime.fromMillisecondsSinceEpoch(
         preDateInMilliSeconds,
       );
-      int diffDays = DateTime.now().difference(preDateTime).inDays;
-      return diffDays > 2 ? true : false;
+      int diffDays = DateTime.now().difference(preDateTime).inHours;
+      return diffDays > 48 ? true : false;
     } else {
       return true;
     }
@@ -48,11 +65,11 @@ class AppAdUtil {
 
   static AppAd? getAppAdForPlayerPage(List<AppAd> appAdList) {
     AppAd? appAd;
-    appAd = appAdList.firstWhere(
+    appAd = appAdList.firstWhereOrNull(
       (element) =>
           element.appAddEmbedPlace == AppAddEmbedPlace.PLAYER_PAGE_ALBUM_ART,
     );
-
+    print("appAdappAd ${appAd}");
     return appAd;
   }
 
@@ -64,6 +81,8 @@ class AppAdUtil {
         path: phoneNumber,
       );
       await launch(launchUri.toString());
+    } else {
+      print("call(String phoneNumber) false");
     }
   }
 

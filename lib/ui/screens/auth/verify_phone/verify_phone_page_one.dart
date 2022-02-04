@@ -28,7 +28,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
   MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-000');
+      new MaskedTextController(mask: '000-000-0000');
   CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
@@ -161,7 +161,17 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             text: AppLocale.of().sendSms,
             onTap: () {
               //VALIDATE COUNTRY CODE AND PHONE NUMBER
-              if (controller.text.length == 11) {
+              if (selectedCountryCode.code == 'ET' &&
+                  controller.text.length == 11) {
+                //LOGIN WITH PHONE
+                BlocProvider.of<AuthBloc>(context).add(
+                  ContinueWithPhoneEvent(
+                    countryCode: selectedCountryCode.dialCode!,
+                    phoneNumber: controller.text.replaceAll('-', ''),
+                  ),
+                );
+              } else if (selectedCountryCode.code != 'ET' &&
+                  controller.text.length == 12) {
                 //LOGIN WITH GOOGLE
                 BlocProvider.of<AuthBloc>(context).add(
                   ContinueWithPhoneEvent(
@@ -192,7 +202,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       children: [
         CountryCodePicker(
           onChanged: (CountryCode countryCode) {
-            selectedCountryCode = countryCode;
+            setState(() {
+              selectedCountryCode = countryCode;
+            });
           },
           initialSelection: 'ET',
           favorite: ['ET', 'US'],
@@ -275,6 +287,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         PhoneNumberInput(
           controller: controller,
           hasError: hasError,
+          selectedCountryCode: selectedCountryCode,
         )
       ],
     );

@@ -222,21 +222,23 @@ class _HomePageState extends State<HomePage>
             bottomMargin: AppMargin.margin_8,
           ),
 
+          ///BUILD HOME PAGE AD
+          ItemHomePageAd(appAddEmbedPlace: AppAddEmbedPlace.HOME_PAGE_TOP),
+
           ///BUILD HOME PAGE AUTO GROUPS
           buildGroupsListView(autoGroups),
 
           ///BUILD HOME PAGE AD
-          buildHomePageAd(),
+          ItemHomePageAd(appAddEmbedPlace: AppAddEmbedPlace.HOME_PAGE_MIDDLE),
 
           ///BUILD HOME PAGE ADMIN GROUPS
           buildGroupsListView(adminGroups),
+
+          ///BUILD HOME PAGE AD
+          ItemHomePageAd(appAddEmbedPlace: AppAddEmbedPlace.HOME_PAGE_BOTTOM),
         ],
       ),
     );
-  }
-
-  Widget buildHomePageAd() {
-    return ItemHomePageAd();
   }
 
   ListView buildGroupsListView(List<Group> groups) {

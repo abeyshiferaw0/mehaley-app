@@ -13,7 +13,10 @@ import 'package:sizer/sizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ItemHomePageAd extends StatefulWidget {
-  const ItemHomePageAd({Key? key}) : super(key: key);
+  const ItemHomePageAd({Key? key, required this.appAddEmbedPlace})
+      : super(key: key);
+
+  final AppAddEmbedPlace appAddEmbedPlace;
 
   @override
   _ItemHomePageAdState createState() => _ItemHomePageAdState();
@@ -38,8 +41,10 @@ class _ItemHomePageAdState extends State<ItemHomePageAd> {
     return BlocBuilder<AppAdBloc, AppAdState>(
       builder: (context, state) {
         if (state is AppAdLoadedState) {
-          AppAd? appAd =
-              AppAdUtil.getAppAdForHomePage(state.appAdData.appAdList);
+          AppAd? appAd = AppAdUtil.getAppAdForHomePage(
+            state.appAdData.appAdList,
+            widget.appAddEmbedPlace,
+          );
 
           if (appAd != null) {
             return buildAdWebView(appAd);
@@ -52,8 +57,11 @@ class _ItemHomePageAdState extends State<ItemHomePageAd> {
 
   Widget buildAdWebView(AppAd appAd) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: AppMargin.margin_32,
+      margin: EdgeInsets.only(
+        bottom: widget.appAddEmbedPlace == AppAddEmbedPlace.HOME_PAGE_MIDDLE
+            ? AppMargin.margin_32
+            : 0,
+        top: AppMargin.margin_32,
       ),
       height: appAd.preferredHeight.sp,
       child: Stack(

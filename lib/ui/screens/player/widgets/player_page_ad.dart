@@ -42,6 +42,13 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
       shouldShowAd = true;
     }
 
+    _timer = Timer.periodic(
+      Duration(milliseconds: 100),
+      (Timer timer) {
+        timer.cancel();
+      },
+    );
+
     AppAdUtil.remove();
   }
 
@@ -61,8 +68,6 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
           );
 
           if (appAd != null) {
-            bool isPlayerAdShownRecently = AppAdUtil.isPlayerAdShownRecently();
-
             ///SHOW ADD IF AD NOT SHOWN RECENTLY
             if (shouldShowAd) {
               return buildAdWebView(appAd);
