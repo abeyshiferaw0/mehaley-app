@@ -79,9 +79,9 @@ class _MainPlayerAlbumArtPagerState extends State<MainPlayerAlbumArtPager> {
           onPageChanged: (pos) {
             // //SEEK AUDIO PLAYER SLIDER ALONG WITH SONG POSITION DURATION
 
-            //print("SeekAudioPlayerToEventCALLED ONE $pos");
+            ////print("SeekAudioPlayerToEventCALLED ONE $pos");
             if (!isBlocScroll) {
-              //print("SeekAudioPlayerToEventCALLED TWO $pos");
+              ////print("SeekAudioPlayerToEventCALLED TWO $pos");
               BlocProvider.of<AudioPlayerBloc>(context).add(
                 SeekAudioPlayerToEvent(
                   song: state.queue.elementAt(pos),

@@ -172,6 +172,17 @@ class AppGradients {
     );
   }
 
+  static getTodayHolidayGradient() {
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        AppColors.orange1,
+        AppColors.orange2,
+      ],
+    );
+  }
+
   static getArtistHeaderCovorGradient() {
     return LinearGradient(
       begin: Alignment.topCenter,

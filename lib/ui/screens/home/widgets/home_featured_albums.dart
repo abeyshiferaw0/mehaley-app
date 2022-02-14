@@ -30,7 +30,7 @@ class _HomeFeaturedAlbumsState extends State<HomeFeaturedAlbums> {
 
   @override
   Widget build(BuildContext context) {
-    if (featuredAlbums.length > 2) {
+    if (featuredAlbums.length > 1) {
       return Container(
         margin: EdgeInsets.only(bottom: AppMargin.margin_48),
         child: Column(

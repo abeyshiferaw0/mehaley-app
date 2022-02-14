@@ -276,6 +276,7 @@ class Song extends Equatable {
                 : isUserSubscribed
                     ? false
                     : true,
+        isPurchased: song.isBought,
         isOffline: downloadedTaskWithSong != null ? true : false,
         listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
         secondsPlayed: null,

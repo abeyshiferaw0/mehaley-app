@@ -17,7 +17,7 @@
 //   void initState() {
 //     final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
 //     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-//       print("InAppPurchaseee=> ${purchaseDetailsList}");
+//       //print("InAppPurchaseee=> ${purchaseDetailsList}");
 //       _listenToPurchaseUpdated(purchaseDetailsList);
 //     }, onDone: () {
 //       _subscription.cancel();
@@ -32,10 +32,10 @@
 //     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
 //       if (purchaseDetails.status == PurchaseStatus.pending) {
 //         // _showPendingUI();
-//         print("InAppPurchaseee=> UPDATE=> PENDING");
+//         //print("InAppPurchaseee=> UPDATE=> PENDING");
 //       } else {
 //         if (purchaseDetails.status == PurchaseStatus.error) {
-//           print("InAppPurchaseee=> UPDATE=> ERROR");
+//           //print("InAppPurchaseee=> UPDATE=> ERROR");
 //           //_handleError(purchaseDetails.error!);
 //         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
 //             purchaseDetails.status == PurchaseStatus.restored) {
@@ -50,7 +50,7 @@
 //         }
 //         if (purchaseDetails.pendingCompletePurchase) {
 //           await InAppPurchase.instance.completePurchase(purchaseDetails);
-//           print("InAppPurchaseee=> UPDATE=> pendingCompletePurchase");
+//           //print("InAppPurchaseee=> UPDATE=> pendingCompletePurchase");
 //         }
 //       }
 //     });
@@ -69,7 +69,7 @@
 //
 //   void initInApp() async {
 //     final bool available = await InAppPurchase.instance.isAvailable();
-//     print("InAppPurchaseee=> available ${available}");
+//     //print("InAppPurchaseee=> available ${available}");
 //     if (available) {
 //       // Set literals require Dart 2.2. Alternatively, use
 // // `Set<String> _kIds = <String>['product1', 'product2'].toSet()`.
@@ -82,8 +82,8 @@
 //
 //       List<ProductDetails> products = response.productDetails;
 //
-//       print("InAppPurchaseee=> products ${products.length}");
-//       print("InAppPurchaseee=> products iddd ${products[0].id}");
+//       //print("InAppPurchaseee=> products ${products.length}");
+//       //print("InAppPurchaseee=> products iddd ${products[0].id}");
 //
 //       final ProductDetails productDetails =
 //           products[0]; // Saved earlier from queryProductDetails().

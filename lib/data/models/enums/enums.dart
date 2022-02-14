@@ -1,3 +1,9 @@
+enum AppType {
+  MEHALEYE,
+  ELF_PLAY,
+}
+
+
 enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM }
 
 enum GroupUiType {

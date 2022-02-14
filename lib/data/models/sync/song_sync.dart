@@ -15,14 +15,16 @@ class SongSync {
   @HiveField(3)
   final bool isPreview;
   @HiveField(4)
-  final bool isOffline;
+  final bool isPurchased;
   @HiveField(5)
-  final String listenDate;
+  final bool isOffline;
   @HiveField(6)
-  final int? secondsPlayed;
+  final String listenDate;
   @HiveField(7)
-  final int songId;
+  final int? secondsPlayed;
   @HiveField(8)
+  final int songId;
+  @HiveField(9)
   final bool isUserSubscribed;
   SongSync({
     required this.songId,
@@ -30,6 +32,7 @@ class SongSync {
     required this.playedFrom,
     required this.playedFromId,
     required this.isPreview,
+    required this.isPurchased,
     required this.isOffline,
     required this.listenDate,
     required this.secondsPlayed,
@@ -44,6 +47,7 @@ class SongSync {
           SongSyncPlayedFrom.values, json["played_from"])!,
       playedFromId: json["played_from_id"],
       isPreview: json["is_preview"],
+      isPurchased: json["is_purchased"],
       isOffline: json["is_offline"],
       listenDate: json["listen_date"],
       secondsPlayed:
@@ -59,6 +63,7 @@ class SongSync {
       "played_from": EnumToString.convertToString(this.playedFrom),
       "played_from_id": this.playedFromId,
       "is_preview": this.isPreview,
+      "is_purchased": this.isPurchased,
       "is_offline": this.isOffline,
       "listen_date": this.listenDate,
       "s_played": this.secondsPlayed,
@@ -74,6 +79,7 @@ class SongSync {
         "\"played_from\"":
             "\"${EnumToString.convertToString(this.playedFrom)}\"",
         "\"is_preview\"": this.isPreview ? 1 : 0,
+        "\"is_purchased\"": this.isPurchased ? 1 : 0,
         "\"is_offline\"": this.isOffline ? 1 : 0,
         "\"listen_date\"": "\"${this.listenDate}\"",
         "\"s_played\"": this.secondsPlayed,
@@ -86,6 +92,7 @@ class SongSync {
       "\"played_from\"": "\"${EnumToString.convertToString(this.playedFrom)}\"",
       "\"played_from_id\"": "\"${this.playedFromId}\"",
       "\"is_preview\"": this.isPreview ? 1 : 0,
+      "\"is_purchased\"": this.isPurchased ? 1 : 0,
       "\"is_offline\"": this.isOffline ? 1 : 0,
       "\"listen_date\"": "\"${this.listenDate}\"",
       "\"s_played\"": this.secondsPlayed,
@@ -98,6 +105,7 @@ class SongSync {
     SongSyncPlayedFrom? playedFrom,
     int? playedFromId,
     bool? isPreview,
+    bool? isPurchased,
     bool? isOffline,
     String? listenDate,
     int? secondsPlayed,
@@ -110,6 +118,7 @@ class SongSync {
       playedFrom: playedFrom ?? this.playedFrom,
       playedFromId: playedFromId ?? this.playedFromId,
       isPreview: isPreview ?? this.isPreview,
+      isPurchased: isPreview ?? this.isPurchased,
       isOffline: isOffline ?? this.isOffline,
       listenDate: listenDate ?? this.listenDate,
       secondsPlayed: secondsPlayed ?? this.secondsPlayed,

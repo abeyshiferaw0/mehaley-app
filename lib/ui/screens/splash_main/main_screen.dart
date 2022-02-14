@@ -30,6 +30,7 @@ import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
@@ -52,8 +53,10 @@ import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_end.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_succes.dart';
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
+import 'package:mehaley/ui/common/today_holiday_toast_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
 final AppRouter _appRouter = AppRouter();
@@ -711,6 +714,19 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 );
               }
+            }
+          },
+        ),
+        BlocListener<TodayHolidayToastCubit, bool>(
+          listener: (BuildContext context, state) {
+            if (state) {
+              showSimpleNotification(
+                TodayHolidayToastWidget(),
+                background: AppColors.transparent,
+                contentPadding: EdgeInsets.all(16),
+                duration: Duration(seconds: 15),
+                elevation: 0,
+              );
             }
           },
         ),

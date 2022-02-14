@@ -63,7 +63,7 @@ class ArtistFollowButton extends StatelessWidget {
                   'ARTIST_FOLLOW',
                   Duration(milliseconds: 0),
                   () {
-                    print('artistId $artistId');
+                    //print("artistId $artistId");
                     BlocProvider.of<LibraryBloc>(context).add(
                       FollowUnFollowArtistEvent(
                         id: artistId,

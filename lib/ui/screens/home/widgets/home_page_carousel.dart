@@ -118,7 +118,7 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           FeaturedAlbumPlaylistHeaderWidget(
-            title: AppLocale.of().featuringTxt,
+            title: AppLocale.of().featuredVideos,
             subTitle: AppLocale.of().videos,
           ),
           AppBouncingButton(

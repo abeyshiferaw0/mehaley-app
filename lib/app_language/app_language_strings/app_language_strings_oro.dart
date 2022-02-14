@@ -474,6 +474,69 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String emptyVideos = "Viidiyoowwan duwwaa";
   final String otherVideos = "Viidiyoowwan biroo";
   final String cantFindOtherVideos = "Viidiyoowwan biroo argachuu hindandeenye";
+  final String subscription = "sabiskiriibshinii";
+  final String profile = "ibsa dhuunfaa";
+  final String subscribed = "sabiskiraayibii godhaniiru";
+  final String continueStr = "itti fufi";
+  final String tryForFree = "bilisaan yaalaa";
+  final String paymentCanceled = "kaffaltiin haqameera";
+  final String noThanks = "miti, galatoomaa";
+  final String openAudio = "awudiyoo bani";
+  final String purchaseCouldNotBeCompleted =
+      "bittaan keessan xumuramuu hin dandeenye";
+  final String subscriptionRequired =
+      "dhageeffachuuf sabiskiriibshinii gaafata";
+  final String resubscribe = "irra deebidhaan godhaa.";
+  final String thankYouForSubscribing =
+      " sabiskiraayibii waan gootaniif galatoomaa.";
+  final String subscribtionNotAvlvable =
+      "tajaajilli sabiskiriibshinii hin eegalle.";
+  final String subscribedMsg =
+      "sabiskiriibshinii weeddutin milkiidhan galmooftaniirtu, faarfannaawwan daangaa bilisaan dhageeffadhaa, buufadhaa.";
+  final String subscriptionNotAvlavableMsg =
+      "tajaajilli sabiskiriibshinii hin eegalamne, sabiskiriibshiniin weedduu naannawa isin argamtanitti yommuu eegalu isin beeksifna.";
+  final String purchaseCouldNotBeVerfied = "bittaan mirkanaa’ee hin dandeenye.";
+  final String purchaseCouldNotBeVerfiedMsg =
+      "bittaa keessan mirkaneessuu irratti rakkoon tureera/maaloo, irra deebi’uudhan yaalaa.";
+  final String subscriptionCouldNotBeRenewd =
+      "sabiskiriibshiniin keessan sababa haqamuutin yookin rakkoolee kaffaltiitin haareffamuu hin dandeenye.";
+  final String completeingYourPurchase =
+      "bittaan keessan raawwatamaat jira/maaloo,  xiqqoo eegaa. . .";
+  final String sadToSeeYouGo = "sabiskiriibshiniin keessan haqameera";
+  final String purchasePending =
+      "bittaan eeggachaat jira/ maaloo, xiqqoo eegadhaa";
+  final String inAppNotAvlable =
+      "bittaan appilikeeshinii tigul naannawa keessanitti hin argamu";
+  final String ourPlans = "akaakulee sabiskiriibshinii";
+  final String allPlansInclude =
+      "gosoonni sabiskiriibshinii hundi kan dhuunfatan";
+  final String unlimitedStreamingAllMezmurs =
+      "tajaajila istiriimingii daanaa bilisaa";
+  final String unlimitedDownloadOffline =
+      "faarfannaawwan buusudhaan intarneetii malee dhageeffachuu";
+  final String highQualityAudio = "awudiyoo qulqullina ol’aanaa qabu";
+  final String featuredVideos = "viidiyoowwan adda bahanii dhiyaatam";
+  final String yenepay = "yeneepey";
+  final String telebirr = "teeleebirr";
+  final String googlePlayInappPurcahses =
+      "bittaa appilikeeshinii googil playii";
+  final String appStoreInappPurcahses = "bittaa appilikeeshinii aapp-istoorii";
+  final String payWithTelebirr = "teelee-birr’tin kaffalaa";
+  final String payWithTelebirrMsg =
+      "bittaa weedduu xumuruuf lakk. Teele-birr keessan fayyadamaa";
+  final String payWithYenepay = " karaa yenee pey’tin kaffalaa";
+  final String payWithYenepayMsg =
+      "bittaa weedduu xumuruuf lakk. Yenee-pey keessan fayyadamaa, yenee-pey filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+  final String payWithGoogleplayInappPurchases =
+      "appilikeeshinii googil pilay’tin bittaa kaffalaa";
+  final String payWithAppStoreInappPurchases =
+      "appilikeeshinii aapp-istoori’tin bittaa kaffalaa";
+  final String payWithGoogleplayInappPurchasesMsg =
+      "bittaa weedduu xumuruuf adda googilii keessan fayyadamaa, googil-pleey filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+  final String payWithAppStoreInappPurchasesMsg =
+      "bittaa weedduu xumuruuf addaa appilii keessan fayyadamaa, aapp-istoorin filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+
+  final String mezmur = "Faarfannaa";
 
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";
@@ -641,71 +704,11 @@ class AppLanguageStringsOro extends AppLocalizations {
     return "yommuu bittaa marsaa kanaa raawwattu${cartTotalPrice.parsePriceAmount()} $birr waaletii kee irraa hirrifama";
   }
 
-  ///UNTRANSLATED
-  ///
-  final String subscription = "subscription";
-  final String profile = "Profile";
-  final String subscribed = "Subscribed";
-  final String continueStr = "Continue";
-  final String tryForFree = "Try for free";
-  final String paymentCanceled = "Payment was canceled!!";
-  final String noThanks = "No, Thanks";
-  final String openAudio = "Open Audio";
-  final String purchaseCouldNotBeCompleted = "Purchase could not be completed";
-  final String subscriptionRequired = "Subscription Required To Listen";
-  final String resubscribe = "Resubscribe";
-  final String thankYouForSubscribing = "Thank you for subscribing.";
-  final String subscribtionNotAvlvable = "Subscription currently not available";
-  final String subscribedMsg =
-      "You have successfully subscribed to mehaleye, enjoy listening mezmurs on mehaleye with unlimited access";
-  final String subscriptionNotAvlavableMsg =
-      "Subscription is currently not available in your country, we will notify you when available.";
-  final String purchaseCouldNotBeVerfied =
-      "Your Purchase Could Not Be Verified";
-  final String purchaseCouldNotBeVerfiedMsg =
-      "There was a problem verifying your purchase\nplease try again!!";
-  final String subscriptionCouldNotBeRenewd =
-      "Your subscription could not be renewed, due to active cancellation or payment issues.";
-  final String completeingYourPurchase =
-      "Completing your purchase\nplease wait...";
-  final String sadToSeeYouGo = "Sad to see you go";
-  final String purchasePending = "Purchase Pending\nPlease wait...";
-  final String inAppNotAvlable =
-      "In app purchasing not available in your location!!";
-  final String ourPlans = "Our Plans";
-  final String allPlansInclude = "All Plans Include";
-  final String unlimitedStreamingAllMezmurs =
-      "Unlimited streaming to all mezmurs";
-  final String unlimitedDownloadOffline =
-      "Unlimited downloads for offline usage";
-  final String highQualityAudio = "High quality audio";
-  final String featuredVideos = "Featured Videos";
-  final String yenepay = "Yenepay";
-  final String telebirr = "Telebirr";
-  final String googlePlayInappPurcahses = "Google Play In-App Purchases";
-  final String appStoreInappPurcahses = "App Store In-App Purchases";
-  final String payWithTelebirr = "Pay with Telebirr";
-  final String payWithTelebirrMsg =
-      "Use your Telebirr account to complete your mehaleye purchase.";
-  final String payWithYenepay = "Pay with Yenepay";
-  final String payWithYenepayMsg =
-      "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
-  final String payWithGoogleplayInappPurchases =
-      "Pay With Google Play In-App Purchases";
-  final String payWithAppStoreInappPurchases =
-      "Pay With App Store In-App Purchases";
-  final String payWithGoogleplayInappPurchasesMsg =
-      "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options";
-  final String payWithAppStoreInappPurchasesMsg =
-      "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options";
-
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {
-      return "You have a premium account\nmanage your subscriptions with google play store";
+      return "fayyadamoo tajaajila sabiskiriibshinii piriimiyeemiitii/ sabiskiriibshinii keessan karaa googil-pleey’n  qindessaa";
     } else {
-      return "You have a premium account\nmanage your subscriptions with App Store";
+      return "fayyadamoo tajaajila sabiskiriibshinii piriimiyeemiitii/ sabiskiriibshinii keessan karaa aapp-istooritiin qindessaa";
     }
   }
-
-  final String mezmur = "mezmur";
 }

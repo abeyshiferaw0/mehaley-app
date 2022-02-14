@@ -422,11 +422,62 @@ class AppLanguageStringsTig extends AppLocalizations {
 
   final String youReceivedGift = "ናይ ዋሌት ውፅኢት ተቐቢሎም";
 
-  final String videos = "ስ";
+  final String videos = "ቪዲዮታት";
   final String allVideos = "ኩሎም ቪዲዮታት";
   final String emptyVideos = "ባዶ ቪዲዮ";
   final String otherVideos = "ካልእ ቪዲዮ";
   final String cantFindOtherVideos = "ካልእ ቪዲዮ ክደሊ አይክኣልኩን";
+
+  final String subscription = "ሰብስክሪብሽን";
+  final String profile = "ናይ ውልቀ-መገለጺ";
+  final String subscribed = "ሰብስክራይብ ገይሮም ኣለው";
+  final String continueStr = "ቀጽል";
+  final String tryForFree = "በናፃ ይፈትኑ";
+  final String paymentCanceled = "ክፍሊት ተሰሪዙ!!";
+  final String noThanks = "ኣይ፣ የቐንየለይ";
+  final String openAudio = "ኦዲዮ ክፈት";
+  final String purchaseCouldNotBeCompleted = "ግዝኢት ክዛዘም ኣይከኣለን";
+  final String subscriptionRequired = "ንምድማፅ ሰብስክሪብሽን የድልይ";
+  final String resubscribe = "መሊሶም ሰብስክራይብ ይግበሩ";
+  final String thankYouForSubscribing = "ሰብስክራይብ ስለዝገበሩ የቐንየልና";
+  final String subscribtionNotAvlvable = " ኣገልግሎት ሰብስክሪብሽን ኣይተጀመረን";
+  final String subscribedMsg =
+      "በመኃልዬ ሰብስክሪብሽን ብዕውት ኩነታት ተመዝጊቡ፣ ብዘይገደብ መዝሙራት ይስምዑ፣ የውርዱ";
+  final String subscriptionNotAvlavableMsg =
+      " አገልግሎት ሰብስክሪብሽን ኣይተጀመረን፣ ብመሃልዬ ሰብስክሪብሽን ኣብዘለውዎ ምስጀመረ ክነፍልጦም ኢና";
+  final String purchaseCouldNotBeVerfied = "ግዝኢትካ ክረጋገፅ ኣይከኣለን";
+  final String purchaseCouldNotBeVerfiedMsg = "ግዝኢትካ ኣብ ምርግጋፅ ፀገም ነይሩ!!";
+  final String subscriptionCouldNotBeRenewd =
+      "ሰብስክሪብሽኖም ስለዝደምሱ ወይ ከኣ ብሰንኪ ፀገማት ክፍሊት ክሕደስ ኣይከኣለን";
+  final String completeingYourPurchase = "ግዝኢቶም ኣብምዝዛም ይርከብ\በጅኦም ይፀበዩ...";
+  final String sadToSeeYouGo = "ሰብስክሪብሽኖም ተደምሲሱ";
+  final String purchasePending = "ግዝኢት ኣብ ምፅባይ\nበጅኦም ይፀበዩ...";
+  final String inAppNotAvlable = "ግዝኢት መተግበሪ ጉግል ንሶን ኣብዝርከቡሉ ከባቢ አይርከብን!!";
+  final String ourPlans = " ዓይነታት ሰብስክሪብሽን";
+  final String allPlansInclude = "ንኩለን ዓይነታት የሰብስክሪብሽን ዝሕዝኦ";
+  final String unlimitedStreamingAllMezmurs = "ዘይተገደበ ኣገልግሎት ስትሪሚንግ";
+  final String unlimitedDownloadOffline = "መዝሙራት ብምውራድ ብዘይ ኢንተርኔት ምድማጽ";
+  final String highQualityAudio = "ዝለዓለ ፅሬት ዘለዎ ኦዲዮ";
+  final String featuredVideos = "ተፈልየን ዝቐረባ ለይተው ቪዲዮታት";
+  final String yenepay = "የኔፔይ";
+  final String telebirr = "ቴሌብር";
+  final String googlePlayInappPurcahses = "ግዝኢት መተግበሪ የጉግል";
+  final String appStoreInappPurcahses = " ግዝኢት መተግበሪ ኣፕ ስቶር";
+  final String payWithTelebirr = "በቴሌብር ይኽፈሉ";
+  final String payWithTelebirrMsg =
+      " ግዝኢት መኃልዬ ግዢን ንምዝዛም ንናይ ቴሌብር መለለይ መንንቶም ይጠቐሙ.";
+  final String payWithYenepay = "ብየኔፔይ ይኽፈሉ";
+  final String payWithYenepayMsg =
+      " ዕድጊት  መኃልዬ ንምዝዛም ንናይ የኔፔይ መለለይ መንነቶም ይጠቐሙ፣ የኔፔይ ዝስዕባ ናይ መኽፈሊ ኣማራፅታት የቕርብ";
+  final String payWithGoogleplayInappPurchases =
+      " ብመተግበሪ  ጉግል ፕሌይ ኣቢሎም ክፍሊት ይፈፅሙ";
+  final String payWithAppStoreInappPurchases =
+      "ብመተግበሪ ኣፕ ስቶር ኣቢሎም ክፍሊታት መተግበሪ ይፈፅሙ";
+  final String payWithGoogleplayInappPurchasesMsg =
+      "ግዝኢት መኃልዬ ንምዝዛም ናይ ጉግል መለለይ መንነቶም ይጠቐሙ። ጉግል ፕሌይ ዝስዕቡ ኣማራፂ ታት ክፍሊት የቕርብ";
+  final String payWithAppStoreInappPurchasesMsg =
+      "ግዝኢት መኃልዬ ንምዝዛም ናይ ኣፕል መለለይ መንነቶም ይጠቐሙ። ኣፕ ስቶር ዝስዕቡ ኣማራፂ ታት ክፍሊት የቕርብ";
+  final String mezmur = "መዝሙር";
 
   String featuring({required String artistName}) {
     return "$artistName ዘእተኻዮም ፕሌይሊስትታት";
@@ -586,71 +637,11 @@ class AppLanguageStringsTig extends AppLocalizations {
     return "$playlistName ተደምሲሱ ኣሎ";
   }
 
-  ///UNTRANSLATED
-  ///
-  final String subscription = "subscription";
-  final String profile = "Profile";
-  final String subscribed = "Subscribed";
-  final String continueStr = "Continue";
-  final String tryForFree = "Try for free";
-  final String paymentCanceled = "Payment was canceled!!";
-  final String noThanks = "No, Thanks";
-  final String openAudio = "Open Audio";
-  final String purchaseCouldNotBeCompleted = "Purchase could not be completed";
-  final String subscriptionRequired = "Subscription Required To Listen";
-  final String resubscribe = "Resubscribe";
-  final String thankYouForSubscribing = "Thank you for subscribing.";
-  final String subscribtionNotAvlvable = "Subscription currently not available";
-  final String subscribedMsg =
-      "You have successfully subscribed to mehaleye, enjoy listening mezmurs on mehaleye with unlimited access";
-  final String subscriptionNotAvlavableMsg =
-      "Subscription is currently not available in your country, we will notify you when available.";
-  final String purchaseCouldNotBeVerfied =
-      "Your Purchase Could Not Be Verified";
-  final String purchaseCouldNotBeVerfiedMsg =
-      "There was a problem verifying your purchase\nplease try again!!";
-  final String subscriptionCouldNotBeRenewd =
-      "Your subscription could not be renewed, due to active cancellation or payment issues.";
-  final String completeingYourPurchase =
-      "Completing your purchase\nplease wait...";
-  final String sadToSeeYouGo = "Sad to see you go";
-  final String purchasePending = "Purchase Pending\nPlease wait...";
-  final String inAppNotAvlable =
-      "In app purchasing not available in your location!!";
-  final String ourPlans = "Our Plans";
-  final String allPlansInclude = "All Plans Include";
-  final String unlimitedStreamingAllMezmurs =
-      "Unlimited streaming to all mezmurs";
-  final String unlimitedDownloadOffline =
-      "Unlimited downloads for offline usage";
-  final String highQualityAudio = "High quality audio";
-  final String featuredVideos = "Featured Videos";
-  final String yenepay = "Yenepay";
-  final String telebirr = "Telebirr";
-  final String googlePlayInappPurcahses = "Google Play In-App Purchases";
-  final String appStoreInappPurcahses = "App Store In-App Purchases";
-  final String payWithTelebirr = "Pay with Telebirr";
-  final String payWithTelebirrMsg =
-      "Use your Telebirr account to complete your mehaleye purchase.";
-  final String payWithYenepay = "Pay with Yenepay";
-  final String payWithYenepayMsg =
-      "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
-  final String payWithGoogleplayInappPurchases =
-      "Pay With Google Play In-App Purchases";
-  final String payWithAppStoreInappPurchases =
-      "Pay With App Store In-App Purchases";
-  final String payWithGoogleplayInappPurchasesMsg =
-      "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options";
-  final String payWithAppStoreInappPurchasesMsg =
-      "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options";
-
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {
-      return "You have a premium account\nmanage your subscriptions with google play store";
+      return "ተረባሒ ኣገልግሎት ፕሪሚየም ሰብስክሪብሽን ድዮም\nሰብስክሪብሽኖም ብ ጉግል ፕሌይ ኣቢሎም የዋድዱ";
     } else {
-      return "You have a premium account\nmanage your subscriptions with App Store";
+      return "ተረባሒ ኣገልግሎት ፕሪሚየም ሰብስክሪብሽን ድዮም\nሰብስክሪብሽኖም ብኣፕ ስቶር ኣቢሎም የዋድዱ";
     }
   }
-
-  final String mezmur = "mezmur";
 }

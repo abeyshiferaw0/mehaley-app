@@ -1,13 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
+import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/home_page_data.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/group.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -27,6 +31,7 @@ import 'package:mehaley/ui/screens/home/widgets/ite_home_page_ad.dart';
 import 'package:mehaley/util/api_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -77,6 +82,7 @@ class _HomePageState extends State<HomePage>
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+
     super.initState();
   }
 
@@ -145,6 +151,30 @@ class _HomePageState extends State<HomePage>
       backgroundColor: AppColors.transparent,
       shadowColor: AppColors.transparent,
       actions: [
+        AppBouncingButton(
+          onTap: () {
+            BlocProvider.of<TodayHolidayToastCubit>(context).showToast(true);
+            BlocProvider.of<TodayHolidayToastCubit>(context).showToast(false);
+          },
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppPadding.padding_8,
+                horizontal: AppPadding.padding_4,
+              ),
+              child: Text(
+                L10nUtil.getCurrentLocale() == AppLanguage.AMHARIC
+                    ? "የዛሬ ወርሃዊ በዓላት"
+                    : "Today's holidays".toUpperCase(),
+                style: TextStyle(
+                  fontSize: AppFontSizes.font_size_10.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+            ),
+          ),
+        ),
         SizedBox(
           width: AppPadding.padding_16,
         ),

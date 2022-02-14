@@ -31,16 +31,16 @@ class _TestTwoWidgetState extends State<TestTwoWidget> {
           webViewContainer = mWebViewController;
         },
         onPageStarted: (String s) {
-          print('WebViewww=> onPageStarted ${s}');
+          //print("WebViewww=> onPageStarted ${s}");
         },
         onPageFinished: (String s) {
-          print('WebViewww=> onPageFinished ${s}');
+          //print("WebViewww=> onPageFinished ${s}");
         },
         onProgress: (int s) {
-          //print('WebViewww=> onProgress ${s}');
+          ////print("WebViewww=> onProgress ${s}");
         },
         onWebResourceError: (WebResourceError error) {
-          print('WebViewww=> onWebResourceError ${error.failingUrl}');
+          //print("WebViewww=> onWebResourceError ${error.failingUrl}");
         },
       ),
     );

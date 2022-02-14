@@ -81,7 +81,7 @@ class DeepLinkListenerBloc
     bool isValidateUri = true;
 
     ///CHECK IF HAS SCHEMA AND QUERY PARAMS
-    if (!uri.hasScheme) isValidateUri = false;
+    //if (!uri.hasScheme) isValidateUri = false;
     if (!uri.hasQuery) isValidateUri = false;
 
     ///CHECK IF TYPE AND ITEM ID EXIST

@@ -17,22 +17,23 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SongSync(
-      songId: fields[7] as int,
+      songId: fields[8] as int,
       uuid: fields[0] as String?,
       playedFrom: fields[1] as SongSyncPlayedFrom,
       playedFromId: fields[2] as int?,
       isPreview: fields[3] as bool,
-      isOffline: fields[4] as bool,
-      listenDate: fields[5] as String,
-      secondsPlayed: fields[6] as int?,
-      isUserSubscribed: fields[8] as bool,
+      isPurchased: fields[4] as bool,
+      isOffline: fields[5] as bool,
+      listenDate: fields[6] as String,
+      secondsPlayed: fields[7] as int?,
+      isUserSubscribed: fields[9] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, SongSync obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -42,14 +43,16 @@ class SongSyncAdapter extends TypeAdapter<SongSync> {
       ..writeByte(3)
       ..write(obj.isPreview)
       ..writeByte(4)
-      ..write(obj.isOffline)
+      ..write(obj.isPurchased)
       ..writeByte(5)
-      ..write(obj.listenDate)
+      ..write(obj.isOffline)
       ..writeByte(6)
-      ..write(obj.secondsPlayed)
+      ..write(obj.listenDate)
       ..writeByte(7)
-      ..write(obj.songId)
+      ..write(obj.secondsPlayed)
       ..writeByte(8)
+      ..write(obj.songId)
+      ..writeByte(9)
       ..write(obj.isUserSubscribed);
   }
 

@@ -427,7 +427,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     //     .seekToNext()
                     //     .catchError(
                     //   (e) {
-                    //     //print("PlayNextSongEvent ${e.toString()}");
+                    //     ////print("PlayNextSongEvent ${e.toString()}");
                     //   },
                     // );
                   },

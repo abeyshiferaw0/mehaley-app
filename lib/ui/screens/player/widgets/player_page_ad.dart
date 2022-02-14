@@ -100,13 +100,13 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                       return NavigationDecision.prevent;
                     },
                     onPageStarted: (String url) {
-                      print("ADDDD=> onPageStarted");
+                      ////print("ADDDD=> onPageStarted");
                       setState(() {
                         opacity = 0.0;
                       });
                     },
                     onPageFinished: (String url) {
-                      print("ADDDD=> onPageFinished");
+                      ////print("ADDDD=> onPageFinished");
                       setState(() {
                         opacity = 1.0;
                       });
@@ -134,7 +134,7 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                       if (webViewController != null) {
                         webViewController.reload();
                       }
-                      print("ADDDD=> onWebResourceError");
+                      ////print("ADDDD=> onWebResourceError");
                       setState(() {
                         opacity = 0.0;
                       });
