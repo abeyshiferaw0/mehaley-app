@@ -5,6 +5,7 @@ import 'package:mehaley/business_logic/blocs/search_page_bloc/front_page_bloc/se
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -79,7 +80,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtil(context: context).getScreenHeight() * 0.7;
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -223,7 +224,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
       style: TextStyle(
         fontSize: AppFontSizes.font_size_18.sp,
         fontWeight: FontWeight.w600,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/screens/home/widgets/group_song_item_play_icon.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
 class ItemCustomGroup extends StatelessWidget {
@@ -36,29 +37,40 @@ class ItemCustomGroup extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(
-                  groupType == GroupType.ARTIST ? width : 4.0),
-              child: CachedNetworkImage(
-                imageUrl: PagesUtilFunctions.getGroupImageUrl(groupType, item),
-                width: width,
-                height: height,
-                imageBuilder: (context, imageProvider) => Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+                groupType == GroupType.ARTIST ? width : 4.0,
+              ),
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl:
+                        PagesUtilFunctions.getGroupImageUrl(groupType, item),
+                    width: width,
+                    height: height,
+                    imageBuilder: (context, imageProvider) => Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
+                        groupType != GroupType.ARTIST
+                            ? AppIconWidget()
+                            : SizedBox(),
+
+                        ///PLAY ICON IF SONG ITEM
+                        GroupSongItemPlayIcon(
+                          groupType: groupType,
+                        )
+                      ],
                     ),
-                    groupType != GroupType.ARTIST
-                        ? AppIconWidget()
-                        : SizedBox(),
-                  ],
-                ),
-                placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
+                    placeholder: (context, url) => buildItemsImagePlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                        buildItemsImagePlaceHolder(),
+                  ),
+                ],
               ),
             ),
             SizedBox(

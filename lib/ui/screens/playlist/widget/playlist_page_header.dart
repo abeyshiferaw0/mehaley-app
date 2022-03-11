@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
@@ -38,7 +39,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
   );
 
   //DOMINANT COLOR
-  Color dominantColor = AppColors.white;
+  Color dominantColor = ColorMapper.getWhite();
 
   //NOTIFIER FOR DOTED INDICATOR
   final ValueNotifier<int> pageNotifier = new ValueNotifier<int>(0);
@@ -54,7 +55,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
           children: [
             Container(
               height: widget.height,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(),
                 child: Column(
@@ -98,7 +99,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             icon: Icon(
               FlutterRemix.arrow_left_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
           Expanded(
@@ -116,7 +117,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                   ),
@@ -151,7 +152,7 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
             child: Icon(
               FlutterRemix.more_2_fill,
               size: AppIconSizes.icon_size_28,
-              color: AppColors.darkGrey,
+              color: ColorMapper.getDarkGrey(),
             ),
             onTap: () {
               PagesUtilFunctions.showMenuSheet(
@@ -209,8 +210,8 @@ class _PlaylistPageHeaderState extends State<PlaylistPageHeader> {
               ),
             ),
             CirclePageIndicator(
-              dotColor: AppColors.darkGrey,
-              selectedDotColor: AppColors.black,
+              dotColor: ColorMapper.getDarkGrey(),
+              selectedDotColor: ColorMapper.getBlack(),
               currentPageNotifier: pageNotifier,
               size: AppIconSizes.icon_size_6,
               itemCount: 3,

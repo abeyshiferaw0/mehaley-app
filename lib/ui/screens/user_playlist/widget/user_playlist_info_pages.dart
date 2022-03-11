@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -18,7 +19,7 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
 
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
-    color: AppColors.darkGrey,
+    color: ColorMapper.getDarkGrey(),
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
@@ -36,7 +37,7 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
               child: Container(
-                color: AppColors.txtGrey,
+                color: ColorMapper.getTxtGrey(),
                 width: AppValues.playlistPageOneImageSize,
                 height: AppValues.playlistPageOneImageSize,
                 child: PagesUtilFunctions.getSongGridImage(
@@ -53,7 +54,7 @@ class UserPlaylistInfoPageOne extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -107,7 +108,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
                         AppLocale.of().playlistBy,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.darkGrey,
+                          color: ColorMapper.getDarkGrey(),
                           letterSpacing: 0.3,
                           fontWeight: FontWeight.w400,
                         ),
@@ -121,7 +122,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
                           context,
                         ),
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           fontSize: AppFontSizes.font_size_12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -152,7 +153,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -164,7 +165,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -183,7 +184,7 @@ class UserPlaylistInfoPageTwo extends StatelessWidget {
             offset: Offset(0, 0),
             spreadRadius: 2,
             blurRadius: 6,
-            color: AppColors.white.withOpacity(0.2),
+            color: ColorMapper.getWhite().withOpacity(0.2),
           ),
         ],
       ),

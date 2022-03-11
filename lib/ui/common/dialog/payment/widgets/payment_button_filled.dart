@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -25,14 +26,14 @@ class PaymentButtonFilled extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: AppColors.orange,
+          color: ColorMapper.getOrange(),
         ),
         child: Text(
           title.toUpperCase(),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w600,
-            color: AppColors.white,
+            color: ColorMapper.getWhite(),
           ),
         ),
       ),

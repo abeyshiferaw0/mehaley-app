@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -39,11 +40,11 @@ class AlbumPlayShuffleHeader extends StatelessWidget {
             child: Container(
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0, 4),
-                    color: ColorUtil.darken(AppColors.white, 0.1),
+                    color: ColorUtil.darken(ColorMapper.getWhite(), 0.1),
                     spreadRadius: 1,
                     blurRadius: 4,
                   ),
@@ -72,7 +73,7 @@ class AlbumPlayShuffleHeader extends StatelessWidget {
                     },
                     icon: FlutterRemix.share_line,
                     iconSize: AppIconSizes.icon_size_20,
-                    iconColor: AppColors.darkOrange,
+                    iconColor: ColorMapper.getDarkOrange(),
                   ),
 
                   Expanded(child: SizedBox()),
@@ -107,8 +108,8 @@ class AlbumPlayShuffleHeader extends StatelessWidget {
                     isLiked: album.isLiked,
                     iconSize: AppIconSizes.icon_size_20,
                     albumId: album.albumId,
-                    likedColor: AppColors.darkOrange,
-                    unlikedColor: AppColors.darkOrange,
+                    likedColor: ColorMapper.getDarkOrange(),
+                    unlikedColor: ColorMapper.getDarkOrange(),
                   ),
 
                   SizedBox(

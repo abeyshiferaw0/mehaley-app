@@ -1,6 +1,6 @@
 {
   "name": "purchases_flutter",
-  "version": "3.7.0",
+  "version": "3.9.4",
   "summary": "Cross-platform subscriptions framework for Flutter.",
   "description": "Client for the RevenueCat subscription and purchase tracking system, making implementing in-app subscriptions in Flutter easy - receipt validation and status tracking included!",
   "homepage": "http://revenuecat.com",
@@ -20,7 +20,7 @@
 
     ],
     "PurchasesHybridCommon": [
-      "1.11.0"
+      "1.11.2"
     ]
   },
   "platforms": {

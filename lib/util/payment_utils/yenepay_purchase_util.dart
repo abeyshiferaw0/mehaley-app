@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_generate_checkout_url_bloc/yenepay_generate_checkout_url_bloc.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/data/models/payment/yenepay_payment_status.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_yenepay_generate_checkout_url.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
@@ -233,5 +238,62 @@ class YenepayPurchaseUtil {
     }
 
     return false;
+  }
+
+  static void onSuccess(YenepayPaymentStatus yenepayPaymentStatus, context) {
+    ///YENEPAY PURCHASE SUCCESS ACTIONS MAPPING
+    if (yenepayPaymentStatus.appPurchasedItemType ==
+        AppPurchasedItemType.SONG_PAYMENT) {
+      BlocProvider.of<IapPurchaseActionBloc>(context).add(
+        IapSongPurchaseActionEvent(
+          itemId: yenepayPaymentStatus.itemId,
+          appPurchasedSources: yenepayPaymentStatus.appPurchasedSources,
+        ),
+      );
+    }
+    if (yenepayPaymentStatus.appPurchasedItemType ==
+        AppPurchasedItemType.ALBUM_PAYMENT) {
+      BlocProvider.of<IapPurchaseActionBloc>(context).add(
+        IapAlbumPurchaseActionEvent(
+          itemId: yenepayPaymentStatus.itemId,
+          isFromSelfPage: yenepayPaymentStatus.isFromSelfPage,
+          appPurchasedSources: yenepayPaymentStatus.appPurchasedSources,
+        ),
+      );
+    }
+    if (yenepayPaymentStatus.appPurchasedItemType ==
+        AppPurchasedItemType.PLAYLIST_PAYMENT) {
+      BlocProvider.of<IapPurchaseActionBloc>(context).add(
+        IapPlaylistPurchaseActionEvent(
+          itemId: yenepayPaymentStatus.itemId,
+          isFromSelfPage: yenepayPaymentStatus.isFromSelfPage,
+          appPurchasedSources: yenepayPaymentStatus.appPurchasedSources,
+        ),
+      );
+    }
+  }
+
+  static void onCancled(
+      YenepayPaymentStatus yenepayPaymentStatus, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      buildAppSnackBar(
+        bgColor: AppColors.blue.withOpacity(0.9),
+        isFloating: true,
+        msg: AppLocale.of().paymentCanceled,
+        txtColor: AppColors.white,
+      ),
+    );
+  }
+
+  static void onFailed(
+      YenepayPaymentStatus yenepayPaymentStatus, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      buildAppSnackBar(
+        bgColor: AppColors.blue.withOpacity(0.9),
+        isFloating: true,
+        msg: AppLocale.of().purchaseNetworkError,
+        txtColor: AppColors.white,
+      ),
+    );
   }
 }

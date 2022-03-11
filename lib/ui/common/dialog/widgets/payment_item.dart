@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
@@ -31,12 +32,12 @@ class PaymentMethodItem extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(AppPadding.padding_16),
         decoration: BoxDecoration(
-          color: !paymentMethod.isAvailable ? AppColors.lightGrey : null,
+          color: !paymentMethod.isAvailable ? ColorMapper.getLightGrey() : null,
           borderRadius: BorderRadius.circular(6.0),
           border: Border.all(
             color: paymentMethod.isSelected
-                ? AppColors.darkOrange
-                : AppColors.txtGrey,
+                ? ColorMapper.getDarkOrange()
+                : ColorMapper.getTxtGrey(),
           ),
         ),
         child: Column(
@@ -80,7 +81,7 @@ class PaymentMethodItem extends StatelessWidget {
       style: TextStyle(
         fontSize: AppFontSizes.font_size_8.sp,
         fontWeight: FontWeight.w400,
-        color: AppColors.txtGrey,
+        color: ColorMapper.getTxtGrey(),
       ),
     );
   }
@@ -91,7 +92,7 @@ class PaymentMethodItem extends StatelessWidget {
       style: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
         fontWeight: FontWeight.bold,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
       ),
     );
   }
@@ -109,12 +110,12 @@ class PaymentMethodItem extends StatelessWidget {
             ? Icon(
                 FlutterRemix.checkbox_circle_fill,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.darkOrange,
+                color: ColorMapper.getDarkOrange(),
               )
             : Icon(
                 FlutterRemix.checkbox_blank_circle_line,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.lightGrey,
+                color: ColorMapper.getLightGrey(),
               ),
       ],
     );

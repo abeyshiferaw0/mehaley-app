@@ -12,6 +12,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profil
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -41,15 +42,15 @@ class _BottomBarState extends State<BottomBar> {
                 return BottomNavigationBar(
                   enableFeedback: true,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: AppColors.white,
-                  unselectedItemColor: AppColors.grey,
-                  selectedItemColor: AppColors.darkOrange,
+                  backgroundColor: ColorMapper.getWhite(),
+                  unselectedItemColor: ColorMapper.getGrey(),
+                  selectedItemColor: ColorMapper.getDarkOrange(),
                   unselectedLabelStyle: TextStyle(
-                    color: AppColors.grey,
+                    color: ColorMapper.getGrey(),
                     fontSize: 11,
                   ),
                   selectedLabelStyle: TextStyle(
-                    color: AppColors.darkOrange,
+                    color: ColorMapper.getDarkOrange(),
                     fontSize: AppFontSizes.font_size_12,
                   ),
                   currentIndex: getBottomBarIndex(state),
@@ -161,14 +162,14 @@ class _BottomBarState extends State<BottomBar> {
                         bottomSpace: 2,
                         size: AppValues.bottomBarActiveIconSize,
                         icon: FlutterRemix.home_line,
-                        color: AppColors.orange,
+                        color: ColorMapper.getOrange(),
                         isForLibrary: false,
                       ),
                       icon: BottomBarIcon(
                         bottomSpace: 2,
                         size: AppValues.bottomBarIconSize,
                         icon: FlutterRemix.home_line,
-                        color: AppColors.grey,
+                        color: ColorMapper.getGrey(),
                         isForLibrary: false,
                       ),
                       label: AppLocale.of().home,
@@ -179,14 +180,14 @@ class _BottomBarState extends State<BottomBar> {
                         bottomSpace: 2,
                         size: AppValues.bottomBarActiveIconSize,
                         icon: FlutterRemix.search_line,
-                        color: AppColors.orange,
+                        color: ColorMapper.getOrange(),
                         isForLibrary: false,
                       ),
                       icon: BottomBarIcon(
                         bottomSpace: 2,
                         size: AppValues.bottomBarIconSize,
                         icon: FlutterRemix.search_line,
-                        color: AppColors.grey,
+                        color: ColorMapper.getGrey(),
                         isForLibrary: false,
                       ),
                       label: AppLocale.of().search,
@@ -197,14 +198,14 @@ class _BottomBarState extends State<BottomBar> {
                         bottomSpace: 2,
                         size: AppValues.bottomBarActiveIconSize,
                         icon: FlutterRemix.stack_line,
-                        color: AppColors.orange,
+                        color: ColorMapper.getOrange(),
                         isForLibrary: false,
                       ),
                       icon: BottomBarIcon(
                         bottomSpace: 2,
                         size: AppValues.bottomBarIconSize,
                         icon: FlutterRemix.stack_line,
-                        color: AppColors.grey,
+                        color: ColorMapper.getGrey(),
                         isForLibrary: false,
                       ),
                       label: AppLocale.of().myLibrary,
@@ -259,7 +260,7 @@ class _BottomBarState extends State<BottomBar> {
               bottomSpace: 2,
               size: AppValues.bottomBarActiveIconSize,
               icon: FlutterRemix.user_line,
-              color: AppColors.orange,
+              color: ColorMapper.getOrange(),
               isForLibrary: false,
             ),
       icon: !isUserSubscribed & isIapAvailable
@@ -273,7 +274,7 @@ class _BottomBarState extends State<BottomBar> {
               bottomSpace: 2,
               size: AppValues.bottomBarIconSize,
               icon: FlutterRemix.user_line,
-              color: AppColors.grey,
+              color: ColorMapper.getGrey(),
               isForLibrary: false,
             ),
       label: !isUserSubscribed & isIapAvailable

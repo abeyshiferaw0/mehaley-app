@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -29,7 +30,7 @@ class DialogDeleteSong extends StatelessWidget {
             vertical: AppPadding.padding_32,
           ),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: ColorMapper.getWhite(),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Column(
@@ -40,7 +41,7 @@ class DialogDeleteSong extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
               SizedBox(
@@ -58,14 +59,14 @@ class DialogDeleteSong extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: AppColors.orange,
+                    color: ColorMapper.getOrange(),
                   ),
                   child: Text(
                     mainButtonText,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                     ),
                   ),
                 ),
@@ -82,7 +83,7 @@ class DialogDeleteSong extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
               ),

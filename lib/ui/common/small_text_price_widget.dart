@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
@@ -56,7 +57,7 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: AppColors.darkOrange,
+        color: ColorMapper.getDarkOrange(),
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -71,7 +72,9 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: shouldUseDimmedColor() ? AppColors.orange : AppColors.darkOrange,
+        color: shouldUseDimmedColor()
+            ? ColorMapper.getOrange()
+            : ColorMapper.getDarkOrange(),
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -86,7 +89,9 @@ class SmallTextPriceWidget extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-        color: shouldUseDimmedColor() ? AppColors.orange : AppColors.darkOrange,
+        color: shouldUseDimmedColor()
+            ? ColorMapper.getOrange()
+            : ColorMapper.getDarkOrange(),
         fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
         fontSize: useLargerText
             ? AppFontSizes.font_size_12.sp
@@ -102,8 +107,8 @@ class SmallTextPriceWidget extends StatelessWidget {
             '${getPrice().parsePriceAmount()} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
         style: TextStyle(
           color: shouldUseDimmedColor()
-              ? AppColors.orange.withOpacity(0.7)
-              : AppColors.darkOrange.withOpacity(0.7),
+              ? ColorMapper.getOrange().withOpacity(0.7)
+              : ColorMapper.getDarkOrange().withOpacity(0.7),
           decoration: TextDecoration.lineThrough,
           fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
           fontSize: useLargerText
@@ -116,8 +121,8 @@ class SmallTextPriceWidget extends StatelessWidget {
                 ' ${(getPrice() - (getPrice() * discountPercentage)).parsePriceAmount()} ${getPaymentMethod() == AppCurrency.ETB ? 'ETB' : 'USD'}',
             style: TextStyle(
               color: shouldUseDimmedColor()
-                  ? AppColors.orange
-                  : AppColors.darkOrange,
+                  ? ColorMapper.getOrange()
+                  : ColorMapper.getDarkOrange(),
               decoration: TextDecoration.none,
               fontWeight: useLargerText ? FontWeight.bold : FontWeight.w600,
               fontSize: useLargerText

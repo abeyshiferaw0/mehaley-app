@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -36,7 +37,7 @@ class FeaturedSongsItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(3),
           child: Container(
             height: double.infinity,
-            color: AppColors.lightGrey,
+            color: ColorMapper.getLightGrey(),
             child: Row(
               children: [
                 buildImageExpanded(),
@@ -67,7 +68,7 @@ class FeaturedSongsItem extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                         fontWeight: FontWeight.w600,
                         fontSize: AppFontSizes.font_size_10.sp,
                       ),
@@ -96,7 +97,7 @@ class FeaturedSongsItem extends StatelessWidget {
                     child: Icon(
                       FlutterRemix.play_circle_fill,
                       size: AppIconSizes.icon_size_48,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                   ),
                 ),
@@ -112,7 +113,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Expanded(
       flex: 25,
       child: CachedNetworkImage(
-        imageUrl:  song.albumArt.imageSmallPath,
+        imageUrl: song.albumArt.imageSmallPath,
         imageBuilder: (context, imageProvider) => Stack(
           children: [
             Container(
@@ -136,12 +137,12 @@ class FeaturedSongsItem extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: ColorUtil.darken(AppColors.lightGrey, 0.04),
+      color: ColorUtil.darken(ColorMapper.getLightGrey(), 0.04),
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(
             FlutterRemix.music_2_line,
-            color: AppColors.grey.withOpacity(0.5),
+            color: ColorMapper.getGrey().withOpacity(0.5),
             size: constraint.biggest.height / 2,
           );
         },

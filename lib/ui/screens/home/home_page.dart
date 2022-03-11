@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/home_page_data.dart';
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(),
         body: BlocBuilder<HomePageBloc, HomePageState>(
           builder: (context, state) {
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage>
 
           ///SUBSCRIBED CARD
           SubscribedTag(
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
           ),
 
           ///
@@ -169,7 +170,7 @@ class _HomePageState extends State<HomePage>
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ),
@@ -187,7 +188,7 @@ class _HomePageState extends State<HomePage>
             child: Icon(
               FlutterRemix.settings_4_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
         ),

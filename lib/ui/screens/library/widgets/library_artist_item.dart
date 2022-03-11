@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -55,7 +56,7 @@ class LibraryArtistsItem extends StatelessWidget {
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_12.sp,
               ),
@@ -66,7 +67,7 @@ class LibraryArtistsItem extends StatelessWidget {
           ),
           Icon(
             FlutterRemix.checkbox_circle_fill,
-            color: AppColors.orange,
+            color: ColorMapper.getOrange(),
             size: AppIconSizes.icon_size_24,
           ),
           SizedBox(

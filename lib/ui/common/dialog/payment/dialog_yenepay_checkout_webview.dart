@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -59,7 +62,7 @@ class _DialogYenepayCheckoutWebViewState
             Container(
               width: ScreenUtil(context: context).getScreenWidth() * 0.95,
               height: ScreenUtil(context: context).getScreenHeight() * 0.9,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: Column(
                 children: [
                   AppTopHeaderWithIcon(),
@@ -83,12 +86,18 @@ class _DialogYenepayCheckoutWebViewState
 
   WebView buildWebView() {
     return WebView(
-      initialUrl: widget.checkOutUrl,
+      initialUrl: getCheckoutUrl(widget.checkOutUrl),
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (mWebViewController) {
         webViewContainer = mWebViewController;
       },
+      userAgent: Platform.isIOS
+          ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15' +
+              ' (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1'
+          : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) ' +
+              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36',
       onPageStarted: (String s) {
+        print("YENEEPAY=> onPageStarted $s");
         setState(() {
           loading = true;
           hasError = false;
@@ -130,7 +139,7 @@ class _DialogYenepayCheckoutWebViewState
     return Visibility(
       visible: loading,
       child: Container(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         child: Center(
           child: AppLoading(
             size: AppValues.loadingWidgetSize * 0.8,
@@ -144,7 +153,7 @@ class _DialogYenepayCheckoutWebViewState
     return Visibility(
       visible: hasError,
       child: Container(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -202,7 +211,7 @@ class _DialogYenepayCheckoutWebViewState
         bgColor: AppColors.blue,
         isFloating: true,
         msg: AppLocale.of().paymentCanceled,
-        txtColor: AppColors.white,
+        txtColor: ColorMapper.getWhite(),
       ),
     );
   }
@@ -214,7 +223,7 @@ class _DialogYenepayCheckoutWebViewState
         bgColor: AppColors.errorRed,
         isFloating: false,
         msg: AppLocale.of().somethingWentWrong,
-        txtColor: AppColors.white,
+        txtColor: ColorMapper.getWhite(),
       ),
     );
   }
@@ -238,5 +247,16 @@ class _DialogYenepayCheckoutWebViewState
     if (isFailureReturnUrl) {
       onFailure();
     }
+  }
+
+  getCheckoutUrl(String checkOutUrl) {
+    // Uri uri = Uri.parse(checkOutUrl);
+    // print("uri.hasScheme $checkOutUrl ${uri.hasScheme} ${uri.scheme}");
+    // if (uri.hasScheme) {
+    //   if (uri.scheme == 'intent') {
+    //     return "${uri.host}${uri.path}";
+    //   }
+    // }
+    return checkOutUrl;
   }
 }

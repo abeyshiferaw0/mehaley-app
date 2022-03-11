@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -73,7 +74,7 @@ class SongItemVideo extends StatelessWidget {
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -90,7 +91,7 @@ class SongItemVideo extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.txtGrey,
+                          color: ColorMapper.getTxtGrey(),
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w500,
                         ),
@@ -102,7 +103,7 @@ class SongItemVideo extends StatelessWidget {
                   child: Icon(
                     Icons.more_vert,
                     size: AppIconSizes.icon_size_24,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                   onSelected: (AppVideoItemAction appVideoItemAction) {
                     if (appVideoItemAction == AppVideoItemAction.OPEN_AUDIO) {
@@ -137,7 +138,7 @@ class SongItemVideo extends StatelessWidget {
                 withShadow: false,
                 radius: 100.0,
                 child: Container(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   padding: EdgeInsets.symmetric(
                     horizontal: AppPadding.padding_12,
                     vertical: AppPadding.padding_6,
@@ -149,7 +150,7 @@ class SongItemVideo extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
-                      color: AppColors.darkOrange,
+                      color: ColorMapper.getDarkOrange(),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -200,7 +201,7 @@ class SongItemVideo extends StatelessWidget {
         title.toUpperCase(),
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontWeight: FontWeight.w500,
         ),
       ),

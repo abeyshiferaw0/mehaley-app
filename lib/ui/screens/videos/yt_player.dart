@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other_videos_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
@@ -75,12 +76,12 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
-        progressIndicatorColor: AppColors.darkOrange,
+        progressIndicatorColor: ColorMapper.getDarkOrange(),
         progressColors: ProgressBarColors(
-          playedColor: AppColors.white,
-          handleColor: AppColors.lightGrey,
-          backgroundColor: AppColors.lightGrey.withOpacity(0.5),
-          bufferedColor: AppColors.lightGrey.withOpacity(0.7),
+          playedColor: ColorMapper.getWhite(),
+          handleColor: ColorMapper.getLightGrey(),
+          backgroundColor: ColorMapper.getLightGrey().withOpacity(0.5),
+          bufferedColor: ColorMapper.getLightGrey().withOpacity(0.7),
         ),
         onReady: () {
           _controller.addListener(() {});
@@ -88,16 +89,16 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       ),
       builder: (context, player) {
         return Scaffold(
-          backgroundColor: AppColors.pagesBgColor,
+          backgroundColor: ColorMapper.getPagesBgColor(),
           appBar: AppBar(
             //brightness: Brightness.dark,
             systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-            backgroundColor: AppColors.white,
+            backgroundColor: ColorMapper.getWhite(),
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               icon: Icon(
                 FlutterRemix.arrow_left_line,
                 size: AppIconSizes.icon_size_24,
@@ -108,7 +109,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
           ),
@@ -186,7 +187,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider(
-          color: AppColors.lightGrey,
+          color: ColorMapper.getLightGrey(),
         );
       },
     );
@@ -202,12 +203,12 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       player: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
-        progressIndicatorColor: AppColors.darkOrange,
+        progressIndicatorColor: ColorMapper.getDarkOrange(),
         progressColors: ProgressBarColors(
-          playedColor: AppColors.white,
-          handleColor: AppColors.lightGrey,
-          backgroundColor: AppColors.lightGrey.withOpacity(0.5),
-          bufferedColor: AppColors.lightGrey.withOpacity(0.7),
+          playedColor: ColorMapper.getWhite(),
+          handleColor: ColorMapper.getLightGrey(),
+          backgroundColor: ColorMapper.getLightGrey().withOpacity(0.5),
+          bufferedColor: ColorMapper.getLightGrey().withOpacity(0.7),
         ),
         onReady: () {
           _controller.addListener(() {});
@@ -225,7 +226,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
         Icon(
           FlutterRemix.video_line,
           size: AppIconSizes.icon_size_72,
-          color: AppColors.lightGrey.withOpacity(0.8),
+          color: ColorMapper.getLightGrey().withOpacity(0.8),
         ),
         SizedBox(
           height: AppMargin.margin_8,
@@ -239,7 +240,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -258,7 +259,7 @@ class _YouTubePlayerPageState extends State<YouTubePlayerPage> {
       child: Text(
         AppLocale.of().otherVideos,
         style: TextStyle(
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontSize: AppFontSizes.font_size_14.sp,
           fontWeight: FontWeight.w600,
         ),

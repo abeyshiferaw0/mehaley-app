@@ -5,6 +5,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
@@ -44,10 +45,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: SafeArea(
         child: Container(
-          color: AppColors.pagesBgColor,
+          color: ColorMapper.getPagesBgColor(),
           child: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
             builder: (context, state) {
               if (state is PlaylistPageLoadingState) {
@@ -88,7 +89,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
           Expanded(
             flex: 5,
             child: Container(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: AppLoading(size: AppValues.loadingWidgetSize),
             ),
           ),
@@ -96,10 +97,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
             flex: 5,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.pagesBgColor,
+                color: ColorMapper.getPagesBgColor(),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.completelyBlack.withOpacity(0.1),
+                    color: ColorMapper.getCompletelyBlack().withOpacity(0.1),
                     offset: Offset(0, 0),
                     blurRadius: 12,
                     spreadRadius: 2,
@@ -173,7 +174,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                     vertical: AppPadding.padding_4,
                   ),
                   child: Divider(
-                    color: AppColors.grey.withOpacity(0.2),
+                    color: ColorMapper.getGrey().withOpacity(0.2),
                   ),
                 );
               },

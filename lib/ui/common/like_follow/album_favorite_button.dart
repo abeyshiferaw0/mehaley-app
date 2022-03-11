@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 
@@ -119,9 +119,9 @@ class _AlbumFavoriteButtonState extends State<AlbumFavoriteButton> {
       int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
       int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
       if (a > b) {
-        return AppColors.darkOrange;
+        return ColorMapper.getDarkOrange();
       } else {
-        return AppColors.darkOrange;
+        return ColorMapper.getDarkOrange();
       }
     }
 

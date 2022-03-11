@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/app_ad_bloc/app_ad_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_ad.dart';
@@ -141,7 +142,7 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                     },
                     zoomEnabled: false,
                     gestureNavigationEnabled: false,
-                    backgroundColor: AppColors.pagesBgColor,
+                    backgroundColor: ColorMapper.getPagesBgColor(),
                   ),
                 ),
                 GestureDetector(
@@ -172,7 +173,7 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                   alignment: Alignment.topRight,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.completelyBlack.withOpacity(0.8),
+                      color: ColorMapper.getCompletelyBlack().withOpacity(0.8),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                     padding: EdgeInsets.all(AppPadding.padding_6),
@@ -187,7 +188,7 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                             height: AppIconSizes.icon_size_32,
                             padding: EdgeInsets.all(AppPadding.padding_6),
                             child: CircularProgressIndicator(
-                              color: AppColors.white,
+                              color: ColorMapper.getWhite(),
                               value: progress,
                               strokeWidth: 2.0,
                             ),
@@ -204,7 +205,7 @@ class _PlayerPageAdState extends State<PlayerPageAd> {
                             },
                             child: Icon(
                               FlutterRemix.close_line,
-                              color: AppColors.white,
+                              color: ColorMapper.getWhite(),
                               size: AppIconSizes.icon_size_32,
                             ),
                           ),

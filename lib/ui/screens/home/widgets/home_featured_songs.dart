@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -119,8 +120,8 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
         itemCount: widget.featuredSongs.length,
         size: AppIconSizes.icon_size_10,
         selectedSize: AppIconSizes.icon_size_10,
-        selectedDotColor: AppColors.darkOrange,
-        dotColor: AppColors.lightGrey,
+        selectedDotColor: ColorMapper.getDarkOrange(),
+        dotColor: ColorMapper.getLightGrey(),
         currentPageNotifier: _currentPageNotifier,
       ),
     );
@@ -132,7 +133,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs> {
       child: Text(
         AppLocale.of().featuredMezmurs,
         style: TextStyle(
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontSize: AppFontSizes.font_size_16.sp,
           fontWeight: FontWeight.bold,
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
@@ -34,13 +35,13 @@ class _SearchPageInputState extends State<SearchPageInput> {
     return Container(
       height: AppValues.searchPersistentSliverInputHeaderHeight,
       decoration: BoxDecoration(
-        color: AppColors.pagesBgColor,
+        color: ColorMapper.getPagesBgColor(),
         boxShadow: [
           BoxShadow(
             offset: Offset(0, 4),
             spreadRadius: 1,
             blurRadius: 4,
-            color: AppColors.black.withOpacity(0.05),
+            color: ColorMapper.getBlack().withOpacity(0.05),
           ),
         ],
       ),
@@ -50,14 +51,14 @@ class _SearchPageInputState extends State<SearchPageInput> {
             horizontal: AppMargin.margin_16,
           ),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: ColorMapper.getWhite(),
             borderRadius: BorderRadius.circular(100.0),
             boxShadow: [
               BoxShadow(
                 offset: Offset(0, 0),
                 spreadRadius: 2,
                 blurRadius: 8,
-                color: AppColors.black.withOpacity(0.15),
+                color: ColorMapper.getBlack().withOpacity(0.15),
               ),
             ],
           ),
@@ -66,7 +67,7 @@ class _SearchPageInputState extends State<SearchPageInput> {
             controller: searchTextController,
             autofocus: true,
             focusNode: widget.focusNode,
-            cursorColor: AppColors.darkOrange,
+            cursorColor: ColorMapper.getDarkOrange(),
             onChanged: (key) {
               if (key.isEmpty || key == '') {
                 widget.onSearchEmpty();
@@ -78,14 +79,14 @@ class _SearchPageInputState extends State<SearchPageInput> {
               prevKey = key;
             },
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
             ),
             decoration: InputDecoration(
-              fillColor: AppColors.black,
-              focusColor: AppColors.black,
-              hoverColor: AppColors.black,
+              fillColor: ColorMapper.getBlack(),
+              focusColor: ColorMapper.getBlack(),
+              hoverColor: ColorMapper.getBlack(),
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(
                 vertical: AppPadding.padding_16,
@@ -96,16 +97,16 @@ class _SearchPageInputState extends State<SearchPageInput> {
               disabledBorder: InputBorder.none,
               hintText: AppLocale.of().searchHint,
               hintStyle: TextStyle(
-                color: AppColors.darkGrey.withOpacity(0.8),
+                color: ColorMapper.getDarkGrey().withOpacity(0.8),
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
               prefixIcon: Icon(
                 FlutterRemix.search_line,
                 size: AppIconSizes.icon_size_20,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
               suffixIcon: IconButton(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 iconSize: AppIconSizes.icon_size_20,
                 icon: Icon(FlutterRemix.close_line),
                 onPressed: () {

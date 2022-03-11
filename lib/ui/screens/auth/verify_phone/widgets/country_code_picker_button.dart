@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -15,7 +16,7 @@ class CountryPickerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.lightGrey,
+      color: ColorMapper.getLightGrey(),
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +41,7 @@ class CountryPickerButton extends StatelessWidget {
             '$countryCode',
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -50,7 +51,7 @@ class CountryPickerButton extends StatelessWidget {
           Icon(
             FlutterRemix.arrow_down_s_fill,
             size: AppFontSizes.font_size_12,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
           ),
           SizedBox(
             width: AppMargin.margin_8,

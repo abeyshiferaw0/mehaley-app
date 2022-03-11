@@ -6,6 +6,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/my_playlists_page.dart';
@@ -48,7 +49,7 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
               return;
             }
           },
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           edgeOffset: AppMargin.margin_16,
           child: Container(
             height: ScreenUtil(context: context).getScreenHeight(),
@@ -103,7 +104,7 @@ class _MyPlaylistTabViewState extends State<MyPlaylistTabView>
           onTap: () {
             PagesUtilFunctions.openCreatePlaylistPage(context);
           },
-          iconColor: AppColors.black,
+          iconColor: ColorMapper.getBlack(),
           icon: FlutterRemix.add_line,
         )
       ],

@@ -5,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -47,12 +48,12 @@ class ArtistSliverFollowButton extends StatelessWidget {
           child: Container(
             height: AppIconSizes.icon_size_40,
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(100.0),
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 0),
-                  color: AppColors.black.withOpacity(0.1),
+                  color: ColorMapper.getBlack().withOpacity(0.1),
                   spreadRadius: 2,
                   blurRadius: 4,
                 ),
@@ -73,7 +74,7 @@ class ArtistSliverFollowButton extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontWeight: FontWeight.w500,
                     fontSize: AppFontSizes.font_size_8.sp - 1,
                   ),

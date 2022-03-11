@@ -28,13 +28,13 @@ import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
 import 'package:mehaley/data/models/album.dart';
-import 'package:mehaley/data/models/app_ad.dart';
 import 'package:mehaley/data/models/app_permission.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -280,31 +280,31 @@ class PagesUtilFunctions {
   static getGroupItemTextStyle(GroupType groupType, item) {
     if (groupType == GroupType.SONG) {
       return TextStyle(
-        color: AppColors.darkGrey,
+        color: ColorMapper.getDarkGrey(),
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else if (groupType == GroupType.PLAYLIST) {
       return TextStyle(
-        color: AppColors.darkGrey,
+        color: ColorMapper.getDarkGrey(),
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else if (groupType == GroupType.ALBUM) {
       return TextStyle(
-        color: AppColors.darkGrey,
+        color: ColorMapper.getDarkGrey(),
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else if (groupType == GroupType.ARTIST) {
       return TextStyle(
-        color: AppColors.darkGrey,
+        color: ColorMapper.getDarkGrey(),
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
     } else {
       return TextStyle(
-        color: AppColors.darkGrey,
+        color: ColorMapper.getDarkGrey(),
         fontWeight: FontWeight.w500,
         fontSize: AppFontSizes.font_size_10.sp,
       );
@@ -592,25 +592,25 @@ class PagesUtilFunctions {
 
   static Color getLoopDarkButtonColor(LoopMode loopMode) {
     if (loopMode == LoopMode.off) {
-      return AppColors.white.withOpacity(0.5);
+      return ColorMapper.getWhite().withOpacity(0.5);
     } else if (loopMode == LoopMode.all) {
-      return AppColors.white;
+      return ColorMapper.getWhite();
     } else if (loopMode == LoopMode.one) {
-      return AppColors.white;
+      return ColorMapper.getWhite();
     } else {
-      return AppColors.white.withOpacity(0.5);
+      return ColorMapper.getWhite().withOpacity(0.5);
     }
   }
 
   static Color getLoopLightButtonColor(LoopMode loopMode) {
     if (loopMode == LoopMode.off) {
-      return AppColors.black;
+      return ColorMapper.getBlack();
     } else if (loopMode == LoopMode.all) {
-      return AppColors.darkOrange;
+      return ColorMapper.getDarkOrange();
     } else if (loopMode == LoopMode.one) {
-      return AppColors.darkOrange;
+      return ColorMapper.getDarkOrange();
     } else {
-      return AppColors.black;
+      return ColorMapper.getBlack();
     }
   }
 
@@ -923,7 +923,7 @@ class PagesUtilFunctions {
   static Widget buildImagePlaceHolder(appItemsType) {
     if (appItemsType == AppItemsType.OTHER) {
       return Container(
-        color: AppColors.lightGrey,
+        color: ColorMapper.getLightGrey(),
       );
     }
     return AppItemsImagePlaceHolder(appItemsType: appItemsType);
@@ -1195,9 +1195,11 @@ class PagesUtilFunctions {
 
   static SystemUiOverlayStyle getStatusBarStyle() {
     return SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
+      statusBarBrightness:
+          AppEnv.isMehaleye() ? Brightness.light : Brightness.dark,
       statusBarColor: AppColors.transparent,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness:
+          AppEnv.isMehaleye() ? Brightness.dark : Brightness.light,
     );
   }
 
@@ -1275,7 +1277,7 @@ class PagesUtilFunctions {
       ScaffoldMessenger.of(context).showSnackBar(
         buildAppSnackBar(
           bgColor: AppColors.errorRed,
-          txtColor: AppColors.white,
+          txtColor: ColorMapper.getWhite(),
           msg: 'Unable To Play Video',
           isFloating: false,
         ),
@@ -1413,5 +1415,4 @@ class PagesUtilFunctions {
       return 'Purchase Completed';
     }
   }
-
 }

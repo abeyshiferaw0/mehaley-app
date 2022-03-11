@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -38,7 +39,7 @@ class ArtistAlbumItem extends StatelessWidget {
             //   (position + 1).toString(),
             //   style: TextStyle(
             //     fontSize: AppFontSizes.font_size_8.sp,
-            //     color: AppColors.white,
+            //     color: ColorMapper.getWhite(),
             //     fontWeight: FontWeight.w600,
             //   ),
             // ),
@@ -64,7 +65,7 @@ class ArtistAlbumItem extends StatelessWidget {
                   L10nUtil.translateLocale(album.albumTitle, context),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -77,7 +78,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       PagesUtilFunctions.getAlbumYear(album),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.txtGrey,
+                        color: ColorMapper.getTxtGrey(),
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w400,
                       ),
@@ -88,7 +89,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.circle,
-                        color: AppColors.txtGrey,
+                        color: ColorMapper.getTxtGrey(),
                         size: AppIconSizes.icon_size_4,
                       ),
                     ),
@@ -96,7 +97,7 @@ class ArtistAlbumItem extends StatelessWidget {
                       AppLocale.of().album,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.txtGrey,
+                        color: ColorMapper.getTxtGrey(),
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w400,
                       ),

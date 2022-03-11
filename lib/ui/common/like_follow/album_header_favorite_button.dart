@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/color_util.dart';
 
 import '../app_bouncing_button.dart';
@@ -49,12 +50,12 @@ class _AlbumHeaderFavoriteButtonState extends State<AlbumHeaderFavoriteButton> {
           child: Container(
             padding: EdgeInsets.all(AppPadding.padding_12),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(100.0),
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 0),
-                  color: ColorUtil.darken(AppColors.white, 0.1),
+                  color: ColorUtil.darken(ColorMapper.getWhite(), 0.1),
                   spreadRadius: 2,
                   blurRadius: 4,
                 ),
@@ -133,9 +134,9 @@ class _AlbumHeaderFavoriteButtonState extends State<AlbumHeaderFavoriteButton> {
       int a = AppHiveBoxes.instance.recentlyLikedAlbumBox.get(widget.albumId);
       int b = AppHiveBoxes.instance.recentlyUnLikedAlbumBox.get(widget.albumId);
       if (a > b) {
-        return AppColors.darkOrange;
+        return ColorMapper.getDarkOrange();
       } else {
-        return AppColors.darkOrange;
+        return ColorMapper.getDarkOrange();
       }
     }
 

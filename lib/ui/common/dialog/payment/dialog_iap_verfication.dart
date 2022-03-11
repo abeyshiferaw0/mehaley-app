@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_verification_bloc/iap_purchase_verification_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -109,7 +110,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
               Container(
                 width: ScreenUtil(context: context).getScreenWidth() * 0.8,
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: BlocConsumer<IapPurchaseVerificationBloc,
@@ -174,7 +175,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ],
@@ -209,7 +210,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
               SizedBox(
@@ -221,7 +222,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.txtGrey,
+                  color: ColorMapper.getTxtGrey(),
                 ),
               ),
               SizedBox(
@@ -237,7 +238,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
               ),
@@ -270,7 +271,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ],

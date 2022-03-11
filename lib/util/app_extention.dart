@@ -48,6 +48,14 @@ extension StringCasingExtension on String {
     newStr = strList.join();
     return newStr;
   }
+
+  String unescape() {
+    String newStr = this;
+    newStr = newStr.replaceAll("&lt;", "<");
+    newStr = newStr.replaceAll("&gt;", ">");
+    newStr = newStr.replaceAll("&amp;", "&");
+    return newStr;
+  }
 }
 
 extension ExtendedVersionNumber on String {

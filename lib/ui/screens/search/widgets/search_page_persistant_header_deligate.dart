@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -22,7 +23,7 @@ class SearchPersistentSliverHeaderDelegate
       },
       child: Container(
         height: AppValues.searchPersistentSliverHeaderHeight,
-        color: AppColors.pagesBgColor,
+        color: ColorMapper.getPagesBgColor(),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -32,12 +33,12 @@ class SearchPersistentSliverHeaderDelegate
                   horizontal: AppMargin.margin_16,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   borderRadius: BorderRadius.circular(100.0),
                   boxShadow: [
                     BoxShadow(
                       offset: Offset(0, 0),
-                      color: AppColors.black.withOpacity(0.1),
+                      color: ColorMapper.getBlack().withOpacity(0.1),
                       blurRadius: 8,
                       spreadRadius: 2,
                     )
@@ -52,7 +53,7 @@ class SearchPersistentSliverHeaderDelegate
                     ),
                     Icon(
                       FlutterRemix.search_line,
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       size: AppIconSizes.icon_size_24,
                     ),
                     SizedBox(
@@ -66,7 +67,7 @@ class SearchPersistentSliverHeaderDelegate
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.txtGrey,
+                          color: ColorMapper.getTxtGrey(),
                         ),
                       ),
                     ),
@@ -84,7 +85,7 @@ class SearchPersistentSliverHeaderDelegate
             //   },
             //   icon: Icon(
             //     FlutterRemix.mic_line,
-            //     color: AppColors.lightGrey,
+            //     color: ColorMapper.getLightGrey(),
             //     size: AppIconSizes.icon_size_28,
             //   ),
             // )

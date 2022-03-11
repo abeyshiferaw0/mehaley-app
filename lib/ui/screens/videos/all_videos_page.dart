@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/videos_bloc/all_videos_bloc/all_videos_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -72,7 +73,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(context),
         body: PagedListView<int, Song>(
           pagingController: _pagingController,
@@ -150,7 +151,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
     return AppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       leading: IconButton(
         onPressed: () {
@@ -159,7 +160,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
         icon: Icon(
           FlutterRemix.arrow_left_line,
           size: AppIconSizes.icon_size_24,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
       title: Text(
@@ -168,7 +169,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
           fontWeight: FontWeight.w600,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );
@@ -183,7 +184,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
         Icon(
           FlutterRemix.video_line,
           size: AppIconSizes.icon_size_72,
-          color: AppColors.lightGrey.withOpacity(0.8),
+          color: ColorMapper.getLightGrey().withOpacity(0.8),
         ),
         SizedBox(
           height: AppMargin.margin_8,
@@ -197,7 +198,7 @@ class _AllVideosPageState extends State<AllVideosPage> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontWeight: FontWeight.w400,
             ),
           ),

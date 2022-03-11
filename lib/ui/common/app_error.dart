@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -64,7 +65,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                       vertical: AppMargin.margin_16,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                       borderRadius: BorderRadius.circular(
                         AppPadding.padding_8,
                       ),
@@ -86,7 +87,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
-                            color: AppColors.black,
+                            color: ColorMapper.getBlack(),
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.none,
                           ),
@@ -97,7 +98,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_10.sp,
-                            color: AppColors.txtGrey,
+                            color: ColorMapper.getTxtGrey(),
                             decoration: TextDecoration.none,
                           ),
                         ),
@@ -110,12 +111,13 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: AppColors.darkOrange,
+                              color: ColorMapper.getDarkOrange(),
                               borderRadius: BorderRadius.circular(30),
                               boxShadow: [
                                 BoxShadow(
                                     offset: Offset(0, 0),
-                                    color: AppColors.white.withOpacity(0.2),
+                                    color:
+                                        ColorMapper.getWhite().withOpacity(0.2),
                                     blurRadius: 6)
                               ],
                             ),
@@ -127,7 +129,7 @@ class _AppErrorState extends State<AppError> with TickerProviderStateMixin {
                               AppLocale.of().tryAgain.toUpperCase(),
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
-                                color: AppColors.white,
+                                color: ColorMapper.getWhite(),
                                 fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.none,
                               ),

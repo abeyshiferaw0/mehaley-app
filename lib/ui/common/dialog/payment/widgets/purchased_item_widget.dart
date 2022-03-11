@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -63,7 +64,7 @@ class PurchasedItemWidget extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: AppFontSizes.font_size_14,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                       maxLines: 1,
                       minFontSize: AppFontSizes.font_size_12,
@@ -73,7 +74,7 @@ class PurchasedItemWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_14,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                         ),
                         scrollAxis: Axis.horizontal,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +98,7 @@ class PurchasedItemWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -110,7 +111,7 @@ class PurchasedItemWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.darkOrange,
+                      color: ColorMapper.getDarkOrange(),
                       fontWeight: FontWeight.w400,
                     ),
                   ),

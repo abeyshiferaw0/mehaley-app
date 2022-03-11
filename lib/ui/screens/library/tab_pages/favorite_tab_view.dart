@@ -10,6 +10,7 @@ import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.da
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -68,7 +69,7 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
                 refreshPage(context);
               }
             },
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             edgeOffset: AppMargin.margin_16,
             child: Container(
               height: double.infinity,
@@ -185,10 +186,10 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.black.withOpacity(0.9),
+                bgColor: ColorMapper.getBlack().withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noMezmursToPlay,
-                txtColor: AppColors.white,
+                txtColor: ColorMapper.getWhite(),
               ),
             );
           }
@@ -209,16 +210,16 @@ class _FavoriteTabViewState extends State<FavoriteTabView>
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.black.withOpacity(0.9),
+                bgColor: ColorMapper.getBlack().withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().noAlbumsToSelect,
-                txtColor: AppColors.white,
+                txtColor: ColorMapper.getWhite(),
               ),
             );
           }
         }
       },
-      iconColor: AppColors.black,
+      iconColor: ColorMapper.getBlack(),
       icon: FlutterRemix.shuffle_line,
     );
   }

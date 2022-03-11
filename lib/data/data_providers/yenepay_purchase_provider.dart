@@ -10,6 +10,8 @@ class YenepayPurchaseProvider {
   Future generateCheckoutUrl(
     int itemId,
     AppPurchasedItemType appPurchasedItemType,
+    AppPurchasedSources appPurchasedSources,
+    bool isFromSelfPage,
   ) async {
     dio = Dio();
 
@@ -23,6 +25,10 @@ class YenepayPurchaseProvider {
         'item_type': EnumToString.convertToString(
           appPurchasedItemType,
         ),
+        'app_purchased_sources': EnumToString.convertToString(
+          appPurchasedSources,
+        ),
+        'is_from_self_page': isFromSelfPage,
       },
     );
     return response;

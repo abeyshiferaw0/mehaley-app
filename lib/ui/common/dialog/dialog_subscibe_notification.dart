@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -28,7 +29,7 @@ class DialogSubscribeNotification extends StatelessWidget {
               Container(
                 width: ScreenUtil(context: context).getScreenWidth() * 0.8,
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Column(
@@ -78,7 +79,7 @@ class DialogSubscribeNotification extends StatelessWidget {
       style: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
         fontWeight: FontWeight.w500,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
       ),
     );
   }
@@ -94,7 +95,7 @@ class DialogSubscribeNotification extends StatelessWidget {
         style: TextStyle(
           fontSize: (AppFontSizes.font_size_10 - 1).sp,
           fontWeight: FontWeight.w300,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );
@@ -122,7 +123,7 @@ class DialogSubscribeNotification extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
             ),
           ),
         ),
@@ -146,7 +147,7 @@ class DialogSubscribeNotification extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
         ),

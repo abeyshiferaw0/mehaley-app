@@ -6,6 +6,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -63,9 +64,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                   context,
                 ),
               ),
-              txtColor: AppColors.white,
+              txtColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: AppColors.white,
+              iconColor: ColorMapper.getWhite(),
             ),
           );
 
@@ -87,9 +88,9 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                   context,
                 ),
               ),
-              txtColor: AppColors.white,
+              txtColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: AppColors.white,
+              iconColor: ColorMapper.getWhite(),
             ),
           );
           Navigator.pop(context, state.myPlaylist);
@@ -101,7 +102,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToRemoveFromPlaylist,
-              bgColor: AppColors.white,
+              bgColor: ColorMapper.getWhite(),
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -114,7 +115,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToDeletePlaylist,
-              bgColor: AppColors.white,
+              bgColor: ColorMapper.getWhite(),
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -123,7 +124,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         body: BlocBuilder<UserPlaylistPageBloc, UserPlaylistPageState>(
           builder: (context, state) {
             if (state is UserPlaylistPageLoadingState) {
@@ -184,7 +185,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
       builder: (context, state) {
         if (state is UserPlaylistLoadingState) {
           return Container(
-            color: AppColors.white.withOpacity(
+            color: ColorMapper.getWhite().withOpacity(
               0.5,
             ),
             child: Center(
@@ -262,7 +263,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                     vertical: AppPadding.padding_4,
                   ),
                   child: Divider(
-                    color: AppColors.grey.withOpacity(0.2),
+                    color: ColorMapper.getGrey().withOpacity(0.2),
                   ),
                 );
               },

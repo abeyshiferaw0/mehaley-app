@@ -6,6 +6,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
@@ -63,8 +64,8 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         if (state is PhoneAuthErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildAppSnackBar(
-              bgColor: AppColors.black.withOpacity(0.9),
-              txtColor: AppColors.white,
+              bgColor: ColorMapper.getBlack().withOpacity(0.9),
+              txtColor: ColorMapper.getWhite(),
               msg: state.error,
               isFloating: false,
             ),
@@ -72,7 +73,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(context),
         //resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -120,7 +121,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -138,7 +139,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
-          color: AppColors.txtGrey,
+          color: ColorMapper.getTxtGrey(),
         ),
       ),
     );
@@ -182,8 +183,8 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   buildAppSnackBar(
-                    bgColor: AppColors.black.withOpacity(0.9),
-                    txtColor: AppColors.white,
+                    bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                    txtColor: ColorMapper.getWhite(),
                     msg: AppLocale.of().invalidPhoneNumber,
                     isFloating: false,
                   ),
@@ -213,16 +214,16 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           alignLeft: false,
           showFlag: true,
           dialogSize: getCountrySearchDialogSize(context),
-          backgroundColor: AppColors.completelyBlack.withOpacity(0.4),
-          dialogBackgroundColor: AppColors.white,
-          barrierColor: AppColors.completelyBlack.withOpacity(0.3),
+          backgroundColor: ColorMapper.getCompletelyBlack().withOpacity(0.4),
+          dialogBackgroundColor: ColorMapper.getWhite(),
+          barrierColor: ColorMapper.getCompletelyBlack().withOpacity(0.3),
           closeIcon: Icon(
             FlutterRemix.close_line,
             size: AppIconSizes.icon_size_24,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
           ),
           searchStyle: TextStyle(
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w600,
           ),
@@ -236,7 +237,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
                   AppLocale.of().noCountryCode,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.grey,
+                    color: ColorMapper.getGrey(),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -245,7 +246,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             );
           },
           dialogTextStyle: TextStyle(
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontSize: AppFontSizes.font_size_10.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -253,23 +254,23 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             prefixIcon: Icon(
               FlutterRemix.search_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.darkOrange,
+              color: ColorMapper.getDarkOrange(),
             ),
-            fillColor: AppColors.black,
-            focusColor: AppColors.black,
-            hoverColor: AppColors.black,
+            fillColor: ColorMapper.getBlack(),
+            focusColor: ColorMapper.getBlack(),
+            hoverColor: ColorMapper.getBlack(),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkOrange),
+              borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkOrange),
+              borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
             ),
             border: UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.darkOrange),
+              borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
             ),
             hintText: AppLocale.of().searchForCountryCode,
             hintStyle: TextStyle(
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontSize: AppFontSizes.font_size_10.sp,
             ),
           ),
@@ -295,7 +296,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       centerTitle: false,
       //brightness: Brightness.dark,
@@ -305,7 +306,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           Navigator.pop(context);
         },
         iconSize: AppIconSizes.icon_size_24,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         icon: Icon(
           FlutterRemix.arrow_left_line,
         ),
@@ -314,7 +315,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         AppLocale.of().continueWithPhoneNumber,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );

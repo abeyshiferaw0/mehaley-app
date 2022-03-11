@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/shimmer_item.dart';
@@ -16,7 +17,7 @@ class ShimmerLyric extends StatelessWidget {
     return Container(
       height: AppValues.lyricPlayerHeight,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
@@ -30,18 +31,18 @@ class ShimmerLyric extends StatelessWidget {
             AppLocale.of().lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w600,
               letterSpacing: 0.8,
             ),
           ),
           SizedBox(height: AppMargin.margin_8),
           Divider(
-            color: AppColors.lightGrey,
+            color: ColorMapper.getLightGrey(),
           ),
           Shimmer.fromColors(
-            highlightColor: AppColors.lightGrey.withOpacity(0.5),
-            baseColor: AppColors.lightGrey,
+            highlightColor: ColorMapper.getLightGrey().withOpacity(0.5),
+            baseColor: ColorMapper.getLightGrey(),
             direction: ShimmerDirection.ltr,
             child: Wrap(
               children: [

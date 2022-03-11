@@ -16,6 +16,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_positi
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -89,7 +90,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           padding: EdgeInsets.all(AppPadding.padding_4),
                           child: Icon(
                             FlutterRemix.share_line,
-                            color: AppColors.white,
+                            color: ColorMapper.getWhite(),
                             size: AppIconSizes.icon_size_24,
                           ),
                         ),
@@ -132,7 +133,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             children: [
                               // Icon(
                               //   FlutterRemix.checkbox_blank_circle_line,
-                              //   color: AppColors.lightGrey,
+                              //   color: ColorMapper.getLightGrey(),
                               //   size: AppIconSizes.icon_size_64,
                               // ),
                               Container(
@@ -142,7 +143,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                   borderRadius: BorderRadius.circular(100.0),
                                   border: Border.all(
                                     width: 1.3,
-                                    color: AppColors.lightGrey,
+                                    color: ColorMapper.getLightGrey(),
                                   ),
                                 ),
                               ),
@@ -150,7 +151,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                 alignment: Alignment.center,
                                 child: Icon(
                                   FlutterRemix.more_2_line,
-                                  color: AppColors.lightGrey,
+                                  color: ColorMapper.getLightGrey(),
                                   size: AppIconSizes.icon_size_32,
                                 ),
                               ),
@@ -166,8 +167,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                       SongFavoriteButton(
                         songId: state.songId,
                         isLiked: state.isLiked,
-                        likedColor: AppColors.white,
-                        unlikedColor: AppColors.white,
+                        likedColor: ColorMapper.getWhite(),
+                        unlikedColor: ColorMapper.getWhite(),
                       ),
                     ],
                   );
@@ -191,7 +192,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                       ),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
-                        color: AppColors.lightGrey.withOpacity(0.7),
+                        color: ColorMapper.getLightGrey().withOpacity(0.7),
                       ),
                     );
                   },
@@ -205,7 +206,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         ),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.lightGrey.withOpacity(0.7),
+                          color: ColorMapper.getLightGrey().withOpacity(0.7),
                         ),
                       );
                     } else {
@@ -222,14 +223,16 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                 if (currentPlayingState != null) {
                   return SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: AppColors.lightGrey,
-                      inactiveTrackColor: AppColors.lightGrey.withOpacity(0.4),
+                      activeTrackColor: ColorMapper.getLightGrey(),
+                      inactiveTrackColor:
+                          ColorMapper.getLightGrey().withOpacity(0.4),
                       trackShape: CustomTrackShape(),
                       trackHeight: 2.0,
-                      thumbColor: AppColors.white,
+                      thumbColor: ColorMapper.getWhite(),
                       thumbShape:
                           RoundSliderThumbShape(enabledThumbRadius: 6.0),
-                      overlayColor: AppColors.lightGrey.withOpacity(0.24),
+                      overlayColor:
+                          ColorMapper.getLightGrey().withOpacity(0.24),
                       overlayShape:
                           RoundSliderOverlayShape(overlayRadius: 16.0),
                     ),
@@ -284,7 +287,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: AppFontSizes.font_size_16,
-                            color: AppColors.white,
+                            color: ColorMapper.getWhite(),
                           ),
                           maxLines: 1,
                           minFontSize: AppFontSizes.font_size_14,
@@ -297,7 +300,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             style: TextStyle(
                               fontSize: AppFontSizes.font_size_16,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.white,
+                              color: ColorMapper.getWhite(),
                             ),
                             scrollAxis: Axis.horizontal,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,7 +330,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         maxLines: 1,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.lightGrey,
+                          color: ColorMapper.getLightGrey(),
                           fontWeight: FontWeight.w300,
                         ),
                       ),
@@ -362,14 +365,14 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             Icon(
                               FlutterRemix.shuffle_line,
                               color: state
-                                  ? AppColors.white
-                                  : AppColors.white.withOpacity(0.5),
+                                  ? ColorMapper.getWhite()
+                                  : ColorMapper.getWhite().withOpacity(0.5),
                               size: AppIconSizes.icon_size_20,
                             ),
                             state
                                 ? Icon(
                                     Icons.circle,
-                                    color: AppColors.white,
+                                    color: ColorMapper.getWhite(),
                                     size: AppIconSizes.icon_size_4,
                                   )
                                 : SizedBox(),
@@ -391,7 +394,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   },
                   child: Icon(
                     Icons.skip_previous_sharp,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     size: AppIconSizes.icon_size_32,
                   ),
                 ),
@@ -410,7 +413,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                             ? Icons.pause_circle_filled_sharp
                             : FlutterRemix.play_circle_fill,
                         size: AppIconSizes.icon_size_64,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                       ),
                     );
                   },
@@ -433,7 +436,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   },
                   child: Icon(
                     Icons.skip_next_sharp,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     size: AppIconSizes.icon_size_32,
                   ),
                 ),
@@ -459,7 +462,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                                 ? Icon(
                                     Icons.circle,
                                     size: AppIconSizes.icon_size_4,
-                                    color: AppColors.white,
+                                    color: ColorMapper.getWhite(),
                                   )
                                 : SizedBox()
                           ],
@@ -493,7 +496,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                           state
                               ? FlutterRemix.volume_mute_line
                               : FlutterRemix.volume_up_line,
-                          color: AppColors.lightGrey,
+                          color: ColorMapper.getLightGrey(),
                           size: AppIconSizes.icon_size_20,
                         ),
                       ),
@@ -510,9 +513,9 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                         song: state,
                         isForPlayerPage: true,
                         downloadingFailedColor:
-                            AppColors.lightGrey.withOpacity(0.5),
-                        downloadingColor: AppColors.lightGrey,
-                        downloadedColor: AppColors.white,
+                            ColorMapper.getLightGrey().withOpacity(0.5),
+                        downloadingColor: ColorMapper.getLightGrey(),
+                        downloadedColor: ColorMapper.getWhite(),
                       );
                     } else {
                       return SizedBox();
@@ -532,7 +535,7 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     padding: const EdgeInsets.all(AppPadding.padding_16),
                     child: Icon(
                       FlutterRemix.play_list_line,
-                      color: AppColors.lightGrey,
+                      color: ColorMapper.getLightGrey(),
                       size: AppIconSizes.icon_size_20,
                     ),
                   ),

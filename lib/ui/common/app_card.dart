@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 
 class AppCard extends StatelessWidget {
   final Widget child;
@@ -27,7 +27,7 @@ class AppCard extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 4,
                   spreadRadius: 2,
-                  color: AppColors.black.withOpacity(0.1),
+                  color: ColorMapper.getBlack().withOpacity(0.1),
                   offset: Offset(0, 0),
                 ),
               ]
@@ -36,7 +36,7 @@ class AppCard extends StatelessWidget {
                     BoxShadow(
                       blurRadius: 2,
                       spreadRadius: 1,
-                      color: AppColors.black.withOpacity(0.1),
+                      color: ColorMapper.getBlack().withOpacity(0.1),
                       offset: Offset(0, 0),
                     ),
                   ]

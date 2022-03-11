@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/settings_page_data.dart';
@@ -33,7 +34,7 @@ class DownloadQualityPicker extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
               SizedBox(
@@ -44,7 +45,7 @@ class DownloadQualityPicker extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.txtGrey,
+                  color: ColorMapper.getTxtGrey(),
                 ),
               ),
             ],
@@ -55,8 +56,8 @@ class DownloadQualityPicker extends StatelessWidget {
         ),
         DropdownButton(
           value: settingsPageData.downloadSongQuality,
-          dropdownColor: AppColors.lightGrey,
-          focusColor: AppColors.orange,
+          dropdownColor: ColorMapper.getLightGrey(),
+          focusColor: ColorMapper.getOrange(),
           icon: Padding(
             padding: const EdgeInsets.only(
               left: AppPadding.padding_8,
@@ -64,11 +65,11 @@ class DownloadQualityPicker extends StatelessWidget {
             child: Icon(
               FlutterRemix.arrow_down_s_fill,
               size: AppIconSizes.icon_size_16,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
           style: TextStyle(
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w400,
           ),
@@ -115,7 +116,8 @@ class DownloadQualityPicker extends StatelessWidget {
         EnumToString.convertToString(appDownloadQualityOptions)
             .replaceAll('_', ' '),
         style: TextStyle(
-          color: isActive ? AppColors.darkOrange : AppColors.txtGrey,
+          color:
+              isActive ? ColorMapper.getDarkOrange() : ColorMapper.getTxtGrey(),
           fontSize: AppFontSizes.font_size_10.sp,
           fontWeight: FontWeight.w600,
         ),

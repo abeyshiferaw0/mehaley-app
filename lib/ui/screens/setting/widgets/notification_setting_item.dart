@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -31,9 +32,9 @@ class NotificationSettingItem extends StatelessWidget {
               scale: 0.9,
               child: Switch(
                 value: isEnabled,
-                activeColor: AppColors.darkOrange,
-                activeTrackColor: AppColors.orange.withOpacity(0.3),
-                inactiveTrackColor: AppColors.grey,
+                activeColor: ColorMapper.getDarkOrange(),
+                activeTrackColor: ColorMapper.getOrange().withOpacity(0.3),
+                inactiveTrackColor: ColorMapper.getGrey(),
                 onChanged: (val) {
                   onSwitched();
                 },
@@ -47,7 +48,7 @@ class NotificationSettingItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w400,
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
               ),
             ),
           ],

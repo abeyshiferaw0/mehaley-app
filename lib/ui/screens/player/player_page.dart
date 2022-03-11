@@ -5,8 +5,8 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
 import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/screens/player/widgets/bg_player_gradient.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_widgets.dart';
@@ -44,7 +44,7 @@ class _PlayerPageState extends State<PlayerPage> {
         quotesDataRepository: AppRepositories.quotesDataRepository,
       ),
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
           listener: playerPageListeners,
           child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -15,7 +16,7 @@ class LibraryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: ColorMapper.getWhite(),
       height: 50,
       child: Stack(
         children: [
@@ -48,7 +49,7 @@ class LibraryHeader extends StatelessWidget {
         padding: EdgeInsets.all(AppPadding.padding_16),
         child: Icon(
           FlutterRemix.search_line,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );
@@ -59,7 +60,7 @@ class LibraryHeader extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 3,
-        color: AppColors.lightGrey,
+        color: ColorMapper.getLightGrey(),
       ),
     );
   }
@@ -69,13 +70,13 @@ class LibraryHeader extends StatelessWidget {
       controller: tabController,
       isScrollable: true,
       labelPadding: EdgeInsets.all(0.0),
-      unselectedLabelColor: AppColors.grey,
+      unselectedLabelColor: ColorMapper.getGrey(),
       labelStyle: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
         fontWeight: FontWeight.bold,
       ),
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(width: 3.0, color: AppColors.darkOrange),
+        borderSide: BorderSide(width: 3.0, color: ColorMapper.getDarkOrange()),
         insets: EdgeInsets.symmetric(horizontal: 0.0),
       ),
       indicatorPadding: EdgeInsets.zero,

@@ -6,6 +6,7 @@ import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -122,7 +123,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: Stack(
         children: [
           BlocConsumer<IapSubscriptionPageBloc, IapSubscriptionPageState>(
@@ -189,7 +190,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
               ],
@@ -285,7 +286,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
       delegate: SubscriptionSliverHeaderDelegate(
         height: ScreenUtil(context: context).getScreenHeight() * 0.15,
         child: Container(
-          color: AppColors.pagesBgColor,
+          color: ColorMapper.getPagesBgColor(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -295,7 +296,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.2,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
               SizedBox(
@@ -311,7 +312,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
               ),
@@ -353,7 +354,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
             AppLocale.of().allPlansInclude,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -367,7 +368,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                 AppLocale.of().unlimitedStreamingAllMezmurs,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -391,7 +392,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                 AppLocale.of().unlimitedDownloadOffline,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -415,7 +416,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
                 AppLocale.of().highQualityAudio,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w400,
                 ),
               ),

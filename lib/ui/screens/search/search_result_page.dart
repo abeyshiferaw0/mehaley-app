@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:mehaley/business_logic/cubits/search_cancel_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
@@ -44,7 +45,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         resizeToAvoidBottomInset: false,
         body: CustomScrollView(
           slivers: [
@@ -130,12 +131,12 @@ class _SearchResultPageState extends State<SearchResultPage> {
             AppValues.searchResultMicButtonSize,
           ),
           child: Container(
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             width: AppValues.searchResultMicButtonSize,
             height: AppValues.searchResultMicButtonSize,
             child: Icon(
               FlutterRemix.mic_line,
-              color: AppColors.darkOrange,
+              color: ColorMapper.getDarkOrange(),
               size: AppIconSizes.icon_size_32,
             ),
           ),
@@ -151,7 +152,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       builder: (context) {
         return Container(
           height: ScreenUtil(context: context).getScreenHeight() * 0.5,

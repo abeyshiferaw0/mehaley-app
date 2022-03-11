@@ -110,4 +110,5 @@ class ColorUtil {
   //       await PaletteGenerator.fromImageProvider(imageProvider);
   //   return paletteGenerator.dominantColor!.color;
   // }
+
 }

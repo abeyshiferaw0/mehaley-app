@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/telebirr/telebirr_generate_checkout_url_bloc/telebirr_generate_checkout_url_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -54,7 +55,7 @@ class _DialogTelebirrGenerateCheckoutUrlState
             width: ScreenUtil(context: context).getScreenWidth() * 0.9,
             height: ScreenUtil(context: context).getScreenHeight() * 0.7,
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(

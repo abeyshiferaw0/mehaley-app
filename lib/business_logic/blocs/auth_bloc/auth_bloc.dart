@@ -52,7 +52,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthErrorState(error: e.toString());
       }
     } else if (event is ContinueWithGoogleEvent) {
-
       yield AuthLoadingState(userLoginType: UserLoginType.GOOGLE);
       try {
         AppFireBaseUser? appFireBaseUser = await signInWithGoogle();
@@ -327,7 +326,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AppFireBaseUser? fireBaseUser;
 
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: pinCode);
+      verificationId: verificationId,
+      smsCode: pinCode,
+    );
 
     // Sign the user in (or link) with the credential
     await firebaseAuth.signInWithCredential(credential).then((firebaseUser) {

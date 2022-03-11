@@ -16,6 +16,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -49,7 +50,7 @@ class _QueueListPageState extends State<QueueListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: SafeArea(
         child: MultiBlocListener(
           listeners: [
@@ -97,7 +98,7 @@ class _QueueListPageState extends State<QueueListPage> {
             itemCount: queue.length,
             proxyDecorator: (widget, int, animation) {
               return Container(
-                color: AppColors.lightGrey,
+                color: ColorMapper.getLightGrey(),
                 child: widget,
               );
             },
@@ -120,13 +121,13 @@ class _QueueListPageState extends State<QueueListPage> {
   SliderTheme buildQueuePageSlider(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: AppColors.darkGrey,
-        inactiveTrackColor: AppColors.darkGrey.withOpacity(0.24),
+        activeTrackColor: ColorMapper.getDarkGrey(),
+        inactiveTrackColor: ColorMapper.getDarkGrey().withOpacity(0.24),
         trackShape: CustomTrackShape(),
         trackHeight: 1.0,
-        thumbColor: AppColors.black,
+        thumbColor: ColorMapper.getBlack(),
         thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
-        overlayColor: AppColors.black.withOpacity(0.24),
+        overlayColor: ColorMapper.getBlack().withOpacity(0.24),
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
       ),
       child: BlocBuilder<CurrentPlayingCubit, Song?>(
@@ -163,7 +164,7 @@ class _QueueListPageState extends State<QueueListPage> {
 
   Container buildQueuePageControls(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: ColorMapper.getWhite(),
       padding: EdgeInsets.symmetric(vertical: AppPadding.padding_20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -184,13 +185,15 @@ class _QueueListPageState extends State<QueueListPage> {
                     children: [
                       Icon(
                         FlutterRemix.shuffle_line,
-                        color: state ? AppColors.darkOrange : AppColors.black,
+                        color: state
+                            ? ColorMapper.getDarkOrange()
+                            : ColorMapper.getBlack(),
                         size: AppIconSizes.icon_size_24,
                       ),
                       state
                           ? Icon(
                               Icons.circle,
-                              color: AppColors.darkOrange,
+                              color: ColorMapper.getDarkOrange(),
                               size: AppIconSizes.icon_size_4,
                             )
                           : SizedBox(),
@@ -209,7 +212,7 @@ class _QueueListPageState extends State<QueueListPage> {
             },
             child: Icon(
               Icons.skip_previous_sharp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               size: AppIconSizes.icon_size_48,
             ),
           ),
@@ -228,7 +231,7 @@ class _QueueListPageState extends State<QueueListPage> {
                       ? Icons.pause_circle_filled_sharp
                       : FlutterRemix.play_circle_fill,
                   size: AppIconSizes.icon_size_72,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               );
             },
@@ -242,7 +245,7 @@ class _QueueListPageState extends State<QueueListPage> {
             },
             child: Icon(
               Icons.skip_next_sharp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               size: AppIconSizes.icon_size_48,
             ),
           ),
@@ -270,7 +273,7 @@ class _QueueListPageState extends State<QueueListPage> {
                           ? Icon(
                               Icons.circle,
                               size: AppIconSizes.icon_size_4,
-                              color: AppColors.darkOrange,
+                              color: ColorMapper.getDarkOrange(),
                             )
                           : SizedBox()
                     ],
@@ -319,7 +322,7 @@ class _QueueListPageState extends State<QueueListPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
               Expanded(child: SizedBox()),
@@ -331,7 +334,7 @@ class _QueueListPageState extends State<QueueListPage> {
                       child: Icon(
                         FlutterRemix.close_line,
                         size: AppIconSizes.icon_size_24,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     )
                   : SizedBox()
@@ -343,7 +346,7 @@ class _QueueListPageState extends State<QueueListPage> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
           SizedBox(height: AppMargin.margin_16),
@@ -354,7 +357,7 @@ class _QueueListPageState extends State<QueueListPage> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
           SizedBox(height: AppMargin.margin_16),
@@ -389,7 +392,7 @@ class _QueueListPageState extends State<QueueListPage> {
                 L10nUtil.translateLocale(song.songName, context),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -410,7 +413,7 @@ class _QueueListPageState extends State<QueueListPage> {
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
                       fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
                     ),

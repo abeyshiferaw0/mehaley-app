@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -31,7 +32,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
           vertical: AppPadding.padding_14,
         ),
         decoration: BoxDecoration(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           borderRadius: BorderRadius.circular(2),
         ),
         child: Center(
@@ -47,7 +48,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                       ),
                       child: CircularProgressIndicator(
                         strokeWidth: 1,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                       ),
                     )
                   : SizedBox(),
@@ -55,7 +56,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -65,7 +66,7 @@ class PhoneAuthLargeButton extends StatelessWidget {
               isLoading != true
                   ? Icon(
                       FlutterRemix.arrow_right_s_line,
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                       size: AppIconSizes.icon_size_12,
                     )
                   : SizedBox(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -29,7 +30,7 @@ class MainAppBar extends StatelessWidget {
 
         ///SUBSCRIBED CARD
         SubscribedTag(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
         ),
 
         Expanded(
@@ -48,7 +49,7 @@ class MainAppBar extends StatelessWidget {
             child: Icon(
               FlutterRemix.settings_4_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
         ),

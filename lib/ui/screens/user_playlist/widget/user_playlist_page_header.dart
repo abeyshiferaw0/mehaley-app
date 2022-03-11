@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_page_bloc/user_playlist_page_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -37,7 +38,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
   );
 
   //DOMINANT COLOR
-  Color dominantColor = AppColors.white;
+  Color dominantColor = ColorMapper.getWhite();
 
   //NOTIFIER FOR DOTED INDICATOR
   final ValueNotifier<int> pageNotifier = new ValueNotifier<int>(0);
@@ -51,7 +52,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
         }
         return Container(
           height: AppValues.userPlaylistHeaderSliverHeight,
-          color: AppColors.white,
+          color: ColorMapper.getWhite(),
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
             child: Column(
@@ -78,7 +79,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
   Container buildAppBar(double shrinkPercentage, MyPlaylist myPlaylist) {
     return Container(
       height: AppValues.userPlaylistHeaderAppBarSliverHeight,
-      //color: AppColors.black.withOpacity(shrinkPercentage),
+      //color: ColorMapper.getBlack().withOpacity(shrinkPercentage),
       padding: EdgeInsets.only(top: AppPadding.padding_28),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +91,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             icon: Icon(
               FlutterRemix.arrow_left_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
           Expanded(
@@ -104,7 +105,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ),
@@ -113,7 +114,7 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
             child: Icon(
               FlutterRemix.more_2_fill,
               size: AppIconSizes.icon_size_28,
-              color: AppColors.darkGrey,
+              color: ColorMapper.getDarkGrey(),
             ),
             onTap: () {
               PagesUtilFunctions.showMenuSheet(
@@ -183,8 +184,8 @@ class _UserPlaylistPageHeaderState extends State<UserPlaylistPageHeader> {
               ),
             ),
             CirclePageIndicator(
-              dotColor: AppColors.darkGrey,
-              selectedDotColor: AppColors.black,
+              dotColor: ColorMapper.getDarkGrey(),
+              selectedDotColor: ColorMapper.getBlack(),
               currentPageNotifier: pageNotifier,
               size: AppIconSizes.icon_size_6,
               itemCount: 2,

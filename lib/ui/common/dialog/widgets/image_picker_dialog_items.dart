@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -29,7 +30,7 @@ class ImagePickerDialogItems extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               size: AppIconSizes.icon_size_24,
             ),
             SizedBox(
@@ -41,7 +42,7 @@ class ImagePickerDialogItems extends StatelessWidget {
                 fontSize: AppFontSizes.font_size_12.sp,
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.italic,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
           ],

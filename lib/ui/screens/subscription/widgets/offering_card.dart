@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -28,7 +29,7 @@ class OfferingCard extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.placeholderIconColor,
+            color: ColorMapper.getPlaceholderIconColor(),
             blurRadius: 12,
             spreadRadius: 2,
             offset: Offset(0, 0),
@@ -138,7 +139,7 @@ class OfferingCard extends StatelessWidget {
           vertical: AppPadding.padding_12,
         ),
         decoration: BoxDecoration(
-          color: AppColors.completelyBlack.withOpacity(0.9),
+          color: ColorMapper.getCompletelyBlack().withOpacity(0.9),
           borderRadius: BorderRadius.circular(100.0),
         ),
         child: Center(
@@ -148,7 +149,7 @@ class OfferingCard extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
             ),
           ),
         ),

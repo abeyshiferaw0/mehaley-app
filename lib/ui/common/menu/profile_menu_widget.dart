@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -27,7 +28,7 @@ class ProfileMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -54,7 +55,7 @@ class ProfileMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: false,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.pencil_line,
                     title: AppLocale.of().editProfile,
                     onTap: () {
@@ -70,7 +71,7 @@ class ProfileMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().share,
                     onTap: () {
@@ -107,7 +108,7 @@ class ProfileMenuWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
                 ),

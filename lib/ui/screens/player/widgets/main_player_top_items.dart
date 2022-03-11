@@ -5,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -40,7 +41,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
             },
             icon: Icon(
               FlutterRemix.arrow_down_s_line,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               size: AppIconSizes.icon_size_28,
             ),
           ),
@@ -53,7 +54,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                     state.from.toUpperCase(),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_6.sp,
-                      color: AppColors.lightGrey,
+                      color: ColorMapper.getLightGrey(),
                       letterSpacing: 1.1,
                     ),
                   ),
@@ -65,7 +66,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_8.sp,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                     ),
                   ),
                 ],
@@ -80,7 +81,7 @@ class _MainPlayerTopItemsState extends State<MainPlayerTopItems> {
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
                       FlutterRemix.more_2_fill,
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                       size: AppIconSizes.icon_size_24,
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,7 +24,7 @@ class WidgetErrorWidget extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.bold,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
@@ -35,7 +36,7 @@ class WidgetErrorWidget extends StatelessWidget {
               subTitle,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
                 fontSize: AppFontSizes.font_size_8.sp,
               ),
             ),
@@ -52,13 +53,13 @@ class WidgetErrorWidget extends StatelessWidget {
                   vertical: AppPadding.padding_8,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   borderRadius: BorderRadius.circular(120),
                 ),
                 child: Text(
                   AppLocale.of().tryAgain,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontWeight: FontWeight.w600,
                     fontSize: AppFontSizes.font_size_10.sp,
                   ),

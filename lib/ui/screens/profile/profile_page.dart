@@ -9,6 +9,7 @@ import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profile_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/profile_page_data.dart';
@@ -111,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: CustomScrollView(
         slivers: [
           BlocBuilder<PagesDominantColorBloc, PagesDominantColorState>(
@@ -171,14 +172,14 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
         SizedBox(height: AppMargin.margin_58),
         Icon(
           FlutterRemix.archive_line,
-          color: AppColors.black.withOpacity(0.2),
+          color: ColorMapper.getBlack().withOpacity(0.2),
           size: AppIconSizes.icon_size_32,
         ),
         SizedBox(height: AppMargin.margin_8),
         Text(
           AppLocale.of().notingToShow,
           style: TextStyle(
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
             fontSize: AppFontSizes.font_size_10.sp,
             fontWeight: FontWeight.w400,
           ),
@@ -385,7 +386,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
               title.toUpperCase(),
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -394,7 +395,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
             ),
             Icon(
               FlutterRemix.arrow_right_s_line,
-              color: AppColors.darkGrey,
+              color: ColorMapper.getDarkGrey(),
               size: AppIconSizes.icon_size_20,
             ),
           ],

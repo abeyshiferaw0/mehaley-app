@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -35,7 +36,7 @@ class ProfileButton extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.white.withOpacity(0.3),
+                  color: ColorMapper.getWhite().withOpacity(0.3),
                   spreadRadius: 6,
                   blurRadius: 6,
                   offset: Offset(0, 0),
@@ -60,7 +61,7 @@ class ProfileButton extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                   );
                 },
@@ -73,7 +74,7 @@ class ProfileButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w300,
-                  color: AppColors.txtGrey,
+                  color: ColorMapper.getTxtGrey(),
                 ),
               ),
             ],
@@ -81,7 +82,7 @@ class ProfileButton extends StatelessWidget {
           Expanded(child: SizedBox()),
           Icon(
             FlutterRemix.arrow_right_s_line,
-            color: AppColors.darkGrey,
+            color: ColorMapper.getDarkGrey(),
             size: AppIconSizes.icon_size_24,
           ),
         ],

@@ -5,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
@@ -42,7 +43,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
   Widget build(BuildContext context) {
     return ExpansionPanelList(
       animationDuration: Duration(milliseconds: 300),
-      dividerColor: AppColors.pagesBgColor,
+      dividerColor: ColorMapper.getPagesBgColor(),
       expandedHeaderPadding: EdgeInsets.zero,
       elevation: 0,
       expansionCallback: (int item, bool status) {
@@ -58,7 +59,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.pagesBgColor,
+          backgroundColor: ColorMapper.getPagesBgColor(),
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -70,7 +71,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                     Expanded(child: SizedBox()),
@@ -79,7 +80,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           ? FlutterRemix.arrow_up_s_line
                           : FlutterRemix.arrow_down_s_line,
                       size: AppIconSizes.icon_size_24,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     )
                   ],
                 ),
@@ -88,7 +89,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
           },
           body: Container(
             child: Theme(
-              data: ThemeData(unselectedWidgetColor: AppColors.txtGrey),
+              data: ThemeData(unselectedWidgetColor: ColorMapper.getTxtGrey()),
               child: Column(
                 children: [
                   LanguageSettingItem(
@@ -148,7 +149,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
         ExpansionPanel(
           canTapOnHeader: true,
           hasIcon: false,
-          backgroundColor: AppColors.pagesBgColor,
+          backgroundColor: ColorMapper.getPagesBgColor(),
           headerBuilder: (context, isExpanded) {
             return Column(
               children: [
@@ -160,7 +161,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                     Expanded(child: SizedBox()),
@@ -169,7 +170,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                           ? FlutterRemix.arrow_up_s_line
                           : FlutterRemix.arrow_down_s_line,
                       size: AppIconSizes.icon_size_24,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     )
                   ],
                 ),
@@ -178,7 +179,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
           },
           body: Container(
             child: Theme(
-              data: ThemeData(unselectedWidgetColor: AppColors.txtGrey),
+              data: ThemeData(unselectedWidgetColor: ColorMapper.getTxtGrey()),
               child: Column(
                 children: [
                   NotificationSettingItem(

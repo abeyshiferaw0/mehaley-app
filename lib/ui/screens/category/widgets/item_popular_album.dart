@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -62,7 +63,7 @@ class ItemPopularAlbum extends StatelessWidget {
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
@@ -16,7 +17,7 @@ class IapPurchasePendingUi extends StatelessWidget {
       builder: (context, state) {
         if (state is ShowIapPurchasePendingState) {
           return Container(
-            color: AppColors.black.withOpacity(0.5),
+            color: ColorMapper.getBlack().withOpacity(0.5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +33,7 @@ class IapPurchasePendingUi extends StatelessWidget {
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
                   ),

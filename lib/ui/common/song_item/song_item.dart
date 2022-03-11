@@ -7,6 +7,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -156,7 +157,7 @@ class _SongItemState extends State<SongItem> {
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: AppFontSizes.font_size_8.sp,
-                                color: AppColors.txtGrey,
+                                color: ColorMapper.getTxtGrey(),
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -184,15 +185,15 @@ class _SongItemState extends State<SongItem> {
           SongIsLikedIndicator(
             songId: song.songId,
             isLiked: song.isLiked,
-            likedColor: AppColors.darkOrange,
-            unlikedColor: AppColors.darkOrange,
+            likedColor: ColorMapper.getDarkOrange(),
+            unlikedColor: ColorMapper.getDarkOrange(),
           ),
           SongDownloadIndicator(
             song: song,
             isForPlayerPage: false,
-            downloadingFailedColor: AppColors.black,
-            downloadingColor: AppColors.darkOrange,
-            downloadedColor: AppColors.darkOrange,
+            downloadingFailedColor: ColorMapper.getBlack(),
+            downloadingColor: ColorMapper.getDarkOrange(),
+            downloadedColor: ColorMapper.getDarkOrange(),
           ),
           showDotsMenu(),
         ],
@@ -220,7 +221,7 @@ class _SongItemState extends State<SongItem> {
           position.toString(),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -307,7 +308,7 @@ class SongIsPlayingText extends StatelessWidget {
           maxLines: 1,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: isPlaying ? AppColors.orange : AppColors.black,
+            color: isPlaying ? ColorMapper.getOrange() : ColorMapper.getBlack(),
             fontWeight: FontWeight.w500,
           ),
         );
@@ -398,7 +399,7 @@ class _SongMenuDotsWidgetState extends State<SongMenuDotsWidget> {
                 padding: EdgeInsets.all(AppPadding.padding_8),
                 child: Icon(
                   FlutterRemix.more_2_fill,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                   size: AppIconSizes.icon_size_24,
                 ),
               ),

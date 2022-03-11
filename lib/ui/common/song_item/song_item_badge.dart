@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,7 +20,7 @@ class SongItemBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.transparent,
         border: Border.all(
-          color: AppColors.txtGrey.withOpacity(0.7),
+          color: ColorMapper.getTxtGrey().withOpacity(0.7),
           width: 0.5,
         ),
         borderRadius: BorderRadius.all(
@@ -30,7 +31,7 @@ class SongItemBadge extends StatelessWidget {
         tag,
         style: TextStyle(
           fontSize: 6.sp,
-          color: color != null ? color : AppColors.txtGrey,
+          color: color != null ? color : ColorMapper.getTxtGrey(),
           fontWeight: FontWeight.w500,
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 

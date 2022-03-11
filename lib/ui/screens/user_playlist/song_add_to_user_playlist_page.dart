@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -51,7 +52,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         if (state is SongAddedToPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: AppColors.darkGrey,
+              bgColor: ColorMapper.getDarkGrey(),
               isFloating: true,
               msg: AppLocale.of().songAddedToPlaylist(
                 songName: L10nUtil.translateLocale(
@@ -63,9 +64,9 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                   context,
                 ),
               ),
-              txtColor: AppColors.white,
+              txtColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: AppColors.darkOrange,
+              iconColor: ColorMapper.getDarkOrange(),
             ),
           );
 
@@ -84,7 +85,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToAddMezmur,
-              bgColor: AppColors.darkGrey,
+              bgColor: ColorMapper.getDarkGrey(),
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -93,7 +94,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(context),
         body: Stack(
           children: [
@@ -159,7 +160,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                                 AppLocale.of().addToExistingPlaylist,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
-                                  color: AppColors.txtGrey,
+                                  color: ColorMapper.getTxtGrey(),
                                   fontSize: AppFontSizes.font_size_8.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -221,14 +222,14 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
     return AppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
         icon: Icon(FlutterRemix.arrow_left_line),
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         iconSize: AppIconSizes.icon_size_24,
       ),
       centerTitle: true,
@@ -236,7 +237,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         AppLocale.of().addToPlaylist,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -246,7 +247,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
   Container buildPostingPlaylistLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.5),
+        color: ColorMapper.getWhite().withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(
@@ -282,7 +283,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                   vertical: AppPadding.padding_8,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.darkOrange,
+                  color: ColorMapper.getDarkOrange(),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -291,7 +292,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               ),
@@ -305,7 +306,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           AppLocale.of().addToNewPlaylist,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
             fontSize: AppFontSizes.font_size_8.sp,
             fontWeight: FontWeight.w400,
           ),
@@ -314,7 +315,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
           height: AppMargin.margin_16,
         ),
         Divider(
-          color: AppColors.lightGrey,
+          color: ColorMapper.getLightGrey(),
           height: 1,
         ),
         SizedBox(

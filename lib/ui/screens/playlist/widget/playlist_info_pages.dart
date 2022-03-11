@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/playlist_page_data.dart';
@@ -29,7 +30,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
 
   final TextStyle followersTextStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
-    color: AppColors.darkGrey,
+    color: ColorMapper.getDarkGrey(),
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
   );
@@ -78,7 +79,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -102,7 +103,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                         child: Icon(
                           Icons.circle,
                           size: AppIconSizes.icon_size_4,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                         ),
                       ),
                 playlistPageData.numberOfFollowers == 0
@@ -197,7 +198,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                         AppLocale.of().playlistBy,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.darkGrey,
+                          color: ColorMapper.getDarkGrey(),
                           letterSpacing: 0.3,
                           fontWeight: FontWeight.w400,
                         ),
@@ -208,7 +209,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
                       Text(
                         PagesUtilFunctions.getPlaylistOwner(playlist, context),
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           fontSize: AppFontSizes.font_size_12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -240,7 +241,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -252,7 +253,7 @@ class PlaylistInfoPageTwo extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -369,7 +370,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
                     ///SUBSCRIBE SMALL BUTTON
                     SubscribeSmallButton(
                       text: AppLocale.of().subscribeDialogTitle,
-                      textColor: AppColors.black,
+                      textColor: ColorMapper.getBlack(),
                       fontSize: AppFontSizes.font_size_10,
                       onTap: () {
                         Navigator.pushNamed(
@@ -395,7 +396,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_12.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -407,7 +408,7 @@ class PlaylistInfoPageThree extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w500,
           ),
         ),

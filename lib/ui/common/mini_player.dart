@@ -14,6 +14,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_positi
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -87,7 +88,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
           ///SHOW SONG CHANGE WITH SLIDING ANIMATION
           animateWhenSongChange(currentPlayingSong);
           return Container(
-            color: AppColors.pagesBgColor,
+            color: ColorMapper.getPagesBgColor(),
             child: SlideTransition(
               position: offset,
               child: GestureDetector(
@@ -256,7 +257,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               ///SUBSCRIBE SMALL BUTTON
               SubscribeSmallButton(
                 text: AppLocale.of().subscribeDialogTitle,
-                textColor: AppColors.white,
+                textColor: ColorMapper.getWhite(),
                 fontSize: AppFontSizes.font_size_10,
                 onTap: () {
                   widget.navigatorKey.currentState!.pushNamed(
@@ -299,7 +300,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
                 SizedBox(
@@ -310,7 +311,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: AppFontSizes.font_size_8.sp,
-                    color: AppColors.lightGrey,
+                    color: ColorMapper.getLightGrey(),
                   ),
                 ),
               ],
@@ -321,7 +322,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 ? FlutterRemix.arrow_down_s_line
                 : FlutterRemix.arrow_up_s_line,
             size: AppIconSizes.icon_size_24,
-            color: AppColors.white,
+            color: ColorMapper.getWhite(),
           ),
         ],
       ),
@@ -363,7 +364,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   child: Icon(
                     FlutterRemix.skip_back_mini_fill,
                     size: AppIconSizes.icon_size_28,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               );
@@ -386,7 +387,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 child: Icon(
                   state ? FlutterRemix.pause_mini_fill : FlutterRemix.play_fill,
                   size: AppIconSizes.icon_size_28,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
               ),
             );
@@ -409,7 +410,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   child: Icon(
                     FlutterRemix.skip_forward_mini_fill,
                     size: AppIconSizes.icon_size_28,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               );
@@ -422,8 +423,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         SongFavoriteButton(
           songId: id,
           isLiked: isLiked,
-          likedColor: AppColors.white,
-          unlikedColor: AppColors.white,
+          likedColor: ColorMapper.getWhite(),
+          unlikedColor: ColorMapper.getWhite(),
         ),
       ],
     );
@@ -443,7 +444,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_16,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
               ),
               maxLines: 1,
               minFontSize: AppFontSizes.font_size_16,
@@ -455,7 +456,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
                 scrollAxis: Axis.horizontal,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -478,7 +479,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 ? PagesUtilFunctions.getArtistsNames(song.artistsName, context)
                 : '',
             style: TextStyle(
-              color: AppColors.lightGrey,
+              color: ColorMapper.getLightGrey(),
               fontSize: AppFontSizes.font_size_8.sp,
             ),
           )
@@ -526,8 +527,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         if (currentPlayingState != null) {
           return SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: AppColors.black,
-              inactiveTrackColor: AppColors.darkGrey.withOpacity(0.5),
+              activeTrackColor: ColorMapper.getBlack(),
+              inactiveTrackColor: ColorMapper.getDarkGrey().withOpacity(0.5),
               thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,
@@ -606,7 +607,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
               borderRadius: BorderRadius.all(
                 Radius.circular(100),
               ),
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -617,7 +618,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               ],

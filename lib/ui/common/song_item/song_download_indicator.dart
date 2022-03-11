@@ -5,6 +5,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -177,7 +178,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                         AppLocale.of().deleteMezmur,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.white.withOpacity(0.7),
+                          color: ColorMapper.getWhite().withOpacity(0.7),
                         ),
                       ),
                     )
@@ -201,10 +202,10 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
               ///SHOW RETRYING MESSAGE
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().retryingDownloadMsg,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
 
@@ -244,7 +245,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                         AppLocale.of().retryDownload,
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_8.sp,
-                          color: AppColors.white.withOpacity(0.7),
+                          color: ColorMapper.getWhite().withOpacity(0.7),
                         ),
                       ),
                     )
@@ -284,7 +285,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                       AppLocale.of().downloadingStr,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
-                        color: AppColors.white.withOpacity(0.7),
+                        color: ColorMapper.getWhite().withOpacity(0.7),
                       ),
                     ),
                   )
@@ -304,10 +305,10 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                   ///SHOW DOWNLOAD STARTED MESSAGE
                   ScaffoldMessenger.of(context).showSnackBar(
                     buildAppSnackBar(
-                      bgColor: AppColors.black.withOpacity(0.9),
+                      bgColor: ColorMapper.getBlack().withOpacity(0.9),
                       isFloating: true,
                       msg: AppLocale.of().downloadStartedMsg,
-                      txtColor: AppColors.white,
+                      txtColor: ColorMapper.getWhite(),
                     ),
                   );
 

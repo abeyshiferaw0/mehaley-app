@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -61,7 +62,7 @@ class ItemSimilarArtistsPlaylist extends StatelessWidget {
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w500,
                   fontSize: AppFontSizes.font_size_14,
                 ),

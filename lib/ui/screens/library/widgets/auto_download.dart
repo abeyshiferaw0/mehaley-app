@@ -17,7 +17,7 @@ class AutoDownloadRadio extends StatelessWidget {
     //         AppLocale.of().autoDownload,
     //         style: TextStyle(
     //           fontSize: AppFontSizes.font_size_12.sp,
-    //           color: AppColors.lightGrey,
+    //           color: ColorMapper.getLightGrey(),
     //           fontWeight: FontWeight.w600,
     //         ),
     //       ),
@@ -26,10 +26,10 @@ class AutoDownloadRadio extends StatelessWidget {
     //         child: Switch(
     //           value: downloadAllSelected,
     //           // trackColor:
-    //           //     MaterialStateProperty.all<Color>(AppColors.grey),
+    //           //     MaterialStateProperty.all<Color>(ColorMapper.getGrey()),
     //           activeColor: AppColors.darkGreen,
     //           activeTrackColor: AppColors.green.withOpacity(0.3),
-    //           inactiveTrackColor: AppColors.grey,
+    //           inactiveTrackColor: ColorMapper.getGrey(),
     //           onChanged: (bool isSwitched) {},
     //         ),
     //       )

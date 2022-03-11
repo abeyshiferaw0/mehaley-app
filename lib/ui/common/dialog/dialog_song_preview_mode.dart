@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -42,7 +43,7 @@ class DialogSongPreviewMode extends StatelessWidget {
         Container(
           width: ScreenUtil(context: context).getScreenWidth() * 0.8,
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: ColorMapper.getWhite(),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Column(
@@ -79,7 +80,7 @@ class DialogSongPreviewMode extends StatelessWidget {
       style: TextStyle(
         fontSize: AppFontSizes.font_size_12.sp,
         fontWeight: FontWeight.w600,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
       ),
     );
   }
@@ -108,7 +109,6 @@ class DialogSongPreviewMode extends StatelessWidget {
             width: AppMargin.margin_16,
           ),
           Flexible(
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +120,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: AppFontSizes.font_size_16,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                     maxLines: 1,
                     minFontSize: AppFontSizes.font_size_16,
@@ -130,7 +130,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_16,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                       scrollAxis: Axis.horizontal,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +153,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -166,7 +166,7 @@ class DialogSongPreviewMode extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.darkOrange,
+                    color: ColorMapper.getDarkOrange(),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -199,7 +199,7 @@ class DialogSongPreviewMode extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w500,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
           SizedBox(
@@ -217,14 +217,14 @@ class DialogSongPreviewMode extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: AppColors.orange,
+                color: ColorMapper.getOrange(),
               ),
               child: Text(
                 AppLocale.of().buyMezmur.toUpperCase(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
               ),
             ),
@@ -236,7 +236,7 @@ class DialogSongPreviewMode extends StatelessWidget {
           ///SUBSCRIBE SMALL BUTTON
           SubscribeSmallButton(
             text: AppLocale.of().subscribeDialogTitle,
-            textColor: AppColors.black,
+            textColor: ColorMapper.getBlack(),
             fontSize: AppFontSizes.font_size_8,
             onTap: () {
               Navigator.pop(context);

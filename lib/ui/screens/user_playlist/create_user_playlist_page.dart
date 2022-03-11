@@ -7,6 +7,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -75,7 +76,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToCreatePlaylist,
-              bgColor: AppColors.white,
+              bgColor: ColorMapper.getWhite(),
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -86,7 +87,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         if (state is UserPlaylistPostedState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              txtColor: AppColors.white,
+              txtColor: ColorMapper.getWhite(),
               msg: AppLocale.of().playlistCreated(
                 playlistName: L10nUtil.translateLocale(
                   state.myPlaylist.playlistNameText,
@@ -95,7 +96,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               ),
               bgColor: AppColors.blue,
               isFloating: true,
-              iconColor: AppColors.white,
+              iconColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
             ),
           );
@@ -113,7 +114,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -165,7 +166,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
   Container buildPostingPlaylistLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.black.withOpacity(0.5),
+        color: ColorMapper.getBlack().withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(
@@ -188,30 +189,30 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
             textAlign: TextAlign.left,
             //autofocus: true,
             controller: descriptionInputController,
-            cursorColor: AppColors.darkOrange,
+            cursorColor: ColorMapper.getDarkOrange(),
             onChanged: (key) {},
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w400,
             ),
             maxLength: descriptionMaxLength,
             decoration: InputDecoration(
-              fillColor: AppColors.black,
-              focusColor: AppColors.black,
-              hoverColor: AppColors.black,
+              fillColor: ColorMapper.getBlack(),
+              focusColor: ColorMapper.getBlack(),
+              hoverColor: ColorMapper.getBlack(),
               border: InputBorder.none,
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.lightGrey),
+                borderSide: BorderSide(color: ColorMapper.getLightGrey()),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: AppColors.darkOrange),
+                borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
               ),
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               hintText: AppLocale.of().addSomeDescription,
               hintStyle: TextStyle(
-                color: AppColors.txtGrey,
+                color: ColorMapper.getTxtGrey(),
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w400,
               ),
@@ -224,7 +225,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 },
                 child: Icon(
                   FlutterRemix.close_line,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                   size: AppFontSizes.font_size_24,
                 ),
               ),
@@ -246,7 +247,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1, color: AppColors.darkGrey),
+                border: Border.all(width: 1, color: ColorMapper.getDarkGrey()),
               ),
               child: Text(
                 AppLocale.of().addDescripption.toUpperCase(),
@@ -254,7 +255,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                 ),
               ),
             ),
@@ -275,7 +276,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w400,
-          color: AppColors.txtGrey,
+          color: ColorMapper.getTxtGrey(),
         ),
       ),
     );
@@ -287,10 +288,10 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
       textAlign: TextAlign.center,
       //autofocus: true,
       controller: nameInputController,
-      cursorColor: AppColors.darkOrange,
+      cursorColor: ColorMapper.getDarkOrange(),
       onChanged: (key) {},
       style: TextStyle(
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         fontSize: AppFontSizes.font_size_18.sp,
         fontWeight: FontWeight.w600,
       ),
@@ -303,27 +304,27 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
           Text(
         '$currentLength/$maxLength',
         style: TextStyle(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           fontSize: AppFontSizes.font_size_10,
         ),
       ),
       maxLength: nameMaxLength,
       decoration: InputDecoration(
-        fillColor: AppColors.black,
-        focusColor: AppColors.black,
-        hoverColor: AppColors.black,
+        fillColor: ColorMapper.getBlack(),
+        focusColor: ColorMapper.getBlack(),
+        hoverColor: ColorMapper.getBlack(),
         border: InputBorder.none,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.lightGrey),
+          borderSide: BorderSide(color: ColorMapper.getLightGrey()),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkOrange),
+          borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
         hintText: AppLocale.of().playlistName,
         hintStyle: TextStyle(
-          color: AppColors.txtGrey,
+          color: ColorMapper.getTxtGrey(),
           fontSize: AppFontSizes.font_size_18.sp,
           fontWeight: FontWeight.w600,
         ),
@@ -344,7 +345,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       margin: EdgeInsets.symmetric(
@@ -365,7 +366,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  color: AppColors.black,
+                                  color: ColorMapper.getBlack(),
                                 ),
                               ),
                             ],
@@ -439,7 +440,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ],
@@ -465,7 +466,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
               child: Icon(
                 FlutterRemix.close_line,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
           ),
@@ -480,7 +481,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ),
@@ -504,7 +505,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
                       msg: AppLocale.of().playlistNameCantBeEmpty,
-                      bgColor: AppColors.darkGrey,
+                      bgColor: ColorMapper.getDarkGrey(),
                       isFloating: false,
                     ),
                   );
@@ -516,11 +517,11 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   horizontal: AppPadding.padding_16,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     width: 1,
-                    color: AppColors.darkGrey,
+                    color: ColorMapper.getDarkGrey(),
                   ),
                 ),
                 child: Text(
@@ -528,7 +529,7 @@ class _CreateUserPlaylistPageState extends State<CreateUserPlaylistPage> {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               ),

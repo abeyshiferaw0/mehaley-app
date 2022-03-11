@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -19,7 +20,7 @@ class AppIconWidget extends StatelessWidget {
         height: AppIconSizes.icon_size_24,
         width: AppIconSizes.icon_size_24,
         fit: BoxFit.contain,
-        color: AppColors.white.withOpacity(0.4),
+        color: ColorMapper.getWhite().withOpacity(0.4),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -34,7 +35,7 @@ class LibraryEmptyPage extends StatelessWidget {
           Icon(
             icon,
             size: AppIconSizes.icon_size_72,
-            color: AppColors.lightGrey.withOpacity(0.8),
+            color: ColorMapper.getLightGrey().withOpacity(0.8),
           ),
           SizedBox(
             height: AppMargin.margin_8,
@@ -48,7 +49,7 @@ class LibraryEmptyPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
-                color: AppColors.txtGrey,
+                color: ColorMapper.getTxtGrey(),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -78,7 +79,7 @@ class LibraryEmptyPage extends StatelessWidget {
               vertical: AppPadding.padding_8,
             ),
             decoration: BoxDecoration(
-              color: AppColors.darkOrange,
+              color: ColorMapper.getDarkOrange(),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -87,7 +88,7 @@ class LibraryEmptyPage extends StatelessWidget {
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.5,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
               ),
             ),
           ),
@@ -112,7 +113,7 @@ class LibraryEmptyPage extends StatelessWidget {
               vertical: AppPadding.padding_8,
             ),
             decoration: BoxDecoration(
-              color: AppColors.darkOrange,
+              color: ColorMapper.getDarkOrange(),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -121,7 +122,7 @@ class LibraryEmptyPage extends StatelessWidget {
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.5,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'package:mehaley/business_logic/cubits/currency_cubit.dart';
 import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
@@ -51,7 +52,7 @@ class _DialogFirstTimeLanAndCurrencyState
                 vertical: AppPadding.padding_16,
               ),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Column(
@@ -62,7 +63,7 @@ class _DialogFirstTimeLanAndCurrencyState
                     height: AppMargin.margin_8,
                   ),
                   Divider(
-                    color: AppColors.lightGrey,
+                    color: ColorMapper.getLightGrey(),
                   ),
                   SizedBox(
                     height: AppMargin.margin_8,
@@ -88,7 +89,7 @@ class _DialogFirstTimeLanAndCurrencyState
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                         ),
                       ),
                     ),
@@ -118,10 +119,12 @@ class _DialogFirstTimeLanAndCurrencyState
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           border: Border.all(
-            color: isSelected ? AppColors.white : AppColors.lightGrey,
+            color: isSelected
+                ? ColorMapper.getWhite()
+                : ColorMapper.getLightGrey(),
             width: 1,
           ),
-          color: isSelected ? AppColors.orange : AppColors.white,
+          color: isSelected ? ColorMapper.getOrange() : ColorMapper.getWhite(),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,13 +135,15 @@ class _DialogFirstTimeLanAndCurrencyState
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w500,
-                color: isSelected ? AppColors.white : AppColors.black,
+                color: isSelected
+                    ? ColorMapper.getWhite()
+                    : ColorMapper.getBlack(),
               ),
             ),
             isSelected
                 ? Icon(
                     FlutterRemix.checkbox_circle_fill,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     size: AppIconSizes.icon_size_20,
                   )
                 : SizedBox(),
@@ -159,7 +164,7 @@ class _DialogFirstTimeLanAndCurrencyState
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
             SizedBox(
@@ -238,7 +243,7 @@ class _DialogFirstTimeLanAndCurrencyState
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
             SizedBox(
@@ -311,7 +316,7 @@ class _DialogFirstTimeLanAndCurrencyState
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
                 SizedBox(
@@ -323,7 +328,7 @@ class _DialogFirstTimeLanAndCurrencyState
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
                 SizedBox(

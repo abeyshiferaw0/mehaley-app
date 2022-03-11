@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/search_page_bloc/search_result_bloc/search_result_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -54,16 +55,16 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       appBar: AppBar(
         centerTitle: true,
         //brightness: Brightness.dark,
         systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-        backgroundColor: AppColors.white,
+        backgroundColor: ColorMapper.getWhite(),
         shadowColor: AppColors.transparent,
         leading: IconButton(
           iconSize: AppIconSizes.icon_size_24,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -76,7 +77,7 @@ class _SearchResultDedicatedState extends State<SearchResultDedicated> {
           ),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_10.sp,
-            color: AppColors.darkGrey,
+            color: ColorMapper.getDarkGrey(),
           ),
         ),
       ),

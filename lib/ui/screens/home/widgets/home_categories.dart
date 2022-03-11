@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/category.dart';
 import 'package:mehaley/ui/screens/home/widgets/item_home_category.dart';
@@ -20,7 +21,7 @@ class HomeCategories extends StatelessWidget {
           child: Text(
             AppLocale.of().categories,
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_16.sp,
               fontWeight: FontWeight.bold,
             ),

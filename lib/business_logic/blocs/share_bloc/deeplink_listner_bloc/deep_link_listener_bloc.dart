@@ -13,20 +13,21 @@ class DeepLinkListenerBloc
   DeepLinkListenerBloc() : super(DeepLinkListenerInitial()) {
     streamSubscription = uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
-        print("uriLinkStream ${uri}");
-        if (isValidateUri(uri)) {
-          this.add(
-            SetDeepLinkListenerOpenEvent(
-              appShareTypes: getUriShareType(uri),
-              itemId: getUriItemId(uri),
-            ),
-          );
-        } else {
-          this.add(
-            SetDeepLinkListenerErrorEvent(
-              error: "INVALID FORMAT",
-            ),
-          );
+        if (uri.host != 'yenepay') {
+          if (isValidateUri(uri)) {
+            this.add(
+              SetDeepLinkListenerOpenEvent(
+                appShareTypes: getUriShareType(uri),
+                itemId: getUriItemId(uri),
+              ),
+            );
+          } else {
+            this.add(
+              SetDeepLinkListenerErrorEvent(
+                error: "INVALID FORMAT",
+              ),
+            );
+          }
         }
       } else {
         this.add(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/shimmer_item.dart';
 import 'package:shimmer/shimmer.dart';
@@ -10,8 +11,8 @@ class PlaylistShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Shimmer.fromColors(
-        highlightColor: AppColors.placeholderIconColor,
-        baseColor: AppColors.lightGrey,
+        highlightColor: ColorMapper.getPlaceholderIconColor(),
+        baseColor: ColorMapper.getLightGrey(),
         direction: ShimmerDirection.ltr,
         child: Wrap(
           children: [

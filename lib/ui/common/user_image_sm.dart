@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
@@ -44,7 +44,7 @@ class UserImageSm extends StatelessWidget {
               border:
                   hasBorder ? Border.all(color: borderColor, width: 1) : null,
               color: hasBorder
-                  ? AppColors.lightGrey
+                  ? ColorMapper.getLightGrey()
                   : AuthUtil.getUserColor(state),
             ),
             width: size,
@@ -59,7 +59,7 @@ class UserImageSm extends StatelessWidget {
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
               ),
             ),
@@ -86,10 +86,10 @@ class UserImageSm extends StatelessWidget {
               '${appUser.socialProfileImgUrl!}${getSocialImageSize(appUser)}',
           fit: BoxFit.cover,
           placeholder: (context, url) => Container(
-            color: AppColors.darkGrey,
+            color: ColorMapper.getDarkGrey(),
           ),
           errorWidget: (context, url, error) => Container(
-            color: AppColors.darkGrey,
+            color: ColorMapper.getDarkGrey(),
           ),
         ),
       ),

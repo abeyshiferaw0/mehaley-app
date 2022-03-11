@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -33,7 +34,7 @@ class AlbumMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -55,7 +56,7 @@ class AlbumMenuWidget extends StatelessWidget {
                       ? MenuItem(
                           isDisabled: false,
                           hasTopMargin: false,
-                          iconColor: AppColors.grey.withOpacity(0.6),
+                          iconColor: ColorMapper.getGrey().withOpacity(0.6),
                           icon: FlutterRemix.money_dollar_circle_line,
                           title: AppLocale.of().buyAlbum,
                           onTap: () {
@@ -69,13 +70,13 @@ class AlbumMenuWidget extends StatelessWidget {
                     isDisabled: false,
                     isLiked: album.isLiked,
                     albumId: album.albumId,
-                    unlikedColor: AppColors.grey.withOpacity(0.6),
-                    likedColor: AppColors.darkOrange,
+                    unlikedColor: ColorMapper.getGrey().withOpacity(0.6),
+                    likedColor: ColorMapper.getDarkOrange(),
                   ),
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.user_voice_line,
                     title: AppLocale.of().viewArtist,
                     onTap: () {
@@ -86,7 +87,7 @@ class AlbumMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().shareAlbum,
                     onTap: () {
@@ -144,7 +145,7 @@ class AlbumMenuWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
                 ),

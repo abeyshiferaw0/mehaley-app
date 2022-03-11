@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -18,12 +19,12 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
       child: Container(
         height: AppIconSizes.icon_size_40,
         decoration: BoxDecoration(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           borderRadius: BorderRadius.circular(100.0),
           boxShadow: [
             BoxShadow(
               offset: Offset(0, 0),
-              color: AppColors.black.withOpacity(0.1),
+              color: ColorMapper.getBlack().withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 2,
             ),
@@ -39,7 +40,7 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
             children: [
               Icon(
                 FlutterRemix.shuffle_line,
-                color: AppColors.lightGrey,
+                color: ColorMapper.getLightGrey(),
                 size: AppIconSizes.icon_size_12,
               ),
               SizedBox(
@@ -53,7 +54,7 @@ class PlayShuffleLgBtnWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.lightGrey,
+                  color: ColorMapper.getLightGrey(),
                 ),
               ),
               SizedBox(

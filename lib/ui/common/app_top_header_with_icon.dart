@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 
@@ -23,12 +24,12 @@ class AppTopHeaderWithIcon extends StatelessWidget {
         horizontal: AppPadding.padding_16,
       ),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         border: !isForNewAppVersionDialog
             ? Border(
                 bottom: BorderSide(
                   width: 1,
-                  color: AppColors.lightGrey,
+                  color: ColorMapper.getLightGrey(),
                 ),
               )
             : null,
@@ -61,7 +62,7 @@ class AppTopHeaderWithIcon extends StatelessWidget {
                     child: Container(
                       child: Icon(
                         FlutterRemix.close_line,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                         size: AppIconSizes.icon_size_24,
                       ),
                     ),

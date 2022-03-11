@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,7 +28,7 @@ class PaymentButtonText extends StatelessWidget {
           style: TextStyle(
             fontSize: AppFontSizes.font_size_8.sp,
             fontWeight: FontWeight.w500,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
           ),
         ),
       ),

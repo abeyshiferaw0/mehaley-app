@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +28,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
     //     decoration: BoxDecoration(
     //       borderRadius: BorderRadius.circular(20),
     //       border: Border.all(
-    //         color: AppColors.white.withOpacity(0.3),
+    //         color: ColorMapper.getWhite().withOpacity(0.3),
     //         width: 1,
     //       ),
     //     ),
@@ -35,7 +36,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
     //      AppLocale.of().addSongs.toUpperCase(),
     //       style: TextStyle(
     //         fontSize: AppFontSizes.font_size_8.sp,
-    //         color: AppColors.white,
+    //         color: ColorMapper.getWhite(),
     //         fontWeight: FontWeight.w600,
     //       ),
     //     ),
@@ -55,7 +56,7 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
               AppLocale.of().addSongsToPlaylist,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -65,14 +66,14 @@ class UserPlaylistAddMezmursBtn extends StatelessWidget {
             //     vertical: AppPadding.padding_8,
             //   ),
             //   decoration: BoxDecoration(
-            //     color: AppColors.white,
+            //     color: ColorMapper.getWhite(),
             //     borderRadius: BorderRadius.circular(30),
             //   ),
             //   child: Text(
             //     AppLocale.of().addSongs.toUpperCase(),
             //     style: TextStyle(
             //       fontSize: AppFontSizes.font_size_12.sp,
-            //       color: AppColors.black,
+            //       color: ColorMapper.getBlack(),
             //       fontWeight: FontWeight.w600,
             //     ),
             //   ),

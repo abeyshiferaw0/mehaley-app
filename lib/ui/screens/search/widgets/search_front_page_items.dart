@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -74,7 +75,7 @@ class _SearchFrontPageItemsState extends State<SearchFrontPageItems> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontWeight: FontWeight.bold,
                   ),
                 ),

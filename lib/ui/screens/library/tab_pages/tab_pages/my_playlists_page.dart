@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_page_bloc/my_playlist_bloc/my_playlist_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -143,10 +144,10 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
               child: Container(
                 width: AppValues.libraryMusicItemSize,
                 height: AppValues.libraryMusicItemSize,
-                color: AppColors.lightGrey,
+                color: ColorMapper.getLightGrey(),
                 child: Icon(
                   FlutterRemix.add_line,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   size: AppIconSizes.icon_size_24,
                 ),
               ),
@@ -158,7 +159,7 @@ class _MyPlaylistItemsListState extends State<MyPlaylistsPage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ),

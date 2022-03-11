@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart'
 import 'package:mehaley/business_logic/blocs/user_playlist_bloc/user_playlist_bloc.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -67,7 +68,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -136,7 +137,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -145,7 +146,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           Text(
             PagesUtilFunctions.getArtistsNames(song.artistsName, context),
             style: TextStyle(
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontStyle: FontStyle.italic,
               fontSize: AppFontSizes.font_size_8.sp,
               fontWeight: FontWeight.w400,
@@ -181,7 +182,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
           ),
           Divider(
             height: 1,
-            color: AppColors.lightGrey,
+            color: ColorMapper.getLightGrey(),
           ),
           SizedBox(
             height: AppMargin.margin_16,
@@ -196,7 +197,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     ? MenuItem(
                         isDisabled: false,
                         hasTopMargin: true,
-                        iconColor: AppColors.grey.withOpacity(0.6),
+                        iconColor: ColorMapper.getGrey().withOpacity(0.6),
                         icon: FlutterRemix.indeterminate_circle_line,
                         title: AppLocale.of().removeFromPlaylistMsg,
                         onTap: () {
@@ -232,9 +233,9 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     : SizedBox(),
                 SongDownloadMenuItem(
                   song: song,
-                  downloadingFailedColor: AppColors.black,
-                  downloadingColor: AppColors.darkOrange,
-                  downloadedColor: AppColors.darkOrange,
+                  downloadingFailedColor: ColorMapper.getBlack(),
+                  downloadingColor: ColorMapper.getDarkOrange(),
+                  downloadedColor: ColorMapper.getDarkOrange(),
                   onSubscribeButtonClicked: () {
                     Navigator.pop(context);
                     widget.onSubscribeButtonClicked();
@@ -248,7 +249,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                     ? MenuItem(
                         isDisabled: false,
                         hasTopMargin: true,
-                        iconColor: AppColors.grey.withOpacity(0.6),
+                        iconColor: ColorMapper.getGrey().withOpacity(0.6),
                         icon: FlutterRemix.money_dollar_circle_line,
                         title: AppLocale.of().buyMezmur,
                         onTap: () {
@@ -263,13 +264,13 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                   isDisabled: false,
                   isLiked: song.isLiked,
                   songId: song.songId,
-                  unlikedColor: AppColors.grey.withOpacity(0.6),
-                  likedColor: AppColors.darkOrange,
+                  unlikedColor: ColorMapper.getGrey().withOpacity(0.6),
+                  likedColor: ColorMapper.getDarkOrange(),
                 ),
                 MenuItem(
                   isDisabled: false,
                   hasTopMargin: true,
-                  iconColor: AppColors.grey.withOpacity(0.6),
+                  iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   icon: FlutterRemix.play_list_line,
                   title: AppLocale.of().addToPlaylist,
                   onTap: () {
@@ -294,7 +295,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 // MenuItem(
                 //   isDisabled:false,
                 //   hasTopMargin: true,
-                //   iconColor: AppColors.grey.withOpacity(0.6),
+                //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                 //   icon: FlutterRemix.playlist_add_line,
                 //   title: AppLocale.of().addToQueue,
                 //   onTap: () async {
@@ -304,7 +305,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 // MenuItem(
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
-                //   iconColor: AppColors.grey.withOpacity(0.6),
+                //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                 //   icon: FlutterRemix.disc_line,
                 //   title: AppLocale.of().viewAlbum,
                 //   onTap: () {},
@@ -312,7 +313,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 // MenuItem(
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
-                //   iconColor: AppColors.grey.withOpacity(0.6),
+                //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                 //   icon: FlutterRemix.user_line,
                 //   title: AppLocale.of().viewArtist,
                 //   onTap: () {},
@@ -320,7 +321,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 // MenuItem(
                 //   isDisabled: !isLeftOverLoaded,
                 //   hasTopMargin: true,
-                //   iconColor: AppColors.grey.withOpacity(0.6),
+                //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                 //   icon: FlutterRemix.layout_row_line,
                 //   title: AppLocale.of().viewMezmursCategory,
                 //   onTap: () {},
@@ -328,7 +329,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
                 MenuItem(
                   isDisabled: false,
                   hasTopMargin: true,
-                  iconColor: AppColors.grey.withOpacity(0.6),
+                  iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   icon: FlutterRemix.share_line,
                   title: AppLocale.of().shareMezmur,
                   onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,7 +19,7 @@ class SearchEmptyMessage extends StatelessWidget {
             Text(
               AppLocale.of().cantFind(searchKey: searchKey),
               style: TextStyle(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.bold,
                 fontSize: AppFontSizes.font_size_12.sp,
               ),
@@ -29,7 +30,7 @@ class SearchEmptyMessage extends StatelessWidget {
             Text(
               AppLocale.of().changeYourSearchKey,
               style: TextStyle(
-                color: AppColors.darkGrey,
+                color: ColorMapper.getDarkGrey(),
                 fontSize: AppFontSizes.font_size_8.sp,
               ),
             ),

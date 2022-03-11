@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -30,7 +31,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
             children: [
               Container(
                 width: ScreenUtil(context: context).getScreenWidth() * 0.8,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -69,7 +70,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                     SizedBox(
@@ -86,7 +87,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                         style: TextStyle(
                           fontSize: (AppFontSizes.font_size_10 - 1).sp,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                         ),
                       ),
                     ),
@@ -104,7 +105,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                         child: AppCard(
                           radius: 100.0,
                           child: Container(
-                            color: AppColors.darkOrange,
+                            color: ColorMapper.getDarkOrange(),
                             padding: EdgeInsets.all(
                               AppPadding.padding_12,
                             ),
@@ -113,7 +114,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                                 AppLocale.of().continueStr,
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
-                                  color: AppColors.white,
+                                  color: ColorMapper.getWhite(),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),

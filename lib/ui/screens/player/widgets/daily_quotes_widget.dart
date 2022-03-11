@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -41,7 +42,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
             height: AppValues.lyricPlayerHeight,
             padding: EdgeInsets.all(AppPadding.padding_14),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
@@ -54,7 +55,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                   AppLocale.of().dailyQuotesFromApp.toUpperCase(),
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.8,
                   ),
@@ -63,7 +64,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                   height: AppMargin.margin_8,
                 ),
                 Divider(
-                  color: AppColors.lightGrey,
+                  color: ColorMapper.getLightGrey(),
                 ),
                 SizedBox(
                   height: AppMargin.margin_8,
@@ -86,7 +87,7 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: AppFontSizes.font_size_16.sp,
-                              color: AppColors.black,
+                              color: ColorMapper.getBlack(),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -125,8 +126,8 @@ class _DailyQuotesWidgetState extends State<DailyQuotesWidget> {
         itemCount: versesList.length,
         size: AppIconSizes.icon_size_10,
         selectedSize: AppIconSizes.icon_size_12,
-        selectedDotColor: AppColors.darkGrey,
-        dotColor: AppColors.lightGrey,
+        selectedDotColor: ColorMapper.getDarkGrey(),
+        dotColor: ColorMapper.getLightGrey(),
         currentPageNotifier: _currentPageNotifier,
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -29,21 +30,21 @@ class CopyButton extends StatelessWidget {
             // ///SHOW COPED SNACK
             // ScaffoldMessenger.of(context).showSnackBar(
             //   buildAppSnackBar(
-            //     bgColor: AppColors.black.withOpacity(0.9),
+            //     bgColor: ColorMapper.getBlack().withOpacity(0.9),
             //     isFloating: true,
             //     msg: AppLocale.of().copiedToClipboard,
-            //     txtColor: AppColors.white,
+            //     txtColor: ColorMapper.getWhite(),
             //   ),
             // );
             showSimpleNotification(
               Container(
                 padding: EdgeInsets.all(AppPadding.padding_8),
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 child: Center(
                   child: Text(
                     AppLocale.of().copiedToClipboard,
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                       fontWeight: FontWeight.w600,
                       fontSize: AppFontSizes.font_size_10.sp,
                     ),
@@ -51,7 +52,7 @@ class CopyButton extends StatelessWidget {
                 ),
               ),
               contentPadding: EdgeInsets.zero,
-              background: AppColors.white,
+              background: ColorMapper.getWhite(),
               duration: Duration(milliseconds: 1200),
             );
           },

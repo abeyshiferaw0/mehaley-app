@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -31,7 +32,7 @@ class PlaylistMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -53,7 +54,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                       ? MenuItem(
                           isDisabled: false,
                           hasTopMargin: false,
-                          iconColor: AppColors.grey.withOpacity(0.6),
+                          iconColor: ColorMapper.getGrey().withOpacity(0.6),
                           icon: FlutterRemix.money_dollar_circle_line,
                           title: AppLocale.of().buyPlaylist,
                           onTap: () {
@@ -70,7 +71,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.search_line,
                     title: AppLocale.of().findInPlaylist,
                     onTap: () {},
@@ -78,7 +79,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: FlutterRemix.sort_asc,
                   //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
@@ -86,7 +87,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.share_line,
                     title: AppLocale.of().sharePlaylist,
                     onTap: () {
@@ -145,7 +146,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -166,7 +167,7 @@ class PlaylistMenuWidget extends StatelessWidget {
                   AppLocale.of().byAppName.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w400,
                   ),

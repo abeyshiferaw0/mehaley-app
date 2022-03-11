@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
@@ -61,7 +62,7 @@ class SignUpPageFront extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.txtGrey,
+                color: ColorMapper.getTxtGrey(),
               ),
             );
           }
@@ -84,7 +85,7 @@ class SignUpPageFront extends StatelessWidget {
             title: AppLocale.of().continueWithPhone,
             icon: AppAssets.icPhone,
             userLoginType: UserLoginType.PHONE_NUMBER,
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             isFilled: true,
             noBorder: false,
             onTap: () {

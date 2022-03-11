@@ -9,6 +9,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -67,7 +68,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
             buildDownloadMsgSnackBar(
               txtColor: AppColors.errorRed,
               msg: AppLocale.of().unableToUpdateProfile,
-              bgColor: AppColors.white,
+              bgColor: ColorMapper.getWhite(),
               isFloating: false,
               iconColor: AppColors.errorRed,
               icon: FlutterRemix.wifi_off_line,
@@ -77,11 +78,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         if (state is AuthUpdateSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              txtColor: AppColors.white,
+              txtColor: ColorMapper.getWhite(),
               msg: AppLocale.of().profileUpdated,
               bgColor: AppColors.blue,
               isFloating: true,
-              iconColor: AppColors.white,
+              iconColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
             ),
           );
@@ -89,7 +90,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
@@ -136,7 +137,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
   Container buildEditingProfileLoading() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.black.withOpacity(0.5),
+        color: ColorMapper.getBlack().withOpacity(0.5),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.symmetric(
@@ -162,7 +163,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       margin: EdgeInsets.symmetric(
@@ -183,7 +184,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  color: AppColors.black,
+                                  color: ColorMapper.getBlack(),
                                 ),
                               ),
                             ],
@@ -291,7 +292,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ],
@@ -307,10 +308,10 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
       textAlign: TextAlign.center,
       //autofocus: true,
       controller: nameInputController,
-      cursorColor: AppColors.darkOrange,
+      cursorColor: ColorMapper.getDarkOrange(),
       onChanged: (key) {},
       style: TextStyle(
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         fontSize: AppFontSizes.font_size_18.sp,
         fontWeight: FontWeight.w600,
       ),
@@ -323,27 +324,27 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
           Text(
         '$currentLength/$maxLength',
         style: TextStyle(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           fontSize: AppFontSizes.font_size_10,
         ),
       ),
       maxLength: nameMaxLength,
       decoration: InputDecoration(
-        fillColor: AppColors.black,
-        focusColor: AppColors.black,
-        hoverColor: AppColors.black,
+        fillColor: ColorMapper.getBlack(),
+        focusColor: ColorMapper.getBlack(),
+        hoverColor: ColorMapper.getBlack(),
         border: InputBorder.none,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.lightGrey),
+          borderSide: BorderSide(color: ColorMapper.getLightGrey()),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkOrange),
+          borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
         ),
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
         hintText: AppLocale.of().profileName,
         hintStyle: TextStyle(
-          color: AppColors.txtGrey,
+          color: ColorMapper.getTxtGrey(),
           fontSize: AppFontSizes.font_size_18.sp,
           fontWeight: FontWeight.w600,
         ),
@@ -367,7 +368,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
               child: Icon(
                 FlutterRemix.close_line,
                 size: AppIconSizes.icon_size_24,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
           ),
@@ -382,7 +383,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                 ),
               ),
             ),
@@ -405,7 +406,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                     buildAppSnackBar(
                       txtColor: AppColors.errorRed,
                       msg: AppLocale.of().userNameCantBeEmpty,
-                      bgColor: AppColors.darkGrey,
+                      bgColor: ColorMapper.getDarkGrey(),
                       isFloating: false,
                     ),
                   );
@@ -417,11 +418,11 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   horizontal: AppPadding.padding_16,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     width: 1,
-                    color: AppColors.darkGrey,
+                    color: ColorMapper.getDarkGrey(),
                   ),
                 ),
                 child: Text(
@@ -429,7 +430,7 @@ class _EditUserProfilePageState extends State<EditUserProfilePage> {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               ),

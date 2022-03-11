@@ -5,6 +5,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -46,7 +47,7 @@ class NoInternetHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_14.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
               ),
             ),
             SizedBox(height: AppMargin.margin_16),
@@ -56,7 +57,7 @@ class NoInternetHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.grey,
+                color: ColorMapper.getGrey(),
               ),
             ),
             SizedBox(height: AppMargin.margin_16),
@@ -79,7 +80,7 @@ class NoInternetHeader extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     borderRadius: BorderRadius.circular(100),
                   ),
                   padding: EdgeInsets.symmetric(
@@ -92,7 +93,7 @@ class NoInternetHeader extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.lightGrey,
+                      color: ColorMapper.getLightGrey(),
                     ),
                   ),
                 ),

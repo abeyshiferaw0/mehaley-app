@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -28,7 +29,7 @@ class FeaturedAlbumPlaylistHeaderWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.darkOrange,
+                color: ColorMapper.getDarkOrange(),
                 letterSpacing: 0.2,
               ),
               children: [
@@ -37,7 +38,7 @@ class FeaturedAlbumPlaylistHeaderWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_16.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     letterSpacing: 0.2,
                   ),
                 ),

@@ -50,7 +50,7 @@ class ItemHomeCategory extends StatelessWidget {
                     buildItemsImagePlaceHolder(),
               ),
               Container(
-                color: AppColors.black.withOpacity(0.4),
+                color: AppColors.completelyBlack.withOpacity(0.4),
               ),
               Padding(
                 padding: const EdgeInsets.all(AppPadding.padding_8),

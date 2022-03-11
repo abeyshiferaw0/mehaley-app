@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -105,7 +106,7 @@ class _SearchResultListState extends State<SearchResultList> {
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w600,
                   ),

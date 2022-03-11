@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/artist.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -27,7 +28,6 @@ class SearchRecentOrMessage extends StatefulWidget {
 }
 
 class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
-
   @override
   void initState() {
     BlocProvider.of<RecentSearchBloc>(context).add(LoadRecentSearchEvent());
@@ -75,7 +75,7 @@ class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
                 AppLocale.of().searchElfFor,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w600,
                   fontSize: AppFontSizes.font_size_14.sp,
                 ),
@@ -89,7 +89,7 @@ class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
                 AppLocale.of().searchHint2,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontSize: AppFontSizes.font_size_10.sp,
                 ),
               ),
@@ -109,7 +109,7 @@ class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
         child: Text(
           AppLocale.of().recentSearches,
           style: TextStyle(
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontSize: AppFontSizes.font_size_12.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -146,7 +146,7 @@ class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
               Text(
                 AppLocale.of().clearRecentSearches,
                 style: TextStyle(
-                  color: AppColors.txtGrey,
+                  color: ColorMapper.getTxtGrey(),
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -158,7 +158,7 @@ class _SearchRecentOrMessageState extends State<SearchRecentOrMessage> {
                 padding: const EdgeInsets.only(top: 3),
                 child: Icon(
                   FlutterRemix.close_line,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                   size: AppIconSizes.icon_size_12,
                 ),
               )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -32,7 +33,7 @@ class SettingRadioItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
                 SizedBox(
@@ -43,7 +44,7 @@ class SettingRadioItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
               ],
@@ -55,10 +56,10 @@ class SettingRadioItem extends StatelessWidget {
           Switch(
             value: isEnabled,
             // trackColor:
-            //     MaterialStateProperty.all<Color>(AppColors.grey),
-            activeColor: AppColors.darkOrange,
-            activeTrackColor: AppColors.orange.withOpacity(0.3),
-            inactiveTrackColor: AppColors.grey,
+            //     MaterialStateProperty.all<Color>(ColorMapper.getGrey()),
+            activeColor: ColorMapper.getDarkOrange(),
+            activeTrackColor: ColorMapper.getOrange().withOpacity(0.3),
+            inactiveTrackColor: ColorMapper.getGrey(),
             onChanged: onSwitched,
           )
         ],

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -104,7 +105,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
                 textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w400,
                   fontSize: AppFontSizes.font_size_8.sp,
                 ),

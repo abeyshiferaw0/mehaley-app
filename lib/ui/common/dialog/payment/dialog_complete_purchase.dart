@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/complete_purchase_dialog_bloc/complete_purchase_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
@@ -71,7 +72,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
                 horizontal: AppMargin.margin_16,
               ),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 borderRadius: BorderRadius.circular(6),
               ),
               padding: EdgeInsets.all(
@@ -133,14 +134,14 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Material(
-          color: AppColors.white,
+          color: ColorMapper.getWhite(),
           child: Checkbox(
             value: alwaysUseSelected,
-            //activeColor: AppColors.darkOrange,
+            //activeColor: ColorMapper.getDarkOrange(),
             fillColor: MaterialStateProperty.all(
-              AppColors.darkOrange,
+              ColorMapper.getDarkOrange(),
             ),
-            checkColor: AppColors.white,
+            checkColor: ColorMapper.getWhite(),
             onChanged: (bool? value) {
               setState(() {
                 alwaysUseSelected = value == null ? false : value;
@@ -151,7 +152,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
         Text(
           AppLocale.of().alwaysUsePayment,
           style: TextStyle(
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
             fontWeight: FontWeight.w400,
             fontSize: AppFontSizes.font_size_8.sp,
           ),
@@ -200,9 +201,9 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
         decoration: BoxDecoration(
           color: selectedPaymentMethod != null
               ? selectedPaymentMethod!.isAvailable
-                  ? AppColors.darkOrange
-                  : AppColors.darkGrey
-              : AppColors.darkGrey,
+                  ? ColorMapper.getDarkOrange()
+                  : ColorMapper.getDarkGrey()
+              : ColorMapper.getDarkGrey(),
           borderRadius: BorderRadius.circular(40),
         ),
         child: Row(
@@ -212,7 +213,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
             Text(
               AppLocale.of().buy.toUpperCase(),
               style: TextStyle(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
@@ -222,7 +223,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
             ),
             Icon(
               FlutterRemix.arrow_right_s_line,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               size: AppIconSizes.icon_size_20,
             ),
           ],
@@ -267,7 +268,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
               child: Text(
                 AppLocale.of().chooseYourPaymentMethod,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w500,
                   fontSize: AppFontSizes.font_size_12.sp,
                 ),
@@ -281,7 +282,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
                 },
                 child: Icon(
                   FlutterRemix.close_line,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   size: AppIconSizes.icon_size_24,
                 ),
               ),
@@ -298,7 +299,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
             AppLocale.of().chooseYourPaymentMethodMsg,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontWeight: FontWeight.w400,
               fontSize: AppFontSizes.font_size_8.sp,
             ),

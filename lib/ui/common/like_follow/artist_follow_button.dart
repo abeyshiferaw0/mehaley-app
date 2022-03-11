@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/dialog/dialog_unlike_unfollow.dart';
@@ -140,14 +141,14 @@ class ArtistFollowButton extends StatelessWidget {
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w400,
           letterSpacing: 1,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.txtGrey.withOpacity(0.1),
+        color: ColorMapper.getTxtGrey().withOpacity(0.1),
         borderRadius: BorderRadius.circular(3),
         border: Border.all(
-          color: AppColors.darkOrange,
+          color: ColorMapper.getDarkOrange(),
           width: 1,
         ),
       ),
@@ -166,11 +167,11 @@ class ArtistFollowButton extends StatelessWidget {
           fontSize: AppFontSizes.font_size_8.sp,
           fontWeight: FontWeight.w200,
           letterSpacing: 1,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.darkGrey.withOpacity(0.2),
+        color: ColorMapper.getDarkGrey().withOpacity(0.2),
         borderRadius: BorderRadius.circular(3),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -102,7 +103,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                         BorderRadius.circular(AppValues.profilePagePicSize),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.white.withOpacity(0.1),
+                        color: ColorMapper.getWhite().withOpacity(0.1),
                         spreadRadius: 6,
                         blurRadius: 12,
                         offset: Offset(0, 0),
@@ -125,7 +126,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_18.sp,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                         ),
                       );
                     },
@@ -154,7 +155,8 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      border: Border.all(color: AppColors.black, width: 1),
+                      border:
+                          Border.all(color: ColorMapper.getBlack(), width: 1),
                     ),
                     padding: EdgeInsets.symmetric(
                       vertical: AppPadding.padding_4,
@@ -165,7 +167,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                   ),
@@ -190,7 +192,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
         icon: Icon(
           FlutterRemix.arrow_left_line,
           color: ColorUtil.darken(
-            AppColors.white,
+            ColorMapper.getWhite(),
             1 - shrinkPercentage,
           ),
           size: AppIconSizes.icon_size_24,
@@ -205,7 +207,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
               ),
             );
           },
@@ -240,7 +242,7 @@ class _ProfilePageHeaderState extends State<ProfilePageHeader> {
             child: Icon(
               FlutterRemix.more_2_line,
               color: ColorUtil.darken(
-                AppColors.white,
+                ColorMapper.getWhite(),
                 1 - shrinkPercentage,
               ),
               size: AppIconSizes.icon_size_24,

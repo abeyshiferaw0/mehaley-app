@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -60,7 +61,7 @@ class BuyItemBtnWidget extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -73,7 +74,7 @@ class BuyItemBtnWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
               ),
               SizedBox(width: AppMargin.margin_4),

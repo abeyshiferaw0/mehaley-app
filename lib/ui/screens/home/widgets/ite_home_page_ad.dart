@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/app_ad_bloc/app_ad_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_ad.dart';
@@ -95,7 +96,7 @@ class _ItemHomePageAdState extends State<ItemHomePageAd> {
               },
               zoomEnabled: false,
               gestureNavigationEnabled: false,
-              backgroundColor: AppColors.pagesBgColor,
+              backgroundColor: ColorMapper.getPagesBgColor(),
             ),
           ),
           GestureDetector(
@@ -126,7 +127,7 @@ class _ItemHomePageAdState extends State<ItemHomePageAd> {
             visible: loading,
             child: SizedBox.expand(
               child: Container(
-                color: AppColors.pagesBgColor,
+                color: ColorMapper.getPagesBgColor(),
                 child: AppLoading(
                   size: AppValues.loadingWidgetSize * 0.6,
                 ),

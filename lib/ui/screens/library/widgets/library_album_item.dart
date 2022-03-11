@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -43,7 +44,7 @@ class LibraryAlbumItem extends StatelessWidget {
                 (position + 1).toString(),
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -69,7 +70,7 @@ class LibraryAlbumItem extends StatelessWidget {
                     L10nUtil.translateLocale(album.albumTitle, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -83,7 +84,7 @@ class LibraryAlbumItem extends StatelessWidget {
                             album.artist.artistName, context),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.txtGrey,
+                          color: ColorMapper.getTxtGrey(),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -93,7 +94,7 @@ class LibraryAlbumItem extends StatelessWidget {
                         ),
                         child: Icon(
                           Icons.circle,
-                          color: AppColors.txtGrey,
+                          color: ColorMapper.getTxtGrey(),
                           size: AppIconSizes.icon_size_4,
                         ),
                       ),
@@ -101,7 +102,7 @@ class LibraryAlbumItem extends StatelessWidget {
                         PagesUtilFunctions.getAlbumYear(album).toString(),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.txtGrey,
+                          color: ColorMapper.getTxtGrey(),
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w400,
                         ),
@@ -144,7 +145,7 @@ class LibraryAlbumItem extends StatelessWidget {
                 },
                 child: Icon(
                   FlutterRemix.more_2_fill,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                   size: AppIconSizes.icon_size_24,
                 ),
               ),

@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mehaley/config/color_mapper.dart';
 
 class App {
   static ThemeData theme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: 'Raleway',
-    primaryColor: AppColors.white,
+    primaryColor: ColorMapper.getWhite(),
     textSelectionTheme: TextSelectionThemeData(
-      selectionHandleColor: AppColors.orange,
+      selectionHandleColor: ColorMapper.getOrange(),
     ),
   );
 }
@@ -74,12 +75,16 @@ class AppColors {
   ///FOR GRADIENT PURPOSES
   static Color orange1 = HexColor('#EBA027');
   static Color orange2 = HexColor('#E7491B');
+  static Color green1 = HexColor('#47C172');
+  static Color green2 = HexColor('#1ED05E');
   static Color appGradientDefaultColorBlack = HexColor('#95999d');
   static Color appGradientDefaultColor = HexColor('#1E96ED');
 
   ///PRIMARY COLORS
   static Color orange = HexColor('#ff6500'); //E9571C
   static Color darkOrange = HexColor('#e65100'); //E7481B
+  static Color green = HexColor('#1DB352'); //E9571C
+  static Color darkGreen = HexColor('#17A348'); //E7481B
 
   ///LIGHT COLORS
   static Color white = HexColor('#FFFFFF');
@@ -98,7 +103,6 @@ class AppColors {
   static Color blue = HexColor('#1E96ED');
   static Color errorRed = Colors.redAccent;
   static Color yellow = HexColor('#f7c631');
-  static Color green = HexColor('#1ED761');
 
   ///OTHER COLORS
   static Color transparent = Colors.transparent;

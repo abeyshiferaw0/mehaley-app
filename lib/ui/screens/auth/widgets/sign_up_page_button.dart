@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/user_login_type.dart';
@@ -56,7 +57,7 @@ class SignUpButton extends StatelessWidget {
                         height: AppIconSizes.icon_size_24,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          color: AppColors.white,
+                          color: ColorMapper.getWhite(),
                         ),
                       );
                     } else {
@@ -76,7 +77,7 @@ class SignUpButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
               ),
             ),

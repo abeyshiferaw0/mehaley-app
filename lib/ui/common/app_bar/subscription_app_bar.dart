@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -44,7 +45,7 @@ class SubscriptionAppBar extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
                     border: Border.all(
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       width: 0.5,
                     ),
                   ),
@@ -54,7 +55,7 @@ class SubscriptionAppBar extends StatelessWidget {
                       Icon(
                         FlutterRemix.refresh_line,
                         size: AppIconSizes.icon_size_12,
-                        color: AppColors.txtGrey,
+                        color: ColorMapper.getTxtGrey(),
                       ),
                       SizedBox(
                         width: AppMargin.margin_6,
@@ -62,7 +63,7 @@ class SubscriptionAppBar extends StatelessWidget {
                       Text(
                         'Restore Purchases',
                         style: TextStyle(
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           fontSize: AppFontSizes.font_size_8.sp,
                           fontWeight: FontWeight.w300,
                         ),

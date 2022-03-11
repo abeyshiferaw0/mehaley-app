@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -59,7 +60,7 @@ class _ArtistPageState extends State<ArtistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: BlocBuilder<ArtistPageBloc, ArtistPageState>(
         builder: (context, state) {
           if (state is ArtistPageLoadingState) {
@@ -67,7 +68,7 @@ class _ArtistPageState extends State<ArtistPage> {
           }
           if (state is ArtistPageLoadedState) {
             return Scaffold(
-              backgroundColor: AppColors.pagesBgColor,
+              backgroundColor: ColorMapper.getPagesBgColor(),
               body: buildArtistPageLoaded(state.artistPageData),
             );
           }
@@ -166,10 +167,10 @@ class _ArtistPageState extends State<ArtistPage> {
           SliverSmallTextButton(
             onTap: () {},
             text: AppLocale.of().share.toUpperCase(),
-            textColor: AppColors.black,
+            textColor: ColorMapper.getBlack(),
             icon: FlutterRemix.share_line,
             iconSize: AppIconSizes.icon_size_20,
-            iconColor: AppColors.darkOrange,
+            iconColor: ColorMapper.getDarkOrange(),
           ),
 
           Expanded(child: SizedBox()),
@@ -227,7 +228,7 @@ class _ArtistPageState extends State<ArtistPage> {
             iconSize: AppIconSizes.icon_size_16,
             artistId: artistPageData.artist.artistId,
             isFollowing: artistPageData.artist.isFollowed!,
-            iconColor: AppColors.darkOrange,
+            iconColor: ColorMapper.getDarkOrange(),
             askDialog: false,
           ),
         ],
@@ -251,7 +252,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 AppLocale.of().popular,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -259,7 +260,7 @@ class _ArtistPageState extends State<ArtistPage> {
               //   padding: EdgeInsets.only(top: 2),
               //   child: Icon(
               //     Icons.navigate_next,
-              //     color: AppColors.lightGrey,
+              //     color: ColorMapper.getLightGrey(),
               //     size: AppIconSizes.icon_size_24,
               //   ),
               // )
@@ -286,7 +287,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 AppLocale.of().latestReleases,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_14.sp,
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -294,7 +295,7 @@ class _ArtistPageState extends State<ArtistPage> {
               //   padding: EdgeInsets.only(top: 2),
               //   child: Icon(
               //     Icons.navigate_next,
-              //     color: AppColors.lightGrey,
+              //     color: ColorMapper.getLightGrey(),
               //     size: AppIconSizes.icon_size_24,
               //   ),
               // )
@@ -411,7 +412,7 @@ class _ArtistPageState extends State<ArtistPage> {
               AppLocale.of().popularAlbums,
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_14.sp,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -419,7 +420,7 @@ class _ArtistPageState extends State<ArtistPage> {
             //   padding: EdgeInsets.only(top: 2),
             //   child: Icon(
             //     Icons.navigate_next,
-            //     color: AppColors.lightGrey,
+            //     color: ColorMapper.getLightGrey(),
             //     size: AppIconSizes.icon_size_24,
             //   ),
             // )
@@ -470,7 +471,7 @@ class _ArtistPageState extends State<ArtistPage> {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -534,7 +535,7 @@ class _ArtistPageState extends State<ArtistPage> {
             AppLocale.of().similarArtist,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_14.sp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w600,
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/util/color_util.dart';
 
 class AppGradients {
@@ -11,7 +11,7 @@ class AppGradients {
       colors: [
         ColorUtil.darken(color, 0.1),
         ColorUtil.darken(color, 0.1),
-        AppColors.white
+        ColorMapper.getWhite()
       ],
       center: Alignment(-0.5, -1.8),
       focal: Alignment(-2, -2),
@@ -22,26 +22,26 @@ class AppGradients {
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [color, AppColors.white],
+      colors: [color, ColorMapper.getWhite()],
     );
   }
 
   getCategoryHeaderGradient(Color color) {
     // return RadialGradient(
     //   radius: 1,
-    //   colors: [color.withOpacity(1), AppColors.black],
+    //   colors: [color.withOpacity(1), ColorMapper.getBlack()],
     //   center: Alignment(-0.5, -1),
     // );
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [color.withOpacity(1), AppColors.white],
+      colors: [color.withOpacity(1), ColorMapper.getWhite()],
     );
   }
 
   getCategoryFilterGradient(Color color) {
     return LinearGradient(
-      colors: [AppColors.white.withOpacity(0.5), AppColors.white],
+      colors: [ColorMapper.getWhite().withOpacity(0.5), ColorMapper.getWhite()],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
     );
@@ -67,7 +67,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         ColorUtil.darken(color, 0.5).withOpacity(0.5),
-        AppColors.white,
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -78,7 +78,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.white,
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -89,7 +89,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.white,
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -99,8 +99,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.white.withOpacity(0.5),
-        AppColors.white,
+        ColorMapper.getWhite().withOpacity(0.5),
+        ColorMapper.getWhite(),
         //Colors.black12.withOpacity(0.9),
       ],
     );
@@ -111,8 +111,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.white.withOpacity(0.7),
-        AppColors.white,
+        ColorMapper.getWhite().withOpacity(0.7),
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -122,8 +122,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.completelyBlack.withOpacity(0.2),
-        AppColors.completelyBlack.withOpacity(0.9),
+        ColorMapper.getCompletelyBlack().withOpacity(0.2),
+        ColorMapper.getCompletelyBlack().withOpacity(0.9),
       ],
     );
   }
@@ -133,8 +133,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.white.withOpacity(0.7),
-        AppColors.white.withOpacity(0.8),
+        ColorMapper.getWhite().withOpacity(0.7),
+        ColorMapper.getWhite().withOpacity(0.8),
       ],
     );
   }
@@ -145,7 +145,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         color,
-        AppColors.white,
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -156,7 +156,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         dominantColor,
-        AppColors.white,
+        ColorMapper.getWhite(),
       ],
     );
   }
@@ -166,8 +166,8 @@ class AppGradients {
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
       colors: [
-        AppColors.orange1,
-        AppColors.orange2,
+        ColorMapper.getOrange1(),
+        ColorMapper.getOrange2(),
       ],
     );
   }
@@ -177,8 +177,8 @@ class AppGradients {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        AppColors.orange1,
-        AppColors.orange2,
+        ColorMapper.getOrange1(),
+        ColorMapper.getOrange2(),
       ],
     );
   }
@@ -188,8 +188,8 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.completelyBlack.withOpacity(0.1),
-        AppColors.completelyBlack.withOpacity(0.5),
+        ColorMapper.getCompletelyBlack().withOpacity(0.1),
+        ColorMapper.getCompletelyBlack().withOpacity(0.5),
       ],
     );
   }
@@ -212,9 +212,9 @@ class AppGradients {
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
       colors: [
-        AppColors.orange1,
-        AppColors.orange,
-        AppColors.orange2,
+        ColorMapper.getOrange1(),
+        ColorMapper.getOrange(),
+        ColorMapper.getOrange2(),
       ],
     );
   }

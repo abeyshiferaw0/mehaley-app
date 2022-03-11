@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -85,8 +86,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             height: AppMargin.margin_4,
           ),
           CirclePageIndicator(
-            dotColor: AppColors.white.withOpacity(0.5),
-            selectedDotColor: AppColors.white,
+            dotColor: ColorMapper.getWhite().withOpacity(0.5),
+            selectedDotColor: ColorMapper.getWhite(),
             currentPageNotifier: pageNotifier,
             size: AppIconSizes.icon_size_4,
             selectedSize: AppIconSizes.icon_size_6,
@@ -98,14 +99,21 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
   }
 
   Column buildInfoPageOne() {
+    ///
+    String word = AppLocale.of().welcomeToMehaley;
+    String lastWordRemoved = word.substring(0, word.lastIndexOf(" "));
+    String lastWord = word.substring(word.lastIndexOf(" "), word.length);
+
+    ///
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ///TITLE
         buildInfoHeaderText(
-          titleOne: 'Welcome to',
-          titleTwo: 'Mehaleye',
+          titleOne: "Welcome to",
+          titleTwo: "Mehaleye",
           isOdd: false,
         ),
         SizedBox(
@@ -116,7 +124,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             horizontal: AppPadding.padding_24 * 2,
           ),
           child: Text(
-            'Listen to Ethiopian orthodox tewahedo mezmurs, teachings and kidase. stream or download mezmurs and listen offline'
+            "Listen to Ethiopian orthodox tewahedo mezmurs, teachings and kidases. stream or download mezmurs to listen offline"
+                .toUpperCase()
                 .toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -124,7 +133,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.lightGrey,
+              color: ColorMapper.getLightGrey(),
             ),
           ),
         ),
@@ -139,8 +148,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
       children: [
         ///TITLE
         buildInfoHeaderText(
-          titleOne: 'Pay',
-          titleTwo: 'With',
+          titleOne: "Pay",
+          titleTwo: "With",
           isOdd: true,
         ),
         SizedBox(
@@ -152,11 +161,18 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'CBE BIRR'),
+            buildPayWithItemsText(paymentMethodName: "TELEBIRR"),
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'CBE MOBILE'),
+            buildPayWithItemsText(paymentMethodName: "YENEPAY"),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             buildPayWithItemsDivider(),
-            buildPayWithItemsText(paymentMethodName: 'ABYSSINIA MOBILE'),
+            buildPayWithItemsText(paymentMethodName: "GOOGLE ACCOUNT"),
+            buildPayWithItemsDivider(),
+            buildPayWithItemsText(paymentMethodName: "APPLE ID"),
           ],
         ),
         SizedBox(
@@ -170,7 +186,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
     return Text(
       paymentMethodName.toUpperCase(),
       style: TextStyle(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         decoration: TextDecoration.none,
         fontWeight: FontWeight.bold,
         fontSize: AppFontSizes.font_size_8.sp,
@@ -185,7 +201,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
       ),
       child: Icon(
         Icons.circle,
-        color: AppColors.orange,
+        color: ColorMapper.getOrange(),
         size: AppIconSizes.icon_size_4,
       ),
     );
@@ -199,7 +215,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
       TextSpan(
         text: titleOne.toUpperCase(),
         style: TextStyle(
-          color: isOdd ? AppColors.orange : AppColors.white,
+          color: isOdd ? ColorMapper.getOrange() : ColorMapper.getWhite(),
           fontWeight: FontWeight.bold,
           fontSize: AppFontSizes.font_size_10.sp,
         ),
@@ -208,7 +224,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
           TextSpan(
             text: titleTwo.toUpperCase(),
             style: TextStyle(
-              color: isOdd ? AppColors.white : AppColors.orange,
+              color: isOdd ? ColorMapper.getWhite() : ColorMapper.getOrange(),
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               fontSize: AppFontSizes.font_size_10.sp,
@@ -228,8 +244,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
       children: [
         ///TITLE
         buildInfoHeaderText(
-          titleOne: 'Subscribe TO',
-          titleTwo: 'Mehaleye',
+          titleOne: "Subscribe TO",
+          titleTwo: "Mehaleye",
           isOdd: false,
         ),
         SizedBox(
@@ -240,7 +256,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             horizontal: AppPadding.padding_24 * 2,
           ),
           child: Text(
-            AppLocale.of().subscribeDialogMsg
+            "Subscribe to mehaleye and get unlimited access to all streams and downloads."
                 .toUpperCase(),
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -248,7 +264,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.lightGrey,
+              color: ColorMapper.getLightGrey(),
             ),
           ),
         ),

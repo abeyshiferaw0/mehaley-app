@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
+import 'package:mehaley/ui/screens/home/widgets/group_song_item_play_icon.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -57,6 +59,11 @@ class ItemCustomGroupGrid extends StatelessWidget {
                     groupType != GroupType.ARTIST
                         ? AppIconWidget()
                         : SizedBox(),
+
+                    ///PLAY ICON IF SONG ITEM
+                    GroupSongItemPlayIcon(
+                      groupType: groupType,
+                    )
                   ],
                 ),
               ),
@@ -69,7 +76,7 @@ class ItemCustomGroupGrid extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: AppColors.grey,
+              color: ColorMapper.getGrey(),
               fontWeight: FontWeight.w400,
               fontSize: AppFontSizes.font_size_10.sp,
             ),

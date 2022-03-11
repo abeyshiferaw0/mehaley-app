@@ -7,8 +7,9 @@ import 'package:mehaley/business_logic/blocs/library_page_bloc/followed_playlist
 import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_artists_page.dart';
 import 'package:mehaley/ui/screens/library/tab_pages/tab_pages/followed_playlists_page.dart';
 
@@ -52,7 +53,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
                 refreshPage(context);
               }
             },
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             edgeOffset: AppMargin.margin_16,
             child: Container(
               height: double.infinity,
@@ -128,7 +129,7 @@ class _FollowingTabViewState extends State<FollowingTabView>
             ),
             // LibraryIconButton(
             //   onTap: () {},
-            //   iconColor: AppColors.white,
+            //   iconColor: ColorMapper.getWhite(),
             //   icon: FlutterRemix.shuffle_line,
             // )
           ],

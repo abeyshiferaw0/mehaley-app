@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -48,10 +51,29 @@ class _DialogTelebirrCheckoutWebViewState
   bool hasError = false;
   bool loading = true;
   late WebViewController webViewController;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
+    print(
+        'TELEBIRRRR=>>  loadUrl  ${widget.resultSuccessRedirectUrl}?transactionNo=${widget.transactionNumber}');
+
+    timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
+      if (webViewController != null) {
+        ///IF RETURN URL RESULT SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
+        String? curr = await webViewController.currentUrl();
+        dialogReturnActions(
+          curr != null ? curr : '',
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -64,7 +86,7 @@ class _DialogTelebirrCheckoutWebViewState
             Container(
               width: ScreenUtil(context: context).getScreenWidth() * 0.95,
               height: ScreenUtil(context: context).getScreenHeight() * 0.9,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: Column(
                 children: [
                   Expanded(
@@ -93,10 +115,15 @@ class _DialogTelebirrCheckoutWebViewState
     return WebView(
       initialUrl: widget.checkOutUrl,
       javascriptMode: JavascriptMode.unrestricted,
+      navigationDelegate: (NavigationRequest request) {
+        print("TELEBIRRRR=>>   NavigationRequest => ${request.url} ");
+        return NavigationDecision.navigate;
+      },
       onWebViewCreated: (mWebViewController) {
         webViewController = mWebViewController;
       },
       onPageStarted: (String s) {
+        print("TELEBIRRRR=>>   onPageStarted => ${s} ");
         setState(() {
           loading = true;
           hasError = false;
@@ -113,14 +140,14 @@ class _DialogTelebirrCheckoutWebViewState
             loading = false;
           });
         }
-
-        ///IF RETURN URL RESULT SUCCESS , CANCEL , FAILURE HANDLE ACCORDINGLY
-        dialogReturnActions(s);
       },
       onProgress: (int s) {},
       onWebResourceError: (WebResourceError error) {
-        loading = false;
-        hasError = true;
+        setState(() {
+          loading = false;
+          hasError = true;
+        });
+        print("TELEBIRRRR=>>   onWebResourceError => ${error.failingUrl} ");
       },
     );
   }
@@ -129,7 +156,7 @@ class _DialogTelebirrCheckoutWebViewState
     return Visibility(
       visible: loading,
       child: Container(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         child: Center(
           child: AppLoading(
             size: AppValues.loadingWidgetSize * 0.8,
@@ -143,7 +170,7 @@ class _DialogTelebirrCheckoutWebViewState
     return Visibility(
       visible: hasError,
       child: Container(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -201,7 +228,7 @@ class _DialogTelebirrCheckoutWebViewState
         bgColor: AppColors.blue,
         isFloating: true,
         msg: AppLocale.of().paymentCanceled,
-        txtColor: AppColors.white,
+        txtColor: ColorMapper.getWhite(),
       ),
     );
   }
@@ -213,12 +240,12 @@ class _DialogTelebirrCheckoutWebViewState
         bgColor: AppColors.errorRed,
         isFloating: false,
         msg: AppLocale.of().somethingWentWrong,
-        txtColor: AppColors.white,
+        txtColor: ColorMapper.getWhite(),
       ),
     );
   }
 
-  dialogReturnActions(returnUrl) {
+  dialogReturnActions(String returnUrl) {
     ///CHECK REDIRECTED URL
     bool isCompletedReturnUrl =
         TelebirrPurchaseUtil.isCompletedReturnUrl(returnUrl);
@@ -248,6 +275,8 @@ class _DialogTelebirrCheckoutWebViewState
       webViewController.loadUrl(
         '${widget.resultSuccessRedirectUrl}?transactionNo=${widget.transactionNumber}&status=$status',
       );
+      print(
+          'TELEBIRRRR=>>  loadUrl  ${widget.resultSuccessRedirectUrl}?transactionNo=${widget.transactionNumber}&status=$status');
     }
   }
 }

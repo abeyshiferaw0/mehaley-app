@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/util/screen_util.dart';
@@ -25,7 +26,7 @@ class DialogLogOut extends StatelessWidget {
               vertical: AppPadding.padding_16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
@@ -36,7 +37,7 @@ class DialogLogOut extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
                 SizedBox(
@@ -48,7 +49,7 @@ class DialogLogOut extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
                 SizedBox(
@@ -66,14 +67,14 @@ class DialogLogOut extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                     child: Text(
                       AppLocale.of().logOut.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                       ),
                     ),
                   ),
@@ -90,7 +91,7 @@ class DialogLogOut extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                   ),
                 ),

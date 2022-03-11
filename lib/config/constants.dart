@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 
 class AppApi {
   static const String baseUrl = 'https://api.mehaleye.com';
-  //static const String baseUrl = 'http://192.168.40.202:8181';
+  //static const String baseUrl = 'http://192.168.189.202:8181';
   static const String musicBaseUrl = '$baseUrl/music';
   static const String userBaseUrl = '$baseUrl/user';
   static const String paymentBaseUrl = '$baseUrl/payment';
@@ -324,4 +324,8 @@ class AppDio {
 
 class AppEnv {
   static const AppType appType = AppType.MEHALEYE;
+
+  static bool isMehaleye() {
+    return appType == AppType.MEHALEYE;
+  }
 }

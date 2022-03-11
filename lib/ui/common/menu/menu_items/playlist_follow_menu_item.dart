@@ -5,8 +5,8 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/menu/menu_items/menu_item.dart';
 
 class PlaylistFollowMenuItem extends StatefulWidget {
@@ -151,29 +151,29 @@ class _PlaylistFollowMenuItemState extends State<PlaylistFollowMenuItem> {
       int b = AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
           .get(widget.playlistId);
       if (a > b) {
-        return AppColors.darkOrange;
+        return ColorMapper.getDarkOrange();
       } else {
-        return AppColors.black.withOpacity(0.3);
+        return ColorMapper.getBlack().withOpacity(0.3);
       }
     }
 
     ///IF FOUND IN RECENTLY FOLLOWED
     if (AppHiveBoxes.instance.recentlyFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.darkOrange;
+      return ColorMapper.getDarkOrange();
     }
 
     ///IF FOUND IN RECENTLY UNFOLLOWED
     if (AppHiveBoxes.instance.recentlyUnFollowedPlaylistBox
         .containsKey(widget.playlistId)) {
-      return AppColors.black.withOpacity(0.3);
+      return ColorMapper.getBlack().withOpacity(0.3);
     }
 
     ///IF NOT FOUND IN BOTH USE ORIGINAL STATE
     if (widget.isFollowing) {
-      return AppColors.darkOrange;
+      return ColorMapper.getDarkOrange();
     } else {
-      return AppColors.black.withOpacity(0.3);
+      return ColorMapper.getBlack().withOpacity(0.3);
     }
   }
 }

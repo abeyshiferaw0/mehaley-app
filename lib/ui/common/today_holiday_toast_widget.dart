@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/app_monthly_holidays_list.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
@@ -67,7 +68,7 @@ class _TodayHolidayToastWidgetState extends State<TodayHolidayToastWidget> {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
                 AppBouncingButton(
@@ -79,7 +80,7 @@ class _TodayHolidayToastWidgetState extends State<TodayHolidayToastWidget> {
                     child: Container(
                       child: Icon(
                         FlutterRemix.close_line,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         size: AppIconSizes.icon_size_24,
                       ),
                     ),
@@ -99,7 +100,7 @@ class _TodayHolidayToastWidgetState extends State<TodayHolidayToastWidget> {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
                 fontWeight: FontWeight.bold,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
               ),
             ),
             SizedBox(
@@ -111,7 +112,7 @@ class _TodayHolidayToastWidgetState extends State<TodayHolidayToastWidget> {
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
               ),
             ),
           ],

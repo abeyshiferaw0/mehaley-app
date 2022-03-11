@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -31,7 +31,7 @@ class UserPlaylistPlayShuffle extends StatelessWidget {
             top: 0,
             child: Container(
               height: 40,
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
             ),
           ),
           Positioned(

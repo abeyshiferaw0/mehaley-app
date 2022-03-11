@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -36,7 +37,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                     child: Text(
                       AppLocale.of().recentlyPlayed,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                         fontSize: AppFontSizes.font_size_16.sp,
                         fontWeight: FontWeight.bold,
                       ),

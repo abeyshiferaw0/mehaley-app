@@ -1,6 +1,6 @@
 // import 'package:mehaley/config/constants.dart';
 // import 'package:mehaley/config/enums.dart';import 'package:mehaley/data/models/lyric_item.dart';
-// import 'package:mehaley/config/themes.dart';
+// import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';import 'package:mehaley/config/color_mapper.dart';
 // import 'package:mehaley/ui/screens/home/widgets/item_custom_group.dart';
 // import 'package:mehaley/ui/screens/home/widgets/item_custom_group_grid.dart';
 // import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@
 //           child: Text(
 //             'Custom Groups From Mehaleye',
 //             style: TextStyle(
-//               color: AppColors.black,
+//               color: ColorMapper.getBlack(),
 //               fontSize: AppFontSizes.font_size_22,
 //               fontWeight: FontWeight.w600,
 //             ),
@@ -80,7 +80,7 @@
 //           child: Text(
 //             'Custom Groups From Mehaleye',
 //             style: TextStyle(
-//               color: AppColors.black,
+//               color: ColorMapper.getBlack(),
 //               fontSize: AppFontSizes.font_size_22,
 //               fontWeight: FontWeight.w600,
 //             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/app_extention.dart';
 import 'package:sizer/sizer.dart';
@@ -22,7 +23,7 @@ class CurrentBallanceWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: AppFontSizes.font_size_8.sp,
             fontWeight: FontWeight.w400,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
           ),
         ),
         SizedBox(
@@ -35,7 +36,7 @@ class CurrentBallanceWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.bold,
-              color: AppColors.darkOrange,
+              color: ColorMapper.getDarkOrange(),
             ),
             children: [
               TextSpan(
@@ -43,7 +44,7 @@ class CurrentBallanceWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.txtGrey,
+                  color: ColorMapper.getTxtGrey(),
                 ),
               ),
             ],

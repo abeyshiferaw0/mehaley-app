@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
@@ -48,7 +49,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                       ),
                     ),
                     SizedBox(height: AppMargin.margin_2),
@@ -57,7 +58,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                           numberOf: myPlaylist.numberOfSongs.toString()),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_8.sp,
-                        color: AppColors.grey,
+                        color: ColorMapper.getGrey(),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -68,7 +69,7 @@ class LibraryMyPlaylistItem extends StatelessWidget {
                   ? Icon(
                       FlutterRemix.add_circle_line,
                       size: AppIconSizes.icon_size_24,
-                      color: AppColors.darkGrey,
+                      color: ColorMapper.getDarkGrey(),
                     )
                   : SizedBox(),
             ],

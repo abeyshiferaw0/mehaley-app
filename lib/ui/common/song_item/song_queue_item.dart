@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -41,7 +42,7 @@ class SongQueueItem extends StatelessWidget {
               '$position',
               style: TextStyle(
                 fontSize: AppFontSizes.font_size_12.sp,
-                color: AppColors.black.withOpacity(0.9),
+                color: ColorMapper.getBlack().withOpacity(0.9),
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -66,7 +67,7 @@ class SongQueueItem extends StatelessWidget {
                     L10nUtil.translateLocale(song.songName, context),
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_12.sp,
-                      color: AppColors.black.withOpacity(0.9),
+                      color: ColorMapper.getBlack().withOpacity(0.9),
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -81,7 +82,7 @@ class SongQueueItem extends StatelessWidget {
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
                       fontSize: AppFontSizes.font_size_10.sp,
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -91,15 +92,15 @@ class SongQueueItem extends StatelessWidget {
             SongIsLikedIndicator(
               songId: song.songId,
               isLiked: song.isLiked,
-              likedColor: AppColors.darkOrange,
-              unlikedColor: AppColors.darkOrange,
+              likedColor: ColorMapper.getDarkOrange(),
+              unlikedColor: ColorMapper.getDarkOrange(),
             ),
             SizedBox(
               width: AppMargin.margin_16,
             ),
             Icon(
               FlutterRemix.order_play_line,
-              color: AppColors.darkGrey,
+              color: ColorMapper.getDarkGrey(),
               size: AppIconSizes.icon_size_16,
             )
           ],

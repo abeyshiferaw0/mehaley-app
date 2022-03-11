@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 
 class PhoneNumberInput extends StatefulWidget {
@@ -48,7 +49,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   controller: widget.controller,
                   textAlignVertical: TextAlignVertical.center,
                   autofocus: true,
-                  cursorColor: AppColors.darkOrange,
+                  cursorColor: ColorMapper.getDarkOrange(),
                   onChanged: (key) {},
                   maxLength:
                       widget.selectedCountryCode.code == etCode ? 11 : 12,
@@ -72,7 +73,9 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   style: TextStyle(
-                    color: readOnly ? AppColors.txtGrey : AppColors.black,
+                    color: readOnly
+                        ? ColorMapper.getTxtGrey()
+                        : ColorMapper.getBlack(),
                     fontSize: AppFontSizes.font_size_14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -85,7 +88,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                       Text(
                     '$currentLength/$maxLength',
                     style: TextStyle(
-                      color: AppColors.darkOrange,
+                      color: ColorMapper.getDarkOrange(),
                       fontSize: AppFontSizes.font_size_10,
                     ),
                   ),
@@ -101,16 +104,16 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     ),
                     errorText: '',
                     filled: true,
-                    fillColor: AppColors.lightGrey,
+                    fillColor: ColorMapper.getLightGrey(),
                     border: InputBorder.none,
-                    focusColor: AppColors.orange,
+                    focusColor: ColorMapper.getOrange(),
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     hintText: AppLocale.of().enterYourPhoneNumber,
                     hintStyle: TextStyle(
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       fontSize: AppFontSizes.font_size_14,
                     ),
                   ),

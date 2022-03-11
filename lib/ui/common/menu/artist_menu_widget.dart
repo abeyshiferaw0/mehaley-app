@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
@@ -32,7 +33,7 @@ class ArtistMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -64,7 +65,7 @@ class ArtistMenuWidget extends StatelessWidget {
                     MenuItem(
                       isDisabled: false,
                       hasTopMargin: true,
-                      iconColor: AppColors.grey.withOpacity(0.6),
+                      iconColor: ColorMapper.getGrey().withOpacity(0.6),
                       icon: FlutterRemix.share_line,
                       title: AppLocale.of().shareArtist,
                       onTap: () {
@@ -126,7 +127,7 @@ class ArtistMenuWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -141,7 +142,7 @@ class ArtistMenuWidget extends StatelessWidget {
                             noOfAlbums: noOfAlbum.toString(),
                           ),
                           style: TextStyle(
-                            color: AppColors.darkGrey,
+                            color: ColorMapper.getDarkGrey(),
                             fontSize: AppFontSizes.font_size_10.sp,
                             fontWeight: FontWeight.w300,
                           ),
@@ -152,7 +153,7 @@ class ArtistMenuWidget extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                     child: Icon(
                       Icons.circle,
-                      color: AppColors.darkGrey,
+                      color: ColorMapper.getDarkGrey(),
                       size: AppIconSizes.icon_size_4,
                     ),
                   ),
@@ -162,7 +163,7 @@ class ArtistMenuWidget extends StatelessWidget {
                             noOfSong: noOfSong.toString(),
                           ),
                           style: TextStyle(
-                            color: AppColors.darkGrey,
+                            color: ColorMapper.getDarkGrey(),
                             fontSize: AppFontSizes.font_size_10.sp,
                             fontWeight: FontWeight.w300,
                           ),

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -51,7 +52,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
         boxShadow: [
           BoxShadow(
             offset: Offset(0, 4),
-            color: ColorUtil.darken(AppColors.white, 0.1),
+            color: ColorUtil.darken(ColorMapper.getWhite(), 0.1),
             spreadRadius: 2,
             blurRadius: 4,
           ),
@@ -95,7 +96,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
 
   AppBar buildAppBar(double shrinkPercentage, ArtistPageData artistPageData) {
     return AppBar(
-      backgroundColor: AppColors.white.withOpacity(shrinkPercentage),
+      backgroundColor: ColorMapper.getWhite().withOpacity(shrinkPercentage),
       shadowColor: AppColors.transparent,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       leading: IconButton(
@@ -105,7 +106,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
         icon: Icon(
           FlutterRemix.arrow_left_line,
           size: AppIconSizes.icon_size_24,
-          color: ColorUtil.darken(AppColors.white, shrinkPercentage),
+          color: ColorUtil.darken(ColorMapper.getWhite(), shrinkPercentage),
         ),
       ),
       title: Opacity(
@@ -116,7 +117,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
           style: TextStyle(
             fontSize: AppFontSizes.font_size_16,
             fontWeight: FontWeight.w600,
-            color: ColorUtil.darken(AppColors.white, shrinkPercentage),
+            color: ColorUtil.darken(ColorMapper.getWhite(), shrinkPercentage),
           ),
         ),
       ),
@@ -129,7 +130,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
             child: Icon(
               FlutterRemix.more_2_fill,
               size: AppIconSizes.icon_size_24,
-              color: ColorUtil.darken(AppColors.white, shrinkPercentage),
+              color: ColorUtil.darken(ColorMapper.getWhite(), shrinkPercentage),
             ),
           ),
           onTap: () {
@@ -168,7 +169,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   ),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontStyle: FontStyle.italic,
                     fontSize: AppFontSizes.font_size_28.sp,
                     fontWeight: FontWeight.w600,
@@ -184,7 +185,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w400,
                   ),
@@ -196,7 +197,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                     Text(
                       '${artistPageData.noOfAlbum} ${AppLocale.of().albums}',
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w300,
                       ),
@@ -206,7 +207,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                           EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
                       child: Icon(
                         Icons.circle,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         size: AppIconSizes.icon_size_4,
                       ),
                     ),
@@ -214,7 +215,7 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                       AppLocale.of().noOfSongs(
                           noOfSong: artistPageData.noOfSong.toString()),
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w300,
                       ),

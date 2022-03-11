@@ -15,8 +15,8 @@ class AuthProvider {
     //GET CACHE OPTIONS
     CacheOptions cacheOptions = await AppApi.getDioCacheOptions();
     BaseOptions options = new BaseOptions(
-      connectTimeout: 15000,
-      receiveTimeout: 9000,
+      connectTimeout: 30000,
+      receiveTimeout: 15000,
     );
     dio = Dio(options);
     //SEND REQUEST

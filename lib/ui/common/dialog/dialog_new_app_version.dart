@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -44,14 +45,14 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
               child: Container(
                 width: ScreenUtil(context: context).getScreenWidth() * 0.8,
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      color: AppColors.pagesBgColor,
+                      color: ColorMapper.getPagesBgColor(),
                       width: double.infinity,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +83,7 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
                             style: TextStyle(
                               fontSize: AppFontSizes.font_size_12.sp,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.black,
+                              color: ColorMapper.getBlack(),
                             ),
                           ),
                           SizedBox(
@@ -98,7 +99,7 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_10.sp,
                                 fontWeight: FontWeight.w400,
-                                color: AppColors.txtGrey,
+                                color: ColorMapper.getTxtGrey(),
                               ),
                             ),
                           ),
@@ -117,14 +118,14 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
-                                color: AppColors.orange,
+                                color: ColorMapper.getOrange(),
                               ),
                               child: Text(
                                 AppLocale.of().updateApp.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_12.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.white,
+                                  color: ColorMapper.getWhite(),
                                 ),
                               ),
                             ),
@@ -144,7 +145,7 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
                                   style: TextStyle(
                                     fontSize: AppFontSizes.font_size_10.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColors.black,
+                                    color: ColorMapper.getBlack(),
                                   ),
                                 ),
                               ),
@@ -160,7 +161,7 @@ class _DialogNewAppVersionState extends State<DialogNewAppVersion> {
                                   style: TextStyle(
                                     fontSize: AppFontSizes.font_size_10.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColors.black,
+                                    color: ColorMapper.getBlack(),
                                   ),
                                 ),
                               ),

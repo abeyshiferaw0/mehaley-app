@@ -3,7 +3,6 @@ enum AppType {
   ELF_PLAY,
 }
 
-
 enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM }
 
 enum GroupUiType {
@@ -119,3 +118,5 @@ enum AppAdAction {
   CALL,
   LAUNCH_URL,
 }
+
+enum YenepayPaymentReturnType { COMPLETED, FAILURE, CANCEL, IS_FREE, EXISTS }

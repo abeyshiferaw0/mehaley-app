@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -50,7 +51,7 @@ class GroupHeaderWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.grey,
+                    color: ColorMapper.getGrey(),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -60,7 +61,7 @@ class GroupHeaderWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontSize: AppFontSizes.font_size_14.sp,
                     fontWeight: FontWeight.bold,
                   ),

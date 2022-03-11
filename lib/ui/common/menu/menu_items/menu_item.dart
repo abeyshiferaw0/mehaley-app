@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -47,8 +48,8 @@ class MenuItem extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: !isDisabled
-                        ? AppColors.black
-                        : AppColors.black.withOpacity(0.4),
+                        ? ColorMapper.getBlack()
+                        : ColorMapper.getBlack().withOpacity(0.4),
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w400,
                   ),

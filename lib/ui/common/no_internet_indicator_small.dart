@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
 
@@ -38,14 +39,14 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.black,
+      color: ColorMapper.getBlack(),
       child: SlideTransition(
         position: offset,
         child: Wrap(
           children: [
             Container(
               width: double.infinity,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               padding: EdgeInsets.symmetric(vertical: AppPadding.padding_4),
               child: Center(
                 child: Text(
@@ -53,7 +54,7 @@ class _NoInternetIndicatorSmallState extends State<NoInternetIndicatorSmall>
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                   ),
                 ),
               ),

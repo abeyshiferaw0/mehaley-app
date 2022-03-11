@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/page_dominant_color_bloc/pages_dominant_color_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -44,7 +45,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
   //ALBUM SUB TITLE TEXT STYLE
   final TextStyle albumSubTitleStyle = TextStyle(
     fontSize: AppFontSizes.font_size_12,
-    color: AppColors.txtGrey,
+    color: ColorMapper.getTxtGrey(),
     letterSpacing: 0.0,
     fontWeight: FontWeight.w500,
   );
@@ -60,7 +61,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -152,7 +153,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
           L10nUtil.translateLocale(album.albumTitle, context),
           style: TextStyle(
             fontSize: AppFontSizes.font_size_24,
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -170,7 +171,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
               child: Icon(
                 Icons.circle,
                 size: AppIconSizes.icon_size_4,
-                color: AppColors.txtGrey,
+                color: ColorMapper.getTxtGrey(),
               ),
             ),
             Text(

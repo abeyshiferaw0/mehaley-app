@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 
 class ShimmerItem extends StatelessWidget {
   const ShimmerItem(
@@ -20,7 +20,7 @@ class ShimmerItem extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        color: AppColors.lightGrey,
+        color: ColorMapper.getLightGrey(),
       ),
     );
   }

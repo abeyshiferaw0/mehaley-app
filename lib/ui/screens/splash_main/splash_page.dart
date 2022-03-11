@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -27,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: AppColors.pagesBgColor,
+          backgroundColor: ColorMapper.getPagesBgColor(),
           appBar: AppBar(
             toolbarHeight: 0.0,
             leading: SizedBox(),
@@ -40,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
         Align(
           alignment: Alignment.topCenter,
           child: Container(
-            // color: AppColors.pagesBgColor,
+            // color: ColorMapper.getPagesBgColor(),
             child: Center(
               child: Image.asset(
                 AppAssets.icSplashIcon,

@@ -6,6 +6,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -86,7 +87,7 @@ class _CategoryPageState extends State<CategoryPage>
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(context),
         body: Stack(
           children: [
@@ -110,7 +111,7 @@ class _CategoryPageState extends State<CategoryPage>
     return AppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       leading: IconButton(
         onPressed: () {
@@ -119,7 +120,7 @@ class _CategoryPageState extends State<CategoryPage>
         icon: Icon(
           FlutterRemix.arrow_left_line,
           size: AppIconSizes.icon_size_24,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
       title: Text(
@@ -131,7 +132,7 @@ class _CategoryPageState extends State<CategoryPage>
         style: TextStyle(
           fontSize: AppFontSizes.font_size_12.sp,
           fontWeight: FontWeight.w600,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );
@@ -280,7 +281,7 @@ class _CategoryPageState extends State<CategoryPage>
         Icon(
           FlutterRemix.music_line,
           size: AppIconSizes.icon_size_72,
-          color: AppColors.lightGrey.withOpacity(0.8),
+          color: ColorMapper.getLightGrey().withOpacity(0.8),
         ),
         SizedBox(
           height: AppMargin.margin_8,
@@ -294,7 +295,7 @@ class _CategoryPageState extends State<CategoryPage>
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -330,7 +331,7 @@ class _CategoryPageState extends State<CategoryPage>
           child: Text(
             AppLocale.of().playlists,
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w600,
             ),
@@ -388,7 +389,7 @@ class _CategoryPageState extends State<CategoryPage>
           child: Text(
             AppLocale.of().albums,
             style: TextStyle(
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontSize: AppFontSizes.font_size_14.sp,
               fontWeight: FontWeight.w600,
             ),
@@ -442,7 +443,7 @@ class _CategoryPageState extends State<CategoryPage>
         Text(
           AppLocale.of().mezmurs,
           style: TextStyle(
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             fontSize: AppFontSizes.font_size_18,
             fontWeight: FontWeight.w600,
           ),

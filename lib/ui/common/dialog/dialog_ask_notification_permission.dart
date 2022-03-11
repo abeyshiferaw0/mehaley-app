@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -42,7 +43,7 @@ class _DialogAskNotificationPermissionState
             child: Container(
               width: ScreenUtil(context: context).getScreenWidth() * 0.8,
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Stack(
@@ -51,7 +52,7 @@ class _DialogAskNotificationPermissionState
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        color: AppColors.pagesBgColor,
+                        color: ColorMapper.getPagesBgColor(),
                         padding: EdgeInsets.all(AppPadding.padding_16),
                         width: double.infinity,
                         child: Column(
@@ -90,7 +91,7 @@ class _DialogAskNotificationPermissionState
                               style: TextStyle(
                                 fontSize: AppFontSizes.font_size_12.sp,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.black,
+                                color: ColorMapper.getBlack(),
                               ),
                             ),
                             SizedBox(
@@ -106,7 +107,7 @@ class _DialogAskNotificationPermissionState
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   fontWeight: FontWeight.w400,
-                                  color: AppColors.txtGrey,
+                                  color: ColorMapper.getTxtGrey(),
                                 ),
                               ),
                             ),
@@ -125,7 +126,7 @@ class _DialogAskNotificationPermissionState
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
-                                  color: AppColors.orange,
+                                  color: ColorMapper.getOrange(),
                                 ),
                                 child: Text(
                                   AppLocale.of()
@@ -134,7 +135,7 @@ class _DialogAskNotificationPermissionState
                                   style: TextStyle(
                                     fontSize: AppFontSizes.font_size_12.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.white,
+                                    color: ColorMapper.getWhite(),
                                   ),
                                 ),
                               ),
@@ -151,7 +152,7 @@ class _DialogAskNotificationPermissionState
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.black,
+                                  color: ColorMapper.getBlack(),
                                 ),
                               ),
                             ),
@@ -169,11 +170,11 @@ class _DialogAskNotificationPermissionState
                       icon: CircleAvatar(
                         radius: AppValues.lyricPageCloseButtonSize * 0.8,
                         backgroundColor:
-                            AppColors.completelyBlack.withOpacity(0.2),
+                            ColorMapper.getCompletelyBlack().withOpacity(0.2),
                         child: Icon(
                           FlutterRemix.close_line,
                           size: AppValues.lyricPageCloseButtonSize * 0.8,
-                          color: AppColors.white,
+                          color: ColorMapper.getWhite(),
                         ),
                       ),
                     ),

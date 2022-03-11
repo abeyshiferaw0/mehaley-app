@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:sizer/sizer.dart';
@@ -31,7 +32,7 @@ class LibrarySortButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
-                  color: AppColors.darkGrey,
+                  color: ColorMapper.getDarkGrey(),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -39,7 +40,7 @@ class LibrarySortButton extends StatelessWidget {
             isSelected
                 ? Icon(
                     FlutterRemix.check_line,
-                    color: AppColors.darkOrange,
+                    color: ColorMapper.getDarkOrange(),
                   )
                 : SizedBox()
           ],

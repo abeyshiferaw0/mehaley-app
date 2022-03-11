@@ -5,8 +5,9 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/api_response/album_page_data.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -43,20 +44,20 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
       builder: (context, state) {
         if (state is AlbumPageLoadingState) {
           return Scaffold(
-            backgroundColor: AppColors.pagesBgColor,
+            backgroundColor: ColorMapper.getPagesBgColor(),
             body: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
           );
         }
         if (state is AlbumPageLoadedState) {
           return Scaffold(
-            backgroundColor: AppColors.pagesBgColor,
+            backgroundColor: ColorMapper.getPagesBgColor(),
             appBar: buildAppBar(state.albumPageData.album),
             body: buildAlbumPageLoaded(state.albumPageData),
           );
         }
         if (state is AlbumPageLoadingErrorState) {
           return Scaffold(
-            backgroundColor: AppColors.pagesBgColor,
+            backgroundColor: ColorMapper.getPagesBgColor(),
             body: AppError(
               bgWidget: AppLoading(size: AppValues.loadingWidgetSize * 0.8),
               onRetry: () {
@@ -128,13 +129,13 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
 
   AppBar buildAppBar(Album album) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       // brightness: Brightness.dark,
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
       leading: IconButton(
         icon: Icon(FlutterRemix.arrow_left_line),
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -146,7 +147,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
               L10nUtil.translateLocale(
                   state.albumPageData.album.albumTitle, context),
               style: TextStyle(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontSize: AppFontSizes.font_size_16,
                 fontWeight: FontWeight.w500,
               ),
@@ -162,7 +163,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
             padding: EdgeInsets.all(AppPadding.padding_8),
             child: Icon(
               FlutterRemix.more_2_fill,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               size: AppIconSizes.icon_size_28,
             ),
           ),

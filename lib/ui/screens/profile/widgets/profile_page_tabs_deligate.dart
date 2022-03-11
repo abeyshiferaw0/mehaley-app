@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -31,7 +32,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
                 horizontal: AppMargin.margin_32,
                 vertical: AppPadding.padding_4,
               ),
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,7 +116,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
           SizedBox(
@@ -127,7 +128,7 @@ class ProfilePageTabsDelegate extends SliverPersistentHeaderDelegate {
               letterSpacing: 0.8,
               fontSize: AppFontSizes.font_size_8.sp,
               fontWeight: FontWeight.w400,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
             ),
           ),
         ],

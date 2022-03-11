@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -79,7 +80,7 @@ class ItemSongVideo extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: ColorMapper.getWhite(),
                       fontSize: AppFontSizes.font_size_12.sp,
                       fontWeight: FontWeight.w500,
                     ),
@@ -92,7 +93,7 @@ class ItemSongVideo extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: AppColors.lightGrey,
+                      color: ColorMapper.getLightGrey(),
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -115,12 +116,12 @@ class ItemSongVideo extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.0),
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                 ),
                 child: Text(
                   'Play Audio'.toUpperCase(),
                   style: TextStyle(
-                    color: AppColors.darkOrange,
+                    color: ColorMapper.getDarkOrange(),
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -135,12 +136,12 @@ class ItemSongVideo extends StatelessWidget {
 
   Container buildOpacityContainer() {
     return Container(
-      color: AppColors.completelyBlack.withOpacity(0.3),
+      color: ColorMapper.getCompletelyBlack().withOpacity(0.3),
       child: Center(
         child: Icon(
           FlutterRemix.play_circle_fill,
           size: AppIconSizes.icon_size_52,
-          color: AppColors.white,
+          color: ColorMapper.getWhite(),
         ),
       ),
     );

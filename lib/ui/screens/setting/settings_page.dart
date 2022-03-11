@@ -5,6 +5,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'package:mehaley/business_logic/blocs/settings_page_bloc/settings_page_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/settings_page_data.dart';
@@ -57,10 +58,10 @@ class _SettingsPageState extends State<SettingsPage> {
             if (state is OneSignalTagAddingError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnectMsg,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -71,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
             if (state is PreferredPaymentMethodChangedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().preferredPaymentChangedTo(
                     paymentName: PagesUtilFunctions.getPaymentMethodName(
@@ -79,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       context,
                     ),
                   ),
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -87,16 +88,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: AppBar(
           //brightness: Brightness.dark,
           systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-          backgroundColor: AppColors.white,
+          backgroundColor: ColorMapper.getWhite(),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            color: AppColors.black,
+            color: ColorMapper.getBlack(),
             icon: Icon(
               FlutterRemix.arrow_left_line,
               size: AppIconSizes.icon_size_24,
@@ -107,7 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
           centerTitle: true,
@@ -245,7 +246,7 @@ class _SettingsPageState extends State<SettingsPage> {
           builder: (context, state) {
             if (state is OneSignalTagAdding) {
               return Container(
-                color: AppColors.black.withOpacity(0.4),
+                color: ColorMapper.getBlack().withOpacity(0.4),
                 child: AppLoading(size: AppValues.loadingWidgetSize / 2),
               );
             }

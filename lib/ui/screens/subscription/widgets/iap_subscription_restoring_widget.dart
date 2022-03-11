@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 
 class IapSubscriptionRestoringWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class IapSubscriptionRestoringWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is IapSubscriptionRestoringState) {
           return Container(
-            color: AppColors.completelyBlack.withOpacity(0.5),
+            color: ColorMapper.getCompletelyBlack().withOpacity(0.5),
             child: Center(
               child: AppLoading(
                 size: AppValues.loadingWidgetSize,

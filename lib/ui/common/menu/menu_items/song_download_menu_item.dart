@@ -5,6 +5,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -186,10 +187,10 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
             ///SHOW RETRYING MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.black.withOpacity(0.9),
+                bgColor: ColorMapper.getBlack().withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().retryingDownloadMsg,
-                txtColor: AppColors.white,
+                txtColor: ColorMapper.getWhite(),
               ),
             );
 
@@ -237,7 +238,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
       child: MenuItem(
         isDisabled: false,
         hasTopMargin: true,
-        iconColor: AppColors.grey.withOpacity(0.6),
+        iconColor: ColorMapper.getGrey().withOpacity(0.6),
         icon: FlutterRemix.arrow_down_circle_line,
         title: AppLocale.of().downloadMezmur,
         onTap: () {
@@ -246,10 +247,10 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
             ///SHOW DOWNLOAD STARTED MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
-                bgColor: AppColors.black.withOpacity(0.9),
+                bgColor: ColorMapper.getBlack().withOpacity(0.9),
                 isFloating: true,
                 msg: AppLocale.of().downloadStartedMsg,
-                txtColor: AppColors.white,
+                txtColor: ColorMapper.getWhite(),
               ),
             );
 

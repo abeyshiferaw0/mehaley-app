@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -38,9 +39,11 @@ class LibraryPageSubTabButton extends StatelessWidget {
               width: 2,
               color: isSelected
                   ? AppColors.transparent
-                  : AppColors.black.withOpacity(0.2),
+                  : ColorMapper.getBlack().withOpacity(0.2),
             ),
-            color: isSelected ? AppColors.darkOrange : AppColors.white,
+            color: isSelected
+                ? ColorMapper.getDarkOrange()
+                : ColorMapper.getWhite(),
           ),
           child: Row(
             children: [
@@ -49,7 +52,7 @@ class LibraryPageSubTabButton extends StatelessWidget {
                       padding: EdgeInsets.only(right: AppPadding.padding_8),
                       child: Icon(
                         prefixIcon,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         size: AppIconSizes.icon_size_16,
                       ),
                     )
@@ -58,7 +61,9 @@ class LibraryPageSubTabButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_8.sp,
-                  color: isSelected ? AppColors.white : AppColors.black,
+                  color: isSelected
+                      ? ColorMapper.getWhite()
+                      : ColorMapper.getBlack(),
                   fontWeight: FontWeight.w700,
                 ),
               ),

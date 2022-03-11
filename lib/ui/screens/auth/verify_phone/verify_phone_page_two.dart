@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -37,8 +38,8 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         if (state is LastSmsStillActiveState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildAppSnackBar(
-              bgColor: AppColors.black.withOpacity(0.9),
-              txtColor: AppColors.white,
+              bgColor: ColorMapper.getBlack().withOpacity(0.9),
+              txtColor: ColorMapper.getWhite(),
               msg: AppLocale.of().pinAlreadySent,
               isFloating: false,
             ),
@@ -56,7 +57,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         appBar: buildAppBar(context),
         //resizeToAvoidBottomInset: false,
         body: Stack(
@@ -102,8 +103,9 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               buildAppSnackBar(
-                                bgColor: AppColors.black.withOpacity(0.9),
-                                txtColor: AppColors.white,
+                                bgColor:
+                                    ColorMapper.getBlack().withOpacity(0.9),
+                                txtColor: ColorMapper.getWhite(),
                                 msg: AppLocale.of().pinNotFilled,
                                 isFloating: false,
                               ),
@@ -146,7 +148,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_8.sp,
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
           ),
         ),
         SizedBox(
@@ -168,7 +170,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppFontSizes.font_size_8.sp,
-                color: AppColors.darkOrange,
+                color: ColorMapper.getDarkOrange(),
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline),
           ),
@@ -187,7 +189,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
-          color: AppColors.txtGrey,
+          color: ColorMapper.getTxtGrey(),
         ),
       ),
     );
@@ -199,7 +201,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: AppFontSizes.font_size_14.sp,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         fontWeight: FontWeight.w600,
       ),
     );
@@ -207,7 +209,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       centerTitle: false,
       //brightness: Brightness.dark,
@@ -217,7 +219,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           Navigator.pop(context);
         },
         iconSize: AppIconSizes.icon_size_24,
-        color: AppColors.black,
+        color: ColorMapper.getBlack(),
         icon: Icon(
           FlutterRemix.arrow_left_line,
         ),
@@ -226,7 +228,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         AppLocale.of().verifyYourPhone,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
-          color: AppColors.black,
+          color: ColorMapper.getBlack(),
         ),
       ),
     );
@@ -234,7 +236,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
 
   Widget darkRoundedPinPut() {
     final BoxDecoration pinPutDecoration = BoxDecoration(
-      color: AppColors.lightGrey,
+      color: ColorMapper.getLightGrey(),
       borderRadius: BorderRadius.circular(4.0),
     );
     return Padding(
@@ -247,7 +249,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
           height: 20,
           width: 2,
           decoration: BoxDecoration(
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             borderRadius: BorderRadius.circular(2),
           ),
         ),
@@ -259,7 +261,7 @@ class _VerifyPhonePageTwoState extends State<VerifyPhonePageTwo> {
         followingFieldDecoration: pinPutDecoration,
         autofocus: true,
         pinAnimationType: PinAnimationType.scale,
-        textStyle: TextStyle(color: AppColors.black, fontSize: 20.0),
+        textStyle: TextStyle(color: ColorMapper.getBlack(), fontSize: 20.0),
         onSubmit: (pin) {
           // BlocProvider.of<AuthBloc>(context).add(
           //   VerifyPhoneEvent(

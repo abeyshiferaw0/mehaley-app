@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -59,7 +60,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
               Positioned.fill(
                 child: Container(
                   width: double.infinity,
-                  color: AppColors.completelyBlack.withOpacity(
+                  color: ColorMapper.getCompletelyBlack().withOpacity(
                     0.2,
                   ),
                 ),
@@ -80,7 +81,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                       AppLocale.of().subscribeDialogTitle.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.none,
                       ),
@@ -93,7 +94,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: (AppFontSizes.font_size_10 - 1).sp,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                         fontWeight: FontWeight.w500,
                         decoration: TextDecoration.none,
                       ),
@@ -114,12 +115,12 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                           vertical: AppPadding.padding_12,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.completelyBlack,
+                          color: ColorMapper.getCompletelyBlack(),
                           borderRadius: BorderRadius.circular(100),
                           boxShadow: [
                             BoxShadow(
                               offset: Offset(0, 0),
-                              color: AppColors.black.withOpacity(0.2),
+                              color: ColorMapper.getBlack().withOpacity(0.2),
                             ),
                           ],
                         ),
@@ -128,7 +129,7 @@ class _AppSubscribeCardState extends State<AppSubscribeCard> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: (AppFontSizes.font_size_10 - 1).sp,
-                            color: AppColors.white,
+                            color: ColorMapper.getWhite(),
                             fontWeight: FontWeight.w700,
                             decoration: TextDecoration.none,
                           ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -133,7 +134,7 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
                   Text(
                     AppLocale.of().seeAll.toUpperCase(),
                     style: TextStyle(
-                      color: AppColors.darkOrange,
+                      color: ColorMapper.getDarkOrange(),
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -141,7 +142,7 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
                   Icon(
                     FlutterRemix.arrow_right_s_line,
                     size: AppIconSizes.icon_size_20,
-                    color: AppColors.darkOrange,
+                    color: ColorMapper.getDarkOrange(),
                   ),
                 ],
               ),
@@ -162,8 +163,8 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
         itemCount: widget.songVideos.length,
         size: AppIconSizes.icon_size_10,
         selectedSize: AppIconSizes.icon_size_10,
-        selectedDotColor: AppColors.darkOrange,
-        dotColor: AppColors.lightGrey,
+        selectedDotColor: ColorMapper.getDarkOrange(),
+        dotColor: ColorMapper.getLightGrey(),
         currentPageNotifier: _currentPageNotifier,
       ),
     );

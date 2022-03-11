@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/lyric_bloc/lyric_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/lyric_item.dart';
@@ -130,7 +131,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                 top: AppPadding.padding_8,
               ),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
@@ -146,7 +147,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                         AppLocale.of().lyrics.toUpperCase(),
                         style: TextStyle(
                           fontSize: AppFontSizes.font_size_10.sp,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.8,
                         ),
@@ -175,7 +176,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                             vertical: AppPadding.padding_4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.black.withOpacity(0.5),
+                            color: ColorMapper.getBlack().withOpacity(0.5),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Row(
@@ -185,7 +186,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                                 AppLocale.of().expand.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_6.sp,
-                                  color: AppColors.white,
+                                  color: ColorMapper.getWhite(),
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 0.8,
                                 ),
@@ -194,7 +195,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                               Icon(
                                 FlutterRemix.zoom_out_line,
                                 size: AppIconSizes.icon_size_16 - 3,
-                                color: AppColors.white,
+                                color: ColorMapper.getWhite(),
                               ),
                             ],
                           ),
@@ -204,7 +205,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                   ),
                   SizedBox(height: AppMargin.margin_8),
                   Divider(
-                    color: AppColors.lightGrey,
+                    color: ColorMapper.getLightGrey(),
                   ),
                   SizedBox(
                     height: AppMargin.margin_8,
@@ -217,10 +218,10 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            AppColors.white,
+                            ColorMapper.getWhite(),
                             Colors.transparent,
                             Colors.transparent,
-                            AppColors.white,
+                            ColorMapper.getWhite(),
                           ],
                           stops: [0.0, 0.05, 0.95, 1.0],
                         ).createShader(bounds);
@@ -243,8 +244,8 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                                           ),
                                           0.8,
                                         )
-                                      : AppColors.black)
-                                  : AppColors.black,
+                                      : ColorMapper.getBlack())
+                                  : ColorMapper.getBlack(),
                               fontWeight: FontWeight.w600,
                             ),
                           );
@@ -260,7 +261,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ShareBtnWidget(
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -289,7 +290,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
     return Container(
       height: AppValues.lyricPlayerHeight,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
@@ -303,14 +304,14 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
             AppLocale.of().lyrics.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w600,
               letterSpacing: 0.8,
             ),
           ),
           SizedBox(height: AppMargin.margin_8),
           Divider(
-            color: AppColors.lightGrey,
+            color: ColorMapper.getLightGrey(),
           ),
           Expanded(
             child: Center(
@@ -320,7 +321,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                   Text(
                     AppLocale.of().cantLoadLyrics,
                     style: TextStyle(
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                       fontWeight: FontWeight.bold,
                       fontSize: AppFontSizes.font_size_12.sp,
                     ),
@@ -331,7 +332,7 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                   Text(
                     AppLocale.of().checkYourInternetConnection.toUpperCase(),
                     style: TextStyle(
-                      color: AppColors.darkGrey,
+                      color: ColorMapper.getDarkGrey(),
                       fontSize: AppFontSizes.font_size_10.sp,
                     ),
                   ),
@@ -352,13 +353,13 @@ class _MiniLyricPlayerWidgetState extends State<MiniLyricPlayerWidget> {
                         vertical: AppPadding.padding_8,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.black,
+                        color: ColorMapper.getBlack(),
                         borderRadius: BorderRadius.circular(120),
                       ),
                       child: Text(
                         AppLocale.of().tryAgain.toUpperCase(),
                         style: TextStyle(
-                          color: AppColors.white,
+                          color: ColorMapper.getWhite(),
                           fontWeight: FontWeight.w600,
                           fontSize: AppFontSizes.font_size_10.sp,
                         ),

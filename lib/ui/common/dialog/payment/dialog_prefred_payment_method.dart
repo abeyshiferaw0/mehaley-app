@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
@@ -40,7 +41,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               horizontal: AppMargin.margin_16,
             ),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(6),
             ),
             padding: EdgeInsets.all(
@@ -94,14 +95,14 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             vertical: AppPadding.padding_20,
           ),
           decoration: BoxDecoration(
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
             child: Text(
               AppLocale.of().done.toUpperCase(),
               style: TextStyle(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 fontWeight: FontWeight.w600,
                 fontSize: AppFontSizes.font_size_10.sp,
               ),
@@ -119,10 +120,10 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppColors.black,
+              ColorMapper.getBlack(),
               Colors.transparent,
               Colors.transparent,
-              AppColors.black,
+              ColorMapper.getBlack(),
             ],
             stops: [0.0, 0.03, 0.98, 1.0],
           ).createShader(bounds);
@@ -163,7 +164,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
             Text(
               AppLocale.of().preferredPaymentMethod,
               style: TextStyle(
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 fontWeight: FontWeight.w500,
                 fontSize: AppFontSizes.font_size_12.sp,
               ),
@@ -177,7 +178,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
               },
               child: Icon(
                 FlutterRemix.close_line,
-                color: AppColors.black,
+                color: ColorMapper.getBlack(),
                 size: AppIconSizes.icon_size_24,
               ),
             ),
@@ -189,7 +190,7 @@ class _PreferredPaymentDialogState extends State<PreferredPaymentDialog> {
         Text(
           AppLocale.of().selectYourPrefrredPayment,
           style: TextStyle(
-            color: AppColors.txtGrey,
+            color: ColorMapper.getTxtGrey(),
             fontWeight: FontWeight.w400,
             fontSize: AppFontSizes.font_size_8.sp,
           ),

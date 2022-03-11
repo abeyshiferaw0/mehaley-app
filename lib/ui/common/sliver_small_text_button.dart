@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:sizer/sizer.dart';
@@ -30,12 +31,12 @@ class SliverSmallTextButton extends StatelessWidget {
       child: Container(
         height: AppIconSizes.icon_size_40,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: ColorMapper.getWhite(),
           borderRadius: BorderRadius.circular(100.0),
           boxShadow: [
             BoxShadow(
               offset: Offset(0, 0),
-              color: AppColors.black.withOpacity(0.1),
+              color: ColorMapper.getBlack().withOpacity(0.1),
               spreadRadius: 2,
               blurRadius: 4,
             ),

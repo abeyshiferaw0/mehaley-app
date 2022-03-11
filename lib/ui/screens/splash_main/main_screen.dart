@@ -19,6 +19,7 @@ import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_restore_bloc/iap_subscription_restore_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_payment_launcher_listener_bloc/yenepay_payment_launcher_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_song_bloc/deep_link_song_bloc.dart';
@@ -33,6 +34,7 @@ import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
@@ -56,6 +58,7 @@ import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/ui/common/today_holiday_toast_widget.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/yenepay_purchase_util.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 //INIT ROUTERS
@@ -102,7 +105,9 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<AppAdBloc>(context).add(
       LoadAppAdEvent(),
     );
-
+    BlocProvider.of<YenepayPaymentLauncherListenerBloc>(context).add(
+      StartYenepayPaymentListenerEvent(),
+    );
     super.initState();
   }
 
@@ -110,6 +115,66 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        BlocListener<YenepayPaymentLauncherListenerBloc,
+            YenepayPaymentLauncherListenerState>(
+          listener: (context, state) {
+            if (state is YenepayPaymentLaunchErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.errorRed,
+                  isFloating: true,
+                  msg: AppLocale.of().purchaseNetworkError,
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+            if (state is YenepayPaymentParseErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                buildAppSnackBar(
+                  bgColor: AppColors.blue.withOpacity(0.9),
+                  isFloating: true,
+                  msg: 'something went wrong!!\ntry refreshing purchased page',
+                  txtColor: AppColors.white,
+                ),
+              );
+            }
+            if (state is YenepayPaymentStatusState) {
+              ///HANDLE YENEPAY PAYMENT COMPLETED SUCCESS
+              if (state.yenepayPaymentStatus.yenepayPaymentReturnType ==
+                      YenepayPaymentReturnType.COMPLETED ||
+                  state.yenepayPaymentStatus.yenepayPaymentReturnType ==
+                      YenepayPaymentReturnType.EXISTS ||
+                  state.yenepayPaymentStatus.yenepayPaymentReturnType ==
+                      YenepayPaymentReturnType.IS_FREE) {
+                ///CALL UTIL FUNCTION
+                YenepayPurchaseUtil.onSuccess(
+                  state.yenepayPaymentStatus,
+                  context,
+                );
+              }
+
+              ///HANDLE YENEPAY PAYMENT CANCELED SUCCESS
+              if (state.yenepayPaymentStatus.yenepayPaymentReturnType ==
+                  YenepayPaymentReturnType.CANCEL) {
+                ///CALL UTIL FUNCTION
+                YenepayPurchaseUtil.onCancled(
+                  state.yenepayPaymentStatus,
+                  context,
+                );
+              }
+
+              ///HANDLE YENEPAY PAYMENT FAILURE SUCCESS
+              if (state.yenepayPaymentStatus.yenepayPaymentReturnType ==
+                  YenepayPaymentReturnType.FAILURE) {
+                ///CALL UTIL FUNCTION
+                YenepayPurchaseUtil.onFailed(
+                  state.yenepayPaymentStatus,
+                  context,
+                );
+              }
+            }
+          },
+        ),
         BlocListener<NewerVersionBloc, NewerVersionState>(
           listener: (context, state) {
             if (state is ShouldShowNewVersionLoadedState) {
@@ -159,10 +224,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is DeepLinkErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: 'invalid url used!!',
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -276,7 +341,7 @@ class _MainScreenState extends State<MainScreen> {
                   isFloating: false,
                   msg:
                       '${AppLocale.of().somethingWentWrong}\n${AppLocale.of().purchaseCouldNotBeCompleted}',
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -284,7 +349,7 @@ class _MainScreenState extends State<MainScreen> {
               ///SHOW NO INTERNET MESSAGE
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                  bgColor: AppColors.white,
+                  bgColor: ColorMapper.getWhite(),
                   isFloating: true,
                   msg: AppLocale.of().noInternetMsg,
                   txtColor: AppColors.errorRed,
@@ -300,9 +365,9 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: AppLocale.of().inAppNotAvlable,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                   icon: FlutterRemix.secure_payment_line,
-                  iconColor: AppColors.white,
+                  iconColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -385,12 +450,12 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().songAddedToFavorites
                       : AppLocale.of().songRemovedToFavorites,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -399,10 +464,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -411,12 +476,12 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().albumAddedToFavorites
                       : AppLocale.of().albumRemovedToFavorites,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -425,10 +490,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -437,12 +502,12 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().playlistAddedToFavorites
                       : AppLocale.of().playlistRemovedToFavorites,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -451,10 +516,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -463,12 +528,12 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().artistsAddedToFavorites
                       : AppLocale.of().artistsRemovedToFavorites,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -477,10 +542,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
@@ -499,16 +564,16 @@ class _MainScreenState extends State<MainScreen> {
                       context,
                     ),
                   ),
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                   icon: FlutterRemix.checkbox_circle_fill,
-                  iconColor: AppColors.white,
+                  iconColor: ColorMapper.getWhite(),
                 ),
               );
             }
             if (state is SongDownloadedNetworkNotAvailableState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                  bgColor: AppColors.white,
+                  bgColor: ColorMapper.getWhite(),
                   isFloating: false,
                   msg: AppLocale.of().yourNotConnected,
                   txtColor: AppColors.errorRed,
@@ -520,7 +585,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongDownloadedPhoneRootedState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildDownloadMsgSnackBar(
-                  bgColor: AppColors.white,
+                  bgColor: ColorMapper.getWhite(),
                   isFloating: false,
                   msg: 'Download not available for rooted phones',
                   txtColor: AppColors.errorRed,
@@ -593,7 +658,7 @@ class _MainScreenState extends State<MainScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   buildAppSnackBar(
                     bgColor: AppColors.blue,
-                    txtColor: AppColors.white,
+                    txtColor: ColorMapper.getWhite(),
                     msg: 'No purchases to restore!!',
                     isFloating: true,
                   ),
@@ -671,8 +736,8 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AudioPlayerErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
-                  txtColor: AppColors.white,
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  txtColor: ColorMapper.getWhite(),
                   msg: state.msg,
                   isFloating: false,
                 ),
@@ -732,7 +797,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: AppColors.pagesBgColor,
+        backgroundColor: ColorMapper.getPagesBgColor(),
         // body: Stack(
         //   children: [
         //     //MAIN ROUTEING PART OF APP
@@ -765,6 +830,7 @@ class _MainScreenState extends State<MainScreen> {
                 Expanded(
                   child: buildWillPopScope(),
                 ),
+
                 //NO INTERNET INDICATOR
                 BlocBuilder<ConnectivityCubit, ConnectivityResult>(
                   builder: (context, state) {
@@ -796,7 +862,7 @@ class _MainScreenState extends State<MainScreen> {
               builder: (context, state) {
                 if (state is IapConsumablePurchaseStartedState) {
                   return Container(
-                    color: AppColors.completelyBlack.withOpacity(0.5),
+                    color: ColorMapper.getCompletelyBlack().withOpacity(0.5),
                     child: AppLoading(
                       size: AppValues.loadingWidgetSize,
                     ),
@@ -879,9 +945,9 @@ class _MainScreenState extends State<MainScreen> {
         bgColor: AppColors.blue,
         isFloating: true,
         msg: msg,
-        txtColor: AppColors.white,
+        txtColor: ColorMapper.getWhite(),
         icon: FlutterRemix.check_fill,
-        iconColor: AppColors.white,
+        iconColor: ColorMapper.getWhite(),
       ),
     );
   }

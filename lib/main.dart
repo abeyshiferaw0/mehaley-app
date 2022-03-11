@@ -24,6 +24,7 @@ import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/strings.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
@@ -53,6 +54,7 @@ import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_res
 import 'business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_status_bloc/iap_subscription_status_bloc.dart';
 import 'business_logic/blocs/payment_blocs/preferred_payment_method_bloc/preferred_payment_method_bloc.dart';
 import 'business_logic/blocs/payment_blocs/recently_purchased_items_bloc/recently_purchased_items_bloc.dart';
+import 'business_logic/blocs/payment_blocs/yenepay/yenepay_payment_launcher_listener_bloc/yenepay_payment_launcher_listener_bloc.dart';
 import 'business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'business_logic/blocs/sync_bloc/song_listen_recorder_bloc/song_listen_recorder_bloc.dart';
@@ -86,7 +88,7 @@ void main() async {
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
     androidNotificationChannelName: 'Mehaleye',
     androidNotificationOngoing: false,
-    notificationColor: AppColors.darkOrange,
+    notificationColor: ColorMapper.getDarkOrange(),
   );
 
   ///INIT HIVE BOXES
@@ -280,6 +282,9 @@ class _MyAppState extends State<MyApp> {
             // BlocProvider<PlayerVideoModeRemoveControlsCubit>(
             //   create: (context) => PlayerVideoModeRemoveControlsCubit(),
             // ),
+            BlocProvider<YenepayPaymentLauncherListenerBloc>(
+              create: (context) => YenepayPaymentLauncherListenerBloc(),
+            ),
             BlocProvider<PlayerQueueCubit>(
               create: (context) => PlayerQueueCubit(
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),

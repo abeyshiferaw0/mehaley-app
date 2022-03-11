@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/cubits/library/following_tab_pages_cubit.
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/library/purchased_tab_pages_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -138,7 +139,7 @@ class _LibraryPageState extends State<LibraryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pagesBgColor,
+      backgroundColor: ColorMapper.getPagesBgColor(),
       body: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (context, value) {
@@ -185,7 +186,7 @@ class _LibraryPageState extends State<LibraryPage>
     return SliverAppBar(
       //brightness: Brightness.dark,
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
-      backgroundColor: AppColors.white,
+      backgroundColor: ColorMapper.getWhite(),
       shadowColor: AppColors.transparent,
       floating: true,
       pinned: false,
@@ -208,7 +209,7 @@ class _LibraryPageState extends State<LibraryPage>
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           );
         },
@@ -223,7 +224,7 @@ class _LibraryPageState extends State<LibraryPage>
             child: Icon(
               FlutterRemix.settings_4_line,
               size: AppIconSizes.icon_size_24,
-              color: AppColors.black,
+              color: ColorMapper.getBlack(),
             ),
           ),
         ),
@@ -234,7 +235,7 @@ class _LibraryPageState extends State<LibraryPage>
         //   onPressed: () {},
         //   icon: Icon(
         //     FlutterRemix.notifications_2_line,
-        //     color: AppColors.white,
+        //     color: ColorMapper.getWhite(),
         //     size: AppIconSizes.icon_size_24,
         //   ),
         // )

@@ -5,6 +5,7 @@ import 'package:mehaley/business_logic/blocs/app_start_bloc/app_start_bloc.dart'
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/dialog/dialog_first_time_lan_and_currency.dart';
@@ -55,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(
                 bgColor: AppColors.errorRed,
-                txtColor: AppColors.white,
+                txtColor: ColorMapper.getWhite(),
                 msg: AppLocale.of().authenticationFailedMsg,
                 isFloating: false,
               ),
@@ -72,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
           }
         },
         child: Scaffold(
-          backgroundColor: AppColors.black,
+          backgroundColor: ColorMapper.getBlack(),
           //resizeToAvoidBottomInset: true,
           body: Stack(
             children: [

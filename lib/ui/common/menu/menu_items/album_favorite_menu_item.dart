@@ -5,6 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -65,8 +66,8 @@ class _AlbumFavoriteMenuItemState extends State<AlbumFavoriteMenuItem> {
                       preButtonText(),
                       style: TextStyle(
                         color: !widget.isDisabled
-                            ? AppColors.black
-                            : AppColors.black.withOpacity(0.4),
+                            ? ColorMapper.getBlack()
+                            : ColorMapper.getBlack().withOpacity(0.4),
                         fontSize: AppFontSizes.font_size_10.sp,
                         fontWeight: FontWeight.w400,
                       ),

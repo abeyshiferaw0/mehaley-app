@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/artist.dart';
 import 'package:mehaley/data/models/category.dart';
@@ -32,7 +33,7 @@ class SearchFrontPageGroups extends StatelessWidget {
           mainTitle,
           style: TextStyle(
             fontSize: 15,
-            color: AppColors.darkGrey,
+            color: ColorMapper.getDarkGrey(),
             fontWeight: FontWeight.w600,
           ),
         ),

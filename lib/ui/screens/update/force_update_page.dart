@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_router.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -32,7 +35,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppColors.orange, AppColors.orange2],
+            colors: [ColorMapper.getOrange(), ColorMapper.getOrange2()],
           ),
         ),
         padding: EdgeInsets.all(AppPadding.padding_32),
@@ -50,7 +53,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
               AppLocale.of().updateRequired.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 fontSize: AppFontSizes.font_size_12.sp,
                 fontWeight: FontWeight.w600,
               ),
@@ -62,7 +65,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
               AppLocale.of().updateRequiredMsg,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.white,
+                color: ColorMapper.getWhite(),
                 fontSize: AppFontSizes.font_size_10.sp,
                 fontWeight: FontWeight.w300,
               ),
@@ -71,20 +74,24 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
               height: ScreenUtil(context: context).getScreenHeight() * 0.05,
             ),
             AppBouncingButton(
-              onTap: () {
+              onTap: () async {
                 ///OPEN PLAY STORE APP STORE
-                InAppReview.instance
-                    .openStoreListing(appStoreId: AppValues.appStoreId);
+                await InAppReview.instance.openStoreListing(
+                  appStoreId: AppValues.appStoreId,
+                );
+
+                ///CLOSE APP
+                exit(0);
               },
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: ColorMapper.getWhite(),
                   borderRadius: BorderRadius.circular(100.0),
                   boxShadow: [
                     BoxShadow(
                       offset: Offset(0, 0),
-                      color: AppColors.completelyBlack.withOpacity(0.1),
+                      color: ColorMapper.getCompletelyBlack().withOpacity(0.1),
                       spreadRadius: 4,
                       blurRadius: 12,
                     ),
@@ -98,7 +105,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                   AppLocale.of().updateApp.toUpperCase(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w600,
                   ),
@@ -115,7 +122,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                   '${AppLocale.of().currentVersion}\n$currentVersion',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w400,
                   ),
@@ -125,7 +132,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                       EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
                   child: Icon(
                     FlutterRemix.arrow_right_s_line,
-                    color: AppColors.lightGrey,
+                    color: ColorMapper.getLightGrey(),
                     size: AppIconSizes.icon_size_20,
                   ),
                 ),
@@ -133,7 +140,7 @@ class _ForceUpdateWidgetState extends State<ForceUpdateWidget> {
                   '${AppLocale.of().newerVersion}\n$newVersion',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.white,
+                    color: ColorMapper.getWhite(),
                     fontSize: AppFontSizes.font_size_8.sp,
                     fontWeight: FontWeight.w400,
                   ),

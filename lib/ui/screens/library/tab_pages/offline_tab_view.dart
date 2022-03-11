@@ -7,6 +7,7 @@ import 'package:mehaley/business_logic/blocs/library_page_bloc/offline_songs_blo
 import 'package:mehaley/business_logic/cubits/library/library_tab_pages_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -59,7 +60,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
                 await BlocProvider.of<OfflineSongsBloc>(context).stream.first;
               }
             },
-            color: AppColors.darkOrange,
+            color: ColorMapper.getDarkOrange(),
             edgeOffset: AppMargin.margin_16,
             child: Container(
               height: ScreenUtil(context: context).getScreenHeight(),
@@ -149,15 +150,15 @@ class _OfflineTabViewState extends State<OfflineTabView>
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: AppColors.black.withOpacity(0.9),
+                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
                   isFloating: true,
                   msg: AppLocale.of().noMezmursToPlay,
-                  txtColor: AppColors.white,
+                  txtColor: ColorMapper.getWhite(),
                 ),
               );
             }
           },
-          iconColor: AppColors.black,
+          iconColor: ColorMapper.getBlack(),
           icon: FlutterRemix.shuffle_line,
         )
       ],
@@ -171,7 +172,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
         horizontal: AppPadding.padding_16,
         vertical: AppPadding.padding_16,
       ),
-      color: AppColors.white,
+      color: ColorMapper.getWhite(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +181,7 @@ class _OfflineTabViewState extends State<OfflineTabView>
             AppLocale.of().sortBy,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               fontWeight: FontWeight.w600,
             ),
           ),

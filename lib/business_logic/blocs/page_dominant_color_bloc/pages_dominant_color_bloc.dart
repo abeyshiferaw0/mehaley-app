@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/util/color_util.dart';
 import 'package:meta/meta.dart';
 

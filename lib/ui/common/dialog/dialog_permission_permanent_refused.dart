@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_permission.dart';
@@ -29,7 +30,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
               vertical: AppPadding.padding_32,
             ),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
@@ -40,7 +41,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.black,
+                    color: ColorMapper.getBlack(),
                   ),
                 ),
                 SizedBox(
@@ -52,7 +53,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_10.sp,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.txtGrey,
+                    color: ColorMapper.getTxtGrey(),
                   ),
                 ),
                 SizedBox(
@@ -68,7 +69,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                       children: [
                         Icon(
                           permissionList.elementAt(index).icon,
-                          color: AppColors.black,
+                          color: ColorMapper.getBlack(),
                           size: AppIconSizes.icon_size_24,
                         ),
                         SizedBox(
@@ -80,7 +81,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                           style: TextStyle(
                             fontSize: AppFontSizes.font_size_12.sp,
                             fontWeight: FontWeight.w400,
-                            color: AppColors.black,
+                            color: ColorMapper.getBlack(),
                           ),
                         ),
                       ],
@@ -107,14 +108,14 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: AppColors.orange,
+                      color: ColorMapper.getOrange(),
                     ),
                     child: Text(
                       AppLocale.of().goToSystemSettings.toUpperCase(),
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_12.sp,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.white,
+                        color: ColorMapper.getWhite(),
                       ),
                     ),
                   ),
@@ -131,7 +132,7 @@ class DialogPermissionPermanentlyRefused extends StatelessWidget {
                     style: TextStyle(
                       fontSize: AppFontSizes.font_size_10.sp,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.black,
+                      color: ColorMapper.getBlack(),
                     ),
                   ),
                 ),

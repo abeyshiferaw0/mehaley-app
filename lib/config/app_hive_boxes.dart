@@ -234,7 +234,7 @@ class AppHiveBoxes {
 
   Future<void> initHiveAdapters() async {
     //INIT HIVE
-    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+    Directory directory = await pathProvider.getApplicationSupportDirectory();
     Hive.init(directory.path);
     Hive.registerAdapter(SongAdapter());
     Hive.registerAdapter(PlaylistAdapter());

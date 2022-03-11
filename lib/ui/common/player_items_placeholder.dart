@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 
 class AppItemsImagePlaceHolder extends StatelessWidget {
@@ -15,12 +15,12 @@ class AppItemsImagePlaceHolder extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: AppColors.lightGrey,
+      color: ColorMapper.getLightGrey(),
       child: LayoutBuilder(
         builder: (context, constraint) {
           return Icon(
             getIconData(),
-            color: AppColors.placeholderIconColor,
+            color: ColorMapper.getPlaceholderIconColor(),
             size: constraint.biggest.height / 2,
           );
         },

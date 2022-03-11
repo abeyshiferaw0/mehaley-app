@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_user_playlist.dart';
 import 'package:mehaley/util/auth_util.dart';
@@ -49,7 +50,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: ColorMapper.getWhite(),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppValues.menuBottomSheetRadius),
           topRight: Radius.circular(AppValues.menuBottomSheetRadius),
@@ -76,7 +77,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: false,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: FlutterRemix.plus_circle_light,
                   //   title: AppLocale.of().addMezmurs,
                   //   onTap: () {},
@@ -84,7 +85,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.pencil_line,
                     title: AppLocale.of().editPlaylist,
                     onTap: () {
@@ -98,7 +99,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   MenuItem(
                     isDisabled: false,
                     hasTopMargin: true,
-                    iconColor: AppColors.grey.withOpacity(0.6),
+                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
                     icon: FlutterRemix.close_line,
                     title: AppLocale.of().deletePlaylist,
                     onTap: () {
@@ -126,7 +127,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: FlutterRemix.search_line,
                   //   title: AppLocale.of().findInPlaylist,
                   //   onTap: () {},
@@ -134,7 +135,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: FlutterRemix.sort_asc_line,
                   //   title: AppLocale.of().sortPlaylist,
                   //   onTap: () {},
@@ -142,7 +143,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: FlutterRemix.share_line,
                   //   title: AppLocale.of().sharePlaylist,
                   //   onTap: () {},
@@ -150,7 +151,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
-                  //   iconColor: AppColors.grey.withOpacity(0.6),
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
                   //   icon: c.smartphone_line,
                   //   title: AppLocale.of().addToHomeScreen,
                   //   onTap: () {},
@@ -175,7 +176,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
             withShadow: false,
             radius: 6.0,
             child: Container(
-              color: AppColors.txtGrey,
+              color: ColorMapper.getTxtGrey(),
               width: AppValues.menuHeaderImageSize,
               height: AppValues.menuHeaderImageSize,
               child: PagesUtilFunctions.getSongGridImage(myPlaylist),
@@ -190,7 +191,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: AppColors.black,
+                  color: ColorMapper.getBlack(),
                   fontSize: AppFontSizes.font_size_12.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -204,7 +205,7 @@ class UserPlaylistMenuWidget extends StatelessWidget {
                         .toUpperCase(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.txtGrey,
+                      color: ColorMapper.getTxtGrey(),
                       fontSize: AppFontSizes.font_size_8.sp,
                       fontWeight: FontWeight.w400,
                     ),

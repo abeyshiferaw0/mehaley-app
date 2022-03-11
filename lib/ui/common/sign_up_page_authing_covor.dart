@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/util/screen_util.dart';
 
@@ -18,7 +18,7 @@ class SignUpPageAuthingCovor extends StatelessWidget {
       width: ScreenUtil(context: context).getScreenWidth(),
       height: ScreenUtil(context: context).getScreenHeight(),
       decoration: BoxDecoration(
-        color: AppColors.completelyBlack.withOpacity(0.5),
+        color: ColorMapper.getCompletelyBlack().withOpacity(0.5),
       ),
       child: showLoading
           ? Center(

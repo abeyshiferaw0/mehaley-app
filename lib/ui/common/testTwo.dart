@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mehaley/config/constants.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_payment_launcher_listener_bloc/yenepay_payment_launcher_listener_bloc.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TestTwoWidget extends StatefulWidget {
   const TestTwoWidget({Key? key}) : super(key: key);
@@ -10,39 +13,86 @@ class TestTwoWidget extends StatefulWidget {
 }
 
 class _TestTwoWidgetState extends State<TestTwoWidget> {
-  ///
-  bool hasError = false;
-  bool loading = true;
-  late WebViewController webViewContainer;
-
   @override
   void initState() {
+    linkStream.listen((String? link) {
+      print("linkStream  link=>  ${link}");
+      closeWebView();
+    }, onError: (err) {
+      print("linkStream  err=>  ${err}");
+    });
+    BlocProvider.of<YenepayPaymentLauncherListenerBloc>(context).add(
+      StartYenepayPaymentListenerEvent(),
+    );
     super.initState();
   }
+
+  final GlobalKey webViewKey = GlobalKey();
+
+  InAppWebViewController? webViewController;
+  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+      crossPlatform: InAppWebViewOptions(
+        useShouldOverrideUrlLoading: true,
+        mediaPlaybackRequiresUserGesture: false,
+      ),
+      android: AndroidInAppWebViewOptions(
+        useHybridComposition: true,
+      ),
+      ios: IOSInAppWebViewOptions(
+        allowsInlineMediaPlayback: true,
+      ));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebView(
-        initialUrl:
-            '${AppApi.baseUrl}/payment/purchase/yene_pay/web_payment/?item_id=462&item_type=SONG_PAYMENT&user_id=4',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (mWebViewController) {
-          webViewContainer = mWebViewController;
+      // body: Center(
+      //   child: IconButton(
+      //     icon: Icon(FlutterRemix.play_circle_line),
+      //     onPressed: () {
+      //       canL(
+      //           "https://app.ethiomobilemoney.et:2121/ammsdkpay/#/?transactionNo=202201271332311486648307689631746");
+      //     },
+      //   ),
+      // ),
+      body: InAppWebView(
+        key: webViewKey,
+        initialUrlRequest: URLRequest(
+            url: Uri.parse(
+                'https://app.ethiomobilemoney.et:2121/ammsdkpay/#/result')),
+        initialOptions: options,
+        onWebViewCreated: (controller) {
+          webViewController = controller;
+          controller.addJavaScriptHandler(
+              handlerName: 'paymentResult',
+              callback: (args) {
+                print("WEBVIEW_TEST=> callback $args");
+                // print arguments coming from the JavaScript side!
+                print(args);
+              });
         },
-        onPageStarted: (String s) {
-          //print("WebViewww=> onPageStarted ${s}");
+        onLoadStart: (controller, url) {
+          print("WEBVIEW_TEST=> onLoadStart");
         },
-        onPageFinished: (String s) {
-          //print("WebViewww=> onPageFinished ${s}");
+        onLoadStop: (controller, url) async {
+          print("WEBVIEW_TEST=> onLoadStop");
         },
-        onProgress: (int s) {
-          ////print("WebViewww=> onProgress ${s}");
-        },
-        onWebResourceError: (WebResourceError error) {
-          //print("WebViewww=> onWebResourceError ${error.failingUrl}");
+        onLoadError: (controller, url, code, message) {
+          print("WEBVIEW_TEST=> onLoadError");
         },
       ),
     );
+  }
+
+  canL(String urlString) async {
+    bool can = true;
+    print("TEST_URL=>  can $can");
+    if (can) {
+      try {
+        print("TEST_URL=>  launch $urlString");
+        launch(urlString);
+      } catch (e) {
+        print("TEST_URL=>  catch ${e.toString()}");
+      }
+    }
   }
 }

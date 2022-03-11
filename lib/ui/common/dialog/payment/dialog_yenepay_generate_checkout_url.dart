@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_generate_checkout_url_bloc/yenepay_generate_checkout_url_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_payment_launcher_listener_bloc/yenepay_payment_launcher_listener_bloc.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
-import 'package:mehaley/ui/common/dialog/payment/dialog_yenepay_checkout_webview.dart';
 import 'package:mehaley/ui/common/widget_error_widget.dart';
 import 'package:mehaley/util/screen_util.dart';
 
@@ -41,6 +42,8 @@ class _DialogYenepayGenerateCheckoutUrlState
     BlocProvider.of<YenepayGenerateCheckoutUrlBloc>(context).add(
       GenerateCheckoutUrlEvent(
         appPurchasedItemType: widget.appPurchasedItemType,
+        appPurchasedSources: widget.appPurchasedSources,
+        isFromSelfPage: widget.isFromSelfPage,
         itemId: widget.itemId,
       ),
     );
@@ -56,7 +59,7 @@ class _DialogYenepayGenerateCheckoutUrlState
             width: ScreenUtil(context: context).getScreenWidth() * 0.9,
             height: ScreenUtil(context: context).getScreenHeight() * 0.7,
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: ColorMapper.getWhite(),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Column(
@@ -72,18 +75,27 @@ class _DialogYenepayGenerateCheckoutUrlState
                         Navigator.pop(context);
 
                         ///SHOW YENEPAY CHECKOUT WEB VIEW DIALOG
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            ///SHOW GENERATE YENEPAY CHECKOUT URL DIALOG
-                            return DialogYenepayCheckoutWebView(
-                              itemId: widget.itemId,
-                              appPurchasedItemType: widget.appPurchasedItemType,
-                              checkOutUrl: state.checkoutUrl,
-                              isFromSelfPage: widget.isFromSelfPage,
-                              appPurchasedSources: widget.appPurchasedSources,
-                            );
-                          },
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) {
+                        //     ///SHOW GENERATE YENEPAY CHECKOUT URL DIALOG
+                        //     return DialogYenepayCheckoutWebView(
+                        //       itemId: widget.itemId,
+                        //       appPurchasedItemType: widget.appPurchasedItemType,
+                        //       checkOutUrl: state.checkoutUrl,
+                        //       isFromSelfPage: widget.isFromSelfPage,
+                        //       appPurchasedSources: widget.appPurchasedSources,
+                        //     );
+                        //   },
+                        // );
+
+                        ///START YENEPAY PAYMENT
+                        BlocProvider.of<YenepayPaymentLauncherListenerBloc>(
+                                context)
+                            .add(
+                          LaunchYenepayPaymentPageEvent(
+                            launchUrl: state.checkoutUrl,
+                          ),
                         );
                       }
                     },
@@ -126,8 +138,10 @@ class _DialogYenepayGenerateCheckoutUrlState
           ///GENERATE YENEPAY CHECKOUT URL
           BlocProvider.of<YenepayGenerateCheckoutUrlBloc>(context).add(
             GenerateCheckoutUrlEvent(
-              appPurchasedItemType: widget.appPurchasedItemType,
               itemId: widget.itemId,
+              appPurchasedItemType: widget.appPurchasedItemType,
+              appPurchasedSources: widget.appPurchasedSources,
+              isFromSelfPage: widget.isFromSelfPage,
             ),
           );
         },

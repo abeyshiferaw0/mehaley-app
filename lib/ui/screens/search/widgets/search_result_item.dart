@@ -7,7 +7,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -166,7 +166,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: AppColors.darkGrey,
+              color: ColorMapper.getDarkGrey(),
               fontWeight: FontWeight.w600,
               fontSize: AppFontSizes.font_size_10.sp,
             ),
@@ -211,7 +211,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                   title,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_12.sp,
-                    color: AppColors.darkGrey,
+                    color: ColorMapper.getDarkGrey(),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -235,7 +235,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                       subTitle,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,
-                        color: AppColors.txtGrey,
+                        color: ColorMapper.getTxtGrey(),
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -259,7 +259,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
                       FlutterRemix.close_line,
-                      color: AppColors.grey,
+                      color: ColorMapper.getGrey(),
                       size: AppIconSizes.icon_size_24,
                     ),
                   ),
@@ -270,7 +270,7 @@ class _SearchResultItemState extends State<SearchResultItem> {
                     padding: EdgeInsets.all(AppPadding.padding_8),
                     child: Icon(
                       FlutterRemix.more_2_line,
-                      color: AppColors.grey,
+                      color: ColorMapper.getGrey(),
                       size: AppIconSizes.icon_size_24,
                     ),
                   ),
