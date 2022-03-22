@@ -26,8 +26,8 @@ class L10nUtil {
     return AppHiveBoxes.instance.settingsBox.get(AppValues.appLanguageKey);
   }
 
-  static AppLanguage changeLocale(AppLanguage appLanguage) {
-    AppHiveBoxes.instance.settingsBox.put(
+  static Future<AppLanguage> changeLocale(AppLanguage appLanguage) async {
+    await AppHiveBoxes.instance.settingsBox.put(
       AppValues.appLanguageKey,
       appLanguage,
     );

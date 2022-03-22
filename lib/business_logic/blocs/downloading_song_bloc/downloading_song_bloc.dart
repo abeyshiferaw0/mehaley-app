@@ -154,6 +154,7 @@ class DownloadingSongBloc
 
       DownloadTaskStatus downloadTaskStatus =
           await downloadUtil.isSongDownloadedCheckWithDb(event.song);
+
       yield SongIsDownloadedState(
         downloadTaskStatus: downloadTaskStatus,
         song: event.song,

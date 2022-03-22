@@ -35,6 +35,7 @@ class SyncRepository {
   Future<Response> syncSongs(List<SongSync> songSyncList) async {
     Response response = await syncProvider.syncSongs(songSyncList);
     if (response.statusCode == 200) {
+      print("responseresponse=>  ${response.data}");
       AppHiveBoxes.instance.songSyncBox.deleteAll(
         songSyncList.map((e) => e.uuid),
       );

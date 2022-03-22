@@ -105,6 +105,23 @@ class PagesUtilFunctions {
     return DateFormat.yMMMd().format(playlist.playlistDateCreated).toString();
   }
 
+  static Widget getGroupItemType(GroupType groupType) {
+    if (groupType == GroupType.SONG)
+      return SongItemBadge(
+        tag: AppLocale.of().mezmur,
+      );
+    if (groupType == GroupType.ALBUM)
+      return SongItemBadge(
+        tag: AppLocale.of().mezmur,
+      );
+    if (groupType == GroupType.PLAYLIST)
+      return SongItemBadge(
+        tag: AppLocale.of().playlist,
+      );
+    if (groupType == GroupType.ARTIST) return SizedBox();
+    return SizedBox();
+  }
+
   static String getPlaylistTotalDuration(List<Song> songs) {
     double totalDurationInSeconds = 0.0;
     for (Song song in songs) {
@@ -1035,7 +1052,7 @@ class PagesUtilFunctions {
 
   static double getSongLength(Song song) {
     final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-    if (!song.isBought && !song.isFree && !isUserSubscribed) {
+    if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(song)) {
       return song.audioFile.audioPreviewDurationSeconds;
     }
     return song.audioFile.audioDurationSeconds;
@@ -1043,7 +1060,7 @@ class PagesUtilFunctions {
 
   static String getFormatdMaxSongDuration(Song song) {
     final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-    if (!song.isBought && !song.isFree && !isUserSubscribed) {
+    if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(song)) {
       return formatSongDurationTimeTo(
         Duration(
           seconds: song.audioFile.audioPreviewDurationSeconds.toInt(),
@@ -1314,7 +1331,6 @@ class PagesUtilFunctions {
     bool isIapAvailable = IapPurchaseRepository(
       iapPurchaseProvider: IapPurchaseProvider(),
     ).getIsIapAvailable();
-
     if (isUserSubscribed & isIapAvailable) {
       return true;
     } else {
@@ -1414,5 +1430,21 @@ class PagesUtilFunctions {
     } else {
       return 'Purchase Completed';
     }
+  }
+
+  static bool isNotFreeBoughtAndSubscribed(Song song) {
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
+    if (!song.isFree && !song.isBought && !isUserSubscribed) return true;
+    return false;
+  }
+
+  static bool isFreeBoughtOrSubscribed(Song currentPlayingSong) {
+    final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
+    if (currentPlayingSong.isFree ||
+        currentPlayingSong.isBought ||
+        isUserSubscribed) return true;
+    return false;
   }
 }

@@ -90,10 +90,8 @@ class _PlayerPageState extends State<PlayerPage> {
   void playerPageListeners(BuildContext context, AudioPlayerState state) {
     if (state is AudioPlayerCurrentSongChangeState) {
       ///POP PLAYER PAGE IF SONG NOT BOUGHT OR FREE
-      final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-      if (!state.song.isFree &&
-          !state.song.isBought &&
-          !isUserSubscribed &&
+
+      if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(state.song) &&
           !isPagePopped) {
         isPagePopped = true;
         Navigator.pop(context);
@@ -112,8 +110,7 @@ class _PlayerPageState extends State<PlayerPage> {
       if (currentItem != null) {
         MediaItem mediaItem = (currentItem.tag as MediaItem);
         Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
-        final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-        if (!song.isBought && !song.isFree && !isUserSubscribed) {
+        if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(song)) {
           ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
           if (!isPagePopped) {
             Navigator.pop(context);

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
@@ -87,7 +88,17 @@ class ItemCustomGroup extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: PagesUtilFunctions.getGroupItemTextStyle(groupType, item),
             ),
-            PagesUtilFunctions.getGroupItemPrice(groupType, item),
+            SizedBox(
+              height: AppMargin.margin_2,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                PagesUtilFunctions.getGroupItemType(groupType),
+                PagesUtilFunctions.getGroupItemPrice(groupType, item),
+              ],
+            ),
             PagesUtilFunctions.getIsExplicitTag(groupType, item)
           ],
         ),

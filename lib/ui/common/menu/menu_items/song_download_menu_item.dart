@@ -9,6 +9,7 @@ import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/ui/common/app_circular_progress_indicator.dart';
 import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/ui/common/dialog/dialog_song_preview_mode.dart';
@@ -53,6 +54,8 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
 
   bool showEmpty = false;
 
+  double downloadingProgress = 0;
+
   @override
   void initState() {
     BlocProvider.of<DownloadingSongBloc>(context).add(
@@ -60,7 +63,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         song: widget.song,
       ),
     );
-    if (widget.song.isBought || widget.song.isFree || isUserSubscribed) {
+    if (PagesUtilFunctions.isFreeBoughtOrSubscribed(widget.song)) {
       showEmpty = true;
     }
     super.initState();
@@ -78,6 +81,8 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
                 showDownloaded = false;
                 showDownloadFailed = false;
                 showEmpty = false;
+                downloadingProgress = state.progress.toDouble();
+                print("state.progress => ${state.progress}");
               });
             }
           }
@@ -221,9 +226,9 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         leadingWidget: Container(
           width: AppIconSizes.icon_size_24,
           height: AppIconSizes.icon_size_24,
-          child: CircularProgressIndicator(
+          child: AppCircularProgressIndicator(
+            progress: downloadingProgress,
             color: widget.downloadingColor,
-            strokeWidth: 2,
           ),
         ),
         title: AppLocale.of().downloadProgressing,
@@ -242,8 +247,7 @@ class _SongDownloadMenuItemState extends State<SongDownloadMenuItem> {
         icon: FlutterRemix.arrow_down_circle_line,
         title: AppLocale.of().downloadMezmur,
         onTap: () {
-          final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-          if (widget.song.isBought || widget.song.isFree || isUserSubscribed) {
+          if (PagesUtilFunctions.isFreeBoughtOrSubscribed(widget.song)) {
             ///SHOW DOWNLOAD STARTED MESSAGE
             ScaffoldMessenger.of(context).showSnackBar(
               buildAppSnackBar(

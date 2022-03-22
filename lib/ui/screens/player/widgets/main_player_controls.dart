@@ -11,6 +11,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubi
 import 'package:mehaley/business_logic/cubits/player_cubits/loop_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/muted_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/shuffle_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
@@ -399,23 +400,39 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                   ),
                 ),
 
-                ///PLAY PAUSE BUTTON
-                BlocBuilder<PlayPauseCubit, bool>(
+                BlocBuilder<PlayerStateCubit, PlayerState>(
                   builder: (context, state) {
-                    return AppBouncingButton(
-                      onTap: () {
-                        BlocProvider.of<AudioPlayerBloc>(context).add(
-                          PlayPauseEvent(),
-                        );
-                      },
-                      child: Icon(
-                        state
-                            ? Icons.pause_circle_filled_sharp
-                            : FlutterRemix.play_circle_fill,
-                        size: AppIconSizes.icon_size_64,
-                        color: ColorMapper.getWhite(),
-                      ),
-                    );
+                    if (state.processingState == ProcessingState.loading) {
+                      ///LOADING CIRCULAR
+                      return Container(
+                        width: AppIconSizes.icon_size_32,
+                        height: AppIconSizes.icon_size_32,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          color: ColorMapper.getWhite(),
+                        ),
+                      );
+                    } else {
+                      ///PLAY PAUSE BUTTON
+                      return BlocBuilder<PlayPauseCubit, bool>(
+                        builder: (context, state) {
+                          return AppBouncingButton(
+                            onTap: () {
+                              BlocProvider.of<AudioPlayerBloc>(context).add(
+                                PlayPauseEvent(),
+                              );
+                            },
+                            child: Icon(
+                              state
+                                  ? Icons.pause_circle_filled_sharp
+                                  : FlutterRemix.play_circle_fill,
+                              size: AppIconSizes.icon_size_64,
+                              color: ColorMapper.getWhite(),
+                            ),
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
 
@@ -522,6 +539,8 @@ class _MainPlayerControlsState extends State<MainPlayerControls> {
                     }
                   },
                 ),
+
+                ///QUEUE PAGE
                 AppBouncingButton(
                   onTap: () {
                     //NAVIGATE TO PLAYER QUEUE PAGE

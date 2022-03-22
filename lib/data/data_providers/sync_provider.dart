@@ -21,9 +21,11 @@ class SyncProvider {
         songSync.uuid,
         songSync.copyWith(secondsPlayed: seconds),
       );
+
       print(
           "SYNCEDDD DATEE= > ${songSync.uuid} CURRENT - PREVIOUS=> ${currentDuration.inSeconds - previousDuration.inSeconds} PREVIOUSLY SAVED SECONDS=> ${seconds}");
     } else {
+      print("songSync.toMap() 2=> ${songSync.toMap()}");
       AppHiveBoxes.instance.songSyncBox.put(songSync.uuid, songSync);
     }
   }
@@ -44,6 +46,8 @@ class SyncProvider {
         ],
       );
     }
+
+    print("formData=>> ${formData.fields}");
 
     Response response = await ApiUtil.post(
       dio: dio,

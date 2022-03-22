@@ -24,7 +24,7 @@ class DropDownOptionsPicker extends StatefulWidget {
   }) : super(key: key);
 
   final Map<String, dynamic> notificationTags;
-  final VoidCallback? onLanguageChanged;
+  final Function(AppLanguage appLanguage)? onLanguageChanged;
 
   @override
   _DropDownOptionsPickerState createState() => _DropDownOptionsPickerState(
@@ -100,7 +100,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                         appLanguage: AppLanguage.AMHARIC,
                       );
                       if (widget.onLanguageChanged != null) {
-                        widget.onLanguageChanged!();
+                        widget.onLanguageChanged!(AppLanguage.AMHARIC);
                       }
                     },
                   ),
@@ -112,7 +112,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                         appLanguage: AppLanguage.ENGLISH,
                       );
                       if (widget.onLanguageChanged != null) {
-                        widget.onLanguageChanged!();
+                        widget.onLanguageChanged!(AppLanguage.ENGLISH);
                       }
                     },
                   ),
@@ -124,7 +124,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                         appLanguage: AppLanguage.OROMIFA,
                       );
                       if (widget.onLanguageChanged != null) {
-                        widget.onLanguageChanged!();
+                        widget.onLanguageChanged!(AppLanguage.OROMIFA);
                       }
                     },
                   ),
@@ -136,7 +136,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                         appLanguage: AppLanguage.TIGRINYA,
                       );
                       if (widget.onLanguageChanged != null) {
-                        widget.onLanguageChanged!();
+                        widget.onLanguageChanged!(AppLanguage.TIGRINYA);
                       }
                     },
                   ),

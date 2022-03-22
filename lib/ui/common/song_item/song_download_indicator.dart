@@ -10,6 +10,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/app_circular_progress_indicator.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -49,6 +50,8 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
 
   bool showEmpty = false;
 
+  double downloadingProgress = 0;
+
   @override
   void initState() {
     BlocProvider.of<DownloadingSongBloc>(context).add(
@@ -71,6 +74,8 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                 showDownloaded = false;
                 showDownloadFailed = false;
                 showEmpty = false;
+                downloadingProgress = state.progress.toDouble();
+                print("state.progress => ${state.progress}");
               });
             }
           }
@@ -266,14 +271,14 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
           children: [
             Container(
               width: widget.isForPlayerPage
-                  ? AppIconSizes.icon_size_20
+                  ? AppIconSizes.icon_size_24
                   : AppIconSizes.icon_size_16,
               height: widget.isForPlayerPage
-                  ? AppIconSizes.icon_size_20
+                  ? AppIconSizes.icon_size_24
                   : AppIconSizes.icon_size_16,
-              child: CircularProgressIndicator(
+              child: AppCircularProgressIndicator(
+                progress: downloadingProgress,
                 color: widget.downloadingColor,
-                strokeWidth: 2,
               ),
             ),
             widget.isForPlayerPage

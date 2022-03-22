@@ -28,6 +28,7 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_
 import 'package:mehaley/business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'package:mehaley/business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
@@ -38,6 +39,7 @@ import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
@@ -796,86 +798,94 @@ class _MainScreenState extends State<MainScreen> {
           },
         ),
       ],
-      child: Scaffold(
-        backgroundColor: ColorMapper.getPagesBgColor(),
-        // body: Stack(
-        //   children: [
-        //     //MAIN ROUTEING PART OF APP
-        //     Align(
-        //       alignment: Alignment.topCenter,
-        //       child: buildWillPopScope(),
-        //     ),
-        //     //MINI PLAYER SHOWN IF MUSIC IS PLAYING
-        //     Align(
-        //       alignment: Alignment.bottomCenter,
-        //       child: BlocBuilder<PlayerStateCubit, PlayerState>(
-        //         builder: (context, state) {
-        //           if (state.processingState == ProcessingState.ready ||
-        //               state.processingState == ProcessingState.buffering ||
-        //               state.processingState == ProcessingState.loading) {
-        //             return MiniPlayer();
-        //           } else {
-        //             return SizedBox();
-        //           }
-        //         },
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        body: Stack(
-          children: [
-            Column(
+      child: BlocBuilder<LocalizationCubit, AppLanguage>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: ColorMapper.getPagesBgColor(),
+            // body: Stack(
+            //   children: [
+            //     //MAIN ROUTEING PART OF APP
+            //     Align(
+            //       alignment: Alignment.topCenter,
+            //       child: buildWillPopScope(),
+            //     ),
+            //     //MINI PLAYER SHOWN IF MUSIC IS PLAYING
+            //     Align(
+            //       alignment: Alignment.bottomCenter,
+            //       child: BlocBuilder<PlayerStateCubit, PlayerState>(
+            //         builder: (context, state) {
+            //           if (state.processingState == ProcessingState.ready ||
+            //               state.processingState == ProcessingState.buffering ||
+            //               state.processingState == ProcessingState.loading) {
+            //             return MiniPlayer();
+            //           } else {
+            //             return SizedBox();
+            //           }
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            body: Stack(
               children: [
-                //MAIN ROUTEING PART OF APP
-                Expanded(
-                  child: buildWillPopScope(),
-                ),
+                Column(
+                  children: [
+                    //MAIN ROUTEING PART OF APP
+                    Expanded(
+                      child: buildWillPopScope(),
+                    ),
 
-                //NO INTERNET INDICATOR
-                BlocBuilder<ConnectivityCubit, ConnectivityResult>(
-                  builder: (context, state) {
-                    if (state == ConnectivityResult.none) {
-                      return NoInternetIndicatorSmall();
-                    } else {
-                      return SizedBox();
-                    }
-                  },
-                ),
+                    //NO INTERNET INDICATOR
+                    BlocBuilder<ConnectivityCubit, ConnectivityResult>(
+                      builder: (context, state) {
+                        if (state == ConnectivityResult.none) {
+                          return NoInternetIndicatorSmall();
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
 
-                ///MINI PLAYER SHOWN IF MUSIC IS PLAYING
-                BlocBuilder<PlayerStateCubit, PlayerState>(
+                    ///MINI PLAYER SHOWN IF MUSIC IS PLAYING
+                    BlocBuilder<PlayerStateCubit, PlayerState>(
+                      builder: (context, state) {
+                        if (state.processingState == ProcessingState.ready ||
+                            state.processingState ==
+                                ProcessingState.buffering ||
+                            state.processingState == ProcessingState.loading) {
+                          return MiniPlayer(
+                            navigatorKey: _navigatorKey,
+                            playerProcessingState: state.processingState,
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                BlocBuilder<IapConsumablePurchaseBloc,
+                    IapConsumablePurchaseState>(
                   builder: (context, state) {
-                    if (state.processingState == ProcessingState.ready ||
-                        state.processingState == ProcessingState.buffering ||
-                        state.processingState == ProcessingState.loading) {
-                      return MiniPlayer(
-                        navigatorKey: _navigatorKey,
+                    if (state is IapConsumablePurchaseStartedState) {
+                      return Container(
+                        color:
+                            ColorMapper.getCompletelyBlack().withOpacity(0.5),
+                        child: AppLoading(
+                          size: AppValues.loadingWidgetSize,
+                        ),
                       );
-                    } else {
-                      return SizedBox();
                     }
+                    return Container();
                   },
-                ),
+                )
               ],
             ),
-            BlocBuilder<IapConsumablePurchaseBloc, IapConsumablePurchaseState>(
-              builder: (context, state) {
-                if (state is IapConsumablePurchaseStartedState) {
-                  return Container(
-                    color: ColorMapper.getCompletelyBlack().withOpacity(0.5),
-                    child: AppLoading(
-                      size: AppValues.loadingWidgetSize,
-                    ),
-                  );
-                }
-                return Container();
-              },
-            )
-          ],
-        ),
-        bottomNavigationBar: BottomBar(
-          navigatorKey: _navigatorKey,
-        ),
+            bottomNavigationBar: BottomBar(
+              navigatorKey: _navigatorKey,
+            ),
+          );
+        },
       ),
     );
   }

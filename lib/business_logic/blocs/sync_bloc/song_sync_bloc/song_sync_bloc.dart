@@ -17,6 +17,7 @@ class SongSyncBloc extends Bloc<SongSyncEvent, SongSyncState> {
     timer = Timer.periodic(
       Duration(seconds: AppValues.songSyncTimerGapInSeconds),
       (Timer t) {
+        print("formData=>> TIMER CALLED ");
         if (!(state is SyncingState)) {
           ///IF NOT CURRENTLY SYNCING, SYNC
           this.add(

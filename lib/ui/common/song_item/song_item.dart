@@ -275,10 +275,24 @@ class _SongItemState extends State<SongItem> {
   }
 
   Widget showDotsMenu() {
-    return SongMenuDotsWidget(
-      song: song,
-      isForMyPlaylist: isForMyPlaylist,
-      onRemoveSongFromPlaylist: widget.onRemoveSongFromPlaylist,
+    return AppBouncingButton(
+      onTap: () {
+        //SHOW MENU DIALOG
+        showSongMenu(
+          context,
+          widget.song,
+          widget.isForMyPlaylist,
+          widget.onRemoveSongFromPlaylist,
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.all(AppPadding.padding_8),
+        child: Icon(
+          FlutterRemix.more_2_fill,
+          color: ColorMapper.getDarkGrey(),
+          size: AppIconSizes.icon_size_24,
+        ),
+      ),
     );
   }
 }

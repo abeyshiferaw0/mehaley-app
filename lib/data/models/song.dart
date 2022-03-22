@@ -312,7 +312,7 @@ class Song extends Equatable {
         );
 
         ///CHECK IF SONG BOUGHT
-        if (!song.isBought && !song.isFree && !isUserSubscribed) {
+        if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(song)) {
           ///CLIP IF NOT BOUGHT OR NOT SUBSCRIBED OR NOT FREE
           clippingAudioSource = ClippingAudioSource(
             child: hlsAudioSource,

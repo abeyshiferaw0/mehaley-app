@@ -19,7 +19,7 @@ class AppAdDataProvider {
           DioCacheInterceptor(
             options: cacheOptions.copyWith(
               policy: CachePolicy.forceCache,
-              maxStale: Duration(days: 3),
+              maxStale: Nullable(Duration(days: 3)),
             ),
           ),
         );

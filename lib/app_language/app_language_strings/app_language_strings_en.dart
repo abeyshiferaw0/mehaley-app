@@ -617,10 +617,10 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String highQualityAudio = "High quality audio";
   final String featuredVideos = "Featured Videos";
   final String yenepay = "Yenepay";
-  final String telebirr = "Telebirr";
+  final String telebirr = "telebirr";
   final String googlePlayInappPurcahses = "Google Play In-App Purchases";
   final String appStoreInappPurcahses = "App Store In-App Purchases";
-  final String payWithTelebirr = "Pay with Telebirr";
+  final String payWithTelebirr = "Pay with telebirr";
   final String payWithTelebirrMsg =
       "Use your Telebirr account to complete your mehaleye purchase.";
   final String payWithYenepay = "Pay with Yenepay";

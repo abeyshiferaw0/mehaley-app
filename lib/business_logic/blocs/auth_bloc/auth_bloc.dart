@@ -186,7 +186,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await FirebaseAuth.instance.signInWithCredential(credential);
 
     if (firebaseUser.user != null) {
-      return getAppFirebaseUser(firebaseUser: firebaseUser);
+      return getAppFirebaseUser(
+        firebaseUser: firebaseUser,
+        userLoginType: UserLoginType.APPLE,
+      );
     } else {
       throw 'Auth bloc googleAuth user is null';
     }
@@ -209,7 +212,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       if (firebaseUser.user != null) {
-        return getAppFirebaseUser(firebaseUser: firebaseUser);
+        return getAppFirebaseUser(
+          firebaseUser: firebaseUser,
+          userLoginType: UserLoginType.GOOGLE,
+        );
       } else {
         throw 'Auth bloc googleAuth user is null';
       }
@@ -234,7 +240,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .signInWithCredential(facebookAuthCredential);
 
       if (firebaseUser.user != null) {
-        return getAppFirebaseUser(firebaseUser: firebaseUser);
+        return getAppFirebaseUser(
+          firebaseUser: firebaseUser,
+          userLoginType: UserLoginType.FACEBOOK,
+        );
       } else {
         return null;
         //throw 'Auth bloc googleAuth user is null';
@@ -251,12 +260,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       forceResendingToken: resendToken,
       timeout: Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) async {
+        print("verificationCompleted =>  called");
         UserCredential firebaseUser =
             await firebaseAuth.signInWithCredential(credential);
         AppFireBaseUser appFireBaseUser = getAppFirebaseUser(
           firebaseUser: firebaseUser,
           countryCode: countryCode,
           phoneNumber: phoneNumber,
+          userLoginType: UserLoginType.PHONE_NUMBER,
         );
 
         ///SAVE USER
@@ -308,6 +319,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required UserCredential firebaseUser,
     String? countryCode,
     String? phoneNumber,
+    required UserLoginType userLoginType,
   }) {
     return AppFireBaseUser(
       userName: firebaseUser.user!.displayName,
@@ -317,7 +329,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           phoneNumber != null ? phoneNumber : firebaseUser.user!.phoneNumber,
       socialProfileImgUrl: firebaseUser.user!.photoURL,
       authLoginId: firebaseUser.user!.uid,
-      loginType: UserLoginType.GOOGLE,
+      loginType: userLoginType,
     );
   }
 
@@ -332,7 +344,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Sign the user in (or link) with the credential
     await firebaseAuth.signInWithCredential(credential).then((firebaseUser) {
-      fireBaseUser = getAppFirebaseUser(firebaseUser: firebaseUser);
+      fireBaseUser = getAppFirebaseUser(
+        firebaseUser: firebaseUser,
+        userLoginType: UserLoginType.PHONE_NUMBER,
+      );
     }).catchError((e) {
       fireBaseUser = null;
     });

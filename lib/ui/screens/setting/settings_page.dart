@@ -25,6 +25,8 @@ import 'package:mehaley/ui/screens/setting/widgets/setting_radio_item.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../data/models/enums/app_languages.dart';
+
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -178,8 +180,10 @@ class _SettingsPageState extends State<SettingsPage> {
 
                     DropDownOptionsPicker(
                       notificationTags: settingsPageData.notificationTags,
-                      onLanguageChanged: () {
+                      onLanguageChanged: (AppLanguage appLanguage) {
                         setState(() {});
+                        // BlocProvider.of<LocalizationCubit>(context)
+                        //     .changeLocale(appLanguage: appLanguage);
                       },
                     ),
                     SizedBox(height: AppMargin.margin_20),

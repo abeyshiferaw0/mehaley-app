@@ -138,14 +138,16 @@ class _HomePageState extends State<HomePage>
           ),
 
           ///SUBSCRIBED CARD
-          SubscribedTag(
-            color: ColorMapper.getDarkOrange(),
+          Expanded(
+            child: SubscribedTag(
+              color: ColorMapper.getDarkOrange(),
+            ),
           ),
 
           ///
-          Expanded(
-            child: SizedBox(),
-          ),
+          SizedBox(
+            width: AppMargin.margin_12,
+          )
         ],
       ),
       systemOverlayStyle: PagesUtilFunctions.getStatusBarStyle(),
@@ -177,7 +179,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
         SizedBox(
-          width: AppPadding.padding_16,
+          width: AppPadding.padding_12,
         ),
         AppBouncingButton(
           onTap: () {

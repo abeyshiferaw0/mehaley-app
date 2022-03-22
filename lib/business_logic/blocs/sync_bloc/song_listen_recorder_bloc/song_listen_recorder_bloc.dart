@@ -46,6 +46,7 @@ class SongListenRecorderBloc
     } else if (event is SaveRecordedSongEvent) {
       yield RecordedSongSavingState(songSync: event.songSync);
       SongSync songSync = event.songSync;
+
       try {
         syncRepository.saveSyncData(
           songSync,

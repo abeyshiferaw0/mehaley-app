@@ -17,8 +17,8 @@ class GroupSongItemPlayIcon extends StatelessWidget {
             alignment: Alignment.center,
             child: Icon(
               FlutterRemix.play_circle_fill,
-              size: AppIconSizes.icon_size_64,
-              color: AppColors.completelyBlack.withOpacity(0.3),
+              size: AppIconSizes.icon_size_48,
+              color: AppColors.white.withOpacity(0.6),
             ),
           )
         : SizedBox();

@@ -7,6 +7,7 @@ class App {
   static ThemeData theme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: 'Raleway',
+    //fontFamily: 'Poppins',
     primaryColor: ColorMapper.getWhite(),
     textSelectionTheme: TextSelectionThemeData(
       selectionHandleColor: ColorMapper.getOrange(),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
@@ -35,9 +36,14 @@ import 'app_card.dart';
 import 'like_follow/song_favorite_button.dart';
 
 class MiniPlayer extends StatefulWidget {
-  const MiniPlayer({Key? key, required this.navigatorKey}) : super(key: key);
+  const MiniPlayer({
+    Key? key,
+    required this.navigatorKey,
+    required this.playerProcessingState,
+  }) : super(key: key);
 
   final GlobalKey<NavigatorState> navigatorKey;
+  final ProcessingState playerProcessingState;
 
   @override
   _MiniPlayerState createState() => _MiniPlayerState();
@@ -58,9 +64,6 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
   double progress = 0.0;
   double bufferedPosition = 0.0;
   double totalDuration = 0.0;
-
-  ///
-  final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
   @override
   void initState() {
@@ -95,12 +98,11 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   ///OPEN PLAYER PAGE IF PURCHASED OR FREE OR SUBSCRIBED
-                  final bool isUserSubscribed =
-                      PagesUtilFunctions.isUserSubscribed();
+                  // final bool isUserSubscribed =
+                  //     PagesUtilFunctions.isUserSubscribed();
 
-                  if (currentPlayingSong.isBought ||
-                      currentPlayingSong.isFree ||
-                      isUserSubscribed) {
+                  if (PagesUtilFunctions.isFreeBoughtOrSubscribed(
+                      currentPlayingSong)) {
                     Navigator.of(context, rootNavigator: true).push(
                       PagesUtilFunctions.createBottomToUpAnimatedRoute(
                         page: PlayerPage(),
@@ -176,9 +178,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              !currentPlayingSong.isBought &&
-                                      !currentPlayingSong.isFree &&
-                                      !isUserSubscribed
+                              PagesUtilFunctions.isNotFreeBoughtAndSubscribed(
+                                      currentPlayingSong)
                                   ? buildPreviewModeBuyContainer(
                                       currentPlayingSong,
                                     )
@@ -376,21 +377,34 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         ///PLAY PAUSE BUTTON
         BlocBuilder<PlayPauseCubit, bool>(
           builder: (context, state) {
-            return AppBouncingButton(
-              onTap: () {
-                BlocProvider.of<AudioPlayerBloc>(context).add(
-                  PlayPauseEvent(),
-                );
-              },
-              child: Padding(
-                padding: EdgeInsets.all(AppPadding.padding_8),
-                child: Icon(
-                  state ? FlutterRemix.pause_mini_fill : FlutterRemix.play_fill,
-                  size: AppIconSizes.icon_size_28,
+            if (widget.playerProcessingState == ProcessingState.loading) {
+              return Container(
+                width: AppIconSizes.icon_size_16,
+                height: AppIconSizes.icon_size_16,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
                   color: ColorMapper.getWhite(),
                 ),
-              ),
-            );
+              );
+            } else {
+              return AppBouncingButton(
+                onTap: () {
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    PlayPauseEvent(),
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(AppPadding.padding_8),
+                  child: Icon(
+                    state
+                        ? FlutterRemix.pause_mini_fill
+                        : FlutterRemix.play_fill,
+                    size: AppIconSizes.icon_size_28,
+                    color: ColorMapper.getWhite(),
+                  ),
+                ),
+              );
+            }
           },
         ),
 
@@ -536,8 +550,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
             child: BlocConsumer<SongPositionCubit, CurrentPlayingPosition>(
               listener: (context, state) {
                 ///PAUSE AND RELOAD PLAYER IF CURRENT PLAYING IS PREVIEW MODE
-                if (!currentPlayingState.isFree &&
-                    !currentPlayingState.isBought) {
+                if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(
+                    currentPlayingState)) {
                   double songDuration =
                       currentPlayingState.audioFile.audioPreviewDurationSeconds;
                   int currentDuration = state.currentDuration.inSeconds;

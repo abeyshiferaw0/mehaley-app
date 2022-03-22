@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -11,6 +12,7 @@ import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.
 import 'package:mehaley/business_logic/blocs/share_bloc/share_buttons_bloc/share_buttons_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/current_playing_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/play_pause_cubit.dart';
+import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_buffered_position_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_duration_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/song_position_cubit.dart';
@@ -512,22 +514,41 @@ class _LyricFullPageState extends State<LyricFullPage> {
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        child: BlocBuilder<PlayPauseCubit, bool>(
+                        child: BlocBuilder<PlayerStateCubit, PlayerState>(
                           builder: (context, state) {
-                            return AppBouncingButton(
-                              onTap: () {
-                                BlocProvider.of<AudioPlayerBloc>(context).add(
-                                  PlayPauseEvent(),
-                                );
-                              },
-                              child: Icon(
-                                state
-                                    ? Icons.pause_circle_filled_sharp
-                                    : FlutterRemix.play_circle_fill,
-                                size: AppIconSizes.icon_size_72,
-                                color: ColorMapper.getWhite(),
-                              ),
-                            );
+                            if (state.processingState ==
+                                ProcessingState.loading) {
+                              ///LOADING CIRCULAR
+                              return Container(
+                                width: AppIconSizes.icon_size_32,
+                                height: AppIconSizes.icon_size_32,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: ColorMapper.getWhite(),
+                                ),
+                              );
+                            } else {
+                              ///PLAY PAUSE BUTTON
+                              return BlocBuilder<PlayPauseCubit, bool>(
+                                builder: (context, state) {
+                                  return AppBouncingButton(
+                                    onTap: () {
+                                      BlocProvider.of<AudioPlayerBloc>(context)
+                                          .add(
+                                        PlayPauseEvent(),
+                                      );
+                                    },
+                                    child: Icon(
+                                      state
+                                          ? Icons.pause_circle_filled_sharp
+                                          : FlutterRemix.play_circle_fill,
+                                      size: AppIconSizes.icon_size_72,
+                                      color: ColorMapper.getWhite(),
+                                    ),
+                                  );
+                                },
+                              );
+                            }
                           },
                         ),
                       ),

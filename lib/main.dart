@@ -27,7 +27,6 @@ import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/strings.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/ui/screens/auth/sign_up_page.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_one.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/verify_phone_page_two.dart';
@@ -198,6 +197,7 @@ class _MyAppState extends State<MyApp> {
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
               ),
             ),
+
             BlocProvider<ShuffleCubit>(
               create: (context) => ShuffleCubit(
                 audioPlayerBloc: BlocProvider.of<AudioPlayerBloc>(context),
@@ -372,36 +372,30 @@ class _MyAppState extends State<MyApp> {
           ],
           child: Builder(
             builder: (context) {
-              return BlocBuilder<LocalizationCubit, AppLanguage>(
-                builder: (context, state) {
-                  return OverlaySupport.global(
-                    child: MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      builder: (BuildContext context, Widget? child) {
-                        final MediaQueryData data = MediaQuery.of(context);
-                        return MediaQuery(
-                          data: data.copyWith(textScaleFactor: 1.0),
-                          child: child!,
-                        );
-                      },
-                      theme: App.theme,
-                      initialRoute: AppRouterPaths.splashRoute,
-                      routes: {
-                        AppRouterPaths.splashRoute: (context) =>
-                            const SplashPage(),
-                        AppRouterPaths.signUp: (context) => const SignUpPage(),
-                        AppRouterPaths.mainScreen: (context) =>
-                            const MainScreen(),
-                        AppRouterPaths.forceUpdate: (context) =>
-                            const ForceUpdateWidget(),
-                        AppRouterPaths.verifyPhonePageOne: (context) =>
-                            const VerifyPhonePageOne(),
-                        AppRouterPaths.verifyPhonePageTwo: (context) =>
-                            const VerifyPhonePageTwo(),
-                      },
-                    ),
-                  );
-                },
+              return OverlaySupport.global(
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  builder: (BuildContext context, Widget? child) {
+                    final MediaQueryData data = MediaQuery.of(context);
+                    return MediaQuery(
+                      data: data.copyWith(textScaleFactor: 1.0),
+                      child: child!,
+                    );
+                  },
+                  theme: App.theme,
+                  initialRoute: AppRouterPaths.splashRoute,
+                  routes: {
+                    AppRouterPaths.splashRoute: (context) => const SplashPage(),
+                    AppRouterPaths.signUp: (context) => const SignUpPage(),
+                    AppRouterPaths.mainScreen: (context) => const MainScreen(),
+                    AppRouterPaths.forceUpdate: (context) =>
+                        const ForceUpdateWidget(),
+                    AppRouterPaths.verifyPhonePageOne: (context) =>
+                        const VerifyPhonePageOne(),
+                    AppRouterPaths.verifyPhonePageTwo: (context) =>
+                        const VerifyPhonePageTwo(),
+                  },
+                ),
               );
             },
           ),

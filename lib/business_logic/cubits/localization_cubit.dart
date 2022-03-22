@@ -5,8 +5,8 @@ import 'package:mehaley/util/l10n_util.dart';
 class LocalizationCubit extends Cubit<AppLanguage> {
   LocalizationCubit() : super(L10nUtil.getCurrentLocale());
 
-  changeLocale({required AppLanguage appLanguage}) {
-    AppLanguage currentAppLanguage = L10nUtil.changeLocale(appLanguage);
+  changeLocale({required AppLanguage appLanguage}) async {
+    AppLanguage currentAppLanguage = await L10nUtil.changeLocale(appLanguage);
     emit(currentAppLanguage);
   }
 }

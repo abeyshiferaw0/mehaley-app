@@ -84,7 +84,14 @@ class ItemCustomGroupGrid extends StatelessWidget {
           SizedBox(
             height: AppMargin.margin_2,
           ),
-          PagesUtilFunctions.getGroupItemPrice(groupType, item)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              PagesUtilFunctions.getGroupItemType(groupType),
+              PagesUtilFunctions.getGroupItemPrice(groupType, item),
+            ],
+          ),
         ],
       ),
     );

@@ -11,6 +11,8 @@ import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:sizer/sizer.dart';
 
+import 'group_song_item_play_icon.dart';
+
 class ItemRecentlyPlayed extends StatelessWidget {
   final double width;
   final double height;
@@ -66,7 +68,12 @@ class ItemRecentlyPlayed extends StatelessWidget {
                         ),
                       ),
                     ),
-                    AppIconWidget()
+                    AppIconWidget(),
+
+                    ///PLAY ICON IF SONG ITEM
+                    GroupSongItemPlayIcon(
+                      groupType: GroupType.SONG,
+                    )
                   ],
                 ),
                 placeholder: (context, url) => buildItemsImagePlaceHolder(),
