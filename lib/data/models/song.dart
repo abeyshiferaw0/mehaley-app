@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -331,10 +332,18 @@ class Song extends Equatable {
           audioSources.add(hlsAudioSource);
         }
       } else {
+        File f = File.fromUri(Uri.file(
+            "${downloadedTaskWithSong.task.savedDir}${Platform.pathSeparator}${downloadedTaskWithSong.task.filename}"));
+
+        print("DOWNLOADUTIL=> exist=>  ${f.existsSync()}");
+
+        print(
+            "DOWNLOADUTIL=> downloadedTaskWithSong.task=> ${Uri.file("${downloadedTaskWithSong.task.savedDir}")}");
+
         ///SONG IS DOWNLOADED
         AudioSource audioSource = AudioSource.uri(
           Uri.file(
-              "${downloadedTaskWithSong.task.savedDir}${downloadedTaskWithSong.task.filename}"),
+              "${downloadedTaskWithSong.task.savedDir}${Platform.pathSeparator}${downloadedTaskWithSong.task.filename}"),
           tag: MediaItem(
             id: song.songId.toString(),
             title: L10nUtil.translateLocale(song.songName, context),

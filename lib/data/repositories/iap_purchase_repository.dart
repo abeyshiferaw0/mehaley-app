@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -68,8 +70,14 @@ class IapPurchaseRepository {
   }
 
   setIsIapAvailable(bool isIapAvailable) async {
-    await AppHiveBoxes.instance.subscriptionBox
-        .put(AppValues.isIapAvailableKey, isIapAvailable);
+    ///IF DEVICE IS IOS IGNOR isIapAvailable AND ALWAYS STORE TRUE AVAILABILITY
+    if (Platform.isAndroid) {
+      await AppHiveBoxes.instance.subscriptionBox
+          .put(AppValues.isIapAvailableKey, isIapAvailable);
+    } else {
+      await AppHiveBoxes.instance.subscriptionBox
+          .put(AppValues.isIapAvailableKey, true);
+    }
   }
 
   bool getIsIapAvailable() {

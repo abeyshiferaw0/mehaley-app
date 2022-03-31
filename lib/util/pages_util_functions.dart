@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +31,7 @@ import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/country_codes.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
@@ -1445,6 +1447,28 @@ class PagesUtilFunctions {
     if (currentPlayingSong.isFree ||
         currentPlayingSong.isBought ||
         isUserSubscribed) return true;
+    return false;
+  }
+
+  static getPhoneInputLengthByCountryCode(String code) {
+    Map? country = CountryCodesList.codes.firstWhereOrNull(
+      (element) =>
+          element['iso2_cc'].toString().toLowerCase() == code.toLowerCase(),
+    );
+    if (country != null) {
+      return country['example'].toString().length + 2;
+    }
+    return 12;
+  }
+
+  static bool validatePhoneByCountryCode(String code, String text) {
+    Map? country = CountryCodesList.codes.firstWhereOrNull(
+      (element) =>
+          element['iso2_cc'].toString().toLowerCase() == code.toLowerCase(),
+    );
+    if (country != null) {
+      return text.length == country['example'].toString().length + 2;
+    }
     return false;
   }
 }

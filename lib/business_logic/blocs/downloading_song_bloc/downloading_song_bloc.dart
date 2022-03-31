@@ -66,6 +66,7 @@ class DownloadingSongBloc
         if (isNetAvailable) {
           if (!isAlreadyInQueue) {
             String saveDir = await downloadUtil.getSaveDir(event.song);
+
             await FlutterDownloader.enqueue(
               url: downloadUtil.getDownloadUrl(
                 event.song,
@@ -112,6 +113,7 @@ class DownloadingSongBloc
       ///GET LIST OF DOWNLOADING SONGS
       if (event.downloadTaskStatus == DownloadTaskStatus.running) {
         Song? song = await downloadUtil.getSongFromTask(event.taskId);
+
         yield DownloadingSongsRunningState(
           downloadTaskStatus: event.downloadTaskStatus,
           progress: event.progress,

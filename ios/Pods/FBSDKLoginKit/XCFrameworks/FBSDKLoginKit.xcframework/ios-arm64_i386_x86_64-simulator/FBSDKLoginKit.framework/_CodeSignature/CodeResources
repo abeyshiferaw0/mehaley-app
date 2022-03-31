@@ -6,27 +6,27 @@
 	<dict>
 		<key>Headers/FBSDKDeviceLoginCodeInfo.h</key>
 		<data>
-		+LNbwZBM3Cdh9jeotdiuUdaczVM=
+		RWCmPcPiM7STZuy9rMDB5gtvTWU=
 		</data>
 		<key>Headers/FBSDKDeviceLoginManager.h</key>
 		<data>
-		ofoYVr4vHDDqkamaR6NZ81Ct2ZA=
+		2y+BOwSTR4AzKFc3JIso+TB+Jis=
 		</data>
 		<key>Headers/FBSDKDeviceLoginManagerResult.h</key>
 		<data>
-		O+jqcgblLAjOuceuhO2194kGUO8=
+		I+aUykBgwmxJNGqgVT3H+4ji4fA=
 		</data>
 		<key>Headers/FBSDKLoginButton.h</key>
 		<data>
-		y5HQu7+Jn0zlS3agrndrMh7Ry/8=
+		j3C8r87bUqtX4/7oG14P3XT/4tc=
 		</data>
 		<key>Headers/FBSDKLoginConfiguration.h</key>
 		<data>
-		v9tpfQLSYHVlVj2FfEkXZgiYm1s=
+		WYOGmYe/aKiegbDsxGLu0dqX43w=
 		</data>
 		<key>Headers/FBSDKLoginConstants.h</key>
 		<data>
-		zm/lUuWmZKHMTfr5BmQFbRHCGVc=
+		T8FH+QdeZFH6fAL4/VQHYNe7bGU=
 		</data>
 		<key>Headers/FBSDKLoginKit-Swift.h</key>
 		<data>
@@ -34,39 +34,39 @@
 		</data>
 		<key>Headers/FBSDKLoginKit.h</key>
 		<data>
-		++2eo5zNDuZvyTS0DvuhGbtjQNs=
+		/oDkazfdEYaO1dZCm7iFtibehBQ=
 		</data>
 		<key>Headers/FBSDKLoginManager.h</key>
 		<data>
-		zGhfUASWPj2J9M87ZMOZVJ9ql1o=
+		pWqo4IUZVe+EacSWAOdX2U1fQKA=
 		</data>
 		<key>Headers/FBSDKLoginManagerLoginResult.h</key>
 		<data>
-		/ZnPx4pvXrzCnlXr3wkMcNyP+Sg=
+		Np1UCf22O3P7gLFzfeiqH7QM/iM=
 		</data>
 		<key>Headers/FBSDKLoginTooltipView.h</key>
 		<data>
-		W6Z5+s7vq/8Acl5EoNo6y4zwqVg=
+		o8oX1UG0vxOKRZsslRDWgRosO9A=
 		</data>
 		<key>Headers/FBSDKReferralCode.h</key>
 		<data>
-		LdPEP3rutIMXUnUKizK4I46/Zvo=
+		saYL8I5UsNYDLhSVQNF4NoYw++s=
 		</data>
 		<key>Headers/FBSDKReferralManager.h</key>
 		<data>
-		RzXHx9yrBmQiZpA0r0t9rPKmGoQ=
+		Qd7jvHyJkHqJ/7ddj11AIUuG53E=
 		</data>
 		<key>Headers/FBSDKReferralManagerResult.h</key>
 		<data>
-		L3KcUuj2xU1mBgvYMO2L8cIJVhw=
+		G6KAE5daTBO2+7VdimMOIv/00Uk=
 		</data>
 		<key>Headers/FBSDKTooltipView.h</key>
 		<data>
-		Zrt3ylsQxUPvP4GhYnYs7sT16Cs=
+		5Kspy45VOuaIL//0ADkyDJUDDcE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7q+dNDGs9ROb6NgdJWicZA8CS1A=
+		eLrzHNM7/vkl6IngAVvmu047Weo=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -78,7 +78,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		wr1dW2qYTL31F0aeyl5sqj0Z6Ow=
+		ScRp37jG0quWauFby/gWrRTaoXY=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		wr1dW2qYTL31F0aeyl5sqj0Z6Ow=
+		ScRp37jG0quWauFby/gWrRTaoXY=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ZEhkOfuteDvEBngnJ4nIStjX+48=
+		aLMm3abBLOobmItY7569oWYMudM=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386.swiftdoc</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386.swiftmodule</key>
 		<data>
-		ZEhkOfuteDvEBngnJ4nIStjX+48=
+		aLMm3abBLOobmItY7569oWYMudM=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -126,7 +126,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		04pXAz2AyvQ3pMVJZaaz1QsaTdU=
+		fnHuDIwbu/EQndk2h8E83BydeRQ=
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -138,7 +138,7 @@
 		</data>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		04pXAz2AyvQ3pMVJZaaz1QsaTdU=
+		fnHuDIwbu/EQndk2h8E83BydeRQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -151,66 +151,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+LNbwZBM3Cdh9jeotdiuUdaczVM=
+			RWCmPcPiM7STZuy9rMDB5gtvTWU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Rpl7fvulD8JIJymsCfHyyyY1guT+ENaitC1464L3Ocs=
+			y74PuDYlFpAJ/XTmrLi55Pv3+lJoUR/d2XxFmHDb4eQ=
 			</data>
 		</dict>
 		<key>Headers/FBSDKDeviceLoginManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ofoYVr4vHDDqkamaR6NZ81Ct2ZA=
+			2y+BOwSTR4AzKFc3JIso+TB+Jis=
 			</data>
 			<key>hash2</key>
 			<data>
-			b3KSpUbOUEINdlSxFY1s5SGkHe54/ng8cVQKmsKbCUw=
+			FkPk1xth+1O5nfs4begRpE0Uw6/cQyIHTwIXDiItJ/s=
 			</data>
 		</dict>
 		<key>Headers/FBSDKDeviceLoginManagerResult.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			O+jqcgblLAjOuceuhO2194kGUO8=
+			I+aUykBgwmxJNGqgVT3H+4ji4fA=
 			</data>
 			<key>hash2</key>
 			<data>
-			q6GJpaZeWF1GaZbZG8CoDchMNomA1aFKaL/tcrMDJ9k=
+			xTq+jeHQp+2GBM/842QI1MAi4Tbr/KWyLGZ0fQx83MQ=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginButton.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			y5HQu7+Jn0zlS3agrndrMh7Ry/8=
+			j3C8r87bUqtX4/7oG14P3XT/4tc=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZWf6RyJKhbyDfQaZ764vTrgYXj4CkWDxZdpOzcxkpX8=
+			Z5zJM44IevztlZgJPttWzzBvVqVtyEZbKSfSlmxH910=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginConfiguration.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v9tpfQLSYHVlVj2FfEkXZgiYm1s=
+			WYOGmYe/aKiegbDsxGLu0dqX43w=
 			</data>
 			<key>hash2</key>
 			<data>
-			9P6ZFgYp8pUaoJLSUb2JKgldpIqVfbAuxvnzmcoM4xk=
+			VRQJ5WTMs6HSTv5QKyBYp7OcB5IMbsAVtrlWVTrI46o=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginConstants.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zm/lUuWmZKHMTfr5BmQFbRHCGVc=
+			T8FH+QdeZFH6fAL4/VQHYNe7bGU=
 			</data>
 			<key>hash2</key>
 			<data>
-			zcKFVRBakmaXM7EK7lVDRD4qLmdFFKrpmu+mc/ULUmQ=
+			17yJgz/zJilGGFH82Dz0kA1QQvdIOhXQqPFgkG9t5qk=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginKit-Swift.h</key>
@@ -228,88 +228,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			++2eo5zNDuZvyTS0DvuhGbtjQNs=
+			/oDkazfdEYaO1dZCm7iFtibehBQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sv/wdgnYBrizhnC0LU6bMUg5eFM+LAovvcyHqxeopkM=
+			qt0Id1R9UkkGgnDnvW6M1SbzCDhdZ9TkBfyYKYFs840=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zGhfUASWPj2J9M87ZMOZVJ9ql1o=
+			pWqo4IUZVe+EacSWAOdX2U1fQKA=
 			</data>
 			<key>hash2</key>
 			<data>
-			pGFnVSMEmzD4s8hR6+FUt/ohL7HOoT3vJ1nuahq8fHk=
+			uzPpcILmXKMErL1pYHnPsleHSUcQ1CC0Gt8qTA9tWbY=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginManagerLoginResult.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/ZnPx4pvXrzCnlXr3wkMcNyP+Sg=
+			Np1UCf22O3P7gLFzfeiqH7QM/iM=
 			</data>
 			<key>hash2</key>
 			<data>
-			uCKDBcsTMCiJXQPcWpCEGoCzu5dseCNMT1IUhFiAxmE=
+			a0T2JS1cKT1f6fBHPjBelwjwWi1XrPyIE2XHhEmUKP0=
 			</data>
 		</dict>
 		<key>Headers/FBSDKLoginTooltipView.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			W6Z5+s7vq/8Acl5EoNo6y4zwqVg=
+			o8oX1UG0vxOKRZsslRDWgRosO9A=
 			</data>
 			<key>hash2</key>
 			<data>
-			NdJCL5Xl5S1ZFPhcE39TsenXLyWTBIKB9GrWPhE1N/A=
+			qc5Aa+HgyaIEgKTdQ8wmzuZxVoc1JY6qQGyrQspiqtI=
 			</data>
 		</dict>
 		<key>Headers/FBSDKReferralCode.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LdPEP3rutIMXUnUKizK4I46/Zvo=
+			saYL8I5UsNYDLhSVQNF4NoYw++s=
 			</data>
 			<key>hash2</key>
 			<data>
-			UaF/79QxnZkm00ffq2Lfw+wAPraUnC2uhLQR7JHQ+C4=
+			4oAZEnpXV/sMQ4mp6vdv2wHA91Lc0sjDLQvOQJfKALY=
 			</data>
 		</dict>
 		<key>Headers/FBSDKReferralManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RzXHx9yrBmQiZpA0r0t9rPKmGoQ=
+			Qd7jvHyJkHqJ/7ddj11AIUuG53E=
 			</data>
 			<key>hash2</key>
 			<data>
-			n2wcsMXLL62UQ4J4wnTQ7sKAMmR+ChbL7G66rqlTCDQ=
+			mk7XU36ehcg85sDadr0ynrR3GnyUViIJB+lVtVNpLxs=
 			</data>
 		</dict>
 		<key>Headers/FBSDKReferralManagerResult.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L3KcUuj2xU1mBgvYMO2L8cIJVhw=
+			G6KAE5daTBO2+7VdimMOIv/00Uk=
 			</data>
 			<key>hash2</key>
 			<data>
-			FdjOcnOAPUaO0G+iGfzMcsEQ9O+arHjkLyoK1DSrZtA=
+			Gneh4Xk51i8EfhNTOnOQ5sZsbiln7aNkZ406VLesEaI=
 			</data>
 		</dict>
 		<key>Headers/FBSDKTooltipView.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Zrt3ylsQxUPvP4GhYnYs7sT16Cs=
+			5Kspy45VOuaIL//0ADkyDJUDDcE=
 			</data>
 			<key>hash2</key>
 			<data>
-			9cb9cCueDgThD4Oku8E7PPJY6iVQMf0CblelS6A2pZM=
+			SGP5ntfacGtOCs/M2Sg8ErnqswDdP59Y1xOm1ShGgrA=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -338,11 +338,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wr1dW2qYTL31F0aeyl5sqj0Z6Ow=
+			ScRp37jG0quWauFby/gWrRTaoXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			m+zjnlkZYneLiCnRqPZ7E6h9v2GVdgCSpW3vSawjxEs=
+			oTfRpipmerCb1Kp1p0tqvbJ/NSHTbV3s++50Hz2CGcc=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/arm64.swiftdoc</key>
@@ -371,11 +371,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wr1dW2qYTL31F0aeyl5sqj0Z6Ow=
+			ScRp37jG0quWauFby/gWrRTaoXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			m+zjnlkZYneLiCnRqPZ7E6h9v2GVdgCSpW3vSawjxEs=
+			oTfRpipmerCb1Kp1p0tqvbJ/NSHTbV3s++50Hz2CGcc=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
@@ -404,11 +404,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZEhkOfuteDvEBngnJ4nIStjX+48=
+			aLMm3abBLOobmItY7569oWYMudM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CNgiPgHljkwd2jGj0hdU9KtGBIC0mh7B8A/Yd5ESW4Q=
+			kGfDyusiZecyat9GrxJQa6bZjg9Kl0W/3KemIS+9lKU=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/i386.swiftdoc</key>
@@ -437,11 +437,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZEhkOfuteDvEBngnJ4nIStjX+48=
+			aLMm3abBLOobmItY7569oWYMudM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CNgiPgHljkwd2jGj0hdU9KtGBIC0mh7B8A/Yd5ESW4Q=
+			kGfDyusiZecyat9GrxJQa6bZjg9Kl0W/3KemIS+9lKU=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -470,11 +470,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			04pXAz2AyvQ3pMVJZaaz1QsaTdU=
+			fnHuDIwbu/EQndk2h8E83BydeRQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			01I+UeHGUxeTBT56yp04+KBi7oIxqFxzFpe+RbCdVL0=
+			UA/n+jtsNlmI4OkT73W3eK3DkGEPsovl77UQlfthJqw=
 			</data>
 		</dict>
 		<key>Modules/FBSDKLoginKit.swiftmodule/x86_64.swiftdoc</key>
@@ -503,11 +503,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			04pXAz2AyvQ3pMVJZaaz1QsaTdU=
+			fnHuDIwbu/EQndk2h8E83BydeRQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			01I+UeHGUxeTBT56yp04+KBi7oIxqFxzFpe+RbCdVL0=
+			UA/n+jtsNlmI4OkT73W3eK3DkGEPsovl77UQlfthJqw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

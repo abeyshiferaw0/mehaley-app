@@ -30,6 +30,11 @@ class IapSubscriptionRepository {
     Map<String, Offering> offeringsMap =
         await iapSubscriptionProvider.fetchOfferings();
 
+    ///DEBUG
+    offeringsMap.values.forEach((element) {
+      print("offeringsMap=> ${element}");
+    });
+
     ///TURN MAP OFFERINGS FROM REVENUE CAT TO LIST
     offeringsMap.forEach(
       (key, value) {

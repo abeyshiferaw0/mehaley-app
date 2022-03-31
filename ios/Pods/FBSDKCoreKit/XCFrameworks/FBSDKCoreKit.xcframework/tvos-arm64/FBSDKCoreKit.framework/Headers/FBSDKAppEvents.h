@@ -1,33 +1,23 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import <Foundation/Foundation.h>
 
 #if !TARGET_OS_TV
-#import <WebKit/WebKit.h>
+ #import <WebKit/WebKit.h>
 #endif
 
-#import <FBSDKCoreKit/FBSDKGraphRequest.h>
-#import <FBSDKCoreKit/FBSDKGraphRequestConnection.h>
-#import <FBSDKCoreKit/FBSDKAppEventParameterName.h>
 #import <FBSDKCoreKit/FBSDKAppEventName.h>
+#import <FBSDKCoreKit/FBSDKAppEventParameterName.h>
 #import <FBSDKCoreKit/FBSDKAppEventUserDataType.h>
 #import <FBSDKCoreKit/FBSDKAppEventsFlushBehavior.h>
+#import <FBSDKCoreKit/FBSDKGraphRequest.h>
+#import <FBSDKCoreKit/FBSDKGraphRequestConnection.h>
 #import <FBSDKCoreKit/FBSDKProductAvailability.h>
 #import <FBSDKCoreKit/FBSDKProductCondition.h>
 
@@ -42,21 +32,6 @@ NS_SWIFT_NAME(AppEventsLoggingResult);
 /**  optional plist key ("FacebookLoggingOverrideAppID") for setting `loggingOverrideAppID` */
 FOUNDATION_EXPORT NSString *const FBSDKAppEventsOverrideAppIDBundleKey
 NS_SWIFT_NAME(AppEventsOverrideAppIDBundleKey);
-
-/** Parameter key used to specify event name. */
-FOUNDATION_EXPORT NSString *const FBSDKAppEventParameterEventName;
-
-/** Parameter key used to specify event log time. */
-FOUNDATION_EXPORT NSString *const FBSDKAppEventParameterLogTime;
-
-/** Parameter key used to specify the type of ad in an FBSDKAppEventNameAdImpression
- * or FBSDKAppEventNameAdClick event.
- * E.g. "banner", "interstitial", "rewarded_video", "native" */
-FOUNDATION_EXPORT FBSDKAppEventParameterName FBSDKAppEventParameterNameAdType;
-
-/** Parameter key used to specify the unique ID for all events within a subscription
- * in an FBSDKAppEventNameSubscribe or FBSDKAppEventNameStartTrial event. */
-FOUNDATION_EXPORT FBSDKAppEventParameterName FBSDKAppEventParameterNameOrderID;
 
 /**
 
@@ -142,14 +117,14 @@ NS_SWIFT_NAME(AppEvents)
  This should be set before any other calls are made to `FBSDKAppEvents`.  Thus, you should set it in your application
  delegate's `application:didFinishLaunchingWithOptions:` delegate.
  */
-@property (class, nonatomic, copy, nullable) NSString *loggingOverrideAppID;
+@property (class, nullable, nonatomic, copy) NSString *loggingOverrideAppID;
 
 /*
  The custom user ID to associate with all app events.
 
  The userID is persisted until it is cleared by passing nil.
  */
-@property (class, nonatomic, copy, nullable) NSString *userID;
+@property (class, nullable, nonatomic, copy) NSString *userID;
 
 /*
   Returns generated anonymous id that persisted with current install of the app
@@ -182,7 +157,6 @@ NS_SWIFT_NAME(AppEvents)
  */
 + (void)logEvent:(FBSDKAppEventName)eventName
       valueToSum:(double)valueToSum;
-
 
 /**
 
@@ -220,7 +194,6 @@ NS_SWIFT_NAME(AppEvents)
 + (void)logEvent:(FBSDKAppEventName)eventName
       valueToSum:(double)valueToSum
       parameters:(nullable NSDictionary<FBSDKAppEventParameterName, id> *)parameters;
-
 
 /**
 
@@ -322,7 +295,6 @@ NS_SWIFT_NAME(AppEvents)
          parameters:(nullable NSDictionary<NSString *, id> *)parameters
         accessToken:(nullable FBSDKAccessToken *)accessToken;
 
-
 /*
  * Push Notifications Logging
  */
@@ -421,14 +393,14 @@ NS_SWIFT_NAME(AppEvents)
 /**
  Sets and sends device token string to register the current application for push notifications.
 
-
-
  Sets and sends a device token string
 
  @param deviceTokenString Device token string.
  */
+// UNCRUSTIFY_FORMAT_OFF
 + (void)setPushNotificationsDeviceTokenString:(NSString *)deviceTokenString
 NS_SWIFT_NAME(setPushNotificationsDeviceToken(_:));
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Explicitly kick off flushing of events to Facebook.  This is an asynchronous method, but it does initiate an immediate
@@ -481,6 +453,8 @@ NS_SWIFT_NAME(setPushNotificationsDeviceToken(_:));
  @param zip user's zip
  @param country user's country
  */
+
+// UNCRUSTIFY_FORMAT_OFF
 + (void)setUserEmail:(nullable NSString *)email
            firstName:(nullable NSString *)firstName
             lastName:(nullable NSString *)lastName
@@ -493,6 +467,7 @@ NS_SWIFT_NAME(setPushNotificationsDeviceToken(_:));
              country:(nullable NSString *)country
 NS_SWIFT_NAME(setUser(email:firstName:lastName:phone:dateOfBirth:gender:city:state:zip:country:))
 DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Sets custom user data to associate with all app events. All user data are hashed
@@ -511,6 +486,8 @@ DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are depreca
  @param zip user's zip
  @param country user's country
  */
+
+// UNCRUSTIFY_FORMAT_OFF
 - (void)setUserEmail:(nullable NSString *)email
            firstName:(nullable NSString *)firstName
             lastName:(nullable NSString *)lastName
@@ -522,12 +499,13 @@ DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are depreca
                  zip:(nullable NSString *)zip
              country:(nullable NSString *)country
 NS_SWIFT_NAME(setUser(email:firstName:lastName:phone:dateOfBirth:gender:city:state:zip:country:));
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Returns the set user data else nil
 */
 + (nullable NSString *)getUserData
-DEPRECATED_MSG_ATTRIBUTE("Class methods for getting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
+    DEPRECATED_MSG_ATTRIBUTE("Class methods for getting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
 
 /**
   Returns the set user data else nil
@@ -538,7 +516,7 @@ DEPRECATED_MSG_ATTRIBUTE("Class methods for getting user information are depreca
   Clears the current user data
 */
 + (void)clearUserData
-DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
+    DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
 
 /**
   Clears the current user data
@@ -556,7 +534,7 @@ DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are depreca
  */
 + (void)setUserData:(nullable NSString *)data
             forType:(FBSDKAppEventUserDataType)type
-DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
+    DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
 
 /**
  Sets custom user data to associate with all app events. All user data are hashed
@@ -574,7 +552,7 @@ DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are depreca
  Clears the current user data of certain type
  */
 + (void)clearUserDataForType:(FBSDKAppEventUserDataType)type
-DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
+    DEPRECATED_MSG_ATTRIBUTE("Class methods for setting user information are deprecated and will be removed in the next major release. Please use the instance method versions instead.");
 
 /**
  Clears the current user data of certain type

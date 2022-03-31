@@ -30,6 +30,7 @@ import 'package:mehaley/ui/screens/home/widgets/home_page_carousel.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_recently_played.dart';
 import 'package:mehaley/ui/screens/home/widgets/ite_home_page_ad.dart';
 import 'package:mehaley/util/api_util.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -83,6 +84,8 @@ class _HomePageState extends State<HomePage>
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
     BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+
+    print("getUserId=>> ${AuthUtil.getUserId()}");
 
     super.initState();
   }

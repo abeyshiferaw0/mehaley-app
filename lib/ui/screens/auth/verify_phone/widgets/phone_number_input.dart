@@ -7,6 +7,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 
 class PhoneNumberInput extends StatefulWidget {
   PhoneNumberInput({
@@ -52,7 +53,9 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   cursorColor: ColorMapper.getDarkOrange(),
                   onChanged: (key) {},
                   maxLength:
-                      widget.selectedCountryCode.code == etCode ? 11 : 12,
+                      PagesUtilFunctions.getPhoneInputLengthByCountryCode(
+                    widget.selectedCountryCode.code!,
+                  ),
                   readOnly: readOnly,
                   keyboardType: TextInputType.number,
                   // inputFormatters: [
@@ -62,12 +65,18 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     if (text == null || text.isEmpty) {
                       return '';
                     } else {
-                      if (widget.selectedCountryCode.code == etCode &&
-                          text.length < 11)
+                      if (PagesUtilFunctions.validatePhoneByCountryCode(
+                          widget.selectedCountryCode.code!, text)) {
+                        return null;
+                      } else {
                         return AppLocale.of().invalidPhoneNumber;
-                      if (widget.selectedCountryCode.code != etCode &&
-                          text.length < 12)
-                        return AppLocale.of().invalidPhoneNumber;
+                      }
+                      // if (widget.selectedCountryCode.code == etCode &&
+                      //     text.length < 11)
+                      //   return AppLocale.of().invalidPhoneNumber;
+                      // if (widget.selectedCountryCode.code != etCode &&
+                      //     text.length < 12)
+                      //   return AppLocale.of().invalidPhoneNumber;
                       return null;
                     }
                   },

@@ -622,7 +622,7 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String appStoreInappPurcahses = "App Store In-App Purchases";
   final String payWithTelebirr = "Pay with telebirr";
   final String payWithTelebirrMsg =
-      "Use your Telebirr account to complete your mehaleye purchase.";
+      "Use your telebirr account to complete your mehaleye purchase.";
   final String payWithYenepay = "Pay with Yenepay";
   final String payWithYenepayMsg =
       "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
