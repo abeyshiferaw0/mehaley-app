@@ -117,7 +117,7 @@ class _DropDownOptionsPickerState extends State<DropDownOptionsPicker> {
                     },
                   ),
                   LanguageSettingItem(
-                    text: 'Oromiffa',
+                    text: 'Afaan Oromoo',
                     isSelected: isLocaleSelected(AppLanguage.OROMIFA),
                     onTap: () {
                       BlocProvider.of<LocalizationCubit>(context).changeLocale(

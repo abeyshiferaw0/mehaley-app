@@ -296,7 +296,7 @@ class Song extends Equatable {
           duration: Duration(
             seconds: song.audioFile.audioDurationSeconds.toInt(),
           ),
-          artUri: Uri.parse(song.albumArt.imageMediumPath),
+          artUri: Uri.parse(song.albumArt.imageLargePath),
           extras: {
             AppValues.songExtraStr: song.toMap(),
             AppValues.songSyncExtraStr: songSync.toMap(),
@@ -332,13 +332,13 @@ class Song extends Equatable {
           audioSources.add(hlsAudioSource);
         }
       } else {
-        File f = File.fromUri(Uri.file(
-            "${downloadedTaskWithSong.task.savedDir}${Platform.pathSeparator}${downloadedTaskWithSong.task.filename}"));
+        Uri t = Uri.file(
+            "${downloadedTaskWithSong.task.savedDir}/${downloadedTaskWithSong.task.filename}");
+        File f = File.fromUri(t);
 
-        print("DOWNLOADUTIL=> exist=>  ${f.existsSync()}");
-
+        print("Uri.file=> ${f.existsSync()}");
         print(
-            "DOWNLOADUTIL=> downloadedTaskWithSong.task=> ${Uri.file("${downloadedTaskWithSong.task.savedDir}")}");
+            "Uri.file=> ${Uri.file("${downloadedTaskWithSong.task.savedDir}${Platform.pathSeparator}${downloadedTaskWithSong.task.filename}")}");
 
         ///SONG IS DOWNLOADED
         AudioSource audioSource = AudioSource.uri(
@@ -352,7 +352,7 @@ class Song extends Equatable {
             duration: Duration(
               seconds: song.audioFile.audioDurationSeconds.toInt(),
             ),
-            artUri: Uri.parse(song.albumArt.imageMediumPath),
+            artUri: Uri.parse(song.albumArt.imageLargePath),
             extras: {
               AppValues.songExtraStr: song.toMap(),
               AppValues.songSyncExtraStr: songSync.toMap(),
@@ -418,7 +418,7 @@ class Song extends Equatable {
   //       duration: Duration(
   //         seconds: song.audioFile.audioDurationSeconds.toInt(),
   //       ),
-  //       artUri: Uri.parse(song.albumArt.imageMediumPath),
+  //       artUri: Uri.parse(song.albumArt.imageLargePath),
   //       extras: {
   //         AppValues.songExtraStr: song.toMap(),
   //         AppValues.songSyncExtraStr: songSync.toMap(),
@@ -463,7 +463,7 @@ class Song extends Equatable {
   //         duration: Duration(
   //           seconds: song.audioFile.audioDurationSeconds.toInt(),
   //         ),
-  //         artUri: Uri.parse(song.albumArt.imageMediumPath),
+  //         artUri: Uri.parse(song.albumArt.imageLargePath),
   //         extras: {
   //           AppValues.songExtraStr: song.toMap(),
   //           AppValues.songSyncExtraStr: songSync.toMap(),

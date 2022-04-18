@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -122,8 +124,12 @@ class AppGradients {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        ColorMapper.getCompletelyBlack().withOpacity(0.2),
-        ColorMapper.getCompletelyBlack().withOpacity(0.9),
+        Platform.isAndroid
+            ? ColorMapper.getCompletelyBlack().withOpacity(0.2)
+            : ColorMapper.getCompletelyBlack().withOpacity(0.5),
+        Platform.isAndroid
+            ? ColorMapper.getCompletelyBlack().withOpacity(0.9)
+            : ColorMapper.getCompletelyBlack(),
       ],
     );
   }

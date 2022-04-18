@@ -169,7 +169,7 @@ class SongItemVideo extends StatelessWidget {
       child: AppCard(
         radius: 4.0,
         child: CachedNetworkImage(
-          imageUrl: videoSong.albumArt.imageMediumPath,
+          imageUrl: videoSong.albumArt.imageLargePath,
           fit: BoxFit.cover,
           placeholder: (context, url) => buildImagePlaceHolder(),
           errorWidget: (context, url, error) => buildImagePlaceHolder(),

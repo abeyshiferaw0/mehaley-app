@@ -115,8 +115,10 @@ class AuthRepository {
     await authProvider.clearDioCache();
     await FirebaseAuth.instance.signOut();
     await FacebookAuth.instance.logOut();
-    await OneSignal.shared.removeExternalUserId();
-    await OneSignal.shared.disablePush(true);
+
+    ///DON'T AWAIT THIS TWO BECAUSE THEY MIGHT TAKE TOO LONG FOR APP TO LOGOUT
+    OneSignal.shared.removeExternalUserId();
+    OneSignal.shared.disablePush(true);
   }
 
   Future<void> turnAllNotificationOn() async {

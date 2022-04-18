@@ -33,7 +33,7 @@ class LibraryArtistsItem extends StatelessWidget {
             child: CachedNetworkImage(
               width: AppValues.followedArtistImageSize,
               height: AppValues.followedArtistImageSize,
-              imageUrl: artist.artistImages[0].imageMediumPath,
+              imageUrl: artist.artistImages[0].imageLargePath,
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(

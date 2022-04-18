@@ -118,7 +118,7 @@ class _SongMenuWidgetState extends State<SongMenuWidget> {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: song.albumArt.imageMediumPath,
+              imageUrl: song.albumArt.imageLargePath,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),
               imageBuilder: (context, imageProvider) => Container(

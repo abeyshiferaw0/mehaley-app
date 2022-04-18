@@ -394,7 +394,7 @@ class _QueueListPageState extends State<QueueListPage> {
             width: AppValues.queueSongItemSize + 10,
             height: AppValues.queueSongItemSize + 10,
             fit: BoxFit.cover,
-            imageUrl: song.albumArt.imageSmallPath,
+            imageUrl: song.albumArt.imageMediumPath,
             placeholder: (context, url) => buildImagePlaceHolder(),
             errorWidget: (context, url, e) => buildImagePlaceHolder(),
           ),

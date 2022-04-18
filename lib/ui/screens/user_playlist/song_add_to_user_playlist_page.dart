@@ -52,7 +52,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
         if (state is SongAddedToPlaylistState) {
           ScaffoldMessenger.of(context).showSnackBar(
             buildDownloadMsgSnackBar(
-              bgColor: ColorMapper.getDarkGrey(),
+              bgColor: AppColors.blue,
               isFloating: true,
               msg: AppLocale.of().songAddedToPlaylist(
                 songName: L10nUtil.translateLocale(
@@ -66,7 +66,7 @@ class _SongAddToUserPlaylistPageState extends State<SongAddToUserPlaylistPage> {
               ),
               txtColor: ColorMapper.getWhite(),
               icon: FlutterRemix.checkbox_circle_fill,
-              iconColor: ColorMapper.getDarkOrange(),
+              iconColor: ColorMapper.getWhite(),
             ),
           );
 

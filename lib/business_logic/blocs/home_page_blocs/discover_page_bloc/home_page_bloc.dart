@@ -19,12 +19,6 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   final HomeDataRepository homeDataRepository;
 
   @override
-  Future<void> close() {
-    homeDataRepository.cancelDio();
-    return super.close();
-  }
-
-  @override
   Stream<HomePageState> mapEventToState(
     HomePageEvent event,
   ) async* {
@@ -61,6 +55,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         }
       }
     } else if (event is ReLoadHomePageEvent) {
+      //yield HomePageLoading();
       try {
         //REFRESH
         final HomePageData refreshedHomePageData =

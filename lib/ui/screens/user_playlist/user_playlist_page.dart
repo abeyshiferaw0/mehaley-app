@@ -282,7 +282,7 @@ class _UserPlaylistPageState extends State<UserPlaylistPage> {
                           ),
                         );
                       },
-                      thumbUrl: songs[position].albumArt.imageSmallPath,
+                      thumbUrl: songs[position].albumArt.imageMediumPath,
                       thumbSize: AppValues.playlistSongItemSize,
                       onPressed: () {
                         //OPEN SONG

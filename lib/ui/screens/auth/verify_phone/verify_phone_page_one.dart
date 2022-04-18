@@ -162,8 +162,8 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             text: AppLocale.of().sendSms,
             onTap: () {
               //VALIDATE COUNTRY CODE AND PHONE NUMBER
-              if (selectedCountryCode.code == 'ET' &&
-                  controller.text.length == 11) {
+              if (PagesUtilFunctions.validatePhoneByCountryCode(
+                  selectedCountryCode.code!, controller.text)) {
                 //LOGIN WITH PHONE
                 BlocProvider.of<AuthBloc>(context).add(
                   ContinueWithPhoneEvent(

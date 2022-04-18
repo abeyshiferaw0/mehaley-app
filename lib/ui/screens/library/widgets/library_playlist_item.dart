@@ -33,7 +33,7 @@ class LibraryPlaylistItem extends StatelessWidget {
               withShadow: false,
               radius: 4.0,
               child: CachedNetworkImage(
-                imageUrl: playlist.playlistImage.imageMediumPath,
+                imageUrl: playlist.playlistImage.imageLargePath,
                 imageBuilder: (context, imageProvider) => Stack(
                   children: [
                     Container(

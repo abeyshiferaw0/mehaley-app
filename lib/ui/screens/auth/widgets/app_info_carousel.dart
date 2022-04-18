@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -77,7 +78,9 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
               },
               children: [
                 buildInfoPageOne(),
-                buildInfoPageTwo(),
+                Platform.isAndroid
+                    ? buildAndroidInfoPageTwo()
+                    : buildIosInfoPageTwo(),
                 buildInfoPageThree(),
               ],
             ),
@@ -141,7 +144,7 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
     );
   }
 
-  Column buildInfoPageTwo() {
+  Column buildAndroidInfoPageTwo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -173,6 +176,36 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
             buildPayWithItemsText(paymentMethodName: "GOOGLE ACCOUNT"),
             buildPayWithItemsDivider(),
             buildPayWithItemsText(paymentMethodName: "APPLE ID"),
+          ],
+        ),
+        SizedBox(
+          height: AppMargin.margin_4,
+        ),
+      ],
+    );
+  }
+
+  Column buildIosInfoPageTwo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ///TITLE
+        buildInfoHeaderText(
+          titleOne: "Use",
+          titleTwo: "Your",
+          isOdd: true,
+        ),
+        SizedBox(
+          height: AppMargin.margin_8,
+        ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //buildPayWithItemsDivider(),
+            buildPayWithItemsText(
+                paymentMethodName: "APPLE ID TO PURCHASE MEZMURS"),
           ],
         ),
         SizedBox(

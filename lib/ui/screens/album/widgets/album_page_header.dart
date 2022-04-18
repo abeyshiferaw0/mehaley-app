@@ -122,7 +122,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
         width: AppValues.albumPageImageSize,
         height: AppValues.albumPageImageSize,
         fit: BoxFit.cover,
-        imageUrl: album.albumImages[0].imageMediumPath,
+        imageUrl: album.albumImages[0].imageLargePath,
         imageBuilder: (context, imageProvider) {
           //CHANGE DOMINANT COLOR
           BlocProvider.of<PagesDominantColorBloc>(context).add(

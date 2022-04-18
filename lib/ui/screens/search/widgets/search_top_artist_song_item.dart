@@ -70,7 +70,7 @@ class SearchTopArtistSongItem extends StatelessWidget {
               child: AppCard(
                 radius: 4.0,
                 child: CachedNetworkImage(
-                  imageUrl: song.albumArt.imageSmallPath,
+                  imageUrl: song.albumArt.imageMediumPath,
                   width: width,
                   height: width,
                   imageBuilder: (context, imageProvider) => Stack(

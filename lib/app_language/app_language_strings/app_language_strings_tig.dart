@@ -7,7 +7,7 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String appName = "መኃልዬ";
   final String byAppName = "ብ መኃልዬ";
   final String appTermsAndCondition =
-      "ገለ ጽሑፍ ብዛዕባ መሃልዮን፤ ስምምዓትን ኩነታትን ፖሊሲ መሰል ውልቃውነትን";
+      "ገለ ጽሑፍ ብዛዕባ መኃልዬን፤ ስምምዓትን ኩነታትን ፖሊሲ መሰል ውልቃውነትን";
   final String logOut = "ውፃእ";
   final String removeFromCart = "ካብ ናይ ጥቕሉል ግዝኢት ኣልግስ";
   final String addToCart = "ናብ ናይ ጥቕሉል ዕድጊት አእትው ";
@@ -202,11 +202,11 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String topCategories = "ውርያ ምድባት";
   final String topMezmurs = "ውርያት መዝሙራት";
   final String topArtists = "ውርት ዘማርቲ";
-  final String searchTitle = "ብመሃልዬ ይኣልሹ";
+  final String searchTitle = "ብመኃልዬ ይኣልሹ";
   final String changeYourSearchKey = "ጽሑፎም ንምቕያር ይፈትኑ";
-  final String searchHint = "ብመሃልዬ ይኣልሹ መዝሙራትን, አልበማትን, ዘመርቲን";
+  final String searchHint = "ብመኃልዬ ይኣልሹ መዝሙራትን, አልበማትን, ዘመርቲን";
   final String searchHint2 = "አልበማትን, ዘመርቲን, ፕሌይሊስትታትን ...";
-  final String searchElfFor = "ብመሃልዬ ይኣልሹ";
+  final String searchElfFor = "ብመኃልዬ ይኣልሹ";
   final String recentSearches = "ናይ ቀረባ እዋን ኣለሻታት";
   final String clearRecentSearches = "ንናይ ቀረባ እዋን ኣለሻታት አልግስ";
   final String seeAllPlaylists = "ንኩለን ፕሌይሊስትታት ረአ";
@@ -300,7 +300,7 @@ class AppLanguageStringsTig extends AppLocalizations {
       "ንቲ ፕሌይሊስት ምድምሳስ ኣይተኻ	ኣለን\nንናይበይነመረብ ርክብካ ኣረጋግፅ";
   final String addSongs = "መዝሙት የእትው";
   final String addSongsToPlaylist = "ንተን መዝሙራት ናብ ፕሌይሊስት ይወስኹ";
-  final String dailyQuotesFromApp = "ዕለታዊ ጥቕስታት ካብ መሃልዬ";
+  final String dailyQuotesFromApp = "ዕለታዊ ጥቕስታት ካብ መኃልዬ";
   final String enablePermissions = "ፐርሚሽናት ፍቐድ";
   final String enablePermissionsMsg =
       "ንምቕፃል ዝስዕቡ ፐርሚሽናት የድልዩ።, ናብ ሲስተም ሴቲንግ ከይዶም ነተን ፐርሚሽናት ይፍቐዱ";
@@ -308,18 +308,18 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String cameraAccess = "ናይ ካሜራ ፍቓድ";
   final String notificationAccess = "ናይ ማሳወቂያ ፍቓድ";
   final String photoAccess = "ናይ ስእልታት ፍቓድ";
-  final String rateApp = "ንመሃለዬ ደረጃ ይስርዑ";
-  final String rateAppMsg = "ንመሃለዬ ሬት ብምግባር ንቲ መተግበሪ ክነማሓይሾ  ይሓግዙና";
+  final String rateApp = "ንመኃልዬ ደረጃ ይስርዑ";
+  final String rateAppMsg = "ንመኃልዬ ሬት ብምግባር ንቲ መተግበሪ ክነማሓይሾ  ይሓግዙና";
   final String areUSureWantToLogOut = "ርግፀኛ ድዮም?";
   final String areUSureWantToLogOutMsg = "ርግፀኛ ድዮም, ምውፃእ ይደልዩ";
   final String preferredCurrency = "ተመራፂ ሸርፊ";
   final String preferredCurrencySettingMsg =
       "ንናትካ ተመራፂ ሸርፊ ዋጋታት ክረአ ንምግባር ኣብ ጥቕሚ ይውዕል";
-  final String shareApp = "ንመሓለዬ ኣማቕል";
-  final String shareAppMsg = "ንመሃሌዬ ምስ መሓዙትን ኣባላት ስድራ ቤትን ይማቐሉ።";
+  final String shareApp = "ንመኃልዬ ኣማቕል";
+  final String shareAppMsg = "ንመኃልዬ ምስ መሓዙትን ኣባላት ስድራ ቤትን ይማቐሉ።";
   final String retryingDownloadMsg = "መሊሱ ኣብምፍታን ይርከብ ";
   final String play = "ኣፃውት";
-  final String onlyOnElf = "ኣብ ልዕሊ መሃሌዬ ጥራሕ";
+  final String onlyOnElf = "ኣብ ልዕሊ መኃልዬ ጥራሕ";
   final String welcome = "እንኳዕ ብደሓን መፁ";
   final String google = "ጉግል";
   final String facebook = "ፌስቡክ";
@@ -334,7 +334,7 @@ class AppLanguageStringsTig extends AppLocalizations {
       "ሓደሽቲ መዝሙራትን ተወሳኺ ማህሌታ ከየምልጡኻ ናይ ማሳወቂያ ፐርሚሽን ኣብርህ";
   final String notNow = "ሀዚ ኣይኸውንን";
   final String done = "ፈፅም";
-  final updateRequired = "ብመሃሌዬ እናተጠቐምካ ንምቕፃል ’ተ ናይ መተግበሪ መማሓየሺ የድልይ ’ዩ";
+  final updateRequired = "ብመኃልዬ እናተጠቐምካ ንምቕፃል ’ተ ናይ መተግበሪ መማሓየሺ የድልይ ’ዩ";
   final updateRequiredMsg =
       "ዝኸበርካ ተጠቃሚ፣ ሀዚ ዘለካ መተግበሪ ግዜ ዝሓለፎ ’ዩ, ሓደሽቲ ባህሪያት ንምርካብ በጃኻ ንማሃልየ ኣዘምኖ";
   final newerVersion = "ሓድሽ ስርሒት";
@@ -408,9 +408,9 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String cartCheckOut = "ናይ ጥቕሉል ግዝኢት ፈጽም";
   final String cartCheckedOutMsg = "ንመዝሙትን፣ አልበሞትን፣ ፕሌይሊስትታትን ብሓደ ግዜ ይግዝኡ";
 
-  final String newVersionAvailable = "ሓድሽ ናይ መሃለየ ስርሒት አሎ ";
+  final String newVersionAvailable = "ሓድሽ ናይ መኃልዬ ስርሒት አሎ ";
   final String newVersionAvailableMsg =
-      "ሓድሽ ናይ መሃለየ ስርሒት አሎ ፣ ናይ ቀረባ እዋን ባህሪያትን መማሓየሽታትን ንምርካብ ንቲ መተግበሪ የማሓየሹ";
+      "ሓድሽ ናይ መኃልዬ ስርሒት አሎ ፣ ናይ ቀረባ እዋን ባህሪያትን መማሓየሽታትን ንምርካብ ንቲ መተግበሪ የማሓየሹ";
   final String maybeLatter = "ምናልባሽ ደሓራይ";
   final String dontAskAgain = "መሊስካ ኣይትጠይቕ";
   final String featuringTxt = "ተፈልዮም ዝቐረቡ";
@@ -444,7 +444,7 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String subscribedMsg =
       "በመኃልዬ ሰብስክሪብሽን ብዕውት ኩነታት ተመዝጊቡ፣ ብዘይገደብ መዝሙራት ይስምዑ፣ የውርዱ";
   final String subscriptionNotAvlavableMsg =
-      " አገልግሎት ሰብስክሪብሽን ኣይተጀመረን፣ ብመሃልዬ ሰብስክሪብሽን ኣብዘለውዎ ምስጀመረ ክነፍልጦም ኢና";
+      " አገልግሎት ሰብስክሪብሽን ኣይተጀመረን፣ ብመኃልዬ ሰብስክሪብሽን ኣብዘለውዎ ምስጀመረ ክነፍልጦም ኢና";
   final String purchaseCouldNotBeVerfied = "ግዝኢትካ ክረጋገፅ ኣይከኣለን";
   final String purchaseCouldNotBeVerfiedMsg = "ግዝኢትካ ኣብ ምርግጋፅ ፀገም ነይሩ!!";
   final String subscriptionCouldNotBeRenewd =

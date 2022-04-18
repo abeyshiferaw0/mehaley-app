@@ -494,8 +494,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "0a208ce87c048ef6d4582ff170eb9f8a37b16652"
-      url: "git://github.com/abeyshiferaw0/flutter_downloader"
+      resolved-ref: "107485df360f22584eb8c30518392129d04774d6"
+      url: "https://github.com/abeyshiferaw0/flutter_downloader.git"
     source: git
     version: "1.7.0"
   flutter_facebook_auth:

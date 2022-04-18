@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -14,11 +15,19 @@ class DeepLinkListenerBloc
     streamSubscription = uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
         if (uri.host != 'yenepay') {
+          print("share =>  uriLinkStream ${isValidateHttpUri(uri)}");
           if (isValidateUri(uri)) {
             this.add(
               SetDeepLinkListenerOpenEvent(
                 appShareTypes: getUriShareType(uri),
                 itemId: getUriItemId(uri),
+              ),
+            );
+          } else if (isValidateHttpUri(uri)) {
+            this.add(
+              SetDeepLinkListenerOpenEvent(
+                appShareTypes: getUriShareType(uri),
+                itemId: getHttpUriItemId(uri),
               ),
             );
           } else {
@@ -54,6 +63,7 @@ class DeepLinkListenerBloc
     if (event is StartDeepLinkListenerEvent) {
       ///FIRST CHECK getInitialUri ONLY ON APP START
       Uri? initialUri = await getInitialUri();
+      print("share =>  getInitialUri ${initialUri}");
       if (initialUri != null) {
         if (isValidateUri(initialUri)) {
           yield DeepLinkOpenState(
@@ -115,6 +125,43 @@ class DeepLinkListenerBloc
     return isValidateUri;
   }
 
+  bool isValidateHttpUri(Uri uri) {
+    bool isValidateUri = true;
+
+    ///CHECK IF HAS SCHEMA AND QUERY PARAMS
+    //if (!uri.hasScheme) isValidateUri = false;
+    if (!uri.hasQuery) isValidateUri = false;
+
+    ///CHECK IF TYPE AND ITEM ID EXIST
+    if (uri.queryParameters['type'] == null) {
+      isValidateUri = false;
+    } else {
+      ///GET TYPE
+      String type = uri.queryParameters['type']!;
+
+      ///CHEK IF TYPE IS VALID
+      if (!(type == 'album' ||
+          type == 'playlist' ||
+          type == 'artist' ||
+          type == 'song')) isValidateUri = false;
+    }
+    if (uri.queryParameters['id'] == null) {
+      isValidateUri = false;
+    } else {
+      ///GET ITEM ID
+      String itemId = uri.queryParameters['id']!;
+
+      ///CHECK ITEM ID IS VALID
+      try {
+        int.parse(AppApi.fromBase64(itemId));
+      } catch (e) {
+        isValidateUri = false;
+      }
+    }
+
+    return isValidateUri;
+  }
+
   AppShareTypes getUriShareType(Uri uri) {
     String type = uri.queryParameters['type']!;
     AppShareTypes appShareTypes = AppShareTypes.OTHER;
@@ -135,6 +182,10 @@ class DeepLinkListenerBloc
 
   int getUriItemId(Uri uri) {
     return int.parse(uri.queryParameters['item_id']!);
+  }
+
+  int getHttpUriItemId(Uri uri) {
+    return int.parse(AppApi.fromBase64(uri.queryParameters['id']!));
   }
 
   @override

@@ -160,7 +160,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
   @override
   Future<void> close() {
-    audioPlayer.stop();
+    //audioPlayer.stop();
     audioPlayer.dispose();
     return super.close();
   }
@@ -182,8 +182,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           audioPlayer.load();
           this.add(
             ReportPlayerEvent(
-              msg:
-                  'catchError Unable to play audio,\ncheck your internet connection',
+              msg: 'Unable to play audio,\nCheck your internet connection',
               error: error.toString(),
             ),
           );

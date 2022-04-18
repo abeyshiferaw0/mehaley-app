@@ -120,7 +120,7 @@ class AlbumMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: album.albumImages[0].imageMediumPath,
+              imageUrl: album.albumImages[0].imageLargePath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),

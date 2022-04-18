@@ -508,7 +508,7 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: CachedNetworkImage(
-          imageUrl: song != null ? song.albumArt.imageSmallPath : '',
+          imageUrl: song != null ? song.albumArt.imageMediumPath : '',
           fit: BoxFit.cover,
           height: AppValues.miniPlayerAlbumArtSize,
           width: AppValues.miniPlayerAlbumArtSize,
@@ -541,8 +541,8 @@ class _MiniPlayerState extends State<MiniPlayer> with TickerProviderStateMixin {
         if (currentPlayingState != null) {
           return SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: ColorMapper.getBlack(),
-              inactiveTrackColor: ColorMapper.getDarkGrey().withOpacity(0.5),
+              activeTrackColor: ColorMapper.getDarkGrey(),
+              inactiveTrackColor: ColorMapper.getLightGrey(),
               thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0.0),
               overlayShape: RoundSliderOverlayShape(overlayRadius: 0.0),
               trackHeight: AppValues.miniPlayerTrackHeight,

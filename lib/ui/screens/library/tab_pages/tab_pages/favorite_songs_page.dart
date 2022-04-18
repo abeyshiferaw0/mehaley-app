@@ -102,7 +102,7 @@ class _FavoriteSongsPageState extends State<FavoriteSongsPage> {
           children: [
             SizedBox(height: AppMargin.margin_8),
             SongItem(
-              thumbUrl: favoriteSongs[position].song.albumArt.imageSmallPath,
+              thumbUrl: favoriteSongs[position].song.albumArt.imageMediumPath,
               song: favoriteSongs[position].song,
               thumbSize: AppValues.playlistSongItemSize,
               onPressed: () {

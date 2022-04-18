@@ -26,7 +26,7 @@
     </queries>
 
    <application
-        android:label="Mehaleye"
+        android:label="መኃልዬ"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 
@@ -46,7 +46,7 @@
 
 
        <!--FOR HOME SCREEN WIDGETS-->
-       <receiver android:name="VersesWidgetProvider" android:label="ጥቅሶች ከመሃልዬ">
+       <receiver android:name="VersesWidgetProvider" android:label="ጥቅሶች ከመኃልዬ">
            <intent-filter>
                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
            </intent-filter>

@@ -7,6 +7,7 @@ import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:sizer/sizer.dart';
@@ -69,6 +70,9 @@ class ItemRecentlyPlayed extends StatelessWidget {
                       ),
                     ),
                     AppIconWidget(),
+
+                    ///TINT IMAGES
+                    AppImageTint(),
 
                     ///PLAY ICON IF SONG ITEM
                     GroupSongItemPlayIcon(

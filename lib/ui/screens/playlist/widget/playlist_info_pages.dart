@@ -52,7 +52,7 @@ class PlaylistInfoPageOne extends StatelessWidget {
                 height: AppValues.playlistPageOneImageSize,
                 fit: BoxFit.cover,
                 imageUrl:
-                    playlistPageData.playlist.playlistImage.imageMediumPath,
+                    playlistPageData.playlist.playlistImage.imageLargePath,
                 imageBuilder: (context, imageProvider) {
                   return Container(
                     decoration: BoxDecoration(

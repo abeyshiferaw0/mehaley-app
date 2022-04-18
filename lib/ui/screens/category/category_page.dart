@@ -203,7 +203,7 @@ class _CategoryPageState extends State<CategoryPage>
                 SongItem(
                   song: item,
                   isForMyPlaylist: false,
-                  thumbUrl: item.albumArt.imageSmallPath,
+                  thumbUrl: item.albumArt.imageMediumPath,
                   thumbSize: AppValues.categorySongItemSize,
                   onPressed: () {
                     //OPEN SONG

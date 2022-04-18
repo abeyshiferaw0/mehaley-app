@@ -48,6 +48,7 @@ import 'package:mehaley/data/models/my_playlist.dart';
 import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
+import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
 import 'package:mehaley/data/repositories/iap_purchase_repository.dart';
@@ -114,7 +115,7 @@ class PagesUtilFunctions {
       );
     if (groupType == GroupType.ALBUM)
       return SongItemBadge(
-        tag: AppLocale.of().mezmur,
+        tag: AppLocale.of().album,
       );
     if (groupType == GroupType.PLAYLIST)
       return SongItemBadge(
@@ -172,13 +173,13 @@ class PagesUtilFunctions {
 
   static String getGroupImageUrl(GroupType groupType, dynamic item) {
     if (groupType == GroupType.SONG) {
-      return (item as Song).albumArt.imageMediumPath;
+      return (item as Song).albumArt.imageLargePath;
     } else if (groupType == GroupType.PLAYLIST) {
-      return (item as Playlist).playlistImage.imageMediumPath;
+      return (item as Playlist).playlistImage.imageLargePath;
     } else if (groupType == GroupType.ALBUM) {
-      return (item as Album).albumImages[0].imageMediumPath;
+      return (item as Album).albumImages[0].imageLargePath;
     } else if (groupType == GroupType.ARTIST) {
-      return (item as Artist).artistImages[0].imageMediumPath;
+      return (item as Artist).artistImages[0].imageLargePath;
     } else {
       return '';
     }
@@ -869,7 +870,7 @@ class PagesUtilFunctions {
           width: AppValues.libraryMusicItemSize,
           height: AppValues.libraryMusicItemSize,
           fit: BoxFit.cover,
-          imageUrl: myPlaylist.playlistImage!.imageMediumPath,
+          imageUrl: myPlaylist.playlistImage!.imageLargePath,
           placeholder: (context, url) =>
               buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
           errorWidget: (context, url, e) =>
@@ -886,7 +887,7 @@ class PagesUtilFunctions {
             width: AppValues.libraryMusicItemSize,
             height: AppValues.libraryMusicItemSize,
             fit: BoxFit.cover,
-            imageUrl: myPlaylist.gridSongImages.elementAt(0).imageMediumPath,
+            imageUrl: myPlaylist.gridSongImages.elementAt(0).imageLargePath,
             placeholder: (context, url) =>
                 buildImagePlaceHolder(AppItemsType.SINGLE_TRACK),
             errorWidget: (context, url, e) =>
@@ -910,8 +911,9 @@ class PagesUtilFunctions {
                   width: AppValues.libraryMusicItemSize,
                   height: AppValues.libraryMusicItemSize,
                   fit: BoxFit.cover,
-                  imageUrl:
-                      myPlaylist.gridSongImages.elementAt(index).imageSmallPath,
+                  imageUrl: myPlaylist.gridSongImages
+                      .elementAt(index)
+                      .imageMediumPath,
                   placeholder: (context, url) =>
                       buildImagePlaceHolder(AppItemsType.OTHER),
                   errorWidget: (context, url, e) =>
@@ -1189,14 +1191,20 @@ class PagesUtilFunctions {
 
   static void rateApp() async {
     final InAppReview inAppReview = InAppReview.instance;
-    bool isAvailable = await inAppReview.isAvailable();
-    if (isAvailable) {
-      inAppReview.requestReview();
-    } else {
-      inAppReview.openStoreListing(
-        appStoreId: AppValues.appStoreId,
-      );
-    }
+    inAppReview.openStoreListing(
+      appStoreId: AppValues.appStoreId,
+    );
+
+    ///REMOVE requestReview BECAUSE OF QUOTA ISSUE AND
+    ///SHOULD NOT BE IMPLEMENTED WITH A BUTTON CLICK
+    //bool isAvailable = await inAppReview.isAvailable();
+    // if (isAvailable) {
+    //   inAppReview.requestReview();
+    // } else {
+    //   inAppReview.openStoreListing(
+    //     appStoreId: AppValues.appStoreId,
+    //   );
+    // }
   }
 
   static void shareApp() async {
@@ -1342,11 +1350,16 @@ class PagesUtilFunctions {
 
   static bool isIapAvailable() {
     ///Check Is Iap Available
-    bool isIapAvailable = IapPurchaseRepository(
-      iapPurchaseProvider: IapPurchaseProvider(),
-    ).getIsIapAvailable();
+    ///CHECK IF ANDROID AND ALWAYS ALLOW FOR IOS
+    if (Platform.isAndroid) {
+      bool isIapAvailable = IapPurchaseRepository(
+        iapPurchaseProvider: IapPurchaseProvider(),
+      ).getIsIapAvailable();
 
-    return isIapAvailable;
+      return isIapAvailable;
+    } else {
+      return true;
+    }
   }
 
   static offlineSongOnClick(
@@ -1470,5 +1483,25 @@ class PagesUtilFunctions {
       return text.length == country['example'].toString().length + 2;
     }
     return false;
+  }
+
+  static String getSubscriptionsOfferingButtonTxt(
+      SubscriptionOfferings subscriptionOfferings) {
+    if (Platform.isIOS) {
+      if (subscriptionOfferings.iosAdditionalInfo != null) {
+        return subscriptionOfferings.iosAdditionalInfo!.buttonTitle;
+      }
+    }
+    return AppLocale.of().tryForFree.toUpperCase();
+  }
+
+  static String getSubscriptionsOfferingPriceDescTxt(
+      SubscriptionOfferings subscriptionOfferings) {
+    if (Platform.isIOS) {
+      if (subscriptionOfferings.iosAdditionalInfo != null) {
+        return subscriptionOfferings.iosAdditionalInfo!.priceDescription;
+      }
+    }
+    return subscriptionOfferings.priceDescription;
   }
 }

@@ -83,7 +83,7 @@ class SignUpPageFront extends StatelessWidget {
         children: [
           SignUpButton(
             title: AppLocale.of().continueWithPhone,
-            icon: AppAssets.icPhone,
+            icon: Platform.isAndroid ? AppAssets.icPhone : null,
             userLoginType: UserLoginType.PHONE_NUMBER,
             color: ColorMapper.getDarkOrange(),
             isFilled: true,
@@ -95,62 +95,126 @@ class SignUpPageFront extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: AppMargin.margin_32),
+
+          Platform.isAndroid
+              ? SizedBox(height: AppMargin.margin_32)
+              : SizedBox(height: AppMargin.margin_8),
 
           ///SOCIAL LOGIN BUTTONS ROW
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SignUpCircleButton(
-                title: AppLocale.of().google,
-                icon: AppAssets.icGoogle,
-                userLoginType: UserLoginType.GOOGLE,
-                onTap: () {
-                  //LOGIN WITH GOOGLE
-                  BlocProvider.of<AuthBloc>(context).add(
-                    ContinueWithGoogleEvent(),
-                  );
-                },
-              ),
-              SizedBox(width: AppMargin.margin_24),
-              SignUpCircleButton(
-                title: AppLocale.of().facebook,
-                icon: AppAssets.icFacebook,
-                userLoginType: UserLoginType.FACEBOOK,
-                onTap: () {
-                  //LOGIN WITH FACEBOOK
-                  BlocProvider.of<AuthBloc>(context).add(
-                    ContinueWithFacebookEvent(),
-                  );
-                },
-              ),
-              Platform.isIOS
-                  ? FutureBuilder<bool>(
-                      future: SignInWithApple.isAvailable(),
-                      builder: (context, snapShot) {
-                        if (snapShot.data == null) return SizedBox();
-                        if (snapShot.data == false) return SizedBox();
-                        return Row(
-                          children: [
-                            SizedBox(width: AppMargin.margin_24),
-                            SignUpCircleButton(
-                              title: AppLocale.of().apple,
-                              icon: AppAssets.icApple,
-                              userLoginType: UserLoginType.APPLE,
-                              onTap: () {
-                                //LOGIN WITH APPLE
-                                BlocProvider.of<AuthBloc>(context).add(
-                                  ContinueWithAppleEvent(),
-                                );
-                              },
-                            ),
-                          ],
+          Platform.isAndroid
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SignUpCircleButton(
+                      title: AppLocale.of().google,
+                      icon: AppAssets.icGoogle,
+                      userLoginType: UserLoginType.GOOGLE,
+                      onTap: () {
+                        //LOGIN WITH GOOGLE
+                        BlocProvider.of<AuthBloc>(context).add(
+                          ContinueWithGoogleEvent(),
                         );
                       },
-                    )
-                  : SizedBox(),
-            ],
-          ),
+                    ),
+                    SizedBox(width: AppMargin.margin_24),
+                    SignUpCircleButton(
+                      title: AppLocale.of().facebook,
+                      icon: AppAssets.icFacebook,
+                      userLoginType: UserLoginType.FACEBOOK,
+                      onTap: () {
+                        //LOGIN WITH FACEBOOK
+                        BlocProvider.of<AuthBloc>(context).add(
+                          ContinueWithFacebookEvent(),
+                        );
+                      },
+                    ),
+                    Platform.isIOS
+                        ? FutureBuilder<bool>(
+                            future: SignInWithApple.isAvailable(),
+                            builder: (context, snapShot) {
+                              if (snapShot.data == null) return SizedBox();
+                              if (snapShot.data == false) return SizedBox();
+                              return Row(
+                                children: [
+                                  SizedBox(width: AppMargin.margin_24),
+                                  SignUpCircleButton(
+                                    title: AppLocale.of().apple,
+                                    icon: AppAssets.icApple,
+                                    userLoginType: UserLoginType.APPLE,
+                                    onTap: () {
+                                      //LOGIN WITH APPLE
+                                      BlocProvider.of<AuthBloc>(context).add(
+                                        ContinueWithAppleEvent(),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : SizedBox(),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Platform.isIOS
+                        ? FutureBuilder<bool>(
+                            future: SignInWithApple.isAvailable(),
+                            builder: (context, snapShot) {
+                              if (snapShot.data == null) return SizedBox();
+                              if (snapShot.data == false) return SizedBox();
+                              return SignUpButton(
+                                title: AppLocale.of().continueWithApple,
+                                txtColor: ColorMapper.getWhite(),
+                                icon: AppAssets.icApple,
+                                noBorder: false,
+                                isFilled: false,
+                                userLoginType: UserLoginType.APPLE,
+                                color: ColorMapper.getWhite(),
+                                onTap: () {
+                                  //LOGIN WITH APPLE
+                                  BlocProvider.of<AuthBloc>(context).add(
+                                    ContinueWithAppleEvent(),
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : SizedBox(),
+                    SizedBox(height: AppMargin.margin_8),
+                    SignUpButton(
+                      title: AppLocale.of().continueWithGoogle,
+                      txtColor: ColorMapper.getWhite(),
+                      icon: AppAssets.icGoogle,
+                      userLoginType: UserLoginType.GOOGLE,
+                      noBorder: false,
+                      isFilled: false,
+                      color: ColorMapper.getWhite(),
+                      onTap: () {
+                        //LOGIN WITH GOOGLE
+                        BlocProvider.of<AuthBloc>(context).add(
+                          ContinueWithGoogleEvent(),
+                        );
+                      },
+                    ),
+                    SizedBox(height: AppMargin.margin_8),
+                    SignUpButton(
+                      title: AppLocale.of().continueWithFacebook,
+                      txtColor: ColorMapper.getWhite(),
+                      icon: AppAssets.icFacebook,
+                      userLoginType: UserLoginType.FACEBOOK,
+                      noBorder: false,
+                      isFilled: false,
+                      color: ColorMapper.getWhite(),
+                      onTap: () {
+                        //LOGIN WITH FACEBOOK
+                        BlocProvider.of<AuthBloc>(context).add(
+                          ContinueWithFacebookEvent(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
         ],
       ),
     );

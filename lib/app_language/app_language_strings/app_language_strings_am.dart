@@ -130,7 +130,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String total = "ጠቅላላ";
   final String checkOut = "ሁሉንም ግዛ";
   final String cartSummery = "የጥቅል ግዢ ዝርዝር";
-  final String remove = "Remove";
+  final String remove = "አስወግድ";
   final String networkError = "ኢንተርኔት የለም";
   final String emptyCategory = "ምድቡ ባዶ ነው";
   final String checkYourInternetConnection = "የበይነመረብ ግንኙነትዎን ያረጋግጡ";
@@ -305,25 +305,25 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String cameraAccess = "የካሜራ ፍቃድ";
   final String notificationAccess = "የማሳወቂያ ፍቃድ";
   final String photoAccess = "የፎቶዎች ፍቃድ";
-  final String rateApp = "መሃለዬን ደረጃ ይስጡ";
-  final String rateAppMsg = "መሃለዬን ሬት በማድረግ መተግበሪያውን አንድናሻሻል ያግዙን";
+  final String rateApp = "መኃልዬን ደረጃ ይስጡ";
+  final String rateAppMsg = "መኃልዬን ሬት በማድረግ መተግበሪያውን አንድናሻሻል ያግዙን";
   final String areUSureWantToLogOut = "እርግጠኛ ነዎት?";
   final String areUSureWantToLogOutMsg = "እርግጠኛ ነዎት፣ መውጣት ይፈልጋሉ";
   final String preferredCurrency = "ተመራጭ ምንዛሪ";
   final String preferredCurrencySettingMsg =
       "የእርስዎ ተመራጭ ምንዛሬ ዋጋዎችን ለማሳየት ጥቅም ላይ ይውላል";
-  final String shareApp = "መሓለዬን አጋሩ";
-  final String shareAppMsg = "መሃሌዬን ከጓደኞች እና ቤተሰብ ጋር ያጋሩ.";
+  final String shareApp = "መኃልዬን አጋሩ";
+  final String shareAppMsg = "መኃልዬን ከጓደኞች እና ቤተሰብ ጋር ያጋሩ.";
   final String retryingDownloadMsg = "እንደገና በመሞከር ላይ";
   final String play = "አጫዉት";
-  final String onlyOnElf = "በመሃሌዬ ላይ ብቻ";
+  final String onlyOnElf = "በመኃልዬ ላይ ብቻ";
   final String welcome = "እንኳን ደህና መጡ";
   final String google = "ጉግል";
   final String facebook = "ፌስቡክ";
   final String apple = "አፕል";
   final String downloadStartedMsg = "ማውረድ ተጀምሮል";
   final String firstTimeDialogMsg = "ቋንቋዎን ይምረጡ፣ በሴቲንግ ውስጥ በኋላ ሊለውጡት ይችላሉ.";
-  final String welcomeToMehaley = "እንኳን ወደ መሃሌዬ በደህና መጡ";
+  final String welcomeToMehaley = "እንኳን ወደ መኃልዬ በደህና መጡ";
   final String chooseYourPreferredCurrency = "የእርስዎን ተመራጭ ምንዛሬ ይምረጡ";
   final String expand = "አስፋ";
   final String enableNotifications = "የማሳወቂያ ፐርሚሽን ፍቀድ";
@@ -331,9 +331,9 @@ class AppLanguageStringsAm extends AppLocalizations {
       "አዳዳዲስ መዝሙሮች አና ተጨማሪ ዝማኔዎች እንዳያመልጥዎ የማሳወቂያ ፐርሚሽን ያብሩ";
   final String notNow = "አሁን አይሆንም";
   final String done = "ፈፅም";
-  final updateRequired = "በመሃሌዬ መጠቀሙዎን ለመቀጠል መተግበሪያዉን ማሻሻል ያስፈልጋል";
+  final updateRequired = "በመኃልዬ መጠቀሙዎን ለመቀጠል መተግበሪያዉን ማሻሻል ያስፈልጋል";
   final updateRequiredMsg =
-      "ውድ ተጠቃሚ፣ አሁን ያለዎት መተግበሪያ ያለፈበተ ነው፣ አዳዲስ ባህሪያትን ለማግኘት እባክዎ መሃለየን ያዘምኑ";
+      "ውድ ተጠቃሚ፣ አሁን ያለዎት መተግበሪያ ያለፈበተ ነው፣ አዳዲስ ባህሪያትን ለማግኘት እባክዎ መኃልዬን ያዘምኑ";
   final newerVersion = "አዲስ ስሪት";
   final currentVersion = "የአሁኑ ስሪት";
   final updateApp = "መተግበሪያን አዘምን";
@@ -405,7 +405,7 @@ class AppLanguageStringsAm extends AppLocalizations {
 
   final String newVersionAvailable = "የመሀለዬ መተግበሪያ አዲስ ሥሪት አለ.";
   final String newVersionAvailableMsg =
-      "አዲስ የ መሃለየ ስሪት አለ ፣ የቅርብ ጊዜ ባህሪዎችን እና ማሻሻያዎችን ለማግኘት መተግበሪያዉን ያዘምኑ";
+      "አዲስ የ መኃልዬ ስሪት አለ ፣ የቅርብ ጊዜ ባህሪዎችን እና ማሻሻያዎችን ለማግኘት መተግበሪያዉን ያዘምኑ";
   final String maybeLatter = "ምናልባት በኋላ";
   final String dontAskAgain = "እንደገና አትጠይቅ";
   final String featuringTxt = "ተለይተዉ የቀረቡ";

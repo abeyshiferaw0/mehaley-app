@@ -33,7 +33,7 @@ class ItemHomeCategory extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl: category.categoryImage.imageMediumPath,
+                imageUrl: category.categoryImage.imageLargePath,
                 fit: BoxFit.cover,
                 height: AppValues.homeCategoriesItemHeight,
                 width: AppValues.homeCategoriesItemWidth,

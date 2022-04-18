@@ -47,28 +47,28 @@ class ShareButtonsBloc extends Bloc<ShareButtonsEvent, ShareButtonsState> {
       String id = AppApi.toBase64Str(event.playlist.playlistId.toString());
       String shareUrl = '${AppApi.sharingBaseUrl}?type=playlist&id=$id';
       Share.share(
-        'Check out $shareUrl',
+        'Check out this orthodox mezmur playlist from mehaleye $shareUrl',
         subject: 'Ethiopian Orthodox Mezmurs On Mehaleye',
       );
     } else if (event is ShareAlbumEvent) {
       String id = AppApi.toBase64Str(event.album.albumId.toString());
       String shareUrl = '${AppApi.sharingBaseUrl}?type=album&id=$id';
       Share.share(
-        'Check out $shareUrl',
+        'Check out this orthodox mezmur album from mehaleye $shareUrl',
         subject: 'Ethiopian Orthodox Mezmurs On Mehaleye',
       );
     } else if (event is ShareArtistEvent) {
       String id = AppApi.toBase64Str(event.artist.artistId.toString());
       String shareUrl = '${AppApi.sharingBaseUrl}?type=zemari&id=$id';
       Share.share(
-        'Check out $shareUrl',
+        'Check out zemari ${event.artist.artistName.textEn} from mehaleye $shareUrl',
         subject: 'Ethiopian Orthodox Mezmurs On Mehaleye',
       );
     } else if (event is ShareSongEvent) {
       String id = AppApi.toBase64Str(event.song.songId.toString());
       String shareUrl = '${AppApi.sharingBaseUrl}?type=mezmur&id=$id';
       Share.share(
-        'Check out $shareUrl',
+        'Check out this orthodox mezmur from mehaleye $shareUrl',
         subject: 'Ethiopian Orthodox Mezmurs On Mehaleye',
       );
     }

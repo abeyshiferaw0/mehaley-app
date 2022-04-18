@@ -4,7 +4,6 @@ import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dar
 import 'package:mehaley/business_logic/blocs/artist_page_bloc/artist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
-import 'package:mehaley/business_logic/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
@@ -85,13 +84,8 @@ class AppRouter {
     //ROUTERS PATH SWITCH
     switch (settings.name) {
       case AppRouterPaths.homeRoute:
-        builder = (_) => BlocProvider<HomePageBloc>(
-              create: (context) => HomePageBloc(
-                homeDataRepository: AppRepositories.homeDataRepository,
-              ),
-              child: HomePage(
-                key: Key('HOME_PAGE_KEY'),
-              ),
+        builder = (_) => HomePage(
+              key: Key('HOME_PAGE_KEY'),
             );
         break;
       case AppRouterPaths.settingRoute:

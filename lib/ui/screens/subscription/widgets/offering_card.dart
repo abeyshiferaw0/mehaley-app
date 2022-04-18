@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_purchase_bloc/iap_subscription_purchase_bloc.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
@@ -8,6 +7,7 @@ import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/util/app_extention.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 class OfferingCard extends StatelessWidget {
@@ -80,7 +80,9 @@ class OfferingCard extends StatelessWidget {
 
           ///PRICE DESCRIPTION
           Text(
-            subscriptionOfferings.priceDescription,
+            PagesUtilFunctions.getSubscriptionsOfferingPriceDescTxt(
+              subscriptionOfferings,
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
@@ -144,7 +146,9 @@ class OfferingCard extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            AppLocale.of().tryForFree.toUpperCase(),
+            PagesUtilFunctions.getSubscriptionsOfferingButtonTxt(
+              subscriptionOfferings,
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_10.sp,

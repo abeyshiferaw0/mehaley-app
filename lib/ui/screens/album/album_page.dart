@@ -7,7 +7,7 @@ import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dar
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/api_response/album_page_data.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -96,7 +96,7 @@ class _AlbumPageState extends State<AlbumPage> with TickerProviderStateMixin {
                       position: position + 1,
                       isForMyPlaylist: false,
                       thumbUrl:
-                          albumPageData.album.albumImages[0].imageSmallPath,
+                          albumPageData.album.albumImages[0].imageMediumPath,
                       thumbSize: AppIconSizes.icon_size_52,
                       song: albumPageData.songs[position],
                       onPressed: () {

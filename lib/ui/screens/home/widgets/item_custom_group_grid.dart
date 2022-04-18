@@ -5,6 +5,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/screens/home/widgets/group_song_item_play_icon.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -60,6 +61,9 @@ class ItemCustomGroupGrid extends StatelessWidget {
                         ? AppIconWidget()
                         : SizedBox(),
 
+                    ///TINT IMAGES
+                    AppImageTint(),
+
                     ///PLAY ICON IF SONG ITEM
                     GroupSongItemPlayIcon(
                       groupType: groupType,
@@ -76,7 +80,7 @@ class ItemCustomGroupGrid extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: ColorMapper.getGrey(),
+              color: ColorMapper.getBlack(),
               fontWeight: FontWeight.w400,
               fontSize: AppFontSizes.font_size_10.sp,
             ),

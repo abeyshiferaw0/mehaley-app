@@ -120,7 +120,7 @@ class PlaylistMenuWidget extends StatelessWidget {
             child: CachedNetworkImage(
               height: AppValues.menuHeaderImageSize,
               width: AppValues.menuHeaderImageSize,
-              imageUrl: playlist.playlistImage.imageMediumPath,
+              imageUrl: playlist.playlistImage.imageLargePath,
               fit: BoxFit.cover,
               placeholder: (context, url) => buildImagePlaceHolder(),
               errorWidget: (context, url, error) => buildImagePlaceHolder(),

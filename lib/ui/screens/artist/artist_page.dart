@@ -339,7 +339,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: popularSongs[position].albumArt.imageSmallPath,
+                thumbUrl: popularSongs[position].albumArt.imageMediumPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),
@@ -386,7 +386,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     index: position,
                   );
                 },
-                thumbUrl: newSongs[position].albumArt.imageSmallPath,
+                thumbUrl: newSongs[position].albumArt.imageMediumPath,
                 thumbSize: AppValues.artistSongItemSize,
               ),
               SizedBox(height: AppMargin.margin_8),

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/screens/home/widgets/group_song_item_play_icon.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
@@ -60,6 +61,9 @@ class ItemCustomGroup extends StatelessWidget {
                         groupType != GroupType.ARTIST
                             ? AppIconWidget()
                             : SizedBox(),
+
+                        ///TINT IMAGES
+                        AppImageTint(),
 
                         ///PLAY ICON IF SONG ITEM
                         GroupSongItemPlayIcon(

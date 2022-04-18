@@ -14,6 +14,7 @@ class SignUpButton extends StatelessWidget {
     Key? key,
     required this.onTap,
     required this.title,
+    this.txtColor,
     required this.color,
     required this.isFilled,
     required this.noBorder,
@@ -23,6 +24,7 @@ class SignUpButton extends StatelessWidget {
 
   final VoidCallback onTap;
   final String title;
+  final Color? txtColor;
   final String? icon;
   final Color color;
   final bool isFilled;
@@ -37,7 +39,12 @@ class SignUpButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isFilled ? color : AppColors.transparent,
-          border: noBorder ? null : Border.all(color: color),
+          border: noBorder
+              ? null
+              : Border.all(
+                  color: color.withOpacity(0.4),
+                  width: 1.5,
+                ),
           borderRadius: noBorder ? null : BorderRadius.circular(50),
         ),
         padding: EdgeInsets.symmetric(
@@ -71,13 +78,16 @@ class SignUpButton extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  fontWeight: FontWeight.w600,
-                  color: ColorMapper.getWhite(),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontWeight: FontWeight.w600,
+                    color: txtColor != null ? txtColor : ColorMapper.getWhite(),
+                  ),
                 ),
               ),
             ),

@@ -78,7 +78,7 @@
 //                   errorWidget: (context, url, error) => buildImagePlaceHolder(),
 //                   placeholder: (context, url) => buildImagePlaceHolder(),
 //                   imageUrl: state != null
-//                       ? AppApi.baseFileUrl + state.albumArt.imageMediumPath
+//                       ? AppApi.baseFileUrl + state.albumArt.imageLargePath
 //                       : '',
 //                 );
 //               } else {

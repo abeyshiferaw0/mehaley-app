@@ -43,6 +43,62 @@ class HomeDataProvider {
     }
   }
 
+  Future getPaginatedAllSongs(int page, int pageSize) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/items/song/",
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
+  Future getPaginatedAllAlbums(int page, int pageSize) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/items/album/",
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
+  Future getPaginatedAllArtists(int page, int pageSize) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/items/artist/",
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
+  Future getPaginatedAllPlaylists(int page, int pageSize) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/items/playlist/",
+      queryParameters: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
   cancel() {
     if (dio != null) {
       dio.close(force: true);

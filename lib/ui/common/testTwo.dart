@@ -1,98 +1,79 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/yenepay/yenepay_payment_launcher_listener_bloc/yenepay_payment_launcher_listener_bloc.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/config/constants.dart';
+import 'package:path_provider/path_provider.dart';
 
 class TestTwoWidget extends StatefulWidget {
   const TestTwoWidget({Key? key}) : super(key: key);
 
   @override
-  _TestTwoWidgetState createState() => _TestTwoWidgetState();
+  State<TestTwoWidget> createState() => _TestTwoWidgetState();
 }
 
 class _TestTwoWidgetState extends State<TestTwoWidget> {
   @override
-  void initState() {
-    linkStream.listen((String? link) {
-      print("linkStream  link=>  ${link}");
-      closeWebView();
-    }, onError: (err) {
-      print("linkStream  err=>  ${err}");
-    });
-    BlocProvider.of<YenepayPaymentLauncherListenerBloc>(context).add(
-      StartYenepayPaymentListenerEvent(),
-    );
-    super.initState();
-  }
-
-  final GlobalKey webViewKey = GlobalKey();
-
-  InAppWebViewController? webViewController;
-  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
-        useShouldOverrideUrlLoading: true,
-        mediaPlaybackRequiresUserGesture: false,
-      ),
-      android: AndroidInAppWebViewOptions(
-        useHybridComposition: true,
-      ),
-      ios: IOSInAppWebViewOptions(
-        allowsInlineMediaPlayback: true,
-      ));
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // body: Center(
-      //   child: IconButton(
-      //     icon: Icon(FlutterRemix.play_circle_line),
-      //     onPressed: () {
-      //       canL(
-      //           "https://app.ethiomobilemoney.et:2121/ammsdkpay/#/?transactionNo=202201271332311486648307689631746");
-      //     },
-      //   ),
-      // ),
-      body: InAppWebView(
-        key: webViewKey,
-        initialUrlRequest: URLRequest(
-            url: Uri.parse(
-                'https://app.ethiomobilemoney.et:2121/ammsdkpay/#/result')),
-        initialOptions: options,
-        onWebViewCreated: (controller) {
-          webViewController = controller;
-          controller.addJavaScriptHandler(
-              handlerName: 'paymentResult',
-              callback: (args) {
-                print("WEBVIEW_TEST=> callback $args");
-                // print arguments coming from the JavaScript side!
-                print(args);
-              });
-        },
-        onLoadStart: (controller, url) {
-          print("WEBVIEW_TEST=> onLoadStart");
-        },
-        onLoadStop: (controller, url) async {
-          print("WEBVIEW_TEST=> onLoadStop");
-        },
-        onLoadError: (controller, url, code, message) {
-          print("WEBVIEW_TEST=> onLoadError");
-        },
+    return Container(
+      child: Center(
+        child: IconButton(
+          icon: Icon(FlutterRemix.user_fill),
+          onPressed: () {
+            dowbload();
+          },
+        ),
       ),
     );
   }
 
-  canL(String urlString) async {
-    bool can = true;
-    print("TEST_URL=>  can $can");
-    if (can) {
-      try {
-        print("TEST_URL=>  launch $urlString");
-        launch(urlString);
-      } catch (e) {
-        print("TEST_URL=>  catch ${e.toString()}");
-      }
+  Future<String> getSaveDir() async {
+    Directory directory = await getApplicationSupportDirectory();
+    Directory saveDir = Directory(
+      '${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}',
+    );
+    bool exists = await saveDir.exists();
+    if (!exists) {
+      await saveDir.create(recursive: true);
+    }
+    return saveDir.path;
+  }
+
+  dowbload() async {
+    var dio = Dio();
+    //dio.interceptors.add(LogInterceptor());
+    // This is big file(about 200M)
+    //   var url = "http://download.dcloud.net.cn/HBuilder.9.0.2.macosx_64.dmg";
+    var url =
+        'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_2MG.mp3';
+
+    String saveDir = await getSaveDir();
+
+    try {
+      var response = await dio.get(
+        url,
+        onReceiveProgress: (received, total) {
+          if (total != -1) {
+            print((received / total * 100).toStringAsFixed(0) + '%');
+          }
+        },
+        //Received data with List<int>
+        options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          receiveTimeout: 0,
+        ),
+      );
+      print(response.headers);
+      var file = File("$saveDir/file.jpg");
+      var raf = file.openSync(mode: FileMode.write);
+      // response.data is List<int> type
+      raf.writeFromSync(response.data);
+      await raf.close();
+      print("file.existsSync()=> ${file.existsSync()}");
+    } catch (e) {
+      print(e);
     }
   }
 }

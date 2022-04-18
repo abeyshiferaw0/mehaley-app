@@ -200,7 +200,7 @@ class _DialogFirstTimeLanAndCurrencyState
             ),
             buildPickerItem(
               context: context,
-              text: 'Oromiffa',
+              text: 'Afaan Oromoo',
               isSelected: isLocaleSelected(AppLanguage.OROMIFA),
               onTap: () {
                 BlocProvider.of<LocalizationCubit>(context).changeLocale(

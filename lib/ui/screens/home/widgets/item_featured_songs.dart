@@ -7,6 +7,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
+import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
 import 'package:mehaley/util/color_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
@@ -113,7 +114,7 @@ class FeaturedSongsItem extends StatelessWidget {
     return Expanded(
       flex: 25,
       child: CachedNetworkImage(
-        imageUrl: song.albumArt.imageSmallPath,
+        imageUrl: song.albumArt.imageMediumPath,
         imageBuilder: (context, imageProvider) => Stack(
           children: [
             Container(
@@ -125,6 +126,9 @@ class FeaturedSongsItem extends StatelessWidget {
               ),
             ),
             AppIconWidget(),
+
+            ///TINT IMAGES
+            AppImageTint(),
           ],
         ),
         placeholder: (context, url) => buildItemsImagePlaceHolder(),

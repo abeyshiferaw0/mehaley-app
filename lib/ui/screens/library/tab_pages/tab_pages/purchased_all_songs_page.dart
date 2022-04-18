@@ -99,7 +99,7 @@ class _PurchasedAllSongsPageState extends State<PurchasedAllSongsPage> {
                 SongItem(
                   song: item,
                   isForMyPlaylist: false,
-                  thumbUrl: item.albumArt.imageSmallPath,
+                  thumbUrl: item.albumArt.imageMediumPath,
                   thumbSize: AppValues.playlistSongItemSize,
                   onPressed: () {
                     //OPEN SONG

@@ -34,7 +34,7 @@ class ItemPopularPlaylist extends StatelessWidget {
             AppCard(
               radius: 4.0,
               child: CachedNetworkImage(
-                imageUrl: playlist.playlistImage.imageMediumPath,
+                imageUrl: playlist.playlistImage.imageLargePath,
                 width: AppValues.categoryPopularItemsSize,
                 height: AppValues.categoryPopularItemsSize,
                 imageBuilder: (context, imageProvider) => Stack(

@@ -84,6 +84,7 @@ class AppValues {
   static const double customGroupHeaderImageSize = 45;
   static const double featuredSongsPagerHeight = 80;
   static const double homeHeaderGradientColor = 400;
+  static const double homePageHeaderTabsHeight = 60;
 
   //BOTTOM BAR
   static const double bottomBarActiveIconSize = 28;
@@ -246,6 +247,10 @@ class AppValues {
   static const double previewModeDialogAppIconSize = 40;
   static const double loadingWidgetSize = 100;
   static const int pageSize = 25;
+  static const int allAlbumsPageSize = 13;
+  static const int allArtistsPageSize = 13;
+  static const int allPlaylistsPageSize = 13;
+  static const int allSongsPageSize = 15;
   static const int colorChangeAnimationDuration = 600;
   static const int buttonBouncingDurationInMili = 200;
   static const int buttonBouncingDurationInMili2 = 50;

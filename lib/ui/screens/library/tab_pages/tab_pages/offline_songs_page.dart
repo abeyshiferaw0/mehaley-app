@@ -107,7 +107,7 @@ class _OfflineSongsPageState extends State<OfflineSongsPage> {
             SongItem(
               song: offlineSong[position],
               isForMyPlaylist: false,
-              thumbUrl: offlineSong[position].albumArt.imageSmallPath,
+              thumbUrl: offlineSong[position].albumArt.imageMediumPath,
               thumbSize: AppValues.offlineSongsSize,
               onPressed: () async {
                 await PagesUtilFunctions.offlineSongOnClick(

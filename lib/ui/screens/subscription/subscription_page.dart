@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
@@ -19,6 +22,7 @@ import 'package:mehaley/ui/screens/subscription/widgets/iap_subscription_restori
 import 'package:mehaley/ui/screens/subscription/widgets/subscription_sliver_header_Delegate.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/offering_card.dart';
 
@@ -227,6 +231,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
 
           ///PLANS INFO
           buildPlansInfo(),
+
+          ///BUILD APP TERMS INFO FOR IOS DEVICES
+          buildTermsInfo(),
         ],
       ),
     );
@@ -435,6 +442,69 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
           ),
         ],
       ),
+    );
+  }
+
+  SliverToBoxAdapter buildTermsInfo() {
+    return SliverToBoxAdapter(
+      child: Platform.isIOS
+          ? Container(
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: AppIconSizes.icon_size_48,
+                    child: Lottie.network(
+                      'https://assets10.lottiefiles.com/packages/lf20_dxwu3xu0.json',
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppMargin.margin_6,
+                  ),
+                  Text(
+                    'All payments will be paid through your iTunes Account and may be managed under Account Settings after the initial payment. Subscription payments will automatically renew unless deactivated at least 24-hours before the end of the current cycle. Your account will be charged for renewal at least 24-hours prior to the end of the current cycle. Cancellations are incurred by disabling auto-renewal.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: (AppFontSizes.font_size_8 + 1).sp,
+                      color: ColorMapper.getGrey(),
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppMargin.margin_20,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      launch('https://mehaleye.com/term-of-service.html');
+                    },
+                    child: Text(
+                      'Terms of Service',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        color: ColorMapper.getGrey(),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      launch('https://mehaleye.com/privacy.html');
+                    },
+                    child: Text(
+                      'Privacy Policy',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        color: ColorMapper.getGrey(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : SizedBox(),
     );
   }
 }

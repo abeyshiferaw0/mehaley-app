@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/complete_purchase_dialog_bloc/complete_purchase_bloc.dart';
@@ -16,193 +18,259 @@ class PurchaseUtil {
   /////////MAIN FUNCTIONS////////////
   ///////////////////////////////////
   static void miniPlayerBuyButtonOnClick(context, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: song.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.miniPlayerBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.miniPlayerBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.miniPlayerBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.miniPlayerBuyButtonOnClick(
+        context,
+        song,
+      );
+    } else {
+      ///FOR ANDROID
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: song.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.miniPlayerBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.miniPlayerBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.miniPlayerBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+      );
+    }
   }
 
   static void songMenuBuyButtonOnClick(context, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: song.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.songMenuBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.songMenuBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.songMenuBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.songMenuBuyButtonOnClick(
+        context,
+        song,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: song.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.songMenuBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.songMenuBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.songMenuBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+      );
+    }
   }
 
   static void songPreviewModeDialogBuyButtonOnClick(context, Song song) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: song.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
-          context,
-          song,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+        context,
+        song,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: song.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+      );
+    }
   }
 
   static void playlistPageHeaderBuyButtonOnClick(context, Playlist playlist) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: playlist.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
-          context,
-          playlist,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
-          context,
-          playlist,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
-          context,
-          playlist,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+        context,
+        playlist,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: playlist.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+            context,
+            playlist,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+            context,
+            playlist,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+            context,
+            playlist,
+          );
+        },
+      );
+    }
   }
 
   static void playlistMenuBuyButtonOnClick(
       context, Playlist playlist, bool isFromPlaylistPage) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: playlist.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.playlistMenuBuyButtonOnClick(
-          context,
-          playlist,
-          isFromPlaylistPage,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.playlistMenuBuyButtonOnClick(
-          context,
-          playlist,
-          isFromPlaylistPage,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.playlistMenuBuyButtonOnClick(
-          context,
-          playlist,
-          isFromPlaylistPage,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.playlistMenuBuyButtonOnClick(
+        context,
+        playlist,
+        isFromPlaylistPage,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: playlist.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.playlistMenuBuyButtonOnClick(
+            context,
+            playlist,
+            isFromPlaylistPage,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.playlistMenuBuyButtonOnClick(
+            context,
+            playlist,
+            isFromPlaylistPage,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.playlistMenuBuyButtonOnClick(
+            context,
+            playlist,
+            isFromPlaylistPage,
+          );
+        },
+      );
+    }
   }
 
   static void albumPageHeaderBuyButtonOnClick(context, Album album) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: album.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.albumPageHeaderBuyButtonOnClick(
-          context,
-          album,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.albumPageHeaderBuyButtonOnClick(
-          context,
-          album,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.albumPageHeaderBuyButtonOnClick(
-          context,
-          album,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+        context,
+        album,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: album.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+            context,
+            album,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+            context,
+            album,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+            context,
+            album,
+          );
+        },
+      );
+    }
   }
 
   static void albumMenuBuyButtonOnClick(
       context, Album album, bool isFromAlbumPage) {
-    ///STEP => SHOW BUYING DIALOGS
-    startPurchaseProcess(
-      context: context,
-      priceEtb: album.priceEtb,
-      onTelebirrSelected: () {
-        TelebirrPurchaseUtil.albumMenuBuyButtonOnClick(
-          context,
-          album,
-          isFromAlbumPage,
-        );
-      },
-      onYenepaySelected: () {
-        YenepayPurchaseUtil.albumMenuBuyButtonOnClick(
-          context,
-          album,
-          isFromAlbumPage,
-        );
-      },
-      onInAppSelected: () {
-        IapPurchaseUtil.albumMenuBuyButtonOnClick(
-          context,
-          album,
-          isFromAlbumPage,
-        );
-      },
-    );
+    ///PROCEED WITH ONLY IAP FOR IOS DEVICES
+    if (Platform.isIOS) {
+      ///
+      IapPurchaseUtil.albumMenuBuyButtonOnClick(
+        context,
+        album,
+        isFromAlbumPage,
+      );
+    } else {
+      ///STEP => SHOW BUYING DIALOGS
+      startPurchaseProcess(
+        context: context,
+        priceEtb: album.priceEtb,
+        onTelebirrSelected: () {
+          TelebirrPurchaseUtil.albumMenuBuyButtonOnClick(
+            context,
+            album,
+            isFromAlbumPage,
+          );
+        },
+        onYenepaySelected: () {
+          YenepayPurchaseUtil.albumMenuBuyButtonOnClick(
+            context,
+            album,
+            isFromAlbumPage,
+          );
+        },
+        onInAppSelected: () {
+          IapPurchaseUtil.albumMenuBuyButtonOnClick(
+            context,
+            album,
+            isFromAlbumPage,
+          );
+        },
+      );
+    }
   }
 
   ////////////////////////////////////

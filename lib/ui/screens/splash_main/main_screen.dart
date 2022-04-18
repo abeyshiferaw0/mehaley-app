@@ -452,7 +452,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().songAddedToFavorites
@@ -466,7 +466,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is SongLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: ColorMapper.getWhite(),
@@ -478,7 +478,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
                       ? AppLocale.of().albumAddedToFavorites
@@ -492,7 +492,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AlbumLikeUnlikeErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: ColorMapper.getWhite(),
@@ -504,7 +504,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().playlistAddedToFavorites
@@ -518,7 +518,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is PlaylistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: ColorMapper.getWhite(),
@@ -530,7 +530,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowSuccessState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
                       ? AppLocale.of().artistsAddedToFavorites
@@ -544,7 +544,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is ArtistFollowUnFollowErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue,
                   isFloating: false,
                   msg: AppLocale.of().couldntConnect,
                   txtColor: ColorMapper.getWhite(),
@@ -738,10 +738,10 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AudioPlayerErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 buildAppSnackBar(
-                  bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                  bgColor: AppColors.blue.withOpacity(0.9),
                   txtColor: ColorMapper.getWhite(),
                   msg: state.msg,
-                  isFloating: false,
+                  isFloating: true,
                 ),
               );
             }

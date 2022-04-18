@@ -38,7 +38,7 @@ class ItemArtistFeaturedPlaylist extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: AppValues.featuringArtistItemImageSize,
                   height: AppValues.featuringArtistItemImageSize,
-                  imageUrl: playlist.playlistImage.imageMediumPath,
+                  imageUrl: playlist.playlistImage.imageLargePath,
                   imageBuilder: (context, imageProvider) => Stack(
                     children: [
                       Container(

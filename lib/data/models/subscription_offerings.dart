@@ -9,6 +9,7 @@ class SubscriptionOfferings extends Equatable {
   final String? savingDescription;
   final String subTitle;
   final Offering offering;
+  final IosAdditionalInfo? iosAdditionalInfo;
 
   ///GRADIENT COLORS
   final HexColor textColor;
@@ -27,6 +28,7 @@ class SubscriptionOfferings extends Equatable {
     required this.color2,
     required this.color3,
     required this.offering,
+    this.iosAdditionalInfo,
   });
 
   @override
@@ -41,6 +43,7 @@ class SubscriptionOfferings extends Equatable {
         color2,
         color3,
         offering,
+        iosAdditionalInfo,
       ];
 
   factory SubscriptionOfferings.fromJson(Map<String, dynamic> json, offering) {
@@ -55,8 +58,23 @@ class SubscriptionOfferings extends Equatable {
       color2: HexColor(json["package_info"]["color2"]),
       color3: HexColor(json["package_info"]["color3"]),
       offering: offering,
+      iosAdditionalInfo: json["ios_additional_info"] != null
+          ? IosAdditionalInfo(
+              buttonTitle: json["ios_additional_info"]["button_title"],
+              priceDescription: json["ios_additional_info"]
+                  ["price_description"],
+            )
+          : null,
     );
   }
 //
 
+}
+
+class IosAdditionalInfo {
+  final String buttonTitle;
+  final String priceDescription;
+
+  IosAdditionalInfo(
+      {required this.buttonTitle, required this.priceDescription});
 }

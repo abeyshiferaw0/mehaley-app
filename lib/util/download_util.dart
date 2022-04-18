@@ -35,14 +35,28 @@ class DownloadUtil {
   }
 
   Future<String> getSaveDir(Song song) async {
-    Directory directory = await getApplicationSupportDirectory();
-    Directory saveDir = Directory(
-      '${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}',
-    );
-    bool exists = await saveDir.exists();
-    if (!exists) {
-      await saveDir.create(recursive: true);
+    Directory saveDir;
+    if (Platform.isAndroid) {
+      Directory directory = await getApplicationSupportDirectory();
+      saveDir = Directory(
+        '${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}',
+      );
+      bool exists = await saveDir.exists();
+      if (!exists) {
+        await saveDir.create(recursive: true);
+      }
+    } else {
+      Directory directory = await getApplicationDocumentsDirectory();
+      saveDir = Directory(
+        '${directory.absolute.path}${Platform.pathSeparator}${AppValues.folderMedia}${Platform.pathSeparator}${AppValues.folderSongs}${Platform.pathSeparator}',
+      );
+      bool exists = await saveDir.exists();
+      if (!exists) {
+        await saveDir.create(recursive: true);
+      }
     }
+
+    print("Uri.file=>2 ${saveDir.path}");
     return saveDir.path;
   }
 
