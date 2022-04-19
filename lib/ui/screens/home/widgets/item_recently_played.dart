@@ -52,7 +52,7 @@ class ItemRecentlyPlayed extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppCard(
-              radius: 4.0,
+              radius: 6.0,
               withShadow: false,
               child: CachedNetworkImage(
                 width: width,

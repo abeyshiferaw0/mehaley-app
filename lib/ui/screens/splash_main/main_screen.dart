@@ -28,6 +28,8 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_
 import 'package:mehaley/business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'package:mehaley/business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
+import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
+import 'package:mehaley/business_logic/cubits/home_page_tabs_change_listner_cubit.dart';
 import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
@@ -62,6 +64,8 @@ import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/payment_utils/yenepay_purchase_util.dart';
 import 'package:overlay_support/overlay_support.dart';
+
+import '../../../business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 
 //INIT ROUTERS
 final AppRouter _appRouter = AppRouter();
@@ -895,14 +899,37 @@ class _MainScreenState extends State<MainScreen> {
       builder: (context) {
         return WillPopScope(
           onWillPop: () async {
-            //DEFAULT BEHAVIOUR
+            ///FIRST CHECK IF HOME PAGE AND TAB IS OTHER THAN EXPLORE
+            ///IF NOT GO TO EXPLORE TAB
+            if (BlocProvider.of<BottomBarCubit>(context).state ==
+                BottomBarPages.HOME) {
+              if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
+                      .state !=
+                  null) {
+                if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
+                        .state !=
+                    HomePageTabs.EXPLORE) {
+                  ///GO TO EXPLORE TAB
+                  BlocProvider.of<HomePageTabsChangeCubit>(context)
+                      .changeGroupType(GroupType.NONE);
+                  BlocProvider.of<HomePageTabsChangeCubit>(context)
+                      .changeGroupType(null);
+                  return false;
+                }
+              }
+            }
+
+            ///THEN TRY
+            ///DEFAULT BEHAVIOUR
             if (_navigatorKey.currentState!.canPop()) {
               // if (BlocProvider.of<BottomBarCubit>(context).state.length > 1) {
               //   BlocProvider.of<BottomBarCubit>(context).navigatorPop();
               // }
               _navigatorKey.currentState!.pop();
+
               return false;
             }
+
             return true;
           },
           child: Navigator(

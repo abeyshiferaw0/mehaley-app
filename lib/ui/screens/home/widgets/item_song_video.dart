@@ -32,7 +32,7 @@ class ItemSongVideo extends StatelessWidget {
           );
         },
         child: AppCard(
-          radius: 4.0,
+          radius: 6.0,
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageBuilder: (context, imageProvider) => Stack(

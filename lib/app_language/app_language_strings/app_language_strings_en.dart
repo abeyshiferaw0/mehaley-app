@@ -417,20 +417,23 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String maybeLatter = "Maybe latter";
   final String dontAskAgain = "Don't ask again";
   final String featuringTxt = "Featured";
-
   final String youPurchasedSong = "Mezmur Purchased";
   final String youPurchasedAlbum = "Album Purchased";
   final String youPurchasedPlaylist = "Playlist Purchased";
   final String youCheckedOutCart = "Cart Checked Cleared";
-
   final String youReceivedGift = "Gift Received";
-
-  ///NOT TRANSLATED
   final String videos = "Videos";
   final String allVideos = "All Videos";
   final String emptyVideos = "Empty Videos";
   final String otherVideos = "Other Videos";
   final String cantFindOtherVideos = "Can't Find Other Videos";
+
+  final String viewMore = "View More";
+  final String explore = "Explore";
+  final String allSongs = "All Mezmurs";
+  final String allAlbums = "All Albums";
+  final String allArtists = "All Zemarians";
+  final String allPlaylists = "All Playlists";
 
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";

@@ -417,12 +417,20 @@ class AppLanguageStringsAm extends AppLocalizations {
 
   final String youReceivedGift = "የዋሌት ስጦታ ተቀብለዋል";
 
-  ///NOT TRANSLATED
   final String videos = "ቪዲዮዎች";
   final String allVideos = "ሁሉም ቪዲዮዎች";
   final String emptyVideos = "ቪዲዮዎች ማግጀት አልተቻለም";
   final String otherVideos = "ሌሎች ቪዲዮዎች";
   final String cantFindOtherVideos = "ሌሎች ቪዲዮዎች ማግጀት አልተቻለም";
+
+  final String explore = "ያስሱ";
+  final String allSongs = "ሁሉም መዝሙሮች";
+  final String allAlbums = "ሁሉም አልበሞች";
+  final String allArtists = "ሁሉም ዘማሪያን";
+  final String allPlaylists = "ሁሉም ፕሌይሊስቶች";
+
+  ///UNTRANSLATED
+  final String viewMore = "ተጨማሪ";
 
   String featuring({required String artistName}) {
     return "$artistName ያካተቱ ፕሌይሊስትዎች";

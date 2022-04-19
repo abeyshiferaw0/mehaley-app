@@ -51,6 +51,7 @@ class _AllAlbumsTabPageState extends State<AllAlbumsTabPage>
   }
 
   @override
+  @override
   void dispose() {
     _pagingController.dispose();
     super.dispose();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -59,19 +60,19 @@ class HomePageHeaderTabs extends StatelessWidget {
         ),
         tabs: [
           buildTabItem(
-            "Explore".toUpperCase(),
+            AppLocale.of().explore.toUpperCase(),
           ),
           buildTabItem(
-            "All Mezmurs".toUpperCase(),
+            AppLocale.of().allSongs.toUpperCase(),
           ),
           buildTabItem(
-            "All Albums".toUpperCase(),
+            AppLocale.of().allAlbums.toUpperCase(),
           ),
           buildTabItem(
-            "All Zemarians".toUpperCase(),
+            AppLocale.of().allArtists.toUpperCase(),
           ),
           buildTabItem(
-            "All Playlists".toUpperCase(),
+            AppLocale.of().allPlaylists.toUpperCase(),
           ),
         ],
       ),

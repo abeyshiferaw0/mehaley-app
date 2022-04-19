@@ -39,7 +39,7 @@ class ItemCustomGroup extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(
-                groupType == GroupType.ARTIST ? width : 4.0,
+                groupType == GroupType.ARTIST ? width : 8.0,
               ),
               child: Stack(
                 children: [

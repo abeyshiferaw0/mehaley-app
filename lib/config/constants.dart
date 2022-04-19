@@ -81,7 +81,7 @@ class AppValues {
   static const double homeUserLibImageItemSize = 50;
   static const double homeCategoriesItemHeight = 70;
   static const double homeCategoriesItemWidth = 155;
-  static const double customGroupHeaderImageSize = 45;
+  static const double customGroupHeaderImageSize = 50;
   static const double featuredSongsPagerHeight = 80;
   static const double homeHeaderGradientColor = 400;
   static const double homePageHeaderTabsHeight = 60;

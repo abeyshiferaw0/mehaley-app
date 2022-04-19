@@ -131,7 +131,7 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String total = "ጠቅላላ";
   final String checkOut = "ሁሉንም ግዛ";
   final String cartSummery = "የጥቅል ግዢ ዝርዝር";
-  final String remove = "Remove";
+  final String remove = "ምውጋድ";
   final String networkError = "ኢንተርኔት የለም";
   final String emptyCategory = "ምድቡ ባዶ ነው";
   final String checkYourInternetConnection = "የበይነመረብ ግንኙነትዎን የረጋግጹ";
@@ -478,6 +478,15 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String payWithAppStoreInappPurchasesMsg =
       "ግዝኢት መኃልዬ ንምዝዛም ናይ ኣፕል መለለይ መንነቶም ይጠቐሙ። ኣፕ ስቶር ዝስዕቡ ኣማራፂ ታት ክፍሊት የቕርብ";
   final String mezmur = "መዝሙር";
+
+  final String explore = "ደህሰስ";
+  final String allSongs = "ኩሉ መዝሙራት";
+  final String allAlbums = "ኩሉ ማህደር";
+  final String allArtists = "ኩሉ ዘማሮ";
+  final String allPlaylists = "ኩሉ ናይ መዝሙር ዝርዝር";
+
+  ///UNTRANSLATED
+  final String viewMore = "View More";
 
   String featuring({required String artistName}) {
     return "$artistName ዘእተኻዮም ፕሌይሊስትታት";

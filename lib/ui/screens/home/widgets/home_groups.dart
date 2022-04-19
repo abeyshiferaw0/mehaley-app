@@ -7,6 +7,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/screens/home/widgets/item_custom_group.dart';
 import 'package:mehaley/ui/screens/home/widgets/item_custom_group_grid.dart';
+import 'package:mehaley/ui/screens/home/widgets/view_more_button.dart';
 import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -52,15 +53,27 @@ class HomeGroups extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(
             left: AppMargin.margin_16,
+            right: AppMargin.margin_8,
             top: AppMargin.margin_32,
           ),
-          child: Text(
-            groupTitle.toTitleCase(),
-            style: TextStyle(
-              color: ColorMapper.getBlack(),
-              fontSize: AppFontSizes.font_size_16.sp,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  groupTitle.toTitleCase(),
+                  style: TextStyle(
+                    color: ColorMapper.getBlack(),
+                    fontSize: AppFontSizes.font_size_16.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ViewMoreButton(
+                groupType: groupType,
+              ),
+            ],
           ),
         ),
         SizedBox(height: AppMargin.margin_20),
@@ -115,15 +128,27 @@ class HomeGroups extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(
             left: AppMargin.margin_16,
+            right: AppMargin.margin_8,
             top: AppMargin.margin_32,
           ),
-          child: Text(
-            groupTitle.toTitleCase(),
-            style: TextStyle(
-              color: ColorMapper.getBlack(),
-              fontSize: AppFontSizes.font_size_16.sp,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  groupTitle.toTitleCase(),
+                  style: TextStyle(
+                    color: ColorMapper.getBlack(),
+                    fontSize: AppFontSizes.font_size_16.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ViewMoreButton(
+                groupType: groupType,
+              ),
+            ],
           ),
         ),
         Container(
@@ -145,10 +170,21 @@ class HomeGroups extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: AppMargin.margin_32),
-        GroupHeaderWidget(
-          groupHeaderImageUrl: groupHeaderImageUrl,
-          groupSubTitle: groupSubTitle,
-          groupTitle: groupTitle,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: GroupHeaderWidget(
+                groupHeaderImageUrl: groupHeaderImageUrl,
+                groupSubTitle: groupSubTitle,
+                groupTitle: groupTitle,
+              ),
+            ),
+            ViewMoreButton(
+              groupType: groupType,
+            ),
+          ],
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

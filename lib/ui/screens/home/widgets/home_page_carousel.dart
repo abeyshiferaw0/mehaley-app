@@ -75,7 +75,7 @@ class _HomePageVideoCarouselState extends State<HomePageVideoCarousel> {
   Widget build(BuildContext context) {
     if (widget.songVideos.length > 0) {
       return Container(
-        height: ScreenUtil(context: context).getScreenHeight() * 0.33,
+        height: ScreenUtil(context: context).getScreenHeight() * 0.35,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

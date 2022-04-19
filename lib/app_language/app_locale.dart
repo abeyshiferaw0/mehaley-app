@@ -515,8 +515,16 @@ class AppLocale {
       appLocalizations.payWithAppStoreInappPurchasesMsg;
   String get mezmur => appLocalizations.mezmur;
 
-  ///FUNCTIONS
+  String get explore => appLocalizations.explore;
+  String get allSongs => appLocalizations.allSongs;
+  String get allAlbums => appLocalizations.allAlbums;
+  String get allArtists => appLocalizations.allArtists;
+  String get allPlaylists => appLocalizations.allPlaylists;
 
+  ///
+  String get viewMore => appLocalizations.viewMore;
+
+  ///FUNCTIONS
   String featuring({required String artistName}) =>
       appLocalizations.featuring(artistName: artistName);
 

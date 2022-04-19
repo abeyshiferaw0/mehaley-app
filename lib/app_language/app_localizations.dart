@@ -417,6 +417,15 @@ abstract class AppLocalizations {
   String get payWithGoogleplayInappPurchasesMsg;
   String get payWithAppStoreInappPurchasesMsg;
 
+  String get explore;
+  String get allSongs;
+  String get allAlbums;
+  String get allArtists;
+  String get allPlaylists;
+
+  ///
+  String get viewMore;
+
   String featuring({required String artistName});
 
   String noOfSongs({required String noOfSong});

@@ -3,7 +3,7 @@ enum AppType {
   ELF_PLAY,
 }
 
-enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM }
+enum GroupType { SONG, PLAYLIST, ARTIST, ALBUM, NONE }
 
 enum GroupUiType {
   LINEAR_HORIZONTAL,
@@ -120,3 +120,5 @@ enum AppAdAction {
 }
 
 enum YenepayPaymentReturnType { COMPLETED, FAILURE, CANCEL, IS_FREE, EXISTS }
+
+enum HomePageTabs { EXPLORE, ALL_SONGS, ALL_ALBUMS, ALL_ARTISTS, ALL_PLAYLISTS }

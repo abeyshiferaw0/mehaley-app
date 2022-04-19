@@ -139,7 +139,7 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String total = "Waliigala";
   final String checkOut = "Hunda isaa biti";
   final String cartSummery = "Tarree bittaa marsaa";
-  final String remove = "Remove";
+  final String remove = "Ballessu";
   final String networkError = "Interneetiin hinjiru";
   final String emptyCategory = "Rimiddiin duwwaadha";
   final String checkYourInternetConnection =
@@ -535,8 +535,16 @@ class AppLanguageStringsOro extends AppLocalizations {
       "bittaa weedduu xumuruuf adda googilii keessan fayyadamaa, googil-pleey filannoowwan kaffaltii armaan gadii ni dhiyeessa";
   final String payWithAppStoreInappPurchasesMsg =
       "bittaa weedduu xumuruuf addaa appilii keessan fayyadamaa, aapp-istoorin filannoowwan kaffaltii armaan gadii ni dhiyeessa";
-
   final String mezmur = "Faarfannaa";
+
+  final String explore = "filachu";
+  final String allSongs = "faarfana hundda";
+  final String allAlbums = "Albbemma hundda";
+  final String allArtists = "Faarfattotta hundda";
+  final String allPlaylists = "faarfanna filacho";
+
+  ///UNTRANSLATED
+  final String viewMore = "View More";
 
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";

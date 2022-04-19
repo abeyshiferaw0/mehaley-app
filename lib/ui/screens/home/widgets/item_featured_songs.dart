@@ -35,7 +35,7 @@ class FeaturedSongsItem extends StatelessWidget {
           right: AppPadding.padding_16,
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(6),
           child: Container(
             height: double.infinity,
             color: ColorMapper.getLightGrey(),
