@@ -229,30 +229,46 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
     );
   }
 
-  ListView buildPaymentMethodsList(List<PaymentMethod> availableMethods) {
-    return ListView.separated(
-      physics: BouncingScrollPhysics(),
-      itemCount: availableMethods.length,
-      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_16),
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(
-          height: AppMargin.margin_20,
-        );
+  ShaderMask buildPaymentMethodsList(List<PaymentMethod> availableMethods) {
+    return ShaderMask(
+      blendMode: BlendMode.dstOut,
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            ColorMapper.getBlack(),
+            Colors.transparent,
+            Colors.transparent,
+            ColorMapper.getBlack(),
+          ],
+          stops: [0.0, 0.03, 0.98, 1.0],
+        ).createShader(bounds);
       },
-      itemBuilder: (BuildContext context, int index) {
-        return PaymentMethodItem(
-          paymentMethod: availableMethods.elementAt(index),
-          onTap: () {
-            if (availableMethods.elementAt(index).isAvailable) {
-              BlocProvider.of<CompletePurchaseBloc>(context).add(
-                SelectedPaymentMethodChangedEvent(
-                  paymentMethod: availableMethods.elementAt(index),
-                ),
-              );
-            }
-          },
-        );
-      },
+      child: ListView.separated(
+        physics: BouncingScrollPhysics(),
+        itemCount: availableMethods.length,
+        padding: EdgeInsets.symmetric(vertical: AppPadding.padding_16),
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            height: AppMargin.margin_20,
+          );
+        },
+        itemBuilder: (BuildContext context, int index) {
+          return PaymentMethodItem(
+            paymentMethod: availableMethods.elementAt(index),
+            onTap: () {
+              if (availableMethods.elementAt(index).isAvailable) {
+                BlocProvider.of<CompletePurchaseBloc>(context).add(
+                  SelectedPaymentMethodChangedEvent(
+                    paymentMethod: availableMethods.elementAt(index),
+                  ),
+                );
+              }
+            },
+          );
+        },
+      ),
     );
   }
 

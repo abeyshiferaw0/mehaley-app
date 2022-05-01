@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/color_mapper.dart';
@@ -5,6 +6,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
 import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/dialog/payment/widgets/plus_tele_tax_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../app_bouncing_button.dart';
@@ -89,14 +91,23 @@ class PaymentMethodItem extends StatelessWidget {
     );
   }
 
-  Text buildTitleText() {
-    return Text(
-      paymentMethod.title,
-      style: TextStyle(
-        fontSize: AppFontSizes.font_size_12.sp,
-        fontWeight: FontWeight.bold,
-        color: ColorMapper.getBlack(),
-      ),
+  Row buildTitleText() {
+    return Row(
+      children: [
+        Text(
+          paymentMethod.title,
+          style: TextStyle(
+            fontSize: AppFontSizes.font_size_12.sp,
+            fontWeight: FontWeight.bold,
+            color: ColorMapper.getBlack(),
+          ),
+        ),
+
+        ///SHOW PLUS TAX INFO FOR TELE CARD PURCHASE
+        PlusTeleTaxWidget(
+          paymentMethod: paymentMethod,
+        ),
+      ],
     );
   }
 

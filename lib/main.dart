@@ -27,6 +27,7 @@ import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/strings.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/screens/auth/sign_up_page.dart';
@@ -383,7 +384,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context) {
               return OverlaySupport.global(
                 child: MaterialApp(
-                  debugShowCheckedModeBanner: false,
+                  debugShowCheckedModeBanner: AppValues.kisDebug,
                   builder: (BuildContext context, Widget? child) {
                     final MediaQueryData data = MediaQuery.of(context);
                     return MediaQuery(

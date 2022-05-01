@@ -266,16 +266,16 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
     return Visibility(
       visible: showDownloading,
       child: Container(
-        margin: EdgeInsets.all(AppPadding.padding_8),
+        margin: EdgeInsets.all(AppMargin.margin_8),
         child: Row(
           children: [
             Container(
               width: widget.isForPlayerPage
                   ? AppIconSizes.icon_size_24
-                  : AppIconSizes.icon_size_16,
+                  : AppIconSizes.icon_size_20,
               height: widget.isForPlayerPage
                   ? AppIconSizes.icon_size_24
-                  : AppIconSizes.icon_size_16,
+                  : AppIconSizes.icon_size_20,
               child: AppCircularProgressIndicator(
                 progress: downloadingProgress,
                 color: widget.downloadingColor,

@@ -3,14 +3,15 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_common_toast_widget.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
 import 'package:mehaley/ui/common/dialog/payment/phone_verfication/dialog_phone_verfication_page_two.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/widgets/country_code_picker_button.dart';
@@ -18,6 +19,7 @@ import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_auth_large_bu
 import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_number_input.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sizer/sizer.dart';
 
 class DialogPhoneVerificationPageOne extends StatefulWidget {
@@ -89,13 +91,18 @@ class _DialogPhoneVerificationPageOneState
         }
         if (state is PhoneAuthErrorState) {
           ///SHOW ERROR MESSAGE
-          ScaffoldMessenger.of(context).showSnackBar(
-            buildAppSnackBar(
-              bgColor: ColorMapper.getBlack().withOpacity(0.9),
-              txtColor: ColorMapper.getWhite(),
-              msg: state.error,
-              isFloating: false,
+          showSimpleNotification(
+            AppCommonToastWidget(
+              bgColor: AppColors.errorRed,
+              text: AppLocale.of().authenticationFailedMsg,
+              textColor: AppColors.white,
+              icon: FlutterRemix.signal_wifi_error_line,
+              iconColor: AppColors.white,
             ),
+            background: AppColors.transparent,
+            contentPadding: EdgeInsets.all(AppPadding.padding_12),
+            duration: Duration(seconds: 7),
+            elevation: 0,
           );
         }
       },
@@ -243,13 +250,16 @@ class _DialogPhoneVerificationPageOneState
                   ),
                 );
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  buildAppSnackBar(
+                showSimpleNotification(
+                  AppCommonToastWidget(
                     bgColor: ColorMapper.getBlack().withOpacity(0.9),
-                    txtColor: ColorMapper.getWhite(),
-                    msg: AppLocale.of().invalidPhoneNumber,
-                    isFloating: false,
+                    text: AppLocale.of().invalidPhoneNumber,
+                    textColor: ColorMapper.getWhite(),
                   ),
+                  background: AppColors.transparent,
+                  contentPadding: EdgeInsets.all(AppPadding.padding_12),
+                  duration: Duration(seconds: 7),
+                  elevation: 0,
                 );
               }
             },

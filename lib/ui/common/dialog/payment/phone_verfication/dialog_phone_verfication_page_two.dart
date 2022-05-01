@@ -8,12 +8,13 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_card.dart';
+import 'package:mehaley/ui/common/app_common_toast_widget.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/common/app_snack_bar.dart';
 import 'package:mehaley/ui/common/app_top_header_with_icon.dart';
 import 'package:mehaley/ui/screens/auth/verify_phone/widgets/phone_auth_large_button.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:sizer/sizer.dart';
 
@@ -51,13 +52,16 @@ class _DialogPhoneVerificationPageTwoState
       listener: (context, state) {
         if (state is LastSmsStillActiveState) {
           ///SHOW VERIFYING LAST SMS IS RECENT MSG
-          ScaffoldMessenger.of(context).showSnackBar(
-            buildAppSnackBar(
+          showSimpleNotification(
+            AppCommonToastWidget(
               bgColor: ColorMapper.getBlack().withOpacity(0.9),
-              txtColor: ColorMapper.getWhite(),
-              msg: AppLocale.of().pinAlreadySent,
-              isFloating: false,
+              text: AppLocale.of().pinAlreadySent,
+              textColor: ColorMapper.getWhite(),
             ),
+            background: AppColors.transparent,
+            contentPadding: EdgeInsets.all(AppPadding.padding_12),
+            duration: Duration(seconds: 7),
+            elevation: 0,
           );
         }
         if (state is ResendCodeState) {
@@ -84,9 +88,40 @@ class _DialogPhoneVerificationPageTwoState
           ///RESUME PAYMENT PROCESS
           widget.onAuthSuccess();
         }
+        if (state is PhoneAuthErrorState) {
+          ///SHOW ERROR MESSAGE
+          showSimpleNotification(
+            AppCommonToastWidget(
+              bgColor: AppColors.errorRed,
+              text: state.error,
+              textColor: AppColors.white,
+              icon: FlutterRemix.signal_wifi_error_line,
+              iconColor: AppColors.white,
+            ),
+            background: AppColors.transparent,
+            contentPadding: EdgeInsets.all(AppPadding.padding_12),
+            duration: Duration(seconds: 7),
+            elevation: 0,
+          );
+        }
         if (state is AuthErrorState) {
           ///POP THIS DIALOG FIRST
           Navigator.pop(context);
+
+          ///SHOW ERROR MESSAGE
+          showSimpleNotification(
+            AppCommonToastWidget(
+              bgColor: AppColors.errorRed,
+              text: AppLocale.of().authenticationFailedMsg,
+              textColor: AppColors.white,
+              icon: FlutterRemix.signal_wifi_error_line,
+              iconColor: AppColors.white,
+            ),
+            background: AppColors.transparent,
+            contentPadding: EdgeInsets.all(AppPadding.padding_12),
+            duration: Duration(seconds: 7),
+            elevation: 0,
+          );
 
           ///GO TO PHONE INPUT DIALOG
           showDialog(
@@ -157,17 +192,21 @@ class _DialogPhoneVerificationPageTwoState
                                               ),
                                             );
                                           } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              buildAppSnackBar(
+                                            ///SHOW PIN NOT ENTERED MSG
+                                            showSimpleNotification(
+                                              AppCommonToastWidget(
                                                 bgColor: ColorMapper.getBlack()
                                                     .withOpacity(0.9),
-                                                txtColor:
-                                                    ColorMapper.getWhite(),
-                                                msg:
+                                                text:
                                                     AppLocale.of().pinNotFilled,
-                                                isFloating: false,
+                                                textColor:
+                                                    ColorMapper.getWhite(),
                                               ),
+                                              background: AppColors.transparent,
+                                              contentPadding: EdgeInsets.all(
+                                                  AppPadding.padding_12),
+                                              duration: Duration(seconds: 7),
+                                              elevation: 0,
                                             );
                                           }
                                         },

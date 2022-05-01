@@ -73,7 +73,7 @@ class WebPaymentValues {
 
 class AppValues {
   ///
-  static bool kisDebug = true;
+  static const bool kisDebug = true;
 
   ///
   static const String appStoreId = "1616875830";

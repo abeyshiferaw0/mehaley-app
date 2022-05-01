@@ -141,7 +141,12 @@ class DialogCustomIP extends StatelessWidget {
                             if (PagesUtilFunctions.isValidIpAddress(
                                     controller.text) ||
                                 AppApi.mainUrl == controller.text) {
-                              AppApi.baseUrl = "http://${controller.text}";
+                              if (PagesUtilFunctions.isValidIpAddress(
+                                  controller.text)) {
+                                AppApi.baseUrl = "http://${controller.text}";
+                              } else {
+                                AppApi.baseUrl = "${controller.text}";
+                              }
                               onIpSet();
                             } else {
                               SnackBar snackBar = SnackBar(
