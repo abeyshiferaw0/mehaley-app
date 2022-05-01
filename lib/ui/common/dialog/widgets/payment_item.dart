@@ -23,6 +23,9 @@ class PaymentMethodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBouncingButton(
       onTap: () {
+        print(
+            "PaymentMethodItem=>> ${paymentMethod.appPaymentMethods}  ${paymentMethod.isAvailable}");
+
         if (paymentMethod.isAvailable) {
           onTap();
         }

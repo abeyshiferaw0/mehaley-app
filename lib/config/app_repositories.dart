@@ -6,6 +6,7 @@ import 'package:mehaley/data/data_providers/artist_data_provider.dart';
 import 'package:mehaley/data/data_providers/auth_provider.dart';
 import 'package:mehaley/data/data_providers/category_data_provider.dart';
 import 'package:mehaley/data/data_providers/deeplink_song_data_provider.dart';
+import 'package:mehaley/data/data_providers/ethio_telecom_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/home_data_provider.dart';
 import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
@@ -33,6 +34,7 @@ import 'package:mehaley/data/repositories/artist_data_repository.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
 import 'package:mehaley/data/repositories/category_data_repository.dart';
 import 'package:mehaley/data/repositories/deeplink_song_repository.dart';
+import 'package:mehaley/data/repositories/ethio_telecom_purchase_repository.dart';
 import 'package:mehaley/data/repositories/home_data_repository.dart';
 import 'package:mehaley/data/repositories/iap_purchase_repository.dart';
 import 'package:mehaley/data/repositories/iap_subscription_repository.dart';
@@ -163,5 +165,10 @@ class AppRepositories {
 
   static AppAdDataRepository appAdDataRepository = AppAdDataRepository(
     appAdDataProvider: AppAdDataProvider(),
+  );
+
+  static EthioTelecomPurchaseRepository ethioTelecomPurchaseRepository =
+      EthioTelecomPurchaseRepository(
+    ethioTelecomPurchaseProvider: EthioTelecomPurchaseProvider(),
   );
 }

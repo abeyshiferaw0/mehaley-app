@@ -19,6 +19,7 @@ class DialogCompletePurchase extends StatefulWidget {
   const DialogCompletePurchase(
       {Key? key,
       required this.onYenepaySelected,
+      required this.onEthioTelecomSelected,
       required this.onTelebirrSelected,
       required this.onInAppSelected,
       required this.priceEtb})
@@ -26,6 +27,7 @@ class DialogCompletePurchase extends StatefulWidget {
 
   final VoidCallback onYenepaySelected;
   final VoidCallback onTelebirrSelected;
+  final VoidCallback onEthioTelecomSelected;
   final VoidCallback onInAppSelected;
   final double priceEtb;
 
@@ -55,12 +57,16 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
       listener: (context, state) {
         if (state is PaymentMethodsLoadedState) {
           state.availableMethods.forEach((e) {
-            if (e.isSelected) {
+            print(
+                "state.availableMethods ${e.appPaymentMethods} ${e.isSelected} ${e.isAvailable} ");
+            if (e.isSelected && e.isAvailable) {
               setState(() {
                 selectedPaymentMethod = e;
               });
             }
           });
+
+          print("selectedPaymentMethod=>>  ${selectedPaymentMethod}");
         }
       },
       child: Center(
@@ -83,21 +89,8 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
                 children: [
                   buildDialogHeader(context),
                   Expanded(
-                    child: BlocConsumer<CompletePurchaseBloc,
+                    child: BlocBuilder<CompletePurchaseBloc,
                         CompletePurchaseState>(
-                      listener: (context, state) {
-                        if (state is PaymentMethodsLoadedState) {
-                          ///IF A PAYMENT METHOD IS ALREADY SELECTED
-                          ///CHECK BOX TO TRUE
-                          state.availableMethods.forEach((element) {
-                            if (element.isSelected) {
-                              setState(() {
-                                alwaysUseSelected = true;
-                              });
-                            }
-                          });
-                        }
-                      },
                       builder: (context, state) {
                         if (state is PaymentMethodsLoadedState) {
                           return buildPaymentMethodsList(
@@ -169,6 +162,10 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
           if (selectedPaymentMethod!.isAvailable) {
             ///POP DIALOG
             Navigator.pop(context);
+            if (selectedPaymentMethod!.appPaymentMethods ==
+                AppPaymentMethods.METHOD_TELE_CARD) {
+              widget.onEthioTelecomSelected();
+            }
             if (selectedPaymentMethod!.appPaymentMethods ==
                 AppPaymentMethods.METHOD_INAPP) {
               widget.onInAppSelected();
@@ -246,11 +243,13 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase> {
         return PaymentMethodItem(
           paymentMethod: availableMethods.elementAt(index),
           onTap: () {
-            BlocProvider.of<CompletePurchaseBloc>(context).add(
-              SelectedPaymentMethodChangedEvent(
-                paymentMethod: availableMethods.elementAt(index),
-              ),
-            );
+            if (availableMethods.elementAt(index).isAvailable) {
+              BlocProvider.of<CompletePurchaseBloc>(context).add(
+                SelectedPaymentMethodChangedEvent(
+                  paymentMethod: availableMethods.elementAt(index),
+                ),
+              );
+            }
           },
         );
       },

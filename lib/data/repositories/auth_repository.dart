@@ -37,46 +37,39 @@ class AuthRepository {
     );
   }
 
-  Future<SaveUserData> saveUser(AppFireBaseUser appFireBaseUser) async {
-    Response response = await authProvider.saveUser(appFireBaseUser);
+  Future<SaveUserData> validateUserPhone(
+      AppFireBaseUser appFireBaseUser) async {
     final AppUser appUser;
-    final String accessToken;
 
-    //PARSE USER
-    appUser = AppUser.fromMap(response.data['user']);
+    Response response = await authProvider.validateUserPhone(appFireBaseUser);
 
-    //PARSE ACCESS TOKEN
-    accessToken = response.data['access_token'];
+    ///PARSE USER
+    appUser = AppUser.fromMap(response.data);
 
-    ///SAVE USER AND TOKEN
-    AppHiveBoxes.instance.userBox.put(
-      AppValues.loggedInUserKey,
+    SaveUserData saveUserData = parseAndSaveUserData(
+      response,
       appUser,
+      false,
     );
 
-    AppHiveBoxes.instance.userBox.put(
-      AppValues.userAccessTokenKey,
-      accessToken,
-    );
-
-    ///SAVE USERS TEMP NAME AND COLOR
-    AppHiveBoxes.instance.userBox.put(
-      AppValues.userTemporaryNameKey,
-      AuthUtil.generateTemporaryUserName(),
-    );
-    AppHiveBoxes.instance.userBox.put(
-      AppValues.userTemporaryColorKey,
-      AuthUtil.generateTemporaryUserColor().value.toString(),
-    );
-
-    return SaveUserData(
-      appUser: appUser,
-      accessToken: accessToken,
-    );
+    return saveUserData;
   }
 
-  cancelDio() {
-    authProvider.cancel();
+  Future<SaveUserData> saveUser(AppFireBaseUser appFireBaseUser) async {
+    final AppUser appUser;
+
+    Response response = await authProvider.saveUser(appFireBaseUser);
+
+    ///PARSE USER
+    appUser = AppUser.fromMap(response.data['user']);
+
+    SaveUserData saveUserData = parseAndSaveUserData(
+      response,
+      appUser,
+      true,
+    );
+
+    return saveUserData;
   }
 
   updateUser(String userName, File image, bool imageChanged) async {
@@ -84,7 +77,7 @@ class AuthRepository {
         await authProvider.updateUser(userName, image, imageChanged);
     final AppUser appUser;
 
-    //PARSE USER
+    ///PARSE USER
     appUser = AppUser.fromMap(response.data['user']);
 
     ///SAVE USER
@@ -145,5 +138,46 @@ class AuthRepository {
     ).then((value) {
       return;
     });
+  }
+
+  SaveUserData parseAndSaveUserData(response, appUser, saveToken) {
+    String accessToken = '';
+
+    ///IF TOKEN IS AVAILABLE
+    if (saveToken) {
+      ///PARSE ACCESS TOKEN
+      accessToken = response.data['access_token'];
+
+      ///SAVE TOKEN
+      AppHiveBoxes.instance.userBox.put(
+        AppValues.userAccessTokenKey,
+        accessToken,
+      );
+    }
+
+    ///SAVE USER
+    AppHiveBoxes.instance.userBox.put(
+      AppValues.loggedInUserKey,
+      appUser,
+    );
+
+    ///SAVE USERS TEMP NAME AND COLOR
+    AppHiveBoxes.instance.userBox.put(
+      AppValues.userTemporaryNameKey,
+      AuthUtil.generateTemporaryUserName(),
+    );
+    AppHiveBoxes.instance.userBox.put(
+      AppValues.userTemporaryColorKey,
+      AuthUtil.generateTemporaryUserColor().value.toString(),
+    );
+
+    return SaveUserData(
+      appUser: appUser,
+      accessToken: accessToken,
+    );
+  }
+
+  cancelDio() {
+    authProvider.cancel();
   }
 }

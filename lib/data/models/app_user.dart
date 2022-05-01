@@ -19,16 +19,18 @@ class AppUser extends Equatable {
   @HiveField(4)
   final String? phoneNumber;
   @HiveField(5)
-  final String? socialProfileImgUrl;
+  final bool isPhoneAuthenticated;
   @HiveField(6)
-  final String authLoginId;
+  final String? socialProfileImgUrl;
   @HiveField(7)
-  final UserLoginType loginType;
+  final String authLoginId;
   @HiveField(8)
-  final RemoteImage? profileImageId;
+  final UserLoginType loginType;
   @HiveField(9)
-  final DateTime dateCreated;
+  final RemoteImage? profileImageId;
   @HiveField(10)
+  final DateTime dateCreated;
+  @HiveField(11)
   final DateTime dateModified;
   @override
   List<Object?> get props => [
@@ -37,6 +39,7 @@ class AppUser extends Equatable {
         userEmail,
         phoneNumberCountryCode,
         phoneNumber,
+        isPhoneAuthenticated,
         socialProfileImgUrl,
         authLoginId,
         loginType,
@@ -51,6 +54,7 @@ class AppUser extends Equatable {
     required this.userEmail,
     required this.phoneNumberCountryCode,
     required this.phoneNumber,
+    required this.isPhoneAuthenticated,
     required this.socialProfileImgUrl,
     required this.authLoginId,
     required this.loginType,
@@ -65,6 +69,7 @@ class AppUser extends Equatable {
       userName: map['user_name'] as String?,
       userEmail: map['user_email'] as String?,
       phoneNumberCountryCode: map['phone_number_country_code'] as String?,
+      isPhoneAuthenticated: map['is_phone_authenticated'] == 1 ? true : false,
       phoneNumber: map['phone_number'] as String?,
       socialProfileImgUrl: map['social_profile_img_url'] as String?,
       authLoginId: map['auth_login_id'] as String,
@@ -87,6 +92,7 @@ class AppUser extends Equatable {
       'user_email': this.userEmail,
       'phone_number_country_code': this.phoneNumberCountryCode,
       'phone_number': this.phoneNumber,
+      'is_phone_authenticated': this.isPhoneAuthenticated,
       'social_profile_img_url': this.socialProfileImgUrl,
       'auth_login_id': this.authLoginId,
       'login_type': this.loginType,

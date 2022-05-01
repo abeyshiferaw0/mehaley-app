@@ -5,6 +5,8 @@ class HomePageTabsChangeCubit extends Cubit<GroupType?> {
   HomePageTabsChangeCubit() : super(null);
 
   changeGroupType(GroupType? groupType) async {
+    print("AppBouncingButton clickedd ${state}");
     emit(groupType);
+    emit(GroupType.NONE);
   }
 }

@@ -708,6 +708,42 @@ class _MainScreenState extends State<MainScreen> {
         BlocListener<OneSignalBloc, OneSignalState>(
           listener: (BuildContext context, state) {
             if (state is NotificationClickedState) {
+              if (state.itemType == AppItemsType.SINGLE_TRACK) {
+                ///OPEN SONG FROM ONE SIGNAL NOTIFICATION
+                ///REUSED CODE FROM SHARING SONG
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return BlocProvider(
+                      create: (context) => DeepLinkSongBloc(
+                        deeplinkSongRepository:
+                            AppRepositories.deeplinkSongRepository,
+                      ),
+                      child: DialogDeeplinkSong(
+                        songId: state.itemId,
+                        onSongFetched: (Song song) {
+                          PagesUtilFunctions.openSong(
+                            context: context,
+                            songs: [song],
+                            startPlaying: true,
+                            playingFrom: PlayingFrom(
+                              songSyncPlayedFrom: SongSyncPlayedFrom.UNK,
+                              songSyncPlayedFromId: -1,
+                              from: AppLocale.of().pushNotifications,
+                              title: L10nUtil.translateLocale(
+                                song.songName,
+                                context,
+                              ),
+                            ),
+                            index: 0,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              }
               if (state.itemType == AppItemsType.PLAYLIST) {
                 _navigatorKey.currentState!.pushNamed(
                   AppRouterPaths.playlistRoute,

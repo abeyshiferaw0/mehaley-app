@@ -54,12 +54,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
     //LISTEN FOR PLAYER QUEUE AND CURRENT INDEX CHANGE
     audioPlayerQueueListen();
-
-    audioPlayer.playbackEventStream.listen((event) {
-      print("playbackEventStream ${event.toString()}");
-    }, onError: (e) {
-      print("playbackEventStream ERROR=> ${e.toString()}");
-    });
   }
 
   @override

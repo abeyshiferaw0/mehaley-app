@@ -22,19 +22,20 @@ class AppUserAdapter extends TypeAdapter<AppUser> {
       userEmail: fields[2] as String?,
       phoneNumberCountryCode: fields[3] as String?,
       phoneNumber: fields[4] as String?,
-      socialProfileImgUrl: fields[5] as String?,
-      authLoginId: fields[6] as String,
-      loginType: fields[7] as UserLoginType,
-      profileImageId: fields[8] as RemoteImage?,
-      dateCreated: fields[9] as DateTime,
-      dateModified: fields[10] as DateTime,
+      isPhoneAuthenticated: fields[5] as bool,
+      socialProfileImgUrl: fields[6] as String?,
+      authLoginId: fields[7] as String,
+      loginType: fields[8] as UserLoginType,
+      profileImageId: fields[9] as RemoteImage?,
+      dateCreated: fields[10] as DateTime,
+      dateModified: fields[11] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, AppUser obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -46,16 +47,18 @@ class AppUserAdapter extends TypeAdapter<AppUser> {
       ..writeByte(4)
       ..write(obj.phoneNumber)
       ..writeByte(5)
-      ..write(obj.socialProfileImgUrl)
+      ..write(obj.isPhoneAuthenticated)
       ..writeByte(6)
-      ..write(obj.authLoginId)
+      ..write(obj.socialProfileImgUrl)
       ..writeByte(7)
-      ..write(obj.loginType)
+      ..write(obj.authLoginId)
       ..writeByte(8)
-      ..write(obj.profileImageId)
+      ..write(obj.loginType)
       ..writeByte(9)
-      ..write(obj.dateCreated)
+      ..write(obj.profileImageId)
       ..writeByte(10)
+      ..write(obj.dateCreated)
+      ..writeByte(11)
       ..write(obj.dateModified);
   }
 

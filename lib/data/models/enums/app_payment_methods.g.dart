@@ -18,8 +18,10 @@ class AppPaymentMethodsAdapter extends TypeAdapter<AppPaymentMethods> {
       case 1:
         return AppPaymentMethods.METHOD_TELEBIRR;
       case 2:
-        return AppPaymentMethods.METHOD_INAPP;
+        return AppPaymentMethods.METHOD_TELE_CARD;
       case 3:
+        return AppPaymentMethods.METHOD_INAPP;
+      case 4:
         return AppPaymentMethods.METHOD_UNK;
       default:
         return AppPaymentMethods.METHOD_YENEPAY;
@@ -35,11 +37,14 @@ class AppPaymentMethodsAdapter extends TypeAdapter<AppPaymentMethods> {
       case AppPaymentMethods.METHOD_TELEBIRR:
         writer.writeByte(1);
         break;
-      case AppPaymentMethods.METHOD_INAPP:
+      case AppPaymentMethods.METHOD_TELE_CARD:
         writer.writeByte(2);
         break;
-      case AppPaymentMethods.METHOD_UNK:
+      case AppPaymentMethods.METHOD_INAPP:
         writer.writeByte(3);
+        break;
+      case AppPaymentMethods.METHOD_UNK:
+        writer.writeByte(4);
         break;
     }
   }

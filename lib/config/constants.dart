@@ -8,13 +8,16 @@ import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AppApi {
-  static const String baseUrl = 'https://api.mehaleye.com';
+  static String mainUrl = "https://api.mehaleye.com";
+
+  ///BASED ON BUILD TYPE
+  static String baseUrl = "https://api.mehaleye.com";
   //static const String baseUrl = 'http://192.168.189.202:8181';
-  static const String musicBaseUrl = '$baseUrl/music';
-  static const String userBaseUrl = '$baseUrl/user';
-  static const String paymentBaseUrl = '$baseUrl/payment';
-  static const String cartBaseUrl = '$baseUrl/subscription';
-  static const String adBaseUrl = '$baseUrl/ad';
+  static String musicBaseUrl = '$baseUrl/music';
+  static String userBaseUrl = '$baseUrl/user';
+  static String paymentBaseUrl = '$baseUrl/payment';
+  static String cartBaseUrl = '$baseUrl/subscription';
+  static String adBaseUrl = '$baseUrl/ad';
   static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -56,21 +59,24 @@ class AppApi {
 }
 
 class WebPaymentValues {
-  static const String cancelUrl =
+  static String cancelUrl =
       AppApi.paymentBaseUrl + '/purchase/web_payment/cancel/';
-  static const String failureUrl =
+  static String failureUrl =
       AppApi.paymentBaseUrl + '/purchase/web_payment/fail/';
-  static const String completedUrl =
+  static String completedUrl =
       AppApi.paymentBaseUrl + '/purchase/web_payment/completed/';
-  static const String alreadyPurchasedUrl =
+  static String alreadyPurchasedUrl =
       AppApi.paymentBaseUrl + '/purchase/web_payment/exists/';
-  static const String isFreeUrl =
+  static String isFreeUrl =
       AppApi.paymentBaseUrl + '/purchase/web_payment/free/';
 }
 
 class AppValues {
   ///
-  static const String appStoreId = "1600274398";
+  static bool kisDebug = true;
+
+  ///
+  static const String appStoreId = "1616875830";
 
   //AUTH PAGES
   static const double signUpAppIconSize = 130;

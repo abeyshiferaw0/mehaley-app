@@ -11,6 +11,18 @@ import 'constants.dart';
 class AppPaymentMethodsList {
   static List<PaymentMethod> list = [
     PaymentMethod(
+      appPaymentMethods: AppPaymentMethods.METHOD_TELE_CARD,
+      isSelected: false,
+      title: "Pay with Ethio tele",
+      isAvailable: true,
+      description: "Use your phone balance to complete your mehaleye purchase",
+      paymentMethodImage: PaymentMethodImage(
+        imagePath: AppAssets.icEthioTele,
+        height: AppIconSizes.icon_size_36,
+      ),
+      paymentOptionImages: [],
+    ),
+    PaymentMethod(
       appPaymentMethods: AppPaymentMethods.METHOD_TELEBIRR,
       isSelected: false,
       title: AppLocale.of().payWithTelebirr,

@@ -189,9 +189,9 @@ class CountryCodesList {
       "geographic": true,
       "level": 1,
       "name": "Austria",
-      "example": "644123456",
+      "example": "68181234267",
       "display_name": "Austria (AT) [+43]",
-      "full_example_with_plus_sign": "+43644123456",
+      "full_example_with_plus_sign": "+4368181234267",
       "display_name_no_e164_cc": "Austria (AT)",
       "e164_key": "43-AT-0"
     },

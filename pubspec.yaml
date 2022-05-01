@@ -3,7 +3,7 @@ description: a music player engine
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.42+16
+version: 1.0.43+17
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

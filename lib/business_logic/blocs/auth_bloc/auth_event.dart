@@ -68,11 +68,21 @@ class VerifyPhoneEvent extends AuthEvent {
   final String pinCode;
   final String verificationId;
   final int? resendToken;
+  final bool? isForEthioTelePaymentAuth;
 
-  VerifyPhoneEvent(
-      {required this.pinCode, required this.verificationId, this.resendToken});
+  VerifyPhoneEvent({
+    required this.pinCode,
+    required this.verificationId,
+    this.resendToken,
+    this.isForEthioTelePaymentAuth,
+  });
   @override
-  List<Object?> get props => [pinCode, verificationId, resendToken];
+  List<Object?> get props => [
+        pinCode,
+        verificationId,
+        resendToken,
+        isForEthioTelePaymentAuth,
+      ];
 }
 
 class ResendPinCodeEvent extends AuthEvent {
@@ -88,6 +98,16 @@ class SaveUserEvent extends AuthEvent {
   final AppFireBaseUser appFireBaseUser;
 
   SaveUserEvent({
+    required this.appFireBaseUser,
+  });
+  @override
+  List<Object?> get props => [appFireBaseUser];
+}
+
+class ValidateUserPhoneEvent extends AuthEvent {
+  final AppFireBaseUser appFireBaseUser;
+
+  ValidateUserPhoneEvent({
     required this.appFireBaseUser,
   });
   @override

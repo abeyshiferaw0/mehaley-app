@@ -4,6 +4,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/data_providers/payment_provider.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
 import 'package:mehaley/data/models/payment/payment_method.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 
 class PaymentRepository {
@@ -46,18 +47,24 @@ class PaymentRepository {
         );
       }
 
-      ///IF IN APP CHECK AVAILABILITY
-      if (element.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
-        if (PagesUtilFunctions.isIapAvailable()) {
-          paymentMethod = paymentMethod.copyWith(
-            isAvailable: true,
-          );
-        } else {
-          paymentMethod = paymentMethod.copyWith(
-            isAvailable: false,
-          );
-        }
+      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
+        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
       }
+
+      ///IF IN APP CHECK AVAILABILITY
+      paymentMethod = checkIapAvailability(paymentMethod);
+
+      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
+        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
+      }
+
+      ///IF ETHIO TELE CARD CHECK AVAILABILITY
+      paymentMethod = checkEthioTeleCardAvailability(paymentMethod);
+
+      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
+        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
+      }
+
       list.add(paymentMethod);
     });
     return list;
@@ -71,17 +78,10 @@ class PaymentRepository {
         method = element;
 
         ///IF IN APP CHECK AVAILABILITY
-        if (method!.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
-          if (PagesUtilFunctions.isIapAvailable()) {
-            method = method!.copyWith(
-              isAvailable: true,
-            );
-          } else {
-            method = method!.copyWith(
-              isAvailable: false,
-            );
-          }
-        }
+        method = checkIapAvailability(method!);
+
+        ///IF ETHIO TELE CARD CHECK AVAILABILITY
+        method = checkEthioTeleCardAvailability(method!);
       }
     });
     return method;
@@ -94,17 +94,11 @@ class PaymentRepository {
       PaymentMethod paymentMethod = element;
 
       ///IF IN APP CHECK AVAILABILITY
-      if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
-        if (PagesUtilFunctions.isIapAvailable()) {
-          paymentMethod = paymentMethod.copyWith(
-            isAvailable: true,
-          );
-        } else {
-          paymentMethod = paymentMethod.copyWith(
-            isAvailable: false,
-          );
-        }
-      }
+      paymentMethod = checkIapAvailability(paymentMethod);
+
+      ///IF ETHIO TELE CARD CHECK AVAILABILITY
+      paymentMethod = checkEthioTeleCardAvailability(paymentMethod);
+
       list.add(
         paymentMethod.copyWith(
           isSelected:
@@ -115,6 +109,43 @@ class PaymentRepository {
       );
     });
     return list;
+  }
+
+  PaymentMethod checkIapAvailability(PaymentMethod paymentMethod) {
+    if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_INAPP) {
+      if (PagesUtilFunctions.isIapAvailable()) {
+        return paymentMethod.copyWith(
+          isAvailable: true,
+        );
+      } else {
+        return paymentMethod.copyWith(
+          isAvailable: false,
+          isSelected: false,
+        );
+      }
+    }
+
+    return paymentMethod;
+  }
+
+  PaymentMethod checkEthioTeleCardAvailability(PaymentMethod paymentMethod) {
+    print(
+        "checkEthioTeleCardAvailability => ${AuthUtil.isUserPhoneAuthenticated()}  ${AuthUtil.isUserPhoneEthiopian()}");
+    if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
+      if (AuthUtil.isUserPhoneAuthenticated() &&
+          !AuthUtil.isUserPhoneEthiopian()) {
+        return paymentMethod.copyWith(
+          isAvailable: false,
+          isSelected: false,
+        );
+      } else {
+        return paymentMethod.copyWith(
+          isAvailable: true,
+        );
+      }
+    }
+
+    return paymentMethod;
   }
 
   cancelDio() {

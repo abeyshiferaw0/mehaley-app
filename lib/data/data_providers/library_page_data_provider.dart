@@ -33,7 +33,7 @@ class LibraryPageDataProvider {
     }
 
     //SEND REQUEST
-    String url = "";
+    String url = '';
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
       url = "/purchased/song/all/";
     } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.SONGS) {

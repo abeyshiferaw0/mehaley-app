@@ -3,6 +3,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/ui/common/dialog/dialog_close_payment_auth_dialog.dart';
 
 import 'app_bouncing_button.dart';
 
@@ -11,10 +12,12 @@ class AppTopHeaderWithIcon extends StatelessWidget {
     Key? key,
     this.isForNewAppVersionDialog = false,
     this.disableCloseButton = false,
+    this.enableCloseWarning,
   }) : super(key: key);
 
   final bool isForNewAppVersionDialog;
   final bool disableCloseButton;
+  final bool? enableCloseWarning;
 
   @override
   Widget build(BuildContext context) {
@@ -52,23 +55,48 @@ class AppTopHeaderWithIcon extends StatelessWidget {
               ),
             ),
           ),
-          !disableCloseButton
-              ? AppBouncingButton(
-                  onTap: () {
+          if (!disableCloseButton)
+            AppBouncingButton(
+              onTap: () {
+                if (enableCloseWarning != null) {
+                  if (enableCloseWarning!) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: DialogClosePaymentAuthDialog(
+                            titleText: 'Cancel payment process',
+                            descText:
+                                'are you sure you want to cancel authenticating your phone number',
+                            onClose: () {
+                              Navigator.pop(context);
+                            },
+                            mainButtonText: 'Continue',
+                            cancelButtonText: 'Cancel',
+                          ),
+                        );
+                      },
+                    );
+                  } else {
                     Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppPadding.padding_4),
-                    child: Container(
-                      child: Icon(
-                        FlutterRemix.close_line,
-                        color: ColorMapper.getBlack(),
-                        size: AppIconSizes.icon_size_24,
-                      ),
-                    ),
+                  }
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(AppPadding.padding_4),
+                child: Container(
+                  child: Icon(
+                    FlutterRemix.close_line,
+                    color: ColorMapper.getBlack(),
+                    size: AppIconSizes.icon_size_24,
                   ),
-                )
-              : SizedBox(),
+                ),
+              ),
+            )
+          else
+            SizedBox(),
         ],
       ),
     );

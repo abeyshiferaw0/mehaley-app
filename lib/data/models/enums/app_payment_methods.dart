@@ -9,7 +9,9 @@ enum AppPaymentMethods {
   @HiveField(1)
   METHOD_TELEBIRR,
   @HiveField(2)
-  METHOD_INAPP,
+  METHOD_TELE_CARD,
   @HiveField(3)
+  METHOD_INAPP,
+  @HiveField(4)
   METHOD_UNK,
 }

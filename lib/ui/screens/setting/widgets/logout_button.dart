@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
+import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -23,6 +24,12 @@ class LogoutButton extends StatelessWidget {
             builder: (context) {
               return DialogLogOut(
                 onLogOut: () {
+                  ///STOP PLAYER
+                  BlocProvider.of<AudioPlayerBloc>(context).add(
+                    StopPlayerEvent(),
+                  );
+
+                  ///LOGOUT
                   BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
                 },
               );

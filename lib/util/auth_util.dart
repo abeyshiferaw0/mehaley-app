@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/models/app_user.dart';
+import 'package:mehaley/data/models/enums/user_login_type.dart';
 
 class AuthUtil {
   static Future<bool> isUserLoggedIn() async {
@@ -80,5 +81,40 @@ class AuthUtil {
     AppUser appUser =
         AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
     return appUser.userId.toString();
+  }
+
+  static bool isUserPhoneAuthenticated() {
+    AppUser appUser =
+        AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
+
+    return appUser.isPhoneAuthenticated;
+  }
+
+  static bool isUserPhoneEthiopian() {
+    bool isUserPhoneEthiopian = false;
+
+    AppUser appUser =
+        AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
+
+    if (appUser.phoneNumber != null) {
+      if (appUser.phoneNumber!.startsWith('+251')) {
+        isUserPhoneEthiopian = true;
+      }
+    }
+
+    return isUserPhoneEthiopian;
+  }
+
+  static bool isAuthTypePhoneNumber() {
+    AppUser appUser =
+        AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
+
+    return appUser.loginType == UserLoginType.PHONE_NUMBER;
+  }
+
+  static getUserString() {
+    AppUser appUser =
+        AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
+    return appUser.toMap();
   }
 }

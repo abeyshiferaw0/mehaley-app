@@ -29,7 +29,7 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
   MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-0000');
+      new MaskedTextController(mask: '000-000-000');
   CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
@@ -171,15 +171,6 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
                     phoneNumber: controller.text.replaceAll('-', ''),
                   ),
                 );
-              } else if (selectedCountryCode.code != 'ET' &&
-                  controller.text.length == 12) {
-                //LOGIN WITH GOOGLE
-                BlocProvider.of<AuthBloc>(context).add(
-                  ContinueWithPhoneEvent(
-                    countryCode: selectedCountryCode.dialCode!,
-                    phoneNumber: controller.text.replaceAll('-', ''),
-                  ),
-                );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   buildAppSnackBar(
@@ -205,11 +196,14 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           onChanged: (CountryCode countryCode) {
             setState(() {
               selectedCountryCode = countryCode;
+              controller.updateMask(
+                PagesUtilFunctions.getPhoneInputMask(selectedCountryCode),
+              );
             });
           },
           initialSelection: 'ET',
           favorite: ['ET', 'US'],
-          showCountryOnly: true,
+          showCountryOnly: false,
           showOnlyCountryWhenClosed: false,
           alignLeft: false,
           showFlag: true,

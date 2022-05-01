@@ -20,8 +20,8 @@ class RemoteImageAdapter extends TypeAdapter<RemoteImage> {
       primaryColorHex: fields[10] as String,
       imageId: fields[0] as int,
       imageSmallPath: fields[1] as String,
-      imageMediumPath: fields[2] as String,
       imageLargePath: fields[3] as String,
+      imageMediumPath: fields[2] as String,
       smallImageWidth: fields[4] as int,
       smallImageHeight: fields[5] as int,
       mediumImageWidth: fields[6] as int,
@@ -38,9 +38,9 @@ class RemoteImageAdapter extends TypeAdapter<RemoteImage> {
       ..writeByte(0)
       ..write(obj.imageId)
       ..writeByte(1)
-      ..write(obj.imageMediumPath)
+      ..write(obj.imageSmallPath)
       ..writeByte(2)
-      ..write(obj.imageLargePath)
+      ..write(obj.imageMediumPath)
       ..writeByte(3)
       ..write(obj.imageLargePath)
       ..writeByte(4)

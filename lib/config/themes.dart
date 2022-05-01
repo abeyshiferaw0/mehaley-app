@@ -47,6 +47,7 @@ class AppAssets {
   static String icMbirr = 'assets/icons/payment_icons/ic_mbirr.png';
   static String icPaypal = 'assets/icons/payment_icons/ic_paypal.png';
   static String icTelebirr = 'assets/icons/payment_icons/ic_telebirr.png';
+  static String icEthioTele = 'assets/icons/payment_icons/ic_ethio_tele.png';
   static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
   static String icYenepay = 'assets/icons/payment_icons/ic_yene_pay.png';
 

@@ -38,13 +38,29 @@ class AuthProvider {
     return response;
   }
 
-  cancel() {
-    if (dio != null) {
-      dio.close(force: true);
-    }
+  Future<Response> validateUserPhone(AppFireBaseUser appFireBaseUser) async {
+    //GET CACHE OPTIONS
+    CacheOptions cacheOptions = await AppApi.getDioCacheOptions();
+    BaseOptions options = new BaseOptions(
+      connectTimeout: 30000,
+      receiveTimeout: 15000,
+    );
+    dio = Dio(options);
+    //SEND REQUEST
+
+    Response response = await ApiUtil.post(
+      dio: dio,
+      url: AppApi.userBaseUrl + "/validate_phone/",
+      useToken: true,
+      data: {
+        'phone_number': appFireBaseUser.phoneNumber,
+      },
+    );
+    return response;
   }
 
-  updateUser(String userName, File image, bool imageChanged) async {
+  Future<Response> updateUser(
+      String userName, File image, bool imageChanged) async {
     dio = Dio();
 
     ///SEND REQUEST
@@ -77,5 +93,11 @@ class AuthProvider {
 
   clearDioCache() async {
     await ApiUtil.deleteAllCache();
+  }
+
+  cancel() {
+    if (dio != null) {
+      dio.close(force: true);
+    }
   }
 }

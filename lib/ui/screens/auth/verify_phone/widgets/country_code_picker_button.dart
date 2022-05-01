@@ -9,15 +9,17 @@ class CountryPickerButton extends StatelessWidget {
   const CountryPickerButton({
     Key? key,
     required this.countryCode,
+    this.removeIcon = false,
   }) : super(key: key);
 
   final CountryCode countryCode;
+  final bool removeIcon;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: ColorMapper.getLightGrey(),
-      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_16),
+      padding: EdgeInsets.symmetric(vertical: AppPadding.padding_14),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -48,11 +50,15 @@ class CountryPickerButton extends StatelessWidget {
           SizedBox(
             width: AppMargin.margin_4,
           ),
-          Icon(
-            FlutterRemix.arrow_down_s_fill,
-            size: AppFontSizes.font_size_12,
-            color: ColorMapper.getBlack(),
-          ),
+          !removeIcon
+              ? Icon(
+                  FlutterRemix.arrow_down_s_fill,
+                  size: AppFontSizes.font_size_12,
+                  color: ColorMapper.getBlack(),
+                )
+              : SizedBox(
+                  width: AppMargin.margin_4,
+                ),
           SizedBox(
             width: AppMargin.margin_8,
           ),

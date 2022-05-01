@@ -9,6 +9,7 @@ import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_complete_purchase.dart';
+import 'package:mehaley/util/payment_utils/ethio_telecom_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/iap_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/telebirr_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/yenepay_purchase_util.dart';
@@ -33,6 +34,12 @@ class PurchaseUtil {
         priceEtb: song.priceEtb,
         onTelebirrSelected: () {
           TelebirrPurchaseUtil.miniPlayerBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.miniPlayerBuyButtonOnClick(
             context,
             song,
           );
@@ -72,6 +79,12 @@ class PurchaseUtil {
             song,
           );
         },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.songMenuBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
         onYenepaySelected: () {
           YenepayPurchaseUtil.songMenuBuyButtonOnClick(
             context,
@@ -107,6 +120,12 @@ class PurchaseUtil {
             song,
           );
         },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
         onYenepaySelected: () {
           YenepayPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
             context,
@@ -138,6 +157,12 @@ class PurchaseUtil {
         priceEtb: playlist.priceEtb,
         onTelebirrSelected: () {
           TelebirrPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+            context,
+            playlist,
+          );
+        },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
             context,
             playlist,
           );
@@ -180,6 +205,13 @@ class PurchaseUtil {
             isFromPlaylistPage,
           );
         },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.playlistMenuBuyButtonOnClick(
+            context,
+            playlist,
+            isFromPlaylistPage,
+          );
+        },
         onYenepaySelected: () {
           YenepayPurchaseUtil.playlistMenuBuyButtonOnClick(
             context,
@@ -213,6 +245,12 @@ class PurchaseUtil {
         priceEtb: album.priceEtb,
         onTelebirrSelected: () {
           TelebirrPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+            context,
+            album,
+          );
+        },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.albumPageHeaderBuyButtonOnClick(
             context,
             album,
           );
@@ -255,6 +293,13 @@ class PurchaseUtil {
             isFromAlbumPage,
           );
         },
+        onEthioTelecomSelected: () {
+          EthioTelecomPurchaseUtil.albumMenuBuyButtonOnClick(
+            context,
+            album,
+            isFromAlbumPage,
+          );
+        },
         onYenepaySelected: () {
           YenepayPurchaseUtil.albumMenuBuyButtonOnClick(
             context,
@@ -280,6 +325,7 @@ class PurchaseUtil {
   static void startPurchaseProcess({
     required BuildContext context,
     required double priceEtb,
+    required VoidCallback onEthioTelecomSelected,
     required VoidCallback onYenepaySelected,
     required VoidCallback onTelebirrSelected,
     required VoidCallback onInAppSelected,
@@ -302,6 +348,7 @@ class PurchaseUtil {
           ],
           child: DialogCompletePurchase(
             priceEtb: priceEtb,
+            onEthioTelecomSelected: onEthioTelecomSelected,
             onYenepaySelected: onYenepaySelected,
             onTelebirrSelected: onTelebirrSelected,
             onInAppSelected: onInAppSelected,

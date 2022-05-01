@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/src/iterable_extensions.dart';
+import 'package:country_code_picker/country_code.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -1210,7 +1211,7 @@ class PagesUtilFunctions {
   static void shareApp() async {
     String appLink;
     if (Platform.isIOS) {
-      appLink = 'https://apps.apple.com/app/id1600274398';
+      appLink = 'https://apps.apple.com/us/app/mehaleye/id1616875830';
     } else {
       appLink =
           'https://play.google.com/store/apps/details?id=com.marathonsystems.mehaleye';
@@ -1474,11 +1475,39 @@ class PagesUtilFunctions {
     return 12;
   }
 
+  static String getPhoneInputMask(CountryCode countryCode) {
+    Map? country = CountryCodesList.codes.firstWhereOrNull(
+      (element) =>
+          element['iso2_cc'].toString().toLowerCase() ==
+          countryCode.code!.toLowerCase(),
+    );
+
+    if (country != null) {
+      int length = country['example'].length;
+      String formattedPhone = '';
+
+      for (var i = 0; i < length; i++) {
+        if (i == 3) {
+          formattedPhone = formattedPhone + '-' + '0';
+        } else if (i == 6) {
+          formattedPhone = formattedPhone + '-' + '0';
+        } else {
+          formattedPhone = formattedPhone + '0';
+        }
+      }
+
+      return formattedPhone;
+    } else {
+      return "000-000-00000";
+    }
+  }
+
   static bool validatePhoneByCountryCode(String code, String text) {
     Map? country = CountryCodesList.codes.firstWhereOrNull(
       (element) =>
           element['iso2_cc'].toString().toLowerCase() == code.toLowerCase(),
     );
+
     if (country != null) {
       return text.length == country['example'].toString().length + 2;
     }
@@ -1503,5 +1532,11 @@ class PagesUtilFunctions {
       }
     }
     return subscriptionOfferings.priceDescription;
+  }
+
+  static bool isValidIpAddress(String text) {
+    final RegExp _ipRegex = RegExp(
+        r"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+    return _ipRegex.hasMatch(text);
   }
 }

@@ -88,8 +88,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         AppFireBaseUser? appFireBaseUser =
             await verifyPinCode(event.pinCode, event.verificationId);
 
+        print(
+            "event.isForEthioTelePaymentAuth ${event.isForEthioTelePaymentAuth}");
+
         if (appFireBaseUser != null) {
-          this.add(SaveUserEvent(appFireBaseUser: appFireBaseUser));
+          if (event.isForEthioTelePaymentAuth != null) {
+            if (event.isForEthioTelePaymentAuth!) {
+              ///FOR MAIN AUTHENTICATION
+              this.add(
+                ValidateUserPhoneEvent(
+                  appFireBaseUser: appFireBaseUser,
+                ),
+              );
+            } else {
+              ///FOR MAIN AUTHENTICATION
+              this.add(
+                SaveUserEvent(
+                  appFireBaseUser: appFireBaseUser,
+                ),
+              );
+            }
+          } else {
+            ///FOR MAIN AUTHENTICATION
+            this.add(
+              SaveUserEvent(
+                appFireBaseUser: appFireBaseUser,
+              ),
+            );
+          }
         } else {
           yield PhoneAuthErrorState(
               error: 'Unable to authenticate\nCheck your pin');
@@ -122,7 +148,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event is AuthSuccessEvent) {
       this.add(SaveUserEvent(appFireBaseUser: event.appFireBaseUser));
     } else if (event is PhoneAuthErrorEvent) {
-      print("eventevent=>> ${event.error}");
       yield PhoneAuthErrorState(error: event.error);
     } else if (event is AuthErrorEvent) {
       yield AuthErrorState(error: event.error);
@@ -134,6 +159,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           event.appFireBaseUser,
         );
         await authRepository.setOneSignalExternalId(saveUserData.appUser);
+        yield AuthSuccessState(
+          appUser: saveUserData.appUser,
+        );
+      } catch (error) {
+        yield AuthErrorState(error: error.toString());
+      }
+    } else if (event is ValidateUserPhoneEvent) {
+      try {
+        SaveUserData saveUserData = await authRepository.validateUserPhone(
+          event.appFireBaseUser,
+        );
         yield AuthSuccessState(
           appUser: saveUserData.appUser,
         );

@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -58,9 +59,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   ),
                   readOnly: readOnly,
                   keyboardType: TextInputType.number,
-                  // inputFormatters: [
-                  //   FilteringTextInputFormatter.digitsOnly
-                  // ],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   validator: (text) {
                     if (text == null || text.isEmpty) {
                       return '';

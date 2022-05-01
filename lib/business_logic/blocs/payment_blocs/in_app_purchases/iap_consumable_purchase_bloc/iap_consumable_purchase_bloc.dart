@@ -22,7 +22,7 @@ class IapConsumablePurchaseBloc
         ///SKIP IF PRODUCT IS A SUBSCRIPTION AND LET REVENUE CAT HANDLE IT
         ///MAKE SURE THE WORD 'SUBSCRIPTION' IN ALL PRODUCT ID'S IN APPLE AND GOOGLE
         if (productIsNotASubscription(productItem)) {
-          print("purchasedItem=> ${productItem.toString()}");
+          //print("purchasedItem=> ${productItem.toString()}");
           _handlePurchaseUpdated(productItem);
         }
       },
@@ -89,7 +89,7 @@ class IapConsumablePurchaseBloc
           IAPItem iapItem = await iapPurchaseRepository.fetchProduct(
             event.iapProduct.productId,
           );
-          print("purchasedItem 2 => ${iapItem.toJson()}");
+          //print("purchasedItem 2 => ${iapItem.toJson()}");
 
           ///PURCHASE PRODUCT
           iapPurchaseRepository.purchaseProduct(iapItem);

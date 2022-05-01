@@ -84,6 +84,7 @@ import 'config/app_hive_boxes.dart';
 void main() async {
   //BLOC TRANSITION OBSERVER AND LOGGER
   Bloc.observer = AppBlocDelegate();
+
   //JUST AUDIO BACKGROUND INIT
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',

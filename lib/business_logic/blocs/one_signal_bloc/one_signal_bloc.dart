@@ -14,6 +14,8 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
     OneSignal.shared.setNotificationOpenedHandler(
       (OSNotificationOpenedResult result) async {
         ///HANDLE NOTIFICATION CLICK EVENT
+        print(
+            "result.notification.additionalData => ${result.notification.additionalData}");
         if (result.notification.additionalData != null) {
           if (result.notification.additionalData!.isNotEmpty) {
             if (result.notification.additionalData!.containsKey('item_id') &&
@@ -57,24 +59,24 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
               if (result.notification.additionalData!.isNotEmpty) {
                 if (result.notification.additionalData!
                     .containsKey('item_id')) {
-                  if (result.action!.actionId! == 'copy_code') {
-                    this.add(
-                      NotificationActionClickedEvent(
-                        billCode:
-                            result.notification.additionalData!['item_id'],
-                        actionId: 'copy_code',
-                      ),
-                    );
-                  }
+                  // if (result.action!.actionId! == 'copy_code') {
+                  //   this.add(
+                  //     NotificationActionClickedEvent(
+                  //       billCode:
+                  //           result.notification.additionalData!['item_id'],
+                  //       actionId: 'copy_code',
+                  //     ),
+                  //   );
+                  // }
                 }
-                if (result.action!.actionId! == 'how_to_pay') {
-                  this.add(
-                    NotificationActionClickedEvent(
-                      billCode: '',
-                      actionId: 'how_to_pay',
-                    ),
-                  );
-                }
+                // if (result.action!.actionId! == 'how_to_pay') {
+                //   this.add(
+                //     NotificationActionClickedEvent(
+                //       billCode: '',
+                //       actionId: 'how_to_pay',
+                //     ),
+                //   );
+                // }
               }
             }
           }
