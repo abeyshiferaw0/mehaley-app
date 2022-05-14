@@ -1436,12 +1436,12 @@ class PagesUtilFunctions {
   }
 
   static String getIapPurchasedMessage(
-      AppPurchasedItemType appPurchasedItemType) {
-    if (appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+      PurchasedItemType purchasedItemType) {
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       return AppLocale.of().songPurchased;
-    } else if (appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    } else if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
       return AppLocale.of().playlistPurchased;
-    } else if (appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+    } else if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
       return AppLocale.of().albumPurchased;
     } else {
       return 'Purchase Completed';
@@ -1535,8 +1535,7 @@ class PagesUtilFunctions {
   }
 
   static bool isValidIpAddress(String text) {
-    final RegExp _ipRegex = RegExp(
-        r"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+    final RegExp _ipRegex = RegExp(r"[0-9]+(?:\.[0-9]+){3}:[0-9]+");
     return _ipRegex.hasMatch(text);
   }
 }

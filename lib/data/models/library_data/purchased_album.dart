@@ -13,17 +13,17 @@ class PurchasedAlbum {
 
   factory PurchasedAlbum.fromMap(Map<String, dynamic> map) {
     return PurchasedAlbum(
-      paymentId: map["payment_id"],
-      album: Album.fromMap(map["album"]),
-      paymentDate: DateTime.parse(map["payment_date"]),
+      paymentId: map['payment_id'],
+      album: Album.fromMap(map['album']),
+      paymentDate: DateTime.parse(map['payment_date']),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "payment_id": this.paymentId,
-      "album": this.album,
-      "payment_date": this.paymentDate.toIso8601String(),
+      'payment_id': this.paymentId,
+      'album': this.album,
+      'payment_date': this.paymentDate.toIso8601String(),
     };
   }
 }

@@ -12,12 +12,14 @@ class AppApi {
 
   ///BASED ON BUILD TYPE
   static String baseUrl = "https://api.mehaleye.com";
-  //static const String baseUrl = 'http://192.168.189.202:8181';
+  //static String baseUrl = 'http://192.168.0.125:8181';
   static String musicBaseUrl = '$baseUrl/music';
   static String userBaseUrl = '$baseUrl/user';
   static String paymentBaseUrl = '$baseUrl/payment';
   static String cartBaseUrl = '$baseUrl/subscription';
   static String adBaseUrl = '$baseUrl/ad';
+  static const String cyberSourceFormPaymentUrl =
+      'https://cyberSource.payment.mehaleye.com';
   static const String sharingBaseUrl = 'https://mehaleye.com/deeplink/share';
 
   static Future<CacheOptions> getDioCacheOptions() async {
@@ -73,7 +75,7 @@ class WebPaymentValues {
 
 class AppValues {
   ///
-  static const bool kisDebug = true;
+  static const bool kisDebug = false;
 
   ///
   static const String appStoreId = "1616875830";

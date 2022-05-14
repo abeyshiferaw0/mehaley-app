@@ -73,27 +73,27 @@ class _ItemHomePageAdState extends State<ItemHomePageAd> {
               initialUrl: appAd.link.toString(),
               javascriptMode: JavascriptMode.unrestricted,
               onWebViewCreated: (WebViewController webViewController) {
-                print("WebView=> onWebViewCreated=>");
+                print('WebView=> onWebViewCreated=>');
                 webViewController = webViewController;
               },
               // navigationDelegate: (NavigationRequest request) {
-              //   print("WebView=> navigationDelegate=> ${request.url}");
+              //   print('WebView=> navigationDelegate=> ${request.url}');
               //   return NavigationDecision.navigate;
               // },
               onPageStarted: (String url) {
-                print("WebView=> onPageStarted=> ${url}");
+                print('WebView=> onPageStarted=> ${url}');
                 setState(() {
                   loading = true;
                 });
               },
               onPageFinished: (String url) {
-                print("WebView=> onPageFinished=> ${url}");
+                print('WebView=> onPageFinished=> ${url}');
                 setState(() {
                   loading = false;
                 });
               },
               onWebResourceError: (WebResourceError error) {
-                print("WebView=> onWebResourceError=> ${error.description}");
+                print('WebView=> onWebResourceError=> ${error.description}');
                 webViewController.reload();
                 setState(() {
                   loading = true;

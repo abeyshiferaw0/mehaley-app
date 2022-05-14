@@ -8,13 +8,13 @@ class StartConsumablePurchaseEvent extends IapConsumablePurchaseEvent {
   StartConsumablePurchaseEvent({
     required this.iapProduct,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.isFromItemSelfPage,
     required this.appPurchasedSources,
   });
 
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final bool isFromItemSelfPage;
   final IapProduct iapProduct;
   final AppPurchasedSources appPurchasedSources;
@@ -23,7 +23,7 @@ class StartConsumablePurchaseEvent extends IapConsumablePurchaseEvent {
   List<Object?> get props => [
         iapProduct,
         itemId,
-        appPurchasedItemType,
+        purchasedItemType,
         isFromItemSelfPage,
         appPurchasedSources,
       ];
@@ -57,7 +57,7 @@ class IapPurchaseCanceledEvent extends IapConsumablePurchaseEvent {
 
 class IapPurchaseSuccessVerifyEvent extends IapConsumablePurchaseEvent {
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final bool isFromSelfPage;
   final PurchasedItem purchasedItem;
   final String purchaseToken;
@@ -65,7 +65,7 @@ class IapPurchaseSuccessVerifyEvent extends IapConsumablePurchaseEvent {
 
   IapPurchaseSuccessVerifyEvent({
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.purchasedItem,
     required this.isFromSelfPage,
     required this.purchaseToken,
@@ -77,7 +77,7 @@ class IapPurchaseSuccessVerifyEvent extends IapConsumablePurchaseEvent {
         purchasedItem,
         purchaseToken,
         isFromSelfPage,
-        appPurchasedItemType,
+        purchasedItemType,
         appPurchasedSources
       ];
 }

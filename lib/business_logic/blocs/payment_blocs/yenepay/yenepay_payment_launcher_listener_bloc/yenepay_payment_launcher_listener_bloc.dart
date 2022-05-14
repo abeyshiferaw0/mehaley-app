@@ -21,10 +21,6 @@ class YenepayPaymentLauncherListenerBloc extends Bloc<
         if (deeplinkUri.host == 'yenepay') {
           ///CLOSE URL LAUNCHED WEB PAGE
           await closeWebView();
-          YenepayPaymentStatus yenepayPaymentStatus =
-              YenepayPaymentStatus.fromJson(
-            deeplinkUri.queryParameters,
-          );
           try {
             ///PARSE DEEPLINK URL TO YenepayPaymentStatus
             YenepayPaymentStatus yenepayPaymentStatus =

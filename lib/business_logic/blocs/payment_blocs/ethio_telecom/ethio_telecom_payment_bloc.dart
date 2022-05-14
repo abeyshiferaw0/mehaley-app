@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mehaley/data/models/api_response/tele_payment_result_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/repositories/ethio_telecom_purchase_repository.dart';
 
@@ -20,18 +21,55 @@ class EthioTelecomPaymentBloc
       yield EthioTelecomPurchasingState();
 
       try {
-        ///CHECK IF INTERNET CONNECT IS AVAILABLE
-        bool isNetAvailable =
-            await ethioTelecomPurchaseRepository.checkInternetConnection();
-        if (isNetAvailable) {
-          ///SAVE LAST ITEM TO BE PURCHASED
-          ethioTelecomPurchaseRepository.purchaseItem(
-            event.itemId,
-            event.appPurchasedItemType,
-          );
+        TelePaymentResultData telePaymentResultData =
+            await ethioTelecomPurchaseRepository.purchaseItem(
+          event.itemId,
+          event.purchasedItemType,
+        );
+
+        if (telePaymentResultData.paymentErrorResult != null) {
+          ///IF NORMAL RESULT IS NOT NULL CHECK FOR IS_FREE OR IS_ALREADY_BOUGHT VALUES
+          if (telePaymentResultData.paymentErrorResult!.isFree) {
+            yield EthioTelecomPurchasedIsFreeState(
+              itemId: event.itemId,
+              purchasedItemType: event.purchasedItemType,
+              telePaymentResultData: telePaymentResultData,
+            );
+          }
+
+          if (telePaymentResultData.paymentErrorResult!.isAlreadyBought) {
+            yield EthioTelecomIsAlreadyBoughtState(
+              itemId: event.itemId,
+              purchasedItemType: event.purchasedItemType,
+              telePaymentResultData: telePaymentResultData,
+            );
+          }
+        } else if (telePaymentResultData.teleResult != null) {
+          ///IF TELE RESULT IS NOT NULL CHECK FOR SUCCESS OR
+          /// FAILURE (MIGHT BE BALANCE NOT ENOUGH)
+          if (telePaymentResultData.teleResult!.status) {
+            yield EthioTelecomPurchasedSuccessState(
+              itemId: event.itemId,
+              purchasedItemType: event.purchasedItemType,
+              telePaymentResultData: telePaymentResultData,
+            );
+          } else {
+            if (telePaymentResultData.teleResult!.isBalanceNotEnough) {
+              yield EthioTelecomPurchaseBalanceNotEnoughState(
+                itemId: event.itemId,
+                purchasedItemType: event.purchasedItemType,
+                telePaymentResultData: telePaymentResultData,
+              );
+            } else {
+              yield EthioTelecomPurchaseNotSuccessState(
+                itemId: event.itemId,
+                purchasedItemType: event.purchasedItemType,
+                telePaymentResultData: telePaymentResultData,
+              );
+            }
+          }
         } else {
-          ///NO INTERNET
-          yield EthioTelecomPurchaseNoInternetState(dateTime: DateTime.now());
+          throw 'TELE CARD PURCHASE RESULT NOT VALID';
         }
       } catch (error) {
         yield EthioTelecomPurchasingFailedState(
@@ -39,13 +77,6 @@ class EthioTelecomPaymentBloc
           dateTime: DateTime.now(),
         );
       }
-
-      //EthioTelecomPurchasingState
-      // EthioTelecomPurchasedState
-      // EthioTelecomPurchaseBalanceNotEnoughState
-      //EthioTelecomPurchaseNoInternetState
-      //EthioTelecomPurchasingFailedState
-
     }
   }
 }

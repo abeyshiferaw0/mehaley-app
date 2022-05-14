@@ -89,17 +89,17 @@ class IapPurchaseRepository {
     return false;
   }
 
-  saveLastItemToPurchase(AppPurchasedItemType appPurchasedItemType, int itemId,
+  saveLastItemToPurchase(PurchasedItemType purchasedItemType, int itemId,
       bool isFromItemSelfPage, AppPurchasedSources appPurchasedSources) async {
-    ///SAVE appPurchasedItemType
+    ///SAVE purchasedItemType
     await AppHiveBoxes.instance.iapUtilBox.put(
       AppValues.lastToBePurchasedItemTypeKey,
       EnumToString.convertToString(
-        appPurchasedItemType,
+        purchasedItemType,
       ),
     );
 
-    ///SAVE appPurchasedItemType
+    ///SAVE purchasedItemType
     await AppHiveBoxes.instance.iapUtilBox.put(
       AppValues.lastToBePurchasedIapPurchasedSourcesKey,
       EnumToString.convertToString(
@@ -123,7 +123,7 @@ class IapPurchaseRepository {
   Map<String, dynamic> getLastItemToPurchase() {
     Map<String, dynamic> info = {};
 
-    ///GET appPurchasedItemType
+    ///GET purchasedItemType
     info[AppValues.lastToBePurchasedItemTypeKey] =
         AppHiveBoxes.instance.iapUtilBox.get(
       AppValues.lastToBePurchasedItemTypeKey,
@@ -150,11 +150,11 @@ class IapPurchaseRepository {
     return info;
   }
 
-  Future<bool> verifyItem(int itemId, AppPurchasedItemType appPurchasedItemType,
+  Future<bool> verifyItem(int itemId, PurchasedItemType purchasedItemType,
       String purchaseToken) async {
     Response response = await iapPurchaseProvider.verifyItem(
       itemId,
-      appPurchasedItemType,
+      purchasedItemType,
       purchaseToken,
     );
 

@@ -5,7 +5,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/api_response/artist_page_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
@@ -214,6 +214,25 @@ class _ArtistPageHeaderState extends State<ArtistPageHeader> {
                     Text(
                       AppLocale.of().noOfSongs(
                           noOfSong: artistPageData.noOfSong.toString()),
+                      style: TextStyle(
+                        color: ColorMapper.getWhite(),
+                        fontSize: AppFontSizes.font_size_10.sp,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: AppMargin.margin_4),
+                      child: Icon(
+                        Icons.circle,
+                        color: ColorMapper.getWhite(),
+                        size: AppIconSizes.icon_size_4,
+                      ),
+                    ),
+                    Text(
+                      AppLocale.of().numberOfFollowers(
+                        numberOf: artistPageData.noOfFollower.toString(),
+                      ),
                       style: TextStyle(
                         color: ColorMapper.getWhite(),
                         fontSize: AppFontSizes.font_size_10.sp,

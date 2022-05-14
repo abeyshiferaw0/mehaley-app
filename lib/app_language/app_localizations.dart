@@ -425,6 +425,17 @@ abstract class AppLocalizations {
 
   ///
   String get viewMore;
+  String get balanceNotEnoughMsg;
+  String get phoneNumberRequired;
+  String get todaysMonthlyHolidays;
+  String get payWithEthioTele;
+  String get payWithEthioTeleMsg;
+  String get payWithCreditCard;
+  String get payWithCreditCardMsg;
+  String get teleCutMsg;
+  String get otherArtists;
+  String get local;
+  String get foreign;
 
   String featuring({required String artistName});
 
@@ -490,4 +501,18 @@ abstract class AppLocalizations {
   String itemIsForFreeMsg({required PurchasedItemType purchasedItemType});
 
   String youHavPremiumAccountMsg({required bool isAndroid});
+
+  String zemariEmptyAlbums({required String zemariName});
+
+  String zemariEmptySongs({required String zemariName});
+
+  String zemariEmptyPlaylists({required String zemariName});
+
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType});
+
+  String alreadyPurchasedTryRefreshMsg(
+      {required PurchasedItemType purchasedItemType});
+
+  String balanceNotEnoughForPurchase(
+      {required PurchasedItemType purchasedItemType});
 }

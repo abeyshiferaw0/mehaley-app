@@ -20,7 +20,7 @@ class RecentlyPurchasedItemsBloc
   Stream<RecentlyPurchasedItemsState> mapEventToState(
       RecentlyPurchasedItemsEvent event) async* {
     if (event is SaveRecentlyPurchasedItemEvent) {
-      if (event.appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+      if (event.purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
         await recentlyPurchasedItemsRepository
             .saveRecentlyPurchasedSong(event.item as Song);
         yield RecentlyPurchasedSongSavedState(
@@ -30,7 +30,7 @@ class RecentlyPurchasedItemsBloc
     }
 
     if (event is SaveRecentlyPurchasedItemEvent) {
-      if (event.appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+      if (event.purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
         await recentlyPurchasedItemsRepository
             .saveRecentlyPurchasedAlbum(event.item as Album);
         yield RecentlyPurchasedAlbumSavedState(
@@ -40,7 +40,7 @@ class RecentlyPurchasedItemsBloc
     }
 
     if (event is SaveRecentlyPurchasedItemEvent) {
-      if (event.appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+      if (event.purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
         await recentlyPurchasedItemsRepository
             .saveRecentlyPurchasedPlaylist(event.item as Playlist);
         yield RecentlyPurchasedPlaylistSavedState(

@@ -9,19 +9,19 @@ class EthioTelecomPurchaseProvider {
 
   Future purchaseItem(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
   ) async {
     dio = Dio();
 
     //SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
-      url: AppApi.paymentBaseUrl + '/purchase/yene_pay/checkout/generate_url/',
+      url: AppApi.paymentBaseUrl + '/purchase/tele_mobile/checkout/',
       useToken: true,
       data: {
         'item_id': itemId,
         'item_type': EnumToString.convertToString(
-          appPurchasedItemType,
+          purchasedItemType,
         ),
       },
     );

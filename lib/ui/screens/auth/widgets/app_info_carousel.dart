@@ -104,8 +104,8 @@ class _AppInfoCarouselState extends State<AppInfoCarousel> {
   Column buildInfoPageOne() {
     ///
     String word = AppLocale.of().welcomeToMehaley;
-    String lastWordRemoved = word.substring(0, word.lastIndexOf(" "));
-    String lastWord = word.substring(word.lastIndexOf(" "), word.length);
+    String lastWordRemoved = word.substring(0, word.lastIndexOf(' '));
+    String lastWord = word.substring(word.lastIndexOf(' '), word.length);
 
     ///
 

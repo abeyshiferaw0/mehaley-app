@@ -27,7 +27,7 @@ class AppVersionUtil {
   }
 
   static String getNewVersion() {
-    String minAppVersion = "new";
+    String minAppVersion = 'new';
     bool exists = AppHiveBoxes.instance.systemUpdate
         .containsKey(AppValues.minAppVersionKey);
     if (exists) {

@@ -21,8 +21,17 @@ class CompletePurchaseBloc
     if (event is LoadPaymentMethodsEvent) {
       yield CompletePurchaseInitial();
       List<PaymentMethod> availableMethods = paymentRepository.getPaymentList();
+
+      ///GET LOCAL AND FOREIGN METHODS FROM AVALVABLE LIST
+      List<PaymentMethod> localAvailableMethods =
+          getLocalMethods(availableMethods);
+      List<PaymentMethod> foreignAvailableMethods =
+          getForeignAvailableMethods(availableMethods);
+
       yield PaymentMethodsLoadedState(
         availableMethods: availableMethods,
+        localAvailableMethods: localAvailableMethods,
+        foreignAvailableMethods: foreignAvailableMethods,
       );
     } else if (event is SelectedPaymentMethodChangedEvent) {
       yield CompletePurchaseInitial();
@@ -30,9 +39,35 @@ class CompletePurchaseBloc
           paymentRepository.getPaymentListWithSelected(
         event.paymentMethod,
       );
+
+      ///GET LOCAL AND FOREIGN METHODS FROM AVALVABLE LIST
+      List<PaymentMethod> localAvailableMethods =
+          getLocalMethods(availableMethods);
+      List<PaymentMethod> foreignAvailableMethods =
+          getForeignAvailableMethods(availableMethods);
+
       yield PaymentMethodsLoadedState(
         availableMethods: availableMethods,
+        localAvailableMethods: localAvailableMethods,
+        foreignAvailableMethods: foreignAvailableMethods,
       );
     }
+  }
+
+  List<PaymentMethod> getLocalMethods(List<PaymentMethod> availableMethods) {
+    List<PaymentMethod> m = [];
+    availableMethods.forEach((element) {
+      if (element.isLocal) m.add(element);
+    });
+    return m;
+  }
+
+  List<PaymentMethod> getForeignAvailableMethods(
+      List<PaymentMethod> availableMethods) {
+    List<PaymentMethod> m = [];
+    availableMethods.forEach((element) {
+      if (!element.isLocal) m.add(element);
+    });
+    return m;
   }
 }

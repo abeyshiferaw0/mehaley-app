@@ -23,7 +23,7 @@ class YenepayGenerateCheckoutUrlBloc extends Bloc<
         final String checkoutUrl =
             await yenepayPurchaseRepository.generateCheckoutUrl(
           event.itemId,
-          event.appPurchasedItemType,
+          event.purchasedItemType,
           event.appPurchasedSources,
           event.isFromSelfPage,
         );

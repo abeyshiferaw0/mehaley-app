@@ -26,7 +26,7 @@ class AppAdDataProvider {
       //SEND REQUEST
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.adBaseUrl + "/",
+        url: AppApi.adBaseUrl + '/',
       );
       return response;
     } else if (appCacheStrategy == AppCacheStrategy.CACHE_LATER) {
@@ -39,7 +39,7 @@ class AppAdDataProvider {
         );
       Response response = await ApiUtil.get(
         dio: dio,
-        url: AppApi.adBaseUrl + "/",
+        url: AppApi.adBaseUrl + '/',
       );
       return response;
     }

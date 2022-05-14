@@ -15,12 +15,14 @@ class PhoneNumberInput extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.hasError,
+    this.isOnlyEt,
     required this.selectedCountryCode,
   }) : super(key: key);
 
   final MaskedTextController controller;
   final bool hasError;
   final CountryCode selectedCountryCode;
+  final bool? isOnlyEt;
 
   @override
   State<PhoneNumberInput> createState() => _PhoneNumberInputState();
@@ -70,13 +72,6 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                       } else {
                         return AppLocale.of().invalidPhoneNumber;
                       }
-                      // if (widget.selectedCountryCode.code == etCode &&
-                      //     text.length < 11)
-                      //   return AppLocale.of().invalidPhoneNumber;
-                      // if (widget.selectedCountryCode.code != etCode &&
-                      //     text.length < 12)
-                      //   return AppLocale.of().invalidPhoneNumber;
-                      return null;
                     }
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -119,7 +114,8 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    hintText: AppLocale.of().enterYourPhoneNumber,
+                    //hintText: AppLocale.of().enterYourPhoneNumber,
+                    hintText: getHint(widget.isOnlyEt),
                     hintStyle: TextStyle(
                       color: ColorMapper.getTxtGrey(),
                       fontSize: AppFontSizes.font_size_14,
@@ -147,5 +143,14 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
         );
       },
     );
+  }
+
+  getHint(bool? isOnlyEt) {
+    if (isOnlyEt != null) {
+      if (isOnlyEt) {
+        return '9xx-xxx-xxx';
+      }
+    }
+    return AppLocale.of().enterYourPhoneNumber;
   }
 }

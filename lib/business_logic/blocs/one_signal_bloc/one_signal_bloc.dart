@@ -15,7 +15,7 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
       (OSNotificationOpenedResult result) async {
         ///HANDLE NOTIFICATION CLICK EVENT
         print(
-            "result.notification.additionalData => ${result.notification.additionalData}");
+            'result.notification.additionalData => ${result.notification.additionalData}');
         if (result.notification.additionalData != null) {
           if (result.notification.additionalData!.isNotEmpty) {
             if (result.notification.additionalData!.containsKey('item_id') &&
@@ -52,7 +52,7 @@ class OneSignalBloc extends Bloc<OneSignalEvent, OneSignalState> {
             }
           }
         }
-        print("resultresult => ${result.toString()}");
+        print('resultresult => ${result.toString()}');
         if (result.action != null) {
           if (result.notification.additionalData != null) {
             if (result.action!.actionId != null) {

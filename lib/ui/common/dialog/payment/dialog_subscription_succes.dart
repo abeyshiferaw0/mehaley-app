@@ -59,7 +59,7 @@ class _DialogSubscriptionSuccessState extends State<DialogSubscriptionSuccess> {
                           child: Container(
                             height: AppIconSizes.icon_size_64 * 2,
                             child: Lottie.asset(
-                              AppAssets.subscriptionSuccess,
+                              AppAssets.subscriptionSuccessLottie,
                             ),
                           ),
                         ),

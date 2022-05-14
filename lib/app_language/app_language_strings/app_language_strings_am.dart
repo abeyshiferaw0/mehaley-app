@@ -4,7 +4,7 @@ import 'package:mehaley/util/app_extention.dart';
 import '../app_localizations.dart';
 
 class AppLanguageStringsAm extends AppLocalizations {
-  final String appName = "መኃልዬ";
+  final String appName = "c";
   final String byAppName = "በ መኃልዬ";
   final String appTermsAndCondition =
       "Some text about mehaleye and terms and conditions and privacy policy፣ Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
@@ -430,7 +430,63 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String allPlaylists = "ሁሉም ፕሌይሊስቶች";
 
   ///UNTRANSLATED
-  final String viewMore = "ተጨማሪ";
+  //////////////
+  ///////////////
+  final String viewMore = "ተጨማሪ ይመልከቱ";
+  final String balanceNotEnoughMsg = "እባክዎን ሂሳብዎን ይሙሉ እና እንደገና ይሞክሩ";
+  final String phoneNumberRequired = "የመኃልዬ ግዢዎን ለማጠናቀቅ ስልክ ቁጥርዎ ያስፈልጋል";
+  final String todaysMonthlyHolidays = "የዛሬ ወርሃዊ በዓላት";
+  final String payWithEthioTele = "በኢትዮ ቴሌ ይክፈሉ";
+  final String payWithEthioTeleMsg = "የመኃልዬ ግዢዎን ለማጠናቀቅ የስልክዎን ሒሳብ ይጠቀሙ";
+  final String payWithCreditCard = "በክሬዲት/በዴቢት ካርዶች ይክፈሉ";
+  final String payWithCreditCardMsg = "የመኃልዬ ግዢዎን ለማጠናቀቅ የክሬዲት/ዴቢት ካርዶችን ይጠቀሙ";
+  final String teleCutMsg = "(+30% የአገልግሎት ክፍያ ተካትቷል)";
+  final String otherArtists = "ሌሎች ዘማሪያን";
+  final String local = "የአገር ወስጥ";
+  final String foreign = "የውጭ";
+
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ፕሌይሊስት";
+    return "ይህ $item ነፃ ነው\nእባክዎን ይህን ገጽ ለማደስ ይሞክሩ";
+  }
+
+  String alreadyPurchasedTryRefreshMsg(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ፕሌይሊስት";
+    return "ይህን $item አስቀድመው ገዝተዋል\nእባክዎን ይህን ገጽ ለማደስ ይሞክሩ";
+  }
+
+  String balanceNotEnoughForPurchase(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "አልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ፕሌይሊስት";
+    return "ይህን $item ለመግዛት የስልክዎ ቀሪ ሒሳብ በቂ አይደለም።";
+  }
+
+  String zemariEmptyAlbums({required String zemariName}) {
+    return "ዠማሪ $zemariName ምንም አልበም የለውም/የላትም።";
+  }
+
+  String zemariEmptySongs({required String zemariName}) {
+    return "ዠማሪ $zemariName ምንም መዝሙሮች የለውም/የላትም።";
+  }
+
+  String zemariEmptyPlaylists({required String zemariName}) {
+    return "ዠማሪ $zemariName በማንኛውም አጫዋች ዝርዝሮች ውስጥ አልቀረበም/ችም።";
+  }
+  //////////////
+  ///////////////
 
   String featuring({required String artistName}) {
     return "$artistName ያካተቱ ፕሌይሊስትዎች";
@@ -631,14 +687,13 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String payWithTelebirr = "በቴሌብር ይክፈሉ";
   final String payWithTelebirrMsg = "የመኃልዬ ግዢን ለማጠናቀቅ የቴሌቢር መለያዎን ይጠቀሙ.";
   final String payWithYenepay = "በየኔፔይ ይክፈሉ";
-  final String payWithYenepayMsg =
-      "የመኃልዬ ግዢን ለማጠናቀቅ የየኔፔይ መለያዎን ይጠቀሙ፣ የኔፔይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
+  final String payWithYenepayMsg = "የመኃልዬ ግዢን ለማጠናቀቅ የየኔፔይ መለያዎን ይጠቀሙ";
   final String payWithGoogleplayInappPurchases = "በ ጉግል ፕሌይ መተግበሪያ ግዢ ይክፈሉ";
   final String payWithAppStoreInappPurchases = "በ አፕ ስቶር መተግበሪያ ግዢ ይክፈሉ";
   final String payWithGoogleplayInappPurchasesMsg =
-      "የመኃልዬ ግዢን ለማጠናቀቅ የጉግል መለያዎን ይጠቀሙ። ጉግል ፕሌይ የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የጉግል መለያዎን ይጠቀሙ";
   final String payWithAppStoreInappPurchasesMsg =
-      "የመኃልዬ ግዢን ለማጠናቀቅ የአፕል መለያዎን ይጠቀሙ። አፕ ስቶር የሚከተሉትን የክፍያ አማራጮች ያቀርባል";
+      "የመኃልዬ ግዢን ለማጠናቀቅ የአፕል መለያዎን ይጠቀሙ";
 
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {

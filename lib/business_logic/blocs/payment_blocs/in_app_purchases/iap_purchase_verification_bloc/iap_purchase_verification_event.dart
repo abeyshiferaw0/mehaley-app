@@ -6,20 +6,20 @@ abstract class IapPurchaseVerificationEvent extends Equatable {
 
 class IapPurchaseVerifyEvent extends IapPurchaseVerificationEvent {
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final PurchasedItem purchasedItem;
   final String purchaseToken;
 
   IapPurchaseVerifyEvent(
       {required this.itemId,
-      required this.appPurchasedItemType,
+      required this.purchasedItemType,
       required this.purchasedItem,
       required this.purchaseToken});
 
   @override
   List<Object?> get props => [
         itemId,
-        appPurchasedItemType,
+        purchasedItemType,
         purchasedItem,
         purchaseToken,
       ];

@@ -467,16 +467,15 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String payWithTelebirrMsg =
       " ግዝኢት መኃልዬ ግዢን ንምዝዛም ንናይ ቴሌብር መለለይ መንንቶም ይጠቐሙ.";
   final String payWithYenepay = "ብየኔፔይ ይኽፈሉ";
-  final String payWithYenepayMsg =
-      " ዕድጊት  መኃልዬ ንምዝዛም ንናይ የኔፔይ መለለይ መንነቶም ይጠቐሙ፣ የኔፔይ ዝስዕባ ናይ መኽፈሊ ኣማራፅታት የቕርብ";
+  final String payWithYenepayMsg = " ዕድጊት  መኃልዬ ንምዝዛም ንናይ የኔፔይ መለለይ መንነቶም ይጠቐሙ";
   final String payWithGoogleplayInappPurchases =
       " ብመተግበሪ  ጉግል ፕሌይ ኣቢሎም ክፍሊት ይፈፅሙ";
   final String payWithAppStoreInappPurchases =
       "ብመተግበሪ ኣፕ ስቶር ኣቢሎም ክፍሊታት መተግበሪ ይፈፅሙ";
   final String payWithGoogleplayInappPurchasesMsg =
-      "ግዝኢት መኃልዬ ንምዝዛም ናይ ጉግል መለለይ መንነቶም ይጠቐሙ። ጉግል ፕሌይ ዝስዕቡ ኣማራፂ ታት ክፍሊት የቕርብ";
+      "ግዝኢት መኃልዬ ንምዝዛም ናይ ጉግል መለለይ መንነቶም ይጠቐሙ";
   final String payWithAppStoreInappPurchasesMsg =
-      "ግዝኢት መኃልዬ ንምዝዛም ናይ ኣፕል መለለይ መንነቶም ይጠቐሙ። ኣፕ ስቶር ዝስዕቡ ኣማራፂ ታት ክፍሊት የቕርብ";
+      "ግዝኢት መኃልዬ ንምዝዛም ናይ ኣፕል መለለይ መንነቶም ይጠቐሙ";
   final String mezmur = "መዝሙር";
 
   final String explore = "ደህሰስ";
@@ -486,7 +485,63 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String allPlaylists = "ኩሉ ናይ መዝሙር ዝርዝር";
 
   ///UNTRANSLATED
-  final String viewMore = "View More";
+  //////////////
+  ///////////////
+  final String viewMore = "ተወሳኺ ይርኣዩ";
+  final String balanceNotEnoughMsg = "በይዘኦም ሒሳቦም መሊኦም ደጊሞም ይፈትኑ";
+  final String phoneNumberRequired = "ዕድጊት ኃልዬ ንምዝዛም ቁፅሪ ስልኮም የድሊ እዩ";
+  final String todaysMonthlyHolidays = "ናይ ሎሚ ወርሓዊ በዓላት";
+  final String payWithEthioTele = "ብኢትዮ ቴሌ ይኽፈሉ";
+  final String payWithEthioTeleMsg = "ዕድጊት መኃልዬ ንዝምዝዛም ሒሳብ ስልኮም ይጠቐሙ";
+  final String payWithCreditCard = "ብካርዲታት ክሬዲት/ብዴቢት ይኽፈሉ";
+  final String payWithCreditCardMsg = "ዕድጊት መኃልዬ ንምዝዛም ካርዲታት ክሬዲት/ዴቢት ይጠቐሙ";
+  final String teleCutMsg = "(+30% ክፍሊት ግልጋሎት ተሓዊሱ ኣሎ)";
+  final String otherArtists = "ካልኦት ዘማሪያን";
+  final String local = "ናይ ውሽጢ ዓዲ";
+  final String foreign = "ናይ ወጻኢ";
+
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "ኣልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ዝርዝር መፃወቲ";
+    return "እዚ $item ናፃ እዩ በይዘኦም እዚ ገፅ ንምሕዳስ ይፈትኑ";
+  }
+
+  String alreadyPurchasedTryRefreshMsg(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "ኣልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ዝርዝር መፃወቲ";
+    return "እዚ $item ኣቕዲሚም ገዚኦም እዮም\nበይዘኦም እዚ ገፅ ንምሕዳስ ይፈትኑ";
+  }
+
+  String balanceNotEnoughForPurchase(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "መዝሙር";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "ኣልበም";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ዝርዝር መፃወቲ";
+    return "እዚ $item ንምግዛእ ናይ ስልኮም ቀሪ ሒሳብ እኹል ኣይኮነን።";
+  }
+
+  String zemariEmptyAlbums({required String zemariName}) {
+    return "ዘማሪ $zemariName ዋላ ሓንቲ ኣልበም የብሉን።";
+  }
+
+  String zemariEmptySongs({required String zemariName}) {
+    return "ዘማሪ $zemariName ዋላ ሓንቲ መዝሙር የብሉን።";
+  }
+
+  String zemariEmptyPlaylists({required String zemariName}) {
+    return "ዘማሪ $zemariName ኣብ ዝኾነ ዝርዝር ኣፃወቲ ኣይቀረበን።";
+  }
+  //////////////
+  ///////////////
 
   String featuring({required String artistName}) {
     return "$artistName ዘእተኻዮም ፕሌይሊስትታት";

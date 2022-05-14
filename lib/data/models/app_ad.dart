@@ -38,42 +38,42 @@ class AppAd extends Equatable {
 
   factory AppAd.fromMap(Map<String, dynamic> json) {
     return AppAd(
-      id: json["ad_id"],
-      link: Uri.parse(json["link"]),
+      id: json['ad_id'],
+      link: Uri.parse(json['link']),
       appAddEmbedPlace: EnumToString.fromString(
         AppAddEmbedPlace.values,
-        json["embed_place"],
+        json['embed_place'],
       )!,
-      appAdAction: json["action"] != null
-          ? EnumToString.fromString(AppAdAction.values, json["action"])
+      appAdAction: json['action'] != null
+          ? EnumToString.fromString(AppAdAction.values, json['action'])
           : null,
-      preferredHeight: json["preferred_height"] != null
-          ? json["preferred_height"] > AppValues.appAdPreferredMaxHeight
+      preferredHeight: json['preferred_height'] != null
+          ? json['preferred_height'] > AppValues.appAdPreferredMaxHeight
               ? AppValues.appAdPreferredMaxHeight
-              : json["preferred_height"]
+              : json['preferred_height']
           : null,
       actionPhoneNumber:
-          json["phone_number"] != null ? json["phone_number"] : null,
+          json['phone_number'] != null ? json['phone_number'] : null,
       actionLaunchLink:
-          json["launch_link"] != null ? Uri.parse(json["launch_link"]) : null,
-      maxAdLength: json["max_ad_length"] != null
-          ? json["max_ad_length"]! > AppValues.appAdMaxLength
+          json['launch_link'] != null ? Uri.parse(json['launch_link']) : null,
+      maxAdLength: json['max_ad_length'] != null
+          ? json['max_ad_length']! > AppValues.appAdMaxLength
               ? AppValues.appAdMaxLength
-              : json["max_ad_length"]
+              : json['max_ad_length']
           : AppValues.appAdMaxLength,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "ad_id": this.id,
-      "link": this.link,
-      "embed_place": this.appAddEmbedPlace,
-      "action": this.appAdAction,
-      "phone_number": this.actionPhoneNumber,
-      "launch_link": this.actionLaunchLink,
-      "preferred_height": this.preferredHeight,
-      "max_ad_length": this.maxAdLength,
+      'ad_id': this.id,
+      'link': this.link,
+      'embed_place': this.appAddEmbedPlace,
+      'action': this.appAdAction,
+      'phone_number': this.actionPhoneNumber,
+      'launch_link': this.actionLaunchLink,
+      'preferred_height': this.preferredHeight,
+      'max_ad_length': this.maxAdLength,
     };
   }
 }

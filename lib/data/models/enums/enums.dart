@@ -91,12 +91,6 @@ enum AppVideoItemAction {
   //OPEN_WITH_YOUTUBE,
 }
 
-enum AppPurchasedItemType {
-  SONG_PAYMENT,
-  ALBUM_PAYMENT,
-  PLAYLIST_PAYMENT,
-}
-
 enum AppPurchasedSources {
   MINI_PLAYER_BUY_BUTTON_ON_CLICK,
   SONG_MENU_BUY_BUTTON_ON_CLICK,

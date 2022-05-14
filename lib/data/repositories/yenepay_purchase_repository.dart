@@ -10,13 +10,13 @@ class YenepayPurchaseRepository {
 
   Future<String> generateCheckoutUrl(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
     AppPurchasedSources appPurchasedSources,
     bool isFromSelfPage,
   ) async {
     Response response = await yenepayPurchaseProvider.generateCheckoutUrl(
       itemId,
-      appPurchasedItemType,
+      purchasedItemType,
       appPurchasedSources,
       isFromSelfPage,
     );

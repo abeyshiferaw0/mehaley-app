@@ -523,8 +523,24 @@ class AppLocale {
 
   ///
   String get viewMore => appLocalizations.viewMore;
+  String get balanceNotEnoughMsg => appLocalizations.balanceNotEnoughMsg;
+  String get phoneNumberRequired => appLocalizations.phoneNumberRequired;
+  String get todaysMonthlyHolidays => appLocalizations.todaysMonthlyHolidays;
+  String get otherArtists => appLocalizations.otherArtists;
+
+  String get payWithEthioTele => appLocalizations.payWithEthioTele;
+  String get payWithEthioTeleMsg => appLocalizations.payWithEthioTeleMsg;
+  String get teleCutMsg => appLocalizations.teleCutMsg;
+
+  String get payWithCreditCard => appLocalizations.payWithCreditCard;
+  String get payWithCreditCardMsg => appLocalizations.payWithCreditCardMsg;
+
+  String get local => appLocalizations.local;
+  String get foreign => appLocalizations.foreign;
+
 
   ///FUNCTIONS
+
   String featuring({required String artistName}) =>
       appLocalizations.featuring(artistName: artistName);
 
@@ -631,4 +647,26 @@ class AppLocale {
 
   String youHavPremiumAccountMsg({required bool isAndroid}) =>
       appLocalizations.youHavPremiumAccountMsg(isAndroid: isAndroid);
+
+  String zemariEmptyAlbums({required String zemariName}) =>
+      appLocalizations.zemariEmptyAlbums(zemariName: zemariName);
+
+  String zemariEmptySongs({required String zemariName}) =>
+      appLocalizations.zemariEmptySongs(zemariName: zemariName);
+
+  String zemariEmptyPlaylist({required String zemariName}) =>
+      appLocalizations.zemariEmptyAlbums(zemariName: zemariName);
+
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.itemIsFreeMsg(purchasedItemType: purchasedItemType);
+
+  String alreadyPurchasedTryRefreshMsg(
+          {required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.alreadyPurchasedTryRefreshMsg(
+          purchasedItemType: purchasedItemType);
+
+  String balanceNotEnoughForPurchase(
+          {required PurchasedItemType purchasedItemType}) =>
+      appLocalizations.balanceNotEnoughForPurchase(
+          purchasedItemType: purchasedItemType);
 }

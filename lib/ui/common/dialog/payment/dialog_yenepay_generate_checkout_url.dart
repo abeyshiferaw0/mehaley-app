@@ -17,14 +17,14 @@ class DialogYenepayGenerateCheckoutUrl extends StatefulWidget {
   const DialogYenepayGenerateCheckoutUrl({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   }) : super(key: key);
 
   final int itemId;
 
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
 
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
@@ -41,7 +41,7 @@ class _DialogYenepayGenerateCheckoutUrlState
     ///GENERATE YENEPAY CHECKOUT URL
     BlocProvider.of<YenepayGenerateCheckoutUrlBloc>(context).add(
       GenerateCheckoutUrlEvent(
-        appPurchasedItemType: widget.appPurchasedItemType,
+        purchasedItemType: widget.purchasedItemType,
         appPurchasedSources: widget.appPurchasedSources,
         isFromSelfPage: widget.isFromSelfPage,
         itemId: widget.itemId,
@@ -81,7 +81,7 @@ class _DialogYenepayGenerateCheckoutUrlState
                         //     ///SHOW GENERATE YENEPAY CHECKOUT URL DIALOG
                         //     return DialogYenepayCheckoutWebView(
                         //       itemId: widget.itemId,
-                        //       appPurchasedItemType: widget.appPurchasedItemType,
+                        //       purchasedItemType: widget.purchasedItemType,
                         //       checkOutUrl: state.checkoutUrl,
                         //       isFromSelfPage: widget.isFromSelfPage,
                         //       appPurchasedSources: widget.appPurchasedSources,
@@ -139,7 +139,7 @@ class _DialogYenepayGenerateCheckoutUrlState
           BlocProvider.of<YenepayGenerateCheckoutUrlBloc>(context).add(
             GenerateCheckoutUrlEvent(
               itemId: widget.itemId,
-              appPurchasedItemType: widget.appPurchasedItemType,
+              purchasedItemType: widget.purchasedItemType,
               appPurchasedSources: widget.appPurchasedSources,
               isFromSelfPage: widget.isFromSelfPage,
             ),

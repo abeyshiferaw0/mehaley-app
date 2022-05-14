@@ -428,12 +428,74 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String otherVideos = "Other Videos";
   final String cantFindOtherVideos = "Can't Find Other Videos";
 
-  final String viewMore = "View More";
   final String explore = "Explore";
   final String allSongs = "All Mezmurs";
   final String allAlbums = "All Albums";
   final String allArtists = "All Zemarians";
   final String allPlaylists = "All Playlists";
+
+  ///UNTRANSLATED
+  //////////////
+  ///////////////
+  final String viewMore = "View More";
+  final String balanceNotEnoughMsg =
+      "Please recharge your balance and try again";
+  final String phoneNumberRequired =
+      "Phone number required to complete your mehaleye purchase";
+  final String todaysMonthlyHolidays = "Today's monthly holidays";
+  final String payWithEthioTele = "Pay With Ethio tele";
+  final String payWithEthioTeleMsg =
+      "Use your phone balance to complete your mehaleye purchase";
+  final String payWithCreditCard = "Pay With Credit/Debit Cards";
+  final String payWithCreditCardMsg =
+      "Use your credit/debit cards tom complete your mehaleye purchase";
+  final String teleCutMsg = "(+30% Service Charge Included)";
+  final String otherArtists = "Other Zemarians";
+  final String local = "Local";
+  final String foreign = "Foreign";
+
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist";
+    return "This $item is free \n please try refreshing page";
+  }
+
+  String alreadyPurchasedTryRefreshMsg(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist";
+    return "You have already purchased this $item \n please try refreshing page";
+  }
+
+  String balanceNotEnoughForPurchase(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) item = "Mezmur";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Album";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Playlist";
+    return "You phone balance is not enough to purchase this $item";
+  }
+
+  String zemariEmptyAlbums({required String zemariName}) {
+    return "Zemari $zemariName doesn't have any albums";
+  }
+
+  String zemariEmptySongs({required String zemariName}) {
+    return "Zemari $zemariName doesn't have any mezmurs";
+  }
+
+  String zemariEmptyPlaylists({required String zemariName}) {
+    return "Zemari $zemariName isn't featured in any playlists";
+  }
+  //////////////
+  ///////////////
 
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";
@@ -441,6 +503,10 @@ class AppLanguageStringsEn extends AppLocalizations {
 
   String noOfSongs({required String noOfSong}) {
     return "$noOfSong Mezmurs";
+  }
+
+  String noOfFollowers({required String noOfFollowers}) {
+    return "$noOfFollowers መዝሙርዎች";
   }
 
   String downloading({required String songName}) {
@@ -628,15 +694,15 @@ class AppLanguageStringsEn extends AppLocalizations {
       "Use your telebirr account to complete your mehaleye purchase.";
   final String payWithYenepay = "Pay with Yenepay";
   final String payWithYenepayMsg =
-      "Use your Yenepay account to complete your mehaleye purchase. yenepay offers the following payment options";
+      "Use your Yenepay account to complete your mehaleye purchase";
   final String payWithGoogleplayInappPurchases =
       "Pay With Google Play In-App Purchases";
   final String payWithAppStoreInappPurchases =
       "Pay With App Store In-App Purchases";
   final String payWithGoogleplayInappPurchasesMsg =
-      "Use your Google account to complete your mehaleye purchase. Google play offers the following payment options";
+      "Use your Google account to complete your mehaleye purchase";
   final String payWithAppStoreInappPurchasesMsg =
-      "Use your Apple account to complete your mehaleye purchase. App store offers the following payment options";
+      "Use your Apple account to complete your mehaleye purchase";
 
   String youHavPremiumAccountMsg({required bool isAndroid}) {
     if (isAndroid) {

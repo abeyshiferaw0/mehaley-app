@@ -65,13 +65,22 @@ class DeepLinkListenerBloc
       Uri? initialUri = await getInitialUri();
       print("share =>  getInitialUri ${initialUri}");
       if (initialUri != null) {
+        ///CHECK IF LINK IS DEEPLINK
         if (isValidateUri(initialUri)) {
           yield DeepLinkOpenState(
             appShareTypes: getUriShareType(initialUri),
             itemId: getUriItemId(initialUri),
           );
         } else {
-          yield DeepLinkErrorState(error: 'INVALID FORMAT');
+          ///CHECK IF LINK IS HTP URL
+          if (isValidateHttpUri(initialUri)) {
+            yield DeepLinkOpenState(
+              appShareTypes: getUriShareType(initialUri),
+              itemId: getHttpUriItemId(initialUri),
+            );
+          } else {
+            yield DeepLinkErrorState(error: 'INVALID FORMAT');
+          }
         }
       } else {
         yield DeepLinkListenerStartedState();

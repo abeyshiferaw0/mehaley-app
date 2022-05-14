@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mehaley/data/data_providers/ethio_telecom_purchase_provider.dart';
+import 'package:mehaley/data/models/api_response/payment_error_result.dart';
+import 'package:mehaley/data/models/api_response/tele_payment_result_data.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/network_util.dart';
 
@@ -10,22 +12,37 @@ class EthioTelecomPurchaseRepository {
   const EthioTelecomPurchaseRepository(
       {required this.ethioTelecomPurchaseProvider});
 
-  Future<String> purchaseItem(
+  Future<TelePaymentResultData> purchaseItem(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
   ) async {
+    TeleResult? teleResult;
+    PaymentErrorResult? paymentErrorResult;
+
+    ///
+    teleResult = null;
+    paymentErrorResult = null;
+
     Response response = await ethioTelecomPurchaseProvider.purchaseItem(
       itemId,
-      appPurchasedItemType,
+      purchasedItemType,
     );
 
-    print("ETHIOTELECOM  DATA => ${response.data}");
-    if (response.statusCode == 200) {
-      String checkOutUrl = response.data['payment_url'];
-      return checkOutUrl;
+    ///PARSE TELE RESULT DATA
+    if (response.data['tele_response'] != null) {
+      teleResult = TeleResult.fromJson(response.data['tele_response']);
     }
 
-    throw "UNABLE TO GENERATE YENE PAY PURCHASE URL";
+    ///PARSE PAYMENT RESULT RESULT DATA
+    if (response.data['error_response'] != null) {
+      paymentErrorResult =
+          PaymentErrorResult.fromJson(response.data['error_response']);
+    }
+
+    return TelePaymentResultData(
+      paymentErrorResult: paymentErrorResult,
+      teleResult: teleResult,
+    );
   }
 
   Future<bool> checkInternetConnection() async {

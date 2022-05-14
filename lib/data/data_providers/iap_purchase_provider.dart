@@ -11,7 +11,7 @@ class IapPurchaseProvider {
 
   Future verifyItem(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
     String purchaseToken,
   ) async {
     dio = Dio();
@@ -23,7 +23,7 @@ class IapPurchaseProvider {
       useToken: true,
       data: {
         'item_id': itemId,
-        'item_type': EnumToString.convertToString(appPurchasedItemType),
+        'item_type': EnumToString.convertToString(purchasedItemType),
         'device': Platform.isAndroid ? 'ANDROID' : 'IOS',
         'token': purchaseToken,
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/app_monthly_holidays_list.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
@@ -61,9 +62,7 @@ class _TodayHolidayToastWidgetState extends State<TodayHolidayToastWidget> {
                   fit: BoxFit.contain,
                 ),
                 Text(
-                  appLanguage == AppLanguage.AMHARIC
-                      ? "የዛሬ ወርሃዊ በዓላት"
-                      : "Today's holidays",
+                  AppLocale.of().todaysMonthlyHolidays,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: AppFontSizes.font_size_8.sp,

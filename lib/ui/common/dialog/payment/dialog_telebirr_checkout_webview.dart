@@ -22,7 +22,7 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
   const DialogTelebirrCheckoutWebView({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.checkOutUrl,
     required this.transactionNumber,
     required this.resultSuccessRedirectUrl,
@@ -32,7 +32,7 @@ class DialogTelebirrCheckoutWebView extends StatefulWidget {
 
   final int itemId;
 
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final String checkOutUrl;
   final String transactionNumber;
   final String resultSuccessRedirectUrl;
@@ -56,8 +56,6 @@ class _DialogTelebirrCheckoutWebViewState
   @override
   void initState() {
     super.initState();
-    print(
-        'TELEBIRRRR=>>  loadUrl  ${widget.resultSuccessRedirectUrl}?transactionNo=${widget.transactionNumber}');
 
     timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
       if (webViewController != null) {
@@ -97,7 +95,9 @@ class _DialogTelebirrCheckoutWebViewState
                         buildError(),
                         Align(
                           alignment: Alignment.topCenter,
-                          child: AppTopHeaderWithIcon(),
+                          child: AppTopHeaderWithIcon(
+                            enableCloseWarning: true,
+                          ),
                         ),
                       ],
                     ),
@@ -116,14 +116,14 @@ class _DialogTelebirrCheckoutWebViewState
       initialUrl: widget.checkOutUrl,
       javascriptMode: JavascriptMode.unrestricted,
       navigationDelegate: (NavigationRequest request) {
-        print("TELEBIRRRR=>>   NavigationRequest => ${request.url} ");
+        print('TELEBIRRRR=>>   NavigationRequest => ${request.url} ');
         return NavigationDecision.navigate;
       },
       onWebViewCreated: (mWebViewController) {
         webViewController = mWebViewController;
       },
       onPageStarted: (String s) {
-        print("TELEBIRRRR=>>   onPageStarted => ${s} ");
+        print('TELEBIRRRR=>>   onPageStarted => ${s} ');
         setState(() {
           loading = true;
           hasError = false;
@@ -147,7 +147,7 @@ class _DialogTelebirrCheckoutWebViewState
           loading = false;
           hasError = true;
         });
-        print("TELEBIRRRR=>>   onWebResourceError => ${error.failingUrl} ");
+        print('TELEBIRRRR=>>   onWebResourceError => ${error.failingUrl} ');
       },
     );
   }
@@ -193,7 +193,7 @@ class _DialogTelebirrCheckoutWebViewState
     Navigator.pop(context);
 
     ///TELEBIRR PURCHASE SUCCESS ACTIONS MAPPING
-    if (widget.appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapSongPurchaseActionEvent(
           itemId: widget.itemId,
@@ -201,7 +201,7 @@ class _DialogTelebirrCheckoutWebViewState
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapAlbumPurchaseActionEvent(
           itemId: widget.itemId,
@@ -210,7 +210,7 @@ class _DialogTelebirrCheckoutWebViewState
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapPlaylistPurchaseActionEvent(
           itemId: widget.itemId,

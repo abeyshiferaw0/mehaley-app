@@ -37,7 +37,7 @@ class UserPLayListRepository {
       );
       return myPlaylist;
     } else {
-      throw "POST_FAILED";
+      throw 'POST_FAILED';
     }
   }
 
@@ -60,7 +60,7 @@ class UserPLayListRepository {
       );
       return myPlaylist;
     } else {
-      throw "UPDATE_FAILED";
+      throw 'UPDATE_FAILED';
     }
   }
 
@@ -77,7 +77,7 @@ class UserPLayListRepository {
     if (response.statusCode == 200) {
       return response;
     } else {
-      throw "POST_FAILED";
+      throw 'POST_FAILED';
     }
   }
 
@@ -117,7 +117,7 @@ class UserPLayListRepository {
     if (response.statusCode == 200) {
       return response;
     } else {
-      throw "POST_FAILED";
+      throw 'POST_FAILED';
     }
   }
 
@@ -128,7 +128,7 @@ class UserPLayListRepository {
     if (response.statusCode == 200) {
       return response;
     } else {
-      throw "DELETE_FAILED";
+      throw 'DELETE_FAILED';
     }
   }
 

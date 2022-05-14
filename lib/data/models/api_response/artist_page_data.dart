@@ -10,6 +10,7 @@ class ArtistPageData extends Equatable {
   final Artist artist;
   final int noOfSong;
   final int noOfAlbum;
+  final int noOfFollower;
   final List<Album> popularAlbums;
   final List<Song> popularSongs;
   final List<Song> newSongs;
@@ -21,6 +22,7 @@ class ArtistPageData extends Equatable {
     required this.artist,
     required this.noOfSong,
     required this.noOfAlbum,
+    required this.noOfFollower,
     required this.popularAlbums,
     required this.newSongs,
     required this.popularSongs,
@@ -34,6 +36,7 @@ class ArtistPageData extends Equatable {
         artist,
         noOfSong,
         noOfAlbum,
+        noOfFollower,
         popularAlbums,
         popularSongs,
         playlistsFeaturingArtists,

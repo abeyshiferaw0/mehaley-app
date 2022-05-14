@@ -5,14 +5,14 @@ import 'package:mehaley/data/models/enums/enums.dart';
 class YenepayPaymentStatus extends Equatable {
   final int itemId;
   final YenepayPaymentReturnType yenepayPaymentReturnType;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
   YenepayPaymentStatus({
     required this.itemId,
     required this.yenepayPaymentReturnType,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   });
@@ -22,8 +22,8 @@ class YenepayPaymentStatus extends Equatable {
       itemId: int.parse(json["item_id"]),
       yenepayPaymentReturnType: EnumToString.fromString(
           YenepayPaymentReturnType.values, json["return_type"])!,
-      appPurchasedItemType: EnumToString.fromString(
-          AppPurchasedItemType.values, json["item_type"])!,
+      purchasedItemType:
+          EnumToString.fromString(PurchasedItemType.values, json["item_type"])!,
       appPurchasedSources: EnumToString.fromString(
           AppPurchasedSources.values, json["app_purchased_sources"])!,
       isFromSelfPage: json["is_from_self_page"] == 'true' ? true : false,
@@ -34,7 +34,7 @@ class YenepayPaymentStatus extends Equatable {
   List<Object?> get props => [
         itemId,
         yenepayPaymentReturnType,
-        appPurchasedItemType,
+        purchasedItemType,
         appPurchasedSources,
         isFromSelfPage,
       ];

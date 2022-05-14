@@ -18,7 +18,7 @@ class RecentlyPurchasedItemAdapter extends TypeAdapter<RecentlyPurchasedItem> {
     };
     return RecentlyPurchasedItem(
       itemId: fields[0] as int,
-      appPurchasedItemType: fields[1] as AppPurchasedItemType,
+      purchasedItemType: fields[1] as PurchasedItemType,
       millisecondsSinceEpoch: fields[2] as int,
     );
   }
@@ -30,7 +30,7 @@ class RecentlyPurchasedItemAdapter extends TypeAdapter<RecentlyPurchasedItem> {
       ..writeByte(0)
       ..write(obj.itemId)
       ..writeByte(1)
-      ..write(obj.appPurchasedItemType)
+      ..write(obj.purchasedItemType)
       ..writeByte(2)
       ..write(obj.millisecondsSinceEpoch);
   }

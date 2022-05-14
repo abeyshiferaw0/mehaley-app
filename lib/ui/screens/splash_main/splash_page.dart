@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          barrierLabel: "DEBUG",
+          barrierLabel: 'DEBUG',
           builder: (context) {
             return DialogCustomIP(
               onIpSet: () {

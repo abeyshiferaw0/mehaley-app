@@ -25,9 +25,6 @@ class PaymentMethodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBouncingButton(
       onTap: () {
-        print(
-            "PaymentMethodItem=>> ${paymentMethod.appPaymentMethods}  ${paymentMethod.isAvailable}");
-
         if (paymentMethod.isAvailable) {
           onTap();
         }
@@ -91,8 +88,9 @@ class PaymentMethodItem extends StatelessWidget {
     );
   }
 
-  Row buildTitleText() {
-    return Row(
+  Column buildTitleText() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           paymentMethod.title,
@@ -104,7 +102,7 @@ class PaymentMethodItem extends StatelessWidget {
         ),
 
         ///SHOW PLUS TAX INFO FOR TELE CARD PURCHASE
-        PlusTeleTaxWidget(
+        TeleTaxAddOnWidget(
           paymentMethod: paymentMethod,
         ),
       ],
@@ -116,9 +114,12 @@ class PaymentMethodItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset(
-          paymentMethod.paymentMethodImage.imagePath,
-          height: paymentMethod.paymentMethodImage.height,
+        Container(
+          child: Image.asset(
+            paymentMethod.paymentMethodImage.imagePath,
+            height: paymentMethod.paymentMethodImage.height,
+            fit: BoxFit.contain,
+          ),
         ),
         paymentMethod.isSelected
             ? Icon(

@@ -9,20 +9,20 @@ class RecentlyPurchasedItem extends Equatable {
   @HiveField(0)
   final int itemId;
   @HiveField(1)
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   @HiveField(2)
   final int millisecondsSinceEpoch;
 
   RecentlyPurchasedItem({
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.millisecondsSinceEpoch,
   });
 
   @override
   List<Object?> get props => [
         itemId,
-        appPurchasedItemType,
+        purchasedItemType,
         millisecondsSinceEpoch,
       ];
 

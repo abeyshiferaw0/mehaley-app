@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/discover_page_bloc/home_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/recently_purchased_cubit.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -43,26 +44,35 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
   @override
   Widget build(BuildContext _) {
     return Builder(builder: (context) {
-      return BlocBuilder<HomePageBloc, HomePageState>(
-        builder: (context, state) {
-          if (state is HomePageLoaded) {
-            return buildHomePageLoaded(state.homePageData);
+      return BlocListener<RecentlyPurchasedCubit, bool?>(
+        listener: (context, state) {
+          if (state != null) {
+            if (state) {
+              BlocProvider.of<HomePageBloc>(context).add(LoadHomePageEvent());
+            }
           }
-          if (state is HomePageLoading) {
-            return AppLoading(size: AppValues.loadingWidgetSize);
-          }
-          if (state is HomePageLoadingError) {
-            return AppError(
-              bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
-              onRetry: () {
-                BlocProvider.of<HomePageBloc>(context).add(
-                  LoadHomePageEvent(),
-                );
-              },
-            );
-          }
-          return AppLoading(size: AppValues.loadingWidgetSize);
         },
+        child: BlocBuilder<HomePageBloc, HomePageState>(
+          builder: (context, state) {
+            if (state is HomePageLoaded) {
+              return buildHomePageLoaded(state.homePageData);
+            }
+            if (state is HomePageLoading) {
+              return AppLoading(size: AppValues.loadingWidgetSize);
+            }
+            if (state is HomePageLoadingError) {
+              return AppError(
+                bgWidget: AppLoading(size: AppValues.loadingWidgetSize),
+                onRetry: () {
+                  BlocProvider.of<HomePageBloc>(context).add(
+                    LoadHomePageEvent(),
+                  );
+                },
+              );
+            }
+            return AppLoading(size: AppValues.loadingWidgetSize);
+          },
+        ),
       );
     });
   }

@@ -4,6 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_albums_page_bloc/all_albums_page_bloc.dart';
+import 'package:mehaley/business_logic/cubits/recently_purchased_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
@@ -66,26 +67,40 @@ class _AllAlbumsTabPageState extends State<AllAlbumsTabPage>
         left: AppPadding.padding_16,
         right: AppPadding.padding_16,
       ),
-      child: BlocListener<AllAlbumsPageBloc, AllAlbumsPageState>(
-        listener: (context, state) {
-          if (state is AllPaginatedAlbumsLoadedState) {
-            final isLastPage =
-                state.paginatedAlbums.length < AppValues.allAlbumsPageSize;
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AllAlbumsPageBloc, AllAlbumsPageState>(
+            listener: (context, state) {
+              if (state is AllPaginatedAlbumsLoadedState) {
+                final isLastPage =
+                    state.paginatedAlbums.length < AppValues.allAlbumsPageSize;
 
-            if (isLastPage) {
-              _pagingController.appendLastPage(state.paginatedAlbums);
-            } else {
-              final nextPageKey = state.page + 1;
-              _pagingController.appendPage(
-                state.paginatedAlbums,
-                nextPageKey,
-              );
-            }
-          }
-          if (state is AllPaginatedAlbumsLoadingErrorState) {
-            _pagingController.error = AppLocale.of().networkError;
-          }
-        },
+                if (isLastPage) {
+                  _pagingController.appendLastPage(state.paginatedAlbums);
+                } else {
+                  final nextPageKey = state.page + 1;
+                  _pagingController.appendPage(
+                    state.paginatedAlbums,
+                    nextPageKey,
+                  );
+                }
+              }
+              if (state is AllPaginatedAlbumsLoadingErrorState) {
+                _pagingController.error = AppLocale.of().networkError;
+              }
+            },
+          ),
+          BlocListener<RecentlyPurchasedCubit, bool?>(
+            listener: (context, state) {
+              if (state != null) {
+                if (state) {
+                  ///FETCH PAGINATED SONGS WITH PAGINATED CONTROLLER
+                  _pagingController.refresh();
+                }
+              }
+            },
+          ),
+        ],
         child: RefreshIndicator(
           color: ColorMapper.getDarkOrange(),
           onRefresh: () => Future.sync(

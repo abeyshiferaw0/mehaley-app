@@ -24,7 +24,7 @@ class IapPurchaseVerificationBloc
         ///VERIFY PURCHASE IN SERVER AND STORE
         bool isValid = await iapPurchaseRepository.verifyItem(
           event.itemId,
-          event.appPurchasedItemType,
+          event.purchasedItemType,
           event.purchaseToken,
         );
 

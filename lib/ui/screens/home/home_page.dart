@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_artists_page_bloc/all_artists_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_playlists_page_bloc/all_playlists_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_songs_page_bloc/all_songs_page_bloc.dart';
@@ -11,13 +12,13 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_listner_cubit.dart';
+import 'package:mehaley/business_logic/cubits/recently_purchased_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
-import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/subscribed_tag.dart';
@@ -27,7 +28,7 @@ import 'package:mehaley/ui/screens/home/tab_pages/all_songs_tab_page.dart';
 import 'package:mehaley/ui/screens/home/tab_pages/dicover_tab_page.dart';
 import 'package:mehaley/ui/screens/home/widgets/home_page_header_tabs_deligate.dart';
 import 'package:mehaley/util/api_util.dart';
-import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
@@ -57,9 +58,16 @@ class _HomePageState extends State<HomePage>
   void didPopNext() {
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
+
+    ///IF THERE WAS A RECENT PURCHASE MADE AFTER ALL CACHE IS CLEARED
+    ///MAKE SURE TO RELOAD ALL TAB PAGES BY RecentlyPurchasedCubit CUBIT
     if (ApiUtil.isRecentlyPurchasedWasMade()) {
       _tabController.animateTo(0);
-      ApiUtil.setRecentlyPurchased(true);
+      BlocProvider.of<RecentlyPurchasedCubit>(context)
+          .setRecentlyPurchased(true);
+      BlocProvider.of<RecentlyPurchasedCubit>(context)
+          .setRecentlyPurchased(null);
+      ApiUtil.setRecentlyPurchased(false);
     }
   }
 
@@ -79,6 +87,8 @@ class _HomePageState extends State<HomePage>
   void initState() {
     BlocProvider.of<BottomBarCubit>(context).changeScreen(BottomBarPages.HOME);
     BlocProvider.of<BottomBarHomeCubit>(context).setPageShowing(true);
+
+    print('PLAYER_AUTH=>>  ${AuthUtil.getUserId()}');
 
     ///INIT TAB CONTROLLER
     _tabController = new TabController(length: 5, vsync: this);
@@ -115,6 +125,7 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     AppRouterPaths.routeObserver.unsubscribe(this);
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -191,9 +202,7 @@ class _HomePageState extends State<HomePage>
                 horizontal: AppPadding.padding_4,
               ),
               child: Text(
-                L10nUtil.getCurrentLocale() == AppLanguage.AMHARIC
-                    ? "የዛሬ ወርሃዊ በዓላት"
-                    : "Today's holidays".toUpperCase(),
+                AppLocale.of().todaysMonthlyHolidays.toUpperCase(),
                 style: TextStyle(
                   fontSize: (AppFontSizes.font_size_8 + 1).sp,
                   fontWeight: FontWeight.w500,

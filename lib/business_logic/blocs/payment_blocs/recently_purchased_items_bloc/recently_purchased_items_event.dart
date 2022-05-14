@@ -6,11 +6,11 @@ abstract class RecentlyPurchasedItemsEvent extends Equatable {
 
 class SaveRecentlyPurchasedItemEvent extends RecentlyPurchasedItemsEvent {
   const SaveRecentlyPurchasedItemEvent(
-      {required this.item, required this.appPurchasedItemType});
+      {required this.item, required this.purchasedItemType});
 
   final dynamic item;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
 
   @override
-  List<Object?> get props => [item, appPurchasedItemType];
+  List<Object?> get props => [item, purchasedItemType];
 }

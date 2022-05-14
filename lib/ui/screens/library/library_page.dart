@@ -79,7 +79,6 @@ class _LibraryPageState extends State<LibraryPage>
     BlocProvider.of<BottomBarCubit>(context)
         .changeScreen(BottomBarPages.LIBRARY);
     BlocProvider.of<BottomBarLibraryCubit>(context).setPageShowing(true);
-    //print("BottomBarProfileCubittt // initState // true");
 
     ///INIT TAB CONTROLLER
     _tabController = new TabController(length: 5, vsync: this);

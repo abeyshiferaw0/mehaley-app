@@ -9,7 +9,7 @@ class TelebirrPurchaseProvider {
 
   Future generateCheckoutUrl(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
   ) async {
     dio = Dio();
 
@@ -21,7 +21,7 @@ class TelebirrPurchaseProvider {
       data: {
         'item_id': itemId,
         'item_type': EnumToString.convertToString(
-          appPurchasedItemType,
+          purchasedItemType,
         ),
       },
     );

@@ -113,7 +113,7 @@ class TelebirrPurchaseUtil {
           ),
           child: DialogTelebirrGenerateCheckoutUrl(
             itemId: song.songId,
-            appPurchasedItemType: AppPurchasedItemType.SONG_PAYMENT,
+            purchasedItemType: PurchasedItemType.SONG_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -140,7 +140,7 @@ class TelebirrPurchaseUtil {
           ),
           child: DialogTelebirrGenerateCheckoutUrl(
             itemId: playlist.playlistId,
-            appPurchasedItemType: AppPurchasedItemType.PLAYLIST_PAYMENT,
+            purchasedItemType: PurchasedItemType.PLAYLIST_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -167,7 +167,7 @@ class TelebirrPurchaseUtil {
           ),
           child: DialogTelebirrGenerateCheckoutUrl(
             itemId: album.albumId,
-            appPurchasedItemType: AppPurchasedItemType.ALBUM_PAYMENT,
+            purchasedItemType: PurchasedItemType.ALBUM_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),

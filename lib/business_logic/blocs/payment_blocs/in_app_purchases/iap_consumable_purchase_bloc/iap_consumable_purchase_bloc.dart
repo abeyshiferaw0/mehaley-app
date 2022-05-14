@@ -79,7 +79,7 @@ class IapConsumablePurchaseBloc
         if (isNetAvailable) {
           ///SAVE LAST ITEM TO BE PURCHASED
           iapPurchaseRepository.saveLastItemToPurchase(
-            event.appPurchasedItemType,
+            event.purchasedItemType,
             event.itemId,
             event.isFromItemSelfPage,
             event.appPurchasedSources,
@@ -115,7 +115,7 @@ class IapConsumablePurchaseBloc
     } else if (event is IapPurchaseSuccessVerifyEvent) {
       yield IapPurchaseSuccessVerifyState(
         purchasedItem: event.purchasedItem,
-        appPurchasedItemType: event.appPurchasedItemType,
+        purchasedItemType: event.purchasedItemType,
         itemId: event.itemId,
         isFromSelfPage: event.isFromSelfPage,
         appPurchasedSources: event.appPurchasedSources,
@@ -137,8 +137,8 @@ class IapConsumablePurchaseBloc
       ///GET LAST TO BE PURCHASED ITEM INFO
       Map<String, dynamic> info = iapPurchaseRepository.getLastItemToPurchase();
       //item type
-      AppPurchasedItemType itemType = EnumToString.fromString(
-        AppPurchasedItemType.values,
+      PurchasedItemType itemType = EnumToString.fromString(
+        PurchasedItemType.values,
         info[AppValues.lastToBePurchasedItemTypeKey]!,
       )!;
       //purchase click source
@@ -155,7 +155,7 @@ class IapConsumablePurchaseBloc
       this.add(
         IapPurchaseSuccessVerifyEvent(
           purchasedItem: purchasedItem,
-          appPurchasedItemType: itemType,
+          purchasedItemType: itemType,
           purchaseToken: Platform.isAndroid
               ? purchasedItem.purchaseToken!
               : purchasedItem.transactionReceipt!,

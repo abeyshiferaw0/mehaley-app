@@ -62,7 +62,7 @@ class IapPurchaseCanceledState extends IapConsumablePurchaseState {
 
 class IapPurchaseSuccessVerifyState extends IapConsumablePurchaseState {
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final PurchasedItem purchasedItem;
   final bool isFromSelfPage;
   final String purchaseToken;
@@ -70,7 +70,7 @@ class IapPurchaseSuccessVerifyState extends IapConsumablePurchaseState {
 
   IapPurchaseSuccessVerifyState({
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.purchasedItem,
     required this.isFromSelfPage,
     required this.purchaseToken,
@@ -81,7 +81,7 @@ class IapPurchaseSuccessVerifyState extends IapConsumablePurchaseState {
         itemId,
         purchasedItem,
         isFromSelfPage,
-        appPurchasedItemType,
+        purchasedItemType,
         purchaseToken,
         appPurchasedSources,
       ];

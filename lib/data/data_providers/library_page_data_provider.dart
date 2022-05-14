@@ -35,16 +35,16 @@ class LibraryPageDataProvider {
     //SEND REQUEST
     String url = '';
     if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALL_SONGS) {
-      url = "/purchased/song/all/";
+      url = '/purchased/song/all/';
     } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.SONGS) {
-      url = "/purchased/song/";
+      url = '/purchased/song/';
     } else if (appPurchasedPageItemTypes == AppPurchasedPageItemTypes.ALBUMS) {
-      url = "/purchased/album/";
+      url = '/purchased/album/';
     } else if (appPurchasedPageItemTypes ==
         AppPurchasedPageItemTypes.PLAYLISTS) {
-      url = "/purchased/playlist/";
+      url = '/purchased/playlist/';
     } else {
-      throw "AppPurchasedPageItemTypes IS INCORRECT";
+      throw 'AppPurchasedPageItemTypes IS INCORRECT';
     }
     Response response = await ApiUtil.get(
       dio: dio,
@@ -59,7 +59,7 @@ class LibraryPageDataProvider {
 
     Response response = await ApiUtil.get(
       dio: dio,
-      url: AppApi.paymentBaseUrl + "/purchased/song/all/list/",
+      url: AppApi.paymentBaseUrl + '/purchased/song/all/list/',
       queryParameters: {
         'page': page,
         'page_size': pageSize,
@@ -91,13 +91,13 @@ class LibraryPageDataProvider {
         );
     }
 
-    String url = "";
+    String url = '';
     if (appFavoritePageItemTypes == AppFavoritePageItemTypes.SONGS) {
-      url = "/liked_songs/";
+      url = '/liked_songs/';
     } else if (appFavoritePageItemTypes == AppFavoritePageItemTypes.ALBUMS) {
-      url = "/liked_albums/";
+      url = '/liked_albums/';
     } else {
-      throw "AppFavoritePageItemTypes IS INCORRECT";
+      throw 'AppFavoritePageItemTypes IS INCORRECT';
     }
     Response response = await ApiUtil.get(
       dio: dio,
@@ -130,13 +130,13 @@ class LibraryPageDataProvider {
         );
     }
 
-    String url = "";
+    String url = '';
     if (appFollowedPageItemTypes == AppFollowedPageItemTypes.PLAYLISTS) {
-      url = "/followed_playlists/";
+      url = '/followed_playlists/';
     } else if (appFollowedPageItemTypes == AppFollowedPageItemTypes.ARTIST) {
-      url = "/followed_artists/";
+      url = '/followed_artists/';
     } else {
-      throw "AppFavoritePageItemTypes IS INCORRECT";
+      throw 'AppFavoritePageItemTypes IS INCORRECT';
     }
     Response response = await ApiUtil.get(
       dio: dio,

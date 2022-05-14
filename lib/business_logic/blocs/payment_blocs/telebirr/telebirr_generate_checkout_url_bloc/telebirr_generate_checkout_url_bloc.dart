@@ -24,7 +24,7 @@ class TelebirrGenerateCheckoutUrlBloc extends Bloc<
         final TelebirrCheckoutApiResult telebirrCheckoutApiResult =
             await telebirrPurchaseRepository.generateCheckoutUrl(
           event.itemId,
-          event.appPurchasedItemType,
+          event.purchasedItemType,
         );
 
         yield TelebirrCheckoutUrlGeneratedState(

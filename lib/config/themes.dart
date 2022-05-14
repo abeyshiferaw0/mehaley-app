@@ -38,18 +38,24 @@ class AppAssets {
   ///PAYMENT ICONS
   static String icApplePay = 'assets/icons/payment_icons/ic_apple_pay.png';
   static String icAppleStore = 'assets/icons/payment_icons/ic_apple_store.png';
-  static String icCbe = 'assets/icons/payment_icons/ic_cbe.png';
-  static String icAmole = 'assets/icons/payment_icons/ic_amole.png';
+  // static String icCbe = 'assets/icons/payment_icons/ic_cbe.png';
+  // static String icAmole = 'assets/icons/payment_icons/ic_amole.png';
   static String icGooglePlay = 'assets/icons/payment_icons/ic_google_play.png';
   static String icGooglePay = 'assets/icons/payment_icons/ic_google_pay.png';
-  static String icHelloCash = 'assets/icons/payment_icons/ic_hello_cash.png';
-  static String icMasterCard = 'assets/icons/payment_icons/ic_mastercard.png';
-  static String icMbirr = 'assets/icons/payment_icons/ic_mbirr.png';
-  static String icPaypal = 'assets/icons/payment_icons/ic_paypal.png';
+  // static String icHelloCash = 'assets/icons/payment_icons/ic_hello_cash.png';
+  // static String icMasterCard = 'assets/icons/payment_icons/ic_mastercard.png';
+  // static String icMbirr = 'assets/icons/payment_icons/ic_mbirr.png';
+  // static String icPaypal = 'assets/icons/payment_icons/ic_paypal.png';
   static String icTelebirr = 'assets/icons/payment_icons/ic_telebirr.png';
   static String icEthioTele = 'assets/icons/payment_icons/ic_ethio_tele.png';
-  static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
+  // static String icVisa = 'assets/icons/payment_icons/ic_visa.png';
   static String icYenepay = 'assets/icons/payment_icons/ic_yene_pay.png';
+  // static String icDiscoveryCard =
+  //     'assets/icons/payment_icons/ic_discovery_card.png';
+  // static String icAmericanExpress =
+  //     'assets/icons/payment_icons/ic_american_express.png';
+  static String icCreditCards =
+      'assets/icons/payment_icons/ic_credit_cards.png';
 
   ///IMAGES
   static String imageSignUpBg = 'assets/images/image_sign_up_bg.jpg';
@@ -70,7 +76,9 @@ class AppAssets {
   static String cartSuccessLottie = 'assets/lottie/cart_success.json';
   static String updateLottie = 'assets/lottie/update.json';
   static String subscriptionEndLottie = 'assets/lottie/subscription_end.json';
-  static String subscriptionSuccess = 'assets/lottie/subscription_success.json';
+  static String subscriptionSuccessLottie =
+      'assets/lottie/subscription_success.json';
+  static String handPhoneLottie = 'assets/lottie/hand_phone.json';
 }
 
 class AppColors {

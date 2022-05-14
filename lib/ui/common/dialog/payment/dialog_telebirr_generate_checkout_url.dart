@@ -17,13 +17,13 @@ class DialogTelebirrGenerateCheckoutUrl extends StatefulWidget {
   const DialogTelebirrGenerateCheckoutUrl({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   }) : super(key: key);
 
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
@@ -39,7 +39,7 @@ class _DialogTelebirrGenerateCheckoutUrlState
     ///GENERATE TELEBIRR CHECKOUT URL
     BlocProvider.of<TelebirrGenerateCheckoutUrlBloc>(context).add(
       GenerateCheckoutUrlEvent(
-        appPurchasedItemType: widget.appPurchasedItemType,
+        purchasedItemType: widget.purchasedItemType,
         itemId: widget.itemId,
       ),
     );
@@ -77,7 +77,7 @@ class _DialogTelebirrGenerateCheckoutUrlState
                             ///SHOW GENERATE TELEBIRR CHECKOUT URL DIALOG
                             return DialogTelebirrCheckoutWebView(
                               itemId: widget.itemId,
-                              appPurchasedItemType: widget.appPurchasedItemType,
+                              purchasedItemType: widget.purchasedItemType,
                               transactionNumber: state.transactionNumber,
                               checkOutUrl: state.checkoutUrl,
                               resultSuccessRedirectUrl:
@@ -128,7 +128,7 @@ class _DialogTelebirrGenerateCheckoutUrlState
           ///GENERATE TELEBIRR CHECKOUT URL
           BlocProvider.of<TelebirrGenerateCheckoutUrlBloc>(context).add(
             GenerateCheckoutUrlEvent(
-              appPurchasedItemType: widget.appPurchasedItemType,
+              purchasedItemType: widget.purchasedItemType,
               itemId: widget.itemId,
             ),
           );

@@ -179,8 +179,7 @@ class _DialogPhoneVerificationPageOneState
     return Container(
       margin: EdgeInsets.only(bottom: AppMargin.margin_48),
       child: Text(
-        "Phone number required to complete your mehaleye purchase"
-            .toUpperCase(),
+        AppLocale.of().phoneNumberRequired.toUpperCase(),
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
@@ -283,6 +282,7 @@ class _DialogPhoneVerificationPageOneState
         PhoneNumberInput(
           controller: controller,
           hasError: hasError,
+          isOnlyEt: true,
           selectedCountryCode: selectedCountryCode,
         )
       ],

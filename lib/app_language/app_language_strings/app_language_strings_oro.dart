@@ -526,15 +526,15 @@ class AppLanguageStringsOro extends AppLocalizations {
       "bittaa weedduu xumuruuf lakk. Teele-birr keessan fayyadamaa";
   final String payWithYenepay = " karaa yenee pey’tin kaffalaa";
   final String payWithYenepayMsg =
-      "bittaa weedduu xumuruuf lakk. Yenee-pey keessan fayyadamaa, yenee-pey filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+      "bittaa weedduu xumuruuf lakk. Yenee-pey keessan fayyadamaa";
   final String payWithGoogleplayInappPurchases =
       "appilikeeshinii googil pilay’tin bittaa kaffalaa";
   final String payWithAppStoreInappPurchases =
       "appilikeeshinii aapp-istoori’tin bittaa kaffalaa";
   final String payWithGoogleplayInappPurchasesMsg =
-      "bittaa weedduu xumuruuf adda googilii keessan fayyadamaa, googil-pleey filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+      "bittaa weedduu xumuruuf adda googilii keessan fayyadamaa";
   final String payWithAppStoreInappPurchasesMsg =
-      "bittaa weedduu xumuruuf addaa appilii keessan fayyadamaa, aapp-istoorin filannoowwan kaffaltii armaan gadii ni dhiyeessa";
+      "bittaa weedduu xumuruuf addaa appilii keessan fayyadamaa";
   final String mezmur = "Faarfannaa";
 
   final String explore = "filachu";
@@ -544,7 +544,69 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String allPlaylists = "faarfanna filacho";
 
   ///UNTRANSLATED
-  final String viewMore = "View More";
+  //////////////
+  ///////////////
+  final String viewMore = "Dabalata ilaalaa";
+  final String balanceNotEnoughMsg =
+      "Maaloo herrega keessan guutaati irra deebiyaa yaala";
+  final String phoneNumberRequired =
+      "Bittaa giddugalaa keessan xumuruuf lakkoofsi bilbilaa keessan nibarbaachisa";
+  final String todaysMonthlyHolidays = "ayyaanota ji’aa harr’aa";
+  final String payWithEthioTele = "Itiyoo teelee tiin kaffalaa";
+  final String payWithEthioTeleMsg =
+      "Bittaa giddugalaa keessan raawwachuuf xumuruuf maaloo herrega bilbila keessanii fayyadamaa";
+  final String payWithCreditCard = "Kaardota kirediit/debiiti tiin kaffalaa";
+  final String payWithCreditCardMsg =
+      "Bittaa giddugalaa keessan xumuruuf maaloo kaardota kirediitii/debiitii fayyadamaa";
+  final String teleCutMsg = "(kaffaltiin tajaajilaa %+30 hammatameera)";
+  final String otherArtists = "Faarfattoota biroo";
+  final String local = "Kan biyya keessaa";
+  final String foreign = "Kan alaa";
+  String itemIsFreeMsg({required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarffannaa";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Albeemii";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "ፕሌይሊስት";
+    return "Kun $item toladha/maaloo fuukla kana haaromsuuf yaalaa";
+  }
+
+  String alreadyPurchasedTryRefreshMsg(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannaa";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "Albeemii";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Tarree sirbaa";
+    return " $item kana dursitanii bittanii jirtu/maaloo fuula kana jaaromsuuf yaalaa";
+  }
+
+  String balanceNotEnoughForPurchase(
+      {required PurchasedItemType purchasedItemType}) {
+    String item = '';
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT)
+      item = "Faarfannaa";
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) item = "albeemii";
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT)
+      item = "Tarree sirbaa";
+    return "$item kana bituudhaaf herregni bilbila keessanii gahaa miti።";
+  }
+
+  String zemariEmptyAlbums({required String zemariName}) {
+    return "Faarfataan/ttuum $zemariName Albeemii hinqabu/qabdu።";
+  }
+
+  String zemariEmptySongs({required String zemariName}) {
+    return "Faarfataan/ttuun $zemariName faarfannaa hinqabu/qabdu።";
+  }
+
+  String zemariEmptyPlaylists({required String zemariName}) {
+    return "Faarfataan/ttuun $zemariName Tarree sirbaa kamiyyu irratti hindhiyaanne።";
+  }
+  //////////////
+  ///////////////
 
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";

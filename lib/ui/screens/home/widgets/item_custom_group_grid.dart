@@ -28,6 +28,7 @@ class ItemCustomGroupGrid extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ClipRRect(

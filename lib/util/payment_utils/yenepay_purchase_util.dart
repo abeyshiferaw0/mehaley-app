@@ -118,7 +118,7 @@ class YenepayPurchaseUtil {
           ),
           child: DialogYenepayGenerateCheckoutUrl(
             itemId: song.songId,
-            appPurchasedItemType: AppPurchasedItemType.SONG_PAYMENT,
+            purchasedItemType: PurchasedItemType.SONG_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -145,7 +145,7 @@ class YenepayPurchaseUtil {
           ),
           child: DialogYenepayGenerateCheckoutUrl(
             itemId: playlist.playlistId,
-            appPurchasedItemType: AppPurchasedItemType.PLAYLIST_PAYMENT,
+            purchasedItemType: PurchasedItemType.PLAYLIST_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -172,7 +172,7 @@ class YenepayPurchaseUtil {
           ),
           child: DialogYenepayGenerateCheckoutUrl(
             itemId: album.albumId,
-            appPurchasedItemType: AppPurchasedItemType.ALBUM_PAYMENT,
+            purchasedItemType: PurchasedItemType.ALBUM_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -242,8 +242,8 @@ class YenepayPurchaseUtil {
 
   static void onSuccess(YenepayPaymentStatus yenepayPaymentStatus, context) {
     ///YENEPAY PURCHASE SUCCESS ACTIONS MAPPING
-    if (yenepayPaymentStatus.appPurchasedItemType ==
-        AppPurchasedItemType.SONG_PAYMENT) {
+    if (yenepayPaymentStatus.purchasedItemType ==
+        PurchasedItemType.SONG_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapSongPurchaseActionEvent(
           itemId: yenepayPaymentStatus.itemId,
@@ -251,8 +251,8 @@ class YenepayPurchaseUtil {
         ),
       );
     }
-    if (yenepayPaymentStatus.appPurchasedItemType ==
-        AppPurchasedItemType.ALBUM_PAYMENT) {
+    if (yenepayPaymentStatus.purchasedItemType ==
+        PurchasedItemType.ALBUM_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapAlbumPurchaseActionEvent(
           itemId: yenepayPaymentStatus.itemId,
@@ -261,8 +261,8 @@ class YenepayPurchaseUtil {
         ),
       );
     }
-    if (yenepayPaymentStatus.appPurchasedItemType ==
-        AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    if (yenepayPaymentStatus.purchasedItemType ==
+        PurchasedItemType.PLAYLIST_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapPlaylistPurchaseActionEvent(
           itemId: yenepayPaymentStatus.itemId,

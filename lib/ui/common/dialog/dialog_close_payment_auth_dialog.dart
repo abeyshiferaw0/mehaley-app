@@ -66,20 +66,6 @@ class DialogClosePaymentAuthDialog extends StatelessWidget {
                 children: [
                   AppBouncingButton(
                     onTap: () {
-                      onClose();
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      cancelButtonText,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        fontWeight: FontWeight.w500,
-                        color: ColorMapper.getBlack(),
-                      ),
-                    ),
-                  ),
-                  AppBouncingButton(
-                    onTap: () {
                       Navigator.pop(context);
                     },
                     child: Container(
@@ -97,6 +83,23 @@ class DialogClosePaymentAuthDialog extends StatelessWidget {
                           fontSize: AppFontSizes.font_size_12.sp,
                           fontWeight: FontWeight.w600,
                           color: ColorMapper.getWhite(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  AppBouncingButton(
+                    onTap: () {
+                      onClose();
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppPadding.padding_8),
+                      child: Text(
+                        cancelButtonText,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_10.sp,
+                          fontWeight: FontWeight.w500,
+                          color: ColorMapper.getBlack(),
                         ),
                       ),
                     ),

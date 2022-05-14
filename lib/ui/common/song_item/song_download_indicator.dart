@@ -75,7 +75,7 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
                 showDownloadFailed = false;
                 showEmpty = false;
                 downloadingProgress = state.progress.toDouble();
-                print("state.progress => ${state.progress}");
+                print('state.progress => ${state.progress}');
               });
             }
           }

@@ -65,9 +65,9 @@ class AppTopHeaderWithIcon extends StatelessWidget {
                       builder: (context) {
                         return Center(
                           child: DialogClosePaymentAuthDialog(
-                            titleText: 'Cancel payment process',
+                            titleText: 'Cancel purchasing',
                             descText:
-                                'are you sure you want to cancel authenticating your phone number',
+                                'Are you sure you want to cancel payment process?',
                             onClose: () {
                               Navigator.pop(context);
                             },

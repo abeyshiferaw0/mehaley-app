@@ -119,13 +119,13 @@ class AuthRepository {
     await OneSignal.shared.sendTags(
       {
         EnumToString.convertToString(
-            AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS): "1",
+            AppUserNotificationTypes.RECEIVE_ADMIN_NOTIFICATIONS): '1',
         EnumToString.convertToString(
-            AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS): "1",
+            AppUserNotificationTypes.RECEIVE_NEW_RELEASES_NOTIFICATIONS): '1',
         EnumToString.convertToString(
-            AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS): "1",
+            AppUserNotificationTypes.RECEIVE_LATEST_UPDATES_NOTIFICATIONS): '1',
         EnumToString.convertToString(AppUserNotificationTypes
-            .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS): "1",
+            .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS): '1',
       },
     ).catchError(
       (error) {

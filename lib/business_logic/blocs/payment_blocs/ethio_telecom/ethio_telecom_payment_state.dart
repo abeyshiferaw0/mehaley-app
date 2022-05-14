@@ -14,34 +14,6 @@ class EthioTelecomPurchasingState extends EthioTelecomPaymentState {
   List<Object> get props => [];
 }
 
-class EthioTelecomPurchasedState extends EthioTelecomPaymentState {
-  final int itemId;
-
-  EthioTelecomPurchasedState({required this.itemId});
-
-  @override
-  List<Object> get props => [itemId];
-}
-
-class EthioTelecomPurchaseBalanceNotEnoughState
-    extends EthioTelecomPaymentState {
-  final DateTime dateTime;
-
-  EthioTelecomPurchaseBalanceNotEnoughState({required this.dateTime});
-
-  @override
-  List<Object> get props => [dateTime];
-}
-
-class EthioTelecomPurchaseNoInternetState extends EthioTelecomPaymentState {
-  final DateTime dateTime;
-
-  EthioTelecomPurchaseNoInternetState({required this.dateTime});
-
-  @override
-  List<Object?> get props => [dateTime];
-}
-
 class EthioTelecomPurchasingFailedState extends EthioTelecomPaymentState {
   final String error;
   final DateTime dateTime;
@@ -51,4 +23,100 @@ class EthioTelecomPurchasingFailedState extends EthioTelecomPaymentState {
 
   @override
   List<Object> get props => [error, dateTime];
+}
+
+class EthioTelecomPurchasedIsFreeState extends EthioTelecomPaymentState {
+  final int itemId;
+  final TelePaymentResultData telePaymentResultData;
+  final PurchasedItemType purchasedItemType;
+
+  EthioTelecomPurchasedIsFreeState({
+    required this.itemId,
+    required this.telePaymentResultData,
+    required this.purchasedItemType,
+  });
+
+  @override
+  List<Object> get props => [
+        itemId,
+        purchasedItemType,
+        telePaymentResultData,
+      ];
+}
+
+class EthioTelecomIsAlreadyBoughtState extends EthioTelecomPaymentState {
+  final int itemId;
+  final TelePaymentResultData telePaymentResultData;
+  final PurchasedItemType purchasedItemType;
+
+  EthioTelecomIsAlreadyBoughtState({
+    required this.itemId,
+    required this.telePaymentResultData,
+    required this.purchasedItemType,
+  });
+
+  @override
+  List<Object> get props => [
+        itemId,
+        purchasedItemType,
+        telePaymentResultData,
+      ];
+}
+
+class EthioTelecomPurchasedSuccessState extends EthioTelecomPaymentState {
+  final int itemId;
+  final TelePaymentResultData telePaymentResultData;
+  final PurchasedItemType purchasedItemType;
+
+  EthioTelecomPurchasedSuccessState({
+    required this.itemId,
+    required this.telePaymentResultData,
+    required this.purchasedItemType,
+  });
+
+  @override
+  List<Object> get props => [
+        itemId,
+        purchasedItemType,
+        telePaymentResultData,
+      ];
+}
+
+class EthioTelecomPurchaseNotSuccessState extends EthioTelecomPaymentState {
+  final int itemId;
+  final TelePaymentResultData telePaymentResultData;
+  final PurchasedItemType purchasedItemType;
+
+  EthioTelecomPurchaseNotSuccessState({
+    required this.itemId,
+    required this.telePaymentResultData,
+    required this.purchasedItemType,
+  });
+
+  @override
+  List<Object> get props => [
+        itemId,
+        purchasedItemType,
+        telePaymentResultData,
+      ];
+}
+
+class EthioTelecomPurchaseBalanceNotEnoughState
+    extends EthioTelecomPaymentState {
+  final int itemId;
+  final TelePaymentResultData telePaymentResultData;
+  final PurchasedItemType purchasedItemType;
+
+  EthioTelecomPurchaseBalanceNotEnoughState({
+    required this.itemId,
+    required this.telePaymentResultData,
+    required this.purchasedItemType,
+  });
+
+  @override
+  List<Object> get props => [
+        itemId,
+        purchasedItemType,
+        telePaymentResultData,
+      ];
 }

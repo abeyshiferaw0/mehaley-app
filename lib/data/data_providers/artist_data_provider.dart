@@ -46,6 +46,53 @@ class ArtistDataProvider {
     }
   }
 
+  Future getPaginatedAllSongs(int page, int pageSize, int artistId) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/get-artist/release/song/",
+      queryParameters: {
+        'id': artistId,
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
+  Future getPaginatedArtistAllAlbums(
+      int page, int pageSize, int artistId) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/get-artist/release/album/",
+      queryParameters: {
+        'id': artistId,
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
+  Future getPaginatedArtistAllPlaylists(
+      int page, int pageSize, int artistId) async {
+    dio = await AppDio.getDio();
+
+    Response response = await ApiUtil.get(
+      dio: dio,
+      url: AppApi.musicBaseUrl + "/get-artist/release/playlist/",
+      queryParameters: {
+        'id': artistId,
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return response;
+  }
+
   cancel() {
     if (dio != null) {
       dio.close(force: true);

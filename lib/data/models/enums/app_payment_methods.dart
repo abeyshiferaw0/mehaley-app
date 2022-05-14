@@ -13,5 +13,7 @@ enum AppPaymentMethods {
   @HiveField(3)
   METHOD_INAPP,
   @HiveField(4)
+  METHOD_CREDIT_CARD,
+  @HiveField(5)
   METHOD_UNK,
 }

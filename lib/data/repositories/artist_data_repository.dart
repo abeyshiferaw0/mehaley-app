@@ -12,11 +12,54 @@ class ArtistDataRepository {
 
   const ArtistDataRepository({required this.artistDataProvider});
 
+  Future<List<Song>> getPaginatedArtistAllSongs(
+      int page, int pageSize, int artistId) async {
+    List<Song> paginatedSongs;
+
+    var response =
+        await artistDataProvider.getPaginatedAllSongs(page, pageSize, artistId);
+
+    paginatedSongs =
+        (response.data as List).map((song) => Song.fromMap(song)).toList();
+
+    return paginatedSongs;
+  }
+
+  Future<List<Album>> getPaginatedArtistAllAlbums(
+      int page, int pageSize, int artistId) async {
+    List<Album> paginatedAlbums;
+
+    var response = await artistDataProvider.getPaginatedArtistAllAlbums(
+        page, pageSize, artistId);
+
+    paginatedAlbums =
+        (response.data as List).map((album) => Album.fromMap(album)).toList();
+
+    return paginatedAlbums;
+  }
+
+  Future<List<Playlist>> getPaginatedArtistAllPlaylists(
+      int page, int pageSize, int artistId) async {
+    List<Playlist> paginatedPlaylists;
+
+    var response = await artistDataProvider.getPaginatedArtistAllPlaylists(
+        page, pageSize, artistId);
+
+    paginatedPlaylists = (response.data as List)
+        .map((playlist) => Playlist.fromMap(playlist))
+        .toList();
+
+    print("response.datauuu =>${paginatedPlaylists.length}");
+
+    return paginatedPlaylists;
+  }
+
   Future<ArtistPageData> getArtistData(
       int artistId, AppCacheStrategy appCacheStrategy) async {
     final Artist artist;
     final int noOfSong;
     final int noOfAlbum;
+    final int noOfFollower;
     final List<Song> popularSongs;
     final List<Song> newSongs;
     final List<Album> popularAlbums;
@@ -30,6 +73,9 @@ class ArtistDataRepository {
 
     //PARSE ARTIST
     artist = Artist.fromMap(response.data['artist_data']);
+
+    //PARSE noOfFollower
+    noOfFollower = response.data['no_of_follower'];
 
     //PARSE noOfSong
     noOfSong = response.data['no_of_song'];
@@ -72,6 +118,7 @@ class ArtistDataRepository {
       playlistsFeaturingArtists: playlistsFeaturingArtists,
       artist: artist,
       noOfSong: noOfSong,
+      noOfFollower: noOfFollower,
       noOfAlbum: noOfAlbum,
       newSongs: newSongs,
     );

@@ -7,15 +7,15 @@ abstract class TelebirrGenerateCheckoutUrlEvent extends Equatable {
 class GenerateCheckoutUrlEvent extends TelebirrGenerateCheckoutUrlEvent {
   const GenerateCheckoutUrlEvent({
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
   });
 
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
 
   @override
   List<Object?> get props => [
         itemId,
-        appPurchasedItemType,
+        purchasedItemType,
       ];
 }

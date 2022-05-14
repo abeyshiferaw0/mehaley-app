@@ -230,7 +230,7 @@ class EthioTelecomPurchaseUtil {
           ),
           child: DialogEthioTelecomPayment(
             itemId: song.songId,
-            appPurchasedItemType: AppPurchasedItemType.SONG_PAYMENT,
+            purchasedItemType: PurchasedItemType.SONG_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -252,7 +252,7 @@ class EthioTelecomPurchaseUtil {
           ),
           child: DialogEthioTelecomPayment(
             itemId: playlist.playlistId,
-            appPurchasedItemType: AppPurchasedItemType.PLAYLIST_PAYMENT,
+            purchasedItemType: PurchasedItemType.PLAYLIST_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),
@@ -274,7 +274,7 @@ class EthioTelecomPurchaseUtil {
           ),
           child: DialogEthioTelecomPayment(
             itemId: album.albumId,
-            appPurchasedItemType: AppPurchasedItemType.ALBUM_PAYMENT,
+            purchasedItemType: PurchasedItemType.ALBUM_PAYMENT,
             isFromSelfPage: isFromItemSelfPage,
             appPurchasedSources: appPurchasedSources,
           ),

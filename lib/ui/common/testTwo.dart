@@ -44,7 +44,7 @@ class _TestTwoWidgetState extends State<TestTwoWidget> {
     var dio = Dio();
     //dio.interceptors.add(LogInterceptor());
     // This is big file(about 200M)
-    //   var url = "http://download.dcloud.net.cn/HBuilder.9.0.2.macosx_64.dmg";
+    //   var url = 'http://download.dcloud.net.cn/HBuilder.9.0.2.macosx_64.dmg';
     var url =
         'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_2MG.mp3';
 
@@ -66,12 +66,12 @@ class _TestTwoWidgetState extends State<TestTwoWidget> {
         ),
       );
       print(response.headers);
-      var file = File("$saveDir/file.jpg");
+      var file = File('$saveDir/file.jpg');
       var raf = file.openSync(mode: FileMode.write);
       // response.data is List<int> type
       raf.writeFromSync(response.data);
       await raf.close();
-      print("file.existsSync()=> ${file.existsSync()}");
+      print('file.existsSync()=> ${file.existsSync()}');
     } catch (e) {
       print(e);
     }

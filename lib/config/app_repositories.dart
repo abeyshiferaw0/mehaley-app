@@ -5,6 +5,7 @@ import 'package:mehaley/data/data_providers/app_version_provider.dart';
 import 'package:mehaley/data/data_providers/artist_data_provider.dart';
 import 'package:mehaley/data/data_providers/auth_provider.dart';
 import 'package:mehaley/data/data_providers/category_data_provider.dart';
+import 'package:mehaley/data/data_providers/credit_card_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/deeplink_song_data_provider.dart';
 import 'package:mehaley/data/data_providers/ethio_telecom_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/home_data_provider.dart';
@@ -33,6 +34,7 @@ import 'package:mehaley/data/repositories/app_version_repository.dart';
 import 'package:mehaley/data/repositories/artist_data_repository.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
 import 'package:mehaley/data/repositories/category_data_repository.dart';
+import 'package:mehaley/data/repositories/credit_card_purchase_repository.dart';
 import 'package:mehaley/data/repositories/deeplink_song_repository.dart';
 import 'package:mehaley/data/repositories/ethio_telecom_purchase_repository.dart';
 import 'package:mehaley/data/repositories/home_data_repository.dart';
@@ -170,5 +172,10 @@ class AppRepositories {
   static EthioTelecomPurchaseRepository ethioTelecomPurchaseRepository =
       EthioTelecomPurchaseRepository(
     ethioTelecomPurchaseProvider: EthioTelecomPurchaseProvider(),
+  );
+
+  static CreditCardPurchaseRepository creditCardPurchaseRepository =
+      CreditCardPurchaseRepository(
+    creditCardPurchaseProvider: CreditCardPurchaseProvider(),
   );
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
@@ -53,13 +52,12 @@ class DialogCustomIP extends StatelessWidget {
                     autofocus: true,
                     cursorColor: ColorMapper.getDarkOrange(),
                     onChanged: (key) {},
-                    keyboardType: TextInputType.number,
                     validator: (text) {
                       if (text != null) {
                         if (PagesUtilFunctions.isValidIpAddress(text)) {
                           return null;
                         } else {
-                          return AppApi.mainUrl != text ? "invalid ip" : null;
+                          return AppApi.mainUrl != text ? 'invalid ip' : null;
                         }
                       }
                       return null;
@@ -91,9 +89,9 @@ class DialogCustomIP extends StatelessWidget {
                       disabledBorder: InputBorder.none,
                       prefix: Container(
                         color: AppColors.darkGrey,
-                        child: Text("HTTP://  "),
+                        child: Text('HTTP://  '),
                       ),
-                      hintText: "ENTER BASE URI // IP",
+                      hintText: 'ENTER BASE URI // IP',
                       hintStyle: TextStyle(
                         color: ColorMapper.getTxtGrey(),
                         fontSize: AppFontSizes.font_size_14,
@@ -121,7 +119,7 @@ class DialogCustomIP extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                "USE DEFAULT",
+                                'USE DEFAULT',
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   fontWeight: FontWeight.w500,
@@ -143,9 +141,9 @@ class DialogCustomIP extends StatelessWidget {
                                 AppApi.mainUrl == controller.text) {
                               if (PagesUtilFunctions.isValidIpAddress(
                                   controller.text)) {
-                                AppApi.baseUrl = "http://${controller.text}";
+                                AppApi.baseUrl = 'http://${controller.text}';
                               } else {
-                                AppApi.baseUrl = "${controller.text}";
+                                AppApi.baseUrl = '${controller.text}';
                               }
                               onIpSet();
                             } else {
@@ -174,7 +172,7 @@ class DialogCustomIP extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                "SET IP",
+                                'SET IP',
                                 style: TextStyle(
                                   fontSize: AppFontSizes.font_size_10.sp,
                                   fontWeight: FontWeight.w500,

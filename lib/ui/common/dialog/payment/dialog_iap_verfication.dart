@@ -22,7 +22,7 @@ class DialogIapVerification extends StatefulWidget {
   const DialogIapVerification({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.purchasedItem,
     required this.isFromSelfPage,
     required this.purchaseToken,
@@ -30,7 +30,7 @@ class DialogIapVerification extends StatefulWidget {
   }) : super(key: key);
 
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final bool isFromSelfPage;
   final PurchasedItem purchasedItem;
   final String purchaseToken;
@@ -50,7 +50,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
     BlocProvider.of<IapPurchaseVerificationBloc>(context).add(
       IapPurchaseVerifyEvent(
         itemId: widget.itemId,
-        appPurchasedItemType: widget.appPurchasedItemType,
+        purchasedItemType: widget.purchasedItemType,
         purchasedItem: widget.purchasedItem,
         purchaseToken: widget.purchaseToken,
       ),
@@ -64,8 +64,8 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
           Navigator.pop(context);
 
           ///IAP PURCHASE SUCCESS ACTIONS MAPPING
-          if (widget.appPurchasedItemType ==
-              AppPurchasedItemType.SONG_PAYMENT) {
+          if (widget.purchasedItemType ==
+              PurchasedItemType.SONG_PAYMENT) {
             BlocProvider.of<IapPurchaseActionBloc>(context).add(
               IapSongPurchaseActionEvent(
                 itemId: widget.itemId,
@@ -73,8 +73,8 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
               ),
             );
           }
-          if (widget.appPurchasedItemType ==
-              AppPurchasedItemType.ALBUM_PAYMENT) {
+          if (widget.purchasedItemType ==
+              PurchasedItemType.ALBUM_PAYMENT) {
             BlocProvider.of<IapPurchaseActionBloc>(context).add(
               IapAlbumPurchaseActionEvent(
                 itemId: widget.itemId,
@@ -83,8 +83,8 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
               ),
             );
           }
-          if (widget.appPurchasedItemType ==
-              AppPurchasedItemType.PLAYLIST_PAYMENT) {
+          if (widget.purchasedItemType ==
+              PurchasedItemType.PLAYLIST_PAYMENT) {
             BlocProvider.of<IapPurchaseActionBloc>(context).add(
               IapPlaylistPurchaseActionEvent(
                 itemId: widget.itemId,
@@ -170,7 +170,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
               ),
               Text(
                 PagesUtilFunctions.getIapPurchasedMessage(
-                    widget.appPurchasedItemType),
+                    widget.purchasedItemType),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppFontSizes.font_size_10.sp,
@@ -297,7 +297,7 @@ class _DialogIapVerificationState extends State<DialogIapVerification>
                   BlocProvider.of<IapPurchaseVerificationBloc>(context).add(
                     IapPurchaseVerifyEvent(
                       itemId: widget.itemId,
-                      appPurchasedItemType: widget.appPurchasedItemType,
+                      purchasedItemType: widget.purchasedItemType,
                       purchasedItem: widget.purchasedItem,
                       purchaseToken: widget.purchaseToken,
                     ),

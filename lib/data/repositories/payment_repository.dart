@@ -47,23 +47,11 @@ class PaymentRepository {
         );
       }
 
-      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
-        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
-      }
-
       ///IF IN APP CHECK AVAILABILITY
       paymentMethod = checkIapAvailability(paymentMethod);
 
-      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
-        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
-      }
-
       ///IF ETHIO TELE CARD CHECK AVAILABILITY
       paymentMethod = checkEthioTeleCardAvailability(paymentMethod);
-
-      if (element.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
-        print("CHECK IF PREFERRED ${paymentMethod.isSelected}");
-      }
 
       list.add(paymentMethod);
     });
@@ -129,8 +117,6 @@ class PaymentRepository {
   }
 
   PaymentMethod checkEthioTeleCardAvailability(PaymentMethod paymentMethod) {
-    print(
-        "checkEthioTeleCardAvailability => ${AuthUtil.isUserPhoneAuthenticated()}  ${AuthUtil.isUserPhoneEthiopian()}");
     if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
       if (AuthUtil.isUserPhoneAuthenticated() &&
           !AuthUtil.isUserPhoneEthiopian()) {

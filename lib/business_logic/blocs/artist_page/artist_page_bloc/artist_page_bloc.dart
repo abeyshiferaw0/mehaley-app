@@ -15,7 +15,7 @@ class ArtistPageBloc extends Bloc<ArtistPageEvent, ArtistPageState> {
   ArtistPageBloc({required this.artistDataRepository})
       : super(ArtistPageInitial());
 
-  ArtistDataRepository artistDataRepository;
+  final ArtistDataRepository artistDataRepository;
 
   @override
   Future<void> close() {

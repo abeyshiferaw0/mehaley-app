@@ -56,7 +56,7 @@ class LibraryPageDataRepository {
               PurchasedPlaylist.fromMap(purchasedPlaylist))
           .toList();
     } else {
-      throw "AppPurchasedPageItemTypes IS INCORRECT";
+      throw 'AppPurchasedPageItemTypes IS INCORRECT';
     }
 
     return PurchasedItemsData(
@@ -103,7 +103,7 @@ class LibraryPageDataRepository {
           .map((favoriteAlbum) => FavoriteAlbum.fromMap(favoriteAlbum))
           .toList();
     } else {
-      throw "AppFavoritePageItemTypes IS INCORRECT";
+      throw 'AppFavoritePageItemTypes IS INCORRECT';
     }
 
     return FavoriteItemsData(
@@ -134,7 +134,7 @@ class LibraryPageDataRepository {
           .map((favoriteArtist) => FollowedArtist.fromMap(favoriteArtist))
           .toList();
     } else {
-      throw "AppFollowedPageItemTypes IS INCORRECT";
+      throw 'AppFollowedPageItemTypes IS INCORRECT';
     }
 
     return FollowingItemsData(
@@ -151,13 +151,13 @@ class LibraryPageDataRepository {
     final List<DownloadTask>? tasks =
         await FlutterDownloader.loadTasksWithRawQuery(
       query:
-          "SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}",
+          'SELECT * FROM task WHERE status=${DownloadTaskStatus.complete.value}',
     );
 
     List<Song> songs = [];
     List<int> timeDownloaded = [];
     if (tasks != null) {
-      print("taskstaskstasks => ${tasks.length}");
+      print('taskstaskstasks => ${tasks.length}');
       if (tasks.length > 0) {
         tasks.forEach((element) {
           songs.add(Song.fromBase64(DownloadUtil.getSongPortion(element.url)));

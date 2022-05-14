@@ -11,9 +11,15 @@ class CompletePurchaseInitial extends CompletePurchaseState {
 
 class PaymentMethodsLoadedState extends CompletePurchaseState {
   final List<PaymentMethod> availableMethods;
+  final List<PaymentMethod> localAvailableMethods;
+  final List<PaymentMethod> foreignAvailableMethods;
 
-  PaymentMethodsLoadedState({required this.availableMethods});
+  PaymentMethodsLoadedState(
+      {required this.localAvailableMethods,
+      required this.foreignAvailableMethods,
+      required this.availableMethods});
 
   @override
-  List<Object> get props => [availableMethods];
+  List<Object> get props =>
+      [availableMethods, localAvailableMethods, localAvailableMethods];
 }

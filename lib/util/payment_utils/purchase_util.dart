@@ -9,6 +9,7 @@ import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_complete_purchase.dart';
+import 'package:mehaley/util/payment_utils/credit_card_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/ethio_telecom_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/iap_purchase_util.dart';
 import 'package:mehaley/util/payment_utils/telebirr_purchase_util.dart';
@@ -46,6 +47,12 @@ class PurchaseUtil {
         },
         onYenepaySelected: () {
           YenepayPurchaseUtil.miniPlayerBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.miniPlayerBuyButtonOnClick(
             context,
             song,
           );
@@ -91,6 +98,12 @@ class PurchaseUtil {
             song,
           );
         },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.songMenuBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
         onInAppSelected: () {
           IapPurchaseUtil.songMenuBuyButtonOnClick(
             context,
@@ -132,6 +145,12 @@ class PurchaseUtil {
             song,
           );
         },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
+            context,
+            song,
+          );
+        },
         onInAppSelected: () {
           IapPurchaseUtil.songPreviewModeDialogBuyButtonOnClick(
             context,
@@ -169,6 +188,12 @@ class PurchaseUtil {
         },
         onYenepaySelected: () {
           YenepayPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
+            context,
+            playlist,
+          );
+        },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.playlistPageHeaderBuyButtonOnClick(
             context,
             playlist,
           );
@@ -219,6 +244,13 @@ class PurchaseUtil {
             isFromPlaylistPage,
           );
         },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.playlistMenuBuyButtonOnClick(
+            context,
+            playlist,
+            isFromPlaylistPage,
+          );
+        },
         onInAppSelected: () {
           IapPurchaseUtil.playlistMenuBuyButtonOnClick(
             context,
@@ -257,6 +289,12 @@ class PurchaseUtil {
         },
         onYenepaySelected: () {
           YenepayPurchaseUtil.albumPageHeaderBuyButtonOnClick(
+            context,
+            album,
+          );
+        },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.albumPageHeaderBuyButtonOnClick(
             context,
             album,
           );
@@ -307,6 +345,13 @@ class PurchaseUtil {
             isFromAlbumPage,
           );
         },
+        onCreditCardSelected: () {
+          CreditCardPurchaseUtil.albumMenuBuyButtonOnClick(
+            context,
+            album,
+            isFromAlbumPage,
+          );
+        },
         onInAppSelected: () {
           IapPurchaseUtil.albumMenuBuyButtonOnClick(
             context,
@@ -327,6 +372,7 @@ class PurchaseUtil {
     required double priceEtb,
     required VoidCallback onEthioTelecomSelected,
     required VoidCallback onYenepaySelected,
+    required VoidCallback onCreditCardSelected,
     required VoidCallback onTelebirrSelected,
     required VoidCallback onInAppSelected,
   }) {
@@ -350,6 +396,7 @@ class PurchaseUtil {
             priceEtb: priceEtb,
             onEthioTelecomSelected: onEthioTelecomSelected,
             onYenepaySelected: onYenepaySelected,
+            onCreditCardSelected: onCreditCardSelected,
             onTelebirrSelected: onTelebirrSelected,
             onInAppSelected: onInAppSelected,
           ),

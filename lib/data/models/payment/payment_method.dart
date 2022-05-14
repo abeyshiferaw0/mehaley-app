@@ -8,6 +8,7 @@ class PaymentMethod extends Equatable {
   final String title;
   final String description;
   final bool isAvailable;
+  final bool isLocal;
   final PaymentMethodImage paymentMethodImage;
   final List<PaymentMethodImage> paymentOptionImages;
 
@@ -15,6 +16,7 @@ class PaymentMethod extends Equatable {
     required this.appPaymentMethods,
     required this.isSelected,
     required this.title,
+    required this.isLocal,
     required this.isAvailable,
     required this.description,
     required this.paymentMethodImage,
@@ -26,6 +28,7 @@ class PaymentMethod extends Equatable {
         appPaymentMethods,
         isSelected,
         title,
+        isLocal,
         isAvailable,
         description,
         paymentMethodImage,
@@ -36,6 +39,7 @@ class PaymentMethod extends Equatable {
     AppPaymentMethods? appPaymentMethods,
     bool? isSelected,
     String? title,
+    bool? isLocal,
     bool? isAvailable,
     String? description,
     PaymentMethodImage? paymentMethodImage,
@@ -45,6 +49,7 @@ class PaymentMethod extends Equatable {
       appPaymentMethods: appPaymentMethods ?? this.appPaymentMethods,
       isSelected: isSelected ?? this.isSelected,
       title: title ?? this.title,
+      isLocal: isLocal ?? this.isLocal,
       isAvailable: isAvailable ?? this.isAvailable,
       description: description ?? this.description,
       paymentMethodImage: paymentMethodImage ?? this.paymentMethodImage,

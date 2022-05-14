@@ -23,6 +23,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscr
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_listner_cubit.dart';
+import 'package:mehaley/business_logic/cubits/recently_purchased_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -378,6 +379,9 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => HomePageTabsChangeCubit(),
+            ),
+            BlocProvider(
+              create: (context) => RecentlyPurchasedCubit(),
             ),
           ],
           child: Builder(

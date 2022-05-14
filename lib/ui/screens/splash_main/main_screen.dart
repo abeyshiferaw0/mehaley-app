@@ -327,7 +327,7 @@ class _MainScreenState extends State<MainScreen> {
                             AppRepositories.iapPurchaseRepository,
                       ),
                       child: DialogIapVerification(
-                        appPurchasedItemType: state.appPurchasedItemType,
+                        purchasedItemType: state.purchasedItemType,
                         itemId: state.itemId,
                         purchasedItem: state.purchasedItem,
                         isFromSelfPage: state.isFromSelfPage,
@@ -399,7 +399,7 @@ class _MainScreenState extends State<MainScreen> {
               ///SHOW SUCCESS SNACK BAR
               showPurchasedSuccessSnack(
                 context,
-                AppPurchasedItemType.SONG_PAYMENT,
+                PurchasedItemType.SONG_PAYMENT,
               );
             }
             if (state is IapAlbumPurchaseActionState) {
@@ -412,7 +412,7 @@ class _MainScreenState extends State<MainScreen> {
                 );
               } else {
                 ///IF NOR FROM SELF PAGE
-                ///GO TO PURCHASED PLAYLIST PAGE
+                ///GO TO PURCHASED ALBUM PAGE
                 goToLibraryPageWithNavigatorKey(
                   _navigatorKey,
                   LibraryFromOtherPageTypes.PURCHASED_ALBUMS,
@@ -422,7 +422,7 @@ class _MainScreenState extends State<MainScreen> {
               ///SHOW SUCCESS SNACK BAR
               showPurchasedSuccessSnack(
                 context,
-                AppPurchasedItemType.ALBUM_PAYMENT,
+                PurchasedItemType.ALBUM_PAYMENT,
               );
             }
             if (state is IapPlaylistPurchaseActionState) {
@@ -445,7 +445,7 @@ class _MainScreenState extends State<MainScreen> {
               ///SHOW SUCCESS SNACK BAR
               showPurchasedSuccessSnack(
                 context,
-                AppPurchasedItemType.PLAYLIST_PAYMENT,
+                PurchasedItemType.PLAYLIST_PAYMENT,
               );
             }
           },
@@ -1002,15 +1002,15 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   static void showPurchasedSuccessSnack(
-      context, AppPurchasedItemType appPurchasedItemType) {
+      context, PurchasedItemType purchasedItemType) {
     String msg = '';
-    if (appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+    if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       msg = AppLocale.of().songPurchased;
     }
-    if (appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+    if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
       msg = AppLocale.of().albumPurchased;
     }
-    if (appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
       msg = AppLocale.of().playlistPurchased;
     }
     ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mehaley/app_language/app_locale.dart';
@@ -22,7 +20,7 @@ class DialogYenepayCheckoutWebView extends StatefulWidget {
   const DialogYenepayCheckoutWebView({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.checkOutUrl,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
@@ -30,7 +28,7 @@ class DialogYenepayCheckoutWebView extends StatefulWidget {
 
   final int itemId;
 
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final String checkOutUrl;
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
@@ -65,7 +63,9 @@ class _DialogYenepayCheckoutWebViewState
               color: ColorMapper.getWhite(),
               child: Column(
                 children: [
-                  AppTopHeaderWithIcon(),
+                  AppTopHeaderWithIcon(
+                    enableCloseWarning: true,
+                  ),
                   Expanded(
                     child: Stack(
                       children: [
@@ -91,13 +91,8 @@ class _DialogYenepayCheckoutWebViewState
       onWebViewCreated: (mWebViewController) {
         webViewContainer = mWebViewController;
       },
-      userAgent: Platform.isIOS
-          ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15' +
-              ' (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1'
-          : 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) ' +
-              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36',
       onPageStarted: (String s) {
-        print("YENEEPAY=> onPageStarted $s");
+        print('YENEEPAY=> onPageStarted $s');
         setState(() {
           loading = true;
           hasError = false;
@@ -176,7 +171,7 @@ class _DialogYenepayCheckoutWebViewState
     Navigator.pop(context);
 
     ///YENEPAY PURCHASE SUCCESS ACTIONS MAPPING
-    if (widget.appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapSongPurchaseActionEvent(
           itemId: widget.itemId,
@@ -184,7 +179,7 @@ class _DialogYenepayCheckoutWebViewState
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapAlbumPurchaseActionEvent(
           itemId: widget.itemId,
@@ -193,7 +188,7 @@ class _DialogYenepayCheckoutWebViewState
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapPlaylistPurchaseActionEvent(
           itemId: widget.itemId,

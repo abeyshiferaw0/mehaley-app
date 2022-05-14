@@ -22,13 +22,13 @@ class DialogEthioTelecomPayment extends StatefulWidget {
   const DialogEthioTelecomPayment({
     Key? key,
     required this.itemId,
-    required this.appPurchasedItemType,
+    required this.purchasedItemType,
     required this.appPurchasedSources,
     required this.isFromSelfPage,
   }) : super(key: key);
 
   final int itemId;
-  final AppPurchasedItemType appPurchasedItemType;
+  final PurchasedItemType purchasedItemType;
   final AppPurchasedSources appPurchasedSources;
   final bool isFromSelfPage;
 
@@ -44,7 +44,7 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
     BlocProvider.of<EthioTelecomPaymentBloc>(context).add(
       StartEthioTelecomPaymentEvent(
         itemId: widget.itemId,
-        appPurchasedItemType: widget.appPurchasedItemType,
+        purchasedItemType: widget.purchasedItemType,
         isFromItemSelfPage: widget.isFromSelfPage,
         appPurchasedSources: widget.appPurchasedSources,
       ),
@@ -71,20 +71,65 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
                     child: BlocConsumer<EthioTelecomPaymentBloc,
                         EthioTelecomPaymentState>(
                       listener: (context, state) {
-                        if (state is EthioTelecomPurchasedState) {}
-                        if (state is EthioTelecomPurchaseNoInternetState) {}
+                        if (state is EthioTelecomPurchasedSuccessState) {
+                          ///PAYMENT SUCCESS
+                          onSuccess();
+                        }
+
+                        if (state is EthioTelecomPurchasedIsFreeState) {
+                          ///POP FIRST
+                          Navigator.pop(context);
+
+                          ///SHOW IS FREE MSG
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            buildAppSnackBar(
+                              bgColor: AppColors.blue,
+                              txtColor: ColorMapper.getWhite(),
+                              msg: AppLocale.of().itemIsFreeMsg(
+                                  purchasedItemType: widget.purchasedItemType),
+                              isFloating: true,
+                            ),
+                          );
+                        }
+                        if (state is EthioTelecomIsAlreadyBoughtState) {
+                          ///POP FIRST
+                          Navigator.pop(context);
+
+                          ///SHOW IS FREE MSG
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            buildAppSnackBar(
+                              bgColor: AppColors.blue,
+                              txtColor: ColorMapper.getWhite(),
+                              msg: AppLocale.of().alreadyPurchasedTryRefreshMsg(
+                                  purchasedItemType: widget.purchasedItemType),
+                              isFloating: true,
+                            ),
+                          );
+                        }
                       },
                       builder: (context, state) {
-                        // if (state is EthioTelecomPurchasingState) {
-                        //   return buildLoading();
-                        // }
-                        // if (state is EthioTelecomPurchaseBalanceNotEnoughState) {
-                        //   return buildBalanceNotEnoughMsg();
-                        // }
-                        // if (state is EthioTelecomPurchasingFailedState) {
-                        //   return buildError();
-                        // }
-                        return buildBalanceNotEnoughMsg();
+                        if (state is EthioTelecomPurchasingState) {
+                          ///BUILD LOADING
+                          return buildLoading();
+                        }
+
+                        if (state
+                            is EthioTelecomPurchaseBalanceNotEnoughState) {
+                          ///BALANCE NOT ENOUGH MSG
+                          return buildBalanceNotEnoughMsg();
+                        }
+
+                        if (state is EthioTelecomPurchasingFailedState) {
+                          ///BUILD ERROR
+                          return buildError();
+                        }
+
+                        if (state is EthioTelecomPurchaseNotSuccessState) {
+                          ///BUILD ERROR FROM TELE OR PAYMENT SERVER SIDE
+                          return buildPaymentNotSuccessError();
+                        }
+
+                        return buildLoading();
                       },
                     ),
                   ),
@@ -131,7 +176,8 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "You balance is not enough to purchase this item",
+            AppLocale.of().balanceNotEnoughForPurchase(
+                purchasedItemType: widget.purchasedItemType),
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: AppFontSizes.font_size_10.sp,
@@ -140,15 +186,15 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
           ),
           Container(
             height: AppIconSizes.icon_size_72 * 3,
-            child: Lottie.network(
-              'https://assets8.lottiefiles.com/packages/lf20_7ciiygtc.json',
+            child: Lottie.asset(
+              AppAssets.handPhoneLottie,
             ),
           ),
           SizedBox(
             height: AppMargin.margin_2,
           ),
           Text(
-            "Please recharge your balance and try again",
+            AppLocale.of().balanceNotEnoughMsg,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppFontSizes.font_size_8.sp,
@@ -205,7 +251,7 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
               BlocProvider.of<EthioTelecomPaymentBloc>(context).add(
                 StartEthioTelecomPaymentEvent(
                   itemId: widget.itemId,
-                  appPurchasedItemType: widget.appPurchasedItemType,
+                  purchasedItemType: widget.purchasedItemType,
                   isFromItemSelfPage: widget.isFromSelfPage,
                   appPurchasedSources: widget.appPurchasedSources,
                 ),
@@ -219,11 +265,38 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
     );
   }
 
+  Widget buildPaymentNotSuccessError() {
+    return Container(
+      color: ColorMapper.getWhite(),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.padding_32,
+          ),
+          child: WidgetErrorWidget(
+            onRetry: () {
+              BlocProvider.of<EthioTelecomPaymentBloc>(context).add(
+                StartEthioTelecomPaymentEvent(
+                  itemId: widget.itemId,
+                  purchasedItemType: widget.purchasedItemType,
+                  isFromItemSelfPage: widget.isFromSelfPage,
+                  appPurchasedSources: widget.appPurchasedSources,
+                ),
+              );
+            },
+            title: 'Something went wrong!!',
+            subTitle: 'please try again after a while',
+          ),
+        ),
+      ),
+    );
+  }
+
   void onSuccess() {
     Navigator.pop(context);
 
-    ///YENEPAY PURCHASE SUCCESS ACTIONS MAPPING
-    if (widget.appPurchasedItemType == AppPurchasedItemType.SONG_PAYMENT) {
+    ///TELE CARD PURCHASE SUCCESS ACTIONS MAPPING
+    if (widget.purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapSongPurchaseActionEvent(
           itemId: widget.itemId,
@@ -231,7 +304,7 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.ALBUM_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapAlbumPurchaseActionEvent(
           itemId: widget.itemId,
@@ -240,7 +313,7 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
         ),
       );
     }
-    if (widget.appPurchasedItemType == AppPurchasedItemType.PLAYLIST_PAYMENT) {
+    if (widget.purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
       BlocProvider.of<IapPurchaseActionBloc>(context).add(
         IapPlaylistPurchaseActionEvent(
           itemId: widget.itemId,
@@ -249,29 +322,5 @@ class _DialogEthioTelecomPaymentState extends State<DialogEthioTelecomPayment> {
         ),
       );
     }
-  }
-
-  void onCancel() {
-    Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      buildAppSnackBar(
-        bgColor: AppColors.blue,
-        isFloating: true,
-        msg: AppLocale.of().paymentCanceled,
-        txtColor: ColorMapper.getWhite(),
-      ),
-    );
-  }
-
-  void onFailure() {
-    Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      buildAppSnackBar(
-        bgColor: AppColors.errorRed,
-        isFloating: false,
-        msg: AppLocale.of().somethingWentWrong,
-        txtColor: ColorMapper.getWhite(),
-      ),
-    );
   }
 }

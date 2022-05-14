@@ -73,6 +73,7 @@ class _SearchPageState extends State<SearchPage> with RouteAware {
 
     BlocProvider.of<SearchFrontPageBloc>(context)
         .add(LoadSearchFrontPageEvent());
+
     super.initState();
   }
 

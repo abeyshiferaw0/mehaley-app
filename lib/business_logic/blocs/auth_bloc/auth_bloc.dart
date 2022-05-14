@@ -312,8 +312,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          this.add(PhoneAuthErrorEvent(
-              error: 'Unable to send sms, chek your internet connection'));
+          this.add(PhoneAuthErrorEvent(error: 'Invalid phone number used'));
         } else {
           this.add(AuthErrorEvent(error: e.code));
         }

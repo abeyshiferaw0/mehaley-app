@@ -151,6 +151,7 @@ class _AlbumPageHeaderState extends State<AlbumPageHeader>
       children: [
         Text(
           L10nUtil.translateLocale(album.albumTitle, context),
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppFontSizes.font_size_24,
             color: ColorMapper.getBlack(),

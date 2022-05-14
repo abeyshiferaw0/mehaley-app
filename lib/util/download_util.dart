@@ -147,9 +147,11 @@ class DownloadUtil {
     if (tasks == null) return DownloadTaskStatus.undefined;
     if (tasks.length < 1) return DownloadTaskStatus.undefined;
 
-    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)).songId ==
+        song.songId) {
       return tasks.first.status;
     }
+
     return DownloadTaskStatus.undefined;
   }
 
@@ -180,7 +182,8 @@ class DownloadUtil {
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
-    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)).songId ==
+        song.songId) {
       return tasks.first;
     }
     return null;
@@ -249,7 +252,8 @@ class DownloadUtil {
     if (tasks == null) return false;
     if (tasks.length < 1) return false;
 
-    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)).songId ==
+        song.songId) {
       return true;
     }
     return false;
@@ -266,7 +270,8 @@ class DownloadUtil {
     if (tasks == null) return null;
     if (tasks.length < 1) return null;
 
-    if (Song.fromBase64(getSongPortion(tasks.first.url)) == song) {
+    if (Song.fromBase64(getSongPortion(tasks.first.url)).songId ==
+        song.songId) {
       return tasks.first.taskId;
     }
     return null;

@@ -13,9 +13,10 @@ class AppPaymentMethodsList {
     PaymentMethod(
       appPaymentMethods: AppPaymentMethods.METHOD_TELE_CARD,
       isSelected: false,
-      title: "Pay with Ethio tele",
+      title: AppLocale.of().payWithEthioTele,
       isAvailable: true,
-      description: "Use your phone balance to complete your mehaleye purchase",
+      isLocal: true,
+      description: AppLocale.of().payWithEthioTeleMsg,
       paymentMethodImage: PaymentMethodImage(
         imagePath: AppAssets.icEthioTele,
         height: AppIconSizes.icon_size_36,
@@ -27,6 +28,7 @@ class AppPaymentMethodsList {
       isSelected: false,
       title: AppLocale.of().payWithTelebirr,
       isAvailable: true,
+      isLocal: true,
       description: AppLocale.of().payWithTelebirrMsg,
       paymentMethodImage: PaymentMethodImage(
         imagePath: AppAssets.icTelebirr,
@@ -39,34 +41,32 @@ class AppPaymentMethodsList {
       isSelected: false,
       title: AppLocale.of().payWithYenepay,
       isAvailable: true,
+      isLocal: true,
       description: AppLocale.of().payWithYenepayMsg,
       paymentMethodImage: PaymentMethodImage(
         imagePath: AppAssets.icYenepay,
         height: AppIconSizes.icon_size_32,
       ),
-      paymentOptionImages: [
-        PaymentMethodImage(
-          imagePath: AppAssets.icAmole,
-          height: AppIconSizes.icon_size_20,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icCbe,
-          height: AppIconSizes.icon_size_20,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icHelloCash,
-          height: AppIconSizes.icon_size_24,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icMbirr,
-          height: AppIconSizes.icon_size_24,
-        ),
-      ],
+      paymentOptionImages: [],
     ),
+    // PaymentMethod(
+    //   appPaymentMethods: AppPaymentMethods.METHOD_CREDIT_CARD,
+    //   isSelected: false,
+    //   isAvailable: true,
+    //   isLocal: false,
+    //   title: AppLocale.of().payWithCreditCard,
+    //   description: AppLocale.of().payWithCreditCardMsg,
+    //   paymentMethodImage: PaymentMethodImage(
+    //     imagePath: AppAssets.icCreditCards,
+    //     height: AppIconSizes.icon_size_32,
+    //   ),
+    //   paymentOptionImages: [],
+    // ),
     PaymentMethod(
       appPaymentMethods: AppPaymentMethods.METHOD_INAPP,
       isSelected: false,
       isAvailable: true,
+      isLocal: false,
       title: Platform.isAndroid
           ? AppLocale.of().payWithGoogleplayInappPurchases
           : AppLocale.of().payWithAppStoreInappPurchases,
@@ -79,25 +79,7 @@ class AppPaymentMethodsList {
             : AppAssets.icAppleStore,
         height: AppIconSizes.icon_size_32,
       ),
-      paymentOptionImages: [
-        PaymentMethodImage(
-          imagePath: AppAssets.icVisa,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icMasterCard,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath: AppAssets.icPaypal,
-          height: AppIconSizes.icon_size_16,
-        ),
-        PaymentMethodImage(
-          imagePath:
-              Platform.isAndroid ? AppAssets.icGooglePay : AppAssets.icApplePay,
-          height: AppIconSizes.icon_size_16,
-        ),
-      ],
+      paymentOptionImages: [],
     ),
   ];
 }

@@ -17,7 +17,7 @@ class LikeFollowRepository {
     } else if (appLikeFollowEvents == AppLikeFollowEvents.UNLIKE) {
       await libraryDataProvider.unlikeSong(id);
     } else {
-      throw "SONG LIKE UNLIKE OPERATION NOT VALID";
+      throw 'SONG LIKE UNLIKE OPERATION NOT VALID';
     }
   }
 
@@ -65,7 +65,7 @@ class LikeFollowRepository {
     } else if (appLikeFollowEvents == AppLikeFollowEvents.UNLIKE) {
       await libraryDataProvider.unlikeAlbum(id);
     } else {
-      throw "ALBUM LIKE UNLIKE OPERATION NOT VALID";
+      throw 'ALBUM LIKE UNLIKE OPERATION NOT VALID';
     }
   }
 
@@ -113,7 +113,7 @@ class LikeFollowRepository {
     } else if (appLikeFollowEvents == AppLikeFollowEvents.UNFOLLOW) {
       await libraryDataProvider.unFollowPlaylist(id);
     } else {
-      throw "PLAYLIST FOLLOW UNFOLLOW OPERATION NOT VALID";
+      throw 'PLAYLIST FOLLOW UNFOLLOW OPERATION NOT VALID';
     }
   }
 
@@ -161,7 +161,7 @@ class LikeFollowRepository {
     } else if (appLikeFollowEvents == AppLikeFollowEvents.UNFOLLOW) {
       await libraryDataProvider.unFollowArtist(id);
     } else {
-      throw "ARTIST FOLLOW UNFOLLOW OPERATION NOT VALID";
+      throw 'ARTIST FOLLOW UNFOLLOW OPERATION NOT VALID';
     }
   }
 

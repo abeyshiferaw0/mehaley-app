@@ -11,11 +11,11 @@ class TelebirrPurchaseRepository {
 
   Future<TelebirrCheckoutApiResult> generateCheckoutUrl(
     int itemId,
-    AppPurchasedItemType appPurchasedItemType,
+    PurchasedItemType purchasedItemType,
   ) async {
     Response response = await telebirrPurchaseProvider.generateCheckoutUrl(
       itemId,
-      appPurchasedItemType,
+      purchasedItemType,
     );
 
     print("TELEBIRR  DATA => ${response.data}");
