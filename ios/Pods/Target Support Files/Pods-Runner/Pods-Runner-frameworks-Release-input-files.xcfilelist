@@ -24,6 +24,7 @@ ${BUILT_PRODUCTS_DIR}/flutter_downloader/flutter_downloader.framework
 ${BUILT_PRODUCTS_DIR}/flutter_facebook_auth/flutter_facebook_auth.framework
 ${BUILT_PRODUCTS_DIR}/flutter_inapp_purchase/flutter_inapp_purchase.framework
 ${BUILT_PRODUCTS_DIR}/flutter_inappwebview/flutter_inappwebview.framework
+${BUILT_PRODUCTS_DIR}/flutter_native_splash/flutter_native_splash.framework
 ${BUILT_PRODUCTS_DIR}/hexcolor/hexcolor.framework
 ${BUILT_PRODUCTS_DIR}/image_picker/image_picker.framework
 ${BUILT_PRODUCTS_DIR}/in_app_review/in_app_review.framework

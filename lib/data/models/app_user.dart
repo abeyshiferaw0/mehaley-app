@@ -19,19 +19,20 @@ class AppUser extends Equatable {
   @HiveField(4)
   final String? phoneNumber;
   @HiveField(5)
-  final bool isPhoneAuthenticated;
-  @HiveField(6)
   final String? socialProfileImgUrl;
-  @HiveField(7)
+  @HiveField(6)
   final String authLoginId;
-  @HiveField(8)
+  @HiveField(7)
   final UserLoginType loginType;
-  @HiveField(9)
+  @HiveField(8)
   final RemoteImage? profileImageId;
-  @HiveField(10)
+  @HiveField(9)
   final DateTime dateCreated;
-  @HiveField(11)
+  @HiveField(10)
   final DateTime dateModified;
+  @HiveField(11, defaultValue: null)
+  final bool? isPhoneAuthenticated;
+
   @override
   List<Object?> get props => [
         userId,

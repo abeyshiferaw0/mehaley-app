@@ -484,9 +484,6 @@ class AppLanguageStringsTig extends AppLocalizations {
   final String allArtists = "ኩሉ ዘማሮ";
   final String allPlaylists = "ኩሉ ናይ መዝሙር ዝርዝር";
 
-  ///UNTRANSLATED
-  //////////////
-  ///////////////
   final String viewMore = "ተወሳኺ ይርኣዩ";
   final String balanceNotEnoughMsg = "በይዘኦም ሒሳቦም መሊኦም ደጊሞም ይፈትኑ";
   final String phoneNumberRequired = "ዕድጊት ኃልዬ ንምዝዛም ቁፅሪ ስልኮም የድሊ እዩ";
@@ -530,18 +527,17 @@ class AppLanguageStringsTig extends AppLocalizations {
   }
 
   String zemariEmptyAlbums({required String zemariName}) {
-    return "ዘማሪ $zemariName ዋላ ሓንቲ ኣልበም የብሉን።";
+    return "ዘርኢ ነገር የለን";
   }
 
   String zemariEmptySongs({required String zemariName}) {
-    return "ዘማሪ $zemariName ዋላ ሓንቲ መዝሙር የብሉን።";
+    return "ዘርኢ ነገር የለን";
   }
 
   String zemariEmptyPlaylists({required String zemariName}) {
-    return "ዘማሪ $zemariName ኣብ ዝኾነ ዝርዝር ኣፃወቲ ኣይቀረበን።";
+    return "ዘርኢ ነገር የለን";
   }
-  //////////////
-  ///////////////
+
 
   String featuring({required String artistName}) {
     return "$artistName ዘእተኻዮም ፕሌይሊስትታት";

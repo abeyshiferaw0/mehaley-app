@@ -22,13 +22,13 @@ class AppUserAdapter extends TypeAdapter<AppUser> {
       userEmail: fields[2] as String?,
       phoneNumberCountryCode: fields[3] as String?,
       phoneNumber: fields[4] as String?,
-      isPhoneAuthenticated: fields[5] as bool,
-      socialProfileImgUrl: fields[6] as String?,
-      authLoginId: fields[7] as String,
-      loginType: fields[8] as UserLoginType,
-      profileImageId: fields[9] as RemoteImage?,
-      dateCreated: fields[10] as DateTime,
-      dateModified: fields[11] as DateTime,
+      isPhoneAuthenticated: fields[11] == null ? false : fields[11] as bool,
+      socialProfileImgUrl: fields[5] as String?,
+      authLoginId: fields[6] as String,
+      loginType: fields[7] as UserLoginType,
+      profileImageId: fields[8] as RemoteImage?,
+      dateCreated: fields[9] as DateTime,
+      dateModified: fields[10] as DateTime,
     );
   }
 
@@ -47,19 +47,19 @@ class AppUserAdapter extends TypeAdapter<AppUser> {
       ..writeByte(4)
       ..write(obj.phoneNumber)
       ..writeByte(5)
-      ..write(obj.isPhoneAuthenticated)
-      ..writeByte(6)
       ..write(obj.socialProfileImgUrl)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.authLoginId)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.loginType)
-      ..writeByte(9)
+      ..writeByte(8)
       ..write(obj.profileImageId)
-      ..writeByte(10)
+      ..writeByte(9)
       ..write(obj.dateCreated)
+      ..writeByte(10)
+      ..write(obj.dateModified)
       ..writeByte(11)
-      ..write(obj.dateModified);
+      ..write(obj.isPhoneAuthenticated);
   }
 
   @override

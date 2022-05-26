@@ -4,7 +4,7 @@ import 'package:mehaley/util/app_extention.dart';
 import '../app_localizations.dart';
 
 class AppLanguageStringsAm extends AppLocalizations {
-  final String appName = "c";
+  final String appName = "መኃልዬ";
   final String byAppName = "በ መኃልዬ";
   final String appTermsAndCondition =
       "Some text about mehaleye and terms and conditions and privacy policy፣ Some text about mehaleye and terms and conditions and privacy policy ;Some text about mehaleye and terms and conditions and privacy policy";
@@ -429,9 +429,6 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String allArtists = "ሁሉም ዘማሪያን";
   final String allPlaylists = "ሁሉም ፕሌይሊስቶች";
 
-  ///UNTRANSLATED
-  //////////////
-  ///////////////
   final String viewMore = "ተጨማሪ ይመልከቱ";
   final String balanceNotEnoughMsg = "እባክዎን ሂሳብዎን ይሙሉ እና እንደገና ይሞክሩ";
   final String phoneNumberRequired = "የመኃልዬ ግዢዎን ለማጠናቀቅ ስልክ ቁጥርዎ ያስፈልጋል";
@@ -475,18 +472,16 @@ class AppLanguageStringsAm extends AppLocalizations {
   }
 
   String zemariEmptyAlbums({required String zemariName}) {
-    return "ዠማሪ $zemariName ምንም አልበም የለውም/የላትም።";
+    return "ምንም የሚታይ ነገር የለም";
   }
 
   String zemariEmptySongs({required String zemariName}) {
-    return "ዠማሪ $zemariName ምንም መዝሙሮች የለውም/የላትም።";
+    return "ምንም የሚታይ ነገር የለም";
   }
 
   String zemariEmptyPlaylists({required String zemariName}) {
-    return "ዠማሪ $zemariName በማንኛውም አጫዋች ዝርዝሮች ውስጥ አልቀረበም/ችም።";
+    return "ምንም የሚታይ ነገር የለም";
   }
-  //////////////
-  ///////////////
 
   String featuring({required String artistName}) {
     return "$artistName ያካተቱ ፕሌይሊስትዎች";

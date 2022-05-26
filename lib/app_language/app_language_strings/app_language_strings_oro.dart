@@ -543,9 +543,6 @@ class AppLanguageStringsOro extends AppLocalizations {
   final String allArtists = "Faarfattotta hundda";
   final String allPlaylists = "faarfanna filacho";
 
-  ///UNTRANSLATED
-  //////////////
-  ///////////////
   final String viewMore = "Dabalata ilaalaa";
   final String balanceNotEnoughMsg =
       "Maaloo herrega keessan guutaati irra deebiyaa yaala";
@@ -595,18 +592,16 @@ class AppLanguageStringsOro extends AppLocalizations {
   }
 
   String zemariEmptyAlbums({required String zemariName}) {
-    return "Faarfataan/ttuum $zemariName Albeemii hinqabu/qabdu።";
+    return "waan agarsiisu hin jiru";
   }
 
   String zemariEmptySongs({required String zemariName}) {
-    return "Faarfataan/ttuun $zemariName faarfannaa hinqabu/qabdu።";
+    return "waan agarsiisu hin jiru";
   }
 
   String zemariEmptyPlaylists({required String zemariName}) {
-    return "Faarfataan/ttuun $zemariName Tarree sirbaa kamiyyu irratti hindhiyaanne።";
+    return "waan agarsiisu hin jiru";
   }
-  //////////////
-  ///////////////
 
   String featuring({required String artistName}) {
     return "$artistName Tarree sirbootaa hammataman";

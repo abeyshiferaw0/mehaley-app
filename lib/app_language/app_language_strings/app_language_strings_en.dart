@@ -434,9 +434,6 @@ class AppLanguageStringsEn extends AppLocalizations {
   final String allArtists = "All Zemarians";
   final String allPlaylists = "All Playlists";
 
-  ///UNTRANSLATED
-  //////////////
-  ///////////////
   final String viewMore = "View More";
   final String balanceNotEnoughMsg =
       "Please recharge your balance and try again";
@@ -484,18 +481,16 @@ class AppLanguageStringsEn extends AppLocalizations {
   }
 
   String zemariEmptyAlbums({required String zemariName}) {
-    return "Zemari $zemariName doesn't have any albums";
+    return "Noting to show";
   }
 
   String zemariEmptySongs({required String zemariName}) {
-    return "Zemari $zemariName doesn't have any mezmurs";
+    return "Noting to show";
   }
 
   String zemariEmptyPlaylists({required String zemariName}) {
-    return "Zemari $zemariName isn't featured in any playlists";
+    return "Noting to show";
   }
-  //////////////
-  ///////////////
 
   String featuring({required String artistName}) {
     return "Playlists Featuring $artistName";

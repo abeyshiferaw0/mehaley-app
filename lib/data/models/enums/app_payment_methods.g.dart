@@ -22,6 +22,8 @@ class AppPaymentMethodsAdapter extends TypeAdapter<AppPaymentMethods> {
       case 3:
         return AppPaymentMethods.METHOD_INAPP;
       case 4:
+        return AppPaymentMethods.METHOD_CREDIT_CARD;
+      case 5:
         return AppPaymentMethods.METHOD_UNK;
       default:
         return AppPaymentMethods.METHOD_YENEPAY;
@@ -43,8 +45,11 @@ class AppPaymentMethodsAdapter extends TypeAdapter<AppPaymentMethods> {
       case AppPaymentMethods.METHOD_INAPP:
         writer.writeByte(3);
         break;
-      case AppPaymentMethods.METHOD_UNK:
+      case AppPaymentMethods.METHOD_CREDIT_CARD:
         writer.writeByte(4);
+        break;
+      case AppPaymentMethods.METHOD_UNK:
+        writer.writeByte(5);
         break;
     }
   }
