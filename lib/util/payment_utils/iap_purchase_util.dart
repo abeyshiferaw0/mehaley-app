@@ -103,7 +103,7 @@ class IapPurchaseUtil {
       StartConsumablePurchaseEvent(
         iapProduct: IapProduct(
           productId: song.priceDollar.productId,
-          productPrice: 1.3,
+          productPrice: song.priceDollar.productPrice,
           iapProductType: IapProductTypes.SONG,
         ),
         itemId: song.songId,
@@ -125,7 +125,7 @@ class IapPurchaseUtil {
       StartConsumablePurchaseEvent(
         iapProduct: IapProduct(
           productId: playlist.priceDollar.productId,
-          productPrice: 1.3,
+          productPrice: playlist.priceDollar.productPrice,
           iapProductType: IapProductTypes.PLAYLIST,
         ),
         itemId: playlist.playlistId,
@@ -147,7 +147,7 @@ class IapPurchaseUtil {
       StartConsumablePurchaseEvent(
         iapProduct: IapProduct(
           productId: album.priceDollar.productId,
-          productPrice: 1.3,
+          productPrice: album.priceDollar.productPrice,
           iapProductType: IapProductTypes.ALBUM,
         ),
         itemId: album.albumId,

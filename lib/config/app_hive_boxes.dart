@@ -236,6 +236,7 @@ class AppHiveBoxes {
     //INIT HIVE
     Directory directory = await pathProvider.getApplicationSupportDirectory();
     Hive.init(directory.path);
+
     Hive.registerAdapter(SongAdapter());
     Hive.registerAdapter(PlaylistAdapter());
     Hive.registerAdapter(AlbumAdapter());

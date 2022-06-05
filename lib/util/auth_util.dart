@@ -83,7 +83,7 @@ class AuthUtil {
     return appUser.userId.toString();
   }
 
-  static bool isUserPhoneAuthenticated() {
+  static bool? isUserPhoneAuthenticated() {
     AppUser appUser =
         AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
 

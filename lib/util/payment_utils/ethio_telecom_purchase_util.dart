@@ -209,11 +209,26 @@ class EthioTelecomPurchaseUtil {
   ///////////////////////////////////
 
   static bool isPhoneAuthRequiredForPurchase() {
-    if (AuthUtil.isUserPhoneAuthenticated() &&
-        AuthUtil.isUserPhoneEthiopian()) {
-      return false;
+    ///FOR
+    ///IF isUserPhoneAuthenticated IS NULL
+    ///(MEANING NEW USERS SINCE THIS DB CHANGE)
+    if (AuthUtil.isUserPhoneAuthenticated() == null) {
+      if (AuthUtil.isAuthTypePhoneNumber() && AuthUtil.isUserPhoneEthiopian()) {
+        return false;
+      } else {
+        return true;
+      }
     } else {
-      return true;
+      ///FOR
+      ///IF isUserPhoneAuthenticated IS NOT NULL
+      ///(MEANING NEW USERS SINCE THIS DB CHANGE WHOBLOGED IN AGAIN)
+      ///OR NEW INSTALLED USERS
+      if (AuthUtil.isUserPhoneAuthenticated()! &&
+          AuthUtil.isUserPhoneEthiopian()) {
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 

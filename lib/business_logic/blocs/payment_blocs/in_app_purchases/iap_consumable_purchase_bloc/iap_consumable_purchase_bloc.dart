@@ -77,6 +77,8 @@ class IapConsumablePurchaseBloc
         bool isNetAvailable =
             await iapPurchaseRepository.checkInternetConnection();
         if (isNetAvailable) {
+          print("event.iapProduct.productId => ${event.iapProduct.productId}");
+
           ///SAVE LAST ITEM TO BE PURCHASED
           iapPurchaseRepository.saveLastItemToPurchase(
             event.purchasedItemType,

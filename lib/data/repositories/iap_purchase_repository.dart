@@ -48,10 +48,15 @@ class IapPurchaseRepository {
     // return products[0];
     List<IAPItem> items =
         await FlutterInappPurchase.instance.getProducts([itemProductId]);
+
     if (items.length < 1) {
       throw 'fetchProduct ==> Product can not be found';
     }
-    return items.first;
+
+    print(
+        "event.iapProduct.productId 222 => ${items.length} // ${items.firstWhere((element) => element.productId == itemProductId)}");
+
+    return items.firstWhere((element) => element.productId == itemProductId);
   }
 
   purchaseProduct(IAPItem iapItem) async {

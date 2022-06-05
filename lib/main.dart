@@ -84,6 +84,9 @@ import 'business_logic/cubits/player_playing_from_cubit.dart';
 import 'config/app_hive_boxes.dart';
 
 void main() async {
+  ///INITIALIZE
+  WidgetsFlutterBinding.ensureInitialized();
+
   //BLOC TRANSITION OBSERVER AND LOGGER
   Bloc.observer = AppBlocDelegate();
 
@@ -101,8 +104,6 @@ void main() async {
   ///INITIALIZE FIREBASE APP
   await Firebase.initializeApp();
 
-  ///INITIALIZE DOWNLOADER
-  WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );

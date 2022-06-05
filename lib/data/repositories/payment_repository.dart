@@ -118,7 +118,7 @@ class PaymentRepository {
 
   PaymentMethod checkEthioTeleCardAvailability(PaymentMethod paymentMethod) {
     if (paymentMethod.appPaymentMethods == AppPaymentMethods.METHOD_TELE_CARD) {
-      if (AuthUtil.isUserPhoneAuthenticated() &&
+      if (AuthUtil.isAuthTypePhoneNumber() &&
           !AuthUtil.isUserPhoneEthiopian()) {
         return paymentMethod.copyWith(
           isAvailable: false,
