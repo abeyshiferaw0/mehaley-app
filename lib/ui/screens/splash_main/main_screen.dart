@@ -27,6 +27,7 @@ import 'package:mehaley/business_logic/blocs/sync_bloc/song_listen_recorder_bloc
 import 'package:mehaley/business_logic/blocs/sync_bloc/song_sync_bloc/song_sync_bloc.dart';
 import 'package:mehaley/business_logic/blocs/update_bloc/app_min_version_bloc/app_min_version_bloc.dart';
 import 'package:mehaley/business_logic/blocs/update_bloc/newer_version_bloc/newer_version_bloc.dart';
+import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_listner_cubit.dart';
@@ -939,18 +940,20 @@ class _MainScreenState extends State<MainScreen> {
             ///IF NOT GO TO EXPLORE TAB
             if (BlocProvider.of<BottomBarCubit>(context).state ==
                 BottomBarPages.HOME) {
-              if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
-                      .state !=
-                  null) {
+              if (BlocProvider.of<BottomBarHomeCubit>(context).state) {
                 if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
                         .state !=
-                    HomePageTabs.EXPLORE) {
-                  ///GO TO EXPLORE TAB
-                  BlocProvider.of<HomePageTabsChangeCubit>(context)
-                      .changeGroupType(GroupType.NONE);
-                  BlocProvider.of<HomePageTabsChangeCubit>(context)
-                      .changeGroupType(null);
-                  return false;
+                    null) {
+                  if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
+                          .state !=
+                      HomePageTabs.EXPLORE) {
+                    ///GO TO EXPLORE TAB
+                    BlocProvider.of<HomePageTabsChangeCubit>(context)
+                        .changeGroupType(GroupType.NONE);
+                    BlocProvider.of<HomePageTabsChangeCubit>(context)
+                        .changeGroupType(null);
+                    return false;
+                  }
                 }
               }
             }
