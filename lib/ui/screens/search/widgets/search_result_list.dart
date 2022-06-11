@@ -193,7 +193,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
-          //SHOW MENU DIALOG
+          ///SHOW MENU DIALOG
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: PlaylistMenuWidget(
@@ -224,7 +224,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
-          //SHOW MENU DIALOG
+          ///SHOW MENU DIALOG
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: AlbumMenuWidget(
@@ -260,7 +260,7 @@ class _SearchResultListState extends State<SearchResultList> {
         isRecentSearchItem: false,
         isPlaylistDedicatedResultPage: false,
         onMenuTap: () {
-          //SHOW MENU DIALOG
+          ///SHOW MENU DIALOG
           PagesUtilFunctions.showMenuSheet(
             context: context,
             child: ArtistMenuWidget(

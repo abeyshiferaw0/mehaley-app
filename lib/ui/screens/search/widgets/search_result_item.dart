@@ -6,8 +6,9 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/recent_search_bloc/recent_search_bloc.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
-import 'package:mehaley/config/themes.dart';import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
@@ -228,8 +229,11 @@ class _SearchResultItemState extends State<SearchResultItem> {
                               : appSearchItemTypes ==
                                       AppSearchItemTypes.PLAYLIST
                                   ? AppLocale.of().playlist.toUpperCase()
-                                  : EnumToString.convertToString(
-                                      appSearchItemTypes),
+                                  : appSearchItemTypes ==
+                                          AppSearchItemTypes.ARTIST
+                                      ? AppLocale.of().artists.toUpperCase()
+                                      : EnumToString.convertToString(
+                                          appSearchItemTypes),
                     ),
                     Text(
                       subTitle,

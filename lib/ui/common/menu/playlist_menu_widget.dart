@@ -68,14 +68,14 @@ class PlaylistMenuWidget extends StatelessWidget {
                     playlistId: playlist.playlistId,
                     isFollowing: playlist.isFollowed!,
                   ),
-                  MenuItem(
-                    isDisabled: false,
-                    hasTopMargin: true,
-                    iconColor: ColorMapper.getGrey().withOpacity(0.6),
-                    icon: FlutterRemix.search_line,
-                    title: AppLocale.of().findInPlaylist,
-                    onTap: () {},
-                  ),
+                  // MenuItem(
+                  //   isDisabled: false,
+                  //   hasTopMargin: true,
+                  //   iconColor: ColorMapper.getGrey().withOpacity(0.6),
+                  //   icon: FlutterRemix.search_line,
+                  //   title: AppLocale.of().findInPlaylist,
+                  //   onTap: () {},
+                  // ),
                   // MenuItem(
                   //   isDisabled: false,
                   //   hasTopMargin: true,
