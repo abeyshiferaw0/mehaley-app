@@ -25,6 +25,7 @@ class MiniLyricOrQuotesWidget extends StatelessWidget {
                 lyricDataRepository: AppRepositories.lyricDataRepository,
               ),
               child: MiniLyricPlayerWidget(
+                key: Key(state.songId.toString()),
                 song: state,
               ),
             );
