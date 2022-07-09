@@ -26,7 +26,7 @@ class DeepLinkListenerBloc
           } else if (isValidateHttpUri(uri)) {
             this.add(
               SetDeepLinkListenerOpenEvent(
-                appShareTypes: getUriShareType(uri),
+                appShareTypes: getHttpUriShareType(uri),
                 itemId: getHttpUriItemId(uri),
               ),
             );
@@ -75,7 +75,7 @@ class DeepLinkListenerBloc
           ///CHECK IF LINK IS HTP URL
           if (isValidateHttpUri(initialUri)) {
             yield DeepLinkOpenState(
-              appShareTypes: getUriShareType(initialUri),
+              appShareTypes: getHttpUriShareType(initialUri),
               itemId: getHttpUriItemId(initialUri),
             );
           } else {
@@ -184,6 +184,24 @@ class DeepLinkListenerBloc
       appShareTypes = AppShareTypes.ARTIST;
     }
     if (type == 'song') {
+      appShareTypes = AppShareTypes.SONG;
+    }
+    return appShareTypes;
+  }
+
+  AppShareTypes getHttpUriShareType(Uri uri) {
+    String type = uri.queryParameters['type']!;
+    AppShareTypes appShareTypes = AppShareTypes.OTHER;
+    if (type == 'album') {
+      appShareTypes = AppShareTypes.ALBUM;
+    }
+    if (type == 'playlist') {
+      appShareTypes = AppShareTypes.PLAYLIST;
+    }
+    if (type == 'zemari') {
+      appShareTypes = AppShareTypes.ARTIST;
+    }
+    if (type == 'zemari') {
       appShareTypes = AppShareTypes.SONG;
     }
     return appShareTypes;
