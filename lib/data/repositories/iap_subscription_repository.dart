@@ -23,8 +23,8 @@ class IapSubscriptionRepository {
     await ApiUtil.deleteAllCache();
   }
 
-  Future<List<SubscriptionOfferings>> fetchOfferings() async {
-    List<SubscriptionOfferings> subscriptionOfferingsList = [];
+  Future<List<IapSubscriptionOfferings>> fetchOfferings() async {
+    List<IapSubscriptionOfferings> subscriptionOfferingsList = [];
 
     ///FETCH ALL OFFERINGS
     Map<String, Offering> offeringsMap =
@@ -34,7 +34,7 @@ class IapSubscriptionRepository {
     offeringsMap.forEach(
       (key, value) {
         subscriptionOfferingsList.add(
-          SubscriptionOfferings.fromJson(
+          IapSubscriptionOfferings.fromJson(
             json.decode(value.serverDescription),
             value,
           ),

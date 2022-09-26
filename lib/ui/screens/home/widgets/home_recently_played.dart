@@ -58,7 +58,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: AppMargin.margin_16),
+            SizedBox(height: AppMargin.margin_8),
           ],
         ),
       );

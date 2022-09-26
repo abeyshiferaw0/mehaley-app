@@ -12,6 +12,8 @@ import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
 import 'package:mehaley/business_logic/blocs/one_signal_bloc/one_signal_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription/ethio_telecom_subscription_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription_callback/ethio_telecom_subscription_callback_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_available_bloc/iap_available_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_consumable_purchase_bloc/iap_consumable_purchase_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
@@ -35,6 +37,7 @@ import 'package:mehaley/business_logic/cubits/localization_cubit.dart';
 import 'package:mehaley/business_logic/cubits/open_profile_page_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -54,6 +57,7 @@ import 'package:mehaley/ui/common/dialog/deeplink_share/dialog_open_deeplink_son
 import 'package:mehaley/ui/common/dialog/dialog_ask_notification_permission.dart';
 import 'package:mehaley/ui/common/dialog/dialog_new_app_version.dart';
 import 'package:mehaley/ui/common/dialog/dialog_subscibe_notification.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_full_screen_subscription.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_iap_verfication.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_purchase_success_transparent.dart';
 import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_end.dart';
@@ -103,6 +107,9 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<NewerVersionBloc>(context).add(
       ShouldShowNewVersionDialogEvent(),
     );
+
+    BlocProvider.of<ShouldShowEthioSubDialogCubit>(context).checkOnAppStart();
+
     BlocProvider.of<IapSubscriptionStatusBloc>(context).add(
       CheckIapSubscriptionEvent(),
     );
@@ -678,6 +685,8 @@ class _MainScreenState extends State<MainScreen> {
           listener: (BuildContext context, state) {
             if (state is IapSubscriptionStatusCheckedState) {
               if (state.isSubscribedEnded) {
+                print("IapSubscriptionStatusBloccc");
+
                 ///STOP PLAYER
                 BlocProvider.of<AudioPlayerBloc>(context).add(
                   StopPlayerEvent(),
@@ -703,6 +712,57 @@ class _MainScreenState extends State<MainScreen> {
                   AppRouterPaths.homeRoute,
                 );
               }
+            }
+          },
+        ),
+        BlocListener<EthioTelecomSubscriptionCallbackBloc,
+            EthioTelecomSubscriptionCallbackState>(
+          listener: (BuildContext context, state) {
+            if (state is ShowLocalSubscriptionActiveDialog) {
+              ///STOP PLAYER
+              BlocProvider.of<AudioPlayerBloc>(context).add(
+                StopPlayerEvent(),
+              );
+
+              ///SHOW SUBSCRIPTION SUCCESS DIALOG
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return DialogSubscriptionSuccess();
+                },
+              );
+
+              ///GO BACK TO HOME PAGE
+              _navigatorKey.currentState!.popAndPushNamed(
+                AppRouterPaths.homeRoute,
+              );
+            }
+            if (state is ShowLocalSubscriptionDeActivateDialog) {
+              ///STOP PLAYER
+              BlocProvider.of<AudioPlayerBloc>(context).add(
+                StopPlayerEvent(),
+              );
+
+              ///SHOW SUBSCRIPTION SUCCESS DIALOG
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return DialogSubscriptionEnd(
+                    onGoToSubscriptionPage: () {
+                      _navigatorKey.currentState!.pushNamed(
+                        AppRouterPaths.subscriptionRoute,
+                      );
+                    },
+                  );
+                },
+              );
+
+              ///GO BACK TO HOME PAGE
+              _navigatorKey.currentState!.popAndPushNamed(
+                AppRouterPaths.homeRoute,
+              );
             }
           },
         ),
@@ -834,6 +894,24 @@ class _MainScreenState extends State<MainScreen> {
                 contentPadding: EdgeInsets.all(16),
                 duration: Duration(seconds: 15),
                 elevation: 0,
+              );
+            }
+          },
+        ),
+        BlocListener<ShouldShowEthioSubDialogCubit, bool>(
+          listener: (context, state) {
+            print("ShouldShowEthioSubDialogCubit ${state}");
+            if (state) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return BlocProvider(
+                    create: (context) => EthioTelecomSubscriptionBloc(
+                        ethioTelecomSubscriptionRepository:
+                            AppRepositories.ethioTelecomSubscriptionRepository),
+                    child: DialogFullScreenSubscription(),
+                  );
+                },
               );
             }
           },

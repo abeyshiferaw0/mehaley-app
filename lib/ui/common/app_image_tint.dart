@@ -9,7 +9,7 @@ class AppImageTint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.completelyBlack.withOpacity(0.2),
+      color: AppColors.completelyBlack.withOpacity(0.1),
     );
   }
 }

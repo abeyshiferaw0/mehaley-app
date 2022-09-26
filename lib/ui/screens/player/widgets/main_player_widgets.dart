@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/ui/common/subscribed_tag.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_controls.dart';
 import 'package:mehaley/ui/screens/player/widgets/main_player_top_items.dart';
@@ -41,11 +42,16 @@ class _MainPlayerWidgetsState extends State<MainPlayerWidgets>
 
               ///ACTIVE SUBSCRIPTION TAG
               SubscribedTag(
-                color: ColorMapper.getWhite(),
+                bgColor: ColorMapper.getWhite(),
+                txtColor: ColorMapper.getBlack(),
               ),
+
+              SizedBox(height: AppPadding.padding_6,),
 
               ///ALBUM ART PAGER
               MainPlayerAlbumArtPager(),
+
+              SizedBox(height: AppPadding.padding_6,),
 
               ///PLAYER CONTROLS
               MainPlayerControls(),

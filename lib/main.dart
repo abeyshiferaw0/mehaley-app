@@ -14,6 +14,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/auth_bloc/auth_bloc.dart';
 import 'package:mehaley/business_logic/blocs/downloading_song_bloc/downloading_song_bloc.dart';
 import 'package:mehaley/business_logic/blocs/library_bloc/library_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription_callback/ethio_telecom_subscription_callback_bloc.dart';
 import 'package:mehaley/business_logic/blocs/share_bloc/deeplink_listner_bloc/deep_link_listener_bloc.dart';
 import 'package:mehaley/business_logic/blocs/song_menu_bloc/song_menu_bloc.dart';
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
@@ -24,6 +25,7 @@ import 'package:mehaley/business_logic/cubits/connectivity_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_listner_cubit.dart';
 import 'package:mehaley/business_logic/cubits/recently_purchased_cubit.dart';
+import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
@@ -178,6 +180,9 @@ class _MyAppState extends State<MyApp> {
               create: (context) => ConnectivityCubit(
                 connectivity: Connectivity(),
               ),
+            ),
+            BlocProvider<ShouldShowEthioSubDialogCubit>(
+              create: (context) => ShouldShowEthioSubDialogCubit(),
             ),
 
             BlocProvider<AudioPlayerBloc>(
@@ -366,6 +371,9 @@ class _MyAppState extends State<MyApp> {
                 myPlaylistRepository: AppRepositories.myPlayListRepository,
               ),
             ),
+            BlocProvider<EthioTelecomSubscriptionCallbackBloc>(
+              create: (context) => EthioTelecomSubscriptionCallbackBloc(),
+            ),
             BlocProvider(
               create: (context) => LocalizationCubit(),
             ),
@@ -399,6 +407,7 @@ class _MyAppState extends State<MyApp> {
                   },
                   theme: App.theme,
                   initialRoute: AppRouterPaths.splashRoute,
+                  navigatorKey: App.navigationKey,
                   routes: {
                     AppRouterPaths.splashRoute: (context) => const SplashPage(),
                     AppRouterPaths.signUp: (context) => const SignUpPage(),

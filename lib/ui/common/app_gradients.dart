@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mehaley/config/color_mapper.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/color_util.dart';
 
 class AppGradients {
@@ -221,6 +222,18 @@ class AppGradients {
         ColorMapper.getOrange1(),
         ColorMapper.getOrange(),
         ColorMapper.getOrange2(),
+      ],
+    );
+  }
+
+  static getFullScreenSubDialogGradient() {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xff3CB5AC),
+        Color(0xff4674E7),
+        Color(0xfff845AE8),
       ],
     );
   }

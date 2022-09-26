@@ -4,6 +4,7 @@ import 'package:mehaley/business_logic/blocs/album_page_bloc/album_page_bloc.dar
 import 'package:mehaley/business_logic/blocs/artist_page/artist_page_bloc/artist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/category_page_bloc/category_page_pagination_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription/ethio_telecom_subscription_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/playlist_page_bloc/playlist_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/profile_page/profile_page_bloc.dart';
@@ -285,13 +286,25 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.subscriptionRoute:
-        builder = (_) => BlocProvider<IapSubscriptionPageBloc>(
+
+
+        builder = (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider<IapSubscriptionPageBloc>(
               create: (context) => IapSubscriptionPageBloc(
                 iapSubscriptionRepository:
-                    AppRepositories.iapSubscriptionRepository,
+                AppRepositories.iapSubscriptionRepository,
               ),
-              child: SubscriptionPage(),
-            );
+            ),
+            BlocProvider(
+              create: (context) => EthioTelecomSubscriptionBloc(
+                ethioTelecomSubscriptionRepository:
+                AppRepositories.ethioTelecomSubscriptionRepository,
+              ),
+            ),
+          ],
+          child: SubscriptionPage(),
+        );
 
         break;
       case AppRouterPaths.allVideosPage:

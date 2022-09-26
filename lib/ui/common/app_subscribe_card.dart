@@ -25,11 +25,10 @@ class AppSubscribeCard extends StatefulWidget {
 
 class _AppSubscribeCardState extends State<AppSubscribeCard> {
   final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-  final bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
   @override
   Widget build(BuildContext context) {
-    if (isUserSubscribed || !isIapAvailable) {
+    if (isUserSubscribed ) {
       return SizedBox();
     } else {
       return Column(

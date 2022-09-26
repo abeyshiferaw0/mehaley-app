@@ -28,12 +28,14 @@ import 'package:mehaley/business_logic/blocs/videos_bloc/other_videos_bloc/other
 import 'package:mehaley/business_logic/cubits/app_user_widgets_cubit.dart';
 import 'package:mehaley/business_logic/cubits/image_picker_cubit.dart';
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
+import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/country_codes.dart';
 import 'package:mehaley/config/themes.dart';
+import 'package:mehaley/data/data_providers/ethio_telecom_subscription_provider.dart';
 import 'package:mehaley/data/data_providers/iap_purchase_provider.dart';
 import 'package:mehaley/data/data_providers/iap_subscription_provider.dart';
 import 'package:mehaley/data/data_providers/settings_data_provider.dart';
@@ -46,12 +48,14 @@ import 'package:mehaley/data/models/enums/app_payment_methods.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/my_playlist.dart';
+import 'package:mehaley/data/models/payment/ethio_tele_subscription_offerings.dart';
 import 'package:mehaley/data/models/payment/iap_product.dart';
 import 'package:mehaley/data/models/playlist.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/data/models/text_lan.dart';
+import 'package:mehaley/data/repositories/ethio_telecom_subscription_repository.dart';
 import 'package:mehaley/data/repositories/iap_purchase_repository.dart';
 import 'package:mehaley/data/repositories/iap_subscription_repository.dart';
 import 'package:mehaley/ui/common/app_card.dart';
@@ -74,6 +78,7 @@ import 'package:package_info/package_info.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PagesUtilFunctions {
@@ -279,6 +284,49 @@ class PagesUtilFunctions {
       return title;
     } else if (groupType == GroupType.ARTIST) {
       return L10nUtil.translateLocale((item as Artist).artistName, context);
+    } else {
+      return '';
+    }
+  }
+
+  static String getGroupItemMainTitle(
+      GroupType groupType, item, BuildContext context) {
+    if (groupType == GroupType.SONG) {
+      String title = L10nUtil.translateLocale((item as Song).songName, context);
+
+      return title;
+    } else if (groupType == GroupType.PLAYLIST) {
+      return L10nUtil.translateLocale(
+          (item as Playlist).playlistNameText, context);
+    } else if (groupType == GroupType.ALBUM) {
+      String title =
+          '${L10nUtil.translateLocale((item as Album).albumTitle, context)}';
+      return title;
+    } else if (groupType == GroupType.ARTIST) {
+      return L10nUtil.translateLocale((item as Artist).artistName, context);
+    } else {
+      return '';
+    }
+  }
+
+  static String getGroupItemSubTitle(
+      GroupType groupType, item, BuildContext context) {
+    if (groupType == GroupType.SONG) {
+      String title = '';
+
+      if (item.artistsName.length > 0) {
+        title = '${L10nUtil.translateLocale(item.artistsName[0], context)}';
+      }
+
+      return title;
+    } else if (groupType == GroupType.PLAYLIST) {
+      return '';
+    } else if (groupType == GroupType.ALBUM) {
+      String title =
+          '${L10nUtil.translateLocale(item.artist.artistName, context)}';
+      return title;
+    } else if (groupType == GroupType.ARTIST) {
+      return '';
     } else {
       return '';
     }
@@ -508,6 +556,12 @@ class PagesUtilFunctions {
     required PlayingFrom playingFrom,
     required int index,
   }) async {
+    ///TO SHOW ETHIO SUB DIALOG WHEN PURCHASED SONG CLICKED
+    if (!songs.elementAt(index).isBought && !songs.elementAt(index).isFree) {
+      BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
+          .checkOnPlayingUnPurchasedSong();
+    }
+
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
@@ -542,6 +596,12 @@ class PagesUtilFunctions {
     required PlayingFrom playingFrom,
     required int index,
   }) async {
+    ///TO SHOW ETHIO SUB DIALOG WHEN PURCHASED SONG CLICKED
+    if (!songs.elementAt(index).isBought && !songs.elementAt(index).isFree) {
+      BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
+          .checkOnPlayingUnPurchasedSong();
+    }
+
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
@@ -1237,8 +1297,8 @@ class PagesUtilFunctions {
       if (item.isOnlyOnElf) {
         return Padding(
           padding: const EdgeInsets.only(
-            top: AppPadding.padding_4,
-          ),
+              //top: AppPadding.padding_4,
+              ),
           child: SongItemBadge(
             tag: AppLocale.of().onlyOnElf.toUpperCase(),
           ),
@@ -1339,10 +1399,11 @@ class PagesUtilFunctions {
       iapSubscriptionProvider: IapSubscriptionProvider(),
     ).getUserIsSubscribes();
 
-    bool isIapAvailable = IapPurchaseRepository(
-      iapPurchaseProvider: IapPurchaseProvider(),
-    ).getIsIapAvailable();
-    if (isUserSubscribed & isIapAvailable) {
+    bool isLocallySubscribed = EthioTelecomSubscriptionRepository(
+      ethioTelecomSubscriptionProvider: EthioTelecomSubscriptionProvider(),
+    ).isLocallySubscribed();
+
+    if (isUserSubscribed || isLocallySubscribed) {
       return true;
     } else {
       return false;
@@ -1373,6 +1434,9 @@ class PagesUtilFunctions {
               ? true
               : false;
       final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
+      print(
+          "getIsUserSubscribedPortion=> ${isSongDownloadedWithSubscription}  ${isUserSubscribed}  ${song.isBought}  ${song.isFree}");
 
       ///IF SONG DOWNLOADED WITH SUBSCRIPTION AND IS NOT BOUGHT AND IS NOT FREE
       ///AND SUBSCRIPTION IS NOT ACTIVE SHOW DIALOG
@@ -1435,8 +1499,7 @@ class PagesUtilFunctions {
     return false;
   }
 
-  static String getIapPurchasedMessage(
-      PurchasedItemType purchasedItemType) {
+  static String getIapPurchasedMessage(PurchasedItemType purchasedItemType) {
     if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
       return AppLocale.of().songPurchased;
     } else if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
@@ -1470,37 +1533,37 @@ class PagesUtilFunctions {
           element['iso2_cc'].toString().toLowerCase() == code.toLowerCase(),
     );
     if (country != null) {
-      return country['example'].toString().length + 2;
+      return country['example'].toString().length;
     }
     return 12;
   }
 
-  static String getPhoneInputMask(CountryCode countryCode) {
-    Map? country = CountryCodesList.codes.firstWhereOrNull(
-      (element) =>
-          element['iso2_cc'].toString().toLowerCase() ==
-          countryCode.code!.toLowerCase(),
-    );
-
-    if (country != null) {
-      int length = country['example'].length;
-      String formattedPhone = '';
-
-      for (var i = 0; i < length; i++) {
-        if (i == 3) {
-          formattedPhone = formattedPhone + '-' + '0';
-        } else if (i == 6) {
-          formattedPhone = formattedPhone + '-' + '0';
-        } else {
-          formattedPhone = formattedPhone + '0';
-        }
-      }
-
-      return formattedPhone;
-    } else {
-      return "000-000-00000";
-    }
-  }
+  // static String getPhoneInputMask(CountryCode countryCode) {
+  //   Map? country = CountryCodesList.codes.firstWhereOrNull(
+  //     (element) =>
+  //         element['iso2_cc'].toString().toLowerCase() ==
+  //         countryCode.code!.toLowerCase(),
+  //   );
+  //
+  //   if (country != null) {
+  //     int length = country['example'].length;
+  //     String formattedPhone = '';
+  //
+  //     for (var i = 0; i < length; i++) {
+  //       if (i == 3) {
+  //         formattedPhone = formattedPhone + '-' + '0';
+  //       } else if (i == 6) {
+  //         formattedPhone = formattedPhone + '-' + '0';
+  //       } else {
+  //         formattedPhone = formattedPhone + '0';
+  //       }
+  //     }
+  //
+  //     return formattedPhone;
+  //   } else {
+  //     return "000-000-00000";
+  //   }
+  // }
 
   static bool validatePhoneByCountryCode(String code, String text) {
     Map? country = CountryCodesList.codes.firstWhereOrNull(
@@ -1509,13 +1572,53 @@ class PagesUtilFunctions {
     );
 
     if (country != null) {
-      return text.length == country['example'].toString().length + 2;
+      return text.length == country['example'].toString().length;
     }
     return false;
   }
 
+  static bool isPhoneValidEthiopian(String text) {
+    bool isPhoneValidEthiopian = true;
+
+    if (text.length == 10) {
+      if (!text.startsWith("0")) {
+        isPhoneValidEthiopian = false;
+      }
+    }
+
+    if (text.length == 9) {
+      if (!text.startsWith("9")) {
+        isPhoneValidEthiopian = false;
+      }
+    }
+
+    if (text.length < 9 || text.length >= 11) {
+      isPhoneValidEthiopian = false;
+    }
+    return isPhoneValidEthiopian;
+  }
+
+  static String formatPhoneNumber(String text) {
+    ///VALIDATE PHONE NUMBER FIRST
+    if (!isPhoneValidEthiopian(text)) {
+      throw "PhoneNumberValidationError";
+    }
+
+    String formattedPhoneNumber = "";
+
+    if (text.length == 10) {
+      formattedPhoneNumber = '${text.substring(1)}';
+    }
+
+    if (text.length == 9) {
+      formattedPhoneNumber = '$text';
+    }
+
+    return formattedPhoneNumber;
+  }
+
   static String getSubscriptionsOfferingButtonTxt(
-      SubscriptionOfferings subscriptionOfferings) {
+      IapSubscriptionOfferings subscriptionOfferings) {
     if (Platform.isIOS) {
       if (subscriptionOfferings.iosAdditionalInfo != null) {
         return subscriptionOfferings.iosAdditionalInfo!.buttonTitle;
@@ -1525,7 +1628,7 @@ class PagesUtilFunctions {
   }
 
   static String getSubscriptionsOfferingPriceDescTxt(
-      SubscriptionOfferings subscriptionOfferings) {
+      IapSubscriptionOfferings subscriptionOfferings) {
     if (Platform.isIOS) {
       if (subscriptionOfferings.iosAdditionalInfo != null) {
         return subscriptionOfferings.iosAdditionalInfo!.priceDescription;
@@ -1537,5 +1640,56 @@ class PagesUtilFunctions {
   static bool isValidIpAddress(String text) {
     final RegExp _ipRegex = RegExp(r"[0-9]+(?:\.[0-9]+){3}:[0-9]+");
     return _ipRegex.hasMatch(text);
+  }
+
+  static void ethioTelecomSubscribeClicked(
+      EthioTeleSubscriptionOfferings ethioTeleSubscriptionOfferings) async {
+    // Android
+    final androidUri =
+        'sms:${ethioTeleSubscriptionOfferings.shortCode}?body=${ethioTeleSubscriptionOfferings.shortCodeSubscribeTxt}';
+
+    final iosUri =
+        'sms:${ethioTeleSubscriptionOfferings.shortCode}&body=${ethioTeleSubscriptionOfferings.shortCodeSubscribeTxt}';
+
+    if (Platform.isAndroid) {
+      if (await canLaunch(androidUri)) {
+        await launch(androidUri);
+      }
+    }
+
+    if (Platform.isIOS) {
+      if (await canLaunch(iosUri)) {
+        await launch(iosUri);
+      }
+    }
+  }
+
+  static SubscriptionPageUiType getSubscriptionPageUiType() {
+    if (isIapAvailable()) {
+      if (AuthUtil.isAuthTypePhoneNumber() && AuthUtil.isUserPhoneEthiopian()) {
+        return SubscriptionPageUiType.BOTH_WITH_TABS;
+      } else {
+        return SubscriptionPageUiType.ONLY_FOREIGN;
+      }
+    } else {
+      if (AuthUtil.isAuthTypePhoneNumber() && AuthUtil.isUserPhoneEthiopian()) {
+        return SubscriptionPageUiType.ONLY_LOCAL;
+      } else {
+        return SubscriptionPageUiType.NOT_AVAILABLE;
+      }
+    }
+  }
+
+  static bool isUserLocalSubscribed() {
+    LocalUserSubscriptionStatus localUserSubscriptionStatus =
+        EthioTelecomSubscriptionRepository(
+      ethioTelecomSubscriptionProvider: EthioTelecomSubscriptionProvider(),
+    ).getLocalSubscriptionStatus();
+
+    if (localUserSubscriptionStatus == LocalUserSubscriptionStatus.ACTIVE) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

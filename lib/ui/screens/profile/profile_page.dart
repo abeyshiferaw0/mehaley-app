@@ -44,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
 
   ///IS USER SUBSCRIBED AND IAP AVAILABLE
   final bool isUsersSubscribed = PagesUtilFunctions.isUserSubscribed();
-  final bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -54,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
 
   @override
   void didPopNext() {
-    if (isUsersSubscribed || !isIapAvailable) {
+    if (isUsersSubscribed ) {
       BlocProvider.of<BottomBarCubit>(context)
           .changeScreen(BottomBarPages.PROFILE);
       BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(true);
@@ -63,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
 
   @override
   void didPushNext() {
-    if (isUsersSubscribed || !isIapAvailable) {
+    if (isUsersSubscribed ) {
       BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(false);
     }
     super.didPushNext();
@@ -71,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
 
   @override
   void didPop() {
-    if (isUsersSubscribed || !isIapAvailable) {
+    if (isUsersSubscribed ) {
       BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(false);
     }
     super.didPop();
@@ -85,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
 
   @override
   void initState() {
-    if (isUsersSubscribed || !isIapAvailable) {
+    if (isUsersSubscribed) {
       BlocProvider.of<BottomBarProfileCubit>(context).setPageShowing(true);
 
       ///CHANGE BOTTOM BAR TO SUBSCRIPTION PAGE

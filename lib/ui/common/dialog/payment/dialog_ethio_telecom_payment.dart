@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom/ethio_telecom_payment_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom/ethio_telecom_payment_bloc.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_purchase_action_bloc/iap_purchase_action_bloc.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';

@@ -36,6 +36,7 @@ class SmallTextPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox();
     if (isPurchased) {
       return buildPurchased(context);
     } else {

@@ -51,6 +51,7 @@ class UserPlaylistDataProvider {
       useToken: true,
       data: formData,
     );
+
     return response;
   }
 

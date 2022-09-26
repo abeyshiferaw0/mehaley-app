@@ -11,9 +11,11 @@ import 'package:mehaley/ui/common/app_card.dart';
 import 'package:mehaley/ui/common/menu/album_menu_widget.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/common/small_text_price_widget.dart';
+import 'package:mehaley/ui/common/song_item/song_item_badge.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/payment_utils/purchase_util.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:sizer/sizer.dart';
 
 class LibraryAlbumItem extends StatelessWidget {
@@ -63,64 +65,65 @@ class LibraryAlbumItem extends StatelessWidget {
                 ),
               ),
               SizedBox(width: AppMargin.margin_8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    L10nUtil.translateLocale(album.albumTitle, context),
-                    style: TextStyle(
-                      fontSize: AppFontSizes.font_size_12.sp,
-                      color: ColorMapper.getBlack(),
-                      fontWeight: FontWeight.w500,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      L10nUtil.translateLocale(album.albumTitle, context),
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontSize: AppFontSizes.font_size_12.sp,
+                        color: ColorMapper.getBlack(),
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: AppMargin.margin_4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        L10nUtil.translateLocale(
-                            album.artist.artistName, context),
-                        style: TextStyle(
-                          fontSize: AppFontSizes.font_size_10.sp,
-                          color: ColorMapper.getTxtGrey(),
-                          fontWeight: FontWeight.w500,
+                    SizedBox(height: AppMargin.margin_4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            L10nUtil.translateLocale(
+                                album.artist.artistName, context),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: AppFontSizes.font_size_10.sp,
+                              color: ColorMapper.getTxtGrey(),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppPadding.padding_4,
-                        ),
-                        child: Icon(
-                          Icons.circle,
-                          color: ColorMapper.getTxtGrey(),
-                          size: AppIconSizes.icon_size_4,
-                        ),
-                      ),
-                      Text(
-                        PagesUtilFunctions.getAlbumYear(album).toString(),
-                        style: TextStyle(
-                          fontSize: AppFontSizes.font_size_10.sp,
-                          color: ColorMapper.getTxtGrey(),
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: AppMargin.margin_6),
-                  SmallTextPriceWidget(
-                    isFree: album.isFree,
-                    priceEtb: album.priceEtb,
-                    priceUsd: album.priceDollar,
-                    discountPercentage: album.discountPercentage,
-                    isDiscountAvailable: album.isDiscountAvailable,
-                    isPurchased: album.isBought,
-                  ),
-                ],
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(
+                        //     horizontal: AppPadding.padding_4,
+                        //   ),
+                        //   child: Icon(
+                        //     Icons.circle,
+                        //     color: ColorMapper.getTxtGrey(),
+                        //     size: AppIconSizes.icon_size_4,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    SizedBox(height: AppMargin.margin_4),
+                    SongItemBadge(
+                      tag: PagesUtilFunctions.getAlbumYear(album).toString(),
+                    ),
+                    SizedBox(height: AppMargin.margin_6),
+                    SmallTextPriceWidget(
+                      isFree: album.isFree,
+                      priceEtb: album.priceEtb,
+                      priceUsd: album.priceDollar,
+                      discountPercentage: album.discountPercentage,
+                      isDiscountAvailable: album.isDiscountAvailable,
+                      isPurchased: album.isBought,
+                    ),
+                  ],
+                ),
               ),
-              Expanded(child: SizedBox()),
               AppBouncingButton(
                 onTap: () {
                   PagesUtilFunctions.showMenuSheet(

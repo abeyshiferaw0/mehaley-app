@@ -28,6 +28,8 @@ class AlbumPageBloc extends Bloc<AlbumPageEvent, AlbumPageState> {
     AlbumPageEvent event,
   ) async* {
     if (event is LoadAlbumPageEvent) {
+
+
       //LOAD CACHE AND REFRESH
       yield AlbumPageLoadingState();
       try {

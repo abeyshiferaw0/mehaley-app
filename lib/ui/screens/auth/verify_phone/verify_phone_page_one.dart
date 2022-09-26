@@ -28,8 +28,13 @@ class VerifyPhonePageOne extends StatefulWidget {
 class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
-  MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-000');
+
+  // MaskedTextController controller =
+  // new MaskedTextController(mask: '000-000-000');
+
+  TextEditingController controller =
+  TextEditingController();
+
   CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
@@ -54,8 +59,8 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               //RESEND PIN CODE
               BlocProvider.of<AuthBloc>(context).add(
                 ContinueWithPhoneEvent(
-                  countryCode: selectedCountryCode.dialCode!,
-                  phoneNumber: controller.text.replaceAll('-', ''),
+                    countryCode: selectedCountryCode.dialCode!,
+                    phoneNumber: controller.text
                 ),
               );
             }
@@ -117,7 +122,10 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
     return Container(
       margin: EdgeInsets.only(bottom: AppMargin.margin_48),
       child: Text(
-        AppLocale.of().whatIsYourPhoneNumber.toUpperCase(),
+        AppLocale
+            .of()
+            .whatIsYourPhoneNumber
+            .toUpperCase(),
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_14.sp,
@@ -135,7 +143,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
       ),
       margin: EdgeInsets.only(bottom: AppMargin.margin_16),
       child: Text(
-        AppLocale.of().phoneVerificationMsg,
+        AppLocale
+            .of()
+            .phoneVerificationMsg,
         textAlign: TextAlign.start,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_8.sp,
@@ -152,34 +162,64 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           return PhoneAuthLargeButton(
             disableBouncing: true,
             isLoading: true,
-            text: AppLocale.of().sendingSms,
+            text: AppLocale
+                .of()
+                .sendingSms,
             onTap: () {},
           );
         } else {
           return PhoneAuthLargeButton(
             isLoading: false,
             disableBouncing: false,
-            text: AppLocale.of().sendSms,
+            text: AppLocale
+                .of()
+                .sendSms,
             onTap: () {
-              //VALIDATE COUNTRY CODE AND PHONE NUMBER
-              if (PagesUtilFunctions.validatePhoneByCountryCode(
-                  selectedCountryCode.code!, controller.text)) {
-                //LOGIN WITH PHONE
-                BlocProvider.of<AuthBloc>(context).add(
-                  ContinueWithPhoneEvent(
-                    countryCode: selectedCountryCode.dialCode!,
-                    phoneNumber: controller.text.replaceAll('-', ''),
-                  ),
-                );
+              if (selectedCountryCode.code! == 'ET') {
+                if (PagesUtilFunctions.isPhoneValidEthiopian(controller.text)) {
+                  //LOGIN WITH PHONE
+                  BlocProvider.of<AuthBloc>(context).add(
+                    ContinueWithPhoneEvent(
+                      countryCode: selectedCountryCode.dialCode!,
+                      phoneNumber: PagesUtilFunctions.formatPhoneNumber(
+                          controller.text),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    buildAppSnackBar(
+                      bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                      txtColor: ColorMapper.getWhite(),
+                      msg: AppLocale
+                          .of()
+                          .invalidPhoneNumber,
+                      isFloating: false,
+                    ),
+                  );
+                }
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  buildAppSnackBar(
-                    bgColor: ColorMapper.getBlack().withOpacity(0.9),
-                    txtColor: ColorMapper.getWhite(),
-                    msg: AppLocale.of().invalidPhoneNumber,
-                    isFloating: false,
-                  ),
-                );
+                //VALIDATE COUNTRY CODE AND PHONE NUMBER
+                if (PagesUtilFunctions.validatePhoneByCountryCode(
+                    selectedCountryCode.code!, controller.text)) {
+                  //LOGIN WITH PHONE
+                  BlocProvider.of<AuthBloc>(context).add(
+                    ContinueWithPhoneEvent(
+                      countryCode: selectedCountryCode.dialCode!,
+                      phoneNumber: controller.text,
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    buildAppSnackBar(
+                      bgColor: ColorMapper.getBlack().withOpacity(0.9),
+                      txtColor: ColorMapper.getWhite(),
+                      msg: AppLocale
+                          .of()
+                          .invalidPhoneNumber,
+                      isFloating: false,
+                    ),
+                  );
+                }
               }
             },
           );
@@ -196,9 +236,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
           onChanged: (CountryCode countryCode) {
             setState(() {
               selectedCountryCode = countryCode;
-              controller.updateMask(
-                PagesUtilFunctions.getPhoneInputMask(selectedCountryCode),
-              );
+              // controller.updateMask(
+              //   PagesUtilFunctions.getPhoneInputMask(selectedCountryCode),
+              // );
             });
           },
           initialSelection: 'ET',
@@ -228,7 +268,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
               ),
               child: Center(
                 child: Text(
-                  AppLocale.of().noCountryCode,
+                  AppLocale
+                      .of()
+                      .noCountryCode,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: ColorMapper.getGrey(),
@@ -262,7 +304,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
             border: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorMapper.getDarkOrange()),
             ),
-            hintText: AppLocale.of().searchForCountryCode,
+            hintText: AppLocale
+                .of()
+                .searchForCountryCode,
             hintStyle: TextStyle(
               color: ColorMapper.getTxtGrey(),
               fontSize: AppFontSizes.font_size_10.sp,
@@ -306,7 +350,9 @@ class _VerifyPhonePageOneState extends State<VerifyPhonePageOne> {
         ),
       ),
       title: Text(
-        AppLocale.of().continueWithPhoneNumber,
+        AppLocale
+            .of()
+            .continueWithPhoneNumber,
         style: TextStyle(
           fontSize: AppFontSizes.font_size_10.sp,
           color: ColorMapper.getBlack(),

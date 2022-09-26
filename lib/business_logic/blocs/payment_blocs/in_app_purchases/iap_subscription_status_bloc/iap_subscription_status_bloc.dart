@@ -28,12 +28,15 @@ class IapSubscriptionStatusBloc
           await iapSubscriptionRepository.setUserIsSubscribes(true);
         } else {
           bool isPreSub = iapSubscriptionRepository.getUserIsSubscribes();
+
+
           if (isPreSub) {
             yield IapSubscriptionStatusCheckedState(isSubscribedEnded: true);
           } else {
             yield IapSubscriptionStatusCheckedState(isSubscribedEnded: false);
           }
           await iapSubscriptionRepository.setUserIsSubscribes(false);
+
         }
       } catch (e) {
         yield IapSubscriptionStatusCheckingErrorState(

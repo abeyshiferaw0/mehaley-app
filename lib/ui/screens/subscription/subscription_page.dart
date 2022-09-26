@@ -1,30 +1,21 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/business_logic/blocs/payment_blocs/in_app_purchases/iap_subscription_page_bloc/iap_subscription_page_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
-import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
-import 'package:mehaley/data/models/subscription_offerings.dart';
 import 'package:mehaley/ui/common/app_bar/subscription_app_bar.dart';
-import 'package:mehaley/ui/common/app_error.dart';
-import 'package:mehaley/ui/common/app_loading.dart';
-import 'package:mehaley/ui/common/dialog/dialog_subscription_not_available.dart';
+import 'package:mehaley/ui/screens/subscription/forign_subscription_page.dart';
+import 'package:mehaley/ui/screens/subscription/local_subscription_page.dart';
 import 'package:mehaley/ui/screens/subscription/widgets/iap_subscription_restoring_widget.dart';
 import 'package:mehaley/ui/screens/subscription/widgets/subscription_sliver_header_Delegate.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import 'widgets/offering_card.dart';
 
 class SubscriptionPage extends StatefulWidget {
   const SubscriptionPage({Key? key}) : super(key: key);
@@ -74,6 +65,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
   //   ),
   // ];
 
+  late SubscriptionPageUiType subscriptionPageUiType;
+
   void didChangeDependencies() {
     super.didChangeDependencies();
     //SUBSCRIBE TO ROUTH OBSERVER
@@ -121,6 +114,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
       LoadIapSubscriptionOfferingsEvent(),
     );
 
+    ///GET
+    subscriptionPageUiType = PagesUtilFunctions.getSubscriptionPageUiType();
+
     super.initState();
   }
 
@@ -130,37 +126,54 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
       backgroundColor: ColorMapper.getPagesBgColor(),
       body: Stack(
         children: [
-          BlocConsumer<IapSubscriptionPageBloc, IapSubscriptionPageState>(
-            listener: (context, state) {
-              if (state is IapNotAvailableErrorState) {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return DialogSubscribeNotAvailable();
-                  },
-                );
+          Column(
+            children: [
+              SizedBox(
+                height: AppMargin.margin_38,
+              ),
 
-                ///GO BACK TO PRE PAGE
-                Navigator.pop(context);
-              }
-            },
-            builder: (context, state) {
-              if (state is IapSubscriptionLoadingState) {
-                return buildPageLoading();
-              }
-              if (state is IapNotAvailableErrorState) {
-                return buildNotAvailable();
-              }
-              if (state is IapSubscriptionLoadedState) {
-                return buildPageLoaded(
-                  state.subscriptionOfferingsList,
-                );
-              }
-              if (state is IapSubscriptionLoadingErrorState) {
-                return buildPageError();
-              }
-              return buildPageLoading();
-            },
+              ///APP BAR (MAKE RESTORE BUTTON VISIBLE IF IAP IS AVAILABLE ONLY)
+              SubscriptionAppBar(
+                showRestoreButton: PagesUtilFunctions.isIapAvailable(),
+              ),
+
+              SizedBox(
+                height: AppMargin.margin_32,
+              ),
+
+              ///HEADER TITLE
+              buildHeaderTitle(),
+
+              ///IF IAP IS AVAILABLE AND USERS PHONE NUMBER IS ETHIOPIAN
+              ///SHOW BOTH LOCAL AND FOREIGN SUBSCRIPTIONS
+              if (subscriptionPageUiType ==
+                  SubscriptionPageUiType.BOTH_WITH_TABS)
+                Expanded(
+                  child: buildBothWithTabs(),
+                ),
+
+              ///IF IAP IS NOT AVAILABLE AND USERS PHONE NUMBER IS ETHIOPIAN
+              ///SHOW ONLY LOCAL SUBSCRIPTIONS
+              if (subscriptionPageUiType == SubscriptionPageUiType.ONLY_LOCAL)
+                Expanded(
+                  child: LocalSubscriptionPage(),
+                ),
+
+              ///IF IAP IS AVAILABLE AND USERS PHONE NUMBER IS NOT ETHIOPIAN
+              ///SHOW ONLY FOREIGN SUBSCRIPTIONS
+              if (subscriptionPageUiType == SubscriptionPageUiType.ONLY_FOREIGN)
+                Expanded(
+                  child: ForeignSubscriptionPage(),
+                ),
+
+              ///IF IAP IS NOT AVAILABLE AND USERS PHONE NUMBER IS NOT ETHIOPIAN
+              ///SHOW SUBSCRIPTIONS NOT AVAILABLE MESSAGE
+              if (subscriptionPageUiType ==
+                  SubscriptionPageUiType.NOT_AVAILABLE)
+                Expanded(
+                  child: buildNotAvailable(),
+                ),
+            ],
           ),
 
           ///IN APP RESTORING LOADING UI
@@ -170,341 +183,135 @@ class _SubscriptionPageState extends State<SubscriptionPage> with RouteAware {
     );
   }
 
-  Widget buildNotAvailable() {
-    return SafeArea(
+  Widget buildBothWithTabs() {
+    return DefaultTabController(
+      length: 2,
       child: Column(
         children: [
           SizedBox(
-            height: AppMargin.margin_24,
+            height: AppMargin.margin_32,
           ),
-
-          ///APP BAR
-          SubscriptionAppBar(
-            showRestoreButton: false,
-          ),
-
-          ///NOT AVAILABLE MESSAGE
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppLocale.of().subscriptionNotAvlavableMsg,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
-                    fontWeight: FontWeight.w600,
-                    color: ColorMapper.getTxtGrey(),
+          TabBar(
+              unselectedLabelColor: AppColors.orange,
+              labelColor: AppColors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: AppColors.orange,
+              ),
+              tabs: [
+                Tab(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(
+                        color: AppColors.orange,
+                        width: 1,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        AppLocale.of().local,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_12.sp,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
+                Tab(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: AppColors.orange, width: 1),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        AppLocale.of().foreign,
+                        style: TextStyle(
+                          fontSize: AppFontSizes.font_size_12.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+          Expanded(
+            child: TabBarView(
+              children: [
+                LocalSubscriptionPage(),
+                ForeignSubscriptionPage(),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildPageLoaded(
-      List<SubscriptionOfferings> subscriptionOfferingsList) {
-    return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: AppMargin.margin_24,
-            ),
-          ),
-
-          ///APP BAR
-          SliverToBoxAdapter(
-            child: SubscriptionAppBar(
-              showRestoreButton: true,
-            ),
-          ),
-
-          ///HEADER TITLE
-          buildHeaderTitle(),
-
-          ///PLANS LIST
-          buildSliverList(subscriptionOfferingsList),
-
-          ///PLANS INFO
-          buildPlansInfo(),
-
-          ///BUILD APP TERMS INFO FOR IOS DEVICES
-          buildTermsInfo(),
-        ],
-      ),
-    );
-  }
-
-  Widget buildPageLoading() {
-    return SafeArea(
-      child: Column(
-        children: [
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          SubscriptionAppBar(
-            showRestoreButton: false,
-          ),
-          Expanded(
-            child: AppLoading(
-              size: AppValues.loadingWidgetSize,
-            ),
           )
         ],
       ),
     );
   }
 
-  Widget buildPageError() {
-    return SafeArea(
-      child: Column(
-        children: [
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          SubscriptionAppBar(
-            showRestoreButton: false,
-          ),
-          Expanded(
-            child: AppError(
-              bgWidget: AppLoading(
-                size: AppValues.loadingWidgetSize,
-              ),
-              onRetry: () {
-                ///LOAD ALL IN APP SUBSCRIPTIONS FROM REVENUE CAT
-                BlocProvider.of<IapSubscriptionPageBloc>(context).add(
-                  LoadIapSubscriptionOfferingsEvent(),
-                );
-              },
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  SliverPersistentHeader buildHeaderTitle() {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: SubscriptionSliverHeaderDelegate(
-        height: ScreenUtil(context: context).getScreenHeight() * 0.15,
+  Widget buildNotAvailable() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.padding_32),
         child: Container(
-          color: ColorMapper.getPagesBgColor(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocale.of().ourPlans.toUpperCase(),
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_12.sp,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.2,
-                  color: ColorMapper.getBlack(),
-                ),
-              ),
-              SizedBox(
-                height: AppMargin.margin_8,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.padding_24,
-                ),
-                child: Text(
-                  AppLocale.of().subscribeDialogMsg,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
-                    fontWeight: FontWeight.w400,
-                    color: ColorMapper.getTxtGrey(),
-                  ),
-                ),
-              ),
-            ],
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.padding_16,
+              vertical: AppPadding.padding_16),
+          decoration: BoxDecoration(
+            color: AppColors.orange2,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Text(
+            AppLocale.of().subscriptionNotAvlavableMsg,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: AppFontSizes.font_size_12.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.white,
+            ),
           ),
         ),
       ),
     );
   }
 
-  SliverToBoxAdapter buildSliverList(
-      List<SubscriptionOfferings> subscriptionOfferingsList) {
-    return SliverToBoxAdapter(
-      child: ListView.builder(
-        itemCount: subscriptionOfferingsList.length,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return OfferingCard(
-            subscriptionOfferings: subscriptionOfferingsList.elementAt(
-              index,
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  SliverToBoxAdapter buildPlansInfo() {
-    return SliverToBoxAdapter(
+  Container buildHeaderTitle() {
+    return Container(
+      color: ColorMapper.getPagesBgColor(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: AppMargin.margin_32,
-          ),
           Text(
-            AppLocale.of().allPlansInclude,
+            AppLocale.of().ourPlans.toUpperCase(),
             style: TextStyle(
               fontSize: AppFontSizes.font_size_12.sp,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1.2,
               color: ColorMapper.getBlack(),
-              fontWeight: FontWeight.w600,
             ),
           ),
           SizedBox(
-            height: AppMargin.margin_16,
+            height: AppMargin.margin_8,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocale.of().unlimitedStreamingAllMezmurs,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  color: ColorMapper.getBlack(),
-                  fontWeight: FontWeight.w400,
-                ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.padding_24,
+            ),
+            child: Text(
+              AppLocale.of().subscribeDialogMsg,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_10.sp,
+                fontWeight: FontWeight.w400,
+                color: ColorMapper.getTxtGrey(),
               ),
-              SizedBox(
-                width: AppMargin.margin_6,
-              ),
-              Icon(
-                FlutterRemix.checkbox_circle_fill,
-                color: AppColors.green,
-                size: AppIconSizes.icon_size_16,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocale.of().unlimitedDownloadOffline,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  color: ColorMapper.getBlack(),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                width: AppMargin.margin_6,
-              ),
-              Icon(
-                FlutterRemix.checkbox_circle_fill,
-                color: AppColors.green,
-                size: AppIconSizes.icon_size_16,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: AppMargin.margin_16,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocale.of().highQualityAudio,
-                style: TextStyle(
-                  fontSize: AppFontSizes.font_size_10.sp,
-                  color: ColorMapper.getBlack(),
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                width: AppMargin.margin_6,
-              ),
-              Icon(
-                FlutterRemix.checkbox_circle_fill,
-                color: AppColors.green,
-                size: AppIconSizes.icon_size_16,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: AppMargin.margin_32,
+            ),
           ),
         ],
       ),
-    );
-  }
-
-  SliverToBoxAdapter buildTermsInfo() {
-    return SliverToBoxAdapter(
-      child: Platform.isIOS
-          ? Container(
-              padding: EdgeInsets.symmetric(horizontal: AppPadding.padding_16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: AppIconSizes.icon_size_48,
-                    child: Lottie.network(
-                      'https://assets10.lottiefiles.com/packages/lf20_dxwu3xu0.json',
-                    ),
-                  ),
-                  SizedBox(
-                    height: AppMargin.margin_6,
-                  ),
-                  Text(
-                    'All payments will be paid through your iTunes Account and may be managed under Account Settings after the initial payment. Subscription payments will automatically renew unless deactivated at least 24-hours before the end of the current cycle. Your account will be charged for renewal at least 24-hours prior to the end of the current cycle. Cancellations are incurred by disabling auto-renewal.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: (AppFontSizes.font_size_8 + 1).sp,
-                      color: ColorMapper.getGrey(),
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(
-                    height: AppMargin.margin_20,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      launch('https://mehaleye.com/term-of-service.html');
-                    },
-                    child: Text(
-                      'Terms of Service',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        color: ColorMapper.getGrey(),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      launch('https://mehaleye.com/privacy.html');
-                    },
-                    child: Text(
-                      'Privacy Policy',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: AppFontSizes.font_size_10.sp,
-                        color: ColorMapper.getGrey(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : SizedBox(),
     );
   }
 }

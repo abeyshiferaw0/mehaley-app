@@ -282,6 +282,7 @@ class Song extends Equatable {
         listenDate: DateFormat("yyyy/MM/dd HH:mm:ss").format(DateTime.now()),
         secondsPlayed: null,
         isUserSubscribed: isUserSubscribed,
+        isLocalSubscription: getIsUserLocalSubscribed(),
       );
 
       if (downloadedTaskWithSong == null) {
@@ -487,5 +488,9 @@ class Song extends Equatable {
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
     String decode = stringToBase64.decode(song);
     return Song.fromMap(json.decode(decode));
+  }
+
+  static getIsUserLocalSubscribed() {
+    return PagesUtilFunctions.isUserLocalSubscribed();
   }
 }

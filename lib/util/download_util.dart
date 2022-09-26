@@ -292,6 +292,7 @@ class DownloadUtil {
   }
 
   static String getIsUserSubscribedPortion(String url) {
+    print("url.split('val=')[2] ${url.split('val=')[2]}");
     return url.split('val=')[2];
   }
 }

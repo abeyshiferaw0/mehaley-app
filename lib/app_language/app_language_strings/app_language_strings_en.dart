@@ -439,7 +439,7 @@ class AppLanguageStringsEn extends AppLocalizations {
       "Please recharge your balance and try again";
   final String phoneNumberRequired =
       "Phone number required to complete your mehaleye purchase";
-  final String todaysMonthlyHolidays = "Today's monthly holidays";
+  final String todaysMonthlyHolidays = "Today's holidays";
   final String payWithEthioTele = "Pay With Ethio tele";
   final String payWithEthioTeleMsg =
       "Use your phone balance to complete your mehaleye purchase";

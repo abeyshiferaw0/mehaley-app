@@ -30,7 +30,8 @@ class MainAppBar extends StatelessWidget {
 
         ///SUBSCRIBED CARD
         SubscribedTag(
-          color: ColorMapper.getDarkOrange(),
+          bgColor: ColorMapper.getDarkOrange(),
+          txtColor: ColorMapper.getWhite(),
         ),
 
         Expanded(

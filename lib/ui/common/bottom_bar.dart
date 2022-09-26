@@ -11,6 +11,7 @@ import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_librar
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_profile_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_search_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_subscription_cubit.dart';
+import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
@@ -55,6 +56,10 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                   currentIndex: getBottomBarIndex(state),
                   onTap: (pos) {
+                    ///TO SHOW ETHIO TELE SUBSCRIPTION DIALOG
+                    BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
+                        .checkOnBottomBarItemClicked();
+
                     if (pos == 0) {
                       if (!BlocProvider.of<BottomBarHomeCubit>(context).state) {
                         BlocProvider.of<BottomBarCubit>(context).changeScreen(
@@ -118,9 +123,8 @@ class _BottomBarState extends State<BottomBar> {
                       ///GET IS USER CURRENTLY SUBSCRIBED
                       bool isUserSubscribed =
                           PagesUtilFunctions.isUserSubscribed();
-                      bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
-                      if (!isUserSubscribed & isIapAvailable) {
+                      if (!isUserSubscribed) {
                         ///IF ACTIVE SUBSCRIPTION USE SUBSCRIPTION PAGE LOGIC
                         if (!BlocProvider.of<BottomBarSubscriptionCubit>(
                                 context)
@@ -243,13 +247,11 @@ class _BottomBarState extends State<BottomBar> {
     ///GET IS USER CURRENTLY SUBSCRIBED
     bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
-    bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
-
     return BottomNavigationBarItem(
-      tooltip: !isUserSubscribed & isIapAvailable
+      tooltip: !isUserSubscribed
           ? AppLocale.of().subscription
           : AppLocale.of().profile,
-      activeIcon: !isUserSubscribed & isIapAvailable
+      activeIcon: !isUserSubscribed
           ? Image.asset(
               AppAssets.isAppSmallIcon,
               width: AppIconSizes.icon_size_24,
@@ -263,7 +265,7 @@ class _BottomBarState extends State<BottomBar> {
               color: ColorMapper.getOrange(),
               isForLibrary: false,
             ),
-      icon: !isUserSubscribed & isIapAvailable
+      icon: !isUserSubscribed
           ? Image.asset(
               AppAssets.isAppSmallGreyIcon,
               width: AppIconSizes.icon_size_24,
@@ -277,7 +279,7 @@ class _BottomBarState extends State<BottomBar> {
               color: ColorMapper.getGrey(),
               isForLibrary: false,
             ),
-      label: !isUserSubscribed & isIapAvailable
+      label: !isUserSubscribed
           ? AppLocale.of().subscription
           : AppLocale.of().profile,
     );

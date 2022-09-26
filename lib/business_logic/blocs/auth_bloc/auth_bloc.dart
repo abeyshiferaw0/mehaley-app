@@ -22,6 +22,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -292,6 +293,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<AppFireBaseUser?> signInWithPhoneNumber(
       String countryCode, String phoneNumber, int? resendToken) async {
+    print("PHONEEEE => $countryCode   ///  $phoneNumber");
+
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '$countryCode$phoneNumber',
       forceResendingToken: resendToken,

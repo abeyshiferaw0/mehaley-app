@@ -4,6 +4,7 @@ import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
+import 'package:mehaley/ui/common/app_bouncing_button.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
 import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
@@ -24,66 +25,88 @@ class ItemCustomGroupGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+    return AppBouncingButton(
+      //behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: groupType == GroupType.ARTIST
+            ? CrossAxisAlignment.center
+            :  CrossAxisAlignment.start,
         children: [
+
           Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(
-                groupType == GroupType.ARTIST
-                    ? AppValues.customGroupItemSize
-                    : 8.0,
-              ),
-              child: CachedNetworkImage(
-                //height: AppValues.customGroupItemSize,
-                width: groupType == GroupType.ARTIST
-                    ? AppValues.customGroupItemSize
-                    : double.infinity,
-                fit: BoxFit.cover,
-                //height: AppValues.customGroupItemSize,
-                imageUrl: PagesUtilFunctions.getGroupImageUrl(groupType, item),
-                placeholder: (context, url) => buildItemsImagePlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    buildItemsImagePlaceHolder(),
-                imageBuilder: (context, imageProvider) => Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    groupType != GroupType.ARTIST
-                        ? AppIconWidget()
-                        : SizedBox(),
+            child: CachedNetworkImage(
+              //height: AppValues.customGroupItemSize,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              //height: AppValues.customGroupItemSize,
+              imageUrl: PagesUtilFunctions.getGroupImageUrl(groupType, item),
+              placeholder: (context, url) => buildItemsImagePlaceHolder(),
+              errorWidget: (context, url, error) =>
+                  buildItemsImagePlaceHolder(),
+              imageBuilder: (context, imageProvider) => Stack(
+                children: [
 
-                    ///TINT IMAGES
-                    AppImageTint(),
+                  ///USE CIRCLE AVATAR IF GROUP TYPE IS ARTISTS
+                  groupType != GroupType.ARTIST
+                      ?   buildOtherGroupsImage(imageProvider)
+                      : buildArtistImage(imageProvider) ,
 
-                    ///PLAY ICON IF SONG ITEM
-                    GroupSongItemPlayIcon(
-                      groupType: groupType,
-                    )
-                  ],
-                ),
+
+
+
+                  groupType != GroupType.ARTIST
+                      ? AppIconWidget()
+                      : SizedBox(),
+
+                  ///TINT IMAGES
+                  // AppImageTint(),
+
+                  ///PLAY ICON IF SONG ITEM
+                  GroupSongItemPlayIcon(
+                    groupType: groupType,
+                  )
+                ],
               ),
             ),
           ),
           SizedBox(height: AppMargin.margin_8),
+          // Text(
+          //   PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
+          //   textAlign: TextAlign.start,
+          //   maxLines: 1,
+          //   overflow: TextOverflow.ellipsis,
+          //   style: TextStyle(
+          //     color: ColorMapper.getBlack(),
+          //     fontWeight: FontWeight.w400,
+          //     fontSize: AppFontSizes.font_size_10.sp,
+          //   ),
+          // ),
           Text(
-            PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
-            textAlign: TextAlign.start,
+            PagesUtilFunctions.getGroupItemMainTitle(groupType, item, context),
             maxLines: 1,
+            textAlign: groupType == GroupType.ARTIST
+                ? TextAlign.center
+                : TextAlign.start,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: ColorMapper.getBlack(),
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w500,
               fontSize: AppFontSizes.font_size_10.sp,
+            ),
+          ),
+
+          Text(
+            PagesUtilFunctions.getGroupItemSubTitle(groupType, item, context),
+            maxLines: 1,
+            textAlign: groupType == GroupType.ARTIST
+                ? TextAlign.center
+                : TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: ColorMapper.getTxtGrey(),
+              fontWeight: FontWeight.w400,
+              fontSize: AppFontSizes.font_size_8.sp,
             ),
           ),
           SizedBox(
@@ -98,6 +121,35 @@ class ItemCustomGroupGrid extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  ClipRRect buildOtherGroupsImage(ImageProvider<Object> imageProvider) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Align buildArtistImage(ImageProvider<Object> imageProvider) {
+
+
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Container(
+        width: AppValues.customGroupItemSize,
+        child: CircleAvatar(
+          radius: AppValues.customGroupItemSize,
+          backgroundImage: imageProvider,
+        ),
       ),
     );
   }

@@ -26,6 +26,8 @@ class SongSync {
   final int songId;
   @HiveField(9)
   final bool isUserSubscribed;
+  @HiveField(10, defaultValue: null)
+  final bool? isLocalSubscription;
   SongSync({
     required this.songId,
     required this.uuid,
@@ -37,6 +39,7 @@ class SongSync {
     required this.listenDate,
     required this.secondsPlayed,
     required this.isUserSubscribed,
+    required this.isLocalSubscription,
   });
 
   factory SongSync.fromMap(Map<String, dynamic> json) {
@@ -53,6 +56,7 @@ class SongSync {
       secondsPlayed:
           json["s_played"] != null ? int.parse(json["s_played"]) : null,
       isUserSubscribed: json["is_user_subscribed"],
+      isLocalSubscription: json["is_local_subscription"],
     );
   }
 
@@ -68,6 +72,7 @@ class SongSync {
       "listen_date": this.listenDate,
       "s_played": this.secondsPlayed,
       "is_user_subscribed": this.isUserSubscribed,
+      "is_local_subscription": this.isLocalSubscription,
     };
   }
 
@@ -84,6 +89,7 @@ class SongSync {
         "\"listen_date\"": "\"${this.listenDate}\"",
         "\"s_played\"": this.secondsPlayed,
         "\"is_user_subscribed\"": this.isUserSubscribed ? 1 : 0,
+        "\"is_local_subscription\"": this.isLocalSubscription==null? false : this.isLocalSubscription! ? 1 : 0,
       };
     }
     return {
@@ -97,6 +103,7 @@ class SongSync {
       "\"listen_date\"": "\"${this.listenDate}\"",
       "\"s_played\"": this.secondsPlayed,
       "\"is_user_subscribed\"": this.isUserSubscribed ? 1 : 0,
+      "\"is_local_subscription\"": this.isLocalSubscription==null? false : this.isLocalSubscription! ? 1 : 0,
     };
   }
 
@@ -111,6 +118,7 @@ class SongSync {
     int? secondsPlayed,
     int? songId,
     bool? isUserSubscribed,
+    bool? isLocalSubscription,
   }) {
     return SongSync(
       songId: songId ?? this.songId,
@@ -123,6 +131,7 @@ class SongSync {
       listenDate: listenDate ?? this.listenDate,
       secondsPlayed: secondsPlayed ?? this.secondsPlayed,
       isUserSubscribed: isUserSubscribed ?? this.isUserSubscribed,
+      isLocalSubscription: isLocalSubscription ?? this.isLocalSubscription,
     );
   }
 }

@@ -108,10 +108,11 @@ class _AllArtistsTabPageState extends State<AllArtistsTabPage>
           child: PagedGridView<int, Artist>(
             pagingController: _pagingController,
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 100 / 110,
-              crossAxisSpacing: AppPadding.padding_16,
+              crossAxisSpacing: AppPadding.padding_8,
               mainAxisSpacing: AppPadding.padding_20,
               crossAxisCount: 2,
             ),

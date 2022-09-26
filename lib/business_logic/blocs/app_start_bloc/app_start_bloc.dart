@@ -76,17 +76,13 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
       ///CHECK IF ACTIVE SUBSCRIPTION
       bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
-      ///Check Is Iap Available
-      bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
       ///CHECK IF LAST SHOWN IS 7 DAYS A GO
-      bool isLastSubDialogMoreThan7Days = isLastSubscriptionMoreThan7Days();
-      if (isIapAvailable) {
-        if (!isUserSubscribed) {
-          if (isLastSubDialogMoreThan7Days) {
-            setLastSubscriptionMoreThan7Days();
-            yield ShowSubscribeDialogState(shouldShow: true);
-          }
+      bool isLastSubDialogMoreThan7Days = isLastSubscriptionMoreThan3Days();
+      if (!isUserSubscribed) {
+        if (isLastSubDialogMoreThan7Days) {
+          setLastSubscriptionMoreThan7Days();
+          yield ShowSubscribeDialogState(shouldShow: true);
         }
       }
     }
@@ -110,7 +106,7 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
     }
   }
 
-  bool isLastSubscriptionMoreThan7Days() {
+  bool isLastSubscriptionMoreThan3Days() {
     if (AppHiveBoxes.instance.settingsBox.containsKey(
       AppValues.dialogSubscribeShownDateKey,
     )) {
@@ -122,7 +118,7 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
         preDateInMilliSeconds,
       );
       int diffDays = DateTime.now().difference(preDateTime).inDays;
-      return diffDays > 6 ? true : false;
+      return diffDays > 3 ? true : false;
     } else {
       return true;
     }

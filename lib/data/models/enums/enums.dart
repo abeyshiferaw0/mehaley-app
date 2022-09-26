@@ -11,6 +11,22 @@ enum GroupUiType {
   GRID_VERTICAL
 }
 
+enum LocalUserSubscriptionStatus {
+  ACTIVE,
+  DEACTIVATED,
+  ERROR,
+  RENEWED,
+  ACTIVATION_PENDING,
+  DEACTIVATION_PENDING,
+}
+
+enum SubscriptionPageUiType {
+  BOTH_WITH_TABS,
+  ONLY_FOREIGN,
+  ONLY_LOCAL,
+  NOT_AVAILABLE
+}
+
 enum AppItemsType {
   ALBUM,
   ARTIST,

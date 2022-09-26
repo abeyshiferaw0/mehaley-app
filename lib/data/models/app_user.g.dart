@@ -22,7 +22,7 @@ class AppUserAdapter extends TypeAdapter<AppUser> {
       userEmail: fields[2] as String?,
       phoneNumberCountryCode: fields[3] as String?,
       phoneNumber: fields[4] as String?,
-      isPhoneAuthenticated: fields[11] == null ? false : fields[11] as bool,
+      isPhoneAuthenticated: fields[11] as bool?,
       socialProfileImgUrl: fields[5] as String?,
       authLoginId: fields[6] as String,
       loginType: fields[7] as UserLoginType,

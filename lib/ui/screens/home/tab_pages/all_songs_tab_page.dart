@@ -12,6 +12,7 @@ import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/song.dart';
 import 'package:mehaley/data/models/sync/song_sync_played_from.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
+import 'package:mehaley/ui/common/app_subscribe_card.dart';
 import 'package:mehaley/ui/common/pagination_error_widget.dart';
 import 'package:mehaley/ui/common/song_item/song_item.dart';
 import 'package:mehaley/ui/screens/library/widgets/library_empty_page.dart';
@@ -61,60 +62,69 @@ class _AllSongsTabPageState extends State<AllSongsTabPage>
   @override
   Widget build(BuildContext context) {
     double screenHeight = ScreenUtil(context: context).getScreenHeight();
-    return Container(
-      padding: EdgeInsets.only(
-        left: AppPadding.padding_16,
-        top: AppPadding.padding_16,
-      ),
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<AllSongsPageBloc, AllSongsPageState>(
-            listener: (context, state) {
-              if (state is AllPaginatedSongsLoadedState) {
-                final isLastPage =
-                    state.paginatedSongs.length < AppValues.allSongsPageSize;
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AllSongsPageBloc, AllSongsPageState>(
+          listener: (context, state) {
+            if (state is AllPaginatedSongsLoadedState) {
+              final isLastPage =
+                  state.paginatedSongs.length < AppValues.allSongsPageSize;
 
-                if (isLastPage) {
-                  _pagingController.appendLastPage(state.paginatedSongs);
-                } else {
-                  final nextPageKey = state.page + 1;
-                  _pagingController.appendPage(
-                    state.paginatedSongs,
-                    nextPageKey,
-                  );
-                }
+              if (isLastPage) {
+                _pagingController.appendLastPage(state.paginatedSongs);
+              } else {
+                final nextPageKey = state.page + 1;
+                _pagingController.appendPage(
+                  state.paginatedSongs,
+                  nextPageKey,
+                );
               }
-              if (state is AllPaginatedSongsLoadingErrorState) {
-                _pagingController.error = AppLocale.of().networkError;
+            }
+            if (state is AllPaginatedSongsLoadingErrorState) {
+              _pagingController.error = AppLocale.of().networkError;
+            }
+          },
+        ),
+        BlocListener<RecentlyPurchasedCubit, bool?>(
+          listener: (context, state) {
+            if (state != null) {
+              if (state) {
+                ///FETCH PAGINATED SONGS WITH PAGINATED CONTROLLER
+                _pagingController.refresh();
               }
-            },
-          ),
-          BlocListener<RecentlyPurchasedCubit, bool?>(
-            listener: (context, state) {
-              if (state != null) {
-                if (state) {
-                  ///FETCH PAGINATED SONGS WITH PAGINATED CONTROLLER
-                  _pagingController.refresh();
-                }
-              }
-            },
-          ),
-        ],
-        child: RefreshIndicator(
-          color: ColorMapper.getDarkOrange(),
-          onRefresh: () => Future.sync(
-            () => _pagingController.refresh(),
-          ),
-          child: PagedListView<int, Song>(
-            pagingController: _pagingController,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            builderDelegate: PagedChildBuilderDelegate<Song>(
-              itemBuilder: (context, item, index) {
-                return Column(
-                  children: [
-                    SizedBox(height: AppMargin.margin_8),
-                    SongItem(
+            }
+          },
+        ),
+      ],
+      child: RefreshIndicator(
+        color: ColorMapper.getDarkOrange(),
+        onRefresh: () => Future.sync(
+          () => _pagingController.refresh(),
+        ),
+        child: PagedListView<int, Song>(
+          pagingController: _pagingController,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          builderDelegate: PagedChildBuilderDelegate<Song>(
+            itemBuilder: (context, item, index) {
+              return Column(
+                children: [
+                  index == 0
+                      ?
+
+                      ///SUBSCRIBE CARD
+                      AppSubscribeCard(
+                          topMargin: 0.0,
+                          bottomMargin: AppMargin.margin_8,
+                        )
+                      : SizedBox(),
+                  SizedBox(height: AppMargin.margin_8),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: AppPadding.padding_16,
+                      top: AppPadding.padding_6,
+                    ),
+                    child: SongItem(
                       song: item,
                       isForMyPlaylist: false,
                       thumbUrl: item.albumArt.imageMediumPath,
@@ -138,59 +148,59 @@ class _AllSongsTabPageState extends State<AllSongsTabPage>
                         );
                       },
                     ),
-                    SizedBox(height: AppMargin.margin_8),
-                  ],
-                );
-              },
-              noItemsFoundIndicatorBuilder: (context) {
-                return Container(
-                  height: screenHeight * 0.5,
-                  child: LibraryEmptyPage(
-                    icon: FlutterRemix.music_2_line,
-                    msg: 'empty mezmurs',
                   ),
-                );
-              },
-              newPageProgressIndicatorBuilder: (context) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
-                  child: AppLoading(
-                    size: 50,
-                    strokeWidth: 3,
-                  ),
-                );
-              },
-              firstPageProgressIndicatorBuilder: (context) {
-                return buildAppLoading(context, screenHeight);
-              },
-              noMoreItemsIndicatorBuilder: (context) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
-                  child: SizedBox(
-                    height: 30,
-                  ),
-                );
-              },
-              newPageErrorIndicatorBuilder: (context) {
-                return PaginationErrorWidget(
+                  SizedBox(height: AppMargin.margin_8),
+                ],
+              );
+            },
+            noItemsFoundIndicatorBuilder: (context) {
+              return Container(
+                height: screenHeight * 0.5,
+                child: LibraryEmptyPage(
+                  icon: FlutterRemix.music_2_line,
+                  msg: 'empty mezmurs',
+                ),
+              );
+            },
+            newPageProgressIndicatorBuilder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+                child: AppLoading(
+                  size: 50,
+                  strokeWidth: 3,
+                ),
+              );
+            },
+            firstPageProgressIndicatorBuilder: (context) {
+              return buildAppLoading(context, screenHeight);
+            },
+            noMoreItemsIndicatorBuilder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.padding_8),
+                child: SizedBox(
+                  height: 30,
+                ),
+              );
+            },
+            newPageErrorIndicatorBuilder: (context) {
+              return PaginationErrorWidget(
+                onRetry: () {
+                  _pagingController.retryLastFailedRequest();
+                },
+              );
+            },
+            firstPageErrorIndicatorBuilder: (context) {
+              return Container(
+                margin: EdgeInsets.only(
+                  top: ScreenUtil(context: context).getScreenHeight() * 0.2,
+                ),
+                child: PaginationErrorWidget(
                   onRetry: () {
-                    _pagingController.retryLastFailedRequest();
+                    _pagingController.refresh();
                   },
-                );
-              },
-              firstPageErrorIndicatorBuilder: (context) {
-                return Container(
-                  margin: EdgeInsets.only(
-                    top: ScreenUtil(context: context).getScreenHeight() * 0.2,
-                  ),
-                  child: PaginationErrorWidget(
-                    onRetry: () {
-                      _pagingController.refresh();
-                    },
-                  ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

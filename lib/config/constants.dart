@@ -12,7 +12,8 @@ class AppApi {
 
   ///BASED ON BUILD TYPE
   static String baseUrl = "https://api.mehaleye.com";
-  //static String baseUrl = 'http://192.168.0.125:8181';
+
+  //static String baseUrl = 'http://192.168.0.15:8000';
   static String musicBaseUrl = '$baseUrl/music';
   static String userBaseUrl = '$baseUrl/user';
   static String paymentBaseUrl = '$baseUrl/payment';
@@ -246,6 +247,9 @@ class AppValues {
       "LAST_TO_BE_PURCHASED_ITE_ID_KEY";
   static const String lastToBePurchasedIsFromSelfPageKey =
       "LAST_TO_BE_PURCHASED_IS_FROM_SELF_PAGE_KEY";
+  static const String localSubscriptionUserStatusKey =
+      "LOCAL_SUBSCRIPTION_USER_STATUS_KEY";
+  static const String bottomBarClickedCountKey = "BOTTOM_BAR_CLICKED_COUNT_KEY";
 
   //system folders
   static const String folderSongs = 'FOLDER_SONGS';
@@ -276,6 +280,8 @@ class AppValues {
   static const String downloaderSendPort = 'downloader_send_port';
   static const String songExtraStr = 'SONG_EXTRA';
   static const String songSyncExtraStr = 'SONG_SYNC_EXTRA';
+  static const String userLocalSubscriptionStatusHeader =
+      'USER_LOCAL_SUBSCRIPTION_STATUS';
   static const double previewDialogSongItemSize = 60;
   static const int songSyncTimerGapInSeconds = 120;
   static const double appSplashIconSize = 150;
@@ -284,7 +290,7 @@ class AppValues {
   static const double appAdPreferredDefaultHeight = 100;
   static const double appAdMaxLength = 10;
 
-  //static const String languageRadioGroupValue = 'LANGUAGE_RADIO';
+//static const String languageRadioGroupValue = 'LANGUAGE_RADIO';
 }
 
 class AppIconSizes {

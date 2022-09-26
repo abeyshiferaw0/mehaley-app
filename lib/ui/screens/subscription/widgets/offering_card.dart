@@ -14,7 +14,7 @@ class OfferingCard extends StatelessWidget {
   const OfferingCard({Key? key, required this.subscriptionOfferings})
       : super(key: key);
 
-  final SubscriptionOfferings subscriptionOfferings;
+  final IapSubscriptionOfferings subscriptionOfferings;
 
   @override
   Widget build(BuildContext context) {

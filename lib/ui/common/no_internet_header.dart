@@ -41,6 +41,7 @@ class NoInternetHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: AppMargin.margin_24),
             Text(
               AppLocale.of().yourOffline,
               textAlign: TextAlign.center,

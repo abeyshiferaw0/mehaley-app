@@ -89,7 +89,7 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: AppMargin.margin_32),
+          //  SizedBox(height: AppMargin.margin_32),
 
           ///APP BAR
           //HomeAppBar(),
@@ -97,6 +97,12 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
 
           ///NO INTERNET HEADER
           NoInternetHeader(),
+
+          ///SUBSCRIBE CARD
+          AppSubscribeCard(
+            topMargin: 0.0,
+            bottomMargin: AppMargin.margin_24,
+          ),
 
           ///BUILD RECENTLY PLAYED LIST
           HomeRecentlyPlayed(recentlyPlayed: homePageData.recentlyPlayed),
@@ -121,12 +127,6 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
           ///SONGS WITH VIDEOS
           HomePageVideoCarousel(
             songVideos: homePageData.videoSongs,
-          ),
-
-          ///SUBSCRIBE CARD
-          AppSubscribeCard(
-            topMargin: AppMargin.margin_48,
-            bottomMargin: AppMargin.margin_8,
           ),
 
           ///BUILD HOME PAGE AD

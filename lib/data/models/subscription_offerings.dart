@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-class SubscriptionOfferings extends Equatable {
+class IapSubscriptionOfferings extends Equatable {
   final String title;
   final String description;
   final String priceDescription;
@@ -17,7 +17,7 @@ class SubscriptionOfferings extends Equatable {
   final HexColor color2;
   final HexColor color3;
 
-  SubscriptionOfferings({
+  IapSubscriptionOfferings({
     required this.title,
     required this.description,
     required this.priceDescription,
@@ -46,8 +46,8 @@ class SubscriptionOfferings extends Equatable {
         iosAdditionalInfo,
       ];
 
-  factory SubscriptionOfferings.fromJson(Map<String, dynamic> json, offering) {
-    return SubscriptionOfferings(
+  factory IapSubscriptionOfferings.fromJson(Map<String, dynamic> json, offering) {
+    return IapSubscriptionOfferings(
       title: json["package_info"]["title"],
       description: json["package_info"]["description"],
       priceDescription: json["package_info"]["priceDescription"],

@@ -21,7 +21,7 @@ class IapSubscriptionPageBloc
       yield IapSubscriptionLoadingState();
 
       try {
-        List<SubscriptionOfferings> subscriptionOfferingsList =
+        List<IapSubscriptionOfferings> subscriptionOfferingsList =
             await iapSubscriptionRepository.fetchOfferings();
 
         yield IapSubscriptionLoadedState(

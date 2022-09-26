@@ -19,11 +19,10 @@ class SubscribeSmallButton extends StatelessWidget {
   final double fontSize;
 
   final bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
-  final bool isIapAvailable = PagesUtilFunctions.isIapAvailable();
 
   @override
   Widget build(BuildContext context) {
-    if (isUserSubscribed || !isIapAvailable) {
+    if (isUserSubscribed ) {
       return SizedBox();
     } else {
       return AppBouncingButton(

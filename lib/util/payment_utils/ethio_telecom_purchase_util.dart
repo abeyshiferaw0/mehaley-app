@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom/ethio_telecom_payment_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom/ethio_telecom_payment_bloc.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
@@ -110,7 +110,7 @@ class EthioTelecomPurchaseUtil {
           return DialogPhoneVerificationPageOne(
             onAuthSuccess: () {
               ///AFTER AUTH IS COMPLETE PROCEED PAYMENT PROCESS BY
-              ///SHOW ETHIO TELECOM SONG PURCHASING DIALOG
+              ///SHOW ETHIO-TELECOM SONG PURCHASING DIALOG
               showSongPurchaseDialog(
                 context,
                 song,
@@ -122,7 +122,7 @@ class EthioTelecomPurchaseUtil {
         },
       );
     } else {
-      ///SHOW ETHIO TELECOM SONG PURCHASING DIALOG
+      ///SHOW ETHIO-TELECOM SONG PURCHASING DIALOG
       showSongPurchaseDialog(
         context,
         song,

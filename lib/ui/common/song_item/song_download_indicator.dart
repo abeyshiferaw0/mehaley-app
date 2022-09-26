@@ -14,6 +14,7 @@ import 'package:mehaley/ui/common/app_circular_progress_indicator.dart';
 import 'package:mehaley/ui/common/dialog/dialog_delete_song.dart';
 import 'package:mehaley/util/download_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
+import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:sizer/sizer.dart';
 
 import '../app_snack_bar.dart';
@@ -302,9 +303,11 @@ class _SongDownloadIndicatorState extends State<SongDownloadIndicator> {
   }
 
   Visibility buildDownloadButton() {
+    bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
+
     return Visibility(
         visible: showEmpty,
-        child: widget.song.isBought
+        child: (widget.song.isBought || isUserSubscribed)
             ? AppBouncingButton(
                 onTap: () {
                   ///SHOW DOWNLOAD STARTED MESSAGE

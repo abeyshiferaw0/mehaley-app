@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_icon_widget.dart';
@@ -8,6 +9,7 @@ import 'package:mehaley/ui/common/app_image_tint.dart';
 import 'package:mehaley/ui/common/player_items_placeholder.dart';
 import 'package:mehaley/ui/screens/home/widgets/group_song_item_play_icon.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class ItemCustomGroup extends StatelessWidget {
   final double width;
@@ -83,15 +85,44 @@ class ItemCustomGroup extends StatelessWidget {
                   ? AppMargin.margin_8
                   : AppMargin.margin_6,
             ),
+            // Text(
+            //   PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
+            //   maxLines: 2,
+            //   textAlign: groupType == GroupType.ARTIST
+            //       ? TextAlign.center
+            //       : TextAlign.left,
+            //   overflow: TextOverflow.ellipsis,
+            //   style: PagesUtilFunctions.getGroupItemTextStyle(groupType, item),
+            // ),
+
             Text(
-              PagesUtilFunctions.getGroupItemTitle(groupType, item, context),
-              maxLines: 2,
+              PagesUtilFunctions.getGroupItemMainTitle(groupType, item, context),
+              maxLines: 1,
               textAlign: groupType == GroupType.ARTIST
                   ? TextAlign.center
                   : TextAlign.left,
               overflow: TextOverflow.ellipsis,
-              style: PagesUtilFunctions.getGroupItemTextStyle(groupType, item),
+              style: TextStyle(
+                color: ColorMapper.getBlack(),
+                fontWeight: FontWeight.w500,
+                fontSize: AppFontSizes.font_size_10.sp,
+              ),
             ),
+
+            Text(
+              PagesUtilFunctions.getGroupItemSubTitle(groupType, item, context),
+              maxLines: 1,
+              textAlign: groupType == GroupType.ARTIST
+                  ? TextAlign.center
+                  : TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: ColorMapper.getTxtGrey(),
+                fontWeight: FontWeight.w400,
+                fontSize: AppFontSizes.font_size_8.sp,
+              ),
+            ),
+
             SizedBox(
               height: AppMargin.margin_2,
             ),
@@ -101,9 +132,10 @@ class ItemCustomGroup extends StatelessWidget {
               children: [
                 PagesUtilFunctions.getGroupItemType(groupType),
                 PagesUtilFunctions.getGroupItemPrice(groupType, item),
+                PagesUtilFunctions.getIsExplicitTag(groupType, item),
               ],
             ),
-            PagesUtilFunctions.getIsExplicitTag(groupType, item)
+
           ],
         ),
       ),

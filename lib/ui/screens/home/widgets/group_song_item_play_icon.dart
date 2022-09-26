@@ -12,6 +12,7 @@ class GroupSongItemPlayIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox();
     return groupType == GroupType.SONG
         ? Align(
             alignment: Alignment.center,

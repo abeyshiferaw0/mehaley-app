@@ -19,7 +19,7 @@ class PhoneNumberInput extends StatefulWidget {
     required this.selectedCountryCode,
   }) : super(key: key);
 
-  final MaskedTextController controller;
+  final TextEditingController controller;
   final bool hasError;
   final CountryCode selectedCountryCode;
   final bool? isOnlyEt;
@@ -55,10 +55,11 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                   autofocus: true,
                   cursorColor: ColorMapper.getDarkOrange(),
                   onChanged: (key) {},
-                  maxLength:
-                      PagesUtilFunctions.getPhoneInputLengthByCountryCode(
-                    widget.selectedCountryCode.code!,
-                  ),
+                  maxLength: widget.selectedCountryCode.code == 'ET'
+                      ? null
+                      : PagesUtilFunctions.getPhoneInputLengthByCountryCode(
+                          widget.selectedCountryCode.code!,
+                        ),
                   readOnly: readOnly,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -66,11 +67,19 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     if (text == null || text.isEmpty) {
                       return '';
                     } else {
-                      if (PagesUtilFunctions.validatePhoneByCountryCode(
-                          widget.selectedCountryCode.code!, text)) {
-                        return null;
+                      if (widget.selectedCountryCode.code == 'ET') {
+                        if (PagesUtilFunctions.isPhoneValidEthiopian(text)) {
+                          return null;
+                        } else {
+                          return AppLocale.of().invalidPhoneNumber;
+                        }
                       } else {
-                        return AppLocale.of().invalidPhoneNumber;
+                        if (PagesUtilFunctions.validatePhoneByCountryCode(
+                            widget.selectedCountryCode.code!, text)) {
+                          return null;
+                        } else {
+                          return AppLocale.of().invalidPhoneNumber;
+                        }
                       }
                     }
                   },
@@ -88,13 +97,15 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                     maxLength,
                     required isFocused,
                   }) =>
-                      Text(
-                    '$currentLength/$maxLength',
-                    style: TextStyle(
-                      color: ColorMapper.getDarkOrange(),
-                      fontSize: AppFontSizes.font_size_10,
-                    ),
-                  ),
+                      widget.selectedCountryCode.code == 'ET'
+                          ? SizedBox()
+                          : Text(
+                              '$currentLength/$maxLength',
+                              style: TextStyle(
+                                color: ColorMapper.getDarkOrange(),
+                                fontSize: AppFontSizes.font_size_10,
+                              ),
+                            ),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: AppPadding.padding_8,

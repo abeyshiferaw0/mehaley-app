@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription_callback/ethio_telecom_subscription_callback_bloc.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/library_data/purchased_playlist.dart';
 import 'package:mehaley/data/models/library_data/purchased_song.dart';
@@ -32,6 +35,26 @@ class ApiUtil {
       options: options,
       cancelToken: cancelToken,
     );
+    print("HEADERS ////// ////// ////// ////// HEADERS ${isFromCatch(response)} ${response.extra['@fromNetwork@']}");
+
+    ///CHECK IF REQUEST IS FROM CATCH
+    ///ONLY CHECK HEADER FOR SUB STATUS IF NOT FROM CATCH
+    if (!isFromCatch(response)) {
+      print("HEADERS ////// ////// ////// ////// HEADERS");
+      print("HEADERS ////// ////// GET  ////// ////// HEADERS");
+      print("HEADERS => ${response.headers}");
+      print("HEADERS ////// ////// ////// ////// HEADERS");
+
+      ///CHECK HEADER FOR LOCAL ETHIO TELECOM SUBSCRIPTION
+      BlocProvider.of<EthioTelecomSubscriptionCallbackBloc>(
+          App.navigationKey.currentContext!)
+          .add(
+        EthioTeleSubCallbackEvent(headers: response.headers),
+      );
+
+      print("headers: ${response.headers}");
+    }
+
 
     return response;
   }
@@ -51,6 +74,7 @@ class ApiUtil {
       String token =
           AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
+
       ///CONFIG HEADER TOKEN
       options = Options(
         headers: {
@@ -64,6 +88,20 @@ class ApiUtil {
       data: data,
       options: useToken ? options : null,
       queryParameters: queryParameters,
+    );
+
+
+
+    print("HEADERS ////// ////// ////// ////// HEADERS");
+    print("HEADERS ////// ////// POST ////// ////// HEADERS");
+    print("HEADERS => ${response.headers}");
+    print("HEADERS ////// ////// ////// ////// HEADERS");
+
+    ///CHECK HEADER FOR LOCAL ETHIO TELECOM SUBSCRIPTION
+    BlocProvider.of<EthioTelecomSubscriptionCallbackBloc>(
+      App.navigationKey.currentContext!,
+    ).add(
+      EthioTeleSubCallbackEvent(headers: response.headers),
     );
 
     return response;
@@ -90,6 +128,11 @@ class ApiUtil {
       await hiveCacheStore.delete(urlKey);
     }
     return;
+  }
+
+  static bool isFromCatch(Response response) {
+    if (response.extra['@fromNetwork@'] == null) return false;
+    return !response.extra['@fromNetwork@'];
   }
 
   static List<PurchasedSong> sortPurchasedSongs(

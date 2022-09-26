@@ -13,6 +13,8 @@ class App {
       selectionHandleColor: ColorMapper.getOrange(),
     ),
   );
+
+  static var navigationKey = GlobalKey<NavigatorState>();
 }
 
 class AppAssets {
@@ -61,6 +63,7 @@ class AppAssets {
   static String imageSignUpBg = 'assets/images/image_sign_up_bg.jpg';
   static String imageSubscribeCardBg =
       'assets/images/image_subscription_card_bg.png';
+  static String imageEthioTeleLogo = 'assets/images/ethio_telecom_logo.png';
 
   ///LOTTIE FILES
   static String cartEmptyLottie = 'assets/lottie/cart_empty.json';

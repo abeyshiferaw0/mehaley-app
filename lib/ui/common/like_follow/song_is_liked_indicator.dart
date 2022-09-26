@@ -28,17 +28,24 @@ class SongIsLikedIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryBloc, LibraryState>(
       builder: (context, state) {
-        if (preIsSongLiked()) {
-          return AppBouncingButton(
-            onTap: () {
+        return AppBouncingButton(
+          onTap: () {
+            if (preIsSongLiked()) {
               showDialog(
                 context: context,
                 builder: (context) {
                   return Center(
                     child: DialogUlLikeUnFollow(
-                      mainButtonText: AppLocale.of().remove.toUpperCase(),
-                      cancelButtonText: AppLocale.of().cancel,
-                      titleText: AppLocale.of().removeFromFavoriteMezmurs,
+                      mainButtonText: AppLocale
+                          .of()
+                          .remove
+                          .toUpperCase(),
+                      cancelButtonText: AppLocale
+                          .of()
+                          .cancel,
+                      titleText: AppLocale
+                          .of()
+                          .removeFromFavoriteMezmurs,
                       onUnLikeUnFollow: () {
                         BlocProvider.of<LibraryBloc>(context).add(
                           LikeUnlikeSongEvent(
@@ -53,16 +60,28 @@ class SongIsLikedIndicator extends StatelessWidget {
                   );
                 },
               );
-            },
-            child: Padding(
-              padding: EdgeInsets.all(AppPadding.padding_8),
-              child: Icon(
-                preIcon(),
-                color: preIconColor(),
-                size: AppIconSizes.icon_size_20,
-              ),
+            } else {
+              BlocProvider.of<LibraryBloc>(context).add(
+                LikeUnlikeSongEvent(
+                  id: songId,
+                  appLikeFollowEvents: preIsSongLiked()
+                      ? AppLikeFollowEvents.UNLIKE
+                      : AppLikeFollowEvents.LIKE,
+                ),
+              );
+            }
+          },
+          child: Padding(
+            padding: EdgeInsets.all(AppPadding.padding_8),
+            child: Icon(
+              preIcon(),
+              color: preIconColor(),
+              size: AppIconSizes.icon_size_20,
             ),
-          );
+          ),
+        );
+        if (preIsSongLiked()) {
+
         } else {
           return SizedBox();
         }

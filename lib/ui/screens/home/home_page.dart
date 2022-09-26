@@ -8,6 +8,7 @@ import 'package:mehaley/business_logic/blocs/home_page_blocs/all_artists_page_bl
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_playlists_page_bloc/all_playlists_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/all_songs_page_bloc/all_songs_page_bloc.dart';
 import 'package:mehaley/business_logic/blocs/home_page_blocs/discover_page_bloc/home_page_bloc.dart';
+import 'package:mehaley/business_logic/blocs/payment_blocs/ethio_telecom_related/ethio_telecom_subscription/ethio_telecom_subscription_bloc.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_cubit.dart';
 import 'package:mehaley/business_logic/cubits/bottom_bar_cubit/bottom_bar_home_cubit.dart';
 import 'package:mehaley/business_logic/cubits/home_page_tabs_change_cubit.dart';
@@ -21,6 +22,7 @@ import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/ui/common/app_bouncing_button.dart';
+import 'package:mehaley/ui/common/dialog/payment/dialog_full_screen_subscription.dart';
 import 'package:mehaley/ui/common/subscribed_tag.dart';
 import 'package:mehaley/ui/screens/home/tab_pages/all_albums_tab_page.dart';
 import 'package:mehaley/ui/screens/home/tab_pages/all_artists_tab_page.dart';
@@ -174,10 +176,13 @@ class _HomePageState extends State<HomePage>
           ),
 
           ///SUBSCRIBED CARD
+          SubscribedTag(
+            bgColor: ColorMapper.getOrange(),
+            txtColor: ColorMapper.getWhite(),
+          ),
+
           Expanded(
-            child: SubscribedTag(
-              color: ColorMapper.getDarkOrange(),
-            ),
+            child: SizedBox(),
           ),
 
           ///
@@ -195,23 +200,38 @@ class _HomePageState extends State<HomePage>
             BlocProvider.of<TodayHolidayToastCubit>(context).showToast(true);
             BlocProvider.of<TodayHolidayToastCubit>(context).showToast(false);
           },
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppPadding.padding_8,
-                horizontal: AppPadding.padding_4,
-              ),
-              child: Text(
-                AppLocale.of().todaysMonthlyHolidays.toUpperCase(),
-                style: TextStyle(
-                  fontSize: (AppFontSizes.font_size_8 + 1).sp,
-                  fontWeight: FontWeight.w500,
-                  color: ColorMapper.getBlack(),
-                ),
-              ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppPadding.padding_8),
+            child: Icon(
+              FlutterRemix.calendar_event_line,
+              size: AppIconSizes.icon_size_24,
+              color: ColorMapper.getBlack(),
             ),
           ),
         ),
+        // AppBouncingButton(
+        //   onTap: () {
+        //     // BlocProvider.of<TodayHolidayToastCubit>(context).showToast(true);
+        //     // BlocProvider.of<TodayHolidayToastCubit>(context).showToast(false);
+        //
+        //   },
+        //   child: Center(
+        //     child: Padding(
+        //       padding: const EdgeInsets.symmetric(
+        //         vertical: AppPadding.padding_8,
+        //         horizontal: AppPadding.padding_4,
+        //       ),
+        //       child: Text(
+        //         AppLocale.of().todaysMonthlyHolidays.toUpperCase(),
+        //         style: TextStyle(
+        //           fontSize: (AppFontSizes.font_size_8 + 1).sp,
+        //           fontWeight: FontWeight.w500,
+        //           color: ColorMapper.getBlack(),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           width: AppPadding.padding_12,
         ),

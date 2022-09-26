@@ -432,7 +432,7 @@ class AppLanguageStringsAm extends AppLocalizations {
   final String viewMore = "ተጨማሪ ይመልከቱ";
   final String balanceNotEnoughMsg = "እባክዎን ሂሳብዎን ይሙሉ እና እንደገና ይሞክሩ";
   final String phoneNumberRequired = "የመኃልዬ ግዢዎን ለማጠናቀቅ ስልክ ቁጥርዎ ያስፈልጋል";
-  final String todaysMonthlyHolidays = "የዛሬ ወርሃዊ በዓላት";
+  final String todaysMonthlyHolidays = "የዛሬ በዓላት";
   final String payWithEthioTele = "በኢትዮ ቴሌ ይክፈሉ";
   final String payWithEthioTeleMsg = "የመኃልዬ ግዢዎን ለማጠናቀቅ የስልክዎን ሒሳብ ይጠቀሙ";
   final String payWithCreditCard = "በክሬዲት/በዴቢት ካርዶች ይክፈሉ";

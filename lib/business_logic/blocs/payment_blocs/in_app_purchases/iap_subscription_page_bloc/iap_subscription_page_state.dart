@@ -15,7 +15,7 @@ class IapSubscriptionLoadingState extends IapSubscriptionPageState {
 }
 
 class IapSubscriptionLoadedState extends IapSubscriptionPageState {
-  final List<SubscriptionOfferings> subscriptionOfferingsList;
+  final List<IapSubscriptionOfferings> subscriptionOfferingsList;
 
   IapSubscriptionLoadedState({required this.subscriptionOfferingsList});
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hive/hive.dart';
 import 'package:mehaley/data/models/album.dart';
 import 'package:mehaley/data/models/app_user.dart';
@@ -8,6 +9,7 @@ import 'package:mehaley/data/models/audio_file.dart';
 import 'package:mehaley/data/models/bg_video.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/app_payment_methods.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/enums/iap_product_types.dart';
 import 'package:mehaley/data/models/enums/playlist_created_by.dart';
 import 'package:mehaley/data/models/enums/setting_enums/app_currency.dart';
@@ -228,6 +230,23 @@ class AppHiveBoxes {
       await settingsBox.put(
         AppValues.appLanguageKey,
         AppLanguage.AMHARIC,
+      );
+    }
+
+    ///LOCAL SUBSCRIPTION SET TO DEACTIVATED INITIALLY
+    if (!subscriptionBox
+        .containsKey(AppValues.localSubscriptionUserStatusKey)) {
+      await subscriptionBox.put(
+        AppValues.localSubscriptionUserStatusKey,
+        EnumToString.convertToString(LocalUserSubscriptionStatus.DEACTIVATED),
+      );
+    }
+
+    ///BOTTOM BAR ITEMS CLICK COUNT
+    if (!settingsBox.containsKey(AppValues.bottomBarClickedCountKey)) {
+      await settingsBox.put(
+        AppValues.bottomBarClickedCountKey,
+        0,
       );
     }
   }
