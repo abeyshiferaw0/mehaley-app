@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -540,6 +541,7 @@ class PagesUtilFunctions {
       context,
       SettingsDataProvider(),
     );
+
     // List<AudioSource> audioSourceItems =
     //     await items.map((song) => Song.toListAudioSourceStreamUri(downloadUtil,song)).toList();
     // //SET PLAYER QUEUE
@@ -556,12 +558,6 @@ class PagesUtilFunctions {
     required PlayingFrom playingFrom,
     required int index,
   }) async {
-    ///TO SHOW ETHIO SUB DIALOG WHEN PURCHASED SONG CLICKED
-    if (!songs.elementAt(index).isBought && !songs.elementAt(index).isFree) {
-      BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
-          .checkOnPlayingUnPurchasedSong();
-    }
-
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
@@ -596,12 +592,6 @@ class PagesUtilFunctions {
     required PlayingFrom playingFrom,
     required int index,
   }) async {
-    ///TO SHOW ETHIO SUB DIALOG WHEN PURCHASED SONG CLICKED
-    if (!songs.elementAt(index).isBought && !songs.elementAt(index).isFree) {
-      BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
-          .checkOnPlayingUnPurchasedSong();
-    }
-
     DownloadUtil downloadUtil = DownloadUtil();
     //GENERATE LIST OF AUDIO SOURCE FROM LIST OF SONG ITEMS
     List<AudioSource> audioSourceItems = await Song.toListAudioSourceStreamUri(
@@ -1651,17 +1641,28 @@ class PagesUtilFunctions {
     final iosUri =
         'sms:${ethioTeleSubscriptionOfferings.shortCode}&body=${ethioTeleSubscriptionOfferings.shortCodeSubscribeTxt}';
 
-    if (Platform.isAndroid) {
-      if (await canLaunch(androidUri)) {
-        await launch(androidUri);
-      }
-    }
+    String message =
+        ethioTeleSubscriptionOfferings.shortCodeSubscribeTxt.toString();
+    List<String> recipents = [
+      ethioTeleSubscriptionOfferings.shortCode.toString()
+    ];
 
-    if (Platform.isIOS) {
-      if (await canLaunch(iosUri)) {
-        await launch(iosUri);
-      }
-    }
+    String _result = await sendSMS(message: message, recipients: recipents)
+        .catchError((onError) {
+      print(onError);
+    });
+
+    // if (Platform.isAndroid) {
+    //   if (await canLaunch(androidUri)) {
+    //     await launch(androidUri);
+    //   }
+    // }
+    //
+    // if (Platform.isIOS) {
+    //   if (await canLaunch(iosUri)) {
+    //     await launch(iosUri);
+    //   }
+    // }
   }
 
   static SubscriptionPageUiType getSubscriptionPageUiType() {

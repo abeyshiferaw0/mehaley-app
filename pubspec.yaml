@@ -103,6 +103,7 @@ dependencies:
   #DEEP LINK
   uni_links: ^0.5.1
   url_launcher: ^6.0.18
+  flutter_sms: ^2.3.3
   #NEW APP VERSION
   new_version: ^0.2.3
   #YOUTUBE

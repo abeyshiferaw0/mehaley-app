@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:mehaley/business_logic/blocs/player_page_bloc/audio_player_bloc.dart';
 import 'package:mehaley/business_logic/blocs/quotes_bloc/quotes_bloc.dart';
+import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
@@ -40,9 +41,10 @@ class _PlayerPageState extends State<PlayerPage> {
   Widget build(BuildContext context) {
     ///PROVIDE QUOTES BLOC TO PAGE
     return BlocProvider(
-      create: (context) => QuotesBloc(
-        quotesDataRepository: AppRepositories.quotesDataRepository,
-      ),
+      create: (context) =>
+          QuotesBloc(
+            quotesDataRepository: AppRepositories.quotesDataRepository,
+          ),
       child: Scaffold(
         backgroundColor: ColorMapper.getPagesBgColor(),
         body: BlocListener<AudioPlayerBloc, AudioPlayerState>(
@@ -54,6 +56,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 child: Container(
                   child: Stack(
                     children: [
+
                       ///PLAYER PAGE BG GRADIENT
                       BgPlayerGradient(),
 
@@ -99,22 +102,37 @@ class _PlayerPageState extends State<PlayerPage> {
     }
   }
 
-  void checkIfShouldPop() {
-    if (BlocProvider.of<AudioPlayerBloc>(context).audioPlayer.sequenceState !=
+  void checkIfShouldPop() async {
+    print("checkIfShouldPop => 1");
+    if (BlocProvider
+        .of<AudioPlayerBloc>(context)
+        .audioPlayer
+        .sequenceState !=
         null) {
+      print("checkIfShouldPop => 2");
       IndexedAudioSource? currentItem =
-          BlocProvider.of<AudioPlayerBloc>(context)
+          BlocProvider
+              .of<AudioPlayerBloc>(context)
               .audioPlayer
               .sequenceState!
               .currentSource;
       if (currentItem != null) {
+        print("checkIfShouldPop => 3");
         MediaItem mediaItem = (currentItem.tag as MediaItem);
         Song song = Song.fromMap(mediaItem.extras![AppValues.songExtraStr]);
         if (PagesUtilFunctions.isNotFreeBoughtAndSubscribed(song)) {
+          print("checkIfShouldPop => 4");
+
           ///POP PAGE IF CURRENT PLAYING IS NOT BOUGHT OR FREE
           if (!isPagePopped) {
+            print("checkIfShouldPop => 5");
+
             Navigator.pop(context);
             isPagePopped = true;
+
+            ///TO SHOW ETHIO SUB DIALOG
+            BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
+                .checkOnPlayingUnPurchasedSong();
           }
         }
       }

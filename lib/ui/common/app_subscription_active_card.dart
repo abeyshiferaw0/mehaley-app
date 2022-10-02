@@ -5,6 +5,7 @@ import 'package:mehaley/app_language/app_locale.dart';
 import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/ethio_telecom_subscription_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'app_gradients.dart';
@@ -90,8 +91,10 @@ class _AppSubscriptionActiveCardState extends State<AppSubscriptionActiveCard> {
                       height: AppMargin.margin_8,
                     ),
                     Text(
-                      AppLocale.of().youHavPremiumAccountMsg(
-                          isAndroid: Platform.isAndroid),
+                      PagesUtilFunctions.isUserLocalSubscribed()
+                          ? ''
+                          : AppLocale.of().youHavPremiumAccountMsg(
+                              isAndroid: Platform.isAndroid),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: AppFontSizes.font_size_10.sp,

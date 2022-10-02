@@ -39,6 +39,7 @@ import 'package:mehaley/business_logic/cubits/player_cubits/player_state_cubit.d
 import 'package:mehaley/business_logic/cubits/player_playing_from_cubit.dart';
 import 'package:mehaley/business_logic/cubits/should_show_ethio_sub_dialog_cubit.dart';
 import 'package:mehaley/business_logic/cubits/today_holiday_toast_cubit.dart';
+import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/app_repositories.dart';
 import 'package:mehaley/config/app_router.dart';
 import 'package:mehaley/config/color_mapper.dart';
@@ -65,6 +66,7 @@ import 'package:mehaley/ui/common/dialog/payment/dialog_subscription_succes.dart
 import 'package:mehaley/ui/common/mini_player.dart';
 import 'package:mehaley/ui/common/no_internet_indicator_small.dart';
 import 'package:mehaley/ui/common/today_holiday_toast_widget.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:mehaley/util/payment_utils/yenepay_purchase_util.dart';
@@ -89,6 +91,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
+    print("TOKENNN => ${AppHiveBoxes.instance.userBox.get(
+        AppValues.userAccessTokenKey)}");
+
     ///START LISTING SYNC RECORDING
     BlocProvider.of<SongListenRecorderBloc>(context).add(StartRecordEvent());
     BlocProvider.of<SongSyncBloc>(context).add(StartSongSyncEvent());
@@ -137,7 +142,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.errorRed,
                   isFloating: true,
-                  msg: AppLocale.of().purchaseNetworkError,
+                  msg: AppLocale
+                      .of()
+                      .purchaseNetworkError,
                   txtColor: AppColors.white,
                 ),
               );
@@ -155,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is YenepayPaymentStatusState) {
               ///HANDLE YENEPAY PAYMENT COMPLETED SUCCESS
               if (state.yenepayPaymentStatus.yenepayPaymentReturnType ==
-                      YenepayPaymentReturnType.COMPLETED ||
+                  YenepayPaymentReturnType.COMPLETED ||
                   state.yenepayPaymentStatus.yenepayPaymentReturnType ==
                       YenepayPaymentReturnType.EXISTS ||
                   state.yenepayPaymentStatus.yenepayPaymentReturnType ==
@@ -253,10 +260,11 @@ class _MainScreenState extends State<MainScreen> {
                   barrierDismissible: false,
                   builder: (context) {
                     return BlocProvider(
-                      create: (context) => DeepLinkSongBloc(
-                        deeplinkSongRepository:
+                      create: (context) =>
+                          DeepLinkSongBloc(
+                            deeplinkSongRepository:
                             AppRepositories.deeplinkSongRepository,
-                      ),
+                          ),
                       child: DialogDeeplinkSong(
                         songId: state.itemId,
                         onSongFetched: (Song song) {
@@ -266,9 +274,11 @@ class _MainScreenState extends State<MainScreen> {
                             startPlaying: true,
                             playingFrom: PlayingFrom(
                               songSyncPlayedFrom:
-                                  SongSyncPlayedFrom.SHARED_SONG,
+                              SongSyncPlayedFrom.SHARED_SONG,
                               songSyncPlayedFromId: -1,
-                              from: AppLocale.of().sharedMezmur,
+                              from: AppLocale
+                                  .of()
+                                  .sharedMezmur,
                               title: L10nUtil.translateLocale(
                                 song.songName,
                                 context,
@@ -330,10 +340,11 @@ class _MainScreenState extends State<MainScreen> {
                   return WillPopScope(
                     onWillPop: () async => false,
                     child: BlocProvider(
-                      create: (context) => IapPurchaseVerificationBloc(
-                        iapPurchaseRepository:
+                      create: (context) =>
+                          IapPurchaseVerificationBloc(
+                            iapPurchaseRepository:
                             AppRepositories.iapPurchaseRepository,
-                      ),
+                          ),
                       child: DialogIapVerification(
                         purchasedItemType: state.purchasedItemType,
                         itemId: state.itemId,
@@ -354,7 +365,11 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.errorRed,
                   isFloating: false,
                   msg:
-                      '${AppLocale.of().somethingWentWrong}\n${AppLocale.of().purchaseCouldNotBeCompleted}',
+                  '${AppLocale
+                      .of()
+                      .somethingWentWrong}\n${AppLocale
+                      .of()
+                      .purchaseCouldNotBeCompleted}',
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -365,7 +380,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: ColorMapper.getWhite(),
                   isFloating: true,
-                  msg: AppLocale.of().noInternetMsg,
+                  msg: AppLocale
+                      .of()
+                      .noInternetMsg,
                   txtColor: AppColors.errorRed,
                   icon: FlutterRemix.wifi_off_line,
                   iconColor: AppColors.errorRed,
@@ -378,7 +395,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: true,
-                  msg: AppLocale.of().inAppNotAvlable,
+                  msg: AppLocale
+                      .of()
+                      .inAppNotAvlable,
                   txtColor: ColorMapper.getWhite(),
                   icon: FlutterRemix.secure_payment_line,
                   iconColor: ColorMapper.getWhite(),
@@ -467,8 +486,12 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
-                      ? AppLocale.of().songAddedToFavorites
-                      : AppLocale.of().songRemovedToFavorites,
+                      ? AppLocale
+                      .of()
+                      .songAddedToFavorites
+                      : AppLocale
+                      .of()
+                      .songRemovedToFavorites,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -480,7 +503,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
+                  msg: AppLocale
+                      .of()
+                      .couldntConnect,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -493,8 +518,12 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.LIKE
-                      ? AppLocale.of().albumAddedToFavorites
-                      : AppLocale.of().albumRemovedToFavorites,
+                      ? AppLocale
+                      .of()
+                      .albumAddedToFavorites
+                      : AppLocale
+                      .of()
+                      .albumRemovedToFavorites,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -506,7 +535,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
+                  msg: AppLocale
+                      .of()
+                      .couldntConnect,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -519,8 +550,12 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
-                      ? AppLocale.of().playlistAddedToFavorites
-                      : AppLocale.of().playlistRemovedToFavorites,
+                      ? AppLocale
+                      .of()
+                      .playlistAddedToFavorites
+                      : AppLocale
+                      .of()
+                      .playlistRemovedToFavorites,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -532,7 +567,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
+                  msg: AppLocale
+                      .of()
+                      .couldntConnect,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -545,8 +582,12 @@ class _MainScreenState extends State<MainScreen> {
                   bgColor: AppColors.blue,
                   isFloating: true,
                   msg: state.appLikeFollowEvents == AppLikeFollowEvents.FOLLOW
-                      ? AppLocale.of().artistsAddedToFavorites
-                      : AppLocale.of().artistsRemovedToFavorites,
+                      ? AppLocale
+                      .of()
+                      .artistsAddedToFavorites
+                      : AppLocale
+                      .of()
+                      .artistsRemovedToFavorites,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -558,7 +599,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildAppSnackBar(
                   bgColor: AppColors.blue,
                   isFloating: false,
-                  msg: AppLocale.of().couldntConnect,
+                  msg: AppLocale
+                      .of()
+                      .couldntConnect,
                   txtColor: ColorMapper.getWhite(),
                 ),
               );
@@ -589,7 +632,9 @@ class _MainScreenState extends State<MainScreen> {
                 buildDownloadMsgSnackBar(
                   bgColor: ColorMapper.getWhite(),
                   isFloating: false,
-                  msg: AppLocale.of().yourNotConnected,
+                  msg: AppLocale
+                      .of()
+                      .yourNotConnected,
                   txtColor: AppColors.errorRed,
                   icon: FlutterRemix.wifi_off_line,
                   iconColor: AppColors.errorRed,
@@ -615,7 +660,7 @@ class _MainScreenState extends State<MainScreen> {
             if (state is AuthLoggedOutState) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                 AppRouterPaths.signUp,
-                (Route<dynamic> route) => false,
+                    (Route<dynamic> route) => false,
               );
             }
           },
@@ -777,10 +822,11 @@ class _MainScreenState extends State<MainScreen> {
                   barrierDismissible: false,
                   builder: (context) {
                     return BlocProvider(
-                      create: (context) => DeepLinkSongBloc(
-                        deeplinkSongRepository:
+                      create: (context) =>
+                          DeepLinkSongBloc(
+                            deeplinkSongRepository:
                             AppRepositories.deeplinkSongRepository,
-                      ),
+                          ),
                       child: DialogDeeplinkSong(
                         songId: state.itemId,
                         onSongFetched: (Song song) {
@@ -791,7 +837,9 @@ class _MainScreenState extends State<MainScreen> {
                             playingFrom: PlayingFrom(
                               songSyncPlayedFrom: SongSyncPlayedFrom.UNK,
                               songSyncPlayedFromId: -1,
-                              from: AppLocale.of().pushNotifications,
+                              from: AppLocale
+                                  .of()
+                                  .pushNotifications,
                               title: L10nUtil.translateLocale(
                                 song.songName,
                                 context,
@@ -906,8 +954,9 @@ class _MainScreenState extends State<MainScreen> {
                 context: context,
                 builder: (context) {
                   return BlocProvider(
-                    create: (context) => EthioTelecomSubscriptionBloc(
-                        ethioTelecomSubscriptionRepository:
+                    create: (context) =>
+                        EthioTelecomSubscriptionBloc(
+                            ethioTelecomSubscriptionRepository:
                             AppRepositories.ethioTelecomSubscriptionRepository),
                     child: DialogFullScreenSubscription(),
                   );
@@ -989,7 +1038,7 @@ class _MainScreenState extends State<MainScreen> {
                     if (state is IapConsumablePurchaseStartedState) {
                       return Container(
                         color:
-                            ColorMapper.getCompletelyBlack().withOpacity(0.5),
+                        ColorMapper.getCompletelyBlack().withOpacity(0.5),
                         child: AppLoading(
                           size: AppValues.loadingWidgetSize,
                         ),
@@ -1016,14 +1065,20 @@ class _MainScreenState extends State<MainScreen> {
           onWillPop: () async {
             ///FIRST CHECK IF HOME PAGE AND TAB IS OTHER THAN EXPLORE
             ///IF NOT GO TO EXPLORE TAB
-            if (BlocProvider.of<BottomBarCubit>(context).state ==
+            if (BlocProvider
+                .of<BottomBarCubit>(context)
+                .state ==
                 BottomBarPages.HOME) {
-              if (BlocProvider.of<BottomBarHomeCubit>(context).state) {
-                if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
-                        .state !=
+              if (BlocProvider
+                  .of<BottomBarHomeCubit>(context)
+                  .state) {
+                if (BlocProvider
+                    .of<HomePageTabsChangeListenerCubit>(context)
+                    .state !=
                     null) {
-                  if (BlocProvider.of<HomePageTabsChangeListenerCubit>(context)
-                          .state !=
+                  if (BlocProvider
+                      .of<HomePageTabsChangeListenerCubit>(context)
+                      .state !=
                       HomePageTabs.EXPLORE) {
                     ///GO TO EXPLORE TAB
                     BlocProvider.of<HomePageTabsChangeCubit>(context)
@@ -1082,17 +1137,23 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  static void showPurchasedSuccessSnack(
-      context, PurchasedItemType purchasedItemType) {
+  static void showPurchasedSuccessSnack(context,
+      PurchasedItemType purchasedItemType) {
     String msg = '';
     if (purchasedItemType == PurchasedItemType.SONG_PAYMENT) {
-      msg = AppLocale.of().songPurchased;
+      msg = AppLocale
+          .of()
+          .songPurchased;
     }
     if (purchasedItemType == PurchasedItemType.ALBUM_PAYMENT) {
-      msg = AppLocale.of().albumPurchased;
+      msg = AppLocale
+          .of()
+          .albumPurchased;
     }
     if (purchasedItemType == PurchasedItemType.PLAYLIST_PAYMENT) {
-      msg = AppLocale.of().playlistPurchased;
+      msg = AppLocale
+          .of()
+          .playlistPurchased;
     }
     ScaffoldMessenger.of(context).showSnackBar(
       buildDownloadMsgSnackBar(
@@ -1140,7 +1201,9 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       builder: (context) {
         return DialogPurchaseSuccess(
-          title: AppLocale.of().albumPurchased,
+          title: AppLocale
+              .of()
+              .albumPurchased,
           subTitle: L10nUtil.translateLocale(
             album.albumTitle,
             context,
@@ -1156,7 +1219,9 @@ class _MainScreenState extends State<MainScreen> {
       context: context,
       builder: (context) {
         return DialogPurchaseSuccess(
-          title: AppLocale.of().playlistPurchased,
+          title: AppLocale
+              .of()
+              .playlistPurchased,
           subTitle: L10nUtil.translateLocale(
             playlist.playlistNameText,
             context,
