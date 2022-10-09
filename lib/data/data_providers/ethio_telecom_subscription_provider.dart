@@ -16,8 +16,8 @@ class EthioTelecomSubscriptionProvider {
     //GET CACHE OPTIONS
     CacheOptions cacheOptions = await AppApi.getDioCacheOptions();
     var timeout = BaseOptions(
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: 30000,
+      receiveTimeout: 60000,
     );
     if (appCacheStrategy == AppCacheStrategy.LOAD_CACHE_FIRST) {
       //INIT DIO WITH CACHE OPTION FORCE CACHE

@@ -6,10 +6,12 @@ import 'package:equatable/equatable.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/data/repositories/auth_repository.dart';
+import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'app_start_event.dart';
+
 part 'app_start_state.dart';
 
 class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
@@ -18,9 +20,7 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
   final AuthRepository authRepository;
 
   @override
-  Stream<AppStartState> mapEventToState(
-    AppStartEvent event,
-  ) async* {
+  Stream<AppStartState> mapEventToState(AppStartEvent event,) async* {
     if (event is IsAppFirstLaunchEvent) {
       //CHECK IF APP IS FIRST TIME
       final bool contains = AppHiveBoxes.instance.appMiscBox.containsKey(
@@ -76,13 +76,18 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
       ///CHECK IF ACTIVE SUBSCRIPTION
       bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
 
+      ///DON'T SHOW DIALOG FOR ETHIOPIAN PHONE LOGGED IN USER
+      bool isUserPhoneEthiopian = AuthUtil.isUserPhoneEthiopian();
 
       ///CHECK IF LAST SHOWN IS 7 DAYS A GO
       bool isLastSubDialogMoreThan7Days = isLastSubscriptionMoreThan3Days();
+
       if (!isUserSubscribed) {
         if (isLastSubDialogMoreThan7Days) {
-          setLastSubscriptionMoreThan7Days();
-          yield ShowSubscribeDialogState(shouldShow: true);
+          if (!isUserPhoneEthiopian) {
+            setLastSubscriptionMoreThan7Days();
+            yield ShowSubscribeDialogState(shouldShow: true);
+          }
         }
       }
     }
@@ -99,7 +104,10 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
       DateTime preDateTime = DateTime.fromMillisecondsSinceEpoch(
         preDateInMilliSeconds,
       );
-      int diffDays = DateTime.now().difference(preDateTime).inDays;
+      int diffDays = DateTime
+          .now()
+          .difference(preDateTime)
+          .inDays;
       return diffDays > 3 ? true : false;
     } else {
       return true;
@@ -117,7 +125,10 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
       DateTime preDateTime = DateTime.fromMillisecondsSinceEpoch(
         preDateInMilliSeconds,
       );
-      int diffDays = DateTime.now().difference(preDateTime).inDays;
+      int diffDays = DateTime
+          .now()
+          .difference(preDateTime)
+          .inDays;
       return diffDays > 3 ? true : false;
     } else {
       return true;
@@ -127,7 +138,9 @@ class AppStartBloc extends Bloc<AppStartEvent, AppStartState> {
   setLastSubscriptionMoreThan7Days() {
     AppHiveBoxes.instance.settingsBox.put(
       AppValues.dialogSubscribeShownDateKey,
-      DateTime.now().millisecondsSinceEpoch,
+      DateTime
+          .now()
+          .millisecondsSinceEpoch,
     );
   }
 }

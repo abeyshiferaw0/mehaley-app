@@ -27,6 +27,7 @@ class HomeRecentlyPlayed extends StatelessWidget {
         ),
         child: Column(
           children: [
+            SizedBox(height: AppMargin.margin_8),
             Container(
               width: double.infinity,
               child: Column(

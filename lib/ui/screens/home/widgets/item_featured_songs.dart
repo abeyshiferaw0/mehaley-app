@@ -90,7 +90,7 @@ class FeaturedSongsItem extends StatelessWidget {
               ),
             ),
             AppBouncingButton(
-              onTap: onSmallPlayButtonTap,
+              onTap: onTap,
               child: Container(
                 padding: EdgeInsets.all(AppPadding.padding_16),
                 child: Center(

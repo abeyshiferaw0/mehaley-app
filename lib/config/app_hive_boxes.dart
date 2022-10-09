@@ -233,12 +233,23 @@ class AppHiveBoxes {
       );
     }
 
+    //CHECK IF APP IS FIRST TIME
+    //IF FIRST TIME DELETE (localSubscriptionUserStatusKey)
+    //IN ORDER TO SHOW ETHIO TEL SUB DIALOG PROPERLY
+    final bool contains = AppHiveBoxes.instance.appMiscBox.containsKey(
+      AppValues.isFirstTimeKey,
+    );
+    if (contains) {
+      await subscriptionBox.delete(AppValues.localSubscriptionUserStatusKey);
+    }
+
     ///LOCAL SUBSCRIPTION SET TO DEACTIVATED INITIALLY
     if (!subscriptionBox
         .containsKey(AppValues.localSubscriptionUserStatusKey)) {
       await subscriptionBox.put(
         AppValues.localSubscriptionUserStatusKey,
-        EnumToString.convertToString(LocalUserSubscriptionStatus.DEACTIVATED),
+        EnumToString.convertToString(
+            LocalUserSubscriptionStatus.ACTIVATION_PENDING),
       );
     }
 

@@ -98,6 +98,7 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
           ///NO INTERNET HEADER
           NoInternetHeader(),
 
+
           ///SUBSCRIBE CARD
           AppSubscribeCard(
             topMargin: 0.0,
@@ -159,10 +160,10 @@ class _DiscoverTabPageState extends State<DiscoverTabPage>
           return HomeGroups(
             groupId: groups[index].groupId,
             groupTitle:
-                L10nUtil.translateLocale(groups[index].groupTitleText, context),
+            L10nUtil.translateLocale(groups[index].groupTitleText, context),
             groupSubTitle: groups[index].groupSubTitleText != null
                 ? L10nUtil.translateLocale(
-                    groups[index].groupSubTitleText!, context)
+                groups[index].groupSubTitleText!, context)
                 : null,
             groupHeaderImageUrl: groups[index].headerImageId != null
                 ? groups[index].headerImageId!.imageMediumPath

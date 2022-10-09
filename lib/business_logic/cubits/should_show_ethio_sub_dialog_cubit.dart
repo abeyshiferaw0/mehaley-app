@@ -1,8 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:mehaley/config/app_hive_boxes.dart';
 import 'package:mehaley/config/constants.dart';
+import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/util/auth_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+
+import '../../util/payment_utils/ethio_telecom_subscription_util.dart';
 
 class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
   ShouldShowEthioSubDialogCubit() : super(false);
@@ -58,9 +62,19 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
     bool isUserPhoneEthiopian = AuthUtil.isUserPhoneEthiopian();
     bool isAuthTypePhoneNumber = AuthUtil.isAuthTypePhoneNumber();
 
+    ///GET CURRENT ETHIO TELECOM
+    LocalUserSubscriptionStatus? nowStatus = EthioTelecomSubscriptionUtil
+        .getUserSavedLocalSubStatus();
+
     ///CHECK IF Alienable
     if (!isUserSubscribed && isUserPhoneEthiopian && isAuthTypePhoneNumber) {
-      return true;
+      ///THIS CONDITION ADDED TO NOT SHOW DIALOG
+      ///WHEN FIRST TIME INSTALLATION WHILE BEING ETHIO TEL SUBSCRIBE
+      print("nowStatus=>>> ${EnumToString.convertToString(nowStatus)}");
+
+      if (nowStatus != LocalUserSubscriptionStatus.ACTIVATION_PENDING) {
+        return true;
+      }
     }
     return false;
   }

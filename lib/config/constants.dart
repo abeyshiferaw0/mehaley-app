@@ -311,6 +311,7 @@ class AppIconSizes {
   static const double icon_size_10 = 10;
   static const double icon_size_6 = 6;
   static const double icon_size_8 = 8;
+  static const double icon_size_18 = 18;
 }
 
 class AppDio {

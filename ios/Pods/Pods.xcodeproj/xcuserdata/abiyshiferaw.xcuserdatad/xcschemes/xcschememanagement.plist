@@ -214,6 +214,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>flutter_sms.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>google_sign_in.xcscheme</key>
 		<dict>
 			<key>isShown</key>

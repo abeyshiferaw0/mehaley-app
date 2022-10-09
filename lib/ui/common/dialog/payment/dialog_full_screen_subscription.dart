@@ -261,16 +261,28 @@ class _DialogFullScreenSubscriptionState
           color: AppColors.completelyBlack,
           borderRadius: BorderRadius.circular(100.0),
         ),
-        child: Center(
-          child: Text(
-            AppLocale.of().tryForFree.toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_10.sp,
-              fontWeight: FontWeight.w600,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppLocale.of().tryForFree.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: AppFontSizes.font_size_10.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
+            ),
+            SizedBox(
+              width: AppMargin.margin_4,
+            ),
+            Icon(
+              FlutterRemix.arrow_right_s_line,
+              size: AppIconSizes.icon_size_16,
               color: AppColors.white,
             ),
-          ),
+          ],
         ),
       ),
     );

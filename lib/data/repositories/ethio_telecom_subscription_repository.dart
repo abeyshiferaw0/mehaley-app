@@ -12,7 +12,7 @@ class EthioTelecomSubscriptionRepository {
       {required this.ethioTelecomSubscriptionProvider});
 
   Future<List<EthioTeleSubscriptionOfferings>>
-      getEthioTeleSubscriptionOfferings(AppCacheStrategy appCacheStrategy,) async {
+  getEthioTeleSubscriptionOfferings(AppCacheStrategy appCacheStrategy,) async {
     final List<EthioTeleSubscriptionOfferings> subscriptionOfferingsList;
 
     Response response = await ethioTelecomSubscriptionProvider
@@ -34,10 +34,11 @@ class EthioTelecomSubscriptionRepository {
 
 
   bool isLocallySubscribed() {
-    LocalUserSubscriptionStatus? nowStatus =  EthioTelecomSubscriptionUtil
+    LocalUserSubscriptionStatus? nowStatus = EthioTelecomSubscriptionUtil
         .getUserSavedLocalSubStatus();
 
-    if (nowStatus == LocalUserSubscriptionStatus.ACTIVE) {
+    if (nowStatus == LocalUserSubscriptionStatus.RENEWED ||
+        nowStatus == LocalUserSubscriptionStatus.ACTIVE) {
       return true;
     } else {
       return false;

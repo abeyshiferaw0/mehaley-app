@@ -126,7 +126,7 @@ class AppGradients {
       end: Alignment.bottomCenter,
       colors: [
         Platform.isAndroid
-            ? ColorMapper.getCompletelyBlack().withOpacity(0.2)
+            ? ColorMapper.getCompletelyBlack().withOpacity(0.3)
             : ColorMapper.getCompletelyBlack().withOpacity(0.5),
         Platform.isAndroid
             ? ColorMapper.getCompletelyBlack().withOpacity(0.9)

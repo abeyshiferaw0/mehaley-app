@@ -43,14 +43,14 @@ class SignUpCircleButton extends StatelessWidget {
                 ),
               ],
             ),
-            padding: EdgeInsets.all(AppPadding.padding_20),
+            padding: EdgeInsets.all(AppPadding.padding_14),
             child: BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoadingState) {
                   if (state.userLoginType == userLoginType) {
                     return Container(
-                      width: AppIconSizes.icon_size_24,
-                      height: AppIconSizes.icon_size_24,
+                      width: AppIconSizes.icon_size_18,
+                      height: AppIconSizes.icon_size_18,
                       child: CircularProgressIndicator(
                         strokeWidth: 3,
                         color: ColorMapper.getDarkGrey(),
@@ -65,18 +65,18 @@ class SignUpCircleButton extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(
-            height: AppMargin.margin_8,
-          ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppFontSizes.font_size_8.sp,
-              fontWeight: FontWeight.w600,
-              color: ColorMapper.getWhite(),
-            ),
-          ),
+          // SizedBox(
+          //   height: AppMargin.margin_8,
+          // ),
+          // Text(
+          //   title,
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(
+          //     fontSize: AppFontSizes.font_size_8.sp,
+          //     fontWeight: FontWeight.w600,
+          //     color: ColorMapper.getWhite(),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -85,8 +85,8 @@ class SignUpCircleButton extends StatelessWidget {
   Widget getButtonIcon() {
     return SvgPicture.asset(
       icon,
-      width: AppIconSizes.icon_size_24,
-      height: AppIconSizes.icon_size_24,
+      width: AppIconSizes.icon_size_18,
+      height: AppIconSizes.icon_size_18,
     );
   }
 }

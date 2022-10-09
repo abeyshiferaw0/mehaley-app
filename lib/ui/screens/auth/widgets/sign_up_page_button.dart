@@ -84,7 +84,7 @@ class SignUpButton extends StatelessWidget {
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: AppFontSizes.font_size_10.sp,
+                    fontSize: AppFontSizes.font_size_12.sp,
                     fontWeight: FontWeight.w600,
                     color: txtColor != null ? txtColor : ColorMapper.getWhite(),
                   ),

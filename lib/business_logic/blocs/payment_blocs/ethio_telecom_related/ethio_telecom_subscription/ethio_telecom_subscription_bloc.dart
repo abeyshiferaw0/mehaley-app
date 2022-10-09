@@ -5,6 +5,7 @@ import 'package:mehaley/data/models/payment/ethio_tele_subscription_offerings.da
 import 'package:mehaley/data/repositories/ethio_telecom_subscription_repository.dart';
 
 part 'ethio_telecom_subscription_event.dart';
+
 part 'ethio_telecom_subscription_state.dart';
 
 class EthioTelecomSubscriptionBloc
@@ -24,15 +25,17 @@ class EthioTelecomSubscriptionBloc
         List<EthioTeleSubscriptionOfferings> ethioTeleSubscriptionOfferings =
             await ethioTelecomSubscriptionRepository
                 .getEthioTeleSubscriptionOfferings(
-              AppCacheStrategy.LOAD_CACHE_FIRST,
-            );
+          AppCacheStrategy.LOAD_CACHE_FIRST,
+        );
 
         yield EthioTeleSubscriptionLoadedState(
           ethioTeleSubscriptionOfferings: ethioTeleSubscriptionOfferings,
         );
       } catch (error) {
+        print("errorerror=> ${error}");
         yield EthioTeleSubscriptionLoadingErrorState(
-          error: error.toString(), dateTime: DateTime.now(),
+          error: error.toString(),
+          dateTime: DateTime.now(),
         );
       }
     }
