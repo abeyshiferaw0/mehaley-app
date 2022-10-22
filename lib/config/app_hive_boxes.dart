@@ -229,7 +229,7 @@ class AppHiveBoxes {
     if (!settingsBox.containsKey(AppValues.appLanguageKey)) {
       await settingsBox.put(
         AppValues.appLanguageKey,
-        AppLanguage.AMHARIC,
+        AppLanguage.ENGLISH,
       );
     }
 
@@ -240,12 +240,14 @@ class AppHiveBoxes {
       AppValues.isFirstTimeKey,
     );
     if (contains) {
-      await subscriptionBox.delete(AppValues.localSubscriptionUserStatusKey);
+      //await subscriptionBox.delete(AppValues.localSubscriptionUserStatusKey);
     }
 
     ///LOCAL SUBSCRIPTION SET TO DEACTIVATED INITIALLY
     if (!subscriptionBox
         .containsKey(AppValues.localSubscriptionUserStatusKey)) {
+      print(
+          "TEST => ${subscriptionBox.get(AppValues.localSubscriptionUserStatusKey)}");
       await subscriptionBox.put(
         AppValues.localSubscriptionUserStatusKey,
         EnumToString.convertToString(

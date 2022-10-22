@@ -9,13 +9,13 @@ import 'package:mehaley/data/repositories/iap_subscription_repository.dart';
 import 'package:mehaley/util/payment_utils/ethio_telecom_subscription_util.dart';
 
 part 'ethio_telecom_subscription_callback_event.dart';
+
 part 'ethio_telecom_subscription_callback_state.dart';
 
 class EthioTelecomSubscriptionCallbackBloc extends Bloc<
     EthioTelecomSubscriptionCallbackEvent,
     EthioTelecomSubscriptionCallbackState> {
-  EthioTelecomSubscriptionCallbackBloc(
-      )
+  EthioTelecomSubscriptionCallbackBloc()
       : super(EthioTelecomSubscriptionCallbackInitial());
 
 
@@ -41,14 +41,16 @@ class EthioTelecomSubscriptionCallbackBloc extends Bloc<
               if (isStatesOneOfFive(subStatus)) {
                 ///GET PREVIOUS STATE BEFORE UPDATING NEW ONE
                 LocalUserSubscriptionStatus? preStatus =
-                    EthioTelecomSubscriptionUtil
-                        .getUserSavedLocalSubStatus();
+                EthioTelecomSubscriptionUtil
+                    .getUserSavedLocalSubStatus();
 
                 ///GET CURRENT FETCHED STATUS
                 LocalUserSubscriptionStatus nowStatus = EnumToString.fromString(
                   LocalUserSubscriptionStatus.values,
                   subStatus.toUpperCase(),
                 )!;
+
+                print("TESTTT => ${nowStatus} ${preStatus}");
 
                 ///STORE USER LOCAL SUBSCRIPTION STATUS
                 await EthioTelecomSubscriptionUtil.storeUserLocalSubStatus(

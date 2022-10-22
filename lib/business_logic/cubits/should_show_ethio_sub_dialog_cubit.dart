@@ -12,6 +12,7 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
   ShouldShowEthioSubDialogCubit() : super(false);
 
   checkOnAppStart() async {
+    print("ShouldShowEthioSubDialogCubit checkOnAppStart");
     await Future.delayed(Duration(seconds: 2));
     if (isAlienableForDialog()) {
       emit(true);
@@ -22,6 +23,7 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
   }
 
   checkOnBottomBarItemClicked() async {
+    print("ShouldShowEthioSubDialogCubit checkOnBottomBarItemClicked");
     int bottomClickCount = AppHiveBoxes.instance.settingsBox
         .get(AppValues.bottomBarClickedCountKey);
 
@@ -48,6 +50,7 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
   }
 
   checkOnPlayingUnPurchasedSong() async {
+    print("ShouldShowEthioSubDialogCubit checkOnPlayingUnPurchasedSong");
     if (isAlienableForDialog()) {
       emit(true);
       emit(false);
@@ -63,8 +66,8 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
     bool isAuthTypePhoneNumber = AuthUtil.isAuthTypePhoneNumber();
 
     ///GET CURRENT ETHIO TELECOM
-    LocalUserSubscriptionStatus? nowStatus = EthioTelecomSubscriptionUtil
-        .getUserSavedLocalSubStatus();
+    LocalUserSubscriptionStatus? nowStatus =
+        EthioTelecomSubscriptionUtil.getUserSavedLocalSubStatus();
 
     ///CHECK IF Alienable
     if (!isUserSubscribed && isUserPhoneEthiopian && isAuthTypePhoneNumber) {

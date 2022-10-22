@@ -35,7 +35,8 @@ class ApiUtil {
       options: options,
       cancelToken: cancelToken,
     );
-    print("HEADERS ////// ////// ////// ////// HEADERS ${isFromCatch(response)} ${response.extra['@fromNetwork@']}");
+    print(
+        "HEADERS ////// ////// ////// ////// HEADERS ${isFromCatch(response)} ${response.extra['@fromNetwork@']}");
 
     ///CHECK IF REQUEST IS FROM CATCH
     ///ONLY CHECK HEADER FOR SUB STATUS IF NOT FROM CATCH
@@ -47,14 +48,13 @@ class ApiUtil {
 
       ///CHECK HEADER FOR LOCAL ETHIO TELECOM SUBSCRIPTION
       BlocProvider.of<EthioTelecomSubscriptionCallbackBloc>(
-          App.navigationKey.currentContext!)
+              App.navigationKey.currentContext!)
           .add(
         EthioTeleSubCallbackEvent(headers: response.headers),
       );
 
       print("headers: ${response.headers}");
     }
-
 
     return response;
   }
@@ -74,7 +74,6 @@ class ApiUtil {
       String token =
           AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey);
 
-
       ///CONFIG HEADER TOKEN
       options = Options(
         headers: {
@@ -89,8 +88,6 @@ class ApiUtil {
       options: useToken ? options : null,
       queryParameters: queryParameters,
     );
-
-
 
     print("HEADERS ////// ////// ////// ////// HEADERS");
     print("HEADERS ////// ////// POST ////// ////// HEADERS");
