@@ -221,7 +221,7 @@ class _ForeignSubscriptionPageState extends State<ForeignSubscriptionPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      launch('https://meleket.net/term-of-service.html');
+                      launch('https://mehaleye.com/term-of-service.html');
                     },
                     child: Text(
                       'Terms of Service',
@@ -234,7 +234,7 @@ class _ForeignSubscriptionPageState extends State<ForeignSubscriptionPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      launch('https://meleket.net/privacy.html');
+                      launch('https://mehaleye.com/privacy.html');
                     },
                     child: Text(
                       'Privacy Policy',

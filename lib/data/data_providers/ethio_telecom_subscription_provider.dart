@@ -51,7 +51,7 @@ class EthioTelecomSubscriptionProvider {
       return response;
     }
 
-    //return """[{"title_en":"Daily Subscription","title_am":"Daily Subscription","description_en":"Get access to Unlimited streaming and download with Meleket daily subscription","description_am":"Get access to Unlimited streaming and download with Meleket daily subscription","shortCode":"8080","shortCodeSubscribeTxt":"ok","priceDescription_en":"3 days freeThen 2 birr/day","priceDescription_am":"3 days freeThen 2 birr/day","savingDescription_en":"","savingDescription_am":"","subTitle_en":"No Commitment, cancel at any time","subTitle_am":"No Commitment, cancel at any time","textColor":"#ffffff","color1":"#3CB5AC","color2":"#4674E7","color3":"#845AE8"}]""";
+    //return """[{"title_en":"Daily Subscription","title_am":"Daily Subscription","description_en":"Get access to Unlimited streaming and download with Mehaleye daily subscription","description_am":"Get access to Unlimited streaming and download with Mehaleye daily subscription","shortCode":"8080","shortCodeSubscribeTxt":"ok","priceDescription_en":"3 days freeThen 2 birr/day","priceDescription_am":"3 days freeThen 2 birr/day","savingDescription_en":"","savingDescription_am":"","subTitle_en":"No Commitment, cancel at any time","subTitle_am":"No Commitment, cancel at any time","textColor":"#ffffff","color1":"#3CB5AC","color2":"#4674E7","color3":"#845AE8"}]""";
   }
 
   LocalUserSubscriptionStatus getLocalSubscriptionStatus() {

@@ -1667,13 +1667,13 @@ class PagesUtilFunctions {
 
   static SubscriptionPageUiType getSubscriptionPageUiType() {
     if (isIapAvailable()) {
-      if (AuthUtil.isAuthTypePhoneNumber() && AuthUtil.isUserPhoneEthiopian()) {
+      if (AuthUtil.isUserPhoneEthiopian()) {
         return SubscriptionPageUiType.BOTH_WITH_TABS;
       } else {
         return SubscriptionPageUiType.ONLY_FOREIGN;
       }
     } else {
-      if (AuthUtil.isAuthTypePhoneNumber() && AuthUtil.isUserPhoneEthiopian()) {
+      if (AuthUtil.isUserPhoneEthiopian()) {
         return SubscriptionPageUiType.ONLY_LOCAL;
       } else {
         return SubscriptionPageUiType.NOT_AVAILABLE;

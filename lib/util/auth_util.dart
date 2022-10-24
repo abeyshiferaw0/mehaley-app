@@ -96,9 +96,9 @@ class AuthUtil {
     AppUser appUser =
         AppHiveBoxes.instance.userBox.get(AppValues.loggedInUserKey);
 
-
     if (appUser.phoneNumber != null) {
-      if (appUser.phoneNumber!.startsWith('+251')) {
+      if (appUser.phoneNumber!.startsWith('+251') ||
+          appUser.phoneNumber!.startsWith('251')) {
         isUserPhoneEthiopian = true;
       }
     }

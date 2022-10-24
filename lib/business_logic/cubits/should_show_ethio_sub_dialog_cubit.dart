@@ -63,14 +63,14 @@ class ShouldShowEthioSubDialogCubit extends Cubit<bool> {
     ///GET BOOL VALUES
     bool isUserSubscribed = PagesUtilFunctions.isUserSubscribed();
     bool isUserPhoneEthiopian = AuthUtil.isUserPhoneEthiopian();
-    bool isAuthTypePhoneNumber = AuthUtil.isAuthTypePhoneNumber();
+    //bool isAuthTypePhoneNumber = AuthUtil.isAuthTypePhoneNumber();
 
     ///GET CURRENT ETHIO TELECOM
     LocalUserSubscriptionStatus? nowStatus =
         EthioTelecomSubscriptionUtil.getUserSavedLocalSubStatus();
 
     ///CHECK IF Alienable
-    if (!isUserSubscribed && isUserPhoneEthiopian && isAuthTypePhoneNumber) {
+    if (!isUserSubscribed && isUserPhoneEthiopian) {
       ///THIS CONDITION ADDED TO NOT SHOW DIALOG
       ///WHEN FIRST TIME INSTALLATION WHILE BEING ETHIO TEL SUBSCRIBE
       print("nowStatus=>>> ${EnumToString.convertToString(nowStatus)}");
