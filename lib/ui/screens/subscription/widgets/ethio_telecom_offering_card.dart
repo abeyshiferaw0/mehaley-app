@@ -11,6 +11,7 @@ import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/util/app_extention.dart';
 import 'package:mehaley/util/l10n_util.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/ethio_telecom_subscription_util.dart';
 import 'package:sizer/sizer.dart';
 
 class EthioTelecomOfferingCard extends StatelessWidget {
@@ -134,8 +135,10 @@ class EthioTelecomOfferingCard extends StatelessWidget {
       context, EthioTeleSubscriptionOfferings ethioTeleSubscriptionOfferings) {
     return AppBouncingButton(
       onTap: () {
-        PagesUtilFunctions.ethioTelecomSubscribeClicked(
-            ethioTeleSubscriptionOfferings);
+        EthioTelecomSubscriptionUtil.onTryClicked(
+          context,
+          ethioTeleSubscriptionOfferings,
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(

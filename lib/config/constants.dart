@@ -349,3 +349,13 @@ class AppEnv {
     return appType == AppType.MEHALEYE;
   }
 }
+
+class AppUpStreamLinks {
+  static const String subscriptionInitialLinkAm =
+      "http://et-ethio-web.upp.st/ETO-ET-KULU/elffgames1-am-doi-web";
+  static const String subscriptionInitialLinkEn =
+      "http://et-ethio-web.upp.st/ETO-ET-KULU/elffgames1-am-doi-web";
+
+  static const String subscriptionSuccessRedirectionLink =
+      "https://mehaleye.com/app/link";
+}

@@ -35,6 +35,7 @@ import 'package:mehaley/ui/screens/search/search_result_dedicated.dart';
 import 'package:mehaley/ui/screens/search/search_result_page.dart';
 import 'package:mehaley/ui/screens/setting/settings_page.dart';
 import 'package:mehaley/ui/screens/subscription/subscription_page.dart';
+import 'package:mehaley/ui/screens/subscription/upstream_subscription_page.dart';
 import 'package:mehaley/ui/screens/user_playlist/user_playlist_page.dart';
 import 'package:mehaley/ui/screens/videos/all_videos_page.dart';
 
@@ -72,10 +73,13 @@ class AppRouterPaths {
   static const String songAddToPlaylist = '/song_add_to_playlist';
   static const String howToPayPageRoute = 'how_to_pay_page';
   static const String allVideosPage = 'all_videos_page';
+  static const String upStreamSubscribePage = 'up_stream_subscribe_page';
 
   //ROUTE OBSERVER
   static final RouteObserver<ModalRoute<void>> routeObserver =
-      RouteObserver<ModalRoute<void>>();
+  RouteObserver<ModalRoute<void>>();
+
+
 }
 
 class AppRouter {
@@ -85,106 +89,126 @@ class AppRouter {
     //ROUTERS PATH SWITCH
     switch (settings.name) {
       case AppRouterPaths.homeRoute:
-        builder = (_) => HomePage(
+        builder = (_) =>
+            HomePage(
               key: Key('HOME_PAGE_KEY'),
             );
         break;
       case AppRouterPaths.settingRoute:
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => SettingsPageBloc(
-                    settingDataRepository:
+                  create: (context) =>
+                      SettingsPageBloc(
+                        settingDataRepository:
                         AppRepositories.settingDataRepository,
-                  ),
+                      ),
                 ),
               ],
               child: SettingsPage(),
             );
         break;
       case AppRouterPaths.profileRoute:
-        builder = (_) => BlocProvider(
-              create: (context) => ProfilePageBloc(
-                profileDataRepository: AppRepositories.profileDataRepository,
-              ),
+        builder = (_) =>
+            BlocProvider(
+              create: (context) =>
+                  ProfilePageBloc(
+                    profileDataRepository: AppRepositories
+                        .profileDataRepository,
+                  ),
               child: ProfilePage(),
             );
         break;
       case AppRouterPaths.playerRoute:
-        builder = (_) => BlocProvider(
-              create: (context) => QuotesBloc(
-                quotesDataRepository: AppRepositories.quotesDataRepository,
-              ),
+        builder = (_) =>
+            BlocProvider(
+              create: (context) =>
+                  QuotesBloc(
+                    quotesDataRepository: AppRepositories.quotesDataRepository,
+                  ),
               child: PlayerPage(),
             );
         break;
       case AppRouterPaths.albumRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => BlocProvider<AlbumPageBloc>(
-              create: (context) => AlbumPageBloc(
-                albumDataRepository: AppRepositories.albumDataRepository,
-              ),
+        builder = (_) =>
+            BlocProvider<AlbumPageBloc>(
+              create: (context) =>
+                  AlbumPageBloc(
+                    albumDataRepository: AppRepositories.albumDataRepository,
+                  ),
               child: AlbumPage(albumId: args.args['albumId']),
             );
         break;
       case AppRouterPaths.playlistRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => BlocProvider<PlaylistPageBloc>(
-              create: (context) => PlaylistPageBloc(
-                playlistDataRepository: AppRepositories.playlistDataRepository,
-              ),
+        builder = (_) =>
+            BlocProvider<PlaylistPageBloc>(
+              create: (context) =>
+                  PlaylistPageBloc(
+                    playlistDataRepository: AppRepositories
+                        .playlistDataRepository,
+                  ),
               child: PlaylistPage(playlistId: args.args['playlistId']),
             );
         break;
       case AppRouterPaths.userPlaylistRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider<UserPlaylistPageBloc>(
-                  create: (context) => UserPlaylistPageBloc(
-                    userPLayListRepository:
+                  create: (context) =>
+                      UserPlaylistPageBloc(
+                        userPLayListRepository:
                         AppRepositories.userPLayListRepository,
-                  ),
+                      ),
                 ),
                 BlocProvider(
-                  create: (context) => UserPlaylistBloc(
-                    userPLayListRepository:
+                  create: (context) =>
+                      UserPlaylistBloc(
+                        userPLayListRepository:
                         AppRepositories.userPLayListRepository,
-                  ),
+                      ),
                 ),
               ],
               child: UserPlaylistPage(playlistId: args.args['playlistId']),
             );
         break;
-      // case AppRouterPaths.editProfileRoute:
-      //   builder = (_) => MultiBlocProvider(
-      //         providers: [
-      //           BlocProvider<ImagePickerCubit>(
-      //             create: (context) => ImagePickerCubit(
-      //               picker: ImagePicker(),
-      //             ),
-      //           ),
-      //           BlocProvider<AuthBloc>(
-      //             create: (context) => AuthBloc(
-      //               firebaseAuth: FirebaseAuth.instance,
-      //               authRepository: AppRepositories.authRepository,
-      //             ),
-      //           ),
-      //         ],
-      //         child: EditUserProfilePage(),
-      //       );
-      //   break;
+    // case AppRouterPaths.editProfileRoute:
+    //   builder = (_) => MultiBlocProvider(
+    //         providers: [
+    //           BlocProvider<ImagePickerCubit>(
+    //             create: (context) => ImagePickerCubit(
+    //               picker: ImagePicker(),
+    //             ),
+    //           ),
+    //           BlocProvider<AuthBloc>(
+    //             create: (context) => AuthBloc(
+    //               firebaseAuth: FirebaseAuth.instance,
+    //               authRepository: AppRepositories.authRepository,
+    //             ),
+    //           ),
+    //         ],
+    //         child: EditUserProfilePage(),
+    //       );
+    //   break;
       case AppRouterPaths.artistRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => BlocProvider(
-            create: (context) => ArtistPageBloc(
-                  artistDataRepository: AppRepositories.artistDataRepository,
-                ),
-            child: ArtistPage(artistId: args.args['artistId']));
+        builder = (_) =>
+            BlocProvider(
+                create: (context) =>
+                    ArtistPageBloc(
+                      artistDataRepository: AppRepositories
+                          .artistDataRepository,
+                    ),
+                child: ArtistPage(artistId: args.args['artistId']));
         break;
       case AppRouterPaths.libraryRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider(
                   create: (context) => FollowingTabPagesCubit(),
@@ -196,34 +220,38 @@ class AppRouter {
                   create: (context) => LibraryTabPagesCubit(),
                 ),
                 BlocProvider(
-                  create: (context) => UserPlaylistBloc(
-                    userPLayListRepository:
+                  create: (context) =>
+                      UserPlaylistBloc(
+                        userPLayListRepository:
                         AppRepositories.userPLayListRepository,
-                  ),
+                      ),
                 ),
               ],
               child: LibraryPage(
                 isFromOffline: args.args[AppValues.isLibraryForOffline],
                 isLibraryForOtherPage:
-                    args.args[AppValues.isLibraryForOtherPage],
+                args.args[AppValues.isLibraryForOtherPage],
                 libraryFromOtherPageTypes:
-                    args.args[AppValues.libraryFromOtherPageTypes],
+                args.args[AppValues.libraryFromOtherPageTypes],
               ),
             );
         break;
       case AppRouterPaths.categoryRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider<CategoryPageBloc>(
-                  create: (context) => CategoryPageBloc(
-                    categoryDataRepository:
+                  create: (context) =>
+                      CategoryPageBloc(
+                        categoryDataRepository:
                         AppRepositories.categoryDataRepository,
-                  ),
+                      ),
                 ),
                 BlocProvider<CategoryPagePaginationBloc>(
-                  create: (context) => CategoryPagePaginationBloc(
-                      categoryDataRepository:
+                  create: (context) =>
+                      CategoryPagePaginationBloc(
+                          categoryDataRepository:
                           AppRepositories.categoryDataRepository),
                 ),
               ],
@@ -232,28 +260,34 @@ class AppRouter {
 
         break;
       case AppRouterPaths.searchRoute:
-        builder = (_) => BlocProvider(
-              create: (context) => SearchFrontPageBloc(
-                searchDataRepository: AppRepositories.searchDataRepository,
-              ),
+        builder = (_) =>
+            BlocProvider(
+              create: (context) =>
+                  SearchFrontPageBloc(
+                    searchDataRepository: AppRepositories.searchDataRepository,
+                  ),
               child: SearchPage(),
             );
         break;
 
       case AppRouterPaths.searchResultRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => SearchResultBloc(
-                    searchDataRepository: AppRepositories.searchDataRepository,
-                  ),
+                  create: (context) =>
+                      SearchResultBloc(
+                        searchDataRepository: AppRepositories
+                            .searchDataRepository,
+                      ),
                 ),
                 BlocProvider(
-                  create: (context) => SearchPageDominantColorCubit(
-                    searchResultBloc:
+                  create: (context) =>
+                      SearchPageDominantColorCubit(
+                        searchResultBloc:
                         BlocProvider.of<SearchResultBloc>(context),
-                  ),
+                      ),
                 ),
                 BlocProvider(
                   create: (context) => RecentSearchBloc(),
@@ -263,20 +297,23 @@ class AppRouter {
                 ),
               ],
               child:
-                  SearchResultPage(isVoiceTyping: args.args['isVoiceTyping']),
+              SearchResultPage(isVoiceTyping: args.args['isVoiceTyping']),
             );
         break;
       case AppRouterPaths.searchResultDedicatedRoute:
         final args = settings.arguments as ScreenArguments;
-        builder = (_) => MultiBlocProvider(
+        builder = (_) =>
+            MultiBlocProvider(
               providers: [
                 BlocProvider(
                   create: (context) => RecentSearchBloc(),
                 ),
                 BlocProvider(
-                  create: (context) => SearchResultBloc(
-                    searchDataRepository: AppRepositories.searchDataRepository,
-                  ),
+                  create: (context) =>
+                      SearchResultBloc(
+                        searchDataRepository: AppRepositories
+                            .searchDataRepository,
+                      ),
                 )
               ],
               child: SearchResultDedicated(
@@ -286,35 +323,39 @@ class AppRouter {
             );
         break;
       case AppRouterPaths.subscriptionRoute:
-
-
-        builder = (_) => MultiBlocProvider(
-          providers: [
-            BlocProvider<IapSubscriptionPageBloc>(
-              create: (context) => IapSubscriptionPageBloc(
-                iapSubscriptionRepository:
-                AppRepositories.iapSubscriptionRepository,
-              ),
-            ),
-            BlocProvider(
-              create: (context) => EthioTelecomSubscriptionBloc(
-                ethioTelecomSubscriptionRepository:
-                AppRepositories.ethioTelecomSubscriptionRepository,
-              ),
-            ),
-          ],
-          child: SubscriptionPage(),
-        );
+        builder = (_) =>
+            MultiBlocProvider(
+              providers: [
+                BlocProvider<IapSubscriptionPageBloc>(
+                  create: (context) =>
+                      IapSubscriptionPageBloc(
+                        iapSubscriptionRepository:
+                        AppRepositories.iapSubscriptionRepository,
+                      ),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      EthioTelecomSubscriptionBloc(
+                        ethioTelecomSubscriptionRepository:
+                        AppRepositories.ethioTelecomSubscriptionRepository,
+                      ),
+                ),
+              ],
+              child: SubscriptionPage(),
+            );
 
         break;
       case AppRouterPaths.allVideosPage:
-        builder = (_) => BlocProvider(
-              create: (context) => AllVideosBloc(
-                videosRepository: AppRepositories.videosRepository,
-              ),
+        builder = (_) =>
+            BlocProvider(
+              create: (context) =>
+                  AllVideosBloc(
+                    videosRepository: AppRepositories.videosRepository,
+                  ),
               child: AllVideosPage(),
             );
         break;
+
 
       default:
         throw Exception('Invalid route: ${settings.name}');

@@ -13,6 +13,7 @@ import 'package:mehaley/ui/common/app_error.dart';
 import 'package:mehaley/ui/common/app_gradients.dart';
 import 'package:mehaley/ui/common/app_loading.dart';
 import 'package:mehaley/util/pages_util_functions.dart';
+import 'package:mehaley/util/payment_utils/ethio_telecom_subscription_util.dart';
 import 'package:mehaley/util/screen_util.dart';
 import 'package:sizer/sizer.dart';
 
@@ -175,8 +176,9 @@ class _DialogFullScreenSubscriptionState
         ),
         AppBouncingButton(
           onTap: () {
-            PagesUtilFunctions.ethioTelecomSubscribeClicked(
-                ethioTeleSubscriptionOfferings);
+            Navigator.of(context).pop();
+            EthioTelecomSubscriptionUtil.onTryClicked(
+                context, ethioTeleSubscriptionOfferings);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -250,8 +252,9 @@ class _DialogFullScreenSubscriptionState
       EthioTeleSubscriptionOfferings ethioTeleSubscriptionOfferings) {
     return AppBouncingButton(
       onTap: () {
-        PagesUtilFunctions.ethioTelecomSubscribeClicked(
-            ethioTeleSubscriptionOfferings);
+        Navigator.of(context).pop();
+        EthioTelecomSubscriptionUtil.onTryClicked(
+            context, ethioTeleSubscriptionOfferings);
       },
       child: Container(
         padding: EdgeInsets.symmetric(

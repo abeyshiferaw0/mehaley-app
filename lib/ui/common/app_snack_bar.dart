@@ -7,6 +7,7 @@ SnackBar buildAppSnackBar({
   required Color bgColor,
   required String msg,
   required Color txtColor,
+  Duration? duration,
   bool isFloating = true,
 }) {
   return SnackBar(
@@ -25,7 +26,7 @@ SnackBar buildAppSnackBar({
         ),
       ],
     ),
-    duration: Duration(seconds: 3),
+    duration: duration != null ? duration : Duration(seconds: 3),
     margin: isFloating
         ? EdgeInsets.symmetric(
             horizontal: AppMargin.margin_16,

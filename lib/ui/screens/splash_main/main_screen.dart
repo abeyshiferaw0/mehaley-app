@@ -860,8 +860,8 @@ class _MainScreenState extends State<MainScreen> {
             if (state is IsAppFirstLaunchState) {
               //IF APP IS NOT OPENED FIRST TIME TRY TO CHECK TO SHOW ETHIO TELE SUB DILAOG
               if (!state.isFirstTime) {
-                BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
-                    .checkOnAppStart();
+                // BlocProvider.of<ShouldShowEthioSubDialogCubit>(context)
+                //     .checkOnAppStart();
               }
             }
 
