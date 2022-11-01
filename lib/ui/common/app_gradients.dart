@@ -127,7 +127,7 @@ class AppGradients {
       colors: [
         Platform.isAndroid
             ? ColorMapper.getCompletelyBlack().withOpacity(0.3)
-            : ColorMapper.getCompletelyBlack().withOpacity(0.5),
+            : ColorMapper.getCompletelyBlack().withOpacity(0.3),
         Platform.isAndroid
             ? ColorMapper.getCompletelyBlack().withOpacity(0.9)
             : ColorMapper.getCompletelyBlack(),
