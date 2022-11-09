@@ -12,13 +12,13 @@ class AppBlocDelegate extends BlocObserver {
 
   @override
   void onChange(BlocBase bloc, Change change) {
-    //logger.i(change);
+    logger.i(change);
     super.onChange(bloc, change);
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    //logger.e(error);
+    logger.e(error);
     super.onError(bloc, error, stackTrace);
   }
 

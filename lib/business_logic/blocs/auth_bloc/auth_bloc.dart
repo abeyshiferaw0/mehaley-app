@@ -266,6 +266,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
+    print("loginResult.message ${loginResult.message}");
+
     // Create a credential from the access token
     if (loginResult.accessToken != null) {
       final OAuthCredential facebookAuthCredential =

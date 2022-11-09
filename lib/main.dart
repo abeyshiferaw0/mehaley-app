@@ -85,6 +85,21 @@ import 'business_logic/cubits/player_cubits/song_position_cubit.dart';
 import 'business_logic/cubits/player_playing_from_cubit.dart';
 import 'config/app_hive_boxes.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  // @override
+  // HttpClient createHttpClient(SecurityContext context) {
+  //   return super.createHttpClient(context)
+  //     ..badCertificateCallback =
+  //         (X509Certificate cert, String host, int port) => true;
+  // }
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() async {
   ///INITIALIZE
   WidgetsFlutterBinding.ensureInitialized();
@@ -130,6 +145,7 @@ void main() async {
   //     },
   //   ),
   // );
+  HttpOverrides.global = new MyHttpOverrides();
   runApp(MyApp());
 }
 
