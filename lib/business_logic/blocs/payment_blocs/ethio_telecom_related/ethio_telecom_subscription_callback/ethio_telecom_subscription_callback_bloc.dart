@@ -18,7 +18,6 @@ class EthioTelecomSubscriptionCallbackBloc extends Bloc<
   EthioTelecomSubscriptionCallbackBloc()
       : super(EthioTelecomSubscriptionCallbackInitial());
 
-
   @override
   Stream<EthioTelecomSubscriptionCallbackState> mapEventToState(
       EthioTelecomSubscriptionCallbackEvent event) async* {
@@ -41,8 +40,7 @@ class EthioTelecomSubscriptionCallbackBloc extends Bloc<
               if (isStatesOneOfFive(subStatus)) {
                 ///GET PREVIOUS STATE BEFORE UPDATING NEW ONE
                 LocalUserSubscriptionStatus? preStatus =
-                EthioTelecomSubscriptionUtil
-                    .getUserSavedLocalSubStatus();
+                    EthioTelecomSubscriptionUtil.getUserSavedLocalSubStatus();
 
                 ///GET CURRENT FETCHED STATUS
                 LocalUserSubscriptionStatus nowStatus = EnumToString.fromString(
@@ -68,22 +66,22 @@ class EthioTelecomSubscriptionCallbackBloc extends Bloc<
 
                 if (EthioTelecomSubscriptionUtil.doesUserSubStatusExists()) {
                   ///IF PRE STATUS WAS ACTIVE
-                  if (preStatus == LocalUserSubscriptionStatus.ACTIVE) {
+                  if (preStatus != LocalUserSubscriptionStatus.DEACTIVATED) {
                     ///IF NOW STATUS IS NOT ACTIVE SHOW SUBSCRIPTION DEACTIVATION DIALOG
-                    if (nowStatus != LocalUserSubscriptionStatus.ACTIVE) {
+                    if (nowStatus == LocalUserSubscriptionStatus.DEACTIVATED) {
                       ///SHOW DIALOG
                       yield ShowLocalSubscriptionDeActivateDialog();
                     }
                   } else {
                     ///IF NOW STATUS IS ACTIVE SHOW SUBSCRIPTION ACTIVE DIALOG
-                    if (nowStatus == LocalUserSubscriptionStatus.ACTIVE) {
+                    if (nowStatus != LocalUserSubscriptionStatus.DEACTIVATED) {
                       ///SHOW DIALOG
                       yield ShowLocalSubscriptionActiveDialog();
                     }
                   }
                 } else {
                   ///IF STATUS IS ACTIVE SHOW SUBSCRIPTION ACTIVE DIALOG
-                  if (nowStatus == LocalUserSubscriptionStatus.ACTIVE) {
+                  if (nowStatus != LocalUserSubscriptionStatus.DEACTIVATED) {
                     ///SHOW DIALOG
 
                     yield ShowLocalSubscriptionActiveDialog();
