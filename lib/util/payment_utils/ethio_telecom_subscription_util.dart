@@ -38,44 +38,59 @@ class EthioTelecomSubscriptionUtil {
   }
 
   static void onTryClicked(context, ethioTeleSubscriptionOfferings) async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-      await Navigator.of(context).push(
-        PagesUtilFunctions.createBottomToUpAnimatedRoute(
-          page: UpstreamSubscriptionPage(
-            ethioTeleSubscriptionOfferings: ethioTeleSubscriptionOfferings,
-          ),
-        ),
-      );
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      PagesUtilFunctions.ethioTelecomSubscribeClicked(
-        ethioTeleSubscriptionOfferings,
-      );
+    PagesUtilFunctions.ethioTelecomSubscribeClicked(
+      ethioTeleSubscriptionOfferings,
+    );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        buildAppSnackBar(
-          bgColor: ColorMapper.getBlack().withOpacity(0.9),
-          isFloating: true,
-          duration: Duration(seconds: 10),
-          msg: 'Please, Try Restarting App After Sending \'Ok\'\nTo Short Code',
-          txtColor: ColorMapper.getWhite(),
-        ),
-      );
-    } else {
-      PagesUtilFunctions.ethioTelecomSubscribeClicked(
-        ethioTeleSubscriptionOfferings,
-      );
+    ScaffoldMessenger.of(context).showSnackBar(
+      buildAppSnackBar(
+        bgColor: ColorMapper.getBlack().withOpacity(0.9),
+        isFloating: true,
+        duration: Duration(seconds: 10),
+        msg: 'Please, Try Restarting App After Sending \'Ok\'\nTo Short Code',
+        txtColor: ColorMapper.getWhite(),
+      ),
+    );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        buildAppSnackBar(
-          bgColor: ColorMapper.getBlack().withOpacity(0.9),
-          isFloating: true,
-          duration: Duration(seconds: 10),
-          msg: 'Please, Try Restarting App After Sending \'Ok\'\nTo Short Code',
-          txtColor: ColorMapper.getWhite(),
-        ),
-      );
-    }
+    ///FOR UP STREAM INTEGRATION
+    // var connectivityResult = await (Connectivity().checkConnectivity());
+    // if (connectivityResult == ConnectivityResult.mobile) {
+    //   await Navigator.of(context).push(
+    //     PagesUtilFunctions.createBottomToUpAnimatedRoute(
+    //       page: UpstreamSubscriptionPage(
+    //         ethioTeleSubscriptionOfferings: ethioTeleSubscriptionOfferings,
+    //       ),
+    //     ),
+    //   );
+    // } else if (connectivityResult == ConnectivityResult.wifi) {
+    //   PagesUtilFunctions.ethioTelecomSubscribeClicked(
+    //     ethioTeleSubscriptionOfferings,
+    //   );
+    //
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     buildAppSnackBar(
+    //       bgColor: ColorMapper.getBlack().withOpacity(0.9),
+    //       isFloating: true,
+    //       duration: Duration(seconds: 10),
+    //       msg: 'Please, Try Restarting App After Sending \'Ok\'\nTo Short Code',
+    //       txtColor: ColorMapper.getWhite(),
+    //     ),
+    //   );
+    // } else {
+    //   PagesUtilFunctions.ethioTelecomSubscribeClicked(
+    //     ethioTeleSubscriptionOfferings,
+    //   );
+    //
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     buildAppSnackBar(
+    //       bgColor: ColorMapper.getBlack().withOpacity(0.9),
+    //       isFloating: true,
+    //       duration: Duration(seconds: 10),
+    //       msg: 'Please, Try Restarting App After Sending \'Ok\'\nTo Short Code',
+    //       txtColor: ColorMapper.getWhite(),
+    //     ),
+    //   );
+    // }
   }
 
   static bool isUrlRedirectToSms(String returnUrl) {
