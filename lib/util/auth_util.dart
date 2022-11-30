@@ -27,6 +27,11 @@ class AuthUtil {
   }
 
   static String getUserName(AppUser appUser) {
+    print("LOGINNN=> ${appUser.isPhoneAuthenticated}");
+    print("LOGINNN=> ${appUser.loginType}");
+    print("LOGINNN=> ${appUser.authLoginId}");
+    print(
+        "LOGINNN=> ${AppHiveBoxes.instance.userBox.get(AppValues.userAccessTokenKey)}");
     if (appUser.userName != null) {
       return appUser.userName!;
     }

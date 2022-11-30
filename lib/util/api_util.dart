@@ -36,6 +36,9 @@ class ApiUtil {
       cancelToken: cancelToken,
     );
     print(
+        "HEADERS ////// ////// ////// ////// HEADERS ${isFromCatch(response)} ${response.headers}");
+
+    print(
         "HEADERS ////// ////// ////// ////// HEADERS ${isFromCatch(response)} ${response.extra['@fromNetwork@']}");
 
     ///CHECK IF REQUEST IS FROM CATCH
@@ -53,7 +56,7 @@ class ApiUtil {
         EthioTeleSubCallbackEvent(headers: response.headers),
       );
 
-      print("headers: ${response.headers}");
+      //print("headers: ${response.headers}");
     }
 
     return response;

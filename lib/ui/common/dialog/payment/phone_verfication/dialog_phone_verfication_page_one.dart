@@ -45,8 +45,10 @@ class _DialogPhoneVerificationPageOneState
     extends State<DialogPhoneVerificationPageOne> {
   //FOR PHONE NUMBER VALIDATION
   bool hasError = false;
-  MaskedTextController controller =
-      new MaskedTextController(mask: '000-000-000');
+
+  // MaskedTextController controller =
+  //     new MaskedTextController(mask: '000-000-000');
+  TextEditingController controller = TextEditingController();
   CountryCode selectedCountryCode = CountryCode.fromCountryCode('ET');
 
   @override
@@ -239,13 +241,14 @@ class _DialogPhoneVerificationPageOneState
             text: AppLocale.of().sendSms,
             onTap: () {
               //VALIDATE COUNTRY CODE AND PHONE NUMBER
-              if (PagesUtilFunctions.validatePhoneByCountryCode(
-                  selectedCountryCode.code!, controller.text)) {
+              if (PagesUtilFunctions.isPhoneValidEthiopian(controller.text)) {
                 //LOGIN WITH PHONE
                 BlocProvider.of<AuthBloc>(context).add(
                   ContinueWithPhoneEvent(
                     countryCode: selectedCountryCode.dialCode!,
-                    phoneNumber: controller.text.replaceAll('-', ''),
+                    phoneNumber: PagesUtilFunctions.formatPhoneNumber(
+                      controller.text,
+                    ),
                   ),
                 );
               } else {
@@ -283,7 +286,7 @@ class _DialogPhoneVerificationPageOneState
           controller: controller,
           hasError: hasError,
           isOnlyEt: true,
-          selectedCountryCode: selectedCountryCode,
+          selectedCountryCode: CountryCode.fromCountryCode('ET'),
         )
       ],
     );
