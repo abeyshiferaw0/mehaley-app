@@ -256,7 +256,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase>
   }
 
   Widget buildPaymentMethods(List<PaymentMethod> localAvailableMethods,
-      List<PaymentMethod> forignAvailableMethods) {
+      List<PaymentMethod> foreignAvailableMethods) {
     return Column(
       children: [
         ///BUILD TABS
@@ -268,7 +268,7 @@ class _DialogCompletePurchaseState extends State<DialogCompletePurchase>
             controller: _tabController,
             children: [
               buildMethodsTabList(localAvailableMethods),
-              buildMethodsTabList(forignAvailableMethods),
+              buildMethodsTabList(foreignAvailableMethods),
             ],
           ),
         ),
