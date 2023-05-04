@@ -44,7 +44,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.marathonsystems.mehaleye"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -83,6 +83,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     //FOR WIDGETS
     implementation 'net.danlew:android.joda:2.10.12.2'
+    ///FOR ANDROID 12 FIX
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
 }
 
 

@@ -203,6 +203,7 @@ open class MonthlyHolidaysWidgetProvider : AppWidgetProvider() {
 
                     val intent = Intent(context, AudioServiceActivity::class.java)
                     val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
                     setOnClickPendingIntent(R.id.widget_container, pendingIntent)
 
                     ///SET HOLIDAYS TEXTS

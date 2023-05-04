@@ -1,12 +1,13 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    package="com.marathonsystems.mehaleye" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.marathonsystems.mehaleye">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <!--FOR JUST AUDIO BACKGROUND-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!--FOR JUST AUDIO BACKGROUND-->
 
     <!-- Provide required visibility configuration for API level 30 and above -->
@@ -25,81 +26,97 @@
         </intent>
     </queries>
 
-   <application
+    <application
         android:label="መኃልዬ"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 
-       <!--FOR JUST AUDIO BACKGROUND-->
-       <service android:name="com.ryanheise.audioservice.AudioService">
-           <intent-filter>
-               <action android:name="android.media.browse.MediaBrowserService" />
-           </intent-filter>
-       </service>
+        <!--FOR JUST AUDIO BACKGROUND-->
+        <service
+            android:name="com.ryanheise.audioservice.AudioService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
 
-       <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver" >
-           <intent-filter>
-               <action android:name="android.intent.action.MEDIA_BUTTON" />
-           </intent-filter>
-       </receiver>
-       <!--FOR AUDIO SERVICE-->
+        <receiver
+            android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+        <!--FOR AUDIO SERVICE-->
 
 
-       <!--FOR HOME SCREEN WIDGETS-->
-       <receiver android:name="VersesWidgetProvider" android:label="ጥቅሶች ከመኃልዬ">
-           <intent-filter>
-               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-           </intent-filter>
-           <meta-data android:name="android.appwidget.provider"
-               android:resource="@xml/verse_widget" />
-       </receiver>
+        <!--FOR HOME SCREEN WIDGETS-->
+        <receiver
+            android:name="VersesWidgetProvider"
+            android:label="ጥቅሶች ከመኃልዬ"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/verse_widget" />
+        </receiver>
 
-       <receiver android:name="MonthlyHolidaysWidgetProvider" android:label="ወርሃዊ በዓላት">
-           <intent-filter>
-               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-           </intent-filter>
-           <meta-data android:name="android.appwidget.provider"
-               android:resource="@xml/monthly_holidays_widget" />
-       </receiver>
-       <!--END FOR HOME SCREEN WIDGETS-->
+        <receiver
+            android:name="MonthlyHolidaysWidgetProvider"
+            android:label="ወርሃዊ በዓላት"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/monthly_holidays_widget" />
+        </receiver>
+        <!--END FOR HOME SCREEN WIDGETS-->
 
-       <!--   FACEBOOK AUTH    -->
-       <meta-data android:name="com.facebook.sdk.ApplicationId"
-           android:value="@string/facebook_app_id"/>
+        <!--   FACEBOOK AUTH    -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-       <activity android:name="com.facebook.FacebookActivity"
-           android:configChanges=
-               "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-           android:label="@string/app_name" />
-       <activity
-           android:name="com.facebook.CustomTabActivity"
-           android:exported="true">
-           <intent-filter>
-               <action android:name="android.intent.action.VIEW" />
-               <category android:name="android.intent.category.DEFAULT" />
-               <category android:name="android.intent.category.BROWSABLE" />
-               <data android:scheme="@string/fb_login_protocol_scheme" />
-           </intent-filter>
-       </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:exported="true" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-       <!--   FACEBOOK AUTH    -->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-       <!--ACTIVITY NAME CHANGED FOR JUST AUDIO BACKGROUND-->
-       <activity
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <!--   FACEBOOK AUTH    -->
+
+        <!--ACTIVITY NAME CHANGED FOR JUST AUDIO BACKGROUND-->
+        <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual
@@ -107,29 +124,30 @@
                  Flutter's first frame. -->
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-           <!-- APP AND DEEP LINK -->
-           <intent-filter android:autoVerify="true">
-               <action android:name="android.intent.action.VIEW" />
-               <category android:name="android.intent.category.DEFAULT" />
-               <category android:name="android.intent.category.BROWSABLE" />
+            <!-- APP AND DEEP LINK -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
 
-               <data
-                   android:scheme="https"
-                   android:host="mehaleye.com" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-               <data
-                   android:scheme="mehaleye"
-                   android:host="open" />
+                <data
+                    android:scheme="https"
+                    android:host="mehaleye.com" />
 
-               <data
-                   android:scheme="mehaleye"
-                   android:host="yenepay" />
+                <data
+                    android:scheme="mehaleye"
+                    android:host="open" />
 
-           </intent-filter>
+                <data
+                    android:scheme="mehaleye"
+                    android:host="yenepay" />
+
+            </intent-filter>
 
         </activity>
 
@@ -140,3 +158,4 @@
             android:value="2" />
     </application>
 </manifest>
+
