@@ -12,7 +12,10 @@ class EthioTelecomPurchaseProvider {
     PurchasedItemType purchasedItemType,
   ) async {
     dio = Dio();
-
+    print("responseee => ${itemId}");
+    print("responseee => ${EnumToString.convertToString(
+      purchasedItemType,
+    )}");
     //SEND REQUEST
     Response response = await ApiUtil.post(
       dio: dio,
@@ -25,6 +28,7 @@ class EthioTelecomPurchaseProvider {
         ),
       },
     );
+    print("responseee => ${response.data}");
     return response;
   }
 

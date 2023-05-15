@@ -46,6 +46,7 @@ import 'package:mehaley/config/color_mapper.dart';
 import 'package:mehaley/config/constants.dart';
 import 'package:mehaley/config/themes.dart';
 import 'package:mehaley/data/models/album.dart';
+import 'package:mehaley/data/models/app_user.dart';
 import 'package:mehaley/data/models/enums/app_languages.dart';
 import 'package:mehaley/data/models/enums/enums.dart';
 import 'package:mehaley/data/models/playlist.dart';

@@ -23,15 +23,15 @@ class AuthRepository {
   Future<void> setOneSignalExternalId(AppUser appUser) async {
     ///SET ONE SIGNAL EXTERNAL ID
     await OneSignal.shared.setExternalUserId(appUser.userId.toString()).then(
-      (results) {
+          (results) {
         return;
       },
     ).catchError(
-      (error) {
+          (error) {
         throw error.toString();
       },
     ).onError(
-      (error, stackTrace) {
+          (error, stackTrace) {
         throw error.toString();
       },
     );
@@ -74,7 +74,7 @@ class AuthRepository {
 
   updateUser(String userName, File image, bool imageChanged) async {
     Response response =
-        await authProvider.updateUser(userName, image, imageChanged);
+    await authProvider.updateUser(userName, image, imageChanged);
     final AppUser appUser;
 
     ///PARSE USER
@@ -93,7 +93,10 @@ class AuthRepository {
     );
     AppHiveBoxes.instance.userBox.put(
       AppValues.userTemporaryColorKey,
-      AuthUtil.generateTemporaryUserColor().value.toString(),
+      AuthUtil
+          .generateTemporaryUserColor()
+          .value
+          .toString(),
     );
     return appUser;
   }
@@ -115,6 +118,7 @@ class AuthRepository {
   }
 
   Future<void> turnAllNotificationOn() async {
+
     ///TURN ALL NOTIFICATION ON
     await OneSignal.shared.sendTags(
       {
@@ -128,11 +132,11 @@ class AuthRepository {
             .RECEIVE_DAILY_CEREMONIES_NOTIFICATIONS): '1',
       },
     ).catchError(
-      (error) {
+          (error) {
         throw '${error.toString()}';
       },
     ).onError(
-      (error, stackTrace) {
+          (error, stackTrace) {
         throw error.toString();
       },
     ).then((value) {
@@ -168,7 +172,10 @@ class AuthRepository {
     );
     AppHiveBoxes.instance.userBox.put(
       AppValues.userTemporaryColorKey,
-      AuthUtil.generateTemporaryUserColor().value.toString(),
+      AuthUtil
+          .generateTemporaryUserColor()
+          .value
+          .toString(),
     );
 
     return SaveUserData(
